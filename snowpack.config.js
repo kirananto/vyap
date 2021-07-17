@@ -10,6 +10,9 @@ module.exports = {
     '@snowpack/plugin-postcss',
     '@snowpack/plugin-typescript',
   ],
+  routes: [
+    { match: 'routes', src: '.*', dest: '/index.html' },
+  ],
   alias: {
     'components': './source/components',
   },

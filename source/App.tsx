@@ -1,14 +1,28 @@
+import { Home } from './Home';
+import { Payment } from './Payment';
+import { Profile } from './Profile';
 import * as React from 'react';
+import './old.css'
 
-import { Avatar } from 'components/Avatar';
-import { Button } from 'components/Button';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
-export const App = () => {
-  return (
-    <div className="h-screen flex flex-col items-center justify-center">
-      <Avatar />
-      <Button>View on GitHub</Button>
-      <Button>View on Bitbucket</Button>
-    </div>
+export const InitialRouter = () => {
+  return (<Router>
+    <Switch>
+          <Route path="/payment">
+            <Payment />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+        </Router>
   );
 }

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { App } from './App';
+import { InitialRouter } from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <InitialRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );
