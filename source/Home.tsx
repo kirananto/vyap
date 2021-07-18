@@ -4,7 +4,7 @@ export const Home = () => {
   return (
     <div className="mobile-main">
       {/* <!-- * Header --> */}
-      <header className="head-container">
+      <header className="head-container bg-gradient-to-bl from-blue-500 to-blue-600">
         <div className="head-right">
           <img src="./assets/icons/user.png" alt="" />
           <h1>Shop Name</h1>
@@ -17,7 +17,7 @@ export const Home = () => {
 
       <!-- ! Nav-Menu Top --> */}
       <div className="nav-top-main">
-        <div className="nav-top-container">
+        <div className="nav-top-container shadow">
           <div className="nav-top-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ export const Home = () => {
         </div> --> */}
       </div>
       <div id="input_container">
-        <input type="text" id="input" placeholder="Search Customer" />
+        <input type="text" id="input" className="shadow-md border-gray-500" placeholder="Search Customer" />
         <img src="./assets/icons/search.svg" id="input_img" />
       </div>
       {/* <!-- Customer Field End -->
@@ -94,7 +94,7 @@ export const Home = () => {
       <div className="card-main-container scrollDes divide-y divide-light-blue-400">
         {Array(10)
           .fill(1)
-          .map((item: any) => (
+          .map(() => (
             <div className="bottom-line">
               <div className="card-main">
                 <div className="card-container">
@@ -110,7 +110,7 @@ export const Home = () => {
                     <h5 className="user-caption">Kannur</h5>
                   </div>
                   <div className="card-child-3">
-                    <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-indigo-100 bg-indigo-600 rounded-full">
+                    <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-100 bg-green-500 rounded-full">
                       20
                     </div>
                     <div className="card-time">
