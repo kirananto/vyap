@@ -1,23 +1,26 @@
+import Footer from "../Components/Footer";
 import * as React from "react";
+import { ItemCard } from "./ItemCard";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   return (
     <div className="mobile-main">
       {/* <!-- * Header --> */}
-      <header className="head-container bg-gradient-to-bl from-blue-500 to-blue-600">
-        <div className="head-right">
-          <img src="./assets/icons/user.png" alt="" />
-          <h1>Shop Name</h1>
-        </div>
+      <header className="head-container bg-gradient-to-br from-blue-500 to-indigo-700">
+        <Link to="/profile" className="flex w-4/5 gap-4 items-center">
+          <img className="w-6" src="../assets/icons/user.png" alt="" />
+          <h1 className="text-white font-bold text-lg">XYZ's Super market</h1>
+        </Link>
         <div className="head-left mt-2">
-          <img className="w-5" src="./assets/icons/notification.svg" alt="" />
+          <img className="w-5" src="../assets/icons/notification.svg" alt="" />
         </div>
       </header>
       {/* <!-- * Header End -->
 
       <!-- ! Nav-Menu Top --> */}
       <div className="nav-top-main">
-        <div className="nav-top-container shadow">
+        <div className="nav-top-container shadow w-11/12 rounded py-4 flex justify-center items-center bg-white">
           <div className="nav-top-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,77 +81,27 @@ export const Home = () => {
       {/* <!-- ! Nav-MenuTop End --> */}
 
       {/* <!-- Search Customer Field --> */}
-      <div className="customer-head-main">
-        {/* <!-- <div className="customer-container">
-          <h3>Customer</h3>
-          <hr />
-        </div> --> */}
-      </div>
-      <div id="input_container">
-        <input type="text" id="input" className="shadow-md border-gray-500" placeholder="Search Customer" />
-        <img src="./assets/icons/search.svg" id="input_img" />
+
+      <div className="flex w-11/12 relative m-auto my-4	">
+        <input type="text" id="input" className="shadow rounded border h-10 pl-10 pr-5 w-full border-gray-100" placeholder="Search Customer" />
+        <img src="../assets/icons/search.svg" className="absolute h-4 top-3 left-3" id="input_img" />
       </div>
       {/* <!-- Customer Field End -->
 
       <!-- Customer Cards --> */}
       <div className="card-main-container scrollDes divide-y divide-light-blue-400">
         {Array(10)
-          .fill(1)
-          .map(() => (
-            <div className="bottom-line">
-              <div className="card-main">
-                <div className="card-container">
-                  <div className="card-child-1">
-                    <img
-                      className="w-8"
-                      src="./assets/icons/cardProfile.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="card-child-2">
-                    <h2 className="user-name">Sabeer</h2>
-                    <h5 className="user-caption">Kannur</h5>
-                  </div>
-                  <div className="card-child-3">
-                    <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-100 bg-green-500 rounded-full">
-                      20
-                    </div>
-                    <div className="card-time">
-                      <img src="./assets/icons/time.svg" alt="" />
-                      <h5>20 sec ago</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          .fill(20)
+          .map((item, index) => (
+            <ItemCard item={item} key={index} />
           ))}
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      <button className="add-cutomer-btn">
-        Add Customer <span className="circle bg-red-500"></span>
+      <button className="add-cutomer-btn text-sm rounded text-white bg-gradient-to-br from-blue-500 to-indigo-700">
+        Add Customer
       </button>
-      {/* <!-- Add Customer Button End --> */}
-
-      {/* <!-- Nav-Bottom  --> */}
-      <div className="nav-bottom-container">
-        <div className="nav-bottom-child-1">
-          <figure className="grid justify-items-center">
-            <img className="w-6" src="./assets/icons/home.svg" alt="" />
-            <figcaption className="text-sm font-semibold text-gray-900">
-              Home
-            </figcaption>
-          </figure>
-        </div>
-        <div className="nav-bottom-child-2">
-          <figure className="grid justify-items-center">
-            <img className="w-6" src="./assets/icons/more.svg" alt="" />
-            <figcaption className="text-sm font-semibold text-gray-900">
-              More
-            </figcaption>
-          </figure>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };

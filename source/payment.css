@@ -1,120 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-}
-/* 
-==============
-Mobile Body 
-==============
-*/
-
-.header-container {
-  display: flex;
-  width: 100%;
-  height: 60px;
-  background-color: #312E81;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  padding-right: 15px;
-}
-.header-col-1 {
-  display: flex;
-  width: 20%;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-
-  /* background-color: orange; */
-}
-.header-col-1 a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.back {
-  height: 30px;
-}
-.profile-icon {
-  width: 30px;
-}
-
-.header-col-2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 60%;
-  color: #ffffff;
-  /* background-color: blue; */
-}
-.phone-number {
-  font-family: "Open Sans", sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-}
-
-.header-col-3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  width: 20%;
-}
-.header-col-3 img {
-  width: 22px;
-}
-/* Header End */
-
-/* Body */
-.heading-container,
-.loadmore-container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  margin: 10px 0 10px 0px;
-  font-size: 1.2rem;
-  background-color: #ffffff;
-}
-.heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  border-radius: 8px;
-  background-color: #312E81;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  width: 85%;
-  height: 35px;
-}
-.heading h1 {
-  font-family: "Open Sans", sans-serif;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 600;
-}
-.loadmore-btn {
-  font-family: "Open Sans", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  width: 30%;
-  height: 35px;
-  border: none;
-  gap: 5px;
-  cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  color: #312E81;
-  font-weight: 600;
-  font-size: 12px;
-}
-.loadmore-btn img {
-  width: 18px;
-}
-
 /* payment */
 .payment-container {
   display: flex;
@@ -149,14 +32,14 @@ Mobile Body
   padding: 10px;
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 .right::after {
   position: absolute;
   content: " ";
   background-color: #ffffff;
   transform: rotate(45deg);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 2px;
   /* top: -50px; */
   right: -5px;
@@ -184,7 +67,6 @@ Mobile Body
   /* background-color: red; */
 }
 .price-text {
-  font-family: "Open Sans", sans-serif;
   font-size: 20px;
   line-height: 20px;
 }
@@ -200,9 +82,9 @@ Mobile Body
   width: 70px;
   height: 20px;
   border-radius: 5px;
-  background-color: #fd9816;
-  color: #ffffff;
-  font-size: 1.2rem;
+  background-color: #FEF3C7;
+  color: #F59E0B;
+  font-size: 12px;
 }
 
 .right-col-2 {
@@ -216,7 +98,6 @@ Mobile Body
 .col-2-row-2 {
   display: flex;
   justify-content: flex-end;
-  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 10px;
   z-index: 1;
@@ -224,7 +105,6 @@ Mobile Body
 .col-2-row-3 {
   display: flex;
   justify-content: flex-end;
-  font-family: "Open Sans", sans-serif;
   font-size: 10px;
   align-items: flex-end;
   margin-top: 11px;
@@ -249,16 +129,16 @@ Mobile Body
   width: 55%;
   height: 70px;
   padding: 10px;
-  background-color: #f3f3f3;
+  background-color: #fafafa;
   border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 .left::after {
   position: absolute;
   content: " ";
-  background-color: #f3f3f3;
+  background-color: #fafafa;
   transform: rotate(45deg);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 2px;
   /* top: -50px; */
   left: -5px;
@@ -288,7 +168,6 @@ Mobile Body
 .col-2-row-2-left {
   display: flex;
   justify-content: flex-start;
-  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 10px;
   z-index: 2;
@@ -296,7 +175,6 @@ Mobile Body
 .col-2-row-3-left {
   display: flex;
   justify-content: flex-end;
-  font-family: "Open Sans", sans-serif;
   font-size: 10px;
   align-items: flex-end;
   margin-top: 11px;
@@ -311,7 +189,6 @@ Mobile Body
   /* background-color: lightblue; */
 }
 .price-text {
-  font-family: "Open Sans", sans-serif;
   font-size: 20px;
   line-height: 20px;
 }
@@ -327,10 +204,10 @@ Mobile Body
   align-items: center;
   width: 80px;
   height: 20px;
-  font-size: 1.2rem;
+  font-size: 12px;
   border-radius: 5px;
-  background-color: #4ae406;
-  color: #ffffff;
+  background-color: #D1FAE5;
+  color: #059669;
 }
 
 /* Payment Section ENDS */
@@ -347,10 +224,8 @@ Mobile Body
   position: sticky;
   justify-content: center;
   align-items: center;
-  background-color: #312E81;
   width: 140px;
   color: #ffffff;
-  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   gap: 8px;
   height: 50px;
@@ -449,7 +324,6 @@ textarea {
   background-color: #312E81;
   width: 100%;
   color: #ffffff;
-  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   height: 50px;
   border: none;

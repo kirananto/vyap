@@ -1,0 +1,43 @@
+import React from "react";
+
+interface IProps {
+  item: any;
+}
+
+export function ItemCard({ item }: IProps) {
+  return (
+    <div className="bottom-line">
+      <div className="card-main">
+        <div className="card-container">
+          <div className="card-child-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="mt-4 rounded-full p-2 h-10 w-10 text-white bg-gradient-to-br from-blue-500 to-indigo-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
+              />
+            </svg>
+          </div>
+          <div className="card-child-2">
+            <h2 className="font-extrabold text-gray-700">Supplier #234</h2>
+            <h5 className="leading text-xs text-gray-500">Kannur, Kerala</h5>
+          </div>
+          <div className="card-child-3">
+            <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">
+              {item}
+            </div>
+              <h6 className="text-xs text-gray-500"> 20 sec ago</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
