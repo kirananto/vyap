@@ -1,5 +1,5 @@
 import { Home } from "./Home/Home";
-import { Payment } from "./Payment";
+import { Payment } from "./Payment/Payment";
 import { Profile } from "./Profile";
 import * as React from "react";
 import "./old.css";

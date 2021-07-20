@@ -3,16 +3,16 @@ import React from "react";
 export default function Login() {
   return (
     <section className="flex flex-col items-center h-screen md:flex-row ">
-      <div className="flex items-center justify-center w-full h-screen px-6 bg-white md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
+      <div className="flex items-center justify-center w-full h-screen px-6  md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
         <div className="w-80 h-100">
-          <a className="flex items-center w-32 mb-4 font-medium text-indigo-900 title-font md:mb-0">
-            <div className="w-2 h-2 p-2 mr-2 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"></div>
-            <h2 className="text-lg font-bold tracking-tighter text-black uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400">
+          <a className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
+            <img className="w-12 h-12" src="./new_logo.svg"/>
+            <h2 className="text-lg font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400">
               {" "}
               Vyap App{" "}
             </h2>
           </a>
-          <h1 className="mt-12 text-2xl font-semibold text-black tracking-ringtighter sm:text-3xl title-font">
+          <h1 className="mt-8 text-xl font-semibold text-gray-700 tracking-ringtighter sm:text-3xl title-font">
             Log in to your account
           </h1>
           <form className="mt-6" action="#" method="POST">
@@ -21,9 +21,9 @@ export default function Login() {
                 Phone number
               </label>
               <input
-                type="email"
-                name=""
-                id=""
+                type="tel"
+                name="tel"
+                id="tel"
                 placeholder="Your phone number"
                 className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
               />

@@ -1,9 +1,12 @@
-import * as React from 'react';
+import  React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Footer from './Components/Footer'
+import Footer from '../Components/Footer'
+import AddPaymentModal from './AddPaymentModal';
 import './payment.css'
 
 export const Payment = () => {
+
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false)
   // const messages = [{
   //   left: true,
   //   date: '5th Mar 21',
@@ -190,7 +193,7 @@ export const Payment = () => {
       {/* <!-- Payment & Order Button --> */}
 
       <div className="btn-container">
-        <button className="payment-btn btn-b bg-indigo-600">
+        <button onClick={() => setPaymentModalVisible(true)} className="payment-btn btn-b bg-indigo-600">
           <img src="./assets/icons/payment/PLUS.svg" alt="" />
           PAYMENT
         </button>
@@ -201,46 +204,7 @@ export const Payment = () => {
       </div>
       <Footer />
       {/* <!-- Popup --> */}
-      <div className="popup animate__animated animate__fadeInUpBig">
-        <h2>PAYMENTS#</h2>
-
-        {/* <!-- Dropdown-1 --> */}
-        <div className="dropdown-container">
-          <span className="drop-head">TYPE</span>
-          <select className="drop" name="payment" id="payment">
-            <option value="volvo">PAYMENT</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
-          </select>
-        </div>
-
-        {/* <!-- Dropdown-2 --> */}
-        <div className="dropdown-container">
-          <span className="drop-head">PAYMENT MODE</span>
-          <select className="drop drop-2" name="payment" id="payment">
-            <option value="volvo">CASH</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
-          </select>
-        </div>
-
-        {/* <!-- Dropdown-3 --> */}
-        <div className="dropdown-container">
-          <span className="drop-head">AMOUNT</span>
-          <input className="drop drop-3" type="text"/>
-        </div>
-        {/* <!-- Textarea --> */}
-        <div className="dropdown-container">
-          <span className="drop-head">REMARKS</span>
-          <textarea name="" id=""></textarea>
-        </div>
-        {/* <!-- btn popup --> */}
-        <button className="save-btn">
-         SAVE
-        </button>
-      </div>
+      <AddPaymentModal isVisible={paymentModalVisible} toggleVisibility={setPaymentModalVisible} />
     </div>
   );
 }
