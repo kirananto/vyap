@@ -1,6 +1,71 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import firebase from "firebase/app";
+import { auth, getUserDocument } from "../Firebase/firebase";
+import PhoneForm from "./PhoneForm";
+import OTPForm from "./OTPForm";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Login() {
+  const [currentPage, setCurrentPage] = useState(0)
+  const captchaRef = useRef(null);
+  const confResRef = useRef<any>();
+  const [error, setError] = useState(null);
+
+  const history = useHistory()
+  const confirmOTP = (code: string) => {
+    setError(null)
+    confResRef.current?.confirm(code).then((result: any) => {
+      // User signed in successfully.
+      console.log('result', result.user.uid)
+      alert('logged in')
+      getUserDocument(result.user.uid).then(res => {
+        console.log('user', res)
+        if(res) {
+          history.replace('/home')
+        } else {
+          history.replace('/signup')
+          // TODO No user, redirect to signup process
+        } 
+      }).catch(error => {
+        console.log('error fetching user', error)
+      })
+      // ...
+    }).catch((error: any) => {
+      console.log('error verifying otp', error.message)
+      setError(error.message)
+      // User couldn't sign in (bad verification code?)
+      // ...
+    })
+  }
+
+  const onPressLogin = (phoneNumber: string) => {
+    setError(null)
+    auth.signInWithPhoneNumber(
+      phoneNumber,
+      new firebase.auth.RecaptchaVerifier(captchaRef.current, {
+        size: 'invisible',
+        callback: (response: any) => {
+          console.log('resultCallback', response)
+          // onCaptcha();
+        },
+      }),
+    ).then((confirmationResult: any) => {
+      confResRef.current = confirmationResult;
+      setCurrentPage(1)
+      console.log('resultSignin', confirmationResult)
+    }).catch((error) => {
+      console.log('setting error')
+      setError(error.message)
+    })
+  }
+
+  function renderForm () {
+    switch(currentPage) {
+      case 1: return  <OTPForm onPressConfirm={confirmOTP} error={error} />
+      default: return  <PhoneForm captchaRef={captchaRef} onPressLogin={onPressLogin} error={error} />
+    }
+  }
+
   return (
     <section className="flex flex-col items-center h-screen md:flex-row ">
       <div className="flex items-center justify-center w-full h-screen px-6  md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
@@ -15,36 +80,16 @@ export default function Login() {
           <h1 className="mt-8 text-xl font-semibold text-gray-700 tracking-ringtighter sm:text-3xl title-font">
             Log in to your account
           </h1>
-          <form className="mt-6" action="#" method="POST">
-            <div>
-              <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
-                Phone number
-              </label>
-              <input
-                type="tel"
-                name="tel"
-                id="tel"
-                placeholder="Your phone number"
-                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
-              />
-            </div>
-            
-            <button
-              type="submit"
-              className="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-500 ease-in-out transform bg-gradient-to-br from-blue-500 to-indigo-700 rounded-lg hover:bg-indigo-800 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 "
-            >
-              Log In
-            </button>
-          </form>
+         {renderForm()}
           <hr className="w-full my-6 border-indigo-100" />
           <p className="mt-8 text-center">
             Need an account?{" "}
-            <a
-              href="#"
+            <Link
+              to="/signup"
               className="font-semibold text-blue-500 hover:text-blue-700"
             >
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

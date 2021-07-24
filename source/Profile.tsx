@@ -1,5 +1,6 @@
 import Footer from './Components/Footer';
 import * as React from 'react';
+import { signout } from './Firebase/UserProvider';
 
 export const Profile = () => {
   return (
@@ -19,20 +20,20 @@ export const Profile = () => {
     <div className="flex justify-center items-center flex-col">
       {/* <!-- Card-1 --> */}
       <div className="flex w-8/12 rounded-xl shadow border border-gray-100 flex-col justify-center items-center">
-        <div className="p-4 w-full text-center border-b-2 border-gray-100">
+        <div className="p-4 w-full text-center border-b-2 border-gray-100 cursor-pointer">
           <h4><a className="text-sm font-semibold text-gray-900" href="#">My Account</a></h4>
         </div>
-        <div className="p-4 w-full text-center">
+        <div className="p-4 w-full text-center cursor-pointer">
           <h4><a className="text-sm font-semibold text-gray-900" href="#">Stock Adjust</a></h4>
         </div>
       </div>
       {/* <!-- card-2 --> */}
       <div className="flex w-8/12 rounded-xl shadow border border-gray-100 flex-col justify-center items-center mt-12">
-        <div className="p-4 w-full text-center border-b-2 border-gray-100">
+        <div className="p-4 w-full text-center border-b-2 border-gray-100 cursor-pointer">
           <h4><a className="text-sm font-semibold text-gray-900" href="#">Settings</a></h4>
         </div>
-        <div className="p-4 w-full text-center">
-          <h4><a className="text-sm font-semibold text-gray-900" href="#">Logout</a></h4>
+        <div className="p-4 w-full text-center cursor-pointer">
+          <h4><a className="text-sm font-semibold text-gray-900" onClick={signout}>Logout</a></h4>
         </div>
       </div>
     </div>
