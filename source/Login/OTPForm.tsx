@@ -22,8 +22,11 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
           Verification code
         </label>
         <input
-          type="tel"
-          name="tel"
+          type="text"
+          inputMode="numeric"
+          autoComplete="one-time-code"
+          pattern="\d{6}"
+          required={true}
           value={code}
           onChange={(event) => setCode(event?.target.value)}
           id="tel"

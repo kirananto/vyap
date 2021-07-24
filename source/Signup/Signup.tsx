@@ -112,6 +112,9 @@ export default function Signup() {
                 className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
               />
             </div>
+            <div className="text-xs text-gray-500 mt-2">
+              We'll never share your email with anyone else.
+            </div>
             <div className="mt-4">
               <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
                 Phone number
