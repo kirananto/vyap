@@ -34,9 +34,9 @@ export default function PhoneForm({ onPressLogin, captchaRef }: IProps) {
       </div>
 
       <div className="text-xs text-gray-500 mt-2">
-        We'll never share your email with anyone else.
+        We'll never share your phone number with anyone else.
       </div>
-      
+
       <button
         type="submit"
         id="login-button"

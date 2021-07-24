@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import SelectCustomerType from "./SelectCustomerType";
 // import firebase from "firebase/app";
 // import { auth } from "../Firebase/firebase";
 // import PhoneForm from "./PhoneForm";
@@ -7,6 +8,8 @@ import React, { useRef, useState } from "react";
 
 export default function Signup() {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   // const [currentPage, setCurrentPage] = useState(0)
   const captchaRef = useRef(null);
   // const confResRef = useRef<any>();
@@ -81,10 +84,41 @@ export default function Signup() {
             <div ref={captchaRef} id="recaptcha-container" />
             <div>
               <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                Name
+              </label>
+              <input
+                type="name"
+                name="name"
+                value={name}
+                required={true}
+                onChange={(event) => setName(event?.target.value)}
+                id="name"
+                placeholder="Your name"
+                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+              />
+            </div>
+            <div className="mt-4">
+              <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                required={true}
+                value={email}
+                onChange={(event) => setEmail(event?.target.value)}
+                id="email"
+                placeholder="Your email"
+                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+              />
+            </div>
+            <div className="mt-4">
+              <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
                 Phone number
               </label>
               <input
                 type="tel"
+                required={true}
                 name="tel"
                 value={phoneNumber}
                 onChange={(event) => setPhoneNumber(event?.target.value)}
@@ -95,9 +129,17 @@ export default function Signup() {
             </div>
 
             <div className="text-xs text-gray-500 mt-2">
-              We'll never share your email with anyone else.
+              We'll never share your phone number with anyone else.
             </div>
-
+            <div className="mt-4">
+              <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                What defines you ?
+              </label>
+              <div className="md:w-custom mx-auto mt-4 md:flex md:justify-between md:flex-wrap">
+                <SelectCustomerType isSelected={true} name="Shop" />
+                <SelectCustomerType isSelected={false} name="Supplier" />
+              </div>
+            </div>
             <button
               type="submit"
               id="login-button"

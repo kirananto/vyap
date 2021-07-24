@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import firebase from "firebase/app";
-import { auth } from "../Firebase/firebase";
+import { auth, getUserDocument } from "../Firebase/firebase";
 import PhoneForm from "./PhoneForm";
 import OTPForm from "./OTPForm";
 import { Link, useHistory } from "react-router-dom";
@@ -16,9 +16,19 @@ export default function Login() {
     setError(null)
     confResRef.current?.confirm(code).then((result: any) => {
       // User signed in successfully.
-      console.log('result', result)
+      console.log('result', result.user.uid)
       alert('logged in')
-      history.replace('/home')
+      getUserDocument(result.user.uid).then(res => {
+        console.log('user', res)
+        if(res) {
+          history.replace('/home')
+        } else {
+          history.replace('/signup')
+          // TODO No user, redirect to signup process
+        } 
+      }).catch(error => {
+        console.log('error fetching user', error)
+      })
       // ...
     }).catch((error: any) => {
       console.log('error verifying otp', error.message)
