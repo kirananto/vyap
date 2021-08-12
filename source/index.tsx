@@ -1,5 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import './assets/fonts/productSans/Product Sans Regular.ttf';
+import './assets/fonts/productSans/Product Sans Bold.ttf';
 
 import { InitialRouter } from './App';
 

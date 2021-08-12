@@ -2,7 +2,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
 }
 body {
   overflow: hidden;
@@ -84,10 +83,9 @@ nav-top
 
 /* Customer Card */
 .card-main-container {
-  height: calc(100vh - 300px);
+  height: calc(100vh - 200px);
   overflow-y: auto;
-  width: 90%;
-  margin-left: 5%;
+  width: 100%;
 }
 .scrollDes::-webkit-scrollbar {
   width: 0px;
@@ -140,8 +138,14 @@ background: #3f4694;
 /* Add Customer Button */
 .add-cutomer-btn {
   position: absolute;
-  bottom: 40px;
+  bottom: 5px;
   right: 10px;
-  width: 130px;
-  height: 45px;
+  width: 160px;
+  height: 35px;
+  border-radius: 50px;
+  transition: 0.1s;
+  outline: none;
+}
+.add-cutomer-btn:active{
+  transform: scale(0.95);
 }

@@ -6,13 +6,13 @@ interface IProps {
 
 export function ItemCard({ item }: IProps) {
   return (
-    <div className="bottom-line">
+    
       <div className="card-main">
         <div className="card-container">
           <div className="card-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="mt-4 rounded-full p-2 h-10 w-10 text-white bg-gradient-to-br from-blue-500 to-indigo-500"
+              className="w-10 h-10 p-2 mt-4 text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -27,8 +27,8 @@ export function ItemCard({ item }: IProps) {
             </svg>
           </div>
           <div className="card-child-2">
-            <h2 className="font-extrabold text-gray-700">Supplier #234</h2>
-            <h5 className="leading text-xs text-gray-500">Kannur, Kerala</h5>
+            <h2 className="font-extrabold text-gray-600">Supplier #234</h2>
+            <h5 className="text-xs text-gray-500 leading">Kannur, Kerala</h5>
           </div>
           <div className="card-child-3">
             <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">
@@ -38,6 +38,6 @@ export function ItemCard({ item }: IProps) {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }

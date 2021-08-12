@@ -7,20 +7,42 @@ export const Home = () => {
   return (
     <div className="mobile-main">
       {/* <!-- * Header --> */}
-      <header className="head-container bg-gradient-to-br from-blue-500 to-indigo-700">
-        <Link to="/profile" className="flex w-4/5 gap-4 items-center">
-          <img className="w-6" src="../assets/icons/user.png" alt="" />
-          <h1 className="text-white font-bold text-lg">XYZ's Super market</h1>
-        </Link>
-        <div className="head-left mt-2">
-          <img className="w-5" src="../assets/icons/notification.svg" alt="" />
+      <header className="flex flex-col gap-2 p-4 bg-white shadow-md">
+        <div className="flex w-full h-full ">
+          <Link to="/profile" className="flex flex-col w-4/5">
+            <h1 className="text-lg font-semibold text-gray-600 font-ProductSans">Welcome👋</h1>
+            <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-900 ">XYZ Supplier</h1>
+          </Link>
+          <div className="flex items-center justify-end w-1/5 ">
+            <img
+              className="h-12 rounded-full shadow-lg"
+              src="../assets/icons/profile/profile-icon.svg"
+              alt=""
+            />
+          </div>
+        </div>
+
+        {/* <!-- Search Customer Field --> */}
+
+        <div className="relative flex w-full">
+          <input
+            type="text"
+            id="input"
+            className="w-full h-10 pl-4 pr-5 bg-gray-100 rounded outline-none "
+            placeholder="Search"
+          />
+          {/* <img
+            src="../assets/icons/search.svg"
+            className="absolute h-4 top-3 left-3"
+            id="input_img"
+          /> */}
         </div>
       </header>
       {/* <!-- * Header End -->
 
       <!-- ! Nav-Menu Top --> */}
-      <div className="nav-top-main">
-        <div className="nav-top-container shadow w-11/12 rounded py-4 flex justify-center items-center bg-white">
+      {/* <div className="nav-top-main">
+        <div className="flex items-center justify-center w-11/12 py-4 bg-white rounded shadow nav-top-container">
           <div className="nav-top-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +58,7 @@ export const Home = () => {
                 d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h3 className="text-xs text-gray-500  font-semibold">
+            <h3 className="text-xs font-semibold text-gray-500">
               Add Product
             </h3>
           </div>
@@ -56,7 +78,7 @@ export const Home = () => {
               />
             </svg>
 
-            <h3 className="text-xs text-gray-500 font-semibold">All Orders</h3>
+            <h3 className="text-xs font-semibold text-gray-500">All Orders</h3>
           </div>
           <div className="nav-top-child-3">
             <svg
@@ -73,23 +95,17 @@ export const Home = () => {
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
               />
             </svg>
-            <h3 className="text-xs text-gray-500  font-semibold">Reports</h3>
+            <h3 className="text-xs font-semibold text-gray-500">Reports</h3>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!-- ! Nav-MenuTop End --> */}
 
-      {/* <!-- Search Customer Field --> */}
-
-      <div className="flex w-11/12 relative m-auto my-4	">
-        <input type="text" id="input" className="shadow rounded border h-10 pl-10 pr-5 w-full border-gray-100" placeholder="Search Customer" />
-        <img src="../assets/icons/search.svg" className="absolute h-4 top-3 left-3" id="input_img" />
-      </div>
       {/* <!-- Customer Field End -->
 
       <!-- Customer Cards --> */}
-      <div className="card-main-container scrollDes divide-y divide-light-blue-400">
+      <div className="relative divide-y card-main-container scrollDes divide-light-blue-400">
         {Array(10)
           .fill(20)
           .map((item, index) => (
@@ -98,7 +114,7 @@ export const Home = () => {
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      <button className="add-cutomer-btn text-sm rounded text-white bg-gradient-to-br from-blue-500 to-indigo-700">
+      <button className="text-white text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         Add Customer
       </button>
       <Footer />

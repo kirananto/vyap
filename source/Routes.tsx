@@ -4,7 +4,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import { Home } from "./Home/Home";
 import { Profile } from "./Profile";
 import Login from "./Login/Login";
-import ProtectedRoute from "./Firebase/ProtectedRoute";
+// import ProtectedRoute from "./Firebase/ProtectedRoute";
 import { UserContext } from "./Firebase/UserProvider";
 import { Payment } from "./Payment/Payment";
 import LoginRoutes from "./Firebase/LoginRoutes";
@@ -22,10 +22,10 @@ function Routes() {
           <Switch>
             <LoginRoutes path="/login" component={Login} />
             <LoginRoutes path="/signup" component={Signup} />
-            <ProtectedRoute path="/payment" component={Payment} />
-            <ProtectedRoute exact path="/home" component={Home} />
-            <ProtectedRoute exact path="/profile" component={Profile} />
-            <ProtectedRoute exact path="/" component={Home} />
+            <Route path="/payment" component={Payment} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/" component={Home} />
             <Route>
               <div> 
                   404 page 
