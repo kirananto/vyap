@@ -11,8 +11,9 @@ import PaymentDetails from "./Payment/PaymentDetails";
 import Reports from "./Reports/Reports";
 import Employees from "./Employees/Employees";
 import LoginRoutes from "./Firebase/LoginRoutes";
-import StockManagement from "./StockManagement/StockManagement"
+import StockManagement from "./StockManagement/StockManagement";
 import Signup from "./Signup/Signup";
+import Settings from "./Settings/Settings";
 
 function Routes() {
   const { user } = useContext(UserContext);
@@ -31,14 +32,14 @@ function Routes() {
             <Route path="/reports" component={Reports} />
             <Route path="/employees" component={Employees} />
             <Route path="/stock-management" component={StockManagement} />
+            <Route path="/settings" component={Settings} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/" component={Home} />
             <Route>
-              <div> 
-                  404 page 
-                  Please go to home
-                  <Link to="/home">Home</Link>
+              <div>
+                404 page Please go to home
+                <Link to="/home">Home</Link>
               </div>
             </Route>
           </Switch>
