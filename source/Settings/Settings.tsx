@@ -21,7 +21,7 @@ export default function Settings() {
         {/* ------- */}
         <div className="flex gap-3 mt-8 mb-3">
           <h1 className="font-semibold text-gray-500 text-md">Dark Mode</h1>
-          <div className="flex items-center justify-center px-2 text-xs font-bold text-center rounded-lg min-w-min side-div">
+          <div className="flex items-center justify-center px-2 text-xs font-bold text-center rounded-lg min-w-min side-div custom-color">
             Coming Soon
           </div>
         </div>
