@@ -20,9 +20,9 @@ Mobile Body
   /* max-width: 450px; */
   max-height: 100vh;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
 
-  /* background-color: aqua; */
+  background-color: rgb(246, 246, 246);
 }
 
 /* 
@@ -86,7 +86,9 @@ nav-top
   height: calc(100vh - 200px);
   overflow-y: auto;
   width: 100%;
+
 }
+
 .scrollDes::-webkit-scrollbar {
   width: 0px;
 }
@@ -138,7 +140,7 @@ background: #3f4694;
 /* Add Customer Button */
 .add-cutomer-btn {
   position: absolute;
-  bottom: 5px;
+  bottom: 40px;
   right: 10px;
   width: 160px;
   height: 35px;
