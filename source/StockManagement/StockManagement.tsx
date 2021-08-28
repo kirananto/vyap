@@ -8,12 +8,12 @@ export default function StockManagement() {
     <>
       <SimpleHeader heading="Stock Management" />
       <div className="flex flex-col gap-4 pt-4 pl-8 bg-white">
-        <div>
+        <div className="flex flex-col gap-3">
           <h1 className="text-sm text-gray-500">Low stock warning</h1>
           <ToggleButton />
         </div>
 
-        <div>
+        <div className="flex flex-col gap-3">
           <h1 className="text-sm text-gray-500">Allow negative purchases</h1>
           <ToggleButton />
         </div>
