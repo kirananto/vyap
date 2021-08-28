@@ -13,7 +13,7 @@ export default function StockManagement() {
           <ToggleButton />
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 mb-7">
           <h1 className="text-sm text-gray-500">Allow negative purchases</h1>
           <ToggleButton />
         </div>
