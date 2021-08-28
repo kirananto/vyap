@@ -1,4 +1,4 @@
-import Footer from './Components/Footer';
+import {Footer} from './Components/Footer';
 import * as React from 'react';
 import { signout } from './Firebase/UserProvider';
 

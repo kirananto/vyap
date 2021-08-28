@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export default function Footer() {
+ function Footer() {
   return (
     <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md">
       {/* Nav-Item-1 */}
@@ -85,3 +85,16 @@ export default function Footer() {
     </div>
   );
 }
+
+
+// ! (SimpleFooter) Footer with only one button-->:
+
+function SimpleFooter(props){
+  return(
+    <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow-2xl">
+      <button className="w-8/12 h-10 font-medium text-white rounded-full text-md bg-gradient-to-r from-blue-500 to-indigo-900">{props.btnName}</button>
+    </div>
+  )
+}
+
+export {Footer, SimpleFooter};

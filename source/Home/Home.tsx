@@ -1,4 +1,4 @@
-import Footer from "../Components/Footer";
+import {Footer} from "../Components/Footer";
 import * as React from "react";
 import { ItemCard } from "./ItemCard";
 import { Link } from "react-router-dom";
