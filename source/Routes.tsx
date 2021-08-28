@@ -12,7 +12,9 @@ import Reports from "./Reports/Reports";
 import Employees from "./Employees/Employees";
 import LoginRoutes from "./Firebase/LoginRoutes";
 import StockManagement from "./StockManagement/StockManagement";
-import Signup from "./Signup/Signup";
+// ! SIGNUP----->
+import SignupStepOne from "./Signup/SignupStepOne";
+import SignupStepTwo from "./Signup/SignupStepTwo";
 import Settings from "./Settings/Settings";
 import More from "./More/More";
 
@@ -27,7 +29,8 @@ function Routes() {
         <>
           <Switch>
             <LoginRoutes path="/login" component={Login} />
-            <LoginRoutes path="/signup" component={Signup} />
+            <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
+            <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
             <Route path="/payment" component={Payment} />
             <Route path="/payment-details" component={PaymentDetails} />
             <Route path="/reports" component={Reports} />
