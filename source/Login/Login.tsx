@@ -1,13 +1,12 @@
 import React, { useRef, useState } from "react";
-import firebase from "firebase/app";
-import { auth, getUserDocument } from "../Firebase/firebase";
+import {  getUserDocument } from "../Firebase/firebase";
 import PhoneForm from "./PhoneForm";
 import OTPForm from "./OTPForm";
 import { Link, useHistory } from "react-router-dom";
+import { generateOtp } from "../API/login.axios";
 
 export default function Login() {
   const [currentPage, setCurrentPage] = useState(0)
-  const captchaRef = useRef(null);
   const confResRef = useRef<any>();
   const [error, setError] = useState(null);
 
@@ -40,21 +39,14 @@ export default function Login() {
 
   const onPressLogin = (phoneNumber: string) => {
     setError(null)
-    auth.signInWithPhoneNumber(
-      phoneNumber,
-      new firebase.auth.RecaptchaVerifier(captchaRef.current, {
-        size: 'invisible',
-        callback: (response: any) => {
-          console.log('resultCallback', response)
-          // onCaptcha();
-        },
-      }),
-    ).then((confirmationResult: any) => {
-      confResRef.current = confirmationResult;
+    generateOtp(phoneNumber).then(result => {
+      console.log('result', result)
       setCurrentPage(1)
-      console.log('resultSignin', confirmationResult)
-    }).catch((error) => {
-      console.log('setting error')
+      // confResRef.current = confirmationResult;
+      // setCurrentPage(1)
+      // console.log('resultSignin', confirmationResult)
+    }).catch(error => {
+      console.log('error', error)
       setError(error.message)
     })
   }
@@ -62,7 +54,7 @@ export default function Login() {
   function renderForm () {
     switch(currentPage) {
       case 1: return  <OTPForm onPressConfirm={confirmOTP} error={error} />
-      default: return  <PhoneForm captchaRef={captchaRef} onPressLogin={onPressLogin} error={error} />
+      default: return  <PhoneForm onPressLogin={onPressLogin} error={error} />
     }
   }
 

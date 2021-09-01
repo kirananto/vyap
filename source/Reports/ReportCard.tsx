@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function ReportCard(props) {
+function ReportCard(props: { bgIllus: any, heading: string }) {
   return (
     <div className="flex flex-col h-auto p-4 bg-white rounded-lg shadow-md">
       <h1 className="pr-10 text-2xl font-black text-gray-500">
@@ -19,7 +19,7 @@ function ReportCard(props) {
 }
 // ! Component for Empty Card
 
-function EmptyReportCard(props){
+function EmptyReportCard(props: { heading: string }){
 
     return(
         <div className="flex items-center justify-center h-auto p-4 bg-white border-4 border-gray-100 border-dashed rounded-lg">

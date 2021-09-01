@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Links(props) {
+export default function Links(props: { linkName: string }) {
     return (
        <>
        {/* Link */}

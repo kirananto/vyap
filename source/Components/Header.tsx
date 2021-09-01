@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Header(props) {
+function Header(props: { heading: string, subHeading: string }) {
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto">
       {/* back icon  */}
@@ -79,7 +79,7 @@ function PaymentBottomHeader() {
 }
 
 // ! Simple Header with only one heading and back button -->
-function SimpleHeader(props){
+function SimpleHeader(props: { heading: string }) {
   return(
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
     {/* back icon  */}

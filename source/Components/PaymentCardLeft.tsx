@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PaymentCardLeft(props) {
+export default function PaymentCardLeft(props: { price: string}) {
   return (
     <div className="flex justify-start w-full">
       <div className="flex flex-col w-8/12 gap-1 p-2 bg-white rounded-lg shadow">

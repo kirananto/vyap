@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function EmployeesCard(props) {
+interface IProps { 
+  name: string
+  orderTaker: string
+}
+export default function EmployeesCard(props: IProps) {
   return (
     <div className="flex w-11/12 px-2 py-4 bg-white rounded-md shadow">
       {/* Col-1 ===================== */}

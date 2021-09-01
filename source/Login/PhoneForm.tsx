@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 interface IProps {
   onPressLogin: (phoneNumber: string) => void;
-  captchaRef: any;
   error: any
 }
 
-export default function PhoneForm({ onPressLogin, captchaRef }: IProps) {
+export default function PhoneForm({ onPressLogin }: IProps) {
   const [phoneNumber, setPhoneNumber] = useState("+917012918926");
 
   return (
@@ -17,7 +16,6 @@ export default function PhoneForm({ onPressLogin, captchaRef }: IProps) {
         onPressLogin(phoneNumber);
       }}
     >
-      <div ref={captchaRef} id="recaptcha-container" />
       <div>
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
           Phone number

@@ -52,7 +52,7 @@ export default function More() {
         <div className="flex items-center w-full gap-2 py-2 ">
           <StockManagementIcon />
           <Links linkName="Stock Management" />
-          <Tag TagName="Beta" />
+          <Tag tagName="Beta" />
         </div>
         {/* ----- */}
         {/* ----- */}
@@ -77,7 +77,7 @@ export default function More() {
         <div className="flex items-center w-full gap-2 py-2 ">
           <OffersManagementIcon />
           <Links linkName="Offer Management" />
-          <Tag TagName="Coming soon" />
+          <Tag tagName="Coming soon" />
         </div>
         {/* ----- */}
         {/* ----- */}
