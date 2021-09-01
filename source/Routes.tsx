@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 
 import { Home } from "./Pages/Home/Home";
 import { Profile } from "./Profile";
 import Login from "./Pages/Login/Login";
 // import ProtectedRoute from "./Firebase/ProtectedRoute";
-import { UserContext } from "./Firebase/UserProvider";
 import { Payment } from "./Pages/Payment/Payment";
 import PaymentDetails from "./Pages/Payment/PaymentDetails";
 import Reports from "./Pages/Reports/Reports";
@@ -19,7 +18,8 @@ import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
 
 function Routes() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = true;
 
   console.log("---------------- ROUTES: ", user);
 

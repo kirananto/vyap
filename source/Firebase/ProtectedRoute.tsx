@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import { UserContext } from "./UserProvider";
+// import { UserContext } from "./UserProvider";
 
 const ProtectedRoute = ({ component: Component, ...rest }: any) => {
-  const { user, profile } = useContext(UserContext);
+  // const { user, profile } = useContext(UserContext);
+  const user = true
+  const profile = true
   return (
     <Route
       {...rest}
