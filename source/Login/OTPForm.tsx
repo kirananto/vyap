@@ -16,7 +16,6 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
         onPressConfirm(code);
       }}
     >
-      <div id="recaptcha-container" />
       <div>
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
           Verification code
@@ -25,7 +24,7 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
           type="text"
           inputMode="numeric"
           autoComplete="one-time-code"
-          pattern="\d{6}"
+          pattern="\d{4}"
           required={true}
           value={code}
           onChange={(event) => setCode(event?.target.value)}
