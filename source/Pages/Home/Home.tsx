@@ -2,8 +2,11 @@ import { Footer } from "../../Components/Footer";
 import * as React from "react";
 import { ItemCard } from "./ItemCard";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCredentials } from "../../Pages/Login/credentialsSlice";
 
 export const Home = () => {
+  const { user } = useSelector(selectCredentials)
   return (
     <div className="mobile-main">
       {/* <!-- * Header --> */}
@@ -14,13 +17,13 @@ export const Home = () => {
               Welcome👋
             </h1>
             <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-900 ">
-              XYZ Supplier
+              {user?.name}
             </h1>
           </Link>
           <div className="flex items-center justify-end w-1/5 ">
             <img
               className="h-12 rounded-full shadow-lg"
-              src="../assets/icons/profile/profile-icon.svg"
+              src={user?.profileImageUrl ?? "../assets/icons/profile/profile-icon.svg"}
               alt=""
             />
           </div>

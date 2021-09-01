@@ -3,12 +3,15 @@ import PhoneForm from "./PhoneForm";
 import OTPForm from "./OTPForm";
 import { Link, useHistory } from "react-router-dom";
 import { generateOtp, verifyOtp } from "../../API/login.axios";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "./credentialsSlice";
 
 export default function Login() {
   const [currentPage, setCurrentPage] = useState(0)
   const phoneNumberRef = useRef<string>('');
   const [error, setError] = useState<string | null>(null);
 
+  const dispatch = useDispatch()
   const history = useHistory()
   const confirmOTP = (code: string) => {
     setError(null)
@@ -16,6 +19,7 @@ export default function Login() {
       if(res.data) {
         console.log('res.data', res.data)
         if(res.data.token) {
+          dispatch(setCredentials(res.data))
           history.replace('/home')
         } else {
           history.replace('/signup')

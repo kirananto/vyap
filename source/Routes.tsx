@@ -16,12 +16,14 @@ import SignupStepOne from "./Pages/Signup/SignupStepOne";
 import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
 import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
+import { useSelector } from "react-redux";
+import { selectCredentials } from "./Pages/Login/credentialsSlice";
 
 function Routes() {
-  // const { user } = useContext(UserContext);
-  const user = true;
+  const user  = useSelector(selectCredentials);
+  console.log('user', user)
 
-  console.log("---------------- ROUTES: ", user);
+  console.log("---------------- ROUTES: ", user.token);
 
   return (
     <>
