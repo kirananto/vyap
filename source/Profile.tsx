@@ -32,7 +32,7 @@ export const Profile = () => {
           <h4><a className="text-sm font-semibold text-gray-900" href="#">Settings</a></h4>
         </div>
         <div className="w-full p-4 text-center cursor-pointer">
-          <h4><a className="text-sm font-semibold text-gray-900" onClick={() => console.log('logout')}>Logout</a></h4>
+          <h4><a className="text-sm font-semibold text-gray-900" onClick={() => console.log('logout')}>Logout2</a></h4>
         </div>
       </div>
     </div>

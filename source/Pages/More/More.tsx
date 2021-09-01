@@ -14,8 +14,20 @@ import {
 import Links from "./Links";
 import Tag from "./Tag";
 import { Footer } from "../../Components/Footer";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../Pages/Login/credentialsSlice";
+import { useHistory } from "react-router-dom";
 
 export default function More() {
+
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const handleLogout = () => {
+    dispatch(setCredentials({ user: undefined, token: undefined }))
+    history.push('/login')
+  }
+
   return (
     <div className="bg-white">
       <SimpleHeader heading="More" />
@@ -81,7 +93,7 @@ export default function More() {
         </div>
         {/* ----- */}
         {/* ----- */}
-        <div className="flex items-center w-full gap-2 py-2 ">
+        <div onClick={handleLogout} className="cursor-pointer flex items-center w-full gap-2 py-2 ">
           <LogoutIcon />
           <Links linkName="Logout" />
         </div>

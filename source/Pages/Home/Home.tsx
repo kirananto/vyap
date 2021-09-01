@@ -12,7 +12,7 @@ export const Home = () => {
       {/* <!-- * Header --> */}
       <header className="flex flex-col gap-2 p-4 bg-white shadow-md">
         <div className="flex w-full h-full ">
-          <Link to="/profile" className="flex flex-col w-4/5">
+          <Link to="/more" className="flex flex-col w-4/5">
             <h1 className="text-lg font-semibold text-gray-600 font-ProductSans">
               Welcome👋
             </h1>

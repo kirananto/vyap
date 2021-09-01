@@ -59,7 +59,7 @@ import { Link } from "react-router-dom";
       {/* Nav-Item-3 */}
 
       <Link
-        to="/payment"
+        to="/more"
         className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer hover:bg-indigo-100"
       >
         <figure className="grid justify-items-center">

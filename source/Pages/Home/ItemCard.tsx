@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface IProps {
   item: any;
@@ -8,7 +9,7 @@ export function ItemCard({ item }: IProps) {
   return (
     
       <div className="card-main">
-        <div className="card-container">
+        <Link to="/payment" className="card-container">
           <div className="card-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +37,7 @@ export function ItemCard({ item }: IProps) {
             </div>
               <h6 className="text-xs text-gray-500"> 20 sec ago</h6>
           </div>
-        </div>
+        </Link>
       </div>
     
   );
