@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import firebase from "firebase/app";
-import { auth, getUserDocument } from "../Firebase/firebase";
+import { auth, getUserDocument } from "../../Firebase/firebase";
 import { Link, useHistory } from "react-router-dom";
 import OTPForm from "../Login/OTPForm";
 import PhoneForm from "../Login/PhoneForm";

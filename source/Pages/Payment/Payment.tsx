@@ -2,10 +2,10 @@ import React, { useState } from "react";
 // import { NavLink } from 'react-router-dom';
 import AddPaymentModal from "./AddPaymentModal";
 import "./payment.css";
-import { Header, PaymentBottomHeader } from "../Components/Header";
-import PaymentCardRight from "../Components/PaymentCardRight";
-import PaymentCardLeft from "../Components/PaymentCardLeft";
-import PaymentFooter from "../Components/PaymentFooter"
+import { Header, PaymentBottomHeader } from "../../Components/Header";
+import PaymentCardRight from "../../Components/PaymentCardRight";
+import PaymentCardLeft from "../../Components/PaymentCardLeft";
+import PaymentFooter from "../../Components/PaymentFooter"
 
 export const Payment = () => {
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);

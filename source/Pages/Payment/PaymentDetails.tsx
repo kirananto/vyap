@@ -1,6 +1,6 @@
 import React from "react";
-import { Header } from "../Components/Header";
-import { PaymentInfo, PaymentInfoTick } from "../Components/PaymentInfo";
+import { Header } from "../../Components/Header";
+import { PaymentInfo, PaymentInfoTick } from "../../Components/PaymentInfo";
 
 export default function PaymentDetails() {
   const textSize = { fontSize: "12px" };

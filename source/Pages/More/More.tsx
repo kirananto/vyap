@@ -1,5 +1,5 @@
 import React from "react";
-import { SimpleHeader } from "../Components/Header";
+import { SimpleHeader } from "../../Components/Header";
 import {
   PaymentIcon,
   AllOrdersIcon,
@@ -13,7 +13,7 @@ import {
 } from "./Icons/Payment";
 import Links from "./Links";
 import Tag from "./Tag";
-import { Footer } from "../Components/Footer";
+import { Footer } from "../../Components/Footer";
 
 export default function More() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import { SimpleHeader } from "../Components/Header";
-import ToggleButton from "../Components/ToggleButton";
+import { SimpleHeader } from "../../Components/Header";
+import ToggleButton from "../../Components/ToggleButton";
 import "./Settings.css";
 
 

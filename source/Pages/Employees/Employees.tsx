@@ -1,5 +1,5 @@
 import React from "react";
-import { SimpleHeader } from "../Components/Header";
+import { SimpleHeader } from "../../Components/Header";
 import EmployeesCard from "./EmployeesCard";
 
 export default function Employees() {

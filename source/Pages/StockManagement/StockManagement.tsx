@@ -1,7 +1,7 @@
 import React from "react";
-import { SimpleHeader } from "../Components/Header";
-import ToggleButton from "../Components/ToggleButton";
-import { SimpleFooter } from "../Components/Footer";
+import { SimpleHeader } from "../../Components/Header";
+import ToggleButton from "../../Components/ToggleButton";
+import { SimpleFooter } from "../../Components/Footer";
 
 export default function StockManagement() {
   return (

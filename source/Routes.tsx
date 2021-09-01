@@ -1,22 +1,22 @@
 import React, { useContext } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 
-import { Home } from "./Home/Home";
+import { Home } from "./Pages/Home/Home";
 import { Profile } from "./Profile";
-import Login from "./Login/Login";
+import Login from "./Pages/Login/Login";
 // import ProtectedRoute from "./Firebase/ProtectedRoute";
 import { UserContext } from "./Firebase/UserProvider";
-import { Payment } from "./Payment/Payment";
-import PaymentDetails from "./Payment/PaymentDetails";
-import Reports from "./Reports/Reports";
-import Employees from "./Employees/Employees";
+import { Payment } from "./Pages/Payment/Payment";
+import PaymentDetails from "./Pages/Payment/PaymentDetails";
+import Reports from "./Pages/Reports/Reports";
+import Employees from "./Pages/Employees/Employees";
 import LoginRoutes from "./Firebase/LoginRoutes";
-import StockManagement from "./StockManagement/StockManagement";
+import StockManagement from "./Pages/StockManagement/StockManagement";
 // ! SIGNUP----->
-import SignupStepOne from "./Signup/SignupStepOne";
-import SignupStepTwo from "./Signup/SignupStepTwo";
-import Settings from "./Settings/Settings";
-import More from "./More/More";
+import SignupStepOne from "./Pages/Signup/SignupStepOne";
+import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
+import Settings from "./Pages/Settings/Settings";
+import More from "./Pages/More/More";
 
 function Routes() {
   const { user } = useContext(UserContext);

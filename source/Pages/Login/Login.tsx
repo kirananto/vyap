@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import PhoneForm from "./PhoneForm";
 import OTPForm from "./OTPForm";
 import { Link, useHistory } from "react-router-dom";
-import { generateOtp, verifyOtp } from "../API/login.axios";
+import { generateOtp, verifyOtp } from "../../API/login.axios";
 
 export default function Login() {
   const [currentPage, setCurrentPage] = useState(0)
