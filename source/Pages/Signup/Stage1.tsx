@@ -1,62 +1,54 @@
-import React, { useRef, useState } from "react";
-import firebase from "firebase/app";
-import { auth, getUserDocument } from "../../Firebase/firebase";
-import { Link, useHistory } from "react-router-dom";
+import React, {  useState } from "react";
+import { Link } from "react-router-dom";
 import OTPForm from "../Login/OTPForm";
 import PhoneForm from "../Login/PhoneForm";
 
 export default function SignupStage1() {
   const [currentPage, setCurrentPage] = useState(0)
-  const captchaRef = useRef(null);
-  const confResRef = useRef<any>();
+  // const confResRef = useRef<any>();
   const [error, setError] = useState(null);
 
-  const history = useHistory()
+  // const history = useHistory()
   const confirmOTP = (code: string) => {
     setError(null)
-    confResRef.current?.confirm(code).then((result: any) => {
-      // User signed in successfully.
-      console.log('result', result.user.uid)
-      alert('logged in')
-      getUserDocument(result.user.uid).then(res => {
-        console.log('user', res)
-        if(res) {
-          history.replace('/home')
-        } else {
-          history.replace('/signup')
-          // TODO No user, redirect to signup process
-        } 
-      }).catch(error => {
-        console.log('error fetching user', error)
-      })
-      // ...
-    }).catch((error: any) => {
-      console.log('error verifying otp', error.message)
-      setError(error.message)
-      // User couldn't sign in (bad verification code?)
-      // ...
-    })
+    console.log('code', code)
+    // confResRef.current?.confirm(code).then((result: any) => {
+    //   // User signed in successfully.
+    //   console.log('result', result.user.uid)
+    //   alert('logged in')
+    //   getUserDocument(result.user.uid).then(res => {
+    //     console.log('user', res)
+    //     if(res) {
+    //       history.replace('/home')
+    //     } else {
+    //       history.replace('/signup')
+    //       // TODO No user, redirect to signup process
+    //     } 
+    //   }).catch(error => {
+    //     console.log('error fetching user', error)
+    //   })
+    //   // ...
+    // }).catch((error: any) => {
+    //   console.log('error verifying otp', error.message)
+    //   setError(error.message)
+    //   // User couldn't sign in (bad verification code?)
+    //   // ...
+    // })
   }
 
   const onPressLogin = (phoneNumber: string) => {
     setError(null)
-    auth.signInWithPhoneNumber(
-      phoneNumber,
-      new firebase.auth.RecaptchaVerifier(captchaRef.current, {
-        size: 'invisible',
-        callback: (response: any) => {
-          console.log('resultCallback', response)
-          // onCaptcha();
-        },
-      }),
-    ).then((confirmationResult: any) => {
-      confResRef.current = confirmationResult;
+    console.log('p', phoneNumber)
+    // auth.signInWithPhoneNumber(
+    //   phoneNumber,
+    // ).then((confirmationResult: any) => {
+    //   confResRef.current = confirmationResult;
       setCurrentPage(1)
-      console.log('resultSignin', confirmationResult)
-    }).catch((error) => {
-      console.log('setting error')
-      setError(error.message)
-    })
+    //   console.log('resultSignin', confirmationResult)
+    // }).catch((error) => {
+    //   console.log('setting error')
+    //   setError(error.message)
+    // })
   }
 
   function renderForm () {

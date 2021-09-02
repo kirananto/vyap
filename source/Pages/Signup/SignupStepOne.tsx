@@ -1,10 +1,5 @@
 import React, { useState } from "react"; //useRef,
-// import SelectCustomerType from "./SelectCustomerType";
-// import firebase from "firebase/app";
-// import { auth } from "../Firebase/firebase";
-// import PhoneForm from "./PhoneForm";
-// import OTPForm from "./OTPForm";
-// import { useHistory } from "react-router-dom";
+
 
 export default function SignupStepOne() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -36,13 +31,6 @@ export default function SignupStepOne() {
   //   setError(null)
   //   auth.signInWithPhoneNumber(
   //     phoneNumber,
-  //     new firebase.auth.RecaptchaVerifier(captchaRef.current, {
-  //       size: 'invisible',
-  //       callback: (response: any) => {
-  //         console.log('resultCallback', response)
-  //         // onCaptcha();
-  //       },
-  //     }),
   //   ).then((confirmationResult: any) => {
   //     confResRef.current = confirmationResult;
   //     setCurrentPage(1)

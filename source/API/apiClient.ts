@@ -1,6 +1,7 @@
 import axios from "axios"
 
-export const baseURL = `https://vyap-backend-vve8g.ondigitalocean.app/do/api`
+// export const baseURL = `https://vyap-backend-vve8g.ondigitalocean.app/do/api`
+export const baseURL = `http://localhost:3333/api`
 
 export const axiosClient = axios.create({
     baseURL: baseURL,

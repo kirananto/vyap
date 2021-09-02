@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { formatDistance } from 'date-fns'
 
 interface IProps {
   item: any;
@@ -9,7 +10,7 @@ export function ItemCard({ item }: IProps) {
   return (
     
       <div className="card-main">
-        <Link to="/payment" className="card-container">
+        <Link to={`/payment/${item.id}`} className="card-container">
           <div className="card-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -28,14 +29,18 @@ export function ItemCard({ item }: IProps) {
             </svg>
           </div>
           <div className="card-child-2">
-            <h2 className="font-extrabold text-gray-600">Supplier #234</h2>
-            <h5 className="text-xs text-gray-500 leading">Kannur, Kerala</h5>
+            <h2 className="font-extrabold text-gray-600">{item.recipient?.name}</h2>
+            <h5 className="text-xs text-gray-500 leading">{item.lastMsg}</h5>
           </div>
           <div className="card-child-3">
             <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">
-              {item}
+              {item.unseenNumbers}
             </div>
-              <h6 className="text-xs text-gray-500"> 20 sec ago</h6>
+              <h6 className="text-xs text-gray-500"> {formatDistance(
+  new Date(item.updatedAt),
+  new Date(),
+  { addSuffix: true }
+)}</h6>
           </div>
         </Link>
       </div>

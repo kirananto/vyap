@@ -1,12 +1,32 @@
 import { Footer } from "../../Components/Footer";
-import * as React from "react";
+import React, { useEffect } from "react";
 import { ItemCard } from "./ItemCard";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "../../Pages/Login/credentialsSlice";
+import { fetchInbox } from "../../API/inbox.axios";
 
 export const Home = () => {
-  const { user } = useSelector(selectCredentials)
+  const [inbox, setInbox] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const { user, token } = useSelector(selectCredentials)
+  const history = useHistory()
+  useEffect(() => {
+    console.log('setCurrentPage', setCurrentPage)
+    const limit = 10
+    if(token) {
+      setLoading(true)
+      fetchInbox(token, ((currentPage - 1) * limit), limit).then(result => {
+        setInbox(result.data.data)
+        setLoading(false)
+        console.log('data', result.data.data)
+      })
+    } else {
+      history.push('/login')
+    }
+  }, [])
+
   return (
     <div className="mobile-main">
       {/* <!-- * Header --> */}
@@ -17,7 +37,7 @@ export const Home = () => {
               Welcome👋
             </h1>
             <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-900 ">
-              {user?.name}
+              {user?.organization?.name}
             </h1>
           </Link>
           <div className="flex items-center justify-end w-1/5 ">
@@ -40,10 +60,9 @@ export const Home = () => {
           />
         </div>
       </header>
-
+      {loading ? <div> Loading...</div> : null}
       <div className="relative divide-y card-main-container scrollDes divide-light-blue-400">
-        {Array(10)
-          .fill(20)
+        {inbox
           .map((item, index) => (
             <ItemCard item={item} key={index} />
           ))}

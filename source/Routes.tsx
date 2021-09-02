@@ -4,12 +4,11 @@ import { Link, Route, Switch } from "react-router-dom";
 import { Home } from "./Pages/Home/Home";
 import { Profile } from "./Profile";
 import Login from "./Pages/Login/Login";
-// import ProtectedRoute from "./Firebase/ProtectedRoute";
 import { Payment } from "./Pages/Payment/Payment";
 import PaymentDetails from "./Pages/Payment/PaymentDetails";
 import Reports from "./Pages/Reports/Reports";
 import Employees from "./Pages/Employees/Employees";
-import LoginRoutes from "./Firebase/LoginRoutes";
+import LoginRoutes from "./Router/LoginRoutes";
 import StockManagement from "./Pages/StockManagement/StockManagement";
 // ! SIGNUP----->
 import SignupStepOne from "./Pages/Signup/SignupStepOne";

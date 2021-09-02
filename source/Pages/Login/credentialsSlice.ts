@@ -1,5 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+
+export interface Organization {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    name: string;
+    description: string;
+    listPrivately: boolean;
+    officeNumber: string;
+    profileImageUrl?: any;
+    gstNumber: string;
+    officeAddress: string;
+    email: string;
+    pinCode: string;
+    isSupplier: boolean;
+    organizationLocationId?: any;
+    categoryId?: any;
+}
+export interface UserSettings {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    isDarkMode: boolean;
+}
+
 export interface User {
     id: string;
     createdAt: Date;
@@ -11,7 +36,9 @@ export interface User {
     roleId: string;
     profileImageUrl: string;
     settingsId?: any;
+    settings: UserSettings | null
     organizationId: string;
+    organization: Organization | null;
 }
 
 export interface CredentialsInterface {
