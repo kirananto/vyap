@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface IProps {
   onPressConfirm: (code: string) => void;
@@ -7,6 +7,41 @@ interface IProps {
 
 export default function OTPForm({ onPressConfirm, error }: IProps) {
   const [code, setCode] = useState("");
+
+  useEffect(() => {
+    // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 1min
+    const signal = new AbortController();
+    setTimeout(() => {
+      signal.abort();
+    }, 1 * 60 * 1000);
+    async function main() {
+      if ('OTPCredential' in window) {
+        try {
+          if (navigator.credentials) {
+            try {
+              //@ts-ignore
+              await navigator.credentials.get({ abort: signal, otp: { transport: ['sms'] } })
+                .then(content => {
+                  //@ts-ignore
+                  if (content?.code) {
+                    //@ts-ignore
+                    onPressConfirm(content.code);
+                  }
+                })
+                .catch(e => console.log(e));
+            }
+            catch (e) {
+              return;
+            }
+          }
+        }
+        catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    main();
+  }, [])
 
   return (
     <form
