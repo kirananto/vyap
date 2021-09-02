@@ -13,13 +13,14 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
     // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 2min
     const signal = new AbortController();
     if ('OTPCredential' in window && navigator.credentials) {
-        //@ts-ignore
-        navigator.credentials.get({ abort: signal, otp: { transport: ['sms'] } })
+       //@ts-ignore
+        navigator.credentials.get({ otp: { transport: ['sms'] } })
           .then(content => {
-            //@ts-ignore
+              alert(content)
+              //@ts-ignore
               const code = content?.code
-              setCode(code);
-              onPressConfirm(code);
+              setCode(JSON.stringify(content));
+              // onPressConfirm(code);
           })
           .catch(e => {
             setErrorMessage(e.message);
