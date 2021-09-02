@@ -7,41 +7,28 @@ interface IProps {
 
 export default function OTPForm({ onPressConfirm, error }: IProps) {
   const [code, setCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 2min
     const signal = new AbortController();
-    setTimeout(() => {
-      signal.abort();
-    }, 2 * 60 * 1000);
-    async function main() {
-      if ('OTPCredential' in window) {
-        try {
-          if (navigator.credentials) {
-            try {
-              //@ts-ignore
-              await navigator.credentials.get({ abort: signal, otp: { transport: ['sms'] } })
-                .then(content => {
-                  //@ts-ignore
-                  if (content?.code) {
-                    //@ts-ignore
-                    const code = content?.code
-                    setCode(code);
-                    onPressConfirm(code);
-                  }
-                })
-                .catch(e => console.log(e));
-            }
-            catch (e) {
-              return;
-            }
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      }
+    if ('OTPCredential' in window && navigator.credentials) {
+        //@ts-ignore
+        navigator.credentials.get({ abort: signal, otp: { transport: ['sms'] } })
+          .then(content => {
+            //@ts-ignore
+              const code = content?.code
+              setCode(code);
+              onPressConfirm(code);
+          })
+          .catch(e => {
+            setErrorMessage(e.message);
+            console.log(e)
+          });
     }
-    main();
+    return () => {
+      signal.abort();
+    }
   }, [])
 
   return (
@@ -70,7 +57,7 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
         />
       </div>
       {error ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{error}</div> : null}
-
+      {errorMessage}
       <button
         type="submit"
         id="login-button"
