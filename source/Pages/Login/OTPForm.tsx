@@ -9,11 +9,11 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 1min
+    // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 2min
     const signal = new AbortController();
     setTimeout(() => {
       signal.abort();
-    }, 1 * 60 * 1000);
+    }, 2 * 60 * 1000);
     async function main() {
       if ('OTPCredential' in window) {
         try {
@@ -25,7 +25,9 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
                   //@ts-ignore
                   if (content?.code) {
                     //@ts-ignore
-                    onPressConfirm(content.code);
+                    const code = content?.code
+                    setCode(code);
+                    onPressConfirm(code);
                   }
                 })
                 .catch(e => console.log(e));
@@ -34,8 +36,7 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
               return;
             }
           }
-        }
-        catch (err) {
+        } catch (err) {
           console.log(err);
         }
       }
