@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// export const baseURL = `https://vyap-backend-vve8g.ondigitalocean.app/do/api`
-export const baseURL = `http://localhost:3333/api`
+//@ts-ignore
+export const baseURL = __SNOWPACK_ENV__.MODE === 'development' ?`http://localhost:3333/api` : `https://vyap-backend-vve8g.ondigitalocean.app/do/api`
 
 export const axiosClient = axios.create({
     baseURL: baseURL,
