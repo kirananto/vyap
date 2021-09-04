@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import { NavLink } from 'react-router-dom';
-import AddPaymentModal from "./AddPaymentModal";
 import "./payment.css";
 import { Header, PaymentBottomHeader } from "../../Components/Header";
 import ChatList from './ChatList'
@@ -13,7 +11,6 @@ import { InboxType } from './inbox.type'
 import { selectCredentials } from "../../Pages/Login/credentialsSlice";
 
 export const Payment = () => {
-  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
   const { id } = useParams<{ id: string }>()
@@ -36,24 +33,6 @@ export const Payment = () => {
      {inbox?.id ? <ChatList inboxId={inbox.id}/> : null}
       {/* Footer */}
       <PaymentFooter />
-      {/* <!-- Payment & Order Button --> */}
-      {/* 
-      <div className="btn-container">
-        <button onClick={() => setPaymentModalVisible(true)} className="bg-indigo-600 payment-btn btn-b">
-          <img src="./assets/icons/payment/PLUS.svg" alt="" />
-          PAYMENT
-        </button>
-        <button className="bg-indigo-600 order-btn btn-b">
-          <img src="./assets/icons/payment/PLUS.svg" alt="" />
-          ORDER
-        </button>
-      </div> */}
-
-      {/* <!-- Popup --> */}
-      <AddPaymentModal
-        isVisible={paymentModalVisible}
-        toggleVisibility={setPaymentModalVisible}
-      />
     </div>
   );
 };

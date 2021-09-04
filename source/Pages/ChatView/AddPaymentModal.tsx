@@ -12,9 +12,9 @@ export default function AddPaymentModal({
     <h2>PAYMENTS#</h2>
   
     {/* <!-- Dropdown-1 --> */}
-    <div className="dropdown-container">
-      <span className="drop-head">TYPE</span>
-      <select className="drop" name="payment" id="payment">
+    <div className="p-2">
+      <span className="float-left mb-2 text-sm text-gray-500">TYPE</span>
+      <select className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " name="payment" id="payment">
         <option value="volvo">PAYMENT</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -23,9 +23,9 @@ export default function AddPaymentModal({
     </div>
 
     {/* <!-- Dropdown-2 --> */}
-    <div className="dropdown-container">
-      <span className="drop-head">PAYMENT MODE</span>
-      <select className="drop drop-2" name="payment" id="payment">
+    <div className="p-2">
+      <span className="float-left mb-2 text-sm text-gray-500">PAYMENT MODE</span>
+      <select className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " name="payment" id="payment">
         <option value="volvo">CASH</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -34,18 +34,22 @@ export default function AddPaymentModal({
     </div>
 
     {/* <!-- Dropdown-3 --> */}
-    <div className="dropdown-container">
-      <span className="drop-head">AMOUNT</span>
-      <input className="drop drop-3" type="text"/>
+    <div className="p-2">
+      <span className="float-left mb-2 text-sm text-gray-500">AMOUNT</span>
+      <input className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " type="text"/>
     </div>
     {/* <!-- Textarea --> */}
-    <div className="dropdown-container">
-      <span className="drop-head">REMARKS</span>
-      <textarea name="" id=""></textarea>
+    <div className="p-2">
+      <span className="float-left mb-2 text-sm text-gray-500">REMARKS</span>
+      <textarea className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " id=""></textarea>
     </div>
     {/* <!-- btn popup --> */}
-    <button onClick={() => toggleVisibility(false)} className="save-btn bg-gradient-to-br from-blue-500 to-indigo-700">
-     SAVE
+    <div className="flex gap-2">
+      <button onClick={() => toggleVisibility(false)} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+     Save Payment
     </button>
+    <button onClick={() => toggleVisibility(false)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
+     Cancel
+    </button></div>
   </div>)
 }
