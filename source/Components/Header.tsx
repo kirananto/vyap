@@ -5,7 +5,7 @@ function Header({ heading, subHeading, phoneNumber }: { heading: string, subHead
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto">
       {/* back icon  */}
-      <NavLink to="/" className="flex items-center justify-start">
+      <NavLink to="/" className="flex items-center justify-start ml-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "
@@ -83,7 +83,7 @@ function SimpleHeader(props: { heading: string }) {
   return(
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
     {/* back icon  */}
-    <NavLink to="/" className="flex items-center justify-start">
+    <NavLink to="/" className="flex items-center justify-start ml-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-8 "

@@ -33,7 +33,7 @@ export const Payment = () => {
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
-      <div className="flex flex-col gap-5 pb-20 pl-2 pr-2 pt-44">
+      <div className="flex flex-col gap-5 pb-20 pl-2 pr-2 pt-44 h-screen overflow-y-scroll">
         <PaymentCardRight price="1600" />
         <p className="text-sm font-medium text-center text-gray-500">Today</p>
         <PaymentCardLeft price="5000" />

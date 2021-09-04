@@ -32,18 +32,18 @@ export default function More() {
   return (
     <div className="bg-white">
       <SimpleHeader heading="More" />
-
+    <div className="h-screen overflow-y-scroll pb-48">
       <div className="flex flex-col items-center justify-center gap-2 py-5">
         <img
           src={user?.profileImageUrl ?? "../assets/img/profileimg.png"}
-          className="w-24 rounded-full"
+          className="mt-10 w-24 rounded-full"
           alt="profile-pic"
         />
-        <h1 className="text-2xl font-bold text-gray-500">{user?.organization?.name}</h1>
+        <h1 className="text-2xl mt-2 font-bold text-gray-500">{user?.organization?.name}</h1>
       </div>
       {/* Menu */}
       {/* ----- */}
-      <div className="flex flex-col gap-2 pl-10">
+      <div className="flex flex-col gap-2 pl-10 mt-2">
         <div className="flex items-center w-full gap-2 py-2 ">
           <PaymentIcon />
           <Links linkName="All Payments" />
@@ -99,6 +99,7 @@ export default function More() {
           <Links linkName="Logout" />
         </div>
         {/* ----- */}
+      </div>
       </div>
       {/* --Footer-- */}
       <Footer/>

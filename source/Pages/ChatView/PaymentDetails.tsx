@@ -9,7 +9,7 @@ export default function PaymentDetails() {
       {/* Header */}
       <div className="w-full pb-3 bg-white shadow ">
           {/* Todo :: Share icon have to be added in the place of contact icon */}
-        <Header heading="Payment details" subHeading="XYZ Supplier" />
+        <Header heading="Payment details" subHeading="XYZ Supplier" phoneNumber="" />
       </div>
       {/* Body */}
       <div className="flex flex-col items-center gap-5 py-10">

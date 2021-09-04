@@ -2,7 +2,6 @@ import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 
 import { Home } from "./Pages/Home/Home";
-import { Profile } from "./Profile";
 import Login from "./Pages/Login/Login";
 import { Payment } from "./Pages/ChatView";
 import PaymentDetails from "./Pages/ChatView/PaymentDetails";
@@ -40,7 +39,6 @@ function Routes() {
             <Route path="/settings" component={Settings} />
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/profile" component={Profile} />
             <Route exact path="/" component={Home} />
             <Route>
               <div>
