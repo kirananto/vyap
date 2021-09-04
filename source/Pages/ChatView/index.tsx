@@ -6,20 +6,31 @@ import { Header, PaymentBottomHeader } from "../../Components/Header";
 import PaymentCardRight from "../../Components/PaymentCardRight";
 import PaymentCardLeft from "../../Components/PaymentCardLeft";
 import PaymentFooter from "../../Components/PaymentFooter"
+import { useEffect } from "react";
+import { fetchInboxById } from "../../API/inbox.axios";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { selectCredentials } from "../../Pages/Login/credentialsSlice";
 
 export const Payment = () => {
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
-  // const messages = [{
-  //   left: true,
-  //   date: '5th Mar 21',
-
-  // }]
+  const [inbox, setInbox] = useState<any>();
+  const { token } = useSelector(selectCredentials)
+  const { id } = useParams<{ id: string }>()
+  useEffect(() => {
+    if(token) {
+      fetchInboxById(token, id).then(res => {
+        setInbox(res.data)
+      })
+    }
+  }, [])
+  console.log(inbox)
   return (
     <div className="overflow-y-auto mobile-main">
       {/* header */}
       <div className="fixed w-full pb-3 bg-white shadow ">
-        <Header heading="Payments" subHeading="XYZ Supplier" />
-        <PaymentBottomHeader />
+        <Header heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
+        <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
       <div className="flex flex-col gap-5 pb-20 pl-2 pr-2 pt-44">

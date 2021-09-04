@@ -4,8 +4,8 @@ import { Link, Route, Switch } from "react-router-dom";
 import { Home } from "./Pages/Home/Home";
 import { Profile } from "./Profile";
 import Login from "./Pages/Login/Login";
-import { Payment } from "./Pages/Payment/Payment";
-import PaymentDetails from "./Pages/Payment/PaymentDetails";
+import { Payment } from "./Pages/ChatView";
+import PaymentDetails from "./Pages/ChatView/PaymentDetails";
 import Reports from "./Pages/Reports/Reports";
 import Employees from "./Pages/Employees/Employees";
 import LoginRoutes from "./Router/LoginRoutes";
@@ -32,7 +32,7 @@ function Routes() {
             <LoginRoutes path="/login" component={Login} />
             <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
-            <Route path="/payment" component={Payment} />
+            <Route path="/chat/:id" component={Payment} />
             <Route path="/payment-details" component={PaymentDetails} />
             <Route path="/reports" component={Reports} />
             <Route path="/employees" component={Employees} />

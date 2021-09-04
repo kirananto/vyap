@@ -4,7 +4,7 @@ import { ItemCard } from "./ItemCard";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "../../Pages/Login/credentialsSlice";
-import { fetchInbox } from "../../API/inbox.axios";
+import { fetchInboxes } from "../../API/inbox.axios";
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
@@ -17,7 +17,7 @@ export const Home = () => {
     const limit = 10
     if(token) {
       setLoading(true)
-      fetchInbox(token, ((currentPage - 1) * limit), limit).then(result => {
+      fetchInboxes(token, ((currentPage - 1) * limit), limit).then(result => {
         setInbox(result.data.data)
         setLoading(false)
         console.log('data', result.data.data)

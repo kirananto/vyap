@@ -10,7 +10,7 @@ export function ItemCard({ item }: IProps) {
   return (
     
       <div className="card-main">
-        <Link to={`/payment/${item.id}`} className="card-container">
+        <Link to={`/chat/${item.id}`} className="card-container">
           <div className="card-child-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"

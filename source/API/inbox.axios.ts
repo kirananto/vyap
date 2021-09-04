@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export const fetchInbox = (token: string, offset?: number, limit?: number) => axiosClient({
+export const fetchInboxes = (token: string, offset?: number, limit?: number) => axiosClient({
     url: '/inbox',
     method: 'GET',
     headers: {
@@ -9,5 +9,14 @@ export const fetchInbox = (token: string, offset?: number, limit?: number) => ax
     params: {
         offset,
         limit
+    }
+})
+
+
+export const fetchInboxById = (token: string, id: string) => axiosClient({
+    url: `/inbox/${id}`,
+    method: 'GET',
+    headers: {
+        'authorization': `Bearer ${token}`
     }
 })
