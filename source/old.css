@@ -128,10 +128,7 @@ background: #3f4694;
   bottom: 80px;
   right: 10px;
   width: 160px;
-  height: 35px;
-  border-radius: 50px;
   transition: 0.1s;
-  outline: none;
 }
 .add-cutomer-btn:active{
   transform: scale(0.95);

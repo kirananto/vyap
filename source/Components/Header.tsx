@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Header({ heading, subHeading, phoneNumber }: { heading: string, subHeading: string, phoneNumber: string }) {
+function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHeading?: string, phoneNumber?: string }) {
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto">
       {/* back icon  */}
@@ -52,7 +52,7 @@ function Header({ heading, subHeading, phoneNumber }: { heading: string, subHead
   );
 }
 
-function PaymentBottomHeader({ amount }: { amount: string }) {
+function PaymentBottomHeader({ amount }: { amount?: string }) {
   const fontSize = {
     fontSize: "11.5px",
   };

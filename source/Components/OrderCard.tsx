@@ -1,13 +1,14 @@
 import React from "react";
+import { format } from 'date-fns'
 
-export default function PaymentCardLeft(props: { price: string}) {
+export default function OrderCard({ className, thread }: { className: string, thread: any }) {
   return (
-    <div className="flex justify-start w-full">
-      <div className="flex flex-col w-8/12 gap-1 p-2 bg-white rounded-lg shadow">
+    <div className={`flex ${className} w-full`}>
+      <div className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg shadow">
         <div className="p-1 text-xs bg-purple-200 rounded-full max-w-max">
           Order #23457645624456
         </div>
-        <div className="text-4xl font-semibold">₹ {props.price}</div>
+        <div className="text-4xl font-semibold">₹ 500</div>
 
         {/* bottom  */}
         <div className="flex items-center w-full">
@@ -16,7 +17,7 @@ export default function PaymentCardLeft(props: { price: string}) {
             {/* Tick icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-green-300 "
+              className="w-5 h-5 text-green-500 "
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -30,7 +31,11 @@ export default function PaymentCardLeft(props: { price: string}) {
           </div>
           {/* col-2 */}
           <div className="flex justify-center w-7/12 gap-2">
-            <p className="text-xs text-gray-500">● 5th Mar ●</p>
+            <p className="text-xs text-gray-500">● {
+              format(
+                new Date(thread.updatedAt),
+                'do MMM'
+              )} ●</p>
             <p className="text-xs text-gray-500">5 items</p>
           </div>
 

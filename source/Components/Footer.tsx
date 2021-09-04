@@ -92,7 +92,7 @@ import { Link } from "react-router-dom";
 function SimpleFooter(props: { btnName: string }){
   return(
     <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow-2xl">
-      <button className="w-8/12 h-10 font-medium text-white rounded-full text-md bg-gradient-to-r from-blue-500 to-indigo-900">{props.btnName}</button>
+      <button className="w-8/12 h-12 font-medium text-white rounded-full text-md bg-gradient-to-r from-blue-500 to-indigo-900">{props.btnName}</button>
     </div>
   )
 }

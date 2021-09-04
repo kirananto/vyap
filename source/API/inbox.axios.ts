@@ -20,3 +20,18 @@ export const fetchInboxById = (token: string, id: string) => axiosClient({
         'authorization': `Bearer ${token}`
     }
 })
+
+export function fetchThreadsById({ token, inboxId, offset, limit }: { token: string; inboxId: string; offset: number; limit: number }) {
+    return axiosClient({
+        url: `/thread`,
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${token}`
+        },
+        params: {
+            inboxId,
+            offset,
+            limit
+        }
+    })
+}

@@ -69,7 +69,7 @@ export const Home = () => {
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      <button className="text-white text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
+      <button className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         Add Customer
       </button>
       <Footer />

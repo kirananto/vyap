@@ -3,18 +3,18 @@ import React, { useState } from "react";
 import AddPaymentModal from "./AddPaymentModal";
 import "./payment.css";
 import { Header, PaymentBottomHeader } from "../../Components/Header";
-import PaymentCardRight from "../../Components/PaymentCardRight";
-import PaymentCardLeft from "../../Components/PaymentCardLeft";
+import ChatList from './ChatList'
 import PaymentFooter from "../../Components/PaymentFooter"
 import { useEffect } from "react";
 import { fetchInboxById } from "../../API/inbox.axios";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import { InboxType } from './inbox.type'
 import { selectCredentials } from "../../Pages/Login/credentialsSlice";
 
 export const Payment = () => {
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
-  const [inbox, setInbox] = useState<any>();
+  const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
   const { id } = useParams<{ id: string }>()
   useEffect(() => {
@@ -24,7 +24,7 @@ export const Payment = () => {
       })
     }
   }, [])
-  console.log(inbox)
+
   return (
     <div className="overflow-y-auto mobile-main">
       {/* header */}
@@ -33,16 +33,7 @@ export const Payment = () => {
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
-      <div className="flex flex-col gap-5 pb-20 pl-2 pr-2 pt-44 h-screen overflow-y-scroll">
-        <PaymentCardRight price="1600" />
-        <p className="text-sm font-medium text-center text-gray-500">Today</p>
-        <PaymentCardLeft price="5000" />
-        <PaymentCardLeft price="7500" />
-        <PaymentCardRight price="800" />
-        <PaymentCardLeft price="900" />
-        <PaymentCardRight price="1600" />
-        <PaymentCardRight price="18,000" />
-      </div>
+     {inbox?.id ? <ChatList inboxId={inbox.id}/> : null}
       {/* Footer */}
       <PaymentFooter />
       {/* <!-- Payment & Order Button --> */}
