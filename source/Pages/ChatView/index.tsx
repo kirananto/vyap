@@ -16,10 +16,7 @@ export const Payment = () => {
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
-  console.log('window.location.pathname', window.location)
-  const params = useParams<{ id: string }>()
-  const { id } = params
-  console.log('params', params)
+  const { id } = useParams<{ id: string }>()
   useEffect(() => {
     if(token) {
       fetchInboxById(token, id).then(res => {

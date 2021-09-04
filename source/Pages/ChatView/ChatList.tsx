@@ -107,9 +107,6 @@ export default function ChatList({ inboxId }: { inboxId: string }) {
                 }
             })}
             {/* <p className="text-sm font-medium text-center text-gray-500">Today</p> */}
-            {/* <OrderCard price="5000" />
-            <OrderCard price="7500" />
-            <OrderCard price="900" /> */}
         </div>
     )
 }
