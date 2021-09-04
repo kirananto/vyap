@@ -14,11 +14,12 @@ import {
 import Links from "./Links";
 import Tag from "./Tag";
 import { Footer } from "../../Components/Footer";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../../Pages/Login/credentialsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCredentials, setCredentials } from "../../Pages/Login/credentialsSlice";
 import { useHistory } from "react-router-dom";
 
 export default function More() {
+  const { user } = useSelector(selectCredentials)
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -34,11 +35,11 @@ export default function More() {
 
       <div className="flex flex-col items-center justify-center gap-2 py-5">
         <img
-          src="../assets/img/profileimg.png"
+          src={user?.profileImageUrl ?? "../assets/img/profileimg.png"}
           className="w-24 rounded-full"
           alt="profile-pic"
         />
-        <h1 className="text-2xl font-bold text-gray-500">K&K Automobiles</h1>
+        <h1 className="text-2xl font-bold text-gray-500">{user?.organization?.name}</h1>
       </div>
       {/* Menu */}
       {/* ----- */}
