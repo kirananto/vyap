@@ -6,9 +6,11 @@ module.exports = {
   },
   plugins: [
     ['@snowpack/plugin-webpack'],
+    '@snowpack/plugin-dotenv',
     '@snowpack/plugin-react-refresh',
     '@snowpack/plugin-postcss',
     '@snowpack/plugin-typescript',
+    
   ],
   routes: [
     { match: 'routes', src: '.*', dest: '/index.html' },
