@@ -32,7 +32,7 @@ function Routes() {
             <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
             <Route path="/chat/:id" component={Payment} />
-            <Route path="/payment-details" component={PaymentDetails} />
+            <Route path="/payment/:id" component={PaymentDetails} />
             <Route path="/reports" component={Reports} />
             <Route path="/employees" component={Employees} />
             <Route path="/stock-management" component={StockManagement} />

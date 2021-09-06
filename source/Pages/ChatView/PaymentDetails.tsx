@@ -1,9 +1,25 @@
-import React from "react";
+import { fetchPaymentById } from "../../API/payment.axios";
+import { paymentObject } from "../../Components/PaymentCard";
+import { selectCredentials } from "../../Pages/Login/credentialsSlice";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import { Header } from "../../Components/Header";
 import { PaymentInfo, PaymentInfoTick } from "../../Components/PaymentInfo";
+import { format } from "date-fns";
 
 export default function PaymentDetails() {
   const textSize = { fontSize: "12px" };
+  const [payment, setPayment] = useState<paymentObject | undefined>()
+  const { token } = useSelector(selectCredentials)
+  const { id } = useParams<{ id: string }>()
+
+  useEffect(() => {
+    fetchPaymentById(token!, id).then(result => {
+      setPayment(result.data)
+    })
+  }, [])
+
   return (
     <div className="h-screen bg-gray-100">
       {/* Header */}
@@ -14,7 +30,7 @@ export default function PaymentDetails() {
       {/* Body */}
       <div className="flex flex-col items-center gap-5 py-10">
         <h1 className="text-6xl font-black text-center text-gray-500">
-          ₹ 5000
+          ₹{payment?.amount}
         </h1>
         {/* ---------------- */}
         <div className="flex items-center justify-center gap-3">
@@ -32,7 +48,10 @@ export default function PaymentDetails() {
             />
           </svg>
           <p className="text-xs text-gray-500">Completed</p>
-          <p className="text-xs text-gray-500">● 5th Mar</p>
+          <p className="text-xs text-gray-500">● {payment?.updatedAt ? format(
+                new Date(payment?.updatedAt),
+                'do MMM'
+              ) : null}</p>
           {/* ------------------ */}
         </div>
 
@@ -44,10 +63,10 @@ export default function PaymentDetails() {
           </h1>
 
           <div className="flex flex-col gap-3">
-            <PaymentInfo heading="Payment id" info="#24787453454524" />
+            <PaymentInfo heading="Payment id" info={`#${id}`} />
             <PaymentInfo
               heading="Date of transaction"
-              info="5:30 AM -5th March 2021"
+              info={payment?.updatedAt ? format(new Date(payment?.updatedAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
             />
             <PaymentInfo heading="Payment method" info="Cash" />
             <PaymentInfo

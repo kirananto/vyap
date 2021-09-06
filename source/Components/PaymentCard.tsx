@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { format } from 'date-fns'
+import { fetchPaymentById } from "../API/payment.axios";
+import { useSelector } from "react-redux";
+import { selectCredentials } from "../Pages/Login/credentialsSlice";
+import { NavLink  } from "react-router-dom";
+
+export interface paymentObject {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  amount: string;
+  note: string;
+  method: number;
+  status: number;
+  initiatedByUserId: string;
+  initiatedByOrgId: string;
+}
 
 export default function PaymentCard({ className, thread }: { className: string, thread: any }) {
+  const [payment, setPayment] = useState<paymentObject | undefined>()
+  const { token } = useSelector(selectCredentials)
+
+  useEffect(() => {
+    fetchPaymentById(token!, thread.meta).then(result => {
+      setPayment(result.data)
+    })
+  }, [])
+
   return (
-    <div className={`flex ${className} w-full`}>
-      <div className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg shadow">
+    <div className={`flex ${className} w-full `}>
+      <NavLink to={`/payment/${thread.meta}`} className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50">
         <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
-          Payment #{thread.meta}
+          Payment #{thread.meta?.split('-')[0]}
         </div>
-        <div className="text-4xl mt-2 text-gray-700 font-bold">₹ 5000</div>
+        <div className="text-4xl mt-2 text-gray-700 font-bold">₹{payment?.amount ?? 0}</div>
 
         {/* bottom  */}
         <div className="flex items-center w-full">
@@ -52,7 +77,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
             />
           </svg>
         </div>
-      </div>
+      </NavLink>
     </div>
   );
 }

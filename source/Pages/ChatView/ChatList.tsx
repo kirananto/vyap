@@ -75,7 +75,7 @@ export default function ChatList({ inboxId }: { inboxId: string }) {
                 senderId: '3223',
                 msg: 'Hello',
                 threadType: ThreadTypeEnum.PAYMENT,
-                meta: '32323232'
+                meta: '2fa8f892-e432-4b27-ad66-806139d6eeee'
             },
             {
                 id: '323',
