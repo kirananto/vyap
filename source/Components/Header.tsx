@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
 
 function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHeading?: string, phoneNumber?: string }) {
+  const history = useHistory()
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto">
       {/* back icon  */}
-      <NavLink to="/" className="flex items-center justify-start ml-2">
+      <div onClick={() => history.goBack()} className="cursor-pointer flex items-center justify-start ml-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "
@@ -20,7 +22,7 @@ function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHea
             d="M15 19l-7-7 7-7"
           />
         </svg>
-      </NavLink>
+      </div>
 
       {/* Heading container */}
       <div className="flex flex-col w-4/5 pl-4 ">
@@ -80,10 +82,11 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
 
 // ! Simple Header with only one heading and back button -->
 function SimpleHeader(props: { heading: string }) {
+  const history = useHistory()
   return(
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
     {/* back icon  */}
-    <NavLink to="/" className="flex items-center justify-start ml-2">
+    <div onClick={() => history.goBack()} className="flex cursor-pointer items-center justify-start ml-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-8 "
@@ -98,7 +101,7 @@ function SimpleHeader(props: { heading: string }) {
           d="M15 19l-7-7 7-7"
         />
       </svg>
-    </NavLink>
+    </div>
 
     {/* Heading container */}
     <div className="flex flex-col w-4/5 pl-4 ">

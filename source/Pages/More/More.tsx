@@ -14,6 +14,7 @@ import {
 import Links from "./Links";
 import Tag from "./Tag";
 import { Footer } from "../../Components/Footer";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../../Pages/Login/credentialsSlice";
 import { useHistory } from "react-router-dom";
@@ -75,10 +76,10 @@ export default function More() {
         </div>
         {/* ----- */}
         {/* ----- */}
-        <div className="flex items-center w-full gap-2 py-2 ">
+        <NavLink to="/settings" className="flex items-center w-full gap-2 py-2 ">
           <SettingsIcon />
           <Links linkName="Settings" />
-        </div>
+        </NavLink>
         {/* ----- */}
         {/* ----- */}
         <div className="flex items-center w-full gap-2 py-2 ">

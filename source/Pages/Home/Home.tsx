@@ -9,15 +9,22 @@ import { fetchInboxes } from "../../API/inbox.axios";
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [paginationParams, serPaginationParams] = React.useState({
+    page: 1,
+    search: "",
+  })
   const { user, token } = useSelector(selectCredentials)
   const history = useHistory()
   useEffect(() => {
-    console.log('setCurrentPage', setCurrentPage)
     const limit = 10
-    if(token) {
+    if (token) {
       setLoading(true)
-      fetchInboxes(token, ((currentPage - 1) * limit), limit).then(result => {
+      fetchInboxes({
+        token, 
+        offset: ((paginationParams.page - 1) * limit), 
+        limit, 
+        search: paginationParams.search === '' ? undefined : paginationParams.search
+      }).then(result => {
         setInbox(result.data.data)
         setLoading(false)
         console.log('data', result.data.data)
@@ -25,7 +32,7 @@ export const Home = () => {
     } else {
       history.push('/login')
     }
-  }, [])
+  }, [paginationParams.search])
 
   return (
     <div className="mobile-main">
@@ -55,8 +62,15 @@ export const Home = () => {
           <input
             type="text"
             id="input"
+            value={paginationParams.search}
             className="w-full h-10 pl-4 pr-5 bg-gray-100 rounded outline-none "
             placeholder="Search"
+            onChange={(e) => {
+              serPaginationParams(prevState => ({
+                ...prevState,
+                search: e.target?.value
+              }))
+            }}
           />
         </div>
       </header>
