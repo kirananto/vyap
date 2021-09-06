@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router";
 
 function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHeading?: string, phoneNumber?: string }) {
