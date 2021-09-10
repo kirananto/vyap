@@ -5,10 +5,15 @@ module.exports = {
     source: { url: '/' },
   },
   plugins: [
-    ['@snowpack/plugin-webpack'],
+    '@snowpack/plugin-dotenv',
     '@snowpack/plugin-react-refresh',
     '@snowpack/plugin-postcss',
-    '@snowpack/plugin-typescript',
+    ['@snowpack/plugin-typescript',
+      {
+        /* Yarn PnP workaround: see https://www.npmjs.com/package/@snowpack/plugin-typescript */
+        ...(process.versions.pnp ? { tsc: 'yarn pnpify tsc' } : {}),
+      },
+    ],
   ],
   routes: [
     { match: 'routes', src: '.*', dest: '/index.html' },

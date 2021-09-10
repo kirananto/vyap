@@ -1,6 +1,6 @@
 import React from "react";
 
-function PaymentInfo(props) {
+function PaymentInfo(props: { heading: string; info: string }) {
   return (
     <div>
       <p className="text-sm font-medium text-gray-500">{props.heading}</p>
@@ -9,7 +9,7 @@ function PaymentInfo(props) {
   );
 }
 
-function PaymentInfoTick(props) {
+function PaymentInfoTick(props: { heading: string; info: string }) {
   return (
     <div>
       <p className="text-sm font-medium text-gray-500">{props.heading}</p>
