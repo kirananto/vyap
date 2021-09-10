@@ -94,7 +94,7 @@ const logoStyle ={marginLeft:"-20px"};
         <button
           type="submit"
           id="login-button"
-          className="block w-full px-4 py-3 mt-8 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg bg-gradient-to-br from-blue-500 to-indigo-700 hover:bg-indigo-800 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 "
+          className="block w-full px-4 py-3 mt-8 font-semibold text-white transition duration-500 ease-in-out transform rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 hover:bg-indigo-800 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 "
         >
           Signup
         </button>

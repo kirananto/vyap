@@ -15,8 +15,11 @@ import StockManagement from "./StockManagement/StockManagement";
 // ! SIGNUP----->
 import SignupStepOne from "./Signup/SignupStepOne";
 import SignupStepTwo from "./Signup/SignupStepTwo";
+import SignupStepThree from "./Signup/SignupStepThree";
+// ! SIGNUP----->
 import Settings from "./Settings/Settings";
 import More from "./More/More";
+import Product from "./Product/Product";
 
 function Routes() {
   const { user } = useContext(UserContext);
@@ -31,11 +34,13 @@ function Routes() {
             <LoginRoutes path="/login" component={Login} />
             <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
+            <LoginRoutes path="/signup-step-3" component={SignupStepThree} />
             <Route path="/payment" component={Payment} />
             <Route path="/payment-details" component={PaymentDetails} />
             <Route path="/reports" component={Reports} />
             <Route path="/employees" component={Employees} />
             <Route path="/stock-management" component={StockManagement} />
+            <Route path="/my-products" component={Product} />
             <Route path="/settings" component={Settings} />
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />

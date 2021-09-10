@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
  function Footer() {
   return (
     <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md">
