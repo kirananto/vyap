@@ -6,7 +6,7 @@ function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHea
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto bg-white ">
       {/* back icon  */}
-      <div onClick={() => history.goBack()} className="cursor-pointer flex items-center justify-start ml-2">
+      <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "
@@ -33,11 +33,6 @@ function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHea
         </h1>
       </div>
       {/* Right Icon container*/}
-<<<<<<< HEAD
-      <div className="flex items-center justify-center rounded-full ali w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-900">
-        <img src={props.icon} alt="icon" />
-      </div>
-=======
       <a href={`tel:${phoneNumber}`} className="flex items-center justify-center rounded-full ali w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-900">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +49,6 @@ function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHea
           />
         </svg>
       </a>
->>>>>>> d27f10df88b1467aafd9c738da75685f387e2cb2
     </div>
   );
 }
@@ -86,34 +80,12 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
 }
 
 // ! Simple Header with only one heading and back button -->
-<<<<<<< HEAD
-function SimpleHeader(props) {
-  return (
-    <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
-      {/* back icon  */}
-      <NavLink to="/" className="flex items-center justify-start">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-8 "
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </NavLink>
-=======
 function SimpleHeader(props: { heading: string }) {
   const history = useHistory()
   return(
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
     {/* back icon  */}
-    <div onClick={() => history.goBack()} className="flex cursor-pointer items-center justify-start ml-2">
+    <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-8 "
@@ -129,7 +101,6 @@ function SimpleHeader(props: { heading: string }) {
         />
       </svg>
     </div>
->>>>>>> d27f10df88b1467aafd9c738da75685f387e2cb2
 
       {/* Heading container */}
       <div className="flex flex-col w-4/5 pl-4 ">

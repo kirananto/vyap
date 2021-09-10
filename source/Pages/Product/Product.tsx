@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Header } from "../Components/Header";
-import { Footer } from "../Components/Footer";
+import { Header } from "../../Components/Header";
+import { Footer } from "../../Components/Footer";
 import "./Product.css";
 import FilterTag from "./FilterTag";
 import ProductCard from "./ProductCard";
