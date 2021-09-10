@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const baseURL = import.meta.env.SNOWPACK_PUBLIC_API_URL ?? `http://localhost:3333`
+export const baseURL = import.meta.env.SNOWPACK_PUBLIC_API_URL ?? `https://vyap-backend-kiw4p.ondigitalocean.app/do`
 
 export const axiosClient = axios.create({
     baseURL: `${baseURL}/api`,
