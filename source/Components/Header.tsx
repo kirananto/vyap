@@ -67,7 +67,7 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
           </h6>
           <h1 className="text-4xl font-semibold">₹ {amount}</h1>
         </div>
-        <div className="flex justify-end w-full pr-4 ">
+        <div className="flex justify-end w-5/12 pr-4 ">
           <img
             className="self-end w-20 "
             src="../assets/illustrations/wallet.svg"
