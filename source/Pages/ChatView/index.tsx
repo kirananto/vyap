@@ -30,7 +30,7 @@ export const Payment = () => {
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
-     {inbox?.id ? <ChatList inboxId={inbox.id}/> : null}
+     {inbox?.id ? <ChatList inboxId={inbox?.inboxHash}/> : null}
       {/* Footer */}
       <PaymentFooter />
     </div>

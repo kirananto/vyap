@@ -7,7 +7,7 @@ export interface InboxType {
     ownerId: string;
     recipientId: string;
     lastMsg: string;
-    threadId: string;
+    inboxHash: string;
     outstandingAmount: string;
     unseenNumbers: number;
     recipient: Organization;
