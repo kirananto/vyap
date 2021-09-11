@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProductCard({ onClicked, onMore }) {
+export default function ProductCard({ onClicked, onMore } : { onClicked: any, onMore: any }) {
   const fontSize = {
     fontSize: "10px",
     top: "-8px",

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchBar({onFilterClick}) {
+export default function SearchBar({onFilterClick} : {onFilterClick : any} ) {
   return (
     <div className="relative flex justify-center w-full gap-2 mt-2">
       <input

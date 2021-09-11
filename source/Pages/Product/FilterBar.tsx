@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FilterBar({onMoreClick}) {
+export default function FilterBar({onMoreClick} : any) {
   return (
     <>
       <div className="flex w-11/12 mx-auto mt-1">

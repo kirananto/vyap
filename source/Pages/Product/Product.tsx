@@ -15,6 +15,12 @@ function Modal({
   SecondComponentAttributes,
   FirstComponent,
   SecondComponent,
+} : {
+  isOpen: any
+  FirstComponentAttributes?: any
+  SecondComponentAttributes?: any
+  FirstComponent: any
+  SecondComponent: any
 }) {
   if (!isOpen) return <FirstComponent {...FirstComponentAttributes} />;
   return <SecondComponent {...SecondComponentAttributes} />;
@@ -49,7 +55,7 @@ export default function Product() {
   //   setIsOpen(!isOpen);
   // }
   // !---Condition if a single product is checked the filter bar will appear->and this function will pass as a function in Product Card component==>
-  function CheckboxClicked(e) {
+  function CheckboxClicked(e: any) {
     if (e.target.checked) {
       setProductsCounts(checkedProductsCounts + 1);
     } else {
@@ -69,7 +75,7 @@ export default function Product() {
           <Header
             heading="My Products"
             subHeading="500 Items"
-            icon="../assets/icons/call.svg"
+            // icon="../assets/icons/call.svg"
           />
         </div>
         {/* 
