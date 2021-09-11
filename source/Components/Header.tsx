@@ -28,12 +28,12 @@ function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHea
         <h1 className="text-lg font-semibold text-gray-600 font-ProductSans">
           {heading}
         </h1>
-        {subHeading && (<h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-900">
+        {subHeading && (<h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900">
           {subHeading}
         </h1>)}
       </div>
       {/* Right Icon container*/}
-      {phoneNumber && (<a href={`tel:${phoneNumber}`} className="flex items-center justify-center rounded-full ali w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-900">
+      {phoneNumber && (<a href={`tel:${phoneNumber}`} className="flex items-center justify-center rounded-full ali w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-900">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 text-white"
