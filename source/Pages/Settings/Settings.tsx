@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { SimpleHeader } from "../../Components/Header";
 import ToggleButton from "../../Components/ToggleButton";
 import "./Settings.css";
@@ -17,7 +18,7 @@ export default function Settings() {
           </div>
         </div>
         {/* -------- */}
-        <a href="/" className="text-blue-500 underline ">10 Members</a>
+        <NavLink to="/employees" className="text-blue-500 underline ">10 Members</NavLink>
         {/* ------- */}
         <div className="flex gap-3 mt-8 mb-3">
           <h1 className="font-semibold text-gray-500 text-md">Dark Mode</h1>
