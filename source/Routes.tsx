@@ -17,6 +17,7 @@ import More from "./Pages/More/More";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "./Pages/Login/credentialsSlice";
 import Orders from "./Pages/Orders";
+import Product from "./Pages/Product/Product";
 
 function Routes() {
   const user  = useSelector(selectCredentials);
@@ -37,6 +38,7 @@ function Routes() {
             <Route path="/reports" component={Reports} />
             <Route path="/employees" component={Employees} />
             <Route path="/stock-management" component={StockManagement} />
+            <Route path="/my-products" component={Product} />
             <Route path="/settings" component={Settings} />
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />

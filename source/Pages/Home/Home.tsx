@@ -1,7 +1,7 @@
 import { Footer } from "../../Components/Footer";
 import React, { useEffect } from "react";
 import { ItemCard } from "./ItemCard";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "../../Pages/Login/credentialsSlice";
 import { fetchInboxes } from "../../API/inbox.axios";
@@ -14,7 +14,7 @@ export const Home = () => {
     search: "",
   })
   const { user, token } = useSelector(selectCredentials)
-  const history = useHistory()
+  // const history = useHistory()
   useEffect(() => {
     const limit = 10
     if (token) {
@@ -30,7 +30,7 @@ export const Home = () => {
         console.log('data', result.data.data)
       })
     } else {
-      history.push('/login')
+      // history.push('/login')
     }
   }, [paginationParams.search])
 

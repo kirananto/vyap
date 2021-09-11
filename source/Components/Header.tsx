@@ -4,9 +4,9 @@ import { useHistory } from "react-router";
 function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHeading?: string, phoneNumber?: string }) {
   const history = useHistory()
   return (
-    <div className="flex w-11/12 pt-2 pb-2 m-auto">
+    <div className="flex w-11/12 pt-2 pb-2 m-auto bg-white ">
       {/* back icon  */}
-      <div onClick={() => history.goBack()} className="cursor-pointer flex items-center justify-start ml-2">
+      <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "
@@ -85,7 +85,7 @@ function SimpleHeader(props: { heading: string }) {
   return(
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
     {/* back icon  */}
-    <div onClick={() => history.goBack()} className="flex cursor-pointer items-center justify-start ml-2">
+    <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-8 "
@@ -102,15 +102,14 @@ function SimpleHeader(props: { heading: string }) {
       </svg>
     </div>
 
-    {/* Heading container */}
-    <div className="flex flex-col w-4/5 pl-4 ">
-      <h1 className="text-xl font-bold text-gray-600 font-ProductSans">
-        {props.heading}
-      </h1>
+      {/* Heading container */}
+      <div className="flex flex-col w-4/5 pl-4 ">
+        <h1 className="text-xl font-bold text-gray-600 font-ProductSans">
+          {props.heading}
+        </h1>
+      </div>
     </div>
-   
-  </div>
-  )
+  );
 }
 
 export { Header, PaymentBottomHeader, SimpleHeader };

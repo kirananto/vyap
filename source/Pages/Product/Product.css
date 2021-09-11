@@ -1,0 +1,22 @@
+.custom-height{
+    overflow-y: scroll;
+    height: calc( 100vh - 280px ) !important;
+    scroll-behavior: smooth;
+    background-color: #fff;
+}
+
+.custom-filter{
+    position: fixed;
+    background-color: red;
+    bottom: -500px;
+    left: 0px;
+    width: 100%;
+    padding: 20px;
+    z-index: 10;
+    animation: filterAnimation forwards 400ms;
+}
+@keyframes filterAnimation{
+    to{
+        bottom: 0px;
+    }
+}
