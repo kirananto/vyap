@@ -63,17 +63,17 @@ export default function More() {
         </NavLink>
         {/* ----- */}
         {/* ----- */}
-        <div className="flex items-center w-full gap-2 py-2 ">
+        <NavLink to="/stock-management" className="flex items-center w-full gap-2 py-2 ">
           <StockManagementIcon />
           <Links linkName="Stock Management" />
           <Tag tagName="Beta" />
-        </div>
+        </NavLink>
         {/* ----- */}
         {/* ----- */}
-        <div className="flex items-center w-full gap-2 py-2 ">
+        <NavLink to="/my-account" className="flex items-center w-full gap-2 py-2 ">
           <MyAccountIcon />
           <Links linkName="My Account" />
-        </div>
+        </NavLink>
         {/* ----- */}
         {/* ----- */}
         <NavLink to="/settings" className="flex items-center w-full gap-2 py-2 ">
