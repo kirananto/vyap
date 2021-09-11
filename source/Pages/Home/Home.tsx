@@ -43,7 +43,7 @@ export const Home = () => {
             <h1 className="text-lg font-semibold text-gray-600 font-ProductSans">
               Welcome👋
             </h1>
-            <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-900 ">
+            <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 ">
               {user?.organization?.name}
             </h1>
           </Link>

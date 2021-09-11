@@ -10,7 +10,7 @@ export default function EmployeesCard(props: IProps) {
       {/* Col-1 ===================== */}
       {/* icon */}
       <div className="flex items-center justify-center w-1/4 ">
-        <div className="flex items-center justify-center w-10 h-10 rounded-full ali bg-gradient-to-r from-blue-500 to-indigo-900">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full ali bg-gradient-to-br from-blue-500 to-indigo-900">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5 text-white"
