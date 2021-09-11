@@ -51,10 +51,10 @@ export default function More() {
         </div>
         {/* ----- */}
         {/* ----- */}
-        <div className="flex items-center w-full gap-2 py-2 ">
+        <NavLink to="/orders" className="flex items-center w-full gap-2 py-2 ">
           <AllOrdersIcon />
           <Links linkName="All Orders" />
-        </div>
+        </NavLink>
         {/* ----- */}
         {/* ----- */}
         <div className="flex items-center w-full gap-2 py-2 ">

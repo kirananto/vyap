@@ -16,6 +16,7 @@ import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "./Pages/Login/credentialsSlice";
+import Orders from "./Pages/Orders";
 
 function Routes() {
   const user  = useSelector(selectCredentials);
@@ -25,7 +26,7 @@ function Routes() {
 
   return (
     <>
-      {typeof user !== "undefined" ? (
+    {typeof user !== "undefined" ? (
         <>
           <Switch>
             <LoginRoutes path="/login" component={Login} />
@@ -40,6 +41,7 @@ function Routes() {
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/" component={Home} />
+            <Route exact path="/orders" component={Orders} />
             <Route>
               <div>
                 404 page Please go to home
