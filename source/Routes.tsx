@@ -19,6 +19,7 @@ import { selectCredentials } from "./Pages/Login/credentialsSlice";
 import Orders from "./Pages/Orders";
 import Product from "./Pages/Product/Product";
 import Account from "./Pages/Account";
+import AllPayments from "./Pages/Payments";
 
 function Routes() {
   const user  = useSelector(selectCredentials);
@@ -46,6 +47,7 @@ function Routes() {
             <Route exact path="/" component={Home} />
             <Route exact path="/orders" component={Orders} />
             <Route exact path="/my-account" component={Account} />
+            <Route exact path="/all-payments" component={AllPayments} />
             <Route>
               <div>
                 404 page Please go to home
