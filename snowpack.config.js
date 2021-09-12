@@ -19,6 +19,7 @@ module.exports = {
     { match: 'routes', src: '.*', dest: '/index.html' },
   ],
   alias: {
-    'components': './source/components',
+    components: './source/components',
+    pages: './source/Pages',
   },
 };

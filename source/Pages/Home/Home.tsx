@@ -3,8 +3,9 @@ import React, { useEffect } from "react";
 import { ItemCard } from "./ItemCard";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCredentials } from "../../Pages/Login/credentialsSlice";
+import { selectCredentials } from "pages/Login/credentialsSlice";
 import { fetchInboxes } from "../../API/inbox.axios";
+import ChatImg from 'pages/ChatView/assets/Chats.svg'
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
@@ -33,6 +34,22 @@ export const Home = () => {
       // history.push('/login')
     }
   }, [paginationParams.search])
+
+  function renderChats() {
+    if(loading) {
+      return <div className="mt-12 p-12 text-center"> Loading...</div>
+    }
+    if(inbox.length === 0) {
+      return <div>
+        <img className="mt-12 h-96 p-12 m-auto" src={ChatImg}/> 
+        <div className="text-center px-6 w-2/3 m-auto"> You do not have any transactions, Please invite a customer to start the transactions </div>
+        </div>
+    }
+    return inbox
+      .map((item, index) => (
+        <ItemCard item={item} key={index} />
+      ))
+  }
 
   return (
     <div className="mobile-main">
@@ -74,12 +91,8 @@ export const Home = () => {
           />
         </div>
       </header>
-      {loading ? <div> Loading...</div> : null}
       <div className="relative divide-y card-main-container scrollDes divide-light-blue-400">
-        {inbox
-          .map((item, index) => (
-            <ItemCard item={item} key={index} />
-          ))}
+        {renderChats()}
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}

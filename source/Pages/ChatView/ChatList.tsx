@@ -32,18 +32,25 @@ export default function ChatList({ inboxId }: { inboxId: string }) {
         })
     }, [])
 
+    function renderChats() {
+        if(threads.length === 0) {
+            return <img src="./assets/Chats.svg" />
+        }
+        return threads.map((thread) => {
+            const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
+            if(thread.type === ThreadTypeEnum.PAYMENT) {
+                return <PaymentCard className={layout} thread={thread} />
+            }
+            if(thread.type === ThreadTypeEnum.ORDER) {
+                return <OrderCard className={layout} thread={thread}/>
+            }
+            return <div>{thread.msg }</div>
+        })
+    }
+
     return (
         <div className="flex flex-col gap-5 pb-20 pl-2 pr-2 pt-44 h-screen overflow-y-scroll">
-            {threads.map((thread) => {
-                const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
-                if(thread.type === ThreadTypeEnum.PAYMENT) {
-                    return <PaymentCard className={layout} thread={thread} />
-                }
-                if(thread.type === ThreadTypeEnum.ORDER) {
-                    return <OrderCard className={layout} thread={thread}/>
-                }
-                return <div>{thread.msg }</div>
-            })}
+            {renderChats()}
             {/* <p className="text-sm font-medium text-center text-gray-500">Today</p> */}
         </div>
     )
