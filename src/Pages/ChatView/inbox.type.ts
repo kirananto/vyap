@@ -1,4 +1,4 @@
-import { Organization } from '../Login/credentialsSlice'
+import type { Organization } from '../Login/credentialsSlice'
 
 export interface InboxType {
     id: string;

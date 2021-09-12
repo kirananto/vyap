@@ -1,6 +1,6 @@
 import { fetchPaymentById } from "../../API/payment.axios";
-import { paymentObject } from "../../Components/PaymentCard";
-import { selectCredentials } from "../../Pages/Login/credentialsSlice";
+import type { paymentObject } from "../../Components/PaymentCard";
+import { selectCredentials } from "../Login/credentialsSlice";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";

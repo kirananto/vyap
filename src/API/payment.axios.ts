@@ -1,5 +1,5 @@
 import { axiosClient } from './apiClient'
-import { paymentMethod, paymentStatus } from './enum'
+import type { paymentMethod, paymentStatus } from './enum'
 
 export const fetchPaymentById = (token: string, id: string) => axiosClient({
     url: `/payment/${id}`,

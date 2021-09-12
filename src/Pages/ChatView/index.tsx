@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { fetchInboxById } from "../../API/inbox.axios";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { InboxType } from './inbox.type'
-import { selectCredentials } from "../../Pages/Login/credentialsSlice";
+import type { InboxType } from './inbox.type'
+import { selectCredentials } from "../Login/credentialsSlice";
 
 export const Payment = () => {
   const [inbox, setInbox] = useState<InboxType>();
