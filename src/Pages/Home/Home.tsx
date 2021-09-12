@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { ItemCard } from "./ItemCard";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCredentials } from "../Login/credentialsSlice";
-import { fetchInboxes } from "../../API/inbox.axios";
-import ChatImg from '../ChatView/assets/Chats.svg'
-import profileImg from "../../assets/icons/profile/profile-icon.svg"
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { fetchInboxes } from "src/API/inbox.axios";
+import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
+import profileImg from "src/assets/icons/profile/profile-icon.svg"
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);

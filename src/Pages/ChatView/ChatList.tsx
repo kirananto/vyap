@@ -3,7 +3,7 @@ import PaymentCard from "../../Components/PaymentCard";
 import OrderCard from "../../Components/OrderCard";
 import { fetchThreadsById } from "../../API/inbox.axios";
 import { useSelector } from 'react-redux';
-import { selectCredentials } from '../Login/credentialsSlice';
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
 // import chatSvg from './assets/Chats.svg'
 const limit = 10
 

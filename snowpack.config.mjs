@@ -20,9 +20,14 @@ export default {
     /* Enable an SPA Fallback in development: */
     {"match": "routes", "src": ".*", "dest": "/index.html"},
   ],
+  alias: {
+    // Type 2: Local Directory Import Alias (relative to cwd)
+    components: './src/components',
+    src: './src',
+  },
   optimize: {
-    /* Example: Bundle your final build: */
-    // "bundle": true,
+    // bundle: true,
+    minify: true,
   },
   packageOptions: {
     /* ... */
