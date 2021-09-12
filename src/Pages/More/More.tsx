@@ -16,8 +16,9 @@ import Tag from "./Tag";
 import { Footer } from "../../Components/Footer";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCredentials, setCredentials } from "../../Pages/Login/credentialsSlice";
+import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
 import { useHistory } from "react-router-dom";
+import profPic from "../../assets/img/profileimg.png"
 
 export default function More() {
   const { user } = useSelector(selectCredentials)
@@ -36,7 +37,7 @@ export default function More() {
     <div className="h-screen overflow-y-scroll pb-48">
       <div className="flex flex-col items-center justify-center gap-2 py-5">
         <img
-          src={user?.profileImageUrl ?? "../assets/img/profileimg.png"}
+          src={user?.profileImageUrl ?? profPic}
           className="mt-10 w-24 rounded-full"
           alt="profile-pic"
         />

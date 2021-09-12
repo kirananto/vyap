@@ -1,4 +1,5 @@
 import React, { useState } from "react"; //useRef,
+import vyapLogo from '../../assets/new_logo.svg'
 
 
 export default function SignupStepOne() {
@@ -51,7 +52,7 @@ const logoStyle ={marginLeft:"-20px"};
   return (
     <div className="flex flex-col items-start w-full h-screen px-8 ">
       <div className="flex items-center justify-start mb-5 mt-52">
-        <img style={logoStyle} className="w-24 m--5" src="../assets/icons/new_logo.svg" alt="" />
+        <img style={logoStyle} className="w-24 m--5" src={vyapLogo} alt="" />
         <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>
       </div>
 

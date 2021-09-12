@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { selectCredentials } from "../Login/credentialsSlice";
 import { fetchInboxes } from "../../API/inbox.axios";
 import ChatImg from '../ChatView/assets/Chats.svg'
+import profileImg from "../../assets/icons/profile/profile-icon.svg"
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
@@ -67,7 +68,7 @@ export const Home = () => {
           <div className="flex items-center justify-end w-1/5 ">
             <img
               className="h-12 rounded-full shadow-lg"
-              src={user?.profileImageUrl ?? "../assets/icons/profile/profile-icon.svg"}
+              src={user?.profileImageUrl ?? profileImg}
               alt=""
             />
           </div>

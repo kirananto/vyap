@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
+import walletSvg from "../assets/illustrations/wallet.svg"
 
 function Header({ heading, subHeading, phoneNumber }: { heading?: string, subHeading?: string, phoneNumber?: string }) {
   const history = useHistory()
@@ -70,7 +71,7 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
         <div className="flex justify-end w-5/12 pr-4 ">
           <img
             className="self-end w-20 "
-            src="../assets/illustrations/wallet.svg"
+            src={walletSvg}
             alt=""
           />
         </div>

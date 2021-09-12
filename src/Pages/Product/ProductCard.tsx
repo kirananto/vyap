@@ -1,4 +1,5 @@
 import React from "react";
+import dairyMilkSvg from "../../assets/img/Dairymilk.jpeg"
 
 export default function ProductCard({ onClicked, onMore } : { onClicked: any, onMore: any }) {
   const fontSize = {
@@ -34,7 +35,7 @@ export default function ProductCard({ onClicked, onMore } : { onClicked: any, on
           >
             Out of stock
           </div>
-          <img src="../assets/img/Dairymilk.jpeg" className="w-16 " alt="" />
+          <img src={dairyMilkSvg} className="w-16 " alt="" />
         </div>
         {/* col-2 product */}
         <div className="flex flex-col ml-2 ">

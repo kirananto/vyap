@@ -3,7 +3,8 @@ import PaymentCard from "../../Components/PaymentCard";
 import OrderCard from "../../Components/OrderCard";
 import { fetchThreadsById } from "../../API/inbox.axios";
 import { useSelector } from 'react-redux';
-import { selectCredentials } from '../../Pages/Login/credentialsSlice';
+import { selectCredentials } from '../Login/credentialsSlice';
+// import chatSvg from './assets/Chats.svg'
 const limit = 10
 
 enum ThreadTypeEnum { 
@@ -33,9 +34,9 @@ export default function ChatList({ inboxId }: { inboxId: string }) {
     }, [])
 
     function renderChats() {
-        if(threads.length === 0) {
-            return <img src="./assets/Chats.svg" />
-        }
+        // if(threads.length === 0) {
+        //     return <img src={chatSvg} />
+        // }
         return threads.map((thread) => {
             const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
             if(thread.type === ThreadTypeEnum.PAYMENT) {

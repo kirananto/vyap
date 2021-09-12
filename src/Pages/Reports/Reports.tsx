@@ -1,6 +1,7 @@
 import React from "react";
 import { SimpleHeader } from "../../Components/Header";
 import {ReportCard, EmptyReportCard} from "./ReportCard";
+import shopImg from "../../assets/illustrations/Shop.svg"
 
 export default function Reports() {
   return (
@@ -14,15 +15,15 @@ export default function Reports() {
       <div className="grid w-full grid-cols-2 gap-4 p-4 mt-2 bg-white">
         <ReportCard
           heading="Shopwise Reports"
-          bgIllus="../assets/illustrations/Shop.svg"
+          bgIllus={shopImg}
         />
          <ReportCard
           heading="Shopwise Reports"
-          bgIllus="../assets/illustrations/Shop.svg"
+          bgIllus={shopImg}
         />
             <ReportCard
           heading="Shopwise Reports"
-          bgIllus="../assets/illustrations/Shop.svg"
+          bgIllus={shopImg}
         />
         <EmptyReportCard 
         heading="More coming soon...!!"

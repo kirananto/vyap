@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import vyapLogo from '../../assets/new_logo.svg'
+
 
 export default function SignupStepTwo() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -9,7 +11,7 @@ export default function SignupStepTwo() {
         <img
           style={logoStyle}
           className="w-24 m--5"
-          src="../assets/icons/new_logo.svg"
+          src={vyapLogo}
           alt=""
         />
         <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>

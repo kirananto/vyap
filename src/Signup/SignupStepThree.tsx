@@ -1,6 +1,8 @@
 import React from "react";
 import ToggleButton from "../Components/ToggleButton";
 import { SimpleFooter } from "../Components/Footer";
+import vyapLogo from '../../assets/new_logo.svg'
+
 
 export default function SignupStepThree() {
   const logoStyle = { marginLeft: "-20px" };
@@ -10,7 +12,7 @@ export default function SignupStepThree() {
         <img
           style={logoStyle}
           className="w-24"
-          src="../assets/icons/new_logo.svg"
+          src={vyapLogo}
           alt=""
         />
         <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>
