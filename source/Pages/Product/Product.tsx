@@ -148,7 +148,7 @@ export default function Product() {
       ></Modal>
       {/* Add Product Button */}
       <div className="relative">
-        <button className="custom-add-product-btn rounded-full px-7 py-2 text-white bg-gradient-to-br from-blue-500 to-indigo-700">
+        <button className="py-2 text-white rounded-full custom-add-product-btn px-7 bg-gradient-to-br from-blue-500 to-indigo-700">
           Add Product
         </button>
       </div>
