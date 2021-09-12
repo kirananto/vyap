@@ -15,12 +15,12 @@ function Modal({
   SecondComponentAttributes,
   FirstComponent,
   SecondComponent,
-} : {
-  isOpen: any
-  FirstComponentAttributes?: any
-  SecondComponentAttributes?: any
-  FirstComponent: any
-  SecondComponent: any
+}: {
+  isOpen: any;
+  FirstComponentAttributes?: any;
+  SecondComponentAttributes?: any;
+  FirstComponent: any;
+  SecondComponent: any;
 }) {
   if (!isOpen) return <FirstComponent {...FirstComponentAttributes} />;
   return <SecondComponent {...SecondComponentAttributes} />;
@@ -146,6 +146,12 @@ export default function Product() {
         FirstComponent={EmptyPopup}
         SecondComponent={SearchMorePopup}
       ></Modal>
+      {/* Add Product Button */}
+      <div className="relative">
+        <button className="py-2 text-white rounded-full custom-add-product-btn px-7 bg-gradient-to-br from-blue-500 to-indigo-700">
+          Add Product
+        </button>
+      </div>
       <Footer />
     </>
   );
