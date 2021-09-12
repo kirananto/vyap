@@ -12,13 +12,7 @@ export default function OrderContainerDetail() {
                     {console.log('item', item)}
                     <div className="flex gap-2">
                         <div
-                            style={{
-                                width: '14px',
-                                height: '14px',
-                                borderRadius: '7px',
-                                backgroundImage: 'linear-gradient(310deg, #4239cb 119%, #3b80f5 5%)'
-                            }}
-                            className={'m-1'}
+                            className="bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-4 w-4"
                         />
                         <div className="flex flex-col">
                             <div className="flex gap-4">

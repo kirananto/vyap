@@ -13,7 +13,7 @@ export default function OrderContainer({
 
     return (
         <div className="bg-gray-100 p-4">
-            <div className="overflow-y-auto bg-white rounded p-4" style={{ height: 'calc(100vh - 11rem)' }}>
+            <div className="overflow-y-auto bg-white rounded p-4" style={{ height: 'calc(100vh - 15rem)' }}>
                 {orders.map((item, index) => (
                     <div className={`${index === orders.length - 1 ? '' : 'border-b border-gray-300'}`} key={`${index}`}>
                         <div className={`flex w-full justify-between mt-2 pb-2`}>

@@ -45,10 +45,10 @@ export default function More() {
       {/* Menu */}
       {/* ----- */}
       <div className="flex flex-col gap-2 pl-10 mt-2">
-        <div className="flex items-center w-full gap-2 py-2 ">
+        <NavLink to="/all-payments" className="flex items-center w-full gap-2 py-2 ">
           <PaymentIcon />
           <Links linkName="All Payments" />
-        </div>
+        </NavLink>
         {/* ----- */}
         {/* ----- */}
         <NavLink to="/orders" className="flex items-center w-full gap-2 py-2 ">
