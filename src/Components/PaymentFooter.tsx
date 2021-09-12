@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AddPaymentModal from "pages/ChatView/AddPaymentModal";
+import AddPaymentModal from "../Pages/ChatView/AddPaymentModal";
 
 export default function PaymentFooter() {
 

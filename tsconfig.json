@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "baseUrl": "./source",
+    "baseUrl": "./",
   },
-  "include": ["source"]
+  "include": ["src"]
 }
