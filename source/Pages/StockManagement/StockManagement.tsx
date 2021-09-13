@@ -2,6 +2,7 @@ import React from "react";
 import { SimpleHeader } from "../../Components/Header";
 import ToggleButton from "../../Components/ToggleButton";
 import { SimpleFooter } from "../../Components/Footer";
+import { Link } from "react-router-dom";
 
 export default function StockManagement() {
   return (
@@ -19,9 +20,9 @@ export default function StockManagement() {
         </div>
 
         <h1 className="text-lg font-bold text-gray-500">Stock management</h1>
-        <p>
-          <a href="/" className="font-medium text-blue-600 underline">10 Purchase orders</a>
-        </p>
+        <div>
+          <Link to="/purchase-order" className="font-medium text-blue-600 underline">10 Purchase orders</Link>
+        </div>
       </div>
       <SimpleFooter btnName="Add Purchase Order" />
     </>
