@@ -1,11 +1,12 @@
 module.exports = {
   purge: [
-    './source/**/*.jsx',
-    './source/**/*.js',
-    './source/**/*.ts',
-    './source/**/*.tsx',
-    './source/**/*.html',
+    './src/**/*.jsx',
+    './src/**/*.js',
+    './src/**/*.ts',
+    './src/**/*.tsx',
+    './src/**/*.html',
   ],
+  mode: 'jit',
   darkMode: false,
   theme: {
     extend: {},

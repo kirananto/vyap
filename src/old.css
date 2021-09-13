@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  overflow: hidden;
+}
+.app-background {
+  background-color: #fbfbfb;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%238d64cd' fill-opacity='0.01'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+
+.mobile-main {
+  background-color: rgb(246, 246, 246);
+}
+
+/* Customer Card */
+.card-main-container {
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  width: 100%;
+
+}
+
+.scrollDes::-webkit-scrollbar {
+  width: 0px;
+}
+/* .scrollDes::-webkit-scrollbar-thumb {
+border-radius: 20px;
+background: #3f4694;
+} */
+.card-main {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  margin-top: 10px;
+  /* background-color: red; */
+}
+.bottom-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.card-container {
+  display: flex;
+  width: 100%;
+
+  /* background-color: yellow; */
+}
+.card-child-1,
+.card-child-2,
+.card-child-3 {
+  display: flex;
+  justify-content: center;
+}
+.card-child-1 {
+  width: 20%;
+  /* background-color: lightblue; */
+}
+.card-child-2 {
+  flex-direction: column;
+  width: 60%;
+  gap: 5px;
+}
+.card-child-3 {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+/* Customer Card Field Ends */
+
+/* Add Customer Button */
+.add-cutomer-btn {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  width: 160px;
+  transition: 0.1s;
+}
+.add-cutomer-btn:active{
+  transform: scale(0.95);
+}

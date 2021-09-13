@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "ProductSans";
+    src: local("ProductSans"), url("/fonts/productSans/ProductSansRegular.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "ProductSansBold";
+    src: local("ProductSansBold"), url("/fonts/productSans/ProductSansBold.ttf") format("truetype");
+}
+
+body {
+    font-family: "ProductSans" !important;
+}
+
+.PRODUCT-SANS-BOLD {
+    font-family: "ProductSansBold" !important;
+}
