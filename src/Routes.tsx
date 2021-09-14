@@ -14,6 +14,7 @@ import SignupStepOne from "./Pages/Signup/SignupStepOne";
 import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
 import SignupStepThree from "./Pages/Signup/SignupStepThree";
 import SignupStepFour from "./Pages/Signup/SignupStepFour";
+import SignupStepFive from "./Pages/Signup/SignupStepFive";
 import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
 import { useSelector } from "react-redux";
@@ -43,6 +44,7 @@ function Routes() {
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
             <Route path="/signup-step-3" component={SignupStepThree} />
             <Route path="/signup-step-4" component={SignupStepFour} />
+            <Route path="/signup-step-5" component={SignupStepFive} />
             {/* ===Signup=== */}
             <Route path="/chat/:id" component={Payment} />
             <Route path="/payment/:id" component={PaymentDetails} />
