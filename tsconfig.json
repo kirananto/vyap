@@ -1,18 +1,27 @@
 {
-  "compileOnSave": false,
+  "include": ["src", "types"],
   "compilerOptions": {
-    "target": "esnext",
     "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "node",
-    "strict": true,
     "jsx": "preserve",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
+    "baseUrl": "./",
+    /* paths - import rewriting/resolving */
+    "paths": {
+      // If you configured any Snowpack aliases, add them here.
+      // Add this line to get types for streaming imports (packageOptions.source="remote"):
+      //     "*": [".snowpack/types/*"]
+      // More info: https://www.snowpack.dev/guides/streaming-imports
+    },
+    /* noEmit - Snowpack builds (emits) files, not tsc. */
     "noEmit": true,
-    "baseUrl": "./source",
-  },
-  "include": ["source"]
+    /* Additional Options */
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["snowpack-env"],
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "error"
+  }
 }

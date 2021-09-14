@@ -1,4 +1,2 @@
 - Product page -> Ayan
-- All Payments -> Fawaz
-- Purchase Orders -> Fawaz
 - Order Details -> Bindya
