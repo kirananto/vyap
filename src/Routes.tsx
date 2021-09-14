@@ -13,12 +13,14 @@ import StockManagement from "./Pages/StockManagement/StockManagement";
 import SignupStepOne from "./Pages/Signup/SignupStepOne";
 import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
 import SignupStepThree from "./Pages/Signup/SignupStepThree";
+import SignupStepFour from "./Pages/Signup/SignupStepFour";
 import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "./Pages/Login/credentialsSlice";
 import Orders from "./Pages/Orders";
 import Product from "./Pages/Product/Product";
+import AddProductMain from "./Pages/Product/AddProduct/MainScreen/AddProductMain";
 import Account from "./Pages/Account";
 import AllPayments from "./Pages/Payments";
 import PurchaseOrder from "./Pages/StockManagement/PurchaseOrder";
@@ -36,15 +38,19 @@ function Routes() {
         <>
           <Switch>
             <LoginRoutes path="/login" component={Login} />
+            {/* ===Signup=== */}
             <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
             <Route path="/signup-step-3" component={SignupStepThree} />
+            <Route path="/signup-step-4" component={SignupStepFour} />
+            {/* ===Signup=== */}
             <Route path="/chat/:id" component={Payment} />
             <Route path="/payment/:id" component={PaymentDetails} />
             <Route path="/reports" component={Reports} />
             <Route path="/employees" component={Employees} />
             <Route path="/stock-management" component={StockManagement} />
             <Route path="/my-products" component={Product} />
+            <Route path="/add-product-main" component={AddProductMain} />
             <Route path="/settings" component={Settings} />
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />
