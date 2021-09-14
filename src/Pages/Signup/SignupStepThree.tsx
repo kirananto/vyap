@@ -1,6 +1,6 @@
 import React from "react";
-import ToggleButton from "../Components/ToggleButton";
-import { SimpleFooter } from "../Components/Footer";
+import ToggleButton from "../../Components/ToggleButton";
+import { SimpleFooter } from "../../Components/Footer";
 import vyapLogo from '../../assets/new_logo.svg'
 
 

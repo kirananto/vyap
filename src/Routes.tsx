@@ -12,6 +12,7 @@ import StockManagement from "./Pages/StockManagement/StockManagement";
 // ! SIGNUP----->
 import SignupStepOne from "./Pages/Signup/SignupStepOne";
 import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
+import SignupStepThree from "./Pages/Signup/SignupStepThree";
 import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
 import { useSelector } from "react-redux";
@@ -37,6 +38,7 @@ function Routes() {
             <LoginRoutes path="/login" component={Login} />
             <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
+            <Route path="/signup-step-3" component={SignupStepThree} />
             <Route path="/chat/:id" component={Payment} />
             <Route path="/payment/:id" component={PaymentDetails} />
             <Route path="/reports" component={Reports} />
