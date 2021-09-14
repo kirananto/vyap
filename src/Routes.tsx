@@ -20,6 +20,8 @@ import Orders from "./Pages/Orders";
 import Product from "./Pages/Product/Product";
 import Account from "./Pages/Account";
 import AllPayments from "./Pages/Payments";
+import PurchaseOrder from "./Pages/StockManagement/PurchaseOrder";
+import AddEditPurchase from "./Pages/StockManagement/PurchaseOrder/AddEditPurchase";
 
 function Routes() {
   const user  = useSelector(selectCredentials);
@@ -48,6 +50,9 @@ function Routes() {
             <Route exact path="/orders" component={Orders} />
             <Route exact path="/my-account" component={Account} />
             <Route exact path="/all-payments" component={AllPayments} />
+            <Route exact path="/purchase-order" component={PurchaseOrder} />
+            <Route exact path="/purchase-order/new" component={AddEditPurchase} />
+            <Route exact path="/purchase-order/:id" component={AddEditPurchase} />
             <Route>
               <div>
                 404 page Please go to home

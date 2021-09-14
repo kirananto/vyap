@@ -1,0 +1,88 @@
+import { SimpleHeader } from '../../../../Components/Header'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import AddRemoveItems from './AddRemoveItems'
+
+export default function AddEditPurchase() {
+
+    const history = useHistory()
+
+    return (
+        <div className="w-full h-screen overflow-y-auto bg-gray-100">
+            {/* header */}
+            <div className="w-full mb-2 bg-white shadow">
+                <SimpleHeader heading={history.location.pathname.replace('/purchase-order/', '') === 'new' ? "Add Purchase Order" : "Edit Purchase Order"} />
+            </div>
+
+            {/* body */}
+            <div className="flex flex-col items-center w-full gap-4 py-2 px-8 pt-8 ">
+                <div className="w-full">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                        Supplier name
+                    </label>
+                    <input
+                        name="tel"
+                        value={'123'}
+                        onChange={(event) => console.log(event?.target.value)}
+                        id="tel"
+                        placeholder="Name of the supplier"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+                    />
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                        GST Number
+                    </label>
+                    <input
+                        name="tel"
+                        value={'123'}
+                        onChange={(event) => console.log(event?.target.value)}
+                        id="tel"
+                        placeholder="1234567890"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+                    />
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                        Invoice number
+                    </label>
+                    <input
+                        name="tel"
+                        value={'123'}
+                        onChange={(event) => console.log(event?.target.value)}
+                        id="tel"
+                        placeholder="223422345678"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+                    />
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                        Invoice Date
+                    </label>
+                    <input
+                        name="tel"
+                        value={'123'}
+                        onChange={(event) => console.log(event?.target.value)}
+                        id="tel"
+                        placeholder="5th March 2021"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+                    />
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                        Invoice amount
+                    </label>
+                    <input
+                        name="tel"
+                        value={'123'}
+                        onChange={(event) => console.log(event?.target.value)}
+                        id="tel"
+                        placeholder="12,3123 /-"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+                    />
+                </div>
+                <AddRemoveItems />
+            </div>
+        </div>
+    )
+}
