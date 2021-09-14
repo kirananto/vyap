@@ -28,3 +28,6 @@
 .custom-add-product-btn:active{
     transform: scale(0.95);
 }
+.custom-btn:active{
+    color: rgb(253, 106, 106);
+}
