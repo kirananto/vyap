@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AddPaymentModal from "../Pages/ChatView/AddPaymentModal";
 
-export default function PaymentFooter() {
+export default function PaymentFooter({recieverOrgId}: {recieverOrgId?: string}) {
 
 const [paymentModalVisible, setPaymentModalVisible] = useState(false);
     return (<>
@@ -12,6 +12,7 @@ const [paymentModalVisible, setPaymentModalVisible] = useState(false);
       <AddPaymentModal
         isVisible={paymentModalVisible}
         toggleVisibility={setPaymentModalVisible}
+        recieverOrgId={recieverOrgId}
       />
         </>
     )
