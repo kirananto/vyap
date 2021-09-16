@@ -3,6 +3,7 @@ import { Link, Route, Switch } from "react-router-dom";
 
 import { Home } from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
+import LoginStepTwo from "./Pages/Login/LoginStepTwo";
 import { Payment } from "./Pages/ChatView";
 import PaymentDetails from "./Pages/ChatView/PaymentDetails";
 import Reports from "./Pages/Reports/Reports";
@@ -39,6 +40,7 @@ function Routes() {
         <>
           <Switch>
             <LoginRoutes path="/login" component={Login} />
+            <LoginRoutes path="/login-step-2" component={LoginStepTwo} />
             {/* ===Signup=== */}
             <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
             <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
