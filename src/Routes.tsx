@@ -10,6 +10,7 @@ import Reports from "./Pages/Reports/Reports";
 import Employees from "./Pages/Employees/Employees";
 import LoginRoutes from "./Router/LoginRoutes";
 import StockManagement from "./Pages/StockManagement/StockManagement";
+import OrderDetails from "./Pages/Orders/OrderView";
 // ! SIGNUP----->
 import SignupStepOne from "./Pages/Signup/SignupStepOne";
 import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
@@ -65,6 +66,7 @@ function Routes() {
             <Route exact path="/purchase-order" component={PurchaseOrder} />
             <Route exact path="/purchase-order/new" component={AddEditPurchase} />
             <Route exact path="/purchase-order/:id" component={AddEditPurchase} />
+            <Route path="/order/:id" component={OrderDetails} />
             <Route>
               <div>
                 404 page Please go to home

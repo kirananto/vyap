@@ -1,10 +1,15 @@
 import React from "react";
 
-function PaymentInfo(props: { heading: string; info: string }) {
+function PaymentInfo(props: { heading: string; info: string; more?: string[] }) {
   return (
     <div>
       <p className="text-sm font-medium text-gray-500">{props.heading}</p>
       <p className="text-sm font-bold text-gray-700">{props.info}</p>
+      {
+        props.more?.map((item, index) => (
+          <p className="text-sm text-gray-700" key={`${index}`}>{item}</p>
+        ))
+      }
     </div>
   );
 }
