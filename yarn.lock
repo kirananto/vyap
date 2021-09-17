@@ -357,7 +357,7 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
-"@mui/core@5.0.0-alpha.45", "@mui/core@^5.0.0-alpha.45":
+"@mui/core@5.0.0-alpha.45":
   version "5.0.0-alpha.45"
   resolved "https://registry.yarnpkg.com/@mui/core/-/core-5.0.0-alpha.45.tgz#f277f33519921fbc2c736312530ba3eb1943b59a"
   integrity sha512-Vx+m9QdPps9zo1/HLfTVKqymm8jpGvFYUST7QoxBgqUJ0PTn2sjHvDwJ4C1wSdK0PnREsvSCkRqw4HosU2VJ/g==
@@ -365,6 +365,18 @@
     "@babel/runtime" "^7.14.8"
     "@emotion/is-prop-valid" "^1.1.0"
     "@mui/utils" "5.0.0-rc.0"
+    clsx "^1.1.1"
+    prop-types "^15.7.2"
+    react-is "^17.0.2"
+
+"@mui/core@^5.0.0-alpha.47":
+  version "5.0.0-alpha.47"
+  resolved "https://registry.yarnpkg.com/@mui/core/-/core-5.0.0-alpha.47.tgz#68d044a5e81fa0f752b8c8a7b40deec04925beab"
+  integrity sha512-/GCIWOq+ydeY8HTWexrvQw7OsmRRvdzW+BB4vQ+V6alaECKSXPQrTDuQtd+lgI2il4p7uhPIKIqjcaAZ/FaNHA==
+  dependencies:
+    "@babel/runtime" "^7.14.8"
+    "@emotion/is-prop-valid" "^1.1.0"
+    "@mui/utils" "^5.0.0"
     clsx "^1.1.1"
     prop-types "^15.7.2"
     react-is "^17.0.2"
@@ -429,6 +441,17 @@
   version "5.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.0.0-rc.0.tgz#1f6858d55ed0139342c90c1483f520d4e07a893f"
   integrity sha512-u65YLalK8Md3HIhCLgD1kPMDxO/XCkUixGyOf6Zb3esSSq7iasLspaBcP2Bt288giM8HB1xlFBfaqoqoT9a4SA==
+  dependencies:
+    "@babel/runtime" "^7.14.8"
+    "@types/prop-types" "^15.7.4"
+    "@types/react-is" "^16.7.1 || ^17.0.0"
+    prop-types "^15.7.2"
+    react-is "^17.0.2"
+
+"@mui/utils@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.0.0.tgz#f34887968e506707d45594719202135a160b9193"
+  integrity sha512-WGikt+LTiGadqqKIGRwPVGtOUHchEEN6/af/T6nln8REkE2COY5nUirNc89ciPz1AznwZFzLtDmNkeV3NqUz2w==
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@types/prop-types" "^15.7.4"

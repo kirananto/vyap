@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@mui/core": "^5.0.0-alpha.45",
+    "@mui/core": "^5.0.0-alpha.47",
     "@mui/material": "^5.0.0-rc.0",
     "@reduxjs/toolkit": "1.6.1",
     "@types/react-select": "^4.0.17",
