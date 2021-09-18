@@ -7,9 +7,11 @@ import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { fetchInboxes } from "src/API/inbox.axios";
 import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import profileImg from "src/assets/icons/profile/profile-icon.svg"
+import AddCustomerModal from "./AddCustomerModal";
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
+  const [addCustomerVisible, setAddCustomerVisible] = React.useState(false)
   const [loading, setLoading] = React.useState(true);
   const [paginationParams, serPaginationParams] = React.useState({
     page: 1,
@@ -97,9 +99,13 @@ export const Home = () => {
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      <button className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
+      <button onClick={() => setAddCustomerVisible(true)} className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         Add Customer
       </button>
+      <AddCustomerModal
+        isVisible={addCustomerVisible}
+        toggleVisibility={() => setAddCustomerVisible(!addCustomerVisible)}
+      />
       <Footer />
     </div>
   );
