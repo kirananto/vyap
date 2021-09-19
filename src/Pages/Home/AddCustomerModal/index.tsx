@@ -6,6 +6,7 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import AddCustomerStep1 from './Step1'
 import InviteExisting from './InviteExisting'
 import PreviewScreen from './Preview'
+import Success from './Success'
 
 export enum currentPageEnum {
   'STEP_1' = 'STEP_1',
@@ -42,7 +43,7 @@ export default function AddCustomerModal({
     //   method,
     //   status: paymentStatus.SUCCESS,
     //   senderOrgId: user?.organizationId!,
-    //   recieverOrgId: recieverOrgId!,
+    //   receiverId: receiverId!,
     // }).then(result => {
     //   // DO feedback for success
     //   toggleVisibility(false)
@@ -82,24 +83,29 @@ export default function AddCustomerModal({
           pinCode={pinCode}
           setPinCode={setPinCode}
         />
-      case currentPageEnum.PREVIEW:
-        return <PreviewScreen
-          address={address}
-          setCurrentPage={setCurrentPage}
-          toggleVisibility={toggleVisibility}
-          isExisting={isExisting}
-          businessNumber={businessNumber}
-          openingBalance={openingBalance}
-          phoneNumber={phoneNumber}
-          pinCode={pinCode}
-          businessName={businessName}
-        />
+        case currentPageEnum.PREVIEW:
+          return <PreviewScreen
+            address={address}
+            setCurrentPage={setCurrentPage}
+            toggleVisibility={toggleVisibility}
+            isExisting={isExisting}
+            businessNumber={businessNumber}
+            openingBalance={openingBalance}
+            phoneNumber={phoneNumber}
+            pinCode={pinCode}
+            businessName={businessName}
+          />
+          case currentPageEnum.SUCCESS:
+            return <Success
+              text="Successfully invited the customer"
+              toggleVisibility={toggleVisibility}
+            />
       default: return <div> Loading </div>
     }
   }
 
   return (<div>
-    <div className={`fixed pin top-0 z-1 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
+    <div onClick={toggleVisibility} className={`fixed pin top-0 z-1 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
     <div className={`popup ${isVisible ? 'show' : ''} animate__animated animate__fadeInUpBig animate__faster`}>
       <h2 className="text-left p-2 text-2xl mt-2 text-gray-700">Add Customer</h2>
       {renderCurrentPage()}

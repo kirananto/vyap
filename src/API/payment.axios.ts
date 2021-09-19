@@ -16,7 +16,7 @@ export const createPayment = (token: string, data: {
     "method": paymentMethod,
     "senderOrgId": string,
     "senderUserId"?: string,
-    "recieverOrgId": string,
+    "receiverId": string,
 }) => axiosClient({
     url: `/payment`,
     method: 'POST',

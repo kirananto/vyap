@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { checkIfUserExists } from 'src/API/invite.axios'
+import { checkIfUserExists, inviteExisting, inviteNew } from 'src/API/invite.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { currentPageEnum } from '.'
 
@@ -29,7 +29,28 @@ export default function PreviewScreen({
   const { token } = useSelector(selectCredentials)
 
   const handleSubmit = () => {
-    toggleVisibility()
+    if(isExisting) {
+      inviteExisting(token!, phoneNumber, parseFloat(`${openingBalance}`)).then(result => {
+        console.log('Success', result.data)
+        setCurrentPage(currentPageEnum.SUCCESS)
+      }).catch(error => {
+        console.log('error', error)
+      })
+    } else {
+      inviteNew(token!, {
+        openingBalance: parseFloat(`${openingBalance}`),
+        phone: phoneNumber,
+        businessName,
+        businessNumber,
+        address,
+        pinCode
+      }).then(result => {
+        setCurrentPage(currentPageEnum.SUCCESS)
+        console.log('result', result)
+      }).catch(error => {
+        console.log('error', error)
+      })
+    }
     // checkIfUserExists(token!, phoneNumber).then(result => {
     //   console.log('data',)
     // }).catch(error => {
@@ -42,7 +63,7 @@ export default function PreviewScreen({
     //   method,
     //   status: paymentStatus.SUCCESS,
     //   senderOrgId: user?.organizationId!,
-    //   recieverOrgId: recieverOrgId!,
+    //   receiverId: receiverId!,
     // }).then(result => {
     //   // DO feedback for success
     //   toggleVisibility(false)
@@ -60,10 +81,10 @@ export default function PreviewScreen({
       }}
     >
       <div className="mt-4">
-        Please confirm that you're adding this customer
-        <div>
-          <label> Phone number: </label>
-          <div> {phoneNumber} </div>
+        Please confirm the below information
+        <div className="my-6 bg-gray-200 p-4 rounded-lg">
+          You are inviting {phoneNumber}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(2)} </span>
+          
         </div>
       </div>
       {/* <!-- btn popup --> */}

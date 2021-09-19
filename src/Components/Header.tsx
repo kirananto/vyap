@@ -79,9 +79,9 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
       <div className="relative flex w-11/12 h-auto bg-gray-100 border border-gray-300 rounded-md">
         <div className="flex flex-col w-4/5 p-2 pl-3">
           <h6 style={fontSize} className="font-bold">
-            Outstanding amount
+            {parseFloat(`${amount ?? 0}`) > 0 ? 'You have to pay' :  'You get'}
           </h6>
-          <h1 className="text-4xl font-semibold">₹ {amount}</h1>
+          <h1 className="text-4xl font-semibold">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>
         </div>
         <div className="flex justify-end w-5/12 pr-4 ">
           <img

@@ -32,7 +32,7 @@ export const Payment = () => {
       {/* body */}
      {inbox?.id ? <ChatList inboxId={inbox?.inboxHash}/> : null}
       {/* Footer */}
-      <PaymentFooter recieverOrgId={inbox?.recipient.id}/>
+      <PaymentFooter receiverId={inbox?.recipient.id}/>
     </div>
   );
 };

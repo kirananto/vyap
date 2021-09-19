@@ -102,10 +102,10 @@ export const Home = () => {
       <button onClick={() => setAddCustomerVisible(true)} className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         Add Customer
       </button>
-      <AddCustomerModal
+      {addCustomerVisible && <AddCustomerModal
         isVisible={addCustomerVisible}
         toggleVisibility={() => setAddCustomerVisible(!addCustomerVisible)}
-      />
+      />}
       <Footer />
     </div>
   );

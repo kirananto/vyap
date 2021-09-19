@@ -43,7 +43,7 @@ export default function InviteExisting({
     //   method,
     //   status: paymentStatus.SUCCESS,
     //   senderOrgId: user?.organizationId!,
-    //   recieverOrgId: recieverOrgId!,
+    //   receiverId: receiverId!,
     // }).then(result => {
     //   // DO feedback for success
     //   toggleVisibility(false)
