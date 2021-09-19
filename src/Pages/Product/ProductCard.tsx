@@ -1,7 +1,7 @@
 import React from "react";
 import dairyMilkSvg from "../../assets/img/Dairymilk.jpeg"
 
-export default function ProductCard({ onClicked, onMore } : { onClicked: any, onMore: any }) {
+export default function ProductCard({ item, onClicked, onMore } : { item: any, onClicked: any, onMore: any }) {
   const fontSize = {
     fontSize: "10px",
     top: "-8px",
@@ -35,15 +35,15 @@ export default function ProductCard({ onClicked, onMore } : { onClicked: any, on
           >
             Out of stock
           </div>
-          <img src={dairyMilkSvg} className="w-16 " alt="" />
+          <img src={dairyMilkSvg} className="w-14 " alt="" />
         </div>
         {/* col-2 product */}
         <div className="flex flex-col ml-2 ">
-          <h1 className="font-semibold text-md ">Dairy Milk Silk 15 Gm Item</h1>
-          <p className="text-sm font-semibold text-gray-400">#2354r456465465</p>
+          <h1 className="font-semibold text-md ">{item?.centralCatalogue?.name} ({item?.aliasName})</h1>
+          <p className="text-sm font-semibold text-gray-400">#{item.id?.split('-')[0]}</p>
           <div className="flex gap-2">
-            <p className="text-sm font-semibold text-gray-500">MRP: 50</p>
-            <p className="text-sm font-semibold text-gray-500">Cost: 48.5</p>
+            <p className="text-sm font-semibold text-gray-500">MRP: ₹{item?.mrpPrice}</p>
+            <p className="text-sm font-semibold text-gray-500">Cost: ₹{item?.rate}</p>
           </div>
         </div>
       </div>

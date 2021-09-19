@@ -55,7 +55,7 @@ function Routes() {
             <Route path="/employees" component={Employees} />
             <Route path="/stock-management" component={StockManagement} />
             <Route path="/my-products" component={Product} />
-            <Route path="/add-product-main" component={AddProductMain} />
+            <Route path="/add-product" component={AddProductMain} />
             <Route path="/settings" component={Settings} />
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />

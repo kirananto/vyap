@@ -105,7 +105,7 @@ export default function AddCustomerModal({
   }
 
   return (<div>
-    <div onClick={toggleVisibility} className={`fixed pin top-0 z-1 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
+    <div onClick={toggleVisibility} className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
     <div className={`popup ${isVisible ? 'show' : ''} animate__animated animate__fadeInUpBig animate__faster`}>
       <h2 className="text-left p-2 text-2xl mt-2 text-gray-700">Add Customer</h2>
       {renderCurrentPage()}

@@ -6,7 +6,13 @@ import FilterTag from "./FilterTag";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
-import { FilterPopup, EmptyPopup, MorePopup, SearchMorePopup } from "./Popups";
+import { fetchProducts } from "src/API/products.axios";
+import { useSelector } from "react-redux";
+import { selectCredentials } from "../Login/credentialsSlice";
+import { EmptyPopup } from "./Popups/EmptyPopup";
+import { FilterPopup } from "./Popups/FilterPopup";
+import { MorePopup } from "./Popups/MorePopup";
+import { SearchMorePopup } from "./Popups/SearchMorePopup";
 
 // ! Modal Logic
 function Modal({
@@ -28,7 +34,8 @@ function Modal({
 
 // ! Main Component
 export default function Product() {
-  // ! Tracking the state of modal(input[checkbox] is Clicked or not)
+  const { token, user } = useSelector(selectCredentials)
+  const [products, setProducts] = useState<any[]>([])
   const [isOpen, setIsOpen] = useState(false);
   // ! Tracking the total number of products is checked..
   const [checkedProductsCounts, setProductsCounts] = useState(0);
@@ -67,6 +74,14 @@ export default function Product() {
     else setIsOpen(false);
   }, [checkedProductsCounts]);
   // ! ------===------->
+
+  useEffect(() => {
+    fetchProducts(token!, user?.organizationId!, 20, 0).then(result => {
+      setProducts(result.data?.data ?? [])
+    }).catch(error => {
+      console.log('error', error)
+    })
+  }, [])
   return (
     <>
       {/* Header Container */}
@@ -119,13 +134,7 @@ export default function Product() {
       ==========
       */}
       <div className="custom-height">
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
-        <ProductCard onClicked={CheckboxClicked} onMore={toggleMore} />
+        {products?.map(mapItem => <ProductCard item={mapItem} onClicked={CheckboxClicked} onMore={toggleMore} />)}
       </div>
 
       {/* Filter Popup */}
@@ -133,18 +142,30 @@ export default function Product() {
         isOpen={filterPopupOpen}
         FirstComponent={EmptyPopup}
         SecondComponent={FilterPopup}
+        SecondComponentAttributes={{
+          isVisible: filterPopupOpen,
+          toggleVisibility: () => setfilterPopupOpen(false)
+        }}
       ></Modal>
       {/* More Product Popup */}
       <Modal
         isOpen={isMoreOpen}
         FirstComponent={EmptyPopup}
         SecondComponent={MorePopup}
+        SecondComponentAttributes={{
+          isVisible: isMoreOpen,
+          toggleVisibility: () => setisMoreOpen(false)
+        }}
       ></Modal>
       {/* More Search Bar Popup */}
       <Modal
         isOpen={isSearchMoreOpen}
         FirstComponent={EmptyPopup}
         SecondComponent={SearchMorePopup}
+        SecondComponentAttributes={{
+          isVisible: isSearchMoreOpen,
+          toggleVisibility: () => setisSearchMoreOpen(false)
+        }}
       ></Modal>
       {/* Add Product Button */}
       <div className="relative">

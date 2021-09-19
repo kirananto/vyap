@@ -38,7 +38,7 @@ export default function AddPaymentModal({
   }
 
   return (<div>
-    <div onClick={() => toggleVisibility(false)} className={`fixed pin top-0 z-1 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
+    <div onClick={() => toggleVisibility(false)} className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
     <div className={`popup ${isVisible ? 'show' : ''} animate__animated animate__fadeInUpBig animate__faster`}>
       {isSuccess ? (<Success
         text="successfully created payment record"
