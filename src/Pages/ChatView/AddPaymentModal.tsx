@@ -65,14 +65,14 @@ export default function AddPaymentModal({
         </div>
         {/* <!-- btn popup --> */}
         <div className="flex mt-4 p-2 gap-2">
-          
+
           <button onClick={() => toggleVisibility(false)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
             Cancel
           </button>
           <button onClick={() => handleSubmit()} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
             Save Payment
           </button>
-          </div>
+        </div>
       </>)}
     </div>
   </div>)

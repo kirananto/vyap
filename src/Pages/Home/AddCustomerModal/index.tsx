@@ -83,23 +83,23 @@ export default function AddCustomerModal({
           pinCode={pinCode}
           setPinCode={setPinCode}
         />
-        case currentPageEnum.PREVIEW:
-          return <PreviewScreen
-            address={address}
-            setCurrentPage={setCurrentPage}
-            toggleVisibility={toggleVisibility}
-            isExisting={isExisting}
-            businessNumber={businessNumber}
-            openingBalance={openingBalance}
-            phoneNumber={phoneNumber}
-            pinCode={pinCode}
-            businessName={businessName}
-          />
-          case currentPageEnum.SUCCESS:
-            return <Success
-              text="Successfully invited the customer"
-              toggleVisibility={toggleVisibility}
-            />
+      case currentPageEnum.PREVIEW:
+        return <PreviewScreen
+          address={address}
+          setCurrentPage={setCurrentPage}
+          toggleVisibility={toggleVisibility}
+          isExisting={isExisting}
+          businessNumber={businessNumber}
+          openingBalance={openingBalance}
+          phoneNumber={phoneNumber}
+          pinCode={pinCode}
+          businessName={businessName}
+        />
+      case currentPageEnum.SUCCESS:
+        return <Success
+          text="Successfully invited the customer"
+          toggleVisibility={toggleVisibility}
+        />
       default: return <div> Loading </div>
     }
   }

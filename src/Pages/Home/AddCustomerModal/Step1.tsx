@@ -39,55 +39,55 @@ export default function AddCustomerStep1({
   }
 
   return (
-      <form
-        className="mt-4 text-left"
-        onSubmit={(event: any) => {
-          event.preventDefault();
-          // onPressLogin(phoneNumber.replace('+91', ''));
-        }}
-      >
-        <div>
-          <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
-            Phone number
-          </label>
-          <input
-            type="tel"
-            name="tel"
-            value={phoneNumber}
-            onChange={(event) => setPhoneNumber(event?.target.value)}
-            id="tel"
-            placeholder="Your phone number"
-            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
-          />
-        </div>
+    <form
+      className="mt-4 text-left"
+      onSubmit={(event: any) => {
+        event.preventDefault();
+        // onPressLogin(phoneNumber.replace('+91', ''));
+      }}
+    >
+      <div>
+        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+          Phone number
+        </label>
+        <input
+          type="tel"
+          name="tel"
+          value={phoneNumber}
+          onChange={(event) => setPhoneNumber(event?.target.value)}
+          id="tel"
+          placeholder="Your phone number"
+          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+        />
+      </div>
 
-        <div className="mt-2 text-xs text-gray-400">
-          We'll never share your phone number with anyone else.
-        </div>
+      <div className="mt-2 text-xs text-gray-400">
+        We'll never share your phone number with anyone else.
+      </div>
 
 
-        <div className="mt-4">
-          <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
-            Opening balance
-          </label>
-          <input
-            type="tel"
-            name="tel"
-            value={openingBalance}
-            onChange={(event: any) => setOpeningBalance(event?.target.value)}
-            id="tel"
-            placeholder="Opening balance of the customer"
-            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
-          />
-        </div>
-        {/* <!-- btn popup --> */}
-        <div className="flex my-8 p-2 gap-2">
-          <button onClick={() => toggleVisibility()} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
-            Cancel
-          </button>
-          <button onClick={() => handleSubmit()} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
-            Next
-          </button>
-        </div>
-      </form>)
+      <div className="mt-4">
+        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+          Opening balance
+        </label>
+        <input
+          type="tel"
+          name="tel"
+          value={openingBalance}
+          onChange={(event: any) => setOpeningBalance(event?.target.value)}
+          id="tel"
+          placeholder="Opening balance of the customer"
+          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+        />
+      </div>
+      {/* <!-- btn popup --> */}
+      <div className="flex my-8 p-2 gap-2">
+        <button onClick={() => toggleVisibility()} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
+          Cancel
+        </button>
+        <button onClick={() => handleSubmit()} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+          Next
+        </button>
+      </div>
+    </form>)
 }

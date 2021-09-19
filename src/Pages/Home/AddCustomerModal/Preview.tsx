@@ -29,7 +29,7 @@ export default function PreviewScreen({
   const { token } = useSelector(selectCredentials)
 
   const handleSubmit = () => {
-    if(isExisting) {
+    if (isExisting) {
       inviteExisting(token!, phoneNumber, parseFloat(`${openingBalance}`)).then(result => {
         console.log('Success', result.data)
         setCurrentPage(currentPageEnum.SUCCESS)
@@ -84,17 +84,17 @@ export default function PreviewScreen({
         Please confirm the below information
         <div className="my-6 bg-gray-200 p-4 rounded-lg">
           You are inviting {phoneNumber}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(2)} </span>
-          
+
         </div>
       </div>
       {/* <!-- btn popup --> */}
       <div className="flex my-8 p-2 gap-2">
 
         <button onClick={() => setCurrentPage(isExisting ? currentPageEnum.STEP_1 : currentPageEnum.NEW_CUSTOMER_STEP)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
-        Back
+          Back
         </button>
         <button onClick={handleSubmit} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
-        Add customer
+          Add customer
         </button>
       </div>
     </form>)

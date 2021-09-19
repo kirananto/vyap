@@ -24,9 +24,9 @@ export const Home = () => {
     if (token) {
       setLoading(true)
       fetchInboxes({
-        token, 
-        offset: ((paginationParams.page - 1) * limit), 
-        limit, 
+        token,
+        offset: ((paginationParams.page - 1) * limit),
+        limit,
         search: paginationParams.search === '' ? undefined : paginationParams.search
       }).then(result => {
         setInbox(result.data.data)
@@ -39,14 +39,14 @@ export const Home = () => {
   }, [paginationParams.search])
 
   function renderChats() {
-    if(loading) {
+    if (loading) {
       return <div className="mt-12 p-12 text-center"> Loading...</div>
     }
-    if(inbox.length === 0) {
+    if (inbox.length === 0) {
       return <div>
-        <img className="mt-12 h-96 p-12 m-auto" src={ChatImg}/> 
+        <img className="mt-12 h-96 p-12 m-auto" src={ChatImg} />
         <div className="text-center px-6 w-2/3 m-auto"> You do not have any transactions, Please invite a customer to start the transactions </div>
-        </div>
+      </div>
     }
     return inbox
       .map((item, index) => (

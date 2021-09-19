@@ -119,7 +119,7 @@ export default function InviteExisting({
       </div>
       {/* <!-- btn popup --> */}
       <div className="flex my-8 p-2 gap-2">
-        
+
         <button onClick={() => setCurrentPage(currentPageEnum.STEP_1)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
           Back
         </button>

@@ -79,7 +79,7 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
       <div className="relative flex w-11/12 h-auto bg-gray-100 border border-gray-300 rounded-md">
         <div className="flex flex-col w-4/5 p-2 pl-3">
           <h6 style={fontSize} className="font-bold">
-            {parseFloat(`${amount ?? 0}`) > 0 ? 'You have to pay' :  'You get'}
+            {parseFloat(`${amount ?? 0}`) > 0 ? 'You have to pay' : 'You get'}
           </h6>
           <h1 className="text-4xl font-semibold">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>
         </div>
@@ -100,23 +100,23 @@ function SimpleHeader(props: { heading: string }) {
   const history = useHistory()
   return (
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
-    {/* back icon  */}
-    <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-8 "
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
-    </div>
+      {/* back icon  */}
+      <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-8 "
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </div>
 
       {/* Heading container */}
       <div className="flex flex-col w-4/5 pl-4 ">
