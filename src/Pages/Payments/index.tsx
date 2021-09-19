@@ -1,10 +1,21 @@
 import { Header } from '../../Components/Header'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AppliedFilters from './AppliedFilters'
 import PaymentContainer from './PaymentContainer'
+import { fetchAllPayments } from 'src/API/payment.axios'
+import { useSelector } from 'react-redux'
+import { selectCredentials } from '../Login/credentialsSlice'
 
 export default function Payments() {
-    const payments = [1,1,1,1,1,1,1,1,1,1,1,1]
+    const { token } = useSelector(selectCredentials)
+    const [payments, setPayments] = useState<any[]>([1,1,1,1,1,1])
+    useEffect(() => {
+        fetchAllPayments(token!).then(result => {
+            console.log(result.data)
+            setPayments(result.data.data)
+            //TODO handle the payments better
+        })
+    }, [])
     return (
         <div className="mobile-main">
             {/* header */}

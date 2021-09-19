@@ -8,6 +8,13 @@ export const fetchPaymentById = (token: string, id: string) => axiosClient({
         'authorization': `Bearer ${token}`
     }
 })
+export const fetchAllPayments = (token: string) => axiosClient({
+    url: `/payment`,
+    method: 'GET',
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
 
 export const createPayment = (token: string, data: {
     "amount": number
