@@ -1,12 +1,21 @@
 import { axiosClient } from './apiClient'
-import type { paymentMethod, paymentStatus } from './enum'
 
-export const fetchPaymentById = (token: string, phone: string, openingBalance?: number) => axiosClient({
+export const inviteExisting = (token: string, phone: string, openingBalance?: number) => axiosClient({
     url: `/invite/existing`,
     method: 'POST',
     data: {
         phone,
         openingBalance
+    },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+export const checkIfUserExists = (token: string, phone: string) => axiosClient({
+    url: `/invite/user-exists`,
+    method: 'GET',
+    params: {
+        phone
     },
     headers: {
         'authorization': `Bearer ${token}`
