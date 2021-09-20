@@ -16,11 +16,13 @@ export default function OTPForm({ onPressConfirm, error }: IProps) {
        //@ts-ignore
         navigator.credentials.get({ otp: { transport: ['sms'] } })
           .then(content => {
-              alert(content)
+              // alert(content)
               //@ts-ignore
               const code = content?.code
-              setCode(JSON.stringify(content));
-              // onPressConfirm(code);
+              setCode(code);
+              if(code) {
+                onPressConfirm(code);
+              }
           })
           .catch(e => {
             setErrorMessage(e.message);
