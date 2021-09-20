@@ -17,7 +17,6 @@ export default function PaymentContainer({
                     <div className={`${index === payments.length - 1 ? '' : 'border-b border-gray-300'}`} key={`${index}`}>
                         <div className={`flex w-full justify-between mt-2 pb-2`}>
                             {/* TODO: Remove this console.log */}
-                            {console.log('item', item)}
                             <div className="flex gap-2">
                                 <div className="flex">
                                     <div className="flex pt-1">
