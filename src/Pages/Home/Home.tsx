@@ -34,7 +34,7 @@ export const Home = () => {
         console.log('data', result.data.data)
       })
     } else {
-      // history.push('/login')
+      history.push('/login')
     }
   }, [paginationParams.search])
 
