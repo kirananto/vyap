@@ -1,0 +1,14 @@
+name: vyap-frontend
+static_sites:
+  - build_command: yarn build
+    environment_slug: node-js
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: kirananto/vyap
+    name: webapp
+    output_dir: build
+    routes:
+    - path: /
+    source_dir: /
+    error_document: index.html
