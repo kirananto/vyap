@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const baseURL = import.meta.env.MODE === 'development' ? 'http://localhost:3333' : `https://vyap-backend-wzpnd.ondigitalocean.app/do`
+export const baseURL = import.meta.env.MODE === 'development' ? 'http://localhost:3333' : `https://api.vyap.app/do`
 
 // export const baseURL =  `http://localhost:3333`
 
