@@ -2,25 +2,28 @@ import React, { useState } from "react";
 import "./payment.css";
 import { Header, PaymentBottomHeader } from "../../Components/Header";
 import ChatList from './ChatList'
-import PaymentFooter from "../../Components/PaymentFooter"
 import { useEffect } from "react";
 import { fetchInboxById } from "../../API/inbox.axios";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import type { InboxType } from './inbox.type'
 import { selectCredentials } from "../Login/credentialsSlice";
+import AddPaymentModal from "./AddPaymentModal";
 
 export const Payment = () => {
   const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+
   const { id } = useParams<{ id: string }>()
   useEffect(() => {
-    if(token) {
+    console.log('------------------------changed-----------')
+    if (token) {
       fetchInboxById(token, id).then(res => {
         setInbox(res.data)
       })
     }
-  }, [])
+  }, [paymentModalVisible, id, token])
 
   return (
     <div className="overflow-y-auto mobile-main">
@@ -30,9 +33,17 @@ export const Payment = () => {
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
-     {inbox?.id ? <ChatList inboxId={inbox?.inboxHash}/> : null}
+      {inbox?.id ? <ChatList inboxId={inbox?.inboxHash} toRefresh={paymentModalVisible}  /> : null}
       {/* Footer */}
-      <PaymentFooter receiverId={inbox?.recipient.id}/>
+      <div className="fixed bottom-0 flex items-center justify-center w-full h-16 gap-4 bg-white" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
+        <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button>
+        <button className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Place Order</button>
+      </div>
+      {paymentModalVisible && <AddPaymentModal
+        isVisible={paymentModalVisible}
+        toggleVisibility={setPaymentModalVisible}
+        receiverId={inbox?.recipient.id}
+      />}
     </div>
   );
 };

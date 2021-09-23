@@ -13,6 +13,7 @@ import { EmptyPopup } from "./Popups/EmptyPopup";
 import { FilterPopup } from "./Popups/FilterPopup";
 import { MorePopup } from "./Popups/MorePopup";
 import { SearchMorePopup } from "./Popups/SearchMorePopup";
+import { Link } from "react-router-dom";
 
 // ! Modal Logic
 function Modal({
@@ -167,9 +168,9 @@ export default function Product() {
           toggleVisibility: () => setisSearchMoreOpen(false)
         }}
       ></Modal>
-      <button className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
+      <Link to="/add-product" className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         Add Product
-      </button>
+      </Link>
       <Footer />
     </>
   );
