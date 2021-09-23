@@ -1,6 +1,7 @@
 import { Footer } from "../../Components/Footer";
 import React, { useEffect } from "react";
 import { ItemCard } from "./ItemCard";
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
@@ -18,7 +19,7 @@ export const Home = () => {
     search: "",
   })
   const { user, token } = useSelector(selectCredentials)
-  // const history = useHistory()
+  const history = useHistory()
   useEffect(() => {
     const limit = 10
     if (token) {
