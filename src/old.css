@@ -79,6 +79,9 @@ background: #3f4694;
   right: 10px;
   width: 160px;
   transition: 0.1s;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .add-cutomer-btn:active{
   transform: scale(0.95);
