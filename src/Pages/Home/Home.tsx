@@ -23,7 +23,6 @@ export const Home = () => {
   useEffect(() => {
     const limit = 10
     if (token) {
-      setLoading(true)
       fetchInboxes({
         token,
         offset: ((paginationParams.page - 1) * limit),
@@ -37,7 +36,7 @@ export const Home = () => {
     } else {
       history.push('/login')
     }
-  }, [paginationParams.search])
+  }, [paginationParams.search, addCustomerVisible])
 
   function renderChats() {
     if (loading) {

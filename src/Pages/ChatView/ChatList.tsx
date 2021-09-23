@@ -12,7 +12,7 @@ enum ThreadTypeEnum {
     'ORDER'=1,
     'MESSAGE'=2
   }
-export default function ChatList({ inboxId }: { inboxId: string }) {
+export default function ChatList({ inboxId, toRefresh }: { inboxId: string, toRefresh: boolean}) {
     const { user, token } = useSelector(selectCredentials)
     
     const [threads, setThreads] = useState<{
@@ -31,7 +31,7 @@ export default function ChatList({ inboxId }: { inboxId: string }) {
         fetchThreadsById({ token: token!, inboxId: inboxId, offset: ((currentPage - 1) * limit), limit }).then(res => {
             setThreads(res.data.data)
         })
-    }, [])
+    }, [toRefresh, token, inboxId, currentPage])
 
     function renderChats() {
         // if(threads.length === 0) {
