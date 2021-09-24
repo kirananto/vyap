@@ -1,5 +1,4 @@
 import React from "react";
-import filterSvg from '../../assets/icons/filter.svg'
 
 export default function SearchBar({ onFilterClick }: { onFilterClick: any }) {
   return (
