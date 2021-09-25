@@ -128,7 +128,7 @@ export default function SignupStepThree() {
             </label>
             <textarea
               value={signup.address}
-              onChange={(event) => setAddress(event?.target.value)}
+              onChange={(event) => dispatch(setAddress(event?.target.value))}
               placeholder="Enter your address."
               className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
             />

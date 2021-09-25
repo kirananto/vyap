@@ -96,12 +96,12 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
 }
 
 // ! Simple Header with only one heading and back button -->
-function SimpleHeader(props: { heading: string }) {
+function SimpleHeader(props: { heading: string, backFn?: any }) {
   const history = useHistory()
   return (
     <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
       {/* back icon  */}
-      <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
+      <div onClick={props.backFn ? props.backFn : () => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "

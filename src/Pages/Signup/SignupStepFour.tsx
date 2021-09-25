@@ -5,7 +5,7 @@ import { SimpleFooter } from "../../Components/Footer";
 import { useHistory } from "react-router";
 import { fetchCategories } from "src/API/category.axios";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCredentials } from "../Login/credentialsSlice";
+import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
 import { selectSignupInfo, setCategory } from "./signupSlice";
 import { signupAPI } from "src/API/signup.axios";
 
@@ -65,7 +65,7 @@ export default function SignupStepTwo() {
     })
   }, [])
 
-  function handleSubmit() {
+  function handleSubmit() {//TODO Fix this
     signupAPI({
     phone: signup.phone,
     name: signup.name,
@@ -77,10 +77,15 @@ export default function SignupStepTwo() {
     listPrivately: signup.listPrivately,
     organizationLocation: {
       lat: signup.organizationLocation.lat,
-      lng: signup.organizationLocation.lng
+      lng: signup.organizationLocation.lng,
+      address: signup.address,
+      city: 'Nil',
+      pinCode: signup.pinCode,
+      state: 'Kerala'
     }
   }).then(result => {
     console.log('result,', result.data)
+    dispatch(setCredentials(result.data))
     history.push('/signup-step-4')
   })
 }
