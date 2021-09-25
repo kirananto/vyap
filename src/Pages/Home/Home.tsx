@@ -40,12 +40,12 @@ export const Home = () => {
 
   function renderChats() {
     if (loading) {
-      return <div className="mt-12 p-12 text-center"> Loading...</div>
+      return <div className="p-12 mt-12 text-center"> Loading...</div>
     }
     if (inbox.length === 0) {
       return <div>
-        <img className="mt-12 h-96 p-12 m-auto" src={ChatImg} />
-        <div className="text-center px-6 w-2/3 m-auto"> You do not have any transactions, Please invite a customer to start the transactions </div>
+        <img className="p-12 m-auto mt-12 h-96" src={ChatImg} />
+        <div className="w-2/3 px-6 m-auto text-center"> You do not have any transactions, Please invite a customer to start the transactions </div>
       </div>
     }
     return inbox
@@ -99,7 +99,7 @@ export const Home = () => {
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      <button onClick={() => setAddCustomerVisible(true)} className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
+      <button onClick={() => setAddCustomerVisible(true)} className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         Add Customer
       </button>
       {addCustomerVisible && <AddCustomerModal
