@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "src/Components/Style/Button";
 
 interface IProps {
   onPressLogin: (phoneNumber: string) => void;
@@ -35,13 +36,7 @@ export default function PhoneForm({ onPressLogin }: IProps) {
         We'll never share your phone number <br/> with anyone else.
       </div>
 
-      <button
-        type="submit"
-        id="login-button"
-        className="block w-full px-4 py-2 mt-6 font-semibold text-white transition duration-500 ease-in-out transform rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 hover:bg-indigo-800 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 "
-      >
-        Log In
-      </button>
+      <Button className="mt-6">Log in</Button>
     </form>
   );
 }
