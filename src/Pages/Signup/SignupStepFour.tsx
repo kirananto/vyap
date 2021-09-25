@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import vyapLogo from "../../assets/new_logo.svg";
 import "./Signup.css";
 import { SimpleFooter } from "../../Components/Footer";
 import { useHistory } from "react-router";
+import { fetchCategories } from "src/API/category.axios";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCredentials } from "../Login/credentialsSlice";
+import { selectSignupInfo, setCategory } from "./signupSlice";
+import { signupAPI } from "src/API/signup.axios";
 
 interface CardInterface {
   title: string
   description: string
   isSelected?: boolean
+  onSelect?: () => void
   image?: string
 }
 
-const Card = ({ title, description, isSelected, image }: CardInterface) => {
+const Card = ({ title, description, isSelected, image,onSelect }: CardInterface) => {
   return (
-    <div className="flex items-center gap-3 bg-white custom">
+    <div onClick={onSelect} className="flex cursor-pointer items-center gap-3 bg-white custom">
       {/* ===tick-div=== */}
-      <div className="inline-flex items-center justify-center w-8 h-8 mx-2 p-1 bg-green-200 rounded-full">
-        <svg
+      <div  className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200'}`}>
+        {isSelected && <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 text-green-800"
           viewBox="0 0 20 20"
@@ -27,7 +33,7 @@ const Card = ({ title, description, isSelected, image }: CardInterface) => {
             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
             clip-rule="evenodd"
           />
-        </svg>
+        </svg>}
       </div>
       {/* === */}
       <div className="flex flex-col custom-width-para-text ml-2">
@@ -44,11 +50,40 @@ const Card = ({ title, description, isSelected, image }: CardInterface) => {
 
 export default function SignupStepTwo() {
   const logoStyle = { marginLeft: "-20px" };
+  const [categories, setCategories] = useState<any[]>([])
   const history = useHistory()
+  const dispatch = useDispatch()
+  const { token } = useSelector(selectCredentials)
+  const signup = useSelector(selectSignupInfo)
+  
+  useEffect(() => {
+    fetchCategories(token!).then(result => {
+      console.log('data', result.data)
+      setCategories(result.data?.data)
+    }).catch(error => {
+      console.log('error')
+    })
+  }, [])
 
   function handleSubmit() {
+    signupAPI({
+    phone: signup.phone,
+    name: signup.name,
+    email: signup.email,
+    businessName: signup.businessName,
+    address: signup.address,
+    categoryId: signup.category,
+    pinCode: signup.pinCode,
+    listPrivately: signup.listPrivately,
+    organizationLocation: {
+      lat: signup.organizationLocation.lat,
+      lng: signup.organizationLocation.lng
+    }
+  }).then(result => {
+    console.log('result,', result.data)
     history.push('/signup-step-4')
-  }
+  })
+}
 
   return (
     <div className="flex flex-col items-start w-full h-screen bg-gray-100">
@@ -63,7 +98,7 @@ export default function SignupStepTwo() {
         </h1>
 
         <div className="flex flex-col gap-4 mt-6">
-          {[1,1,1,1].map(mapItem => <Card title="Agriculture" description={`Lorem ipsum dolor sit amet consectetur adipisicing elit.`}/>)}
+          {categories.map(mapItem => <Card isSelected={mapItem.id === signup.category} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description}/>)}
         </div>
       </div>
       <SimpleFooter btnName="Create account." onClick={handleSubmit}/>

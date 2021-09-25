@@ -3,7 +3,7 @@ import ToggleButton from "../../Components/ToggleButton";
 import { SimpleFooter } from "../../Components/Footer";
 import vyapLogo from '../../assets/new_logo.svg'
 import { useDispatch, useSelector } from "react-redux";
-import { selectSignupInfo, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from "./signupSlice";
+import { selectSignupInfo, setAddress, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from "./signupSlice";
 import { isEmail } from "class-validator";
 import { useHistory } from "react-router";
 
@@ -18,7 +18,7 @@ export default function SignupStepThree() {
   function handleProceed(e: any) {
     e.preventDefault()
     const result = handleValidations()
-    if(result) {
+    if (result) {
       // Proceed to next step
       history.push('/signup-step-3')
     }
@@ -30,6 +30,10 @@ export default function SignupStepThree() {
     }
     if (signup.businessName?.length < 3) {
       setError('Enter a valid business name.')
+      return false
+    }
+    if (signup.address?.length < 3) {
+      setError('Enter a valid address .')
       return false
     }
     if (signup.businessName?.length < 3) {
@@ -118,6 +122,18 @@ export default function SignupStepThree() {
               onChange={(event: any) => dispatch(setPinCode(event.target.value))}
             />
           </div>
+          <div className="mt-2">
+            <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+              Address
+            </label>
+            <textarea
+              value={signup.address}
+              onChange={(event) => setAddress(event?.target.value)}
+              placeholder="Enter your address."
+              className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+            />
+          </div>
+
           {/* ---===Location===--- */}
           <div className="my-4 ">
             <p className="block text-sm font-semibold text-gray-500">
@@ -137,7 +153,6 @@ export default function SignupStepThree() {
               </svg>
             </div>
           </div>
-
           {/* ---===Location===--- */}
           <div>
             <p className="block mb-2 text-sm font-semibold text-gray-500">

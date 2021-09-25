@@ -21,7 +21,7 @@ export default function SignupStepFive() {
       <h1 className="mt-4 mb-2 text-4xl font-bold text-gray-600">Success 🎉</h1>
       <p className="text-lg font-bold text-gray-400">You can now proceed using the app.</p>
 
-      <Button onClick={history.push('/add-product')} className="w-8/12 h-12 mt-24 ">Start by adding products</Button>
+      <Button onClick={() => history.push('/add-product')} className="w-8/12 h-12 mt-24 ">Start by adding products</Button>
     </div>
   );
 }

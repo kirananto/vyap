@@ -12,6 +12,8 @@ export interface SignupInterface {
     pinCode: string;
     organizationLocation: OrganizationLocationInterface
     businessName: string
+    category: string
+    address: string,
     listPrivately: boolean
 }
 
@@ -24,7 +26,9 @@ const initialState: SignupInterface = {
         lat: 41,
         lng: 41
     },
+    address: '',
     businessName: '',
+    category: '',
     listPrivately: false
 
 };
@@ -50,6 +54,9 @@ export const signupSlice = createSlice({
         setBusinessName: (state, action: PayloadAction<string>) => {
             state.businessName = action.payload;
         },
+        setAddress: (state, action: PayloadAction<string>) => {
+            state.address = action.payload;
+        },
         setListPrivately: (state, action: PayloadAction<boolean>) => {
             state.listPrivately = action.payload;
         },
@@ -57,10 +64,13 @@ export const signupSlice = createSlice({
             state.organizationLocation.lat = action.payload.lat;
             state.organizationLocation.lng = action.payload.lng;
         },
+        setCategory: (state, action: PayloadAction<string>) => {
+            state.category = action.payload;
+        },
     },
 });
 
-export const { setName, setPhone, setBusinessName, setEmail, setListPrivately, setOrganizationLocation, setPinCode } = signupSlice.actions;
+export const { setName, setPhone, setBusinessName, setEmail, setListPrivately, setOrganizationLocation, setPinCode, setCategory, setAddress } = signupSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
