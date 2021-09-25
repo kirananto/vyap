@@ -18,7 +18,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
 import { useHistory } from "react-router-dom";
-import profPic from "../../assets/img/profileimg.png"
+import profPic from "src/assets/icons/profile/profile-icon.svg"
 
 export default function More() {
   const { user } = useSelector(selectCredentials)
