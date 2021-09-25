@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import ToggleButton from "../../Components/ToggleButton";
 import { SimpleFooter } from "../../Components/Footer";
 import vyapLogo from '../../assets/new_logo.svg'
+import { useDispatch, useSelector } from "react-redux";
+import { selectSignupInfo, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from "./signupSlice";
+import { isEmail } from "class-validator";
+import { useHistory } from "react-router";
 
 
 export default function SignupStepThree() {
   const logoStyle = { marginLeft: "-20px" };
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const signup = useSelector(selectSignupInfo)
+  const [error, setError] = useState('')
+
+  function handleProceed(e: any) {
+    e.preventDefault()
+    const result = handleValidations()
+    if(result) {
+      // Proceed to next step
+      history.push('/signup-step-3')
+    }
+  }
+  function handleValidations() {
+    if (signup.name?.length < 3) {
+      setError('Enter a valid name.')
+      return false
+    }
+    if (signup.businessName?.length < 3) {
+      setError('Enter a valid business name.')
+      return false
+    }
+    if (signup.businessName?.length < 3) {
+      setError('Enter a valid business name.')
+      return false
+    }
+    if (!isEmail(signup.email)) {
+      setError('Enter a valid email.')
+      return false
+    }
+    if (signup.pinCode?.length !== 6) {
+      setError('Enter a valid pinCode.')
+      return false
+    }
+    return true
+  }
   return (
     <div className="flex flex-col items-start w-full h-screen ">
       <div className="flex items-center justify-start px-8 mt-24 mb-5">
@@ -32,6 +72,8 @@ export default function SignupStepThree() {
             <input
               className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
               type="text"
+              value={signup.name}
+              onChange={(event: any) => dispatch(setName(event.target.value))}
               placeholder="Enter your name"
             />
           </div>
@@ -44,6 +86,8 @@ export default function SignupStepThree() {
               className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
               type="text"
               placeholder="Name of the shope or business"
+              value={signup.businessName}
+              onChange={(event: any) => dispatch(setBusinessName(event.target.value))}
             />
           </div>
 
@@ -56,6 +100,8 @@ export default function SignupStepThree() {
               className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
               type="text"
               placeholder="Your email"
+              value={signup.email}
+              onChange={(event: any) => dispatch(setEmail(event.target.value))}
             />
           </div>
 
@@ -68,10 +114,12 @@ export default function SignupStepThree() {
               className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
               type="text"
               placeholder="Enter the pincode of your location"
+              value={signup.pinCode}
+              onChange={(event: any) => dispatch(setPinCode(event.target.value))}
             />
           </div>
           {/* ---===Location===--- */}
-          <div>
+          <div className="my-4 ">
             <p className="block text-sm font-semibold text-gray-500">
               Location
             </p>
@@ -95,10 +143,16 @@ export default function SignupStepThree() {
             <p className="block mb-2 text-sm font-semibold text-gray-500">
               List Items Privately
             </p>
-            <ToggleButton />
+            <ToggleButton
+              value={signup.listPrivately}
+              onChange={(event: any) => dispatch(setListPrivately(!signup.listPrivately))}
+            />
+          </div>
+          <div>
+            {error ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{error}</div> : null}
           </div>
         </div>
-        <SimpleFooter btnName="Proceed" />
+        <SimpleFooter onClick={handleProceed} btnName="Proceed" />
       </form>
     </div>
   );

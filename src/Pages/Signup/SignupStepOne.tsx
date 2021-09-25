@@ -1,93 +1,87 @@
-import React, { useState } from "react"; //useRef,
+import React, { useRef, useState } from "react";
+import PhoneForm from "../Login/PhoneForm";
+import OTPForm from "../Login/OTPForm";
+import { Link, useHistory } from "react-router-dom";
+import { generateOtp, verifyPhone } from "../../API/login.axios";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../Login/credentialsSlice";
 import vyapLogo from '../../assets/new_logo.svg'
+import { setPhone } from "./signupSlice";
 
+export default function SignupStep1() {
+  const [currentPage, setCurrentPage] = useState(0)
+  const phoneNumberRef = useRef<string>('');
+  const [error, setError] = useState<string | null>(null);
 
-export default function SignupStepOne() {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [name, setName] = useState("");
-  // const [currentPage, setCurrentPage] = useState(0)
-  // const captchaRef = useRef(null);
-  // const confResRef = useRef<any>();
-  // const [error, setError] = useState(null);
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const confirmOTP = (code: string) => {
+    setError(null)
+    verifyPhone(phoneNumberRef.current, code).then(res => {
+      if (res.data) {
+        console.log('res.data', res.data)
+        dispatch(setPhone(phoneNumberRef.current))
+        history.push('/signup-step-2')
+      }
+    })
+      .catch((error: any) => {
+        console.log('error verifying otp', error.message)
+        setError('Could not verify otp')
+        // User couldn't sign in (bad verification code?)
+        // ...
+      })
+  }
 
-  // const history = useHistory()
-  // const confirmOTP = (code: string) => {
-  //   setError(null)
-  //   confResRef.current?.confirm(code).then((result: any) => {
-  //     // User signed in successfully.
-  //     console.log('result', result)
-  //     alert('logged in')
-  //     history.replace('/home')
-  //     // ...
-  //   }).catch((error: any) => {
-  //     console.log('error verifying otp', error.message)
-  //     setError(error.message)
-  //     // User couldn't sign in (bad verification code?)
-  //     // ...
-  //   })
-  // }
+  const onPressLogin = (phoneNumber: string) => {
+    setError(null)
+    generateOtp(phoneNumber).then(result => {
+      console.log('result', result)
+      setCurrentPage(1)
+      phoneNumberRef.current = phoneNumber
+      // confResRef.current = confirmationResult;
+      // setCurrentPage(1)
+      // console.log('resultSignin', confirmationResult)
+    }).catch(error => {
+      console.log('error', error)
+      setError(error.message)
+    })
+  }
 
-  // const onPressLogin = (phoneNumber: string) => {
-  //   setError(null)
-  //   auth.signInWithPhoneNumber(
-  //     phoneNumber,
-  //   ).then((confirmationResult: any) => {
-  //     confResRef.current = confirmationResult;
-  //     setCurrentPage(1)
-  //     console.log('resultSignin', confirmationResult)
-  //   }).catch((error) => {
-  //     console.log('setting error')
-  //     setError(error.message)
-  //   })
-  // }
+  function renderForm() {
+    switch (currentPage) {
+      case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => setCurrentPage(0)} error={error} />
+      default: return <PhoneForm onPressLogin={onPressLogin} error={error} />
+    }
+  }
 
-  // function renderForm () {
-  //   switch(currentPage) {
-  //     case 1: return  <OTPForm onPressConfirm={confirmOTP} error={error} />
-  //     default: return  <PhoneForm captchaRef={captchaRef} onPressLogin={onPressLogin} error={error} />
-  //   }
-  // }
-const logoStyle ={marginLeft:"-20px"};
   return (
-    <div className="flex flex-col items-start w-full h-screen px-8 ">
-      <div className="flex items-center justify-start mb-5 mt-52">
-        <img style={logoStyle} className="w-24 m--5" src={vyapLogo} alt="" />
-        <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>
-      </div>
-
-      <h1 className="text-lg font-bold text-gray-600">Signup with Vyap to succeed.</h1>
-      <form
-        className="w-full mt-6"
-        onSubmit={(event: any) => {
-          event.preventDefault();
-          // onPressLogin(phoneNumber);
-        }}
-      >
-        <div className="mt-4">
-          <label className="block text-sm font-semibold text-gray-500">
-            Phone number
-          </label>
-          <input
-            type="tel"
-            required={true}
-            name="tel"
-            value={phoneNumber}
-            onChange={(event) => setPhoneNumber(event?.target.value)}
-            id="tel"
-            placeholder="Your phone number"
-            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
-          />
+    <section className="flex flex-col items-center h-screen md:flex-row ">
+      <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
+        <div className="w-80 h-100">
+          <a className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
+            <img className="w-12 h-12" src={vyapLogo} />
+            <h2 className="text-2xl font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400">
+              {" "}
+              Vyap {" "}
+            </h2>
+          </a>
+          <h1 className="mt-8 text-lg font-semibold text-gray-700 tracking-ringtighter title-font">
+            {currentPage === 1 ? `We've send you an verification code
+To your phone number` : 'Signup with vyap to succeed'}
+          </h1>
+          {renderForm()}
+          <hr className="w-full my-6 border-indigo-100" />
+          <p className="mt-8 text-center">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold text-blue-500 hover:text-blue-700"
+            >
+              Log in
+            </Link>
+          </p>
         </div>
-        <p className="mt-2 text-xs text-gray-300">We'll never share your phone number <br /> with anyone else.</p>
-        <button
-          type="submit"
-          id="login-button"
-          className="block w-full px-4 py-3 mt-8 font-semibold text-white transition duration-500 ease-in-out transform rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 hover:bg-indigo-800 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 "
-        >
-          Signup
-        </button>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 }

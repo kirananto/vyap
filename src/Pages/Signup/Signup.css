@@ -11,12 +11,13 @@
     display: flex;
     position: absolute;
     right: 0px;
+    bottom: 0px;
     border-top-left-radius: 120px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    width: 110px;
-    height: 111px;
-    opacity: 0.87;
+    width: 90px;
+    height: 91px;
+    opacity: 0.77;
     background-image: linear-gradient(to bottom, #4338ca, #3b82f6);
   }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "./Style/Button";
 
 function Footer() {
   return (
@@ -89,12 +90,12 @@ function Footer() {
 
 // ! (SimpleFooter) Footer with only one button-->:
 
-function SimpleFooter(props: { btnName: string }) {
+function SimpleFooter(props: { btnName: string, onClick?: any }) {
   return (
     <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow-2xl">
-      <button className="w-8/12 h-12 font-medium text-white rounded-full text-md bg-gradient-to-br from-blue-500 to-indigo-900">
+      <Button onClick={props.onClick} className="w-8/12 h-12 ">
         {props.btnName}
-      </button>
+      </Button>
     </div>
   );
 }
