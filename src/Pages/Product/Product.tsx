@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../../Components/Header";
 import { Footer } from "../../Components/Footer";
-import "./Product.css";
+import "./assets/Product.css";
 import FilterTag from "./FilterTag";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
@@ -14,6 +14,7 @@ import { FilterPopup } from "./Popups/FilterPopup";
 import { MorePopup } from "./Popups/MorePopup";
 import { SearchMorePopup } from "./Popups/SearchMorePopup";
 import { Link } from "react-router-dom";
+import ChatImg from './assets/no_data.svg'
 
 // ! Modal Logic
 function Modal({
@@ -36,6 +37,7 @@ function Modal({
 // ! Main Component
 export default function Product() {
   const { token, user } = useSelector(selectCredentials)
+  const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState<any[]>([])
   const [isOpen, setIsOpen] = useState(false);
   // ! Tracking the total number of products is checked..
@@ -81,8 +83,23 @@ export default function Product() {
       setProducts(result.data?.data ?? [])
     }).catch(error => {
       console.log('error', error)
+    }).finally(() => {
+      setLoading(false)
     })
   }, [])
+
+  function renderProducts() {
+    if(loading) {
+      return <div className="mt-12 p-12 text-center"> Loading...</div>
+    }
+    if (products?.length === 0) {
+      return <div>
+        <img className="mt-12 h-64 p-12 m-auto" src={ChatImg} />
+        <div className="text-center px-6 w-2/3 m-auto"> You do not have any products added. Please add a product to begin listing it to your shops. </div>
+      </div>
+    }
+    return products?.map(mapItem => <ProductCard item={mapItem} onClicked={CheckboxClicked} onMore={toggleMore} />)
+  }
   return (
     <>
       {/* Header Container */}
@@ -91,7 +108,7 @@ export default function Product() {
           <Header
             heading="My Products"
             subHeading="500 Items"
-            // icon="../assets/icons/call.svg"
+          // icon="../assets/icons/call.svg"
           />
         </div>
         {/* 
@@ -135,7 +152,7 @@ export default function Product() {
       ==========
       */}
       <div className="custom-height">
-        {products?.map(mapItem => <ProductCard item={mapItem} onClicked={CheckboxClicked} onMore={toggleMore} />)}
+        {renderProducts()}
       </div>
 
       {/* Filter Popup */}

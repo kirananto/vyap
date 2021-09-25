@@ -16,3 +16,12 @@ export const verifyOtp = (phone: string, otp: string) => axiosClient({
         otp
     }
 })
+
+export const verifyPhone = (phone: string, otp: string) => axiosClient({
+    url: '/auth/verify-phone',
+    method: 'POST',
+    data: {
+        phone,
+        otp
+    }
+})

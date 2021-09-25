@@ -65,7 +65,7 @@ export default function InviteExisting({
           Business name or shop name
         </label>
         <input
-          type="tel"
+          type="text"
           name="tel"
           value={businessName}
           onChange={(event) => setBusinessName(event?.target.value)}

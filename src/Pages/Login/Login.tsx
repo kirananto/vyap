@@ -17,9 +17,9 @@ export default function Login() {
   const confirmOTP = (code: string) => {
     setError(null)
     verifyOtp(phoneNumberRef.current, code).then(res => {
-      if(res.data) {
+      if (res.data) {
         console.log('res.data', res.data)
-        if(res.data.token) {
+        if (res.data.token) {
           dispatch(setCredentials(res.data))
           history.replace('/home')
         } else {
@@ -28,12 +28,12 @@ export default function Login() {
         }
       }
     })
-    .catch((error: any) => {
-      console.log('error verifying otp', error.message)
-      setError('Could not verify otp')
-      // User couldn't sign in (bad verification code?)
-      // ...
-    })
+      .catch((error: any) => {
+        console.log('error verifying otp', error.message)
+        setError('Could not verify otp')
+        // User couldn't sign in (bad verification code?)
+        // ...
+      })
   }
 
   const onPressLogin = (phoneNumber: string) => {
@@ -51,10 +51,10 @@ export default function Login() {
     })
   }
 
-  function renderForm () {
-    switch(currentPage) {
-      case 1: return  <OTPForm onPressConfirm={confirmOTP} error={error} />
-      default: return  <PhoneForm onPressLogin={onPressLogin} error={error} />
+  function renderForm() {
+    switch (currentPage) {
+      case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => setCurrentPage(0)} error={error} />
+      default: return <PhoneForm onPressLogin={onPressLogin} error={error} />
     }
   }
 
@@ -63,16 +63,17 @@ export default function Login() {
       <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
         <div className="w-80 h-100">
           <a className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
-            <img className="w-12 h-12" src={vyapLogo}/>
+            <img className="w-12 h-12" src={vyapLogo} />
             <h2 className="text-2xl font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400">
               {" "}
               Vyap {" "}
             </h2>
           </a>
           <h1 className="mt-8 text-lg font-semibold text-gray-700 tracking-ringtighter title-font">
-            Log in to vyap
+            {currentPage === 1 ? `We've send you an verification code
+To your phone number` : 'Log in to vyap'}
           </h1>
-         {renderForm()}
+          {renderForm()}
           <hr className="w-full my-6 border-indigo-100" />
           <p className="mt-8 text-center">
             Need an account?{" "}

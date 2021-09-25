@@ -1,5 +1,6 @@
 
 import credentialsSlice from '../Pages/Login/credentialsSlice';
+import signupSlice from '../Pages/Signup/signupSlice';
 
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, } from 'redux-persist'
@@ -9,6 +10,7 @@ import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
     credentials: credentialsSlice,
+    signup: signupSlice,
 })
 const persistConfig = { key: 'root', version: 1, storage, }
 const persistedReducer = persistReducer(persistConfig, rootReducer)

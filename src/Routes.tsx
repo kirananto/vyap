@@ -3,7 +3,6 @@ import { Link, Route, Switch } from "react-router-dom";
 
 import { Home } from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
-import LoginStepTwo from "./Pages/Login/LoginStepTwo";
 import { Payment } from "./Pages/ChatView";
 import PaymentDetails from "./Pages/ChatView/PaymentDetails";
 import Reports from "./Pages/Reports/Reports";
@@ -13,7 +12,6 @@ import StockManagement from "./Pages/StockManagement/StockManagement";
 import OrderDetails from "./Pages/Orders/OrderView";
 // ! SIGNUP----->
 import SignupStepOne from "./Pages/Signup/SignupStepOne";
-import SignupStepTwo from "./Pages/Signup/SignupStepTwo";
 import SignupStepThree from "./Pages/Signup/SignupStepThree";
 import SignupStepFour from "./Pages/Signup/SignupStepFour";
 import SignupStepFive from "./Pages/Signup/SignupStepFive";
@@ -41,13 +39,11 @@ function Routes() {
         <>
           <Switch>
             <LoginRoutes path="/login" component={Login} />
-            <LoginRoutes path="/login-step-2" component={LoginStepTwo} />
             {/* ===Signup=== */}
-            <LoginRoutes path="/signup-step-1" component={SignupStepOne} />
-            <LoginRoutes path="/signup-step-2" component={SignupStepTwo} />
-            <Route path="/signup-step-3" component={SignupStepThree} />
-            <Route path="/signup-step-4" component={SignupStepFour} />
-            <Route path="/signup-step-5" component={SignupStepFive} />
+            <LoginRoutes path="/signup" component={SignupStepOne} />
+            <Route path="/signup-step-2" component={SignupStepThree} />
+            <Route path="/signup-step-3" component={SignupStepFour} />
+            <Route path="/signup-step-4" component={SignupStepFive} />
             {/* ===Signup=== */}
             <Route path="/chat/:id" component={Payment} />
             <Route path="/payment/:id" component={PaymentDetails} />
