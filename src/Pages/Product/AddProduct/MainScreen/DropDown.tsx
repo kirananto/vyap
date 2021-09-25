@@ -2,7 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Drop.css";
 
 function List(props: any) {
-  return <div onClick={() => props.onSelect(props.opt)}>{props.opt.name}</div>;
+  return (
+    <div className="drop-main" onClick={() => props.onSelect(props.opt)}>
+      <div className="p-2 border border-gray-200 rounded-lg product-image">
+        <img className="w-10 h-10" src={props.opt.url} alt={props.opt.name} />
+      </div>
+      <div className="product-details">
+        <div className="text-base font-bold text-gray-700">{props.opt.name}</div>
+        <div className="text-xs">{props.opt.quantity}</div>
+        <div className="text-xs font-bold text-gray-400">{props.opt.price}</div>
+      </div>
+    </div>
+  );
 }
 
 function DropDown(props: any) {
@@ -43,7 +54,7 @@ function DropDown(props: any) {
     if (props.onSelect) props.onSelect(e);
   }
   return (
-    <div className="dropdown-container">
+    <div className=" dropdown-container">
       <div>
         <input
           type="text"
@@ -57,7 +68,7 @@ function DropDown(props: any) {
           Create
         </button>
       </div>
-      <div className="drop">
+      <div className={isOpen ? "drop-open" : "drop-close"}>
         {isOpen
           ? searches.map((opt: any) => <List opt={opt} onSelect={select} />)
           : []}
