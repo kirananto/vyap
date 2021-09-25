@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import { SimpleHeader } from 'src/Components/Header'
 import Button from 'src/Components/Style/Button'
 import DairySmall from '../../../assets/img/DairySmall.jpeg'
@@ -9,6 +10,8 @@ export default function PlaceOrder() {
     const [discount, setDiscount] = React.useState(0)
     const [isOpen, setIsOpen] = React.useState(true)
     const [cartItems, setCartItems] = React.useState([1,1,1])
+
+    const history = useHistory()
 
     return (
         <div className="bg-white">
@@ -72,7 +75,7 @@ export default function PlaceOrder() {
                                 ₹500
                             </div>
                         </div>))}
-                        <div className="flex w-full border border-dashed py-2 mt-4 cursor-pointer justify-center items-center">
+                        <div className="flex w-full border border-dashed py-2 mt-4 cursor-pointer justify-center items-center" onClick={() => history.push('/place-order/add-item')}>
                             <div className="flex ">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
