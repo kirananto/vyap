@@ -4,7 +4,7 @@ import { Header, PaymentBottomHeader } from "../../Components/Header";
 import ChatList from './ChatList'
 import { useEffect } from "react";
 import { fetchInboxById } from "../../API/inbox.axios";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import type { InboxType } from './inbox.type'
 import { selectCredentials } from "../Login/credentialsSlice";
@@ -14,6 +14,8 @@ export const Payment = () => {
   const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+
+  const history = useHistory()
 
   const { id } = useParams<{ id: string }>()
   useEffect(() => {
@@ -37,7 +39,7 @@ export const Payment = () => {
       {/* Footer */}
       <div className="fixed bottom-0 flex items-center justify-center w-full h-16 gap-4 bg-white" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
         <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button>
-        <button className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Place Order</button>
+        <button onClick={() => history.push('/place-order')} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Place Order</button>
       </div>
       {paymentModalVisible && <AddPaymentModal
         isVisible={paymentModalVisible}
