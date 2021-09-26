@@ -26,6 +26,7 @@ import Account from "./Pages/Account";
 import AllPayments from "./Pages/Payments";
 import PurchaseOrder from "./Pages/StockManagement/PurchaseOrder";
 import AddEditPurchase from "./Pages/StockManagement/PurchaseOrder/AddEditPurchase";
+import CreateProduct from "./Pages/Product/AddProduct/ProductScreen/CreateProduct";
 
 function Routes() {
   const user  = useSelector(selectCredentials);
@@ -52,6 +53,7 @@ function Routes() {
             <Route path="/stock-management" component={StockManagement} />
             <Route path="/my-products" component={Product} />
             <Route path="/add-product" component={AddProductMain} />
+            <Route path="/create-product" component={CreateProduct} />
             <Route path="/settings" component={Settings} />
             <Route path="/more" component={More} />
             <Route exact path="/home" component={Home} />
