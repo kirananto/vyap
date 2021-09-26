@@ -3,7 +3,7 @@ import "./Drop.css";
 
 function List(props: any) {
   return (
-    <div className="mb-4 drop-main" onClick={() => props.onSelect(props.opt)}>
+    <div className="drop-main" onClick={() => props.onSelect(props.opt)}>
       <div className="p-2 border border-gray-200 rounded-lg product-image">
         <img className="w-10 h-10" src={props.opt.url} alt={props.opt.name} />
       </div>
@@ -65,7 +65,7 @@ function DropDown(props: any) {
           value={value}
           onFocus={() => setIsOpen(true)}
           // onBlur={() => setIsOpen(false)}
-          className="p-2 border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none"
+          className="p-2 pl-4 border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none"
           placeholder="Search or create product..."
         />
         <button

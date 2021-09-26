@@ -1,6 +1,5 @@
-
-.input-field{
-    width: 80%;
+.input-field {
+  width: 80%;
 }
 .close-dropdown {
   width: 100vw;
@@ -10,8 +9,11 @@
 }
 
 .drop-open {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   background-color: #fff;
-  padding: 10px;
+  padding: 15px;
   margin-top: 10px;
   border: solid 1px rgb(235, 235, 235);
   border-radius: 12px;
@@ -20,13 +22,12 @@
 }
 /* ! Dropdown scrollbar des */
 .drop-open::-webkit-scrollbar {
-    width: 10px;
-    
+  width: 10px;
 }
 .drop-open::-webkit-scrollbar-thumb {
-border-radius: 20px;
-/* background: rgba(59, 131, 246, 0.5); */
-background: rgba(59, 131, 246, 0);
+  border-radius: 20px;
+  /* background: rgba(59, 131, 246, 0.5); */
+  background: rgba(59, 131, 246, 0);
 }
 /* ! Dropdown scrollbar des !!!END!!! */
 .drop-main {
@@ -49,8 +50,8 @@ background: rgba(59, 131, 246, 0);
   border: solid rgba(229, 231, 235) 1px;
   transition: 0.2s;
 }
-.show-create-btn:active{
-    transform: scale(0.9);
+.show-create-btn:active {
+  transform: scale(0.9);
 }
 .hide-create-div {
   display: none;
