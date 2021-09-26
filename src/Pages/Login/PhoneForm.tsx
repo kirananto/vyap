@@ -7,7 +7,7 @@ interface IProps {
 }
 
 export default function PhoneForm({ onPressLogin }: IProps) {
-  const [phoneNumber, setPhoneNumber] = useState("7012918926");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
     <form
