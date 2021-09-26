@@ -6,13 +6,13 @@ import DropDown from "./DropDown";
 export default function AddProductMain() {
   const history = useHistory();
   return (
-    <>
+    <div className="w-full h-screen">
       <SimpleHeader
         heading="Add product"
         backFn={() => history.push("/my-products")}
       />
-      <div className="w-11/12 mx-auto">
-        <h1>What is the product?</h1>
+      <div className="w-11/12 pt-6 mx-auto">
+        <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         <DropDown
           onSelect={(e: any) => console.log(e)}
           options={[
@@ -40,6 +40,6 @@ export default function AddProductMain() {
           ]}
         />
       </div>
-    </>
+    </div>
   );
 }
