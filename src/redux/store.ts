@@ -7,7 +7,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage'
 import { combineReducers } from 'redux'
 import placeOrderSlice from 'src/Pages/ChatView/PlaceOrder/placeOrderSlice';
-import addProductSlice from 'src/Pages/Product/AddProduct/addProductSlice';
+import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice';
 
 
 const rootReducer = combineReducers({

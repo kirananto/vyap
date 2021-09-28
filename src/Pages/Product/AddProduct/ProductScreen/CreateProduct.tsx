@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SimpleHeader } from "../../../../Components/Header";
 import { SimpleFooter } from "../../../../Components/Footer";
 import ItemCard from "./ItemCard";
 import "./CreateProduct.css";
 import PricingTab from "./PricingTab";
 import OthersTab from "./OthersTab";
+import { useDispatch } from "react-redux";
+import { clearAll } from "../redux/addProductSlice";
 
 
 function CreateProduct() {
   const [toggleState, setToggleState] = useState(1);
 
+  const dispatch = useDispatch()
+
   const toggleTabs = (index: any) => {
     setToggleState(index);
   };
+
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearAll())
+    }
+  }, [])
+
   return (
     <div className="bg-white create-product-container">
       <SimpleHeader heading="Create Product" />
@@ -32,7 +44,9 @@ function CreateProduct() {
           </button>
           <button
             onClick={() => toggleTabs(2)}
-            className="px-8 py-1 font-semibold text-gray-500 focus:bg-blue-200 focus:px-8 focus:py-1 focus:rounded-full focus:text-blue-600"
+            className={
+              `${toggleState === 2 ? "btn-1-show-active" : "btn-1-hide-active"} px-8 py-1 font-semibold text-gray-500 focus:bg-blue-200 focus:px-8 focus:py-1 focus:rounded-full focus:text-blue-600`
+            }
           >
             Others
           </button>
