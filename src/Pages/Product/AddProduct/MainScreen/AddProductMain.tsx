@@ -11,7 +11,7 @@ export default function AddProductMain() {
         heading="Add product"
         backFn={() => history.push("/my-products")}
       />
-      <div className="w-11/12 pt-6 mx-auto">
+      <div className="w-11/12 p-3 pt-6 mx-auto mt-24">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         <DropDown
           onSelect={(e: any) => console.log(e)}

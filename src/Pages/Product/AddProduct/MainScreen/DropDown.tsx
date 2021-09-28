@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router";
 import "./Drop.css";
 
 function List(props: any) {
@@ -27,6 +28,8 @@ function DropDown(props: any) {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const history = useHistory()
+
   useEffect(() => {
     setSearches(opts);
   }, [opts]);
@@ -53,7 +56,10 @@ function DropDown(props: any) {
     setSelected(e);
     setIsOpen(false);
     setValue(e.name);
-    if (props.onSelect) props.onSelect(e);
+    if (props.onSelect) {
+      props.onSelect(e)
+      history.push('/create-product')
+    }
   }
   return (
     <div className="w-full dropdown-container">
@@ -91,9 +97,9 @@ function DropDown(props: any) {
         {isOpen
           ? searches.map((opt: any) => <List opt={opt} onSelect={select} />)
           : []}
-        <div className={isdisabled ? "hide-create-div" : "show-create-div"}>
+        {/* <div className={isdisabled ? "hide-create-div" : "show-create-div"}>
           <p className="font-bold text-gray-600">+ Add this new product</p>
-        </div>
+        </div> */}
       </div>
       <div className="close-dropdown" onClick={() => setIsOpen(false)}></div>
     </div>
