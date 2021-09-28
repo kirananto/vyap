@@ -4,14 +4,27 @@ import AppliedFilters from './AppliedFilters'
 import DairySmall from '../../../../assets/img/DairySmall.jpeg'
 import Button from 'src/Components/Style/Button'
 import DropList from 'src/Components/Style/DropList'
+import { useDispatch } from 'react-redux'
+import { pushItemsToCart } from '../placeOrderSlice'
+import { useHistory } from 'react-router'
 
 export default function AddItem() {
 
     const [itemList, setItemList] = React.useState([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    const [selectedItems, setSelectedItems] = React.useState([1,1])
     const [isDropOpen, setIsDropOpen] = React.useState<{
         isAdd: boolean,
         isOpen: any
     } | undefined>(undefined)
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    function onSubmit () {
+        //TODO Add to dispatch
+        dispatch(pushItemsToCart([1]))
+        history.push('/place-order')
+    }
 
     return (
         <div className="bg-white">
@@ -95,7 +108,7 @@ export default function AddItem() {
                 </div>))}
             </div>
             <div className="fixed bottom-12 m-auto left-0 right-0 px-4">
-                <Button>Add 10 items (₹1660)</Button>
+                <Button onClick={onSubmit}>Add {selectedItems?.length} items (₹1660)</Button>
             </div>
         </div>
     )
