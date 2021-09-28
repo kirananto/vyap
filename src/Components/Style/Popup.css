@@ -1,0 +1,27 @@
+.main-popup-container {
+  position: fixed;
+  bottom: -500px;
+  width: 100vw;
+  /* padding: 20px; */
+  /* margin-left: -20px; */
+  background-color: #fff;
+  z-index: 10;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  animation: popupAnimation forwards 400ms;
+}
+@keyframes popupAnimation {
+  to {
+    bottom: 0px;
+  }
+}
+
+.main-popup-inner {
+  position: relative;
+  padding: 30px 20px 30px 20px;
+}
+.main-popup-btn {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}
