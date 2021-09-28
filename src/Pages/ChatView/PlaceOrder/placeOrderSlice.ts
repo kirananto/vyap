@@ -3,12 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface PlaceOrderInterface {
     note: string;
     discount: number;
+    orgId: string
     cartItems: any[];
 }
 
 const initialState: PlaceOrderInterface = {
     note: '',
     discount: 0,
+    orgId: '',
     cartItems: [],
 };
 
@@ -27,6 +29,9 @@ export const placeOrderSlice = createSlice({
         pushItemsToCart: (state, action: PayloadAction<any>) => {
             state.cartItems?.push(action.payload);//TODO fix the logic
         },
+        setOrgId: (state, action: PayloadAction<string>) => {
+            state.orgId = action.payload
+        },
         clearAll: (state) => {
             state.note = '';
             state.discount = 0;
@@ -36,7 +41,7 @@ export const placeOrderSlice = createSlice({
     },
 });
 
-export const { setNote, setFlatDiscount, pushItemsToCart, clearAll } = placeOrderSlice.actions;
+export const { setNote, setFlatDiscount, pushItemsToCart,setOrgId, clearAll } = placeOrderSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
