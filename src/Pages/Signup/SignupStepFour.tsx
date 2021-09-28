@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import { fetchCategories } from "src/API/category.axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
-import { selectSignupInfo, setCategory } from "./signupSlice";
+import { clearAll, selectSignupInfo, setCategory } from "./signupSlice";
 import { signupAPI } from "src/API/signup.axios";
 
 interface CardInterface {
@@ -17,11 +17,11 @@ interface CardInterface {
   image?: string
 }
 
-const Card = ({ title, description, isSelected, image,onSelect }: CardInterface) => {
+const Card = ({ title, description, isSelected, image, onSelect }: CardInterface) => {
   return (
     <div onClick={onSelect} className="flex cursor-pointer items-center gap-3 bg-white custom">
       {/* ===tick-div=== */}
-      <div  className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200'}`}>
+      <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200'}`}>
         {isSelected && <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 text-green-800"
@@ -55,7 +55,7 @@ export default function SignupStepTwo() {
   const dispatch = useDispatch()
   const { token } = useSelector(selectCredentials)
   const signup = useSelector(selectSignupInfo)
-  
+
   useEffect(() => {
     fetchCategories(token!).then(result => {
       console.log('data', result.data)
@@ -67,28 +67,29 @@ export default function SignupStepTwo() {
 
   function handleSubmit() {//TODO Fix this
     signupAPI({
-    phone: signup.phone,
-    name: signup.name,
-    email: signup.email,
-    businessName: signup.businessName,
-    address: signup.address,
-    categoryId: signup.category,
-    pinCode: signup.pinCode,
-    listPrivately: signup.listPrivately,
-    organizationLocation: {
-      lat: signup.organizationLocation.lat,
-      lng: signup.organizationLocation.lng,
+      phone: signup.phone,
+      name: signup.name,
+      email: signup.email,
+      businessName: signup.businessName,
       address: signup.address,
-      city: 'Nil',
+      categoryId: signup.category,
       pinCode: signup.pinCode,
-      state: 'Kerala'
-    }
-  }).then(result => {
-    console.log('result,', result.data)
-    dispatch(setCredentials(result.data))
-    history.push('/signup-step-4')
-  })
-}
+      listPrivately: signup.listPrivately,
+      organizationLocation: {
+        lat: signup.organizationLocation.lat,
+        lng: signup.organizationLocation.lng,
+        address: signup.address,
+        city: 'Nil',
+        pinCode: signup.pinCode,
+        state: 'Kerala'
+      }
+    }).then(result => {
+      console.log('result,', result.data)
+      dispatch(setCredentials(result.data))
+      dispatch(clearAll())
+      history.push('/signup-step-4')
+    })
+  }
 
   return (
     <div className="flex flex-col items-start w-full h-screen bg-gray-100">
@@ -103,10 +104,10 @@ export default function SignupStepTwo() {
         </h1>
 
         <div className="flex flex-col gap-4 mt-6">
-          {categories.map(mapItem => <Card isSelected={mapItem.id === signup.category} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description}/>)}
+          {categories.map(mapItem => <Card isSelected={mapItem.id === signup.category} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
         </div>
       </div>
-      <SimpleFooter btnName="Create account." onClick={handleSubmit}/>
+      <SimpleFooter btnName="Create account." onClick={handleSubmit} />
     </div>
   );
 }
