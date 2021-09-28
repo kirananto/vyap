@@ -1,6 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router";
 
 function ItemCard() {
+
+  const history = useHistory()
+
   const productDetails = {
     name: "Dairy Milk Silk",
     quantity: 15,
@@ -33,7 +37,9 @@ function ItemCard() {
       </div>
       {/* product handle-col */}
       <div className="flex items-center justify-center w-1/4 ">
-        <button>
+        <button
+          onClick={() => history.push('/add-product')}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="text-red-400 w-7 h-7"
