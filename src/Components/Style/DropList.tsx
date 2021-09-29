@@ -7,6 +7,7 @@ interface IProps {
     list: Array<{
         label: string,
         appearance: IAppearance
+        onClick: any
     }>
     isOpen: boolean
     onClick: any
@@ -63,7 +64,7 @@ export default function DropList(props: IProps) {
             {props.isOpen && (<div className="z-50 w-max text-gray-600 origin-top-right absolute right-4 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
                 <div className="py-2" role="none">
                     {props.list.map((mapItem, mapIndex) => (
-                        <div key={mapIndex} className={`flex items-center gap-2 border-l-4 border-white ${getAppearance(mapItem.appearance).focus} px-4 py-2`}>
+                        <div key={mapIndex} onClick={mapItem.onClick} className={`flex items-center cursor-pointer gap-2 border-l-4 border-white ${getAppearance(mapItem.appearance).focus} px-4 py-2`}>
                             <div className={`flex ${getAppearance(mapItem.appearance).text}`}>
                                 {getAppearance(mapItem.appearance).icon}
                             </div>

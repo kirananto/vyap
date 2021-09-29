@@ -5,15 +5,29 @@ import { SimpleHeader } from 'src/Components/Header'
 import Button from 'src/Components/Style/Button'
 import DairySmall from '../../../assets/img/DairySmall.jpeg'
 import ChatImg from '../../Product/assets/no_data.svg'
+import DropList from 'src/Components/Style/DropList'
+
 import { selectPlaceOrderInfo, setFlatDiscount, setNote } from './placeOrderSlice'
 
 export default function PlaceOrder() {
 
-    const [isOpen, setIsOpen] = React.useState(true)
+    const [isOpen, setIsOpen] = React.useState(true)   
+    const [isDropOpen, setIsDropOpen] = React.useState<{
+        isAdd: boolean,
+        isOpen: any
+    } | undefined>(undefined)
 
     const placeOrder = useSelector(selectPlaceOrderInfo)
     const dispatch = useDispatch()
     const history = useHistory()
+
+    function handleAddItem (item: any, caseQuantity: number) {
+        console.log('data')
+    }
+
+    function handleRemoveItemItem (item: any, caseQuantity: number) {
+        console.log('data')
+    }
 
     function renderCartItems() {
         if (placeOrder.cartItems?.length === 0) {
@@ -39,15 +53,65 @@ export default function PlaceOrder() {
                         <div className="flex font-bold text-xs text-gray-400">MRP: 50 Cost: 50</div>
                     </div>
                     <div className="flex text-blue-600 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <DropList
+                        isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
+                        list={[{
+                            appearance: 'danger',
+                            label: 'Remove 1 Item',
+                            onClick: () => handleRemoveItemItem(item, 1)
+                        }, {
+                            appearance: 'danger',
+                            label: 'Remove 1 Case (10 Pc)',
+                            onClick: () => handleRemoveItemItem(item, 10)
+                        }]}
+                        trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        </svg>}
+                        onClick={() => {
+                            if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
+                                setIsDropOpen({
+                                    isAdd: false,
+                                    isOpen: undefined
+                                })
+                            } else {
+                                setIsDropOpen({
+                                    isAdd: false,
+                                    isOpen: index
+                                })
+                            }
+                        }}
+                    />
                     </div>
-                    <div className="flex items-center">10</div>
+                    <div className="flex items-center">{item.quantity ?? 0}</div>
                     <div className="flex text-blue-600 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <DropList
+                        isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
+                        list={[{
+                            appearance: 'primary',
+                            label: 'Add 1 Item',
+                            onClick: () => handleAddItem(item, 1)
+                        }, {
+                            appearance: 'primary',
+                            label: 'Add 1 Case (10 Pc)',
+                            onClick: () => handleAddItem(item, 10)
+                        }]}
+                        trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        </svg>}
+                        onClick={() => {
+                            if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
+                                setIsDropOpen({
+                                    isAdd: true,
+                                    isOpen: undefined
+                                })
+                            } else {
+                                setIsDropOpen({
+                                    isAdd: true,
+                                    isOpen: index
+                                })
+                            }
+                        }}
+                    />
                     </div>
                 </div>
                 <div className="flex text-lg font-bold text-gray-600 items-center">

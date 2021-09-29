@@ -14,13 +14,13 @@ import ChatImg from '../../../Product/assets/no_data.svg'
 export default function AddItem() {
 
     const [itemList, setItemList] = React.useState<any[]>([])
-    const [selectedItems, setSelectedItems] = React.useState([1, 1])
+    const [selectedItems, setSelectedItems] = React.useState<any>([])
     const [isDropOpen, setIsDropOpen] = React.useState<{
         isAdd: boolean,
         isOpen: any
     } | undefined>(undefined)
 
-    const { token } = useSelector(selectCredentials)
+    const { token, user } = useSelector(selectCredentials)
 
     const placeOrder = useSelector(selectPlaceOrderInfo)
 
@@ -28,15 +28,60 @@ export default function AddItem() {
     const history = useHistory()
 
     useEffect(() => {
-        fetchProducts(token!, placeOrder?.orgId!, 20, 0).then(result => {
+        // TODO use placeOrder.orgId
+        fetchProducts(token!, user?.organizationId!, 20, 0).then(result => {
             setItemList(result.data?.data ?? [])
         })
     }, [])
 
     function onSubmit() {
         //TODO Add to dispatch
-        dispatch(pushItemsToCart([1]))
+        dispatch(pushItemsToCart(selectedItems))
         history.push('/place-order')
+    }
+
+    function handleAddItem(item: any, caseQuantity: number) {
+        const isAlreadyPresent = selectedItems?.some((someItem: any) => someItem.id === item.id)
+        if (isAlreadyPresent) {
+            const _selectedItems = selectedItems?.map((mapItem: any) => {
+                if (mapItem.id === item.id) {
+                    return {
+                        ...mapItem,
+                        quantity: mapItem.quantity + caseQuantity
+                    }
+                }
+                return mapItem
+            }).filter((filterItem: any) => filterItem.quantity > 0)
+
+            setSelectedItems(_selectedItems)
+        } else {
+            const _selectedItems = [...selectedItems, {
+                ...item,
+                quantity: caseQuantity
+            }]
+
+            setSelectedItems(_selectedItems)
+        }
+    }
+
+
+    function handleRemoveItemItem(item: any, caseQuantity: number) {
+        const _selectedItems = selectedItems?.map((mapItem: any) => {
+            if (mapItem.id === item.id) {
+                return {
+                    ...mapItem,
+                    quantity: mapItem.quantity - caseQuantity
+                }
+            }
+            return mapItem
+        }).filter((filterItem: any) => filterItem.quantity > 0)
+
+        setSelectedItems(_selectedItems)
+    }
+
+    function calculatePriceOfSelected() {
+        const price = selectedItems?.reduce((a: any, b: any) => (a + (b.quantity * parseFloat(b?.rate))), 0)
+        return price
     }
 
     function renderItems() {
@@ -56,7 +101,7 @@ export default function AddItem() {
                 <div className="flex flex-col">
                     <div className="flex text-base font-bold text-gray-600">{item.aliasName}</div>
                     <div className="flex font-bold text-xs text-gray-300">#213r423423423423423</div>
-                    <div className="flex font-bold text-xs text-gray-400">MRP: 50 Cost: 48.5</div>
+                    <div className="flex font-bold text-xs text-gray-400">MRP:  ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                 </div>
             </div>
             <div className="flex gap-2">
@@ -65,10 +110,12 @@ export default function AddItem() {
                         isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
                         list={[{
                             appearance: 'danger',
-                            label: 'Remove 1 Item'
+                            label: 'Remove 1 Item',
+                            onClick: () => handleRemoveItemItem(item, 1)
                         }, {
                             appearance: 'danger',
-                            label: 'Remove 1 Case (10 Pc)'
+                            label: 'Remove 1 Case (10 Pc)',
+                            onClick: () => handleRemoveItemItem(item, 10)
                         }]}
                         trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -88,16 +135,18 @@ export default function AddItem() {
                         }}
                     />
                 </div>
-                <div className="flex items-center">10</div>
+                <div className="flex items-center">{selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? 0}</div>
                 <div className="flex text-blue-600 items-center">
                     <DropList
                         isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
                         list={[{
                             appearance: 'primary',
-                            label: 'Add 1 Item'
+                            label: 'Add 1 Item',
+                            onClick: () => handleAddItem(item, 1)
                         }, {
                             appearance: 'primary',
-                            label: 'Add 1 Case (10 Pc)'
+                            label: 'Add 1 Case (10 Pc)',
+                            onClick: () => handleAddItem(item, 10)
                         }]}
                         trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -131,7 +180,7 @@ export default function AddItem() {
                 {renderItems()}
             </div>
             <div className="fixed bottom-12 m-auto left-0 right-0 px-4">
-                <Button onClick={onSubmit}>Add {selectedItems?.length} items (₹1660)</Button>
+                <Button onClick={onSubmit}>Add {selectedItems?.length} items (₹{calculatePriceOfSelected()})</Button>
             </div>
         </div>
     )
