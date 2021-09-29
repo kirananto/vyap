@@ -1,19 +1,35 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ToggleButton from "../../../../Components/ToggleButton";
 import HSNmodal from "./HSNmodal";
+import { selectAddProductInfo, setGstPercentage, setHsnNumber, setMrpPrice, setSalesPrice, setTaxEnabled } from '../redux/addProductSlice'
 
 function PricingTab() {
   const [modal, setModal] = useState(false);
 
+  const addProductInfo = useSelector(selectAddProductInfo)
+
+  const dispatch = useDispatch()
+
   const handleModal = () => {
     setModal(true);
   };
+
+  const handleGstPercentage = (event: any) => {
+    const tempVal = event.target.value
+    if (tempVal <= 100) {
+      dispatch(setGstPercentage(tempVal))
+    }
+  }
+
   return (
     <div className="flex flex-col gap-5">
       <div>
         <p className="text-base font-bold text-gray-500">MRP</p>
         <input
-          type="text"
+          onChange={(event: any) => dispatch(setMrpPrice(event.target.value))}
+          value={addProductInfo.pricing?.mrpPrice}
+          type="number"
           placeholder="Enter price"
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 "
         />
@@ -21,7 +37,9 @@ function PricingTab() {
       <div>
         <p className="text-base font-bold text-gray-500">Sales Price</p>
         <input
-          type="text"
+          onChange={(event: any) => dispatch(setSalesPrice(event.target.value))}
+          value={addProductInfo.pricing?.salesPrice}
+          type="number"
           placeholder="Enter price"
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 "
         />
@@ -29,14 +47,19 @@ function PricingTab() {
       {/* Tax-info */}
       <div className="flex justify-between">
         <div className="text-base font-bold text-gray-500">Tax Info</div>
-        <ToggleButton />
+        <ToggleButton 
+          onChange={() => dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled))}
+          value={addProductInfo.pricing?.taxEnabled}
+        />
       </div>
       {/* ---------- */}
       <div>
         <p className="text-base text-gray-500">HSN Number</p>
         <div className="des-modal-btn">
           <input
-            type="text"
+            onChange={(event: any) => dispatch(setHsnNumber(event.target.value))}
+            value={addProductInfo.pricing?.hsnNumber}
+            type="number"
             placeholder="Enter price"
             className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 "
           />
@@ -73,8 +96,11 @@ function PricingTab() {
         <p className="text-base text-gray-500">GST Percentage</p>
         <div className="flex">
           <input
-            type="text"
-            className="w-2/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2"
+            onChange={handleGstPercentage}
+            value={addProductInfo.pricing?.gstPercentage}
+            type="number"
+            max={100}
+            className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2"
           />
           <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
             %

@@ -1,21 +1,51 @@
-import React from "react";
+import React, { Dispatch } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAddProductInfo, setBarCode, setBrand, setCaseQuantity, setCategory, setSkuCode } from "../redux/addProductSlice";
 
-const imgURL =
-  "https://i5.walmartimages.com/asr/b16c6dcf-98b5-4000-b106-728647912d81_1.ae9db2c3a2020d02b73f03d740cdef14.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF";
-
-const ImageContainer = () => {
+const ImageContainer = (item: any) => {
   return (
-    <div className="w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm ">
-      <img src={imgURL} alt="" />
+    <div className="w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm " key={item?.id}>
+      <img key={item?.id} alt="" src={item?.url} />
     </div>
   );
 };
+
+const handleInputChange = (event: any, label: string, dispatch: Dispatch<any>) => {
+  const tempVal = event.target.value
+  switch (label) {
+    case "Your Item Code(SKU)":
+      dispatch(setSkuCode(tempVal))
+      break
+
+    case "Category":
+      dispatch(setCategory(tempVal))
+      break
+
+    case "Barcode":
+      dispatch(setBarCode(tempVal))
+      break
+
+    case "Brand":
+      dispatch(setBrand(tempVal))
+      break
+
+    case "Case Quantity":
+      dispatch(setCaseQuantity(tempVal))
+      break
+
+    default:
+      break;
+  }
+}
+
 const Input = (props: any) => {
   return (
     <div>
       <p className="text-sm font-bold text-gray-500">{props.label}</p>
       <input
+        onChange={(event: any) => handleInputChange(event, props.label, props.dispatch)}
         type="text"
+        value={props.value}
         placeholder={props.placeholder}
         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 "
       />
@@ -23,6 +53,11 @@ const Input = (props: any) => {
   );
 };
 function OthersTab() {
+
+  const dispatch = useDispatch()
+
+  const addProductInfo = useSelector(selectAddProductInfo)
+
   return (
     <div>
       <h1 className="font-bold text-gray-500 ">Add product images</h1>
@@ -32,9 +67,8 @@ function OthersTab() {
       </p>
       {/* image-container */}
       <div className="flex flex-wrap gap-4 mt-4 mb-8">
-        <ImageContainer />
-        <ImageContainer />
-        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm ">
+        {addProductInfo?.others?.productImage?.map((item) => <ImageContainer item={item} />)}
+        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-8 h-8"
@@ -54,12 +88,12 @@ function OthersTab() {
       {/* Image container ENDS */}
       {/* Details-container */}
       <div className="flex flex-col gap-2">
-        <Input label="Your Item Code(SKU)" />
+        <Input label="Your Item Code(SKU)" dispatch={dispatch} value={addProductInfo?.others?.skuCode} />
 
         {/* TODO: Need to make this input field a multiselect field*/}
-        <Input label="Category" />
+        <Input label="Category" dispatch={dispatch} value={addProductInfo?.others?.category} />
         <div className="barcode-input">
-          <Input label="Barcode" placeholder="Enter or Scan Barcode" />
+          <Input label="Barcode" placeholder="Enter or Scan Barcode" dispatch={dispatch} value={addProductInfo?.others?.barCode} />
           <div className="barcode-icon">
             <button>
               <svg
@@ -85,8 +119,8 @@ function OthersTab() {
             </button>
           </div>
         </div>
-        <Input label="Brand" placeholder="Enter brand..." />
-        <Input label="Case Quantity" placeholder="Enter quantity..." />
+        <Input label="Brand" placeholder="Enter brand..." dispatch={dispatch} value={addProductInfo?.others?.brand} />
+        <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} />
       </div>
     </div>
   );
