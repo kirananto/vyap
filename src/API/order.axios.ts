@@ -7,6 +7,13 @@ export const fetchOrderAPI = (token: string, id: string) => axiosClient({
         'authorization': `Bearer ${token}`
     }
 })
+export const fetchOrdersAPI = (token: string) => axiosClient({
+    url: `/order`,
+    method: 'GET',
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
 
 export const placeOrderAPI = (token: string, data: {
     description: string

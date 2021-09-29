@@ -1,10 +1,21 @@
 import { Header } from '../../Components/Header'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AppliedFilters from './AppliedFilters'
 import OrderContainer from './OrderContainer'
+import { fetchOrdersAPI } from 'src/API/order.axios'
+import { useSelector } from 'react-redux'
+import { selectCredentials } from '../Login/credentialsSlice'
 
 export default function Orders() {
-    const orders = [1,1,1,1,1,1,1,1,1,1,1,1]
+    const [orders, setOrders] = useState<any[]>([])
+    const { token } = useSelector(selectCredentials)
+
+    useEffect(() => {
+        fetchOrdersAPI(token!).then(result => {
+            setOrders(result?.data?.data ?? [])
+        })
+    }, [])
+
     return (
         <div className="mobile-main">
             {/* header */}
