@@ -29,6 +29,15 @@ export default function PlaceOrder() {
         console.log('data')
     }
 
+    function getTotalPrice() {
+        const price = placeOrder.cartItems?.reduce((a: any, b: any) => (a + (b.quantity * parseFloat(b?.rate))), 0)
+        return price
+    }
+
+    function handleSubmit() {
+        console.log('handleSubmit')
+    }
+
     function renderCartItems() {
         if (placeOrder.cartItems?.length === 0) {
             return <div>
@@ -48,9 +57,9 @@ export default function PlaceOrder() {
                         <img className="h-full w-full" src={DairySmall} alt="" />
                     </div>
                     <div className="flex flex-col">
-                        <div className="flex text-base font-bold text-gray-600">Dairy Milk Silk</div>
-                        <div className="flex font-bold text-xs text-gray-300">15 Gms</div>
-                        <div className="flex font-bold text-xs text-gray-400">MRP: 50 Cost: 50</div>
+                        <div className="flex text-base font-bold text-gray-600">{item.aliasName}</div>
+                        <div className="flex font-bold text-xs text-gray-300">{item?.centralCatalogue?.description}</div>
+                        <div className="flex font-bold text-xs text-gray-400">MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                     </div>
                     <div className="flex text-blue-600 items-center">
                     <DropList
@@ -115,7 +124,7 @@ export default function PlaceOrder() {
                     </div>
                 </div>
                 <div className="flex text-lg font-bold text-gray-600 items-center">
-                    ₹500
+                ₹{item?.quantity * parseFloat(item?.rate)}
                 </div>
             </div>
             ))}
@@ -167,11 +176,11 @@ export default function PlaceOrder() {
                         </div>
                         <div className="mt-4 text-right">
                             <div className="text-gray-400 text-xl font-extrabold">Total</div>
-                            <div className="text-xl font-extrabold">₹1660</div>
-                            <div className="text-xl font-extrabold">₹660</div>
+                            <div className="text-xl font-extrabold">₹{getTotalPrice()}</div>
+                            <div className="text-xl font-extrabold">₹{getTotalPrice() - placeOrder.discount}</div>
                         </div>
                         <div className="mt-4">
-                            <Button>Place order</Button>
+                            <Button onClick={handleSubmit}>Place order</Button>
                         </div>
                     </div>}
                 </div>

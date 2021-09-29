@@ -27,7 +27,7 @@ export const placeOrderSlice = createSlice({
             state.discount = action.payload;
         },
         pushItemsToCart: (state, action: PayloadAction<any>) => {
-            state.cartItems?.push(action.payload);//TODO fix the logic
+            state.cartItems = [...state.cartItems, ...action.payload];//TODO fix the logic
         },
         setOrgId: (state, action: PayloadAction<string>) => {
             state.orgId = action.payload
