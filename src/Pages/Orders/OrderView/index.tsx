@@ -23,7 +23,7 @@ export default function OrderDetails() {
     }, [])
 
     return (
-        <div className="h-screen bg-gray-100">
+        <div className="h-screen bg-gray-100 overflow-auto">
             {/* Header */}
             <div className="w-full pb-3 bg-white shadow ">
                 {/* Todo :: Share icon have to be added in the place of contact icon */}

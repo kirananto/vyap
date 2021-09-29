@@ -58,7 +58,7 @@ export default function PaymentDetails() {
         {/* Payment detail Card */}
         {/* ------------------- */}
         <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50">
-          <h1 className="mb-4 text-2xl font-semibold text-gray-800">
+          <h1 className="mb-4 text-xl font-semibold text-gray-800">
             Payment details
           </h1>
 
