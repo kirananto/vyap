@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink  } from "react-router-dom";
 import { format } from 'date-fns'
+import { useSelector } from "react-redux";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { fetchOrderAPI } from "src/API/order.axios";
+
 
 export default function OrderCard({ className, thread }: { className: string, thread: any }) {
+  const [order, setOrder] = useState<any | undefined>()
+  const { token } = useSelector(selectCredentials)
+
+  useEffect(() => {
+    fetchOrderAPI(token!, thread.meta).then(result => {
+      setOrder(result.data)
+    })
+  }, [])
+
   return (
     <div className={`flex ${className} w-full`}>
-      <div className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg shadow">
+      <NavLink to={`/order/${thread.meta}`} className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg shadow">
         <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
-          Order #{thread.meta}
+          Order #{thread.meta?.split('-')[0]}
         </div>
-        <div className="text-4xl mt-2 text-gray-700 font-bold">₹ 500</div>
+        <div className="text-4xl mt-2 text-gray-700 font-bold">₹ {(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}</div>
 
         {/* bottom  */}
         <div className="flex items-center w-full">
@@ -36,7 +50,7 @@ export default function OrderCard({ className, thread }: { className: string, th
                 new Date(thread.updatedAt),
                 'do MMM'
               )} ●</p>
-            <p className="text-xs text-gray-500">5 items</p>
+            <p className="text-xs text-gray-500">{order?.numberOfItems} items</p>
           </div>
 
           <svg
@@ -54,7 +68,7 @@ export default function OrderCard({ className, thread }: { className: string, th
             />
           </svg>
         </div>
-      </div>
+      </NavLink>
     </div>
   );
 }

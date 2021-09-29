@@ -8,8 +8,11 @@ import ChatImg from '../../Product/assets/no_data.svg'
 import DropList from 'src/Components/Style/DropList'
 
 import { selectPlaceOrderInfo, setFlatDiscount, setNote } from './placeOrderSlice'
+import { placeOrderAPI } from 'src/API/order.axios'
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 
 export default function PlaceOrder() {
+    const { token, user } = useSelector(selectCredentials)
 
     const [isOpen, setIsOpen] = React.useState(true)   
     const [isDropOpen, setIsDropOpen] = React.useState<{
@@ -36,6 +39,19 @@ export default function PlaceOrder() {
 
     function handleSubmit() {
         console.log('handleSubmit')
+        placeOrderAPI(token!, {
+            description: placeOrder.note,
+            flatDiscount: placeOrder.discount,
+            supplierId: placeOrder.orgId,
+            buyerId: user?.organizationId!,
+            orderItems: placeOrder.cartItems?.map(mapItem => {
+                return {
+                    quantity: mapItem.quantity,
+                    purchasePrice: parseFloat(mapItem.rate),
+                    productId: mapItem.id
+                }
+            })
+        })
     }
 
     function renderCartItems() {

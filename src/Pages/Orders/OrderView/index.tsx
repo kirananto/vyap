@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../../../Components/Header';
 import OrderDetail from './OrderDetails'
 import ItemList from './ItemList'
+import { useSelector } from 'react-redux';
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
+import { useParams } from 'react-router';
+import { fetchOrderAPI } from 'src/API/order.axios';
+import { format } from "date-fns";
+
 
 export default function OrderDetails() {
+
+    const [order, setOrder] = useState<any | undefined>()
+
+    const { token } = useSelector(selectCredentials)
+    const { id } = useParams<{ id: string }>()
+
+    useEffect(() => {
+        fetchOrderAPI(token!, id).then(result => {
+            setOrder(result.data)
+        })
+    }, [])
+
     return (
         <div className="h-screen bg-gray-100">
             {/* Header */}
@@ -14,7 +32,7 @@ export default function OrderDetails() {
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-10">
                 <h1 className="text-6xl font-black text-center text-gray-500">
-                    ₹{"1660"}
+                    ₹{(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}
                 </h1>
                 {/* ---------------- */}
                 <div className="flex items-center justify-center gap-3">
@@ -32,8 +50,11 @@ export default function OrderDetails() {
                         />
                     </svg>
                     <p className="text-xs text-gray-500">Order completed</p>
-                    <p className="text-xs text-gray-500">● 5th Mar</p>
-                    <p className="text-xs text-gray-500">● 5 Items</p>
+                    <p className="text-xs text-gray-500">● {order?.updatedAt ? format(
+                new Date(order?.updatedAt),
+                'do MMM'
+              ) : null}</p>
+                    <p className="text-xs text-gray-500">● {order?.numberOfItems} Items</p>
                     {/* ------------------ */}
                 </div>
                 {/* Order Detail card */}
