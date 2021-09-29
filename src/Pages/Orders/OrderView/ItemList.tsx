@@ -3,10 +3,10 @@ import DairySmall from "../../../assets/img/DairySmall.jpeg"
 
 function Items({ order } : { order: any }) {
     const items = [1, 1, 1, 1, 1]
-    console.log('order', order)
+    console.log('order', order?.orderItems)
     return (
         <div>
-            {items.map((item, index) => (<div className="flex justify-between" key={`${index}`}>
+            {order?.orderItems?.map((item: any, index: number) => (<div className="flex justify-between" key={`${index}`}>
                 <div className="flex pt-4 gap-4">
                     <div className="h-14 w-14 rounded border border-gray-300 bg-white">
                         <img className="h-full w-full" src={DairySmall} alt="" />
@@ -17,7 +17,7 @@ function Items({ order } : { order: any }) {
                         <div className="flex font-bold text-xs text-gray-600">MRP: 50</div>
                     </div>
                     <div className="flex h-5 w-10 rounded text-xs bg-gray-200 self-center items-center justify-center">
-                        X 5
+                        X {item?.quantity}
                     </div>
                 </div>
                 <div className="flex text-lg font-bold text-gray-600 items-center">
@@ -27,6 +27,8 @@ function Items({ order } : { order: any }) {
         </div>
     )
 }
+
+
 
 export default function ItemList({ order } : { order: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
