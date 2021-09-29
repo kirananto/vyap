@@ -1,11 +1,22 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { SimpleHeader } from "../../Components/Header";
 import ToggleButton from "../../Components/ToggleButton";
+import { selectCredentials, setDarkMode } from "../Login/credentialsSlice";
 import "./Settings.css";
 
 
 export default function Settings() {
+
+  const { user } = useSelector(selectCredentials)
+  const dispatch = useDispatch()
+
+  function changeDarkMode () {
+    const newVal = !user?.settings?.isDarkMode
+    dispatch(setDarkMode(newVal))
+  }
+
   return (
     <div>
       <SimpleHeader heading="Settings" />
@@ -26,7 +37,7 @@ export default function Settings() {
             Coming Soon
           </div>
         </div>
-        <ToggleButton />
+        <ToggleButton value={user?.settings?.isDarkMode} onChange={changeDarkMode} />
         {/* --------- */}
         <h1 className="font-semibold text-gray-500 mt-9 text-md">Import Customer CSV</h1>
         <button className="w-2/4 h-8 mt-3 font-bold text-blue-500 border-2 border-blue-500 rounded-md text-md">Upload CSV</button>
