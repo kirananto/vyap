@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { PaymentInfo, PaymentInfoTick } from "../../../Components/PaymentInfo"
+import { format } from "date-fns";
 
-function OrderDetailed() {
+function OrderDetailed({ order } : { order: any }) {
     return (
         <div className="flex flex-col gap-3">
-            <PaymentInfo heading="Order id" info='#23434534534' />
+            <PaymentInfo heading="Order id" info={`#${order.id?.split('-')?.[0]}`} />
             <PaymentInfo
                 heading="Order placed on"
-                info='5:30 AM - 5th March 2021'
+                info={order?.createdAt ? format(new Date(order?.createdAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
             />
             <PaymentInfo
                 heading="Last updated on"
-                info='5:30 AM - 5th March 2021'
+                info={order?.updatedAt ? format(new Date(order?.updatedAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
             />
             <PaymentInfo
                 heading="Shop name"
@@ -24,7 +25,7 @@ function OrderDetailed() {
             />
             <PaymentInfo
                 heading="Note"
-                info="Urgent deliver, Also personalised message for the supplier"
+                info={order?.description ?? 'No information'}
             />
             <PaymentInfoTick
                 heading="Status"
@@ -34,14 +35,14 @@ function OrderDetailed() {
     )
 }
 
-export default function OrderDetail() {
+export default function OrderDetail({ order } : { order: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
     return (
-        <div className="w-11/12 p-4 bg-white rounded-md shadow">
-            <div className="flex mb-4 items-center justify-between">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50">
+            <div className={`flex ${isExpanded ? 'mb-4': ''} items-center justify-between`}>
                 <div className="flex flex-col text-2xl font-semibold text-gray-800">
                     Order details
-            </div>
+                </div>
                 <div>
                     {isExpanded ? (<div className="flex text-gray-600" onClick={() => setIsExpanded(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +57,7 @@ export default function OrderDetail() {
                     </div>)}
                 </div>
             </div>
-            {isExpanded && <OrderDetailed />}
+            {isExpanded && <OrderDetailed order={order}/>}
         </div>
     )
 }

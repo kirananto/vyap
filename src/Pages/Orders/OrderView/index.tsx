@@ -31,7 +31,7 @@ export default function OrderDetails() {
             </div>
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-10">
-                <h1 className="text-6xl font-black text-center text-gray-500">
+                <h1 className="text-6xl font-black text-center text-gray-600">
                     ₹{(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}
                 </h1>
                 {/* ---------------- */}
@@ -58,9 +58,9 @@ export default function OrderDetails() {
                     {/* ------------------ */}
                 </div>
                 {/* Order Detail card */}
-                <OrderDetail />
+                <OrderDetail order={order} />
                 {/* Item List */}
-                <ItemList />
+                <ItemList order={order}/>
             </div>
         </div>
     )

@@ -107,7 +107,7 @@ export default function Product() {
         <div className="border-b">
           <Header
             heading="My Products"
-            subHeading="500 Items"
+            subHeading={`${products?.length ?? 0} Items`}
           // icon="../assets/icons/call.svg"
           />
         </div>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import DairySmall from "../../../assets/img/DairySmall.jpeg"
 
-function Items() {
+function Items({ order } : { order: any }) {
     const items = [1, 1, 1, 1, 1]
+    console.log('order', order)
     return (
         <div>
             {items.map((item, index) => (<div className="flex justify-between" key={`${index}`}>
@@ -27,11 +28,11 @@ function Items() {
     )
 }
 
-export default function ItemList() {
+export default function ItemList({ order } : { order: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
     return (
-        <div className="w-11/12 p-4 bg-white rounded-md shadow">
-            <div className="flex mb-4 items-center justify-between">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50">
+            <div className={`flex ${isExpanded ? 'mb-4' : ''} items-center justify-between`}>
                 <div className="flex flex-col text-2xl font-semibold text-gray-800">
                     Items
             </div>
@@ -49,7 +50,7 @@ export default function ItemList() {
                     </div>)}
                 </div>
             </div>
-            {isExpanded && <Items />}
+            {isExpanded && <Items order={order} />}
         </div>
     )
 }

@@ -29,7 +29,7 @@ export default function PaymentDetails() {
       </div>
       {/* Body */}
       <div className="flex flex-col items-center gap-5 py-10">
-        <h1 className="text-6xl font-black text-center text-gray-500">
+        <h1 className="text-6xl font-black text-center text-gray-600">
           ₹{payment?.amount}
         </h1>
         {/* ---------------- */}
@@ -57,7 +57,7 @@ export default function PaymentDetails() {
 
         {/* Payment detail Card */}
         {/* ------------------- */}
-        <div className="w-11/12 p-4 bg-white rounded-md shadow">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50">
           <h1 className="mb-4 text-2xl font-semibold text-gray-800">
             Payment details
           </h1>
@@ -81,13 +81,12 @@ export default function PaymentDetails() {
           </div>
         </div>
         {/* delete payment button */}
-        <button className="w-10/12 h-12 mt-10 text-lg font-semibold text-red-400 bg-red-200 rounded-full">
+        {/* <button className="w-10/12 h-12 mt-10 text-lg font-semibold text-red-400 bg-red-200 rounded-full">
           Delete Payment
-        </button>
+        </button> */}
         {/* Bottom info delete */}
         <p style={textSize} className="w-9/12 px-4 text-center text-gray-400">
-          Once deleted, you'll not be able to recover. Please create new payment
-          if you have to
+          You will not be able to delete the payment, instead create a payment with negative value.
         </p>
       </div>
     </div>

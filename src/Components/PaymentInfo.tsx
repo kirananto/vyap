@@ -2,7 +2,7 @@ import React from "react";
 
 function PaymentInfo(props: { heading: string; info: string; more?: string[] }) {
   return (
-    <div>
+    <div className="mt-1">
       <p className="text-sm font-medium text-gray-500">{props.heading}</p>
       <p className="text-sm font-bold text-gray-700">{props.info}</p>
       {
