@@ -1,7 +1,10 @@
 import { SimpleHeader } from '../../Components/Header'
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectCredentials } from '../Login/credentialsSlice'
 
 export default function Account() {
+    const { user } = useSelector(selectCredentials)
     return (
         <div className="w-full h-screen overflow-y-auto bg-gray-100">
             <div className="w-full mb-2 bg-white shadow">
@@ -20,14 +23,14 @@ export default function Account() {
                         </svg>
                     </div>
                 </div>
-                <div className="pb-8 text-2xl font-bold text-gray-500">K & K Automobiles</div>
+                <div className="pb-8 text-2xl font-bold text-gray-500">{user?.organization?.name}</div>
                 <div className="w-full">
                     <label className="block text-sm font-bold leading-relaxed tracking-tighter text-gray-500">
                         Your name
                     </label>
                     <input
                         name="tel"
-                        value={'123'}
+                        value={user?.name}
                         onChange={(event) => console.log(event?.target.value)}
                         id="tel"
                         placeholder="Your name"
@@ -39,10 +42,10 @@ export default function Account() {
                         Business name
                     </label>
                     <input
-                        name="tel"
-                        value={'123'}
+                        name="text"
+                        value={user?.organization?.name}
                         onChange={(event) => console.log(event?.target.value)}
-                        id="tel"
+                        id="text"
                         placeholder="Business name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
                     />
@@ -52,10 +55,10 @@ export default function Account() {
                         Email
                     </label>
                     <input
-                        name="tel"
-                        value={'123'}
+                        name="email"
+                        value={user?.email}
                         onChange={(event) => console.log(event?.target.value)}
-                        id="tel"
+                        id="email"
                         placeholder="Email"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
                     />
@@ -65,10 +68,10 @@ export default function Account() {
                         Pin Code
                     </label>
                     <input
-                        name="tel"
-                        value={'123'}
+                        name="pin"
+                        value={user?.organization?.pinCode}
                         onChange={(event) => console.log(event?.target.value)}
-                        id="tel"
+                        id="pin"
                         placeholder="Pin Code"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
                     />
@@ -80,7 +83,7 @@ export default function Account() {
                     </label>
                     <input
                         name="tel"
-                        value={'123'}
+                        value={'No Information'}
                         onChange={(event) => console.log(event?.target.value)}
                         id="tel"
                         placeholder="Location"
@@ -93,7 +96,7 @@ export default function Account() {
                     </label>
                     <input
                         name="tel"
-                        value={'123'}
+                        value={'No Information'}
                         onChange={(event) => console.log(event?.target.value)}
                         id="tel"
                         placeholder="Category"

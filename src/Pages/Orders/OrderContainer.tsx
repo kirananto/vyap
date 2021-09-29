@@ -33,8 +33,8 @@ export default function OrderContainer({
                             </div>
                             <div className="flex">
                                 <div className="flex flex-col">
-                                    <div className="text-gray-600 text-lg font-extrabold">₹ 5000</div>
-                                    <div className="text-gray-400 text-xs font-extrabold mx-auto">(5 items)</div>
+                                    <div className="text-gray-600 text-lg font-extrabold">₹ {(parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)).toFixed(2)}</div>
+                                    <div className="text-gray-400 text-xs font-extrabold mx-auto">({item?.numberOfItems} items)</div>
                                 </div>
                                 {isExpanded === index ? (<div className="flex text-gray-600" onClick={() => setIsExpanded(undefined)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
