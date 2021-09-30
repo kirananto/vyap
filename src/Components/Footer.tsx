@@ -90,10 +90,10 @@ function Footer() {
 
 // ! (SimpleFooter) Footer with only one button-->:
 
-function SimpleFooter(props: { btnName: string, onClick?: any }) {
+function SimpleFooter(props: { btnName: string, onClick?: any, isDisabled?: boolean }) {
   return (
     <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow-2xl">
-      <Button onClick={props.onClick} className="w-8/12 h-12 ">
+      <Button onClick={props.onClick} className="w-8/12 h-12" isDisabled={props.isDisabled}>
         {props.btnName}
       </Button>
     </div>
