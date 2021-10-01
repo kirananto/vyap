@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { fetchCentralProducts } from "src/API/products.axios";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { SimpleHeader } from "../../../../Components/Header";
 import DropDown from "./DropDown";
 
 export default function AddProductMain() {
+  const { token }  = useSelector(selectCredentials)
   const history = useHistory();
+
+  const [options, setOptions] = useState<any[]>([])
+
+  useEffect(() => {
+    fetchCentralProducts(token!, 100, 0).then(result => {
+      console.log('result', result.data?.data)
+      setOptions(result.data?.data)
+      // setOptions([
+      //   {
+      //     name: "Dairy Milk Silk",
+      //     value: "Dairy Milk Silk",
+      //     quantity: 15 + " gm",
+      //     price: "MRP: " + 50,
+      //     url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+      //   },
+      //   {
+      //     name: "Dairy Milk Silk",
+      //     value: "Dairy Milk Silk",
+      //     quantity: 18 + " gm",
+      //     price: "MRP: " + 50,
+      //     url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+      //   },
+      //   {
+      //     name: "Dairy Milk Silk",
+      //     value: "Dairy Milk Silk",
+      //     quantity: 18 + " gm",
+      //     price: "MRP: " + 50,
+      //     url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+      //   },
+      // ])
+    })
+  }, [])
   return (
     <div className="w-full h-screen">
       <SimpleHeader
@@ -15,29 +51,30 @@ export default function AddProductMain() {
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         <DropDown
           onSelect={(e: any) => console.log(e)}
-          options={[
-            {
-              name: "Dairy Milk Silk",
-              value: "Dairy Milk Silk",
-              quantity: 15 + " gm",
-              price: "MRP: " + 50,
-              url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
-            },
-            {
-              name: "Dairy Milk Silk",
-              value: "Dairy Milk Silk",
-              quantity: 18 + " gm",
-              price: "MRP: " + 50,
-              url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
-            },
-            {
-              name: "Dairy Milk Silk",
-              value: "Dairy Milk Silk",
-              quantity: 18 + " gm",
-              price: "MRP: " + 50,
-              url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
-            },
-          ]}
+          options={options}
+          // options={[
+          //   {
+          //     name: "Dairy Milk Silk",
+          //     value: "Dairy Milk Silk",
+          //     quantity: 15 + " gm",
+          //     price: "MRP: " + 50,
+          //     url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+          //   },
+          //   {
+          //     name: "Dairy Milk Silk",
+          //     value: "Dairy Milk Silk",
+          //     quantity: 18 + " gm",
+          //     price: "MRP: " + 50,
+          //     url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+          //   },
+          //   {
+          //     name: "Dairy Milk Silk",
+          //     value: "Dairy Milk Silk",
+          //     quantity: 18 + " gm",
+          //     price: "MRP: " + 50,
+          //     url: "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+          //   },
+          // ]}
         />
       </div>
     </div>

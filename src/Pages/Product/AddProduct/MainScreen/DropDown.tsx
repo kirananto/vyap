@@ -6,14 +6,14 @@ function List(props: any) {
   return (
     <div className="drop-main" onClick={() => props.onSelect(props.opt)}>
       <div className="p-2 border border-gray-200 rounded-lg product-image">
-        <img className="w-10 h-10" src={props.opt.url} alt={props.opt.name} />
+        <img className="w-10 h-10" src={props.opt.url ?? 'https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png'} alt={props.opt.name} />
       </div>
       <div className="product-details">
         <div className="text-base font-bold text-gray-700">
           {props.opt.name}
         </div>
-        <div className="text-xs">{props.opt.quantity}</div>
-        <div className="text-xs font-bold text-gray-400">{props.opt.price}</div>
+        <div className="text-xs text-gray-400">{props.opt.description}</div>
+        {/* <div className="text-xs font-bold text-gray-400">{props.opt.price}</div> */}
       </div>
     </div>
   );
@@ -22,7 +22,6 @@ function List(props: any) {
 function DropDown(props: any) {
   const [value, setValue] = useState("");
   const [opts, setOpts] = useState(props.options || []);
-  const [searches, setSearches] = useState([]);
   const [selected, setSelected] = useState({});
   const [isdisabled, setIsdisabled] = useState(true);
 
@@ -30,20 +29,25 @@ function DropDown(props: any) {
 
   const history = useHistory()
 
-  useEffect(() => {
-    setSearches(opts);
-  }, [opts]);
-
   function search(e: any) {
     let text = e.target.value;
     setValue(text);
-    let searched = opts.filter((a: any) => a.value.indexOf(text) != -1);
+  }
 
-    let dises = opts.filter((a: any) => a.value == text);
+  useEffect(() => {
+    let dises = props.options.filter((a: any) => a.name.indexOf(value) != -1);
     if (dises.length == 0) setIsdisabled(false);
     else setIsdisabled(true);
-    setSearches(searched);
+  }, [value])
+
+  function getSearchedOpts() {
+    let searched = props.options.filter((a: any) => a.name.indexOf(value) != -1);
+    console.log('opts', opts)
+    console.log('searched', searched)
+
+    return searched
   }
+
   function add(e: any) {
     let key = e.nativeEvent.key || "Enter";
     if (key == "Enter" && !isdisabled) {
@@ -61,13 +65,24 @@ function DropDown(props: any) {
       history.push('/create-product')
     }
   }
+
+  function renderListItems () {
+    const listItems = getSearchedOpts()
+    if(listItems?.length === 0) {
+      return <div className="p-4">No existing products found, add this as a new product by Clicking Add Button.</div>
+    }
+    return listItems.map((opt: any) => {
+      console.log('opt1')
+      return <List opt={opt} onSelect={select} />
+    })
+  }
   return (
     <div className="w-full dropdown-container">
       <div className="flex gap-2">
         <input
           type="text"
           onChange={search}
-          onKeyPress={add}
+          // onKeyPress={add}
           value={value}
           onFocus={() => setIsOpen(true)}
           // onBlur={() => setIsOpen(false)}
@@ -86,16 +101,16 @@ function DropDown(props: any) {
             fill="currentColor"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             />
           </svg>
         </button>
       </div>
       <div className={isOpen ? "drop-open" : "drop-close"}>
         {isOpen
-          ? searches.map((opt: any) => <List opt={opt} onSelect={select} />)
+          ? renderListItems()
           : []}
         {/* <div className={isdisabled ? "hide-create-div" : "show-create-div"}>
           <p className="font-bold text-gray-600">+ Add this new product</p>

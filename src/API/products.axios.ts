@@ -31,6 +31,18 @@ export const fetchProducts = (token: string, organizationId: string, limit: numb
     }
 })
 
+export const fetchCentralProducts = (token: string, limit: number, offset: number) => axiosClient({
+    url: `/central-catalogue`,
+    method: 'GET',
+    params: {
+        limit,
+        offset
+    },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
 export const postAddProduct = (token: string, data: IAddProduct) => axiosClient({
     url: `/organization-catalogue`,
     method: 'POST',
