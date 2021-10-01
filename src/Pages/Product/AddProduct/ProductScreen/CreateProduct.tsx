@@ -44,7 +44,7 @@ function CreateProduct() {
   const handleAddProduct = () => {
     const body: IAddProduct = {
       organizationCatalogueCategory: {
-          name: productDetails.name,
+          name: productDetails.name, // TODO replace with category name
           description: ''
       },
       itemSKUCode: addProductInfo?.others?.skuCode,
@@ -71,7 +71,7 @@ function CreateProduct() {
       <div className="w-11/12 pt-6 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         {/* ===--===Product card===--=== */}
-        <ItemCard productDetails={productDetails} />
+        <ItemCard />
         {/* -------- */}
         <div className="flex justify-between px-10 py-4">
           <button

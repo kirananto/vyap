@@ -1,5 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface CentralCatalogueInterface {
+    barCode: string
+    brandId: string
+    description: string
+    hsnId: string
+    id: string
+    name: string
+}
 export interface AddProductInterface {
     pricing: {
         mrpPrice: number
@@ -8,6 +16,7 @@ export interface AddProductInterface {
         hsnNumber: number
         gstPercentage: number
     },
+    centralCatalogue?: CentralCatalogueInterface,
     others: {
         productImage: any[]
         skuCode: string
@@ -19,6 +28,7 @@ export interface AddProductInterface {
 }
 
 const initialState: AddProductInterface = {
+    centralCatalogue: undefined,
     pricing: {
         mrpPrice: 0,
         salesPrice: 0,
@@ -45,6 +55,9 @@ export const addProductSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
+        setCentralCatalogue: (state: AddProductInterface, action: PayloadAction<CentralCatalogueInterface>) => {
+            state.centralCatalogue = action.payload;
+        },
         setMrpPrice: (state: AddProductInterface, action: PayloadAction<number>) => {
             state.pricing.mrpPrice = action.payload;
         },
@@ -86,6 +99,7 @@ export const addProductSlice = createSlice({
 });
 
 export const { 
+    setCentralCatalogue,
     setMrpPrice,
     setBarCode,
     setBrand,

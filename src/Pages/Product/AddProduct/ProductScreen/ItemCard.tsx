@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { selectAddProductInfo } from "../redux/addProductSlice";
 
 function ItemCard(props: any) {
 
-  const { productDetails } = props
+  const productDetails = useSelector(selectAddProductInfo)
 
   const history = useHistory()
 
@@ -14,20 +16,20 @@ function ItemCard(props: any) {
         <div className="flex items-center justify-center p-2 border border-gray-200 rounded-lg product-image">
           <img
             className="w-10 h-10"
-            src={productDetails.imgURL}
+            src="https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png" // TODO Replace image
             alt="product-image"
           />
         </div>
       </div>
       {/* detail-col */}
-      <div className="w-full">
+      <div className="w-full ml-2 mt-2">
         <div className="text-base font-bold text-gray-700">
-          {productDetails.name}
+          {productDetails.centralCatalogue?.name}
         </div>
-        <div className="text-xs">{productDetails.quantity} Gms</div>
-        <div className="text-xs font-bold text-gray-400">
+        <div className="text-xs">{productDetails?.centralCatalogue?.description}</div>
+        {/* <div className="text-xs font-bold text-gray-400">
           MRP: {productDetails.price} ₹
-        </div>
+        </div> */}
       </div>
       {/* product handle-col */}
       <div className="flex items-center justify-center w-1/4 ">
