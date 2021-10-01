@@ -1,17 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-function ItemCard() {
+function ItemCard(props: any) {
+
+  const { productDetails } = props
 
   const history = useHistory()
-
-  const productDetails = {
-    name: "Dairy Milk Silk",
-    quantity: 15,
-    price: 50,
-    imgURL:
-      "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
-  };
 
   return (
     <div className="flex w-full gap-2">
