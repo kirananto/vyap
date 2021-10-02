@@ -7,7 +7,7 @@ import PricingTab from "./PricingTab";
 import OthersTab from "./OthersTab";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
-import { IAddProduct, postAddProduct } from "src/API/products.axios";
+import { IAddProduct, postAddCentralProduct, postAddProduct } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { useHistory } from "react-router";
 
@@ -19,13 +19,13 @@ function CreateProduct() {
   const addProductInfo = useSelector(selectAddProductInfo)
   const { token } = useSelector(selectCredentials)
 
-  const productDetails = {
-    name: "Dairy Milk Silk",
-    quantity: 15,
-    price: 50,
-    imgURL:
-      "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
-  };
+  // const productDetails = {
+  //   name: "Dairy Milk Silk",
+  //   quantity: 15,
+  //   price: 50,
+  //   imgURL:
+  //     "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
+  // };
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -41,10 +41,10 @@ function CreateProduct() {
     }
   }, [])
 
-  const handleAddProduct = () => {
+  const handleAddProduct = async () => {
     const body: IAddProduct = {
       organizationCatalogueCategory: {
-          name: productDetails.name, // TODO replace with category name
+          name: addProductInfo.others?.category, // TODO replace with category name
           description: ''
       },
       itemSKUCode: addProductInfo?.others?.skuCode,
@@ -53,6 +53,17 @@ function CreateProduct() {
       rate: addProductInfo?.pricing?.salesPrice
     }
     setIsLoading(true)
+    if(!addProductInfo?.centralCatalogue?.id) {
+
+    }
+
+    // postAddCentralProduct(token!, {
+    //   name: addProductInfo?.centralCatalogue?.name!,
+    //   description: 'Description',
+    //   brandId: string,
+    //   hsnId: string,
+    // })
+
     postAddProduct(token!, body)
       .then((response) => {
         setIsLoading(false)

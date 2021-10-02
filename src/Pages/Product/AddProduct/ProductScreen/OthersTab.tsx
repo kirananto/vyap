@@ -1,6 +1,8 @@
-import React, { Dispatch } from "react";
+import React, { Dispatch, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAddProductInfo, setBarCode, setBrand, setCaseQuantity, setCategory, setSkuCode } from "../redux/addProductSlice";
+import { fetchBrands } from "src/API/brand.axios";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 
 const ImageContainer = (item: any) => {
   return (
@@ -55,8 +57,31 @@ const Input = (props: any) => {
 function OthersTab() {
 
   const dispatch = useDispatch()
+  const { token } = useSelector(selectCredentials)
 
   const addProductInfo = useSelector(selectAddProductInfo)
+
+  useEffect(() => {
+    fetchBrands(token!, 100, 0).then((result) =>
+      console.log(
+        result.data.data
+          // .sort((a: any, b: any) => {
+          //     const nameA = a.application_name.toLowerCase()
+          //     const nameB = b.application_name.toLowerCase()
+          //     if (nameA < nameB) {
+          //         return -1
+          //     }
+          //     if (nameA > nameB) {
+          //         return 1
+          //     }
+          //     return 0
+          // })
+          .map((item: any) => ({ label: 'ssdd', value: item }))
+      )
+    )
+      .catch(() => console.log('Error loading data'))
+
+  }, [])
 
   return (
     <div>

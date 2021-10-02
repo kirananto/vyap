@@ -18,6 +18,16 @@ export interface IAddProduct {
     rate: number
 }
 
+export interface AddCentralCatalogueInterface {
+   name: string
+   description: string
+   brandId: string
+   hsnId: string
+   // TODO Unverified
+   categories: any
+   image: any
+}
+
 export const fetchProducts = (token: string, organizationId: string, limit: number, offset: number) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
@@ -38,6 +48,14 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
         limit,
         offset
     },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+export const postAddCentralProduct = (token: string, data: AddCentralCatalogueInterface) => axiosClient({
+    url: `/central-catalogue`,
+    method: 'POST',
+    data,
     headers: {
         'authorization': `Bearer ${token}`
     }
