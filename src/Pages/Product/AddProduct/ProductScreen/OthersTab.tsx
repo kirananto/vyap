@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAddProductInfo, setBarCode, setBrand, setCaseQuantity, setCategory, setSkuCode } from "../redux/addProductSlice";
 import { fetchBrands } from "src/API/brand.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { imageUpload } from "src/API/image.axios";
 
 const ImageContainer = (item: any) => {
   return (
@@ -82,6 +83,15 @@ function OthersTab() {
       .catch(() => console.log('Error loading data'))
 
   }, [])
+
+  function uploadImage () {
+    // var data = new FormData();
+    // data.append('productId', 'dfd364ac-7cd3-4f72-8e8c-13af725c78c6');
+    // data.append('file', // Append image here);
+    // imageUpload(token!, data).then(result => {
+    //   console.log('data', result.data)
+    // })
+  }
 
   return (
     <div>
