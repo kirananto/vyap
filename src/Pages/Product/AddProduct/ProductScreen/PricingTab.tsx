@@ -23,7 +23,7 @@ function PricingTab() {
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)'}}>
       <div>
         <p className="text-base font-bold text-gray-500">MRP</p>
         <input

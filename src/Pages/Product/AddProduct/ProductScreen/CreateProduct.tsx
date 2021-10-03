@@ -77,26 +77,24 @@ function CreateProduct() {
   }
 
   return (
-    <div className="bg-white create-product-container">
+    <div className=" create-product-container">
       <SimpleHeader heading="Create Product" />
-      <div className="w-11/12 pt-6 mx-auto">
+      <div className="w-11/12 pt-6  px-2 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         {/* ===--===Product card===--=== */}
         <ItemCard />
         {/* -------- */}
-        <div className="flex justify-between px-10 py-4">
+        <div className="flex justify-between py-4">
           <button
             onClick={() => toggleTabs(1)}
-            className={
-              toggleState === 1 ? "btn-1-show-active" : "btn-1-hide-active"
-            }
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1 ? "bg-blue-100 text-blue-600 " : "text-gray-500"}`}
           >
             Pricing
           </button>
           <button
             onClick={() => toggleTabs(2)}
             className={
-              `${toggleState === 2 ? "btn-1-show-active" : "btn-1-hide-active"} px-8 py-1 font-semibold text-gray-500 focus:bg-blue-200 focus:px-8 focus:py-1 focus:rounded-full focus:text-blue-600`
+              `px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2 ? "bg-blue-100 text-blue-600" : "text-gray-500"}`
             }
           >
             Others
@@ -105,12 +103,12 @@ function CreateProduct() {
         {/* -------- */}
 
         {/* -------------------TAB-1----------------- */}
-        <div className={toggleState === 1 ? "tab-1-show" : "tab-1-hide"}>
+        <div className={toggleState === 1 ? "block" : "hidden"}>
           <PricingTab />
         </div>
 
         {/* -------------------TAB-1----------------- */}
-        <div className={toggleState === 2 ? "tab-2-show" : "tab-2-hide"}>
+        <div className={toggleState === 2 ? "block" : "hidden"}>
          <OthersTab />
         </div>
       </div>

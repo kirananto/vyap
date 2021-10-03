@@ -1,38 +1,8 @@
 /* px-8 py-1 font-semibold text-gray-500 focus:bg-blue-200 focus:px-8 focus:py-1 focus:rounded-full focus:text-blue-600 */
 .create-product-container{
-    height: 85vh;
+    /* height: 85vh; */
     overflow-y: auto;
     padding-bottom: 20px;
-}
-.btn-1-show-active {
-  font-weight: 600;
-  padding: 4px 32px 4px 32px;
-  background-color: rgba(191, 219, 254, 1);
-  color: rgba(37, 99, 235, 1);
-  border-radius: 9999px;
-}
-.btn-1-show-active:focus {
-  background-color: rgba(191, 219, 254, 1);
-  padding: 4px 32px 4px 32px;
-  border-radius: 9999px;
-  color: rgba(37, 99, 235, 1);
-}
-.btn-1-hide-active {
-  font-weight: 600;
-  padding: 4px 32px 4px 32px;
-  color: rgba(107, 114, 128);
-}
-.tab-1-show {
-  display: block;
-}
-.tab-1-hide {
-  display: none;
-}
-.tab-2-show {
-  display: block;
-}
-.tab-2-hide {
-  display: none;
 }
 
 /* ! ===Modal DESIGNING=== */

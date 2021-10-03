@@ -94,7 +94,7 @@ function OthersTab() {
   }
 
   return (
-    <div>
+    <div className="mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)'}}>
       <h1 className="font-bold text-gray-500 ">Add product images</h1>
       <p className="text-xs font-bold text-gray-300">
         Add upto 5 images. First image is your product's cover
