@@ -38,19 +38,19 @@ function OrderDetailed({ order } : { order: any }) {
 export default function OrderDetail({ order } : { order: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
     return (
-        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-700">
             <div className={`flex ${isExpanded ? 'mb-4': ''} items-center justify-between`}>
-                <div className="flex flex-col text-xl font-semibold text-gray-800">
+                <div className="flex flex-col text-xl font-semibold text-gray-800 dark:text-gray-200">
                     Order details
                 </div>
                 <div>
-                    {isExpanded ? (<div className="flex text-gray-600" onClick={() => setIsExpanded(false)}>
+                    {isExpanded ? (<div className="flex text-gray-600 dark:text-gray-200" onClick={() => setIsExpanded(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                         </svg>
                     </div>
 
-                    ) : (<div className="flex text-gray-600" onClick={() => setIsExpanded(true)}>
+                    ) : (<div className="flex text-gray-600 dark:text-gray-200" onClick={() => setIsExpanded(true)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>

@@ -8,7 +8,7 @@ export default function ProductCard({ item, onClicked, onMore } : { item: any, o
     marginLeft: "1px",
   };
   return (
-    <div className="flex items-center justify-between w-11/12 gap-4 py-4 mx-auto bg-white">
+    <div className="flex items-center justify-between w-11/12 gap-4 py-4 mx-auto bg-white dark:bg-gray-800">
       {/*
       =============
       Col-1
@@ -39,11 +39,11 @@ export default function ProductCard({ item, onClicked, onMore } : { item: any, o
         </div>
         {/* col-2 product */}
         <div className="flex flex-col ml-2 ">
-          <h1 className="font-semibold text-md ">{item?.centralCatalogue?.name} ({item?.aliasName})</h1>
-          <p className="text-sm font-semibold text-gray-400">#{item.id?.split('-')[0]}</p>
+          <h1 className="font-semibold text-md dark:text-gray-200 ">{item?.centralCatalogue?.name} ({item?.aliasName})</h1>
+          <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">#{item.id?.split('-')[0]}</p>
           <div className="flex gap-2">
-            <p className="text-sm font-semibold text-gray-500">MRP: ₹{item?.mrpPrice}</p>
-            <p className="text-sm font-semibold text-gray-500">Cost: ₹{item?.rate}</p>
+            <p className="text-sm font-semibold text-gray-500  dark:text-gray-400 ">MRP: ₹{item?.mrpPrice}</p>
+            <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">Cost: ₹{item?.rate}</p>
           </div>
         </div>
       </div>

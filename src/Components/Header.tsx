@@ -5,12 +5,12 @@ import walletSvg from "../assets/illustrations/wallet.svg"
 function Header({ heading, subHeading, phoneNumber, shareDetails }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string }) {
   const history = useHistory()
   return (
-    <div className="flex w-11/12 pt-2 pb-2 m-auto bg-white ">
+    <div className="flex w-11/12 pt-2 pb-2 m-auto ">
       {/* back icon  */}
       <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-8 "
+          className="w-8 dark:text-gray-300"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -25,11 +25,11 @@ function Header({ heading, subHeading, phoneNumber, shareDetails }: { heading?: 
       </div>
 
       {/* Heading container */}
-      <div className={`flex ${subHeading ? 'flex-col' : 'items-center'} w-4/5 pl-4 `}>
-        <h1 className="text-lg font-semibold text-gray-600 font-ProductSans">
+      <div className={`flex ${subHeading ? 'flex-col' : 'items-center'} w-4/5 pl-4 text-gray-600 dark:text-gray-300 `}>
+        <h1 className="text-lg font-semibold  font-ProductSans">
           {heading}
         </h1>
-        {subHeading && (<h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900">
+        {subHeading && (<h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
           {subHeading}
         </h1>)}
       </div>
@@ -54,7 +54,7 @@ function Header({ heading, subHeading, phoneNumber, shareDetails }: { heading?: 
       {shareDetails && (<a href="" className="flex items-center justify-center rounded-full ali w-14 h-14">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-6 w-6 dark:text-gray-300"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor">
@@ -76,12 +76,12 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
   return (
     <div className="flex items-center justify-center w-full mt-1">
       {/* card container */}
-      <div className="relative flex w-11/12 h-auto bg-gray-100 border border-gray-400 rounded-md">
+      <div className="relative flex w-11/12 h-auto bg-gray-100 dark:bg-gray-500 border border-gray-400 rounded-md">
         <div className="flex flex-col w-4/5 p-2 pl-3">
-          <h6 style={fontSize} className="font-bold text-gray-800">
+          <h6 style={fontSize} className="font-bold text-gray-800 dark:text-gray-300">
             {parseFloat(`${amount ?? 0}`) > 0 ? 'You have to pay' : 'You get'}
           </h6>
-          <h1 className="text-4xl font-semibold text-gray-700">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>
+          <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-200">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>
         </div>
         <div className="flex justify-end w-5/12 pr-4 ">
           <img

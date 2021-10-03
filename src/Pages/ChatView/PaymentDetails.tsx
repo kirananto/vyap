@@ -21,15 +21,15 @@ export default function PaymentDetails() {
   }, [])
 
   return (
-    <div className="h-screen bg-gray-100">
+    <div className="h-screen bg-gray-100 dark:bg-gray-800">
       {/* Header */}
-      <div className="w-full pb-3 bg-white shadow ">
+      <div className="w-full py-2 bg-white shadow dark:bg-gray-700">
           {/* Todo :: Share icon have to be added in the place of contact icon */}
         <Header heading="Payment details" subHeading="XYZ Supplier" phoneNumber="" />
       </div>
       {/* Body */}
       <div className="flex flex-col items-center gap-5 py-10">
-        <h1 className="text-6xl font-black text-center text-gray-600">
+        <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
           ₹{payment?.amount}
         </h1>
         {/* ---------------- */}
@@ -47,8 +47,8 @@ export default function PaymentDetails() {
               clip-rule="evenodd"
             />
           </svg>
-          <p className="text-xs text-gray-500">Completed</p>
-          <p className="text-xs text-gray-500">● {payment?.updatedAt ? format(
+          <p className="text-xs text-gray-500 dark:text-gray-400">Completed</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">● {payment?.updatedAt ? format(
                 new Date(payment?.updatedAt),
                 'do MMM'
               ) : null}</p>
@@ -57,8 +57,8 @@ export default function PaymentDetails() {
 
         {/* Payment detail Card */}
         {/* ------------------- */}
-        <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50">
-          <h1 className="mb-4 text-xl font-semibold text-gray-800">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-gray-700">
+          <h1 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">
             Payment details
           </h1>
 

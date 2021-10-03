@@ -4,7 +4,7 @@ import Button from "./Style/Button";
 
 function Footer() {
   return (
-    <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-600 dark:border-gray-600">
+    <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-700 dark:border-gray-600">
       {/* Nav-Item-1 */}
       <Link
         to="/"

@@ -18,11 +18,11 @@ export default function OrderCard({ className, thread }: { className: string, th
 
   return (
     <div className={`flex ${className} w-full`}>
-      <NavLink to={`/order/${thread.meta}`} className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50">
+      <NavLink to={`/order/${thread.meta}`} className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600">
         <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
           Order #{thread.meta?.split('-')[0]}
         </div>
-        <div className="text-4xl mt-2 text-gray-700 font-bold">₹ {(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}</div>
+        <div className="text-4xl mt-2 text-gray-700 font-bold dark:text-gray-200">₹ {(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}</div>
 
         {/* bottom  */}
         <div className="flex items-center w-full">
@@ -41,21 +41,21 @@ export default function OrderCard({ className, thread }: { className: string, th
                 clip-rule="evenodd"
               />
             </svg>
-            <p className="text-xs text-gray-500">Completed</p>
+            <p className="text-xs text-gray-500 dark:text-gray-300">Completed</p>
           </div>
           {/* col-2 */}
           <div className="flex justify-left w-7/12 gap-2">
-            <p className="text-xs text-gray-500">● {
+            <p className="text-xs text-gray-500 dark:text-gray-300">● {
               format(
                 new Date(thread.updatedAt),
                 'do MMM'
               )} ●</p>
-            <p className="text-xs text-gray-500">{order?.numberOfItems} items</p>
+            <p className="text-xs text-gray-500 dark:text-gray-300">{order?.numberOfItems} items</p>
           </div>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="justify-end w-5 h-5 text-gray-500"
+            className="justify-end w-5 h-5 text-gray-500 dark:text-gray-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

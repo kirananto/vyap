@@ -3,11 +3,11 @@ import React from "react";
 function PaymentInfo(props: { heading: string; info: string; more?: string[] }) {
   return (
     <div className="mt-1">
-      <p className="text-sm font-medium text-gray-500">{props.heading}</p>
-      <p className="text-sm font-bold text-gray-700">{props.info}</p>
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-500">{props.heading}</p>
+      <p className="text-sm font-bold text-gray-700 dark:text-gray-300">{props.info}</p>
       {
         props.more?.map((item, index) => (
-          <p className="text-sm text-gray-700" key={`${index}`}>{item}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300" key={`${index}`}>{item}</p>
         ))
       }
     </div>
@@ -17,7 +17,7 @@ function PaymentInfo(props: { heading: string; info: string; more?: string[] }) 
 function PaymentInfoTick(props: { heading: string; info: string }) {
   return (
     <div>
-      <p className="text-sm font-medium text-gray-500">{props.heading}</p>
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-200">{props.heading}</p>
       <div className="flex items-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ function PaymentInfoTick(props: { heading: string; info: string }) {
             clip-rule="evenodd"
           />
         </svg>
-        <p className="text-sm font-bold text-gray-700">{props.info}</p>
+        <p className="text-sm font-bold text-gray-700 dark:text-gray-100">{props.info}</p>
       </div>
     </div>
   );

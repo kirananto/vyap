@@ -29,16 +29,16 @@ export const Payment = () => {
   }, [paymentModalVisible, id, token])
 
   return (
-    <div className="overflow-y-auto">
+    <div className="overflow-y-auto dark:bg-gray-800">
       {/* header */}
-      <div className="fixed w-full pb-3 bg-white shadow ">
+      <div className="fixed w-full pb-3 bg-white shadow dark:bg-gray-700">
         <Header heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
       {inbox?.id ? <ChatList inboxId={inbox?.inboxHash} toRefresh={paymentModalVisible}  /> : null}
       {/* Footer */}
-      <div className="fixed bottom-0 flex items-center justify-center w-full h-16 gap-4 bg-white" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
+      <div className="fixed bottom-0 flex items-center justify-center w-full h-16 gap-4 bg-white dark:bg-gray-700" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
         <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button>
         <button onClick={() => {
           dispatch(setOrgId(inbox?.recipient?.id!))

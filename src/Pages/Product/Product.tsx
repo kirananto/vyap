@@ -103,7 +103,7 @@ export default function Product() {
   return (
     <>
       {/* Header Container */}
-      <div className="pb-4 bg-white border-b-2 ">
+      <div className="pb-4 bg-white border-b-2 dark:bg-gray-700 dark:border-gray-600">
         <div className="border-b">
           <Header
             heading="My Products"
@@ -151,7 +151,7 @@ export default function Product() {
       Card
       ==========
       */}
-      <div className="custom-height">
+      <div className="custom-height dark:bg-gray-800">
         {renderProducts()}
       </div>
 

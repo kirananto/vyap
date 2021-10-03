@@ -23,15 +23,15 @@ export default function OrderDetails() {
     }, [])
 
     return (
-        <div className="h-screen bg-gray-100 overflow-auto">
+        <div className="h-screen bg-gray-100 overflow-auto dark:bg-gray-800">
             {/* Header */}
-            <div className="w-full pb-3 bg-white shadow ">
+            <div className="w-full py-2 bg-white shadow dark:bg-gray-700">
                 {/* Todo :: Share icon have to be added in the place of contact icon */}
                 <Header heading="Order details" subHeading="XYZ Supplier" shareDetails="bb" />
             </div>
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-10">
-                <h1 className="text-6xl font-black text-center text-gray-600">
+                <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
                     ₹{(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}
                 </h1>
                 {/* ---------------- */}
@@ -49,12 +49,12 @@ export default function OrderDetails() {
                             clip-rule="evenodd"
                         />
                     </svg>
-                    <p className="text-xs text-gray-500">Order completed</p>
-                    <p className="text-xs text-gray-500">● {order?.updatedAt ? format(
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Order completed</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">● {order?.updatedAt ? format(
                 new Date(order?.updatedAt),
                 'do MMM'
               ) : null}</p>
-                    <p className="text-xs text-gray-500">● {order?.numberOfItems} Items</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">● {order?.numberOfItems} Items</p>
                     {/* ------------------ */}
                 </div>
                 {/* Order Detail card */}
