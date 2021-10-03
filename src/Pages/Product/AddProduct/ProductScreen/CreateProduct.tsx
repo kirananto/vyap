@@ -19,14 +19,6 @@ function CreateProduct() {
   const addProductInfo = useSelector(selectAddProductInfo)
   const { token } = useSelector(selectCredentials)
 
-  // const productDetails = {
-  //   name: "Dairy Milk Silk",
-  //   quantity: 15,
-  //   price: 50,
-  //   imgURL:
-  //     "https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png",
-  // };
-
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -54,15 +46,13 @@ function CreateProduct() {
     }
     setIsLoading(true)
     if(!addProductInfo?.centralCatalogue?.id) {
-
+      // postAddCentralProduct(token!, {
+      //   name: addProductInfo?.centralCatalogue?.name!,
+      //   description: 'Description',
+      //   brandId: string,
+      //   hsnId: string,
+      // })
     }
-
-    // postAddCentralProduct(token!, {
-    //   name: addProductInfo?.centralCatalogue?.name!,
-    //   description: 'Description',
-    //   brandId: string,
-    //   hsnId: string,
-    // })
 
     postAddProduct(token!, body)
       .then((response) => {

@@ -38,8 +38,15 @@ const initialState: AddProductInterface = {
     },
     others: {
         productImage: [{
-            id: '123',
-            url: "https://i5.walmartimages.com/asr/b16c6dcf-98b5-4000-b106-728647912d81_1.ae9db2c3a2020d02b73f03d740cdef14.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+            AITags: null,
+            fileId: "61597fe7496dfb559b8088f8",
+            filePath: "/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
+            fileType: "image",
+            height: 225,
+            name: "DairySmall_FEGqoZSyd.jpeg",
+            size: 12425,
+            thumbnailUrl: "https://ik.imagekit.io/2ts5tqew8qy/tr:n-media_library_thumbnail/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
+            url: "https://ik.imagekit.io/2ts5tqew8qy/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg"
         }],
         skuCode: '',
         category: '',
@@ -73,8 +80,11 @@ export const addProductSlice = createSlice({
         setGstPercentage: (state, action: PayloadAction<number>) => {
             state.pricing.gstPercentage = action.payload
         },
-        setProductImage: (state, action: PayloadAction<any>) => {
-            state.others.productImage = action.payload
+        setProductImage: (state: AddProductInterface, action: PayloadAction<any>) => {
+            state.others.productImage = [
+                ...state.others.productImage,
+                action.payload
+            ]
         },
         setSkuCode: (state, action: PayloadAction<any>) => {
             state.others.skuCode = action.payload
