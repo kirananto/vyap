@@ -1,9 +1,10 @@
-import React, { Dispatch, useEffect } from "react";
+import React, { Dispatch, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAddProductInfo, setBarCode, setBrand, setCaseQuantity, setCategory, setSkuCode } from "../redux/addProductSlice";
+import { selectAddProductInfo, setBarCode, setBrand, setCaseQuantity, setCategory, setProductImage, setSkuCode } from "../redux/addProductSlice";
 import { fetchBrands } from "src/API/brand.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
+import Spinner from "src/Components/Style/Spinner";
 
 const ImageContainer = (item: any) => {
   return (
@@ -57,10 +58,14 @@ const Input = (props: any) => {
 };
 function OthersTab() {
 
+  const [spinner, setSpinner] = useState(false)
+
   const dispatch = useDispatch()
   const { token } = useSelector(selectCredentials)
 
   const addProductInfo = useSelector(selectAddProductInfo)
+
+  const fileUploaderRef: any = useRef(null)
 
   useEffect(() => {
     fetchBrands(token!, 100, 0).then((result) =>
@@ -85,12 +90,23 @@ function OthersTab() {
   }, [])
 
   function uploadImage () {
-    // var data = new FormData();
-    // data.append('productId', 'dfd364ac-7cd3-4f72-8e8c-13af725c78c6');
-    // data.append('file', // Append image here);
-    // imageUpload(token!, data).then(result => {
-    //   console.log('data', result.data)
-    // })
+    if (fileUploaderRef.current?.files?.length > 0) {
+      setSpinner(true)
+      var data = new FormData();
+      data.append('file', fileUploaderRef.current?.files?.[0]);
+      imageUpload(token!, data).then(result => {
+        console.log('data', result.data)
+        dispatch(setProductImage({
+          id: result.data.fileId,
+          url: result.data.filePath
+        }))
+        setSpinner(false)
+      })
+      .catch(error => {
+        console.log('error', error)
+        setSpinner(false)
+      })
+    }
   }
 
   return (
@@ -103,8 +119,8 @@ function OthersTab() {
       {/* image-container */}
       <div className="flex flex-wrap gap-4 mt-4 mb-8">
         {addProductInfo?.others?.productImage?.map((item) => <ImageContainer item={item} />)}
-        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer ">
-          <svg
+        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer " onClick={() => fileUploaderRef.current!.click()}>
+          {!spinner ? (<svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-8 h-8"
             fill="none"
@@ -117,8 +133,11 @@ function OthersTab() {
               stroke-width="2"
               d="M12 4v16m8-8H4"
             />
-          </svg>
+          </svg>) : (
+            <Spinner />
+          )}
         </div>
+        <input type="file" style={{display: 'none'}} ref={fileUploaderRef} accept={'image/png,image/jpeg'} onChange={uploadImage} />
       </div>
       {/* Image container ENDS */}
       {/* Details-container */}

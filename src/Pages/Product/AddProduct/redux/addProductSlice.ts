@@ -73,8 +73,11 @@ export const addProductSlice = createSlice({
         setGstPercentage: (state, action: PayloadAction<number>) => {
             state.pricing.gstPercentage = action.payload
         },
-        setProductImage: (state, action: PayloadAction<any>) => {
-            state.others.productImage = action.payload
+        setProductImage: (state: AddProductInterface, action: PayloadAction<any>) => {
+            state.others.productImage = [
+                ...state.others.productImage,
+                action.payload
+            ]
         },
         setSkuCode: (state, action: PayloadAction<any>) => {
             state.others.skuCode = action.payload
