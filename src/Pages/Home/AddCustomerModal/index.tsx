@@ -28,7 +28,6 @@ export default function AddCustomerModal({
   const [isExisting, setIsExisting] = React.useState(false)
   const [phoneNumber, setPhoneNumber] = React.useState('')
   const [openingBalance, setOpeningBalance] = React.useState(0)
-  const [businessNumber, setBusinessNumber] = React.useState('')
   const [address, setAddress] = React.useState("")
   const [businessName, setBusinessName] = React.useState("")
   const [pinCode, setPinCode] = React.useState("")
@@ -73,8 +72,6 @@ export default function AddCustomerModal({
       case currentPageEnum.NEW_CUSTOMER_STEP:
         return <InviteExisting
           toggleVisibility={toggleVisibility}
-          setBusinessNumber={setBusinessNumber}
-          businessNumber={businessNumber}
           address={address}
           setAddress={setAddress}
           setCurrentPage={setCurrentPage}
@@ -89,7 +86,6 @@ export default function AddCustomerModal({
           setCurrentPage={setCurrentPage}
           toggleVisibility={toggleVisibility}
           isExisting={isExisting}
-          businessNumber={businessNumber}
           openingBalance={openingBalance}
           phoneNumber={phoneNumber}
           pinCode={pinCode}

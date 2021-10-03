@@ -5,8 +5,6 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { currentPageEnum } from '.'
 
 interface IProps {
-  setBusinessNumber: any
-  businessNumber: any
   address: any
   setAddress: any
   businessName: any
@@ -18,8 +16,6 @@ interface IProps {
 }
 export default function InviteExisting({
   toggleVisibility,
-  setBusinessNumber,
-  businessNumber,
   address,
   setAddress,
   businessName,
@@ -57,7 +53,6 @@ export default function InviteExisting({
       className="mt-4 text-left"
       onSubmit={(event: any) => {
         event.preventDefault();
-        // onPressLogin(phoneNumber.replace('+91', ''));
       }}
     >
       <div className="mt-4">
@@ -87,22 +82,6 @@ export default function InviteExisting({
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
         />
       </div>
-
-      <div className="mt-4">
-        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
-          Office number
-        </label>
-        <input
-          type="tel"
-          name="tel"
-          value={businessNumber}
-          onChange={(event) => setBusinessNumber(event?.target.value)}
-          id="tel"
-          placeholder="Your phone number"
-          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
-        />
-      </div>
-
       <div className="mt-4">
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
           Pin code

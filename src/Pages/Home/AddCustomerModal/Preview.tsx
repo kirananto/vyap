@@ -7,7 +7,6 @@ import { currentPageEnum } from '.'
 interface IProps {
   phoneNumber: string
   openingBalance: number
-  businessNumber: any
   address: any
   businessName: any
   pinCode: any
@@ -17,7 +16,6 @@ interface IProps {
 }
 export default function PreviewScreen({
   toggleVisibility,
-  businessNumber,
   address,
   businessName,
   pinCode,
@@ -41,7 +39,7 @@ export default function PreviewScreen({
         openingBalance: parseFloat(`${openingBalance}`),
         phone: phoneNumber,
         businessName,
-        businessNumber,
+        businessNumber: phoneNumber,
         address,
         pinCode
       }).then(result => {
@@ -51,25 +49,6 @@ export default function PreviewScreen({
         console.log('error', error)
       })
     }
-    // checkIfUserExists(token!, phoneNumber).then(result => {
-    //   console.log('data',)
-    // }).catch(error => {
-    //   // TODO user doesn't exist
-    // })
-    // TODO DO validations before making API call
-    // createPayment(token!, {
-    //   amount,
-    //   note,
-    //   method,
-    //   status: paymentStatus.SUCCESS,
-    //   senderOrgId: user?.organizationId!,
-    //   receiverId: receiverId!,
-    // }).then(result => {
-    //   // DO feedback for success
-    //   toggleVisibility(false)
-    // }).catch(error => {
-    //   // Do feedback for error
-    // })
   }
 
   return (
