@@ -6,10 +6,11 @@ import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
 import Spinner from "src/Components/Style/Spinner";
 
-const ImageContainer = (item: any) => {
+const ImageContainer = (props: any) => {
+  const { item } = props
   return (
-    <div className="w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm " key={item?.id}>
-      <img key={item?.id} alt="" src={item?.url} />
+    <div className="w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm " key={item?.fileId}>
+      <img key={item?.fileId} alt="" src={item?.thumbnailUrl} />
     </div>
   );
 };
@@ -96,10 +97,7 @@ function OthersTab() {
       data.append('file', fileUploaderRef.current?.files?.[0]);
       imageUpload(token!, data).then(result => {
         console.log('data', result.data)
-        dispatch(setProductImage({
-          id: result.data.fileId,
-          url: result.data.filePath
-        }))
+        dispatch(setProductImage(result.data))
         setSpinner(false)
       })
       .catch(error => {
