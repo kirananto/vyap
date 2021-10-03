@@ -17,7 +17,7 @@ export default function Payments() {
         })
     }, [])
     return (
-        <div className="mobile-main">
+        <div className="">
             {/* header */}
             <div className="w-full pb-3 bg-white shadow ">
                 <Header heading="All Payments" />

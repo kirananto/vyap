@@ -29,7 +29,7 @@ export const Payment = () => {
   }, [paymentModalVisible, id, token])
 
   return (
-    <div className="overflow-y-auto mobile-main">
+    <div className="overflow-y-auto">
       {/* header */}
       <div className="fixed w-full pb-3 bg-white shadow ">
         <Header heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
