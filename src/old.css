@@ -4,7 +4,7 @@
   margin: 0;
 }
 body {
-  overflow: hidden;
+  overflow: auto;
 }
 .app-background {
   background-color: #fbfbfb;
