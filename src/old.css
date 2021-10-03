@@ -12,10 +12,6 @@ body {
 }
 
 
-.mobile-main {
-  background-color: rgb(246, 246, 246);
-}
-
 /* Customer Card */
 .card-main-container {
   height: calc(100vh - 200px);

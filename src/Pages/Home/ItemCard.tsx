@@ -29,8 +29,8 @@ export function ItemCard({ item }: IProps) {
             </svg>
           </div>
           <div className="card-child-2">
-            <h2 className="font-extrabold text-gray-600 truncate">{item.recipient?.name}</h2>
-            <h5 className="text-xs text-gray-500 leading truncate">{item.lastMsg}</h5>
+            <h2 className="font-extrabold text-gray-600 dark:text-gray-200 truncate">{item.recipient?.name}</h2>
+            <h5 className="text-xs text-gray-500 dark:text-gray-400 leading truncate">{item.lastMsg}</h5>
           </div>
           <div className="card-child-3 text-right mr-4">
             <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">

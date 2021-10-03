@@ -40,7 +40,7 @@ export const Home = () => {
 
   function renderChats() {
     if (loading) {
-      return <div className="p-12 mt-12 text-center"> Loading...</div>
+      return <div className="p-12 mt-12 text-center dark:text-gray-100"> Loading...</div>
     }
     if (inbox.length === 0) {
       return <div>
@@ -55,15 +55,15 @@ export const Home = () => {
   }
 
   return (
-    <div className="mobile-main">
+    <div className="dark:bg-gray-800" >
       {/* <!-- * Header --> */}
-      <header className="flex flex-col gap-2 p-4 bg-white shadow-md">
+      <header className="flex flex-col gap-2 p-4 bg-white dark:bg-gray-600 shadow-md">
         <div className="flex w-full h-full ">
           <Link to="/more" className="flex flex-col w-4/5">
-            <h1 className="text-lg font-semibold text-gray-600 font-ProductSans">
+            <h1 className="text-lg font-semibold text-gray-600 dark:text-gray-100 font-ProductSans">
               Welcome👋
             </h1>
-            <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 ">
+            <h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500  to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
               {user?.organization?.name}
             </h1>
           </Link>
@@ -94,7 +94,7 @@ export const Home = () => {
           />
         </div>
       </header>
-      <div className="relative divide-y card-main-container scrollDes divide-light-blue-400">
+      <div className="relative divide-y card-main-container scrollDes divide-light-blue-400 dark:divide-gray-700">
         {renderChats()}
       </div>
       {/* <!-- Customer Card End -->

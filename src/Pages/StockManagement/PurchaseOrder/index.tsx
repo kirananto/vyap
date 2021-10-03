@@ -12,7 +12,7 @@ export default function PurchaseOrder() {
     const history = useHistory()
 
     return (
-        <div className="mobile-main h-screen">
+        <div className="h-screen">
             {/* header */}
             <div className="w-full mb-2 bg-white shadow">
                 <SimpleHeader heading=" Purchase Orders " />
