@@ -18,7 +18,7 @@ export default function OrderCard({ className, thread }: { className: string, th
 
   return (
     <div className={`flex ${className} w-full`}>
-      <NavLink to={`/order/${thread.meta}`} className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600">
+      <NavLink to={`/order/${thread.meta}`} className="flex flex-col w-8/12 gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600">
         <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
           Order #{thread.meta?.split('-')[0]}
         </div>

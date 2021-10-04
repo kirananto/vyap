@@ -21,9 +21,9 @@ export default function PaymentDetails() {
   }, [])
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-gray-800">
+    <div className="h-screen bg-gray-100 dark:bg-gray-900">
       {/* Header */}
-      <div className="w-full py-2 bg-white shadow dark:bg-gray-700">
+      <div className="w-full py-2 bg-white shadow dark:bg-gray-800">
           {/* Todo :: Share icon have to be added in the place of contact icon */}
         <Header heading="Payment details" subHeading="XYZ Supplier" phoneNumber="" />
       </div>
@@ -57,7 +57,7 @@ export default function PaymentDetails() {
 
         {/* Payment detail Card */}
         {/* ------------------- */}
-        <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-gray-700">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-gray-800">
           <h1 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">
             Payment details
           </h1>

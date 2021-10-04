@@ -4,7 +4,7 @@ function PaymentIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -23,7 +23,7 @@ function AllOrdersIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -42,7 +42,7 @@ function ReportsIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -61,7 +61,7 @@ function StockManagementIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -80,7 +80,7 @@ function MyAccountIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -99,7 +99,7 @@ function SettingsIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -123,7 +123,7 @@ function HelpIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -141,7 +141,7 @@ function OffersManagementIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -165,7 +165,7 @@ function LogoutIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-gray-500"
+      className="w-6 h-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

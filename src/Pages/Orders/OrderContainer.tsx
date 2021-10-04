@@ -12,8 +12,8 @@ export default function OrderContainer({
     const [isExpanded, setIsExpanded] = useState<any>(undefined)
 
     return (
-        <div className="bg-gray-100 p-4">
-            <div className="overflow-y-auto bg-white rounded p-4" style={{ height: 'calc(100vh - 15rem)' }}>
+        <div className="bg-gray-100 p-4 dark:bg-gray-900">
+            <div className="overflow-y-auto bg-white dark:bg-gray-800 rounded p-4" style={{ height: 'calc(100vh - 15rem)' }}>
                 {orders.map((item, index) => (
                     <div className={`${index === orders.length - 1 ? '' : 'border-b border-gray-300'}`} key={`${index}`}>
                         <div className={`flex w-full justify-between mt-2 pb-2`}>

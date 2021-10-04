@@ -23,9 +23,9 @@ export default function OrderDetails() {
     }, [])
 
     return (
-        <div className="h-screen bg-gray-100 overflow-auto dark:bg-gray-800">
+        <div className="h-screen bg-gray-100 overflow-auto dark:bg-gray-900">
             {/* Header */}
-            <div className="w-full py-2 bg-white shadow dark:bg-gray-700">
+            <div className="w-full py-2 bg-white shadow dark:bg-gray-800">
                 {/* Todo :: Share icon have to be added in the place of contact icon */}
                 <Header heading="Order details" subHeading="XYZ Supplier" shareDetails="bb" />
             </div>

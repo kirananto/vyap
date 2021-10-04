@@ -99,7 +99,7 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
 function SimpleHeader(props: { heading: string, backFn?: any }) {
   const history = useHistory()
   return (
-    <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow">
+    <div className="flex items-center w-full h-16 pt-2 pb-2 m-auto shadow dark:bg-gray-800 dark:text-gray-300">
       {/* back icon  */}
       <div onClick={props.backFn ? props.backFn : () => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
@@ -120,7 +120,7 @@ function SimpleHeader(props: { heading: string, backFn?: any }) {
 
       {/* Heading container */}
       <div className="flex flex-col w-4/5 pl-4 ">
-        <h1 className="text-xl font-bold text-gray-600 font-ProductSans">
+        <h1 className="text-xl font-bold text-gray-600 dark:text-gray-300 font-ProductSans">
           {props.heading}
         </h1>
       </div>

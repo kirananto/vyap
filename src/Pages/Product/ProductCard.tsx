@@ -8,7 +8,7 @@ export default function ProductCard({ item, onClicked, onMore } : { item: any, o
     marginLeft: "1px",
   };
   return (
-    <div className="flex items-center justify-between w-11/12 gap-4 py-4 mx-auto bg-white dark:bg-gray-800">
+    <div className="flex items-center justify-between w-11/12 gap-4 py-4 mx-auto bg-white dark:bg-gray-900">
       {/*
       =============
       Col-1

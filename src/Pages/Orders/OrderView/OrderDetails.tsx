@@ -38,7 +38,7 @@ function OrderDetailed({ order } : { order: any }) {
 export default function OrderDetail({ order } : { order: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
     return (
-        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-700">
+        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
             <div className={`flex ${isExpanded ? 'mb-4': ''} items-center justify-between`}>
                 <div className="flex flex-col text-xl font-semibold text-gray-800 dark:text-gray-200">
                     Order details

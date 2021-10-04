@@ -95,7 +95,7 @@ export default function Product() {
     if (products?.length === 0) {
       return <div>
         <img className="mt-12 h-64 p-12 m-auto" src={ChatImg} />
-        <div className="text-center px-6 w-2/3 m-auto"> You do not have any products added. Please add a product to begin listing it to your shops. </div>
+        <div className="text-center px-6 w-2/3 m-auto dark:text-gray-200"> You do not have any products added. Please add a product to begin listing it to your shops. </div>
       </div>
     }
     return products?.map(mapItem => <ProductCard item={mapItem} onClicked={CheckboxClicked} onMore={toggleMore} />)
@@ -103,8 +103,8 @@ export default function Product() {
   return (
     <>
       {/* Header Container */}
-      <div className="pb-4 bg-white border-b-2 dark:bg-gray-700 dark:border-gray-600">
-        <div className="border-b">
+      <div className="pb-4 bg-white border-b-2 dark:bg-gray-800 dark:border-gray-700">
+        <div className="border-b dark:border-gray-700">
           <Header
             heading="My Products"
             subHeading={`${products?.length ?? 0} Items`}
@@ -151,7 +151,7 @@ export default function Product() {
       Card
       ==========
       */}
-      <div className="custom-height dark:bg-gray-800">
+      <div className="custom-height dark:bg-gray-900">
         {renderProducts()}
       </div>
 

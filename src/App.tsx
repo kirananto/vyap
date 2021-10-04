@@ -11,7 +11,7 @@ import { persistor, store } from "./redux/store";
 export const InitialRouter = () => {
   return (<Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <div className="app-background">
+      <div className="app-background dark:bg-gray-800">
         <Router>
           <Routes />
         </Router>
