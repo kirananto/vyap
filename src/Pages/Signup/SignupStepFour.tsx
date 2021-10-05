@@ -19,9 +19,9 @@ interface CardInterface {
 
 const Card = ({ title, description, isSelected, image, onSelect }: CardInterface) => {
   return (
-    <div onClick={onSelect} className="flex cursor-pointer items-center gap-3 bg-white custom">
+    <div onClick={onSelect} className="flex cursor-pointer items-center gap-3 bg-white custom dark:bg-gray-700">
       {/* ===tick-div=== */}
-      <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200'}`}>
+      <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200 dark:bg-gray-500'}`}>
         {isSelected && <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 text-green-800"
@@ -37,8 +37,8 @@ const Card = ({ title, description, isSelected, image, onSelect }: CardInterface
       </div>
       {/* === */}
       <div className="flex flex-col custom-width-para-text ml-2">
-        <h1 className="text-lg font-bold text-gray-600">{title}</h1>
-        <p className="text-xs text-gray-400">
+        <h1 className="text-lg font-bold text-gray-600 dark:text-gray-200">{title}</h1>
+        <p className="text-xs text-gray-400 dark:text-gray-300">
           {description}
         </p>
         {/* <img src="" alt="" /> */}
@@ -92,14 +92,14 @@ export default function SignupStepTwo() {
   }
 
   return (
-    <div className="flex flex-col items-start w-full h-screen bg-gray-100">
+    <div className="flex flex-col items-start w-full h-screen bg-gray-100 dark:bg-gray-900">
       <div className="w-11/12 mx-auto ">
         <div className="flex items-center justify-start mt-32 mb-5">
           <img style={logoStyle} className="w-24 m--5" src={vyapLogo} alt="" />
           <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>
         </div>
 
-        <h1 className="text-lg font-bold text-gray-600">
+        <h1 className="text-lg font-bold text-gray-600 dark:text-gray-300">
           Please specify the <br /> category of business
         </h1>
 

@@ -51,7 +51,7 @@ export default function SignupStepThree() {
     return true
   }
   return (
-    <div className="flex flex-col items-start w-full h-screen ">
+    <div className="flex flex-col items-start w-full h-screen dark:bg-gray-900 ">
       <div className="flex items-center justify-start px-8 mt-24 mb-5">
         <img
           style={logoStyle}
@@ -62,7 +62,7 @@ export default function SignupStepThree() {
         <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>
       </div>
       {/* Form */}
-      <h1 className="px-8 mb-5 text-xl font-bold text-gray-500">
+      <h1 className="px-8 mb-5 text-xl font-bold text-gray-500 dark:text-gray-300">
         Little bit more information to <br /> get started
       </h1>
 
