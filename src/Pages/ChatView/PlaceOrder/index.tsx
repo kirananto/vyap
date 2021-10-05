@@ -63,7 +63,7 @@ export default function PlaceOrder() {
         if (placeOrder.cartItems?.length === 0) {
             return <div>
                 <img className="mt-12 h-48 p-6 m-auto" src={ChatImg} />
-                <div className="text-center px-6 w-2/3 m-auto mb-8"> You do not have any items in your cart, please add by tapping add more below. </div>
+                <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-gray-300"> You do not have any items in your cart, please add by tapping add more below. </div>
             </div>
         }
         return (<>
