@@ -73,9 +73,9 @@ export default function PlaceOrder() {
                         <img className="h-full w-full" src={DairySmall} alt="" />
                     </div>
                     <div className="flex flex-col">
-                        <div className="flex text-base font-bold text-gray-600">{item.aliasName}</div>
-                        <div className="flex font-bold text-xs text-gray-300">{item?.centralCatalogue?.description}</div>
-                        <div className="flex font-bold text-xs text-gray-400">MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
+                        <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{item.aliasName}</div>
+                        <div className="flex font-bold text-xs text-gray-300 dark:text-gray-300">{item?.centralCatalogue?.description}</div>
+                        <div className="flex font-bold text-xs text-gray-400 dark:text-gray-400">MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                     </div>
                     <div className="flex text-blue-600 items-center">
                     <DropList
@@ -107,7 +107,7 @@ export default function PlaceOrder() {
                         }}
                     />
                     </div>
-                    <div className="flex items-center">{item.quantity ?? 0}</div>
+                    <div className="flex items-center dark:text-gray-200">{item.quantity ?? 0}</div>
                     <div className="flex text-blue-600 items-center">
                     <DropList
                         isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
@@ -139,7 +139,7 @@ export default function PlaceOrder() {
                     />
                     </div>
                 </div>
-                <div className="flex text-lg font-bold text-gray-600 items-center">
+                <div className="flex text-lg font-bold text-gray-600 items-center dark:text-gray-200">
                 ₹{item?.quantity * parseFloat(item?.rate)}
                 </div>
             </div>
@@ -148,7 +148,7 @@ export default function PlaceOrder() {
     }
 
     return (
-        <div className="bg-white">
+        <div className="bg-white dark:bg-gray-900">
             <div className="w-full bg-white shadow ">
                 <SimpleHeader heading={'Place Order'} />
             </div>
@@ -158,15 +158,15 @@ export default function PlaceOrder() {
                     <span className="float-left mb-2 text-sm text-gray-500">Note</span>
                     <textarea value={placeOrder.note} onChange={(event) => dispatch(setNote(event.target.value as any))} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " id=""></textarea>
                 </div>
-                <div className="border rounded-lg m-2 px-4 border-gray-200 pb-8 pt-4">
+                <div className="border rounded-lg m-2 px-4 border-gray-200 pb-8 pt-4  dark:border-gray-700">
                     <div className="flex text-red-600 text-xs justify-end">* only available for supplier</div>
                     <span className="float-left mb-2 text-sm text-gray-500">Flat discount amount</span>
                     <input value={placeOrder.discount} onChange={(event) => dispatch(setFlatDiscount(parseFloat(event?.target.value as any)))} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                         inputMode="numeric" type="number" />
                 </div>
-                <div className="border rounded-lg m-2 px-4 border-gray-200 pb-4 pt-4">
+                <div className="border rounded-lg m-2 px-4 border-gray-200 dark:border-gray-700 pb-4 pt-4">
                     <div className="flex justify-between">
-                        <div className="text-xl font-bold">Items</div>
+                        <div className="text-xl font-bold dark:text-gray-300">Items</div>
                         <div>
                             {!isOpen ? (<svg xmlns="http://www.w3.org/2000/svg" onClick={() => setIsOpen(true)} className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -180,20 +180,20 @@ export default function PlaceOrder() {
                     {isOpen && <div>
 
                         {renderCartItems()}
-                        <div className="flex w-full border border-dashed py-2 mt-4 cursor-pointer justify-center items-center" onClick={() => history.push('/place-order/add-item')}>
+                        <div className="flex w-full border border-dashed dark:border-gray-500 py-2 mt-4 cursor-pointer justify-center items-center" onClick={() => history.push('/place-order/add-item')}>
                             <div className="flex ">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 dark:text-gray-300 " viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                                 </svg>
                             </div>
-                            <div className="flex font-bold text-gray-600 text-lg">
+                            <div className="flex font-bold text-gray-600 dark:text-gray-300 text-lg">
                                 Add more items
                             </div>
                         </div>
                         <div className="mt-4 text-right">
-                            <div className="text-gray-400 text-xl font-extrabold">Total</div>
-                            <div className="text-xl font-extrabold">₹{getTotalPrice()}</div>
-                            <div className="text-xl font-extrabold">₹{getTotalPrice() - placeOrder.discount}</div>
+                            <div className="text-gray-400 dark:text-gray-300 text-xl font-extrabold">Total</div>
+                            <div className="text-xl font-extrabold dark:text-gray-400">₹{getTotalPrice()}</div>
+                            <div className="text-xl font-extrabold dark:text-gray-400">₹{getTotalPrice() - placeOrder.discount}</div>
                         </div>
                         <div className="mt-4">
                             <Button onClick={handleSubmit}>Place order</Button>

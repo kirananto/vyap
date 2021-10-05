@@ -24,13 +24,13 @@ export default function PaymentContainer({
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className="text-gray-400">#{item?.id?.split('-')[0]} •  {item.createdAt ? format(new Date(item.createdAt), 'do MMM yyyy' ) : ''}</div>
-                                    <div className="text-gray-600 my-1">{item.receiver?.name}</div>
+                                    <div className="text-gray-400 dark:text-gray-300">#{item?.id?.split('-')[0]} •  {item.createdAt ? format(new Date(item.createdAt), 'do MMM yyyy' ) : ''}</div>
+                                    <div className="text-gray-600 dark:text-gray-200 my-1">{item.receiver?.name}</div>
                                     <div className="flex w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">{paymentMethod[item.method]}</div>
                                 </div>
                             </div>
                             <div className="flex items-center">
-                                <div className="text-gray-600 text-lg font-extrabold">₹ {item.amount}</div>
+                                <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold">₹ {item.amount}</div>
                             </div>
                         </div>
                     </div>))}
