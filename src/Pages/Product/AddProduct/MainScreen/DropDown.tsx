@@ -86,12 +86,12 @@ function DropDown(props: any) {
           value={value}
           onFocus={() => setIsOpen(true)}
           // onBlur={() => setIsOpen(false)}
-          className="p-2 pl-4 border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none"
+          className="p-2 pl-4 border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
           placeholder="Search or create product..."
         />
         <button
           disabled={isdisabled}
-          className={isdisabled ? "hide-create-btn" : "show-create-btn"}
+          className={`${isdisabled ? "hide-create-btn" : "show-create-btn"} dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500`}
           onClick={add}
         >
           <svg
