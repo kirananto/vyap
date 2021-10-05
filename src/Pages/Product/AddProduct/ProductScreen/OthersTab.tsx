@@ -116,7 +116,7 @@ function OthersTab() {
       </p>
       {/* image-container */}
       <div className="flex flex-wrap gap-4 mt-4 mb-8">
-        {addProductInfo?.others?.productImage?.map((item) => <ImageContainer item={item} />)}
+        {addProductInfo?.others?.productImage?.map((item) => <ImageContainer key={item.fileId} item={item} />)}
         <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer dark:text-gray-300" onClick={() => fileUploaderRef.current!.click()}>
           {!spinner ? (<svg
             xmlns="http://www.w3.org/2000/svg"

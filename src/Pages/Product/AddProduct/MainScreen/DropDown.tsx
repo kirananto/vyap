@@ -4,8 +4,8 @@ import "./Drop.css";
 
 function List(props: any) {
   return (
-    <div className="drop-main" onClick={() => props.onSelect(props.opt)}>
-      <div className="p-2 border border-gray-200 rounded-lg product-image">
+    <div className="drop-main cursor-pointer" onClick={() => props.onSelect(props.opt)}>
+      <div className="overflow-hidden border border-gray-200 rounded-lg product-image">
         <img className="w-10 h-10" src={props.opt.url ?? 'https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png'} alt={props.opt.name} />
       </div>
       <div className="product-details">
