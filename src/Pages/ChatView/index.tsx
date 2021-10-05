@@ -32,7 +32,7 @@ export const Payment = () => {
     <div className="overflow-y-auto dark:bg-gray-900">
       {/* header */}
       <div className="fixed w-full pb-3 bg-white shadow dark:bg-gray-800">
-        <Header heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
+        <Header onBackClick={() => history.push('/home')} heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}

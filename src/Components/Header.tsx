@@ -2,12 +2,12 @@ import React from "react";
 import { useHistory } from "react-router";
 import walletSvg from "../assets/illustrations/wallet.svg"
 
-function Header({ heading, subHeading, phoneNumber, shareDetails }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string }) {
+function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any }) {
   const history = useHistory()
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto ">
       {/* back icon  */}
-      <div onClick={() => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
+      <div onClick={onBackClick ? onBackClick : () => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 dark:text-gray-300"
