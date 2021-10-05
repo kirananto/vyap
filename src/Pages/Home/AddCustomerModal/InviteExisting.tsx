@@ -66,7 +66,7 @@ export default function InviteExisting({
           onChange={(event) => setBusinessName(event?.target.value)}
           id="tel"
           placeholder="Name of the shop or Business"
-          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
         />
       </div>
       <div className="mt-4">
@@ -79,7 +79,7 @@ export default function InviteExisting({
           onChange={(event) => setAddress(event?.target.value)}
           id="tel"
           placeholder="Enter the address of the customer."
-          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
         />
       </div>
       <div className="mt-4">
@@ -93,13 +93,13 @@ export default function InviteExisting({
           onChange={(event) => setPinCode(event?.target.value)}
           id="tel"
           placeholder="Pin code of the customer"
-          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
         />
       </div>
       {/* <!-- btn popup --> */}
       <div className="flex my-8 p-2 gap-2">
 
-        <button onClick={() => setCurrentPage(currentPageEnum.STEP_1)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
+        <button onClick={() => setCurrentPage(currentPageEnum.STEP_1)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200">
           Back
         </button>
         <button onClick={() => setCurrentPage(currentPageEnum.PREVIEW)} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">

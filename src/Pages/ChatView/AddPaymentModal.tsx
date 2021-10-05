@@ -66,7 +66,7 @@ export default function AddPaymentModal({
         {/* <!-- btn popup --> */}
         <div className="flex mt-4 p-2 gap-2">
 
-          <button onClick={() => toggleVisibility(false)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
+          <button onClick={() => toggleVisibility(false)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200">
             Cancel
           </button>
           <button onClick={() => handleSubmit()} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">

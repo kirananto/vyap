@@ -6,7 +6,7 @@ interface IProps {
 }
 export default function EmployeesCard(props: IProps) {
   return (
-    <div className="flex w-11/12 px-2 py-4 bg-white rounded-md shadow">
+    <div className="flex w-11/12 px-2 py-4 bg-white rounded-md shadow dark:bg-gray-800">
       {/* Col-1 ===================== */}
       {/* icon */}
       <div className="flex items-center justify-center w-1/4 ">
@@ -30,12 +30,12 @@ export default function EmployeesCard(props: IProps) {
 
       {/* Col-2 ===================== */}
       <div className="flex flex-col justify-center w-3/4">
-        <h1 className="font-bold text-gray-600">{props.name}</h1>
-        <p className="text-xs font-bold text-gray-400">Order taker - {props.orderTaker}</p>
+        <h1 className="font-bold text-gray-600 dark:text-gray-300">{props.name}</h1>
+        <p className="text-xs font-bold text-gray-400 dark:text-gray-200">Order taker - {props.orderTaker}</p>
       </div>
       {/* Col-3 ===================== */}
       {/* option icon */}
-      <div className="flex items-center justify-end w-1/4 pr-1 ">
+      <div className="flex items-center justify-end w-1/4 pr-1 dark:text-gray-200 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6"

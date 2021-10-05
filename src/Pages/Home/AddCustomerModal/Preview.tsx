@@ -59,9 +59,9 @@ export default function PreviewScreen({
         // onPressLogin(phoneNumber.replace('+91', ''));
       }}
     >
-      <div className="mt-4">
+      <div className="mt-4 dark:text-gray-400">
         Please confirm the below information
-        <div className="my-6 bg-gray-200 p-4 rounded-lg">
+        <div className="my-6 bg-gray-200 p-4 rounded-lg dark:bg-gray-600 dark:text-gray-200">
           You are inviting {phoneNumber}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(2)} </span>
 
         </div>
@@ -69,7 +69,7 @@ export default function PreviewScreen({
       {/* <!-- btn popup --> */}
       <div className="flex my-8 p-2 gap-2">
 
-        <button onClick={() => setCurrentPage(isExisting ? currentPageEnum.STEP_1 : currentPageEnum.NEW_CUSTOMER_STEP)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700">
+        <button onClick={() => setCurrentPage(isExisting ? currentPageEnum.STEP_1 : currentPageEnum.NEW_CUSTOMER_STEP)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200">
           Back
         </button>
         <button onClick={handleSubmit} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">

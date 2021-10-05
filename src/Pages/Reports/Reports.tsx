@@ -5,14 +5,14 @@ import shopImg from "../../assets/illustrations/Shop.svg"
 
 export default function Reports() {
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-900">
       {/* Header */}
       <div className="bg-white shadow">
         <SimpleHeader heading="Reports" />
       </div>
 
       {/* Card Container */}
-      <div className="grid w-full grid-cols-2 gap-4 p-4 mt-2 bg-white">
+      <div className="grid w-full grid-cols-2 gap-4 p-4 mt-2">
         <ReportCard
           heading="Shopwise Reports"
           bgIllus={shopImg}

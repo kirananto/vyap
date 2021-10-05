@@ -151,7 +151,7 @@ export default function Product() {
       Card
       ==========
       */}
-      <div className="custom-height dark:bg-gray-900">
+      <div className="custom-height bg-white dark:bg-gray-900">
         {renderProducts()}
       </div>
 

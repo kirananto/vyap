@@ -19,7 +19,7 @@ export default function Payments() {
     return (
         <div className="">
             {/* header */}
-            <div className="w-full pb-3 bg-white shadow ">
+            <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
                 <Header heading="All Payments" />
                 <AppliedFilters />
             </div>
@@ -28,7 +28,7 @@ export default function Payments() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 w-full h-16 bg-white shadow px-8 grid">
+            <div className="fixed bottom-0 w-full h-20 bg-white shadow px-8 grid dark:bg-gray-800">
                 <div className="flex items-center justify-center gap-2 justify-self-center mt-2 w-full max-w-lg">
                     <button className="flex justify-center gap-1 items-center w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

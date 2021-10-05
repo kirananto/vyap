@@ -56,7 +56,7 @@ export default function PurchaseOrder() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-16 bg-white shadow">
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow">
                 <button 
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                     onClick={() => history.push('/purchase-order/new')}
