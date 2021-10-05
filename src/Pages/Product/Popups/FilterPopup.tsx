@@ -19,7 +19,7 @@ const Sorting = (props: SortingProps) => {
 export function FilterPopup({ isVisible, toggleVisibility }: { isVisible: boolean, toggleVisibility: any }) {
     return (<>
       <div onClick={toggleVisibility} className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
-      <div className="flex flex-col w-full gap-3 bg-white popup text-left animate__animated animate__fadeInUpBig animate__faster">
+      <div className="flex flex-col w-full gap-3 bg-white popup text-left animate__animated animate__fadeInUpBig animate__faster dark:bg-gray-700">
   
         <div className="flex items-center justify-between mb-4">
           {/* col-1 */}

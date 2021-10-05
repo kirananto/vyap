@@ -39,13 +39,13 @@ export default function AddPaymentModal({
 
   return (<div>
     <div onClick={() => toggleVisibility(false)} className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
-    <div className={`popup ${isVisible ? 'show' : ''} animate__animated animate__fadeInUpBig animate__faster`}>
+    <div className={`popup ${isVisible ? 'show' : ''} animate__animated animate__fadeInUpBig animate__faster dark:bg-gray-700`}>
       {isSuccess ? (<Success
         text="successfully created payment record"
         toggleVisibility={() => toggleVisibility(false)}
-      />) : (<><h2 className="text-left p-2 text-2xl mt-2 text-gray-700">Add Payment</h2>
+      />) : (<><h2 className="text-left p-2 text-2xl mt-2 text-gray-700 dark:text-gray-200">Add Payment</h2>
         <div className="p-2">
-          <span className="float-left mb-2 text-sm text-gray-500">Payment mode</span>
+          <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">Payment mode</span>
           <select value={method} onChange={(event) => setMethod(event?.target.value as unknown as paymentMethod)} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " name="payment" id="payment">
             <option value={paymentMethod.CASH}>CASH</option>
             <option value={paymentMethod.CHEQUE}>CHEQUE</option>
@@ -54,13 +54,13 @@ export default function AddPaymentModal({
 
         {/* <!-- Dropdown-3 --> */}
         <div className="p-2">
-          <span className="float-left mb-2 text-sm text-gray-500">AMOUNT</span>
+          <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">AMOUNT</span>
           <input value={amount} onChange={(event) => setAmount(parseFloat(event?.target.value as any))} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
             inputMode="numeric" type="number" />
         </div>
         {/* <!-- Textarea --> */}
         <div className="p-2">
-          <span className="float-left mb-2 text-sm text-gray-500">REMARKS</span>
+          <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">REMARKS</span>
           <textarea value={note} onChange={(event) => setNote(event.target.value as any)} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " id=""></textarea>
         </div>
         {/* <!-- btn popup --> */}
