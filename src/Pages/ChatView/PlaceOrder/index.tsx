@@ -7,14 +7,14 @@ import DairySmall from '../../../assets/img/DairySmall.jpeg'
 import ChatImg from '../../Product/assets/no_data.svg'
 import DropList from 'src/Components/Style/DropList'
 
-import { selectPlaceOrderInfo, setFlatDiscount, setNote } from './placeOrderSlice'
+import { pushItemsToCart, removeItemsFromCart, selectPlaceOrderInfo, setFlatDiscount, setNote } from './placeOrderSlice'
 import { placeOrderAPI } from 'src/API/order.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 
 export default function PlaceOrder() {
     const { token, user } = useSelector(selectCredentials)
 
-    const [isOpen, setIsOpen] = React.useState(true)   
+    const [isOpen, setIsOpen] = React.useState(true)
     const [isDropOpen, setIsDropOpen] = React.useState<{
         isAdd: boolean,
         isOpen: any
@@ -24,12 +24,15 @@ export default function PlaceOrder() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    function handleAddItem (item: any, caseQuantity: number) {
-        console.log('data')
+    function handleAddItem(item: any, caseQuantity: number) {
+        dispatch(pushItemsToCart([{
+            ...item,
+            quantity: caseQuantity
+        }]))
     }
 
-    function handleRemoveItemItem (item: any, caseQuantity: number) {
-        console.log('data')
+    function handleRemoveItemItem(item: any, caseQuantity: number) {
+        dispatch(removeItemsFromCart({ id: item.id, quantity: caseQuantity }))
     }
 
     function getTotalPrice() {
@@ -51,6 +54,8 @@ export default function PlaceOrder() {
                     productId: mapItem.id
                 }
             })
+        }).then(result => {
+            history.push(`/chat/${localStorage?.getItem('inboxId')}`)
         })
     }
 
@@ -73,74 +78,74 @@ export default function PlaceOrder() {
                         <img className="h-full w-full" src={DairySmall} alt="" />
                     </div>
                     <div className="flex flex-col">
-                        <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{item.aliasName}</div>
+                        <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
                         <div className="flex font-bold text-xs text-gray-300 dark:text-gray-300">{item?.centralCatalogue?.description}</div>
                         <div className="flex font-bold text-xs text-gray-400 dark:text-gray-400">MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                     </div>
                     <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                    <DropList
-                        isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
-                        list={[{
-                            appearance: 'danger',
-                            label: 'Remove 1 Item',
-                            onClick: () => handleRemoveItemItem(item, 1)
-                        }, {
-                            appearance: 'danger',
-                            label: 'Remove 1 Case (10 Pc)',
-                            onClick: () => handleRemoveItemItem(item, 10)
-                        }]}
-                        trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>}
-                        onClick={() => {
-                            if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
-                                setIsDropOpen({
-                                    isAdd: false,
-                                    isOpen: undefined
-                                })
-                            } else {
-                                setIsDropOpen({
-                                    isAdd: false,
-                                    isOpen: index
-                                })
-                            }
-                        }}
-                    />
+                        <DropList
+                            isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
+                            list={[{
+                                appearance: 'danger',
+                                label: 'Remove 1 Item',
+                                onClick: () => handleRemoveItemItem(item, 1)
+                            }, {
+                                appearance: 'danger',
+                                label: 'Remove 1 Case (10 Pc)',
+                                onClick: () => handleRemoveItemItem(item, 10)
+                            }]}
+                            trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>}
+                            onClick={() => {
+                                if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
+                                    setIsDropOpen({
+                                        isAdd: false,
+                                        isOpen: undefined
+                                    })
+                                } else {
+                                    setIsDropOpen({
+                                        isAdd: false,
+                                        isOpen: index
+                                    })
+                                }
+                            }}
+                        />
                     </div>
                     <div className="flex items-center dark:text-gray-200">{item.quantity ?? 0}</div>
                     <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                    <DropList
-                        isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
-                        list={[{
-                            appearance: 'primary',
-                            label: 'Add 1 Item',
-                            onClick: () => handleAddItem(item, 1)
-                        }, {
-                            appearance: 'primary',
-                            label: 'Add 1 Case (10 Pc)',
-                            onClick: () => handleAddItem(item, 10)
-                        }]}
-                        trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>}
-                        onClick={() => {
-                            if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
-                                setIsDropOpen({
-                                    isAdd: true,
-                                    isOpen: undefined
-                                })
-                            } else {
-                                setIsDropOpen({
-                                    isAdd: true,
-                                    isOpen: index
-                                })
-                            }
-                        }}
-                    />
+                        <DropList
+                            isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
+                            list={[{
+                                appearance: 'primary',
+                                label: 'Add 1 Item',
+                                onClick: () => handleAddItem(item, 1)
+                            }, {
+                                appearance: 'primary',
+                                label: 'Add 1 Case (10 Pc)',
+                                onClick: () => handleAddItem(item, 10)
+                            }]}
+                            trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>}
+                            onClick={() => {
+                                if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
+                                    setIsDropOpen({
+                                        isAdd: true,
+                                        isOpen: undefined
+                                    })
+                                } else {
+                                    setIsDropOpen({
+                                        isAdd: true,
+                                        isOpen: index
+                                    })
+                                }
+                            }}
+                        />
                     </div>
                 </div>
                 <div className="flex text-lg font-bold text-gray-600 items-center dark:text-gray-200">
-                ₹{item?.quantity * parseFloat(item?.rate)}
+                    ₹{item?.quantity * parseFloat(item?.rate)}
                 </div>
             </div>
             ))}

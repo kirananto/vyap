@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
 import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import Spinner from 'src/Components/Style/Spinner';
+import { useParams } from 'react-router';
 
 const limit = 10
 
@@ -30,10 +31,14 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
     }[]>([]);
     const [currentPage] = useState(1)
 
+
+  const { id } = useParams<{ id: string }>()
+
     useEffect(() => {
         setError(false)
         fetchThreadsById({ token: token!, inboxId: inboxId!, offset: ((currentPage - 1) * limit), limit }).then((res: any) => {
             setThreads(res.data.data)
+            localStorage.setItem('inboxId', `${id}`)
             setLoading(false)
         }).catch(error => {
             if (inboxId) {

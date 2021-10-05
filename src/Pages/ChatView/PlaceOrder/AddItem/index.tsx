@@ -99,7 +99,7 @@ export default function AddItem() {
                     <img className="h-full w-full" src={DairySmall} alt="" />
                 </div>
                 <div className="flex flex-col">
-                    <div className="flex text-base font-bold text-gray-600">{item.aliasName}</div>
+                    <div className="flex text-base font-bold text-gray-600">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
                     <div className="flex font-bold text-xs text-gray-300">#213r423423423423423</div>
                     <div className="flex font-bold text-xs text-gray-400">MRP:  ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                 </div>
