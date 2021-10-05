@@ -55,23 +55,23 @@ export default function SignupStep1() {
   }
 
   return (
-    <section className="flex flex-col items-center h-screen md:flex-row ">
+    <section className="flex flex-col items-center h-screen md:flex-row  dark:bg-gray-800">
       <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
         <div className="w-80 h-100">
           <a className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
             <img className="w-12 h-12" src={vyapLogo} />
-            <h2 className="text-2xl font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400">
+            <h2 className="text-2xl font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400 dark:text-indigo-100">
               {" "}
               Vyap {" "}
             </h2>
           </a>
-          <h1 className="mt-8 text-lg font-semibold text-gray-700 tracking-ringtighter title-font">
+          <h1 className="mt-8 text-lg font-semibold text-gray-700 tracking-ringtighter title-font dark:text-gray-200">
             {currentPage === 1 ? `We've send you an verification code
 To your phone number` : 'Signup with vyap to succeed'}
           </h1>
           {renderForm()}
-          <hr className="w-full my-6 border-indigo-100" />
-          <p className="mt-8 text-center">
+          <hr className="w-full my-6 border-indigo-100 dark:border-gray-600" />
+          <p className="mt-8 text-center dark:text-gray-400">
             Already have an account?{" "}
             <Link
               to="/login"
