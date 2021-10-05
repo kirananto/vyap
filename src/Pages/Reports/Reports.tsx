@@ -5,7 +5,7 @@ import shopImg from "../../assets/illustrations/Shop.svg"
 
 export default function Reports() {
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="bg-white dark:bg-gray-900 h-screen">
       {/* Header */}
       <div className="bg-white shadow">
         <SimpleHeader heading="Reports" />
