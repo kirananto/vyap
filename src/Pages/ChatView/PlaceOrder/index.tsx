@@ -63,7 +63,7 @@ export default function PlaceOrder() {
         }
         return (<>
             <div className={'my-4'}>
-                <input placeholder={'Search'} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " />
+                <input placeholder={'Search'} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " />
             </div>
             {placeOrder.cartItems.map((item, index) => (<div className="flex justify-between" key={`${index}`}>
                 {/* TODO: Remove this console.log */}
@@ -156,12 +156,12 @@ export default function PlaceOrder() {
                 {/* <!-- Textarea --> */}
                 <div className="p-2">
                     <span className="float-left mb-2 text-sm text-gray-500">Note</span>
-                    <textarea value={placeOrder.note} onChange={(event) => dispatch(setNote(event.target.value as any))} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " id=""></textarea>
+                    <textarea value={placeOrder.note} onChange={(event) => dispatch(setNote(event.target.value as any))} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " id=""></textarea>
                 </div>
                 <div className="border rounded-lg m-2 px-4 border-gray-200 pb-8 pt-4">
                     <div className="flex text-red-600 text-xs justify-end">* only available for supplier</div>
                     <span className="float-left mb-2 text-sm text-gray-500">Flat discount amount</span>
-                    <input value={placeOrder.discount} onChange={(event) => dispatch(setFlatDiscount(parseFloat(event?.target.value as any)))} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 "
+                    <input value={placeOrder.discount} onChange={(event) => dispatch(setFlatDiscount(parseFloat(event?.target.value as any)))} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                         inputMode="numeric" type="number" />
                 </div>
                 <div className="border rounded-lg m-2 px-4 border-gray-200 pb-4 pt-4">
