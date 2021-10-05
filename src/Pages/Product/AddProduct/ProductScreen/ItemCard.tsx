@@ -23,10 +23,10 @@ function ItemCard(props: any) {
       </div>
       {/* detail-col */}
       <div className="w-full ml-2 mt-2">
-        <div className="text-base font-bold text-gray-700">
+        <div className="text-base font-bold text-gray-700 dark:text-gray-300">
           {productDetails.centralCatalogue?.name}
         </div>
-        <div className="text-xs">{productDetails?.centralCatalogue?.description}</div>
+        <div className="text-xs dark:text-gray-400">{productDetails?.centralCatalogue?.description}</div>
         {/* <div className="text-xs font-bold text-gray-400">
           MRP: {productDetails.price} ₹
         </div> */}
@@ -38,7 +38,7 @@ function ItemCard(props: any) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="text-red-400 w-7 h-7"
+            className="text-red-400 w-7 h-7 dark:text-red-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

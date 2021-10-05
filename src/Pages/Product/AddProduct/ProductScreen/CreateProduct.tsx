@@ -67,7 +67,7 @@ function CreateProduct() {
   }
 
   return (
-    <div className=" create-product-container">
+    <div className=" create-product-container dark:bg-gray-900">
       <SimpleHeader heading="Create Product" />
       <div className="w-11/12 pt-6  px-2 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
@@ -77,14 +77,14 @@ function CreateProduct() {
         <div className="flex justify-between py-4">
           <button
             onClick={() => toggleTabs(1)}
-            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1 ? "bg-blue-100 text-blue-600 " : "text-gray-500"}`}
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1 ? "bg-blue-100 text-blue-600 " : "text-gray-500 dark:text-gray-300"}`}
           >
             Pricing
           </button>
           <button
             onClick={() => toggleTabs(2)}
             className={
-              `px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2 ? "bg-blue-100 text-blue-600" : "text-gray-500"}`
+              `px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2 ? "bg-blue-100 text-blue-600" : "text-gray-500 dark:text-gray-300"}`
             }
           >
             Others

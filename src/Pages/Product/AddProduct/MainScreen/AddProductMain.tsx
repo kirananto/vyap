@@ -44,12 +44,12 @@ export default function AddProductMain() {
     })
   }, [])
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen dark:bg-gray-900">
       <SimpleHeader
         heading="Add product"
         backFn={() => history.push("/my-products")}
       />
-      <div className="w-11/12 p-3 pt-6 mx-auto mt-24">
+      <div className="w-11/12 p-3 pt-6 mx-auto mt-24 dark:bg-gray-900">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         <DropDown
           onSelect={(e: any) => dispatch(setCentralCatalogue(e))}

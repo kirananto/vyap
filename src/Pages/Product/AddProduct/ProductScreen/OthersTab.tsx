@@ -9,7 +9,7 @@ import Spinner from "src/Components/Style/Spinner";
 const ImageContainer = (props: any) => {
   const { item } = props
   return (
-    <div className="w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm " key={item?.fileId}>
+    <div className="w-16 h-16 overflow-hidden border border-gray-200 dark:border-gray-500 rounded-lg shadow-sm " key={item?.fileId}>
       <img key={item?.fileId} alt="" src={item?.thumbnailUrl} />
     </div>
   );
@@ -52,7 +52,7 @@ const Input = (props: any) => {
         type="text"
         value={props.value}
         placeholder={props.placeholder}
-        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 "
+        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
       />
     </div>
   );
@@ -117,7 +117,7 @@ function OthersTab() {
       {/* image-container */}
       <div className="flex flex-wrap gap-4 mt-4 mb-8">
         {addProductInfo?.others?.productImage?.map((item) => <ImageContainer item={item} />)}
-        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer " onClick={() => fileUploaderRef.current!.click()}>
+        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer dark:text-gray-300" onClick={() => fileUploaderRef.current!.click()}>
           {!spinner ? (<svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-8 h-8"
@@ -146,7 +146,7 @@ function OthersTab() {
         <Input label="Category" dispatch={dispatch} value={addProductInfo?.others?.category} />
         <div className="barcode-input">
           <Input label="Barcode" placeholder="Enter or Scan Barcode" dispatch={dispatch} value={addProductInfo?.others?.barCode} />
-          <div className="barcode-icon">
+          <div className="barcode-icon dark:text-gray-300">
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
