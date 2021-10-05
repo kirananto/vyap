@@ -32,7 +32,7 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
 
     useEffect(() => {
         setError(false)
-        fetchThreadsById({ token: token!, inboxId: inboxId!, offset: ((currentPage - 1) * limit), limit }).then(res => {
+        fetchThreadsById({ token: token!, inboxId: inboxId!, offset: ((currentPage - 1) * limit), limit }).then((res: any) => {
             setThreads(res.data.data)
             setLoading(false)
         }).catch(error => {
@@ -47,9 +47,9 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
             return <div className="p-12 mt-12 text-center dark:text-gray-100"> Error loading chats...</div>
         }
         if (loading) {
-            return <div className="p-12 mt-12 text-center dark:text-gray-100 grid"> 
-            <Spinner />
-            <div className="mt-4">Loading...</div>
+            return <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
+                <Spinner />
+                <div className="mt-4">Loading...</div>
             </div>
         }
         if (threads.length === 0) {

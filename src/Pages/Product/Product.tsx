@@ -79,7 +79,7 @@ export default function Product() {
   // ! ------===------->
 
   useEffect(() => {
-    fetchProducts(token!, user?.organizationId!, 20, 0).then(result => {
+    fetchProducts(token!, user?.organizationId!, 20, 0).then((result: any) => {
       setProducts(result.data?.data ?? [])
     }).catch(error => {
       console.log('error', error)
@@ -89,7 +89,7 @@ export default function Product() {
   }, [])
 
   function renderProducts() {
-    if(loading) {
+    if (loading) {
       return <div className="mt-12 p-12 text-center"> Loading...</div>
     }
     if (products?.length === 0) {

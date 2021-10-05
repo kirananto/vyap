@@ -29,7 +29,7 @@ export const Home = () => {
         offset: ((paginationParams.page - 1) * limit),
         limit,
         search: paginationParams.search === '' ? undefined : paginationParams.search
-      }).then(result => {
+      }).then((result: any) => {
         setInbox(result.data.data)
         setLoading(false)
         console.log('data', result.data.data)

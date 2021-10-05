@@ -57,7 +57,7 @@ export default function SignupStepTwo() {
   const signup = useSelector(selectSignupInfo)
 
   useEffect(() => {
-    fetchCategories(token!).then(result => {
+    fetchCategories(token!).then((result: any) => {
       console.log('data', result.data)
       setCategories(result.data?.data)
     }).catch(error => {

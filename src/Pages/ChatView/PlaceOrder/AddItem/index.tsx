@@ -29,7 +29,7 @@ export default function AddItem() {
 
     useEffect(() => {
         // TODO use placeOrder.orgId
-        fetchProducts(token!, user?.organizationId!, 20, 0).then(result => {
+        fetchProducts(token!, user?.organizationId!, 20, 0).then((result: any) => {
             setItemList(result.data?.data ?? [])
         })
     }, [])

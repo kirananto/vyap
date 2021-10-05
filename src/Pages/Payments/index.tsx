@@ -10,7 +10,7 @@ export default function Payments() {
     const { token } = useSelector(selectCredentials)
     const [payments, setPayments] = useState<any[]>([1, 1, 1, 1, 1, 1])
     useEffect(() => {
-        fetchAllPayments(token!).then(result => {
+        fetchAllPayments(token!).then((result: any) => {
             console.log(result.data)
             setPayments(result.data.data)
             //TODO handle the payments better

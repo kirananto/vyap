@@ -11,7 +11,7 @@ export default function Orders() {
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
-        fetchOrdersAPI(token!).then(result => {
+        fetchOrdersAPI(token!).then((result: any) => {
             setOrders(result?.data?.data ?? [])
         })
     }, [])

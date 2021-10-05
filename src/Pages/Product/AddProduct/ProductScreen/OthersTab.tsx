@@ -69,7 +69,7 @@ function OthersTab() {
   const fileUploaderRef: any = useRef(null)
 
   useEffect(() => {
-    fetchBrands(token!, 100, 0).then((result) =>
+    fetchBrands(token!, 100, 0).then((result: any) =>
       console.log(
         result.data.data
           // .sort((a: any, b: any) => {

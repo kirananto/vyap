@@ -16,7 +16,7 @@ export default function Login() {
   const history = useHistory()
   const confirmOTP = (code: string) => {
     setError(null)
-    verifyOtp(phoneNumberRef.current, code).then(res => {
+    verifyOtp(phoneNumberRef.current, code).then((res: any) => {
       if (res.data) {
         console.log('res.data', res.data)
         if (res.data.token) {
