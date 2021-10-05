@@ -9,6 +9,7 @@ import { fetchInboxes } from "src/API/inbox.axios";
 import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import profileImg from "src/assets/icons/profile/profile-icon.svg"
 import AddCustomerModal from "./AddCustomerModal";
+import Spinner from "src/Components/Style/Spinner";
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
@@ -40,7 +41,10 @@ export const Home = () => {
 
   function renderChats() {
     if (loading) {
-      return <div className="p-12 mt-12 text-center dark:text-gray-100"> Loading...</div>
+      return <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
+        <Spinner />
+        <div className="mt-4">Loading...</div>
+      </div>
     }
     if (inbox.length === 0) {
       return <div>
