@@ -77,7 +77,7 @@ export default function PlaceOrder() {
                         <div className="flex font-bold text-xs text-gray-300 dark:text-gray-300">{item?.centralCatalogue?.description}</div>
                         <div className="flex font-bold text-xs text-gray-400 dark:text-gray-400">MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                     </div>
-                    <div className="flex text-blue-600 items-center">
+                    <div className="flex text-blue-600 dark:text-blue-400 items-center">
                     <DropList
                         isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
                         list={[{
@@ -108,7 +108,7 @@ export default function PlaceOrder() {
                     />
                     </div>
                     <div className="flex items-center dark:text-gray-200">{item.quantity ?? 0}</div>
-                    <div className="flex text-blue-600 items-center">
+                    <div className="flex text-blue-600 dark:text-blue-400 items-center">
                     <DropList
                         isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
                         list={[{
@@ -148,7 +148,7 @@ export default function PlaceOrder() {
     }
 
     return (
-        <div className="bg-white dark:bg-gray-900">
+        <div className="bg-white dark:bg-gray-900 min-h-screen">
             <div className="w-full bg-white shadow ">
                 <SimpleHeader heading={'Place Order'} />
             </div>
@@ -167,7 +167,7 @@ export default function PlaceOrder() {
                 <div className="border rounded-lg m-2 px-4 border-gray-200 dark:border-gray-700 pb-4 pt-4">
                     <div className="flex justify-between">
                         <div className="text-xl font-bold dark:text-gray-300">Items</div>
-                        <div>
+                        <div className=" dark:text-gray-300">
                             {!isOpen ? (<svg xmlns="http://www.w3.org/2000/svg" onClick={() => setIsOpen(true)} className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>) : (
