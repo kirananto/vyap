@@ -29,7 +29,7 @@ function Header({ heading, subHeading, phoneNumber, shareDetails }: { heading?: 
         <h1 className="text-lg font-semibold  font-ProductSans">
           {heading}
         </h1>
-        {subHeading && (<h1 className="text-lg font-black text-transparent PRODUCT-SANS-BOLD bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
+        {subHeading && (<h1 className="text-lg font-black text-transparent product_sans_bold bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
           {subHeading}
         </h1>)}
       </div>

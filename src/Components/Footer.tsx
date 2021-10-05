@@ -8,7 +8,7 @@ function Footer() {
       {/* Nav-Item-1 */}
       <Link
         to="/"
-        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer hover:bg-indigo-100 text-gray-500 dark:text-gray-200 dark:hover:bg-gray-500"
+        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer text-gray-500 dark:text-gray-200 ripple_effect"
       >
         <figure className="grid justify-items-center">
           <svg
@@ -35,7 +35,7 @@ function Footer() {
 
       <Link
         to="/my-products"
-        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer hover:bg-indigo-100  text-gray-500 dark:text-gray-200  dark:hover:bg-gray-500"
+        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer  text-gray-500 dark:text-gray-200 ripple_effect"
       >
         <figure className="grid justify-items-center">
           <svg
@@ -62,7 +62,7 @@ function Footer() {
 
       <Link
         to="/more"
-        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer hover:bg-indigo-100 text-gray-500 dark:text-gray-200  dark:hover:bg-gray-500"
+        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer text-gray-500 dark:text-gray-200 ripple_effect"
       >
         <figure className="grid justify-items-center">
           <svg

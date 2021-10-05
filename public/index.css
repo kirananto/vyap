@@ -12,6 +12,20 @@ body {
     font-family: "ProductSans" !important;
 }
 
-.PRODUCT-SANS-BOLD {
+.product_sans_bold {
     font-family: "ProductSansBold" !important;
+}
+
+/* Ripple effect */
+.ripple_effect {
+    background-position: center;
+    transition: background 0.8s;
+}
+.ripple_effect:hover {
+    background:  radial-gradient(circle, transparent 1%, #47a7f51c 1%) center/15000%;
+}
+.ripple_effect:active {
+    background-color: #3c40433d;
+    background-size: 100%;
+    transition: background 0s;
 }
