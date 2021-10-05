@@ -73,7 +73,7 @@ function DropDown(props: any) {
     }
     return listItems.map((opt: any) => {
       console.log('opt1')
-      return <List opt={opt} onSelect={select} />
+      return <List key={opt.id} opt={opt} onSelect={select} />
     })
   }
   return (
