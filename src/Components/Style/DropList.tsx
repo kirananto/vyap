@@ -37,21 +37,21 @@ const getAppearance = (appearance: IAppearance): {
     switch (appearance) {
         case 'primary':
             return {
-                text: 'text-gray-600',
-                focus: 'focus:border-purple-600 focus:bg-purple-100',
+                text: 'text-gray-600 dark:text-gray-200',
+                focus: 'dark:bg-gray-600',
                 icon: addIcon()
             }
         
         case 'danger':
             return {
-                text: 'text-red-600',
-                focus: 'focus:border-red-600 focus:bg-purple-100',
+                text: 'text-red-600 dark:text-gray-200',
+                focus: 'dark:bg-gray-600',
                 icon: removeIcon()
             }
         default:
             return {
-                text: 'text-gray-600',
-                focus: 'focus:border-gray-600 focus:bg-purple-100',
+                text: 'text-gray-600 dark:text-gray-200',
+                focus: 'dark:bg-gray-600',
                 icon: addIcon()
             }
     }
@@ -61,10 +61,10 @@ export default function DropList(props: IProps) {
     return (
         <div className="relative inline-block text-left">
             <div onClick={props.onClick}>{props.trigger}</div>
-            {props.isOpen && (<div className="z-50 w-max text-gray-600 origin-top-right absolute right-4 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+            {props.isOpen && (<div className="z-50 w-max text-gray-600 origin-top-right absolute right-4 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-600 border-l-4 border-purple-300" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
                 <div className="py-2" role="none">
                     {props.list.map((mapItem, mapIndex) => (
-                        <div key={mapIndex} onClick={mapItem.onClick} className={`flex items-center cursor-pointer gap-2 border-l-4 border-white ${getAppearance(mapItem.appearance).focus} px-4 py-2`}>
+                        <div key={mapIndex} onClick={mapItem.onClick} className={`flex items-center cursor-pointer gap-2 ${getAppearance(mapItem.appearance).focus} px-4 py-2`}>
                             <div className={`flex ${getAppearance(mapItem.appearance).text}`}>
                                 {getAppearance(mapItem.appearance).icon}
                             </div>

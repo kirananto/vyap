@@ -91,7 +91,7 @@ export default function AddItem() {
                 <div className="text-center px-6 w-2/3 m-auto mb-8"> Sorry the seller has no products for sale. </div>
             </div>
         }
-        return itemList.map((item, index) => (<div className="flex pt-4 gap-2 justify-between border-b-2 border-gray-100 pb-2" key={`${index}`}>
+        return itemList.map((item, index) => (<div className="flex pt-4 gap-2 justify-between border-b-2 border-gray-100 dark:border-gray-700 pb-2" key={`${index}`}>
             {/* TODO: Remove this console.log */}
             {console.log(item)}
             <div className="flex gap-2 items-center">
@@ -99,13 +99,13 @@ export default function AddItem() {
                     <img className="h-full w-full" src={DairySmall} alt="" />
                 </div>
                 <div className="flex flex-col">
-                    <div className="flex text-base font-bold text-gray-600">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
+                    <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
                     <div className="flex font-bold text-xs text-gray-300">#213r423423423423423</div>
                     <div className="flex font-bold text-xs text-gray-400">MRP:  ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                 </div>
             </div>
             <div className="flex gap-2">
-                <div className="flex text-blue-600 items-center">
+                <div className="flex text-blue-600 dark:text-blue-400 items-center">
                     <DropList
                         isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
                         list={[{
@@ -135,8 +135,8 @@ export default function AddItem() {
                         }}
                     />
                 </div>
-                <div className="flex items-center">{selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? 0}</div>
-                <div className="flex text-blue-600 items-center">
+                <div className="flex items-center dark:text-gray-200">{selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? 0}</div>
+                <div className="flex text-blue-600 dark:text-blue-400 items-center">
                     <DropList
                         isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
                         list={[{
@@ -171,8 +171,8 @@ export default function AddItem() {
     }
 
     return (
-        <div className="bg-white">
-            <div className="w-full pb-3 bg-white shadow ">
+        <div className="bg-white dark:bg-gray-900">
+            <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
                 <Header heading="Add Item" />
                 <AppliedFilters />
             </div>
