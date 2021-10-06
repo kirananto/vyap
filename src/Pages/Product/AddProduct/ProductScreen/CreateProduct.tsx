@@ -39,7 +39,7 @@ function CreateProduct() {
     let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
 
     if(!addProductInfo?.centralCatalogue?.id) {
-      postAddCentralProduct(token!, {
+      const centralProduct: any = await postAddCentralProduct(token!, {
         name: addProductInfo?.centralCatalogue?.name!,
         description: addProductInfo?.centralCatalogue?.description ?? '',
         categories: {
@@ -48,10 +48,10 @@ function CreateProduct() {
           imageName: 'string'
         },
         images: addProductInfo?.others?.productImage,
-        // brandId: 'string',
-        // hsnId: 'string',
+        // brandId: 'string',// TODO
+        // hsnId: 'string', // TODO
       })
-      centralCatalogueId
+      centralCatalogueId = centralProduct?.data?.id
     }
     const body: IAddProduct = {
       organizationCatalogueCategory: {
@@ -64,20 +64,20 @@ function CreateProduct() {
       centralCatalogueId,
       itemSKUCode: addProductInfo?.others?.skuCode,
       taxEnabled: addProductInfo?.pricing?.taxEnabled,
-      mrpPrice: addProductInfo?.pricing?.mrpPrice,
-      rate: addProductInfo?.pricing?.salesPrice
+      mrpPrice: parseFloat(`${addProductInfo?.pricing?.mrpPrice}`),
+      rate: parseFloat(`${addProductInfo?.pricing?.salesPrice}`)
     }
 
-    // postAddProduct(token!, body)
-    //   .then((response) => {
-    //     setIsLoading(false)
-    //     console.log('response', response)
-    //     history.push('/my-products')
-    //   })
-    //   .catch(error => {
-    //     setIsLoading(false)
-    //     console.log('add product error', error)
-    //   })
+    postAddProduct(token!, body)
+      .then((response) => {
+        setIsLoading(false)
+        console.log('response', response)
+        history.push('/my-products')
+      })
+      .catch(error => {
+        setIsLoading(false)
+        console.log('add product error', error)
+      })
   }
 
   return (
