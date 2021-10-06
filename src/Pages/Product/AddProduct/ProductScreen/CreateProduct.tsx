@@ -36,15 +36,23 @@ function CreateProduct() {
   const handleAddProduct = async () => {
     
     setIsLoading(true)
+    let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
+
     if(!addProductInfo?.centralCatalogue?.id) {
-      // postAddCentralProduct(token!, {
-      //   name: addProductInfo?.centralCatalogue?.name!,
-      //   description: 'Description',
-      //   brandId: string,
-      //   hsnId: string,
-      // })
+      postAddCentralProduct(token!, {
+        name: addProductInfo?.centralCatalogue?.name!,
+        description: addProductInfo?.centralCatalogue?.description ?? '',
+        categories: {
+          name: 'string',
+          description: 'string',
+          imageName: 'string'
+        },
+        images: addProductInfo?.others?.productImage,
+        // brandId: 'string',
+        // hsnId: 'string',
+      })
+      centralCatalogueId
     }
-    const centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
     const body: IAddProduct = {
       organizationCatalogueCategory: {
           name: addProductInfo.others?.category, // TODO replace with category name
@@ -60,16 +68,16 @@ function CreateProduct() {
       rate: addProductInfo?.pricing?.salesPrice
     }
 
-    postAddProduct(token!, body)
-      .then((response) => {
-        setIsLoading(false)
-        console.log('response', response)
-        history.push('/my-products')
-      })
-      .catch(error => {
-        setIsLoading(false)
-        console.log('add product error', error)
-      })
+    // postAddProduct(token!, body)
+    //   .then((response) => {
+    //     setIsLoading(false)
+    //     console.log('response', response)
+    //     history.push('/my-products')
+    //   })
+    //   .catch(error => {
+    //     setIsLoading(false)
+    //     console.log('add product error', error)
+    //   })
   }
 
   return (

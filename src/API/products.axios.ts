@@ -22,11 +22,11 @@ export interface IAddProduct {
 export interface AddCentralCatalogueInterface {
    name: string
    description: string
-   brandId: string
-   hsnId: string
+   brandId?: string
+   hsnId?: string
    // TODO Unverified
    categories: any
-   image: any
+   images: any
 }
 
 export const fetchProducts = (token: string, organizationId: string, limit: number, offset: number) => axiosClient({

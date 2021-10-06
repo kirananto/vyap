@@ -5,12 +5,13 @@ import { fetchBrands } from "src/API/brand.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
 import Spinner from "src/Components/Style/Spinner";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
 
 const ImageContainer = (props: any) => {
   const { item } = props
   return (
     <div className="w-16 h-16 overflow-hidden border border-gray-200 dark:border-gray-500 rounded-lg shadow-sm " key={item?.fileId}>
-      <img key={item?.fileId} alt="" src={item?.thumbnailUrl} />
+      <img key={item?.imageName} alt="" src={getImageURL(item?.imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} />
     </div>
   );
 };
@@ -103,9 +104,13 @@ function OthersTab() {
       setSpinner(true)
       var data = new FormData();
       data.append('file', fileUploaderRef.current?.files?.[0]);
-      imageUpload(token!, data).then(result => {
+      imageUpload(token!, data).then((result: any) => {
         console.log('data', result.data)
-        dispatch(setProductImage(result.data))
+        dispatch(setProductImage({
+          imageName: result.data.name,
+          title: addProductInfo?.centralCatalogue?.name ?? 'name',
+          description: `${addProductInfo?.centralCatalogue?.name}`
+        }))
         setSpinner(false)
       })
         .catch(error => {
@@ -125,7 +130,7 @@ function OthersTab() {
         </p>
         {/* image-container */}
         <div className="flex flex-wrap gap-4 mt-4 mb-8">
-          {addProductInfo?.others?.productImage?.map((item) => <ImageContainer key={item.fileId} item={item} />)}
+          {addProductInfo?.others?.productImage?.map((item) => <ImageContainer key={item.imageName} item={item} />)}
           <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer dark:text-gray-300" onClick={() => fileUploaderRef.current!.click()}>
             {!spinner ? (<svg
               xmlns="http://www.w3.org/2000/svg"
