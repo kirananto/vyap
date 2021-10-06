@@ -98,7 +98,7 @@ export default function Product() {
         <div className="text-center px-6 w-2/3 m-auto dark:text-gray-200"> You do not have any products added. Please add a product to begin listing it to your shops. </div>
       </div>
     }
-    return products?.map(mapItem => <ProductCard item={mapItem} onClicked={CheckboxClicked} onMore={toggleMore} />)
+    return products?.map(mapItem => <ProductCard key={mapItem.id} item={mapItem} onClicked={CheckboxClicked} onMore={toggleMore} />)
   }
   return (
     <>

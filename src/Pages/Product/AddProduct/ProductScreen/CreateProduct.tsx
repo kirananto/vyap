@@ -34,16 +34,7 @@ function CreateProduct() {
   }, [])
 
   const handleAddProduct = async () => {
-    const body: IAddProduct = {
-      organizationCatalogueCategory: {
-          name: addProductInfo.others?.category, // TODO replace with category name
-          description: ''
-      },
-      itemSKUCode: addProductInfo?.others?.skuCode,
-      taxEnabled: addProductInfo?.pricing?.taxEnabled,
-      mrpPrice: addProductInfo?.pricing?.mrpPrice,
-      rate: addProductInfo?.pricing?.salesPrice
-    }
+    
     setIsLoading(true)
     if(!addProductInfo?.centralCatalogue?.id) {
       // postAddCentralProduct(token!, {
@@ -52,6 +43,18 @@ function CreateProduct() {
       //   brandId: string,
       //   hsnId: string,
       // })
+    }
+    const body: IAddProduct = {
+      organizationCatalogueCategory: {
+          name: addProductInfo.others?.category, // TODO replace with category name
+          description: ''
+      },
+      aliasName: addProductInfo?.centralCatalogue?.id ? addProductInfo?.others?.aliasName : '',
+      centralCatalogueId: '132',
+      itemSKUCode: addProductInfo?.others?.skuCode,
+      taxEnabled: addProductInfo?.pricing?.taxEnabled,
+      mrpPrice: addProductInfo?.pricing?.mrpPrice,
+      rate: addProductInfo?.pricing?.salesPrice
     }
 
     postAddProduct(token!, body)

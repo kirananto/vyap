@@ -36,9 +36,9 @@ export default function Employees() {
         </button>
       </div>
       <Popup trigger={modalEmployee} setModalEmployee={setModalEmployee}>
-        <h1 className="text-2xl font-bold text-gray-500">Invite Employee</h1>
+        <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-300">Invite Employee</h1>
         <div className="pt-5">
-          <p className="text-sm font-bold text-gray-500">Phone number</p>
+          <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Phone number</p>
           <input
             type="text"
             placeholder="Enter your phone number... "
@@ -51,7 +51,7 @@ export default function Employees() {
           </p>
 
           <div className="pt-5">
-            <p className="text-sm font-bold text-gray-500">Role</p>
+            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Role</p>
             <input
               type="text"
               placeholder="Order Taker/ Delivery Person"
@@ -60,7 +60,7 @@ export default function Employees() {
           </div>
           {/* todo:: make this multiselect inpupt */}
           <div className="pt-5">
-            <p className="text-sm font-bold text-gray-500">
+            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
               Assigned Customers
             </p>
             <input

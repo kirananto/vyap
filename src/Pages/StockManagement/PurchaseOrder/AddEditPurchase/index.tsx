@@ -8,7 +8,7 @@ export default function AddEditPurchase() {
     const history = useHistory()
 
     return (
-        <div className="w-full h-screen overflow-y-auto bg-gray-100">
+        <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
             {/* header */}
             <div className="w-full mb-2 bg-white shadow">
                 <SimpleHeader heading={history.location.pathname.replace('/purchase-order/', '') === 'new' ? "Add Purchase Order" : "Edit Purchase Order"} />
@@ -17,7 +17,7 @@ export default function AddEditPurchase() {
             {/* body */}
             <div className="flex flex-col items-center w-full gap-4 py-2 px-8 pt-8 ">
                 <div className="w-full">
-                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
                         Supplier name
                     </label>
                     <input
@@ -30,7 +30,7 @@ export default function AddEditPurchase() {
                     />
                 </div>
                 <div className="w-full">
-                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
                         GST Number
                     </label>
                     <input
@@ -43,7 +43,7 @@ export default function AddEditPurchase() {
                     />
                 </div>
                 <div className="w-full">
-                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
                         Invoice number
                     </label>
                     <input
@@ -56,7 +56,7 @@ export default function AddEditPurchase() {
                     />
                 </div>
                 <div className="w-full">
-                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
                         Invoice Date
                     </label>
                     <input
@@ -69,7 +69,7 @@ export default function AddEditPurchase() {
                     />
                 </div>
                 <div className="w-full">
-                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
                         Invoice amount
                     </label>
                     <input

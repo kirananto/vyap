@@ -23,7 +23,7 @@ function PricingTab() {
   }
 
   return (
-    <div className="flex flex-col gap-5 mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)'}}>
+    <div className="flex flex-col gap-5 mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)' }}>
       <div>
         <p className="text-base font-bold text-gray-500">MRP</p>
         <input
@@ -45,15 +45,16 @@ function PricingTab() {
         />
       </div>
       {/* Tax-info */}
-      <div className="flex justify-between">
+      <div className="mt-2">
         <div className="text-base font-bold text-gray-500">Tax Info</div>
-        <ToggleButton 
+        <ToggleButton
+          className="mt-4"
           onChange={() => dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled))}
           value={addProductInfo.pricing?.taxEnabled}
         />
       </div>
       {/* ---------- */}
-      <div>
+      {!addProductInfo?.centralCatalogue?.id && <div>
         <p className="text-base text-gray-500">HSN Number</p>
         <div className="des-modal-btn">
           <input
@@ -64,7 +65,7 @@ function PricingTab() {
             className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
           />
           {/* Modal handle btn */}
-          <button className="modal-btn " onClick={handleModal}>
+          <button className="modal-btn dark:text-gray-300" onClick={handleModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5"
@@ -81,7 +82,7 @@ function PricingTab() {
           {/* Modal */}
           <div>
             <HSNmodal trigger={modal} setModal={setModal}>
-              <h3 className="font-bold text-gray-500">HSN Number</h3>
+              <h3 className="font-bold text-gray-500 dark:text-gray-200">HSN Number</h3>
               <p className="mt-10 text-xs font-bold text-gray-300">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
                 maiores repellat provident eaque eligendi hic sed quidem
@@ -90,9 +91,9 @@ function PricingTab() {
             </HSNmodal>
           </div>
         </div>
-      </div>
+      </div>}
       {/* GST % */}
-      <div>
+      {!addProductInfo?.centralCatalogue?.id && <div>
         <p className="text-base text-gray-500">GST Percentage</p>
         <div className="flex">
           <input
@@ -106,7 +107,7 @@ function PricingTab() {
             %
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

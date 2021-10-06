@@ -24,6 +24,7 @@ export interface AddProductInterface {
         barCode: string
         brand: string
         caseQuantity: number
+        aliasName: string
     }
 }
 
@@ -48,6 +49,7 @@ const initialState: AddProductInterface = {
             thumbnailUrl: "https://ik.imagekit.io/2ts5tqew8qy/tr:n-media_library_thumbnail/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
             url: "https://ik.imagekit.io/2ts5tqew8qy/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg"
         }],
+        aliasName: '',
         skuCode: '',
         category: '',
         barCode: '',
@@ -89,6 +91,9 @@ export const addProductSlice = createSlice({
         setSkuCode: (state, action: PayloadAction<any>) => {
             state.others.skuCode = action.payload
         },
+        setAliasName: (state, action: PayloadAction<string>) => {
+            state.others.aliasName = action.payload
+        },
         setCategory: (state, action: PayloadAction<any>) => {
             state.others.category = action.payload
         },
@@ -121,6 +126,7 @@ export const {
     setSalesPrice,
     setSkuCode,
     setTaxEnabled,
+    setAliasName,
     clearAll
 } = addProductSlice.actions;
 

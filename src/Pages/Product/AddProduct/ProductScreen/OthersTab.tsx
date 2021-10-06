@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAddProductInfo, setBarCode, setBrand, setCaseQuantity, setCategory, setProductImage, setSkuCode } from "../redux/addProductSlice";
+import { selectAddProductInfo, setAliasName, setBarCode, setBrand, setCaseQuantity, setCategory, setProductImage, setSkuCode } from "../redux/addProductSlice";
 import { fetchBrands } from "src/API/brand.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
@@ -26,6 +26,10 @@ const handleInputChange = (event: any, label: string, dispatch: Dispatch<any>) =
       dispatch(setCategory(tempVal))
       break
 
+    case "Alias Name":
+      dispatch(setAliasName(tempVal))
+      break
+
     case "Barcode":
       dispatch(setBarCode(tempVal))
       break
@@ -45,8 +49,8 @@ const handleInputChange = (event: any, label: string, dispatch: Dispatch<any>) =
 
 const Input = (props: any) => {
   return (
-    <div>
-      <p className="text-sm font-bold text-gray-500">{props.label}</p>
+    <div className=" mt-2 ">
+      <p className="text-sm font-bold text-gray-500 dark:text-gray-300">{props.label}</p>
       <input
         onChange={(event: any) => handleInputChange(event, props.label, props.dispatch)}
         type="text"
@@ -90,7 +94,7 @@ function OthersTab() {
 
   }, [])
 
-  function uploadImage () {
+  function uploadImage() {
     if (fileUploaderRef.current?.files?.length > 0) {
       setSpinner(true)
       var data = new FormData();
@@ -100,51 +104,53 @@ function OthersTab() {
         dispatch(setProductImage(result.data))
         setSpinner(false)
       })
-      .catch(error => {
-        console.log('error', error)
-        setSpinner(false)
-      })
+        .catch(error => {
+          console.log('error', error)
+          setSpinner(false)
+        })
     }
   }
 
   return (
-    <div className="mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)'}}>
-      <h1 className="font-bold text-gray-500 ">Add product images</h1>
-      <p className="text-xs font-bold text-gray-300">
-        Add upto 5 images. First image is your product's cover
-        <br /> image that will be highlighted everywhere{" "}
-      </p>
-      {/* image-container */}
-      <div className="flex flex-wrap gap-4 mt-4 mb-8">
-        {addProductInfo?.others?.productImage?.map((item) => <ImageContainer key={item.fileId} item={item} />)}
-        <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer dark:text-gray-300" onClick={() => fileUploaderRef.current!.click()}>
-          {!spinner ? (<svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 4v16m8-8H4"
-            />
-          </svg>) : (
-            <Spinner />
-          )}
+    <div className="mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)' }}>
+      {!addProductInfo?.centralCatalogue?.id && <>
+        <h1 className="font-bold text-gray-500 dark:text-gray-400 ">Add product images</h1>
+        <p className="text-xs font-bold text-gray-300 mt-2">
+          Add upto 5 images. First image is your product's cover
+          <br /> image that will be highlighted everywhere{" "}
+        </p>
+        {/* image-container */}
+        <div className="flex flex-wrap gap-4 mt-4 mb-8">
+          {addProductInfo?.others?.productImage?.map((item) => <ImageContainer key={item.fileId} item={item} />)}
+          <div className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer dark:text-gray-300" onClick={() => fileUploaderRef.current!.click()}>
+            {!spinner ? (<svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-8 h-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 4v16m8-8H4"
+              />
+            </svg>) : (
+              <Spinner />
+            )}
+          </div>
+          <input type="file" style={{ display: 'none' }} ref={fileUploaderRef} accept={'image/png,image/jpeg'} onChange={uploadImage} />
         </div>
-        <input type="file" style={{display: 'none'}} ref={fileUploaderRef} accept={'image/png,image/jpeg'} onChange={uploadImage} />
-      </div>
+      </>}
       {/* Image container ENDS */}
       {/* Details-container */}
       <div className="flex flex-col gap-2">
-        <Input label="Your Item Code(SKU)" dispatch={dispatch} value={addProductInfo?.others?.skuCode} />
+        <Input label="Your Item Code(SKU)" placeholder="Enter SKU Code" dispatch={dispatch} value={addProductInfo?.others?.skuCode} />
 
         {/* TODO: Need to make this input field a multiselect field*/}
-        <Input label="Category" dispatch={dispatch} value={addProductInfo?.others?.category} />
-        <div className="barcode-input">
+        <Input label="Category" placeholder="Enter category" dispatch={dispatch} value={addProductInfo?.others?.category} />
+        {!addProductInfo?.centralCatalogue?.id && <div className="barcode-input">
           <Input label="Barcode" placeholder="Enter or Scan Barcode" dispatch={dispatch} value={addProductInfo?.others?.barCode} />
           <div className="barcode-icon dark:text-gray-300">
             <button>
@@ -170,9 +176,10 @@ function OthersTab() {
               </svg>
             </button>
           </div>
-        </div>
-        <Input label="Brand" placeholder="Enter brand..." dispatch={dispatch} value={addProductInfo?.others?.brand} />
-        <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} />
+        </div>}
+        {addProductInfo?.centralCatalogue?.id && <Input label="Alias Name" placeholder="Enter alias name..." dispatch={dispatch} value={addProductInfo?.others?.aliasName} />}
+        {!addProductInfo?.centralCatalogue?.id && <Input label="Brand" placeholder="Enter brand..." dispatch={dispatch} value={addProductInfo?.others?.brand} />}
+        {/* <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} /> */}
       </div>
     </div>
   );

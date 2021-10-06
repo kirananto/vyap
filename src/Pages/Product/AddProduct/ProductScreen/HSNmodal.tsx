@@ -3,12 +3,12 @@ import "./HSNmodal.css";
 
 function HSNmodal(props: any) {
   return props.trigger ? (
-    <div className="border-t border-gray-100 shadow-2xl popup-container">
+    <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-gray-700 dark:border-gray-800">
       <div className="popup-inner">
         <button className="popup-btn" onClick={() => props.setModal(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8 text-blue-600"
+            className="w-8 h-8 text-blue-600 dark:text-blue-400"
             viewBox="0 0 20 20"
             fill="currentColor"
           >

@@ -9,9 +9,9 @@ export interface IAddProduct {
         createdAt?: string,
         updatedAt?: string
     },
-    aliasName?: string,
+    aliasName: string,
     organizationCatalogueCategoryId?: string,
-    centralCatalogueId?: string,
+    centralCatalogueId: string,
     itemSKUCode: string
     taxEnabled: boolean,
     mrpPrice: number,
