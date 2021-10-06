@@ -9,6 +9,7 @@ export interface IAddProduct {
         createdAt?: string,
         updatedAt?: string
     },
+    thumbnailImage: string
     aliasName: string,
     organizationCatalogueCategoryId?: string,
     centralCatalogueId: string,

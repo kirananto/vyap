@@ -44,13 +44,16 @@ function CreateProduct() {
       //   hsnId: string,
       // })
     }
+    const centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
     const body: IAddProduct = {
       organizationCatalogueCategory: {
           name: addProductInfo.others?.category, // TODO replace with category name
-          description: ''
+          description: '',
+          imageName: ''
       },
+      thumbnailImage: addProductInfo?.others?.productImage?.[0]?.imageName,
       aliasName: addProductInfo?.centralCatalogue?.id ? addProductInfo?.others?.aliasName : '',
-      centralCatalogueId: '132',
+      centralCatalogueId,
       itemSKUCode: addProductInfo?.others?.skuCode,
       taxEnabled: addProductInfo?.pricing?.taxEnabled,
       mrpPrice: addProductInfo?.pricing?.mrpPrice,

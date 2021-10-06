@@ -38,17 +38,19 @@ const initialState: AddProductInterface = {
         gstPercentage: 0
     },
     others: {
-        productImage: [{
-            AITags: null,
-            fileId: "61597fe7496dfb559b8088f8",
-            filePath: "/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
-            fileType: "image",
-            height: 225,
-            name: "DairySmall_FEGqoZSyd.jpeg",
-            size: 12425,
-            thumbnailUrl: "https://ik.imagekit.io/2ts5tqew8qy/tr:n-media_library_thumbnail/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
-            url: "https://ik.imagekit.io/2ts5tqew8qy/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg"
-        }],
+        productImage: [
+            //     {
+            //     AITags: null,
+            //     fileId: "61597fe7496dfb559b8088f8",
+            //     filePath: "/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
+            //     fileType: "image",
+            //     height: 225,
+            //     name: "DairySmall_FEGqoZSyd.jpeg",
+            //     size: 12425,
+            //     thumbnailUrl: "https://ik.imagekit.io/2ts5tqew8qy/tr:n-media_library_thumbnail/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg",
+            //     url: "https://ik.imagekit.io/2ts5tqew8qy/CENTRAL_CATALOGUE_IMAGE/DairySmall_FEGqoZSyd.jpeg"
+            // }
+        ],
         aliasName: '',
         skuCode: '',
         category: '',
@@ -94,6 +96,11 @@ export const addProductSlice = createSlice({
         setAliasName: (state, action: PayloadAction<string>) => {
             state.others.aliasName = action.payload
         },
+        setDescription: (state, action: PayloadAction<string>) => {
+            if (state.centralCatalogue) {
+                state.centralCatalogue.description = action.payload
+            }
+        },
         setCategory: (state, action: PayloadAction<any>) => {
             state.others.category = action.payload
         },
@@ -113,7 +120,7 @@ export const addProductSlice = createSlice({
     },
 });
 
-export const { 
+export const {
     setCentralCatalogue,
     setMrpPrice,
     setBarCode,
@@ -127,6 +134,7 @@ export const {
     setSkuCode,
     setTaxEnabled,
     setAliasName,
+    setDescription,
     clearAll
 } = addProductSlice.actions;
 

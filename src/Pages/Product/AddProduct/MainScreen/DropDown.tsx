@@ -54,6 +54,10 @@ function DropDown(props: any) {
       setOpts([...opts, { name: value, value }]);
     }
     search({ target: { value } });
+    props.onSelect({
+      name: value
+    })
+    history.push('/create-product')
     setIsdisabled(true);
   }
   function select(e: any) {
@@ -91,7 +95,7 @@ function DropDown(props: any) {
         />
         <button
           disabled={isdisabled}
-          className={`${isdisabled ? "hide-create-btn" : "show-create-btn"} dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500`}
+          className={`${isdisabled ? "hide-create-btn" : "show-create-btn"} bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500`}
           onClick={add}
         >
           <svg

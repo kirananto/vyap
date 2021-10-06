@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAddProductInfo, setAliasName, setBarCode, setBrand, setCaseQuantity, setCategory, setProductImage, setSkuCode } from "../redux/addProductSlice";
+import { selectAddProductInfo, setAliasName, setBarCode, setBrand, setCaseQuantity, setCategory, setDescription, setProductImage, setSkuCode } from "../redux/addProductSlice";
 import { fetchBrands } from "src/API/brand.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
@@ -28,6 +28,10 @@ const handleInputChange = (event: any, label: string, dispatch: Dispatch<any>) =
 
     case "Alias Name":
       dispatch(setAliasName(tempVal))
+      break
+
+    case "Description":
+      dispatch(setDescription(tempVal))
       break
 
     case "Barcode":
@@ -146,6 +150,7 @@ function OthersTab() {
       {/* Image container ENDS */}
       {/* Details-container */}
       <div className="flex flex-col gap-2">
+        {!addProductInfo?.centralCatalogue?.id && <Input label="Description" placeholder="Enter Description" dispatch={dispatch} value={addProductInfo?.centralCatalogue?.description} />}
         <Input label="Your Item Code(SKU)" placeholder="Enter SKU Code" dispatch={dispatch} value={addProductInfo?.others?.skuCode} />
 
         {/* TODO: Need to make this input field a multiselect field*/}
