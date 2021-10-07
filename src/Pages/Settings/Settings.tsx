@@ -15,6 +15,15 @@ export default function Settings() {
   function changeDarkMode () {
     const newVal = !user?.settings?.isDarkMode
     dispatch(setDarkMode(newVal))
+    // Whenever the user explicitly chooses light mode
+    localStorage.theme = newVal ? 'dark' : 'light'
+
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }
 
   return (
@@ -33,9 +42,6 @@ export default function Settings() {
         {/* ------- */}
         <div className="flex gap-3 mt-8 mb-3">
           <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Dark Mode</h1>
-          <div className="flex items-center justify-center px-2 text-xs font-bold text-center rounded-lg min-w-min side-div custom-color">
-            Coming Soon
-          </div>
         </div>
         <ToggleButton value={user?.settings?.isDarkMode} onChange={changeDarkMode} />
         {/* --------- */}
