@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { SimpleHeader } from 'src/Components/Header'
 import Button from 'src/Components/Style/Button'
-import DairySmall from '../../../assets/img/DairySmall.jpeg'
 import ChatImg from '../../Product/assets/no_data.svg'
 import DropList from 'src/Components/Style/DropList'
 
 import { pushItemsToCart, removeItemsFromCart, selectPlaceOrderInfo, setFlatDiscount, setNote } from './placeOrderSlice'
 import { placeOrderAPI } from 'src/API/order.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import { getImageURL, IMAGEKIT_FOLDERS } from 'src/util'
 
 export default function PlaceOrder() {
     const { token, user } = useSelector(selectCredentials)
@@ -75,7 +75,7 @@ export default function PlaceOrder() {
                 {console.log(item)}
                 <div className="flex pt-4 gap-2 items-center">
                     <div className="h-10 w-10 rounded border border-gray-300 bg-white">
-                        <img className="h-full w-full" src={DairySmall} alt="" />
+                        <img className="h-full w-full" src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="" />
                     </div>
                     <div className="flex flex-col">
                         <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>

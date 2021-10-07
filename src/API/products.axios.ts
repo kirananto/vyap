@@ -47,12 +47,26 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     method: 'GET',
     params: {
         limit,
-        offset
+        offset,
     },
     headers: {
         'authorization': `Bearer ${token}`
     }
 })
+
+export const fetchCentralProductImages = (token: string, limit: number, offset: number, catalogueId: string) => axiosClient({
+    url: `/central-catalogue-image`,
+    method: 'GET',
+    params: {
+        limit,
+        offset,
+        filter: `productId||$eq||${catalogueId}`
+    },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
 export const postAddCentralProduct = (token: string, data: AddCentralCatalogueInterface) => axiosClient({
     url: `/central-catalogue`,
     method: 'POST',

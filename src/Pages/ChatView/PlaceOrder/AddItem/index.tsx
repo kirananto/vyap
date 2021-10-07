@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Header } from 'src/Components/Header'
 import AppliedFilters from './AppliedFilters'
-import DairySmall from '../../../../assets/img/DairySmall.jpeg'
 import Button from 'src/Components/Style/Button'
 import DropList from 'src/Components/Style/DropList'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +9,7 @@ import { useHistory } from 'react-router'
 import { fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../Product/assets/no_data.svg'
+import { getImageURL, IMAGEKIT_FOLDERS } from 'src/util'
 
 export default function AddItem() {
 
@@ -96,7 +96,7 @@ export default function AddItem() {
             {console.log(item)}
             <div className="flex gap-2 items-center">
                 <div className="flex h-12 w-12 rounded border border-gray-300 bg-white">
-                    <img className="h-full w-full" src={DairySmall} alt="" />
+                    <img className="h-full w-full" src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="" />
                 </div>
                 <div className="flex flex-col">
                     <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>

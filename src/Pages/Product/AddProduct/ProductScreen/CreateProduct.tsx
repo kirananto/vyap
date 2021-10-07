@@ -7,15 +7,18 @@ import PricingTab from "./PricingTab";
 import OthersTab from "./OthersTab";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
-import { IAddProduct, postAddCentralProduct, postAddProduct } from "src/API/products.axios";
+import { fetchCentralProductImages, IAddProduct, postAddCentralProduct, postAddProduct } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { useHistory } from "react-router";
+import dummy from '../MainScreen/dummy.svg'
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
 
 
 function CreateProduct() {
   const [toggleState, setToggleState] = useState(1);
   const [isLoading, setIsLoading] = useState(false)
 
+  const [productImage, setProductImage] = useState(dummy)
   const addProductInfo = useSelector(selectAddProductInfo)
   const { token } = useSelector(selectCredentials)
 
@@ -30,6 +33,18 @@ function CreateProduct() {
   useEffect(() => {
     return () => {
       dispatch(clearAll())
+    }
+  }, [])
+
+
+  useEffect(() => {
+    if(addProductInfo?.centralCatalogue?.id) {
+      fetchCentralProductImages(token!, 100, 0, addProductInfo?.centralCatalogue?.id).then((result: any) => {
+        const imageName = result.data?.data?.filter((filterItem: any) => filterItem.imageName?.includes('.'))?.[0]?.imageName
+        if(imageName) {
+          setProductImage(getImageURL(imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE))
+        }
+      })
     }
   }, [])
 
@@ -86,7 +101,7 @@ function CreateProduct() {
       <div className="w-11/12 pt-6  px-2 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         {/* ===--===Product card===--=== */}
-        <ItemCard />
+        <ItemCard productImage={productImage}/>
         {/* -------- */}
         <div className="flex justify-between py-4">
           <button

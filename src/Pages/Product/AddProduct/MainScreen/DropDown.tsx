@@ -1,12 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { fetchCentralProductImages } from "src/API/products.axios";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
+import dummy from './dummy.svg'
 import "./Drop.css";
 
 function List(props: any) {
+  const { token } = useSelector(selectCredentials)
+  const [productImage, setProductImage] = useState(dummy)
+
+  useEffect(() => {
+    fetchCentralProductImages(token!, 100, 0, props?.opt?.id).then((result: any) => {
+      const imageName = result.data?.data?.filter((filterItem: any) => filterItem.imageName?.includes('.'))?.[0]?.imageName
+      if(imageName) {
+        setProductImage(getImageURL(imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE))
+      }
+    })
+  }, [])
+
   return (
     <div className="drop-main cursor-pointer" onClick={() => props.onSelect(props.opt)}>
       <div className="overflow-hidden border border-gray-200 rounded-lg product-image">
-        <img className="w-10 h-10" src={props.opt.url ?? 'https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png'} alt={props.opt.name} />
+        <img className="w-10 h-10" src={productImage} alt={props.opt.name} />
       </div>
       <div className="product-details">
         <div className="text-base font-bold text-gray-700">
@@ -70,9 +87,9 @@ function DropDown(props: any) {
     }
   }
 
-  function renderListItems () {
+  function renderListItems() {
     const listItems = getSearchedOpts()
-    if(listItems?.length === 0) {
+    if (listItems?.length === 0) {
       return <div className="p-4">No existing products found, add this as a new product by Clicking Add Button.</div>
     }
     return listItems.map((opt: any) => {

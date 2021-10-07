@@ -1,6 +1,5 @@
 import React from "react";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
-import dairyMilkSvg from "../../assets/img/Dairymilk.jpeg"
 
 export default function ProductCard({ item, onClicked, onMore } : { item: any, onClicked: any, onMore: any }) {
   const fontSize = {

@@ -16,7 +16,7 @@ function ItemCard(props: any) {
         <div className="flex items-center justify-center p-2 border border-gray-200 rounded-lg product-image">
           <img
             className="w-10 h-10"
-            src="https://5.imimg.com/data5/WV/NN/MY-3473686/cadbury-dairymilk-silk-pack-of-5-500x500.png" // TODO Replace image
+            src={props.productImage}
             alt="product-image"
           />
         </div>
