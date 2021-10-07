@@ -17,10 +17,10 @@ export const fetchOrdersAPI = (token: string) => axiosClient({
 
 export const placeOrderAPI = (token: string, data: {
     description: string
-    supplierId: string 
+    supplierId: string
     buyerId: string
     flatDiscount: number
-    orderItems: { 
+    orderItems: {
         quantity: string
         purchasePrice: number
         productId: string
@@ -33,3 +33,19 @@ export const placeOrderAPI = (token: string, data: {
         'authorization': `Bearer ${token}`
     }
 })
+
+
+export function fetchOrderItems(token: string, orderId: string, limit: number, offset: number) {
+    return axiosClient({
+        url: `/order-item`,
+        method: 'GET',
+        params: {
+            orderId,
+            limit,
+            offset
+        },
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    })
+}

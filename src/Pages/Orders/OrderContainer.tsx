@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import OrderContainerDetail from './OrderContianerDetail'
+import format from 'date-fns/format'
 
 interface IProps {
     orders: any[]
@@ -26,8 +27,8 @@ export default function OrderContainer({
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className="text-gray-400 dark:text-gray-300">#234234 • 25th March 2021</div>
-                                    <div className="text-gray-600 dark:text-gray-200 my-1">K & K Automobiles, Kochi</div>
+                                    <div className="text-gray-400 dark:text-gray-300">#{item?.id?.split('-')[0]} • {item.createdAt ? format(new Date(item.createdAt), 'do MMM yyyy' ) : ''}</div>
+                                    <div className="text-gray-600 dark:text-gray-200 my-1">{item.supplier?.name} {'->'} {item?.buyer?.name}</div>
                                     <div className="flex w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">Order completed</div>
                                 </div>
                             </div>
@@ -49,7 +50,7 @@ export default function OrderContainer({
                                 </div>)}
                             </div>
                         </div>
-                        {isExpanded === index && <OrderContainerDetail />}
+                        {isExpanded === index && <OrderContainerDetail order={item}/>}
                     </div>))}
             </div>
         </div>
