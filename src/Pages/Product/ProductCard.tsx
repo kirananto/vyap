@@ -1,7 +1,7 @@
 import React from "react";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
 
-export default function ProductCard({ item, onClicked, onMore } : { item: any, onClicked: any, onMore: any }) {
+export default function ProductCard({ item, onClicked, onMore, isChecked } : { item: any, onClicked: any, onMore: any, isChecked: boolean }) {
   const fontSize = {
     fontSize: "10px",
     top: "-8px",
@@ -18,7 +18,8 @@ export default function ProductCard({ item, onClicked, onMore } : { item: any, o
         <input
           type="checkbox"
           className="w-5 h-5 bg-red-200 active:bg-red-400"
-          onChange={onClicked}
+          onChange={() => onClicked(item)}
+          checked={isChecked}
         />
       </div>
       {/* 

@@ -1,6 +1,6 @@
 .custom-height{
     overflow-y: scroll;
-    height: calc( 100vh - 280px ) !important;
+    height: calc( 100vh - 274px ) !important;
     scroll-behavior: smooth;
 }
 
