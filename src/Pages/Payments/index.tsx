@@ -8,10 +8,12 @@ import { selectCredentials } from '../Login/credentialsSlice'
 
 export default function Payments() {
     const { token } = useSelector(selectCredentials)
-    const [payments, setPayments] = useState<any[]>([1, 1, 1, 1, 1, 1])
+    const [payments, setPayments] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         fetchAllPayments(token!).then((result: any) => {
             console.log(result.data)
+            setLoading(false)
             setPayments(result.data.data)
             //TODO handle the payments better
         })
@@ -24,8 +26,11 @@ export default function Payments() {
                 <AppliedFilters />
             </div>
             {/* body */}
-            <PaymentContainer payments={payments} />
-
+            <div className="bg-gray-100 p-4 dark:bg-gray-900">
+                <div className="overflow-y-auto bg-white dark:bg-gray-800 rounded p-4" style={{ height: 'calc(100vh - 15rem)' }}>
+                    <PaymentContainer payments={payments} loading={loading} />
+                </div>
+            </div>
             {/* Footer */}
 
             <div className="fixed bottom-0 w-full h-20 bg-white shadow px-8 grid dark:bg-gray-800">

@@ -9,9 +9,11 @@ import { selectCredentials } from '../Login/credentialsSlice'
 export default function Orders() {
     const [orders, setOrders] = useState<any[]>([])
     const { token } = useSelector(selectCredentials)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetchOrdersAPI(token!).then((result: any) => {
+            setLoading(false)
             setOrders(result?.data?.data ?? [])
         })
     }, [])
@@ -24,8 +26,11 @@ export default function Orders() {
                 <AppliedFilters />
             </div>
             {/* body */}
-            <OrderContainer orders={orders} />
-
+            <div className="bg-gray-100 p-4 dark:bg-gray-900">
+                <div className="overflow-y-auto bg-white pb-24 dark:bg-gray-800 rounded p-4" style={{ height: 'calc(100vh - 15rem)' }}>
+                    <OrderContainer loading={loading} orders={orders} />
+                </div>
+            </div>
             {/* Footer */}
 
             <div className="fixed bottom-0 w-full h-20 bg-white dark:bg-gray-800 shadow px-8 grid">
