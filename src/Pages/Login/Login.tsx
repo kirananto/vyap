@@ -30,7 +30,7 @@ export default function Login() {
     })
       .catch((error: any) => {
         console.log('error verifying otp', error.message)
-        setError('Could not verify otp')
+        setError('Please enter valid OTP')
         // User couldn't sign in (bad verification code?)
         // ...
       })
@@ -42,12 +42,12 @@ export default function Login() {
       console.log('result', result)
       setCurrentPage(1)
       phoneNumberRef.current = phoneNumber
-      // confResRef.current = confirmationResult;
-      // setCurrentPage(1)
-      // console.log('resultSignin', confirmationResult)
     }).catch(error => {
-      console.log('error', error)
-      setError(error.message)
+      if(error?.response?.data?.message) {
+        setError('Please enter a valid phone number')
+      } else {
+        setError('Please try again later')
+      }
     })
   }
 
