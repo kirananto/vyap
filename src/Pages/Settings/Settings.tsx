@@ -12,7 +12,7 @@ export default function Settings() {
   const { user } = useSelector(selectCredentials)
   const dispatch = useDispatch()
 
-  function changeDarkMode () {
+  function changeDarkMode() {
     const newVal = !user?.settings?.isDarkMode
     dispatch(setDarkMode(newVal))
     // Whenever the user explicitly chooses light mode
@@ -34,7 +34,7 @@ export default function Settings() {
         <div className="flex gap-3 mb-2">
           <h1 className="font-bold text-gray-700 text-md dark:text-gray-300">Team members</h1>
           <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min side-div">
-            Beta
+            Coming soon
           </div>
         </div>
         {/* -------- */}
@@ -45,7 +45,12 @@ export default function Settings() {
         </div>
         <ToggleButton value={user?.settings?.isDarkMode} onChange={changeDarkMode} />
         {/* --------- */}
-        <h1 className="font-semibold text-gray-500 mt-9 text-md dark:text-gray-300">Import Customer CSV</h1>
+        <div className="flex gap-3 mb-2 mt-9">
+          <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Import Customer CSV</h1>
+          <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min side-div">
+            Coming soon
+          </div>
+        </div>
         <button className="w-2/4 h-8 mt-3 font-bold text-blue-500 border-2 border-blue-500 rounded-md text-md">Upload CSV</button>
       </div>
     </div>

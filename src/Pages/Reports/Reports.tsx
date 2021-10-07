@@ -26,7 +26,7 @@ export default function Reports() {
           bgIllus={shopImg}
         />
         <EmptyReportCard 
-        heading="More coming soon...!!"
+        heading="coming soon...!!"
         />
         
       </div>
