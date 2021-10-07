@@ -46,57 +46,57 @@ export default function More() {
         {/* Menu */}
         {/* ----- */}
         <div className="flex flex-col gap-2 pl-10 mt-2">
-          <NavLink to="/all-payments" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 ">
+          <NavLink to="/all-payments" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
             <PaymentIcon />
             <Links linkName="All Payments" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/orders" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 ">
+          <NavLink to="/orders" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
             <AllOrdersIcon />
             <Links linkName="All Orders" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/reports" className="flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <NavLink to="/reports" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <ReportsIcon />
             <Links linkName="Reports" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/stock-management" className="flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <NavLink to="/stock-management" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <StockManagementIcon />
             <Links linkName="Stock Management" />
             <Tag tagName="Beta" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/my-account" className="flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <NavLink to="/my-account" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <MyAccountIcon />
             <Links linkName="My Account" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/settings" className="flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <NavLink to="/settings" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <SettingsIcon />
             <Links linkName="Settings" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <HelpIcon />
             <Links linkName="Help and Support" />
           </div>
           {/* ----- */}
           {/* ----- */}
-          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <OffersManagementIcon />
             <Links linkName="Offer Management" />
             <Tag tagName="Coming soon" />
           </div>
           {/* ----- */}
           {/* ----- */}
-          <div onClick={handleLogout} className="cursor-pointer flex items-center w-full gap-2 py-2 dark:text-gray-300">
+          <div onClick={handleLogout} className="cursor-pointer flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <LogoutIcon />
             <Links linkName="Logout" />
           </div>
