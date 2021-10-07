@@ -1,4 +1,3 @@
-- Login guards
 - Filters in all payments
 - Refining creation of product
 - Validation at all palces
