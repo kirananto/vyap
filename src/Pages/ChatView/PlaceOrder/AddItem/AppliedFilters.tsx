@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'src/Components/Style/Button'
 
 export default function AppliedFilters() {
     return (

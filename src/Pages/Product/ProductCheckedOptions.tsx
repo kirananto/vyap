@@ -1,12 +1,16 @@
 import React from "react";
 
-export default function FilterBar({onMoreClick} : any) {
+export default function FilterBar({
+  onMoreClick
+} : {
+  onMoreClick: any
+}) {
   return (
     <>
       <div className="flex w-11/12 mx-auto mt-1">
         <p className="text-xs font-semibold text-gray-400">10 items selected</p>
       </div>
-      <div className="relative flex justify-between w-11/12 gap-2 mx-auto mt-2 ">
+      <div className="relative flex justify-between gap-2 mt-2 ">
         {/* ===Button-1=== */}
         <button className="inline-flex items-center justify-center w-1/4 px-2 py-1 font-bold text-red-400 bg-red-200 rounded ">
           <svg

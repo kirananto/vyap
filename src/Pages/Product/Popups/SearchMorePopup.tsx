@@ -1,16 +1,17 @@
 import React from 'react'
 
 
-export function SearchMorePopup({ isVisible, toggleVisibility }: { isVisible: boolean, toggleVisibility: any }) {
-    return (<>
-      <div onClick={toggleVisibility} className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
-      <div className="flex flex-col w-full gap-3 bg-white popup text-left animate__animated animate__fadeInUpBig animate__faster dark:bg-gray-700">
-        {/* Heading */}
-        <div className="flex flex-col justify-between mb-4">
+export function SearchMorePopup() {
+  return (
+    <div className="pb-8">
+      <div className="flex flex-col justify-between mb-4">
+        <div>
           <h1 className="text-lg font-bold text-gray-500 dark:text-gray-200">Manoharam Pillai</h1>
           <p className="text-xs font-semibold text-gray-300">Order taker</p>
         </div>
-        <button className="inline-flex items-center gap-4 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+      </div>
+      <div className="flex flex-col gap-4">
+        <button className="flex items-center gap-4 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -27,7 +28,7 @@ export function SearchMorePopup({ isVisible, toggleVisibility }: { isVisible: bo
           </svg>
           <span>Delete User</span>
         </button>
-        <button className="inline-flex items-center gap-4 mb-10 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+        <button className="flex items-center gap-4 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -45,6 +46,6 @@ export function SearchMorePopup({ isVisible, toggleVisibility }: { isVisible: bo
           <span>Edit User </span>
         </button>
       </div>
-    </>
-    );
-  }
+    </div>
+  );
+}

@@ -20,7 +20,7 @@ import More from "./Pages/More/More";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "./Pages/Login/credentialsSlice";
 import Orders from "./Pages/Orders";
-import Product from "./Pages/Product/Product";
+import Product from "./Pages/Product";
 import AddProductMain from "./Pages/Product/AddProduct/MainScreen/AddProductMain";
 import Account from "./Pages/Account";
 import AllPayments from "./Pages/Payments";
