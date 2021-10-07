@@ -29,6 +29,8 @@ import AddEditPurchase from "./Pages/StockManagement/PurchaseOrder/AddEditPurcha
 import CreateProduct from "./Pages/Product/AddProduct/ProductScreen/CreateProduct";
 import PlaceOrder from "./Pages/ChatView/PlaceOrder";
 import AddItem from "./Pages/ChatView/PlaceOrder/AddItem";
+import ProtectedRoute from "./Router/ProtectedRoute";
+import PageNotFound from "./Pages/404NotFound";
 
 function Routes() {
   const user  = useSelector(selectCredentials);
@@ -44,37 +46,32 @@ function Routes() {
             <LoginRoutes path="/login" component={Login} />
             {/* ===Signup=== */}
             <LoginRoutes path="/signup" component={SignupStepOne} />
-            <Route path="/signup-step-2" component={SignupStepThree} />
-            <Route path="/signup-step-3" component={SignupStepFour} />
-            <Route path="/signup-step-4" component={SignupStepFive} />
+            <LoginRoutes path="/signup-step-2" component={SignupStepThree} />
+            <LoginRoutes path="/signup-step-3" component={SignupStepFour} />
+            <LoginRoutes path="/signup-step-4" component={SignupStepFive} />
             {/* ===Signup=== */}
-            <Route path="/chat/:id" component={Payment} />
-            <Route path="/payment/:id" component={PaymentDetails} />
-            <Route path="/reports" component={Reports} />
-            <Route path="/employees" component={Employees} />
-            <Route path="/stock-management" component={StockManagement} />
-            <Route path="/my-products" component={Product} />
-            <Route path="/add-product" component={AddProductMain} />
-            <Route path="/create-product" component={CreateProduct} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/more" component={More} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/orders" component={Orders} />
-            <Route exact path="/my-account" component={Account} />
-            <Route exact path="/all-payments" component={AllPayments} />
-            <Route exact path="/purchase-order" component={PurchaseOrder} />
-            <Route exact path="/purchase-order/new" component={AddEditPurchase} />
-            <Route exact path="/purchase-order/:id" component={AddEditPurchase} />
-            <Route path="/order/:id" component={OrderDetails} />
-            <Route exact path="/place-order" component={PlaceOrder} />
-            <Route exact path="/place-order/add-item" component={AddItem} />
-            <Route>
-              <div>
-                404 page Please go to home
-                <Link to="/home">Home</Link>
-              </div>
-            </Route>
+            <ProtectedRoute path="/chat/:id" component={Payment} />
+            <ProtectedRoute path="/payment/:id" component={PaymentDetails} />
+            <ProtectedRoute path="/reports" component={Reports} />
+            <ProtectedRoute path="/employees" component={Employees} />
+            <ProtectedRoute path="/stock-management" component={StockManagement} />
+            <ProtectedRoute path="/my-products" component={Product} />
+            <ProtectedRoute path="/add-product" component={AddProductMain} />
+            <ProtectedRoute path="/create-product" component={CreateProduct} />
+            <ProtectedRoute path="/settings" component={Settings} />
+            <ProtectedRoute path="/more" component={More} />
+            <ProtectedRoute exact path="/home" component={Home} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute exact path="/orders" component={Orders} />
+            <ProtectedRoute exact path="/my-account" component={Account} />
+            <ProtectedRoute exact path="/all-payments" component={AllPayments} />
+            <ProtectedRoute exact path="/purchase-order" component={PurchaseOrder} />
+            <ProtectedRoute exact path="/purchase-order/new" component={AddEditPurchase} />
+            <ProtectedRoute exact path="/purchase-order/:id" component={AddEditPurchase} />
+            <ProtectedRoute path="/order/:id" component={OrderDetails} />
+            <ProtectedRoute exact path="/place-order" component={PlaceOrder} />
+            <ProtectedRoute exact path="/place-order/add-item" component={AddItem} />
+            <Route component={PageNotFound} />
           </Switch>
         </>
       ) : (
