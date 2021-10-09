@@ -76,7 +76,7 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
   return (
     <div className="flex items-center justify-center w-full mt-1">
       {/* card container */}
-      <div className="relative flex w-11/12 h-auto bg-gray-100 dark:bg-gray-500 border border-gray-400 rounded-md">
+      <div className="relative flex w-11/12 h-auto bg-gray-100 dark:bg-gray-700 border border-gray-400 rounded-md">
         <div className="flex flex-col w-4/5 p-2 pl-3">
           <h6 style={fontSize} className="font-bold text-gray-800 dark:text-gray-300">
             {parseFloat(`${amount ?? 0}`) > 0 ? 'You have to pay' : 'You get'}
