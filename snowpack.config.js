@@ -1,5 +1,9 @@
+const package = require('./package.json');
+process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION = package.version;
+process.env.SNOWPACK_PUBLIC_SERVICE_WORKER = 'sw.js';
+
 /** @type {import("snowpack").SnowpackUserConfig } */
-export default {
+module.exports = {
   mount: {
     public: { url: '/', static: true },
     src: { url: '/dist' },
