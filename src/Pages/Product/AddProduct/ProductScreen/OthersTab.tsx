@@ -5,7 +5,7 @@ import { fetchBrands } from "src/API/brand.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
 import Spinner from "src/Components/Style/Spinner";
-import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
 const ImageContainer = (props: any) => {
   const { item } = props

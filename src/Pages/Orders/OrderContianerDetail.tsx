@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchOrderItems } from 'src/API/order.axios'
 import Spinner from 'src/Components/Style/Spinner'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/util'
+import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectCredentials } from '../Login/credentialsSlice'
 
 export default function OrderContainerDetail({ order }: { order: any }) {

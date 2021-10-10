@@ -10,6 +10,7 @@ import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import profileImg from "src/assets/icons/profile/profile-icon.svg"
 import AddCustomerModal from "./AddCustomerModal";
 import Spinner from "src/Components/Style/Spinner";
+import { FormattedMessage } from "react-intl";
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
@@ -104,7 +105,10 @@ export const Home = () => {
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
       <button onClick={() => setAddCustomerVisible(true)} className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
-        Add Customer
+        <FormattedMessage
+          id="action.addCustomer"
+          defaultMessage="Add Customer"
+        />
       </button>
       {addCustomerVisible && <AddCustomerModal
         isVisible={addCustomerVisible}

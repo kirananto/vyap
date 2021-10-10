@@ -1,0 +1,14 @@
+{
+    "action.updateApplication": [
+        {
+            "type": 0,
+            "value": "Reload to update this application"
+        }
+    ],
+    "action.addCustomer": [
+        {
+            "type": 0,
+            "value": "Add Customer"
+        }
+    ]
+}

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { fetchCentralProductImages } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 import dummy from './dummy.svg'
 import "./Drop.css";
 

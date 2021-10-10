@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetchOrderItems } from "src/API/order.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
 function Items({ order } : { order: any }) {
     console.log('order', order?.id)

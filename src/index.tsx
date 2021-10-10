@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './tailwind.css'
-
+import { Provider } from 'react-redux'
 import { InitialRouter } from './App';
+import { persistor, store } from "./redux/store";
+import { PersistGate } from 'redux-persist/integration/react'
 
 // On page load or when changing themes, best to add inline in `head` to avoid FOUC
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -13,7 +15,11 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 
 ReactDOM.render(
   <React.StrictMode>
-    <InitialRouter />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <InitialRouter />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

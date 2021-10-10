@@ -1,15 +1,17 @@
 import React from 'react'
 export function MorePopup() {
+  function deleteProduct() {
+    console.log('product')
+  }
   return (
-    <div className="pb-8">
+    <div className="pb-8 pt-2 px-4">
       {/* Heading */}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-bold text-gray-500 dark:text-gray-200">Options</h1>
-        <p className="text-xs font-semibold text-gray-300">1 item selected</p>
+        <h1 className="text-lg font-bold text-gray-500 dark:text-gray-200">More options</h1>
       </div>
       {/* row-1 */}
       <div className="flex flex-col gap-4">
-        <button className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+        <button onClick={deleteProduct} className="flex items-center gap-2 text-sm font-semibold text-red-500 dark:text-red-300 custom-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -24,7 +26,7 @@ export function MorePopup() {
               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
             />
           </svg>
-          <span>Delete Products(s)</span>
+          <span>Delete Products</span>
         </button>
         {/* ---- */}
         <button className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">

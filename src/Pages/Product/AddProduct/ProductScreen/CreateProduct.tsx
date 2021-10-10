@@ -11,7 +11,7 @@ import { fetchCentralProductImages, IAddProduct, postAddCentralProduct, postAddP
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { useHistory } from "react-router";
 import dummy from '../MainScreen/dummy.svg'
-import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
 
 function CreateProduct() {

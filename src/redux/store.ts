@@ -8,13 +8,15 @@ import storage from 'redux-persist/lib/storage'
 import { combineReducers } from 'redux'
 import placeOrderSlice from 'src/Pages/ChatView/PlaceOrder/placeOrderSlice';
 import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice';
+import i18nSlice from 'src/i18nSlice';
 
 
 const rootReducer = combineReducers({
     credentials: credentialsSlice,
     signup: signupSlice,
     placeorder: placeOrderSlice,
-    addproduct: addProductSlice
+    addproduct: addProductSlice,
+    i18n: i18nSlice
 })
 const persistConfig = { key: 'root', version: 1, storage, }
 const persistedReducer = persistReducer(persistConfig, rootReducer)

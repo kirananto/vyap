@@ -1,5 +1,5 @@
 import React from "react";
-import { getImageURL, IMAGEKIT_FOLDERS } from "src/util";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
 export default function ProductCard({ item, onClicked, onMore, isChecked }: { item: any, onClicked: any, onMore: any, isChecked: boolean }) {
   const fontSize = {

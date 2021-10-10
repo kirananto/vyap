@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { selecti18nConfig, setLanguage } from "src/i18nSlice";
 import { SimpleHeader } from "../../Components/Header";
 import ToggleButton from "../../Components/ToggleButton";
 import { selectCredentials, setDarkMode } from "../Login/credentialsSlice";
@@ -10,6 +11,7 @@ import "./Settings.css";
 export default function Settings() {
 
   const { user } = useSelector(selectCredentials)
+  const language = useSelector(selecti18nConfig).language
   const dispatch = useDispatch()
 
   function changeDarkMode() {
@@ -44,6 +46,12 @@ export default function Settings() {
           <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Dark Mode</h1>
         </div>
         <ToggleButton value={user?.settings?.isDarkMode} onChange={changeDarkMode} />
+        <div className="flex gap-3 mt-8 mb-3">
+          <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Set Language to malayalam ?</h1>
+        </div>
+        <ToggleButton value={language === 'ml'} onChange={() => {
+          dispatch(setLanguage(language === 'ml' ? 'en' : 'ml'))
+        }} />
         {/* --------- */}
         <div className="flex gap-3 mb-2 mt-9">
           <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Import Customer CSV</h1>

@@ -18,7 +18,7 @@ const Sorting = (props: SortingProps) => {
 
 export function FilterPopup() {
   return (
-    <div>
+    <div className="pt-2 px-4">
       <div className="flex items-center justify-between mb-4">
         {/* col-1 */}
         <div className="flex gap-2 text-gray-500 dark:text-gray-200">

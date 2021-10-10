@@ -9,7 +9,7 @@ import DropList from 'src/Components/Style/DropList'
 import { pushItemsToCart, removeItemsFromCart, selectPlaceOrderInfo, setFlatDiscount, setNote } from './placeOrderSlice'
 import { placeOrderAPI } from 'src/API/order.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/util'
+import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
 export default function PlaceOrder() {
     const { token, user } = useSelector(selectCredentials)

@@ -9,7 +9,7 @@ import { useHistory } from 'react-router'
 import { fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../Product/assets/no_data.svg'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/util'
+import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
 export default function AddItem() {
 
