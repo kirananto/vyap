@@ -85,7 +85,7 @@ export default function Product() {
   }
   return (
     <>
-      <div className="bg-white dark:bg-gray-900">
+      <div className="bg-gray-100 dark:bg-gray-900">
         <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
           <Header
             heading="My Products"
@@ -101,7 +101,7 @@ export default function Product() {
         </div>
       </div>
 
-      <div className="custom-height bg-white dark:bg-gray-900">
+      <div className="custom-height bg-gray-100 dark:bg-gray-900">
         {renderProducts()}
       </div>
 

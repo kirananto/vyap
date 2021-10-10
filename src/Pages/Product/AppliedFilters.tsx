@@ -29,8 +29,8 @@ export default function AppliedFilters({
             <div className="flex justify-between py-2">
                 <div className="flex flex-col">
                     <div className="flex gap-2 items-end">
-                        <div className={'text-base font-bold text-gray-500'}>Applied Filters</div>
-                        <div className={'text-sm font-semibold text-blue-500 cursor-pointer'}>Clear all</div>
+                        <div className={'text-base font-bold text-gray-500 dark:text-gray-300'}>Applied Filters</div>
+                        <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'}>Clear all</div>
                     </div>
                     <div className="flex gap-2 mt-2">
                         <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 1</div>
