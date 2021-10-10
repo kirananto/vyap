@@ -14,15 +14,31 @@ module.exports = {
     '@snowpack/plugin-postcss',
     [
       '@snowpack/plugin-typescript',
-      [
-        '@snowpack/plugin-webpack',
+      {
+        /* Yarn PnP workaround: see https://www.npmjs.com/package/@snowpack/plugin-typescript */
+        ...(process.versions.pnp ? { tsc: 'yarn pnpify tsc' } : {}),
+      },
+    ],
+    [
+      '@snowpack/plugin-webpack',
       {
         extendConfig: (config) => {
           const { glob } = require("glob");
           const { InjectManifest } = require('workbox-webpack-plugin');
+          const webpack = require('webpack')
           const additionalManifestEntries = [
             ...glob.sync("*.{png,html,json,txt}", { cwd: './build' })
           ].map((e) => ({ url: e, revision: process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION }));
+
+          config.plugins.push(
+            new webpack.DefinePlugin({
+              __SNOWPACK_ENV__: JSON.stringify({
+                MODE: 'production',
+                NODE_ENV: 'production',
+                SSR: false
+              })
+            })
+          );
 
           config.plugins.push(
             new InjectManifest({
@@ -32,10 +48,11 @@ module.exports = {
               "swDest": process.env.SNOWPACK_PUBLIC_SERVICE_WORKER
             })
           );
+
           return config;
         },
-      },],
-    ],
+      },
+    ]
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
