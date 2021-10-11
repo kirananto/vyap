@@ -9,7 +9,7 @@ declare const self: {
   skipWaiting: () => void;
 } & ServiceWorkerGlobalScope;
 
-const SERVICE_WORKER_NAME = 'Timelet Service Worker';
+const SERVICE_WORKER_NAME = 'Vyap Service Worker';
 const SERVICE_WORKER_VERSION = import.meta.env.SNOWPACK_PUBLIC_PACKAGE_VERSION;
 // eslint-disable-next-line no-restricted-globals
 const DEBUG_MODE = location.hostname === '127.0.0.1' || location.hostname === 'localhost';
