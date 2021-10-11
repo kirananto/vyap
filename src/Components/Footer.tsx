@@ -1,14 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from 'react-router'
 import Button from "./Style/Button";
 
 function Footer() {
+  const location = useLocation()
+  const isActive = (paths: string[]) => {
+    console.log('location.pathname', location.pathname)
+    console.log('paths', paths)
+    if (paths.includes(location.pathname)) {
+
+    console.log('return val', true)
+      return true
+    }
+    console.log('return val', false)
+    return false
+  }
   return (
     <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-800 dark:border-gray-800">
       {/* Nav-Item-1 */}
       <Link
         to="/"
-        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer text-gray-500 dark:text-gray-200 ripple_effect"
+        className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/home', '/']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}
       >
         <figure className="grid justify-items-center">
           <svg
@@ -35,8 +48,8 @@ function Footer() {
 
       <Link
         to="/my-products"
-        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer  text-gray-500 dark:text-gray-200 ripple_effect"
-      >
+
+        className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/my-products']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}      >
         <figure className="grid justify-items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -62,8 +75,8 @@ function Footer() {
 
       <Link
         to="/more"
-        className="flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer text-gray-500 dark:text-gray-200 ripple_effect"
-      >
+
+        className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/more']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}      >
         <figure className="grid justify-items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
