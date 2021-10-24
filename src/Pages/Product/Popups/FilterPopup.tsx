@@ -1,5 +1,6 @@
 import React from 'react'
-import FilterCategories from "../FilterCategories";
+import FilterCategory from "../FilterCategory";
+import FilterBrands from '../FilterBrands'
 
 interface SortingProps {
   sortingName: string;
@@ -18,7 +19,7 @@ const Sorting = (props: SortingProps) => {
 
 export function FilterPopup() {
   return (
-    <div className="pt-2 px-4">
+    <div className="pt-2 px-4 pb-10">
       <div className="flex items-center justify-between mb-4">
         {/* col-1 */}
         <div className="flex gap-2 text-gray-500 dark:text-gray-200">
@@ -46,8 +47,8 @@ export function FilterPopup() {
       </div>
       {/* --------- */}
       <div className="flex flex-col gap-4">
-        <FilterCategories heading="Based On Category" />
-        <FilterCategories heading="Based On Brands" />
+        <FilterCategory heading="Based On Category" type="category"/>
+        <FilterBrands heading="Based On Brands" type="brand" />
       </div>
       {/* Sorting */}
       <div className="flex gap-2 mt-4 text-gray-500 dark:text-gray-300">
@@ -73,7 +74,7 @@ export function FilterPopup() {
           <h1 className="text-lg font-semibold ">Sorting</h1>
         </div>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 mt-2">
         <Sorting sortingName="Latest first" />
         <Sorting sortingName="Price-Low to High" />
         <Sorting sortingName="Price-High to Low" />

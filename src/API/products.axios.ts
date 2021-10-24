@@ -54,6 +54,18 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     }
 })
 
+export const fetchCentralProductCategories = (token: string, limit: number, offset: number) => axiosClient({
+    url: `/organization-catalogue-category`,
+    method: 'GET',
+    params: {
+        limit,
+        offset,
+    },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
 export const fetchCentralProductImages = (token: string, limit: number, offset: number, catalogueId: string) => axiosClient({
     url: `/central-catalogue-image`,
     method: 'GET',

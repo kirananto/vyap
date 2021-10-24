@@ -8,7 +8,7 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
     marginLeft: "-4px",
   };
   return (
-    <div className="flex items-center justify-between w-11/12 gap-4 py-2 mx-auto bg-gray-100 dark:bg-gray-900">
+    <div className="flex items-center justify-between w-11/12 gap-4 py-2 mx-auto bg-gray-100 dark:bg-gray-900 mt-2">
       {/*
       =============
       Col-1
@@ -29,7 +29,7 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
       */}
       <div className="flex w-3/4">
         <div
-          className="relative m-auto p-2 bg-gray-100 border-2 rounded-lg w-14 h-14 bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100"
+          className="relative p-2 bg-gray-100 border-2 rounded-lg w-14 h-14 bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100"
           style={item?.thumbnailImage ? { backgroundImage: `url(${getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)}` } : {}}
         >
           {/* col-1 product */}
@@ -44,7 +44,7 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
           /> */}
         </div>
         {/* col-2 product */}
-        <div className="flex flex-col ml-4 mt-2">
+        <div className="flex flex-col ml-4 mt-0">
           <h1 className="font-semibold text-md dark:text-gray-200 ">{item?.centralCatalogue?.name} {item?.aliasName? `(${item?.aliasName})` : '' }</h1>
           <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">#{item.id?.split('-')[0]}</p>
           <div className="flex gap-2">

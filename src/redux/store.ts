@@ -9,6 +9,7 @@ import { combineReducers } from 'redux'
 import placeOrderSlice from 'src/Pages/ChatView/PlaceOrder/placeOrderSlice';
 import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice';
 import i18nSlice from 'src/i18nSlice';
+import productFiltersSlice from 'src/Pages/Product/productFiltersSlice';
 
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     signup: signupSlice,
     placeorder: placeOrderSlice,
     addproduct: addProductSlice,
-    i18n: i18nSlice
+    i18n: i18nSlice,
+    productFilters: productFiltersSlice
 })
 const persistConfig = { key: 'root', version: 1, storage, }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
