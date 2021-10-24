@@ -1,15 +1,28 @@
 import React from 'react'
 import FilterCategory from "../FilterCategory";
 import FilterBrands from '../FilterBrands'
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAll, selectProductFilters, setSorting } from '../productFiltersSlice';
 
 interface SortingProps {
   sortingName: string;
+  value: 'latest' | 'price-high-low' | 'price-low-high' | undefined;
 }
 
 const Sorting = (props: SortingProps) => {
+
+  const dispatch = useDispatch()
+  const filters = useSelector(selectProductFilters)
+
+  const isChecked = filters?.sorting === props.value
+
+  function onChangeSorting () {
+    dispatch(setSorting(props.value))
+  }
+
   return (
     <div className="flex items-center gap-2 ml-4">
-      <input type="radio" name="" id="" />
+      <input type="radio" checked={isChecked} onChange={onChangeSorting} />
       <label htmlFor="" className="text-sm font-semibold text-gray-500 dark:text-gray-400">
         {props.sortingName}
       </label>
@@ -18,6 +31,10 @@ const Sorting = (props: SortingProps) => {
 };
 
 export function FilterPopup() {
+
+  const dispatch = useDispatch()
+
+
   return (
     <div className="pt-2 px-4 pb-10">
       <div className="flex items-center justify-between mb-4">
@@ -42,7 +59,7 @@ export function FilterPopup() {
         </div>
         {/* col-2 */}
         <div>
-          <p className="text-xs font-bold text-blue-500">Clear All</p>
+          <p className="text-xs font-bold text-blue-500 cursor-pointer" onClick={() => dispatch(clearAll())}>Clear All</p>
         </div>
       </div>
       {/* --------- */}
@@ -75,9 +92,9 @@ export function FilterPopup() {
         </div>
       </div>
       <div className="flex flex-col gap-1 mt-2">
-        <Sorting sortingName="Latest first" />
-        <Sorting sortingName="Price-Low to High" />
-        <Sorting sortingName="Price-High to Low" />
+        <Sorting sortingName="Latest first" value="latest" />
+        <Sorting sortingName="Price-Low to High" value="price-high-low"  />
+        <Sorting sortingName="Price-High to Low" value="price-low-high"  />
       </div>
     </div>
   );

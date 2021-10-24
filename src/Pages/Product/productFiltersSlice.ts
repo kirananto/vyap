@@ -27,11 +27,21 @@ export const productFiltersSlice = createSlice({
         setSorting: (state, action: PayloadAction<ProductFilterInterface['sorting']>) => {
             state.sorting = action.payload;
         },
-        addCategories: (state, action: PayloadAction<any>) => {
-            state.categories.push(action.payload);
+        categoriesCheckbox: (state, action: PayloadAction<any>) => {
+            const isPresent = state.categories?.find(item => item.id === action.payload.id)
+            if(isPresent) {
+                state.categories = state.categories?.filter(filterItem => filterItem.id !== action.payload.id)
+            } else {
+                state.categories.push(action.payload)
+            }
         },
-        addBrands: (state, action: PayloadAction<any>) => {
-            state.brands.push(action.payload);
+        brandsCheckbox: (state, action: PayloadAction<any>) => {
+            const isPresent = state.brands?.find(item => item.id === action.payload.id)
+            if(isPresent) {
+                state.brands = state.brands?.filter(filterItem => filterItem.id !== action.payload.id)
+            } else {
+                state.brands.push(action.payload)
+            }
         },
         clearAll: (state) => {
             state.categories = [];
@@ -42,7 +52,7 @@ export const productFiltersSlice = createSlice({
     },
 });
 
-export const { setCategories, setBrands, setSorting, addCategories, addBrands, clearAll } = productFiltersSlice.actions;
+export const { setCategories, setBrands, setSorting, categoriesCheckbox, brandsCheckbox, clearAll } = productFiltersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

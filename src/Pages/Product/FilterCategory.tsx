@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCentralProductCategories } from "src/API/products.axios";
 import { selectCredentials } from "../Login/credentialsSlice";
+import { categoriesCheckbox, selectProductFilters } from "./productFiltersSlice";
 
 interface CategoryName {
-  CategoryName: String;
+  name: String;
+  item: any
 }
 const Category = (props: CategoryName) => {
+
+  const dispatch = useDispatch()
+  const filters = useSelector(selectProductFilters)
+
+  const isChecked = !!filters?.categories?.find(findItem => findItem.id === props?.item?.id)
+
+  function tickCheckBox() {
+    dispatch(categoriesCheckbox(props.item))
+  }
+
   return (
     <div className="flex items-center gap-2 ml-4">
-      <input type="checkbox" />
+      <input type="checkbox" checked={isChecked} onChange={tickCheckBox} />
       <label htmlFor="" className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-        {props.CategoryName}
+        {props.name}
       </label>
     </div>
   );
@@ -37,7 +49,7 @@ export default function FilterCategory(props: FilterCategories) {
         {props.heading}
       </h1>
       <div className="flex flex-col gap-1 mt-2">
-        {items?.map(item => <Category key={item.id} CategoryName={item.name} />)}
+        {items?.map(item => <Category key={item.id} item={item} name={item.name} />)}
       </div>
     </div>
   );

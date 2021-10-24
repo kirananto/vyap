@@ -1,5 +1,7 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ProductCheckedOptions from './ProductCheckedOptions'
+import { clearAll, selectProductFilters } from './productFiltersSlice'
 
 export default function AppliedFilters({
     selectedProduct,
@@ -10,6 +12,22 @@ export default function AppliedFilters({
     onMoreClick: any,
     onFilterClick: any
 }) {
+
+    const filters = useSelector(selectProductFilters)
+
+    const dispatch = useDispatch()
+
+    const filterText = (value: string) => {
+        switch(value) {
+            case 'latest': return `Sort by latest`
+            case 'price-high-low': return `Price-High to Low`
+            case 'price-low-high': return `Price-Low to High`
+        }
+    }
+
+    function hasFilters () {
+        return filters?.categories?.length > 0 || filters?.brands?.length > 0 || filters?.sorting !== undefined
+    }
     return (
         <div className="px-4">
             {selectedProduct?.length === 0 ? (<div className={'flex my-2 gap-4'}>
@@ -30,15 +48,16 @@ export default function AppliedFilters({
                 <div className="flex flex-col">
                     <div className="flex gap-2 items-end">
                         <div className={'text-base font-bold text-gray-500 dark:text-gray-300'}>Applied Filters</div>
-                        <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'}>Clear all</div>
+                        {hasFilters() && <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'} onClick={() => dispatch(clearAll())}>Clear all</div>}
                     </div>
-                    <div className="flex gap-2 mt-2">
-                        <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 1</div>
-                        <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 2</div>
-                    </div>
-                </div>
-                <div className="text-sm font-semibold text-blue-500 self-end">
-                    Select Products
+                    {hasFilters() ? <div className="flex gap-2 mt-2">
+                        {filters?.categories?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
+                        {filters?.brands?.map(mapItem => <div key={mapItem.id} className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
+                        {filters?.sorting && (
+                            <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
+                                {filterText(filters?.sorting)}
+                            </div>)}
+                    </div> : <div className="flex gap-2 mt-2 text-sm text-gray-400 dark:text-gray-300"> No filters applied</div>}
                 </div>
             </div>
         </div>
