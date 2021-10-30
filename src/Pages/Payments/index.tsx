@@ -5,11 +5,15 @@ import PaymentContainer from './PaymentContainer'
 import { fetchAllPayments } from 'src/API/payment.axios'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
+import ModalViewer from 'src/Components/Style/ModalViewer'
+import { FilterPopup } from './Filters/FilterPopUp'
 
 export default function Payments() {
     const { token } = useSelector(selectCredentials)
     const [payments, setPayments] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
+    const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+
     useEffect(() => {
         fetchAllPayments(token!).then((result: any) => {
             console.log(result.data)
@@ -23,7 +27,7 @@ export default function Payments() {
             {/* header */}
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
                 <Header heading="All Payments" />
-                <AppliedFilters />
+                <AppliedFilters openFilters={() => setfilterPopupOpen(!filterPopupOpen)}/>
             </div>
             {/* body */}
             <div className="bg-gray-100 p-4 dark:bg-gray-900">
@@ -31,6 +35,12 @@ export default function Payments() {
                     <PaymentContainer payments={payments} loading={loading} />
                 </div>
             </div>
+
+            <ModalViewer
+                body={<FilterPopup />}
+                isOpen={filterPopupOpen}
+                onClose={() => setfilterPopupOpen(false)}
+            />
             {/* Footer */}
 
             <div className="fixed bottom-0 w-full h-20 bg-white shadow px-8 grid dark:bg-gray-800">
