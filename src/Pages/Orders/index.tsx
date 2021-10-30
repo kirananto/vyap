@@ -5,11 +5,14 @@ import OrderContainer from './OrderContainer'
 import { fetchOrdersAPI } from 'src/API/order.axios'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
+import ModalViewer from 'src/Components/Style/ModalViewer'
+import { FilterPopup } from './Filters/FilterPopUp'
 
 export default function Orders() {
     const [orders, setOrders] = useState<any[]>([])
     const { token } = useSelector(selectCredentials)
     const [loading, setLoading] = useState(true)
+    const [filterPopupOpen, setfilterPopupOpen] = useState(false);
 
     useEffect(() => {
         fetchOrdersAPI(token!).then((result: any) => {
@@ -23,7 +26,7 @@ export default function Orders() {
             {/* header */}
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
                 <Header heading="All Orders" />
-                <AppliedFilters />
+                <AppliedFilters openFilters={() => setfilterPopupOpen(!filterPopupOpen)} />
             </div>
             {/* body */}
             <div className="bg-gray-100 p-4 dark:bg-gray-900">
@@ -32,6 +35,12 @@ export default function Orders() {
                 </div>
             </div>
             {/* Footer */}
+
+            <ModalViewer
+                body={<FilterPopup />}
+                isOpen={filterPopupOpen}
+                onClose={() => setfilterPopupOpen(false)}
+            />
 
             <div className="fixed bottom-0 w-full h-20 bg-white dark:bg-gray-800 shadow px-8 grid">
                 <div className="flex items-center justify-center gap-2 justify-self-center mt-2 w-full max-w-lg">

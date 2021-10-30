@@ -11,6 +11,7 @@ import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice'
 import i18nSlice from 'src/i18nSlice';
 import productFiltersSlice from 'src/Pages/Product/productFiltersSlice';
 import paymentFiltersSlice from 'src/Pages/Payments/Filters/paymentFiltersSlice';
+import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice';
 
 
 const rootReducer = combineReducers({
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     addproduct: addProductSlice,
     i18n: i18nSlice,
     productFilters: productFiltersSlice,
-    paymentFilters: paymentFiltersSlice
+    paymentFilters: paymentFiltersSlice,
+    orderFilters: orderFiltersSlice
 })
 const persistConfig = { key: 'root', version: 1, storage, }
 const persistedReducer = persistReducer(persistConfig, rootReducer)

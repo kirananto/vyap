@@ -1,19 +1,39 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearAll, selectOrderFilters } from './Filters/orderFiltersSlice'
 
-export default function AppliedFilters() {
+export default function AppliedFilters({ openFilters } : { openFilters: any}) {
+
+    const filters = useSelector(selectOrderFilters)
+    const dispatch = useDispatch()
+
+    const filterText = (value: string) => {
+        switch(value) {
+            case 'latest': return `Sort by latest`
+            case 'price-high-low': return `Price-High to Low`
+            case 'price-low-high': return `Price-Low to High`
+        }
+    }
+    function hasFilters () {
+        return filters?.accounts?.length > 0 || (filters?.orderStatus?.length ?? -1) > 0 || filters?.sorting !== undefined
+    }
     return (
         <div className="flex w-11/12 m-auto justify-between py-4">
             <div className="flex flex-col ml-4">
                 <div className="flex gap-2 items-end">
                     <div className={'text-sm text-gray-600 dark:text-gray-300'}>Applied Filters & Sorting</div>
-                    <div className={'text-xs text-blue-800 cursor-pointer dark:text-blue-300'}>Clear all</div>
+                    {hasFilters() && <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'} onClick={() => dispatch(clearAll())}>Clear all</div>}
                 </div>
-                <div className="flex gap-2 mt-2">
-                    <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">K & K Auto mobiles</div>
-                    <div className="flex bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">Order completed</div>
-                </div>
+                {hasFilters() ? <div className="flex gap-2 mt-2">
+                        {filters?.accounts?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem?.recipient?.name}</div>)}
+                        {filters?.orderStatus &&  <div className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.orderStatus}</div>}
+                        {filters?.sorting && (
+                            <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
+                                {filterText(filters?.sorting)}
+                            </div>)}
+                    </div> : <div className="flex gap-2 mt-2 text-sm text-gray-400 dark:text-gray-300"> No filters applied</div>}
             </div>
-            <div className="flex ">
+            <div className="flex " onClick={openFilters}>
                 <div className={'flex border border-gray-200 rounded place-items-center px-2 py-1 text-gray-600 cursor-pointer text-base font-semibold dark:border-gray-300 dark:text-gray-300'}>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
