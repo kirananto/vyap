@@ -11,7 +11,7 @@ export default function Account() {
                 <SimpleHeader heading=" My Account " />
             </div>
             {/* Caard Container  */}
-            <div className="flex flex-col items-center w-full gap-4 px-8 py-2 ">
+            <div className="flex flex-col items-center w-full gap-4 px-8 py-2 pt-20">
                 <div 
                     className="relative w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-indigo-900"
                 >

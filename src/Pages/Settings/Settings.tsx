@@ -31,7 +31,7 @@ export default function Settings() {
   return (
     <div className="dark:bg-gray-900">
       <SimpleHeader heading="Settings" />
-      <div className="pt-6 pl-8 bg-white dark:bg-gray-900 h-screen">
+      <div className="pt-20 pl-8 bg-white dark:bg-gray-900 h-screen">
         {/* ------ */}
         <div className="flex gap-3 mb-2">
           <h1 className="font-bold text-gray-700 text-md dark:text-gray-300">Team members</h1>
