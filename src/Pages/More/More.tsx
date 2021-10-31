@@ -34,7 +34,7 @@ export default function More() {
   return (
     <div className="bg-white dark:bg-gray-900">
       <SimpleHeader heading="More" />
-      <div className="h-screen overflow-y-auto pb-48">
+      <div className="h-screen overflow-y-auto pt-8 pb-48">
         <div className="flex flex-col items-center justify-center gap-2 py-5">
           <img
             src={user?.profileImageUrl ?? profPic}

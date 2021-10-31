@@ -12,7 +12,7 @@ export default function Reports() {
       </div>
 
       {/* Card Container */}
-      <div className="grid w-full grid-cols-2 gap-4 p-4 mt-2">
+      <div className="grid w-full grid-cols-2 gap-4 p-4 mt-2 pt-20">
         <ReportCard
           heading="Shopwise Reports"
           bgIllus={shopImg}
