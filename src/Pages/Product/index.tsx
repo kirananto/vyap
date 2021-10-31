@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import ChatImg from './assets/no_data.svg'
 import ModalViewer from "src/Components/Style/ModalViewer";
 import AppliedFilters from "./AppliedFilters";
+import { selectProductFilters } from "./productFiltersSlice";
 
 
 // ! Main Component
@@ -20,6 +21,8 @@ export default function Product() {
   const { token, user } = useSelector(selectCredentials)
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState<any[]>([])
+  const filters = useSelector(selectProductFilters)
+
   // ! Tracking the total number of products is checked..
   // !--------------->
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
@@ -52,14 +55,22 @@ export default function Product() {
   // ! ------===------->
 
   useEffect(() => {
-    fetchProducts(token!, user?.organizationId!, 20, 0).then((result: any) => {
+    fetchProducts({
+      token: token!,
+      organizationId: user?.organizationId!,
+      limit: 20,
+      offset: 0,
+      ordering: filters?.sorting,
+      categoryIds: filters?.categories?.length ? `${filters?.categories?.map((item: { id: string }) => item.id).join(',')}` : undefined,
+      brandIds: filters?.brands?.length ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}` : undefined
+    }).then((result: any) => {
       setProducts(result.data?.data ?? [])
     }).catch(error => {
       console.log('error', error)
     }).finally(() => {
       setLoading(false)
     })
-  }, [])
+  }, [filters?.categories, filters?.brands, filters?.sorting])
 
   function renderProducts() {
     if (loading) {
@@ -71,13 +82,13 @@ export default function Product() {
         <div className="text-center px-6 w-2/3 m-auto dark:text-gray-200"> You do not have any products added. Please add a product to begin listing it to your shops. </div>
       </div>
     }
-    return products?.map(mapItem => <ProductCard 
-      key={mapItem.id} 
-      item={mapItem} 
-      onClicked={CheckboxClicked} 
-      onMore={toggleMore} 
+    return products?.map(mapItem => <ProductCard
+      key={mapItem.id}
+      item={mapItem}
+      onClicked={CheckboxClicked}
+      onMore={toggleMore}
       isChecked={!(selectedProduct?.find(findItem => findItem?.id === mapItem?.id) === undefined)}
-      />)
+    />)
   }
   return (
     <>
@@ -88,10 +99,10 @@ export default function Product() {
             subHeading={`${products?.length ?? 0} Items`}
           />
           <div>
-            <AppliedFilters 
-              selectedProduct={selectedProduct} 
-              onMoreClick={() => setisSearchMoreOpen(true)} 
-              onFilterClick={() => setfilterPopupOpen(true)} 
+            <AppliedFilters
+              selectedProduct={selectedProduct}
+              onMoreClick={() => setisSearchMoreOpen(true)}
+              onFilterClick={() => setfilterPopupOpen(true)}
             />
           </div>
         </div>
@@ -107,12 +118,12 @@ export default function Product() {
         isOpen={filterPopupOpen}
         onClose={() => setfilterPopupOpen(false)}
       />
-      <ModalViewer 
+      <ModalViewer
         body={<SearchMorePopup />}
         isOpen={isSearchMoreOpen}
         onClose={() => setisSearchMoreOpen(false)}
       />
-      <ModalViewer 
+      <ModalViewer
         body={<MorePopup />}
         isOpen={isMoreOpen}
         onClose={() => setisMoreOpen(false)}

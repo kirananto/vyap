@@ -20,21 +20,24 @@ export interface IAddProduct {
 }
 
 export interface AddCentralCatalogueInterface {
-   name: string
-   description: string
-   brandId?: string
-   hsnId?: string
-   // TODO Unverified
-   categories: any
-   images: any
+    name: string
+    description: string
+    brandId?: string
+    hsnId?: string
+    // TODO Unverified
+    categories: any
+    images: any
 }
 
-export const fetchProducts = (token: string, organizationId: string, limit: number, offset: number) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
         organizationId,
         limit,
+        categoryIds,
+        brandIds,
+        ordering,
         offset
     },
     headers: {
