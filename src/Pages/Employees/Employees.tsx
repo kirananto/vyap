@@ -13,10 +13,10 @@ export default function Employees() {
   return (
     <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
       <div className="w-full mb-2 bg-white shadow">
-        <SimpleHeader heading=" Employees " />
+        <SimpleHeader heading=" Employees" />
       </div>
       {/* Caard Container  */}
-      <div className="flex flex-col items-center w-full gap-4 py-2 ">
+      <div className="flex flex-col items-center w-full gap-4 py-2 pt-20">
         <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
         <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
         <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />

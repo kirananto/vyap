@@ -98,7 +98,7 @@ function CreateProduct() {
   return (
     <div className=" create-product-container dark:bg-gray-900">
       <SimpleHeader heading="Create Product" />
-      <div className="w-11/12 pt-6  px-2 mx-auto">
+      <div className="w-11/12 pt-20  px-2 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
         {/* ===--===Product card===--=== */}
         <ItemCard productImage={productImage}/>

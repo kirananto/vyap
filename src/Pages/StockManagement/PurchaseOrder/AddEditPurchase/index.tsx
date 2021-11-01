@@ -15,7 +15,7 @@ export default function AddEditPurchase() {
             </div>
 
             {/* body */}
-            <div className="flex flex-col items-center w-full gap-4 py-2 px-8 pt-8 ">
+            <div className="flex flex-col items-center w-full gap-4 py-2 px-8 pt-20 ">
                 <div className="w-full">
                     <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
                         Supplier name

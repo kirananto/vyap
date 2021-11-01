@@ -157,7 +157,7 @@ export default function PlaceOrder() {
             <div className="w-full bg-white shadow ">
                 <SimpleHeader heading={'Place Order'} />
             </div>
-            <div className={'p-2'}>
+            <div className={'p-2 pt-20'}>
                 {/* <!-- Textarea --> */}
                 <div className="p-2">
                     <span className="float-left mb-2 text-sm text-gray-500">Note</span>
