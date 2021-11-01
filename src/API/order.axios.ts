@@ -1,3 +1,4 @@
+import type { OrderStatusType } from 'src/Pages/Orders/enum'
 import { axiosClient } from './apiClient'
 
 export const fetchOrderAPI = (token: string, id: string) => axiosClient({
@@ -7,9 +8,12 @@ export const fetchOrderAPI = (token: string, id: string) => axiosClient({
         'authorization': `Bearer ${token}`
     }
 })
-export const fetchOrdersAPI = (token: string) => axiosClient({
+export const fetchOrdersAPI = (token: string, orderStatus: OrderStatusType) => axiosClient({
     url: `/order`,
     method: 'GET',
+    params: {
+        orderStatus
+    },
     headers: {
         'authorization': `Bearer ${token}`
     }

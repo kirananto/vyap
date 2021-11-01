@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FilterPopup } from './Filters/FilterPopUp'
+import { OrderStatusType } from './enum'
 
 export default function Orders() {
     const [orders, setOrders] = useState<any[]>([])
@@ -15,7 +16,7 @@ export default function Orders() {
     const [filterPopupOpen, setfilterPopupOpen] = useState(false);
 
     useEffect(() => {
-        fetchOrdersAPI(token!).then((result: any) => {
+        fetchOrdersAPI(token!, OrderStatusType.PENDING).then((result: any) => {
             setLoading(false)
             setOrders(result?.data?.data ?? [])
         })
