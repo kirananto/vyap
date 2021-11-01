@@ -64,7 +64,7 @@ export function FilterPopup() {
       {/* --------- */}
       <div className="flex flex-col gap-4">
         <FilterAccounts heading="Based On Accounts" type="account"/>
-        <FilterAccounts heading="Based On Order Type" type="orderType" />
+        <FilterAccounts heading="Based On Order status" type="orderStatus" />
       </div>
       {/* Sorting */}
       <div className="flex gap-2 mt-4 text-gray-500 dark:text-gray-300">

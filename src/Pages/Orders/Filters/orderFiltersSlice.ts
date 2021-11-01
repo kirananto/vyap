@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { OrderStatusType } from '../enum';
 
 export interface OrderFilterInterface {
-    orderStatus: string | undefined;
+    orderStatus: OrderStatusType | undefined;
     accounts: any[];
     sorting: 'latest' | 'price-high-low' | 'price-low-high' | undefined;
 }

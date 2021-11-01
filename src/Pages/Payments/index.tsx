@@ -7,21 +7,23 @@ import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FilterPopup } from './Filters/FilterPopUp'
+import { selectPaymentFilters } from './Filters/paymentFiltersSlice'
 
 export default function Payments() {
     const { token } = useSelector(selectCredentials)
     const [payments, setPayments] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+    const filters = useSelector(selectPaymentFilters)
 
     useEffect(() => {
-        fetchAllPayments(token!).then((result: any) => {
+        fetchAllPayments({ token: token!, limit: 100, offset: 0, paymentMethod: filters?.paymentMethod }).then((result: any) => {
             console.log(result.data)
             setLoading(false)
             setPayments(result.data.data)
             //TODO handle the payments better
         })
-    }, [])
+    }, [filters?.paymentMethod])
     return (
         <div className="">
             {/* header */}

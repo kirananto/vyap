@@ -46,6 +46,10 @@ export default function FilterCategory(props: FilterCategories) {
       setItems([{
         id: 'cash',
         name: 'CASH'
+      },
+      {
+        id: 'cheque',
+        name: 'CHEQUE'
       }])
     } else {
       fetchInboxes({ token: token!, limit: 100, offset: 0 }).then((result: any) => {

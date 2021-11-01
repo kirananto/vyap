@@ -6,18 +6,18 @@ import { addAccountsCheckbox, selectOrderFilters, setAccounts, setOrderStatus } 
 
 interface CategoryName {
   item: any
-  type: 'orderType' | 'account'
+  type: 'orderStatus' | 'account'
 }
 const Account = ({ item, type }: CategoryName) => {
 
   const dispatch = useDispatch()
   const filters = useSelector(selectOrderFilters)
 
-  const isChecked = type === 'orderType' ? filters?.orderStatus === item.name : !!filters?.accounts?.find(findItem => findItem.id === item?.id)
+  const isChecked = type === 'orderStatus' ? filters?.orderStatus === item.id : !!filters?.accounts?.find(findItem => findItem.id === item?.id)
 
   function tickCheckBox() {
-    if(type === 'orderType') {
-      dispatch(setOrderStatus(item?.name))
+    if (type === 'orderStatus') {
+      dispatch(setOrderStatus(item?.id))
     } else {
       dispatch(addAccountsCheckbox(item))
     }
@@ -25,9 +25,9 @@ const Account = ({ item, type }: CategoryName) => {
 
   return (
     <div className="flex items-center gap-2 ml-4">
-      <input type="checkbox" checked={isChecked} onChange={tickCheckBox} />
+      <input type={type === 'orderStatus' ? 'radio' : "checkbox"} checked={isChecked} onChange={tickCheckBox} />
       <label htmlFor="" className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-        {type === 'orderType' ? item?.name : item?.recipient?.name}
+        {type === 'orderStatus' ? item?.name : item?.recipient?.name}
       </label>
     </div>
   );
@@ -35,18 +35,28 @@ const Account = ({ item, type }: CategoryName) => {
 
 interface FilterCategories {
   heading: String;
-  type: 'orderType' | 'account'
+  type: 'orderStatus' | 'account'
 }
 export default function FilterCategory(props: FilterCategories) {
   const [items, setItems] = useState<any[]>([])
   const { token } = useSelector(selectCredentials)
 
   useEffect(() => {
-    if (props.type === 'orderType') {
-      setItems([{
-        id: 'cash',
-        name: 'CASH'
-      }])
+    if (props.type === 'orderStatus') {
+      setItems([
+        {
+          id: 'PENDING',
+          name: 'Pending'
+        },
+        {
+          id: 'PROCESSING',
+          name: 'Processing'
+        },
+        {
+          id: 'COMPLETE',
+          name: 'Complete'
+        }
+      ])
     } else {
       fetchInboxes({ token: token!, limit: 100, offset: 0 }).then((result: any) => {
         setItems(result?.data?.data?.filter((item: any) => item?.recipient))

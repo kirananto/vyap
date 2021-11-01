@@ -8,19 +8,26 @@ import { selectCredentials } from '../Login/credentialsSlice'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FilterPopup } from './Filters/FilterPopUp'
 import { OrderStatusType } from './enum'
+import { selectOrderFilters } from './Filters/orderFiltersSlice'
 
 export default function Orders() {
     const [orders, setOrders] = useState<any[]>([])
     const { token } = useSelector(selectCredentials)
     const [loading, setLoading] = useState(true)
     const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+    const filters = useSelector(selectOrderFilters)
 
     useEffect(() => {
-        fetchOrdersAPI(token!, OrderStatusType.PENDING).then((result: any) => {
+        fetchOrdersAPI({
+            token: token!,
+            orderStatus: filters.orderStatus,
+            offset: 0,
+            limit: 100
+        }).then((result: any) => {
             setLoading(false)
             setOrders(result?.data?.data ?? [])
         })
-    }, [])
+    }, [filters.orderStatus])
 
     return (
         <div className="dark:bg-gray-900">
