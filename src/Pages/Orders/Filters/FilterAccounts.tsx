@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInboxes } from "src/API/inbox.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { addAccountsCheckbox, selectOrderFilters, setAccounts, setOrderStatus } from "./orderFiltersSlice";
+import { selectOrderFilters, setAccount, setOrderStatus } from "./orderFiltersSlice";
 
 interface CategoryName {
   item: any
@@ -13,13 +13,13 @@ const Account = ({ item, type }: CategoryName) => {
   const dispatch = useDispatch()
   const filters = useSelector(selectOrderFilters)
 
-  const isChecked = type === 'orderStatus' ? filters?.orderStatus === item.id : !!filters?.accounts?.find(findItem => findItem.id === item?.id)
+  const isChecked = type === 'orderStatus' ? filters?.orderStatus === item.id : filters?.account?.id === item?.recipient?.id
 
   function tickCheckBox() {
     if (type === 'orderStatus') {
       dispatch(setOrderStatus(item?.id))
     } else {
-      dispatch(addAccountsCheckbox(item))
+      dispatch(setAccount({ id: item?.recipient?.id, name: item?.recipient?.name }))
     }
   }
 

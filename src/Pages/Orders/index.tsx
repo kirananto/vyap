@@ -21,13 +21,15 @@ export default function Orders() {
         fetchOrdersAPI({
             token: token!,
             orderStatus: filters.orderStatus,
+            ordering: filters?.sorting,
+            relatedId: filters?.account.id,
             offset: 0,
             limit: 100
         }).then((result: any) => {
             setLoading(false)
             setOrders(result?.data?.data ?? [])
         })
-    }, [filters.orderStatus])
+    }, [filters.orderStatus, filters?.sorting, filters?.account])
 
     return (
         <div className="dark:bg-gray-900">

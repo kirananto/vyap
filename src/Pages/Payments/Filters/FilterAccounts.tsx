@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInboxes } from "src/API/inbox.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { addAccountsCheckbox, selectPaymentFilters, setAccounts, setPaymentMethod } from "./paymentFiltersSlice";
+import { selectPaymentFilters, setAccount, setPaymentMethod } from "./paymentFiltersSlice";
 
 interface CategoryName {
   item: any
@@ -13,13 +13,13 @@ const Account = ({ item, type }: CategoryName) => {
   const dispatch = useDispatch()
   const filters = useSelector(selectPaymentFilters)
 
-  const isChecked = type === 'paymentType' ? filters?.paymentMethod === item.name : !!filters?.accounts?.find(findItem => findItem.id === item?.id)
+  const isChecked = type === 'paymentType' ? filters?.paymentMethod === item.name : filters?.account?.id === item?.recipient?.id
 
   function tickCheckBox() {
     if(type === 'paymentType') {
       dispatch(setPaymentMethod(item?.name))
     } else {
-      dispatch(addAccountsCheckbox(item))
+      dispatch(setAccount({ id: item?.recipient?.id, name: item?.recipient?.name }))
     }
   }
 

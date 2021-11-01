@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface PaymentFilterInterface {
     paymentMethod: string | undefined;
-    accounts: any[];
+    account: { id: string, name: string } | undefined;
     sorting: 'latest' | 'price-high-low' | 'price-low-high' | undefined;
 }
 
 const initialState: PaymentFilterInterface = {
     paymentMethod: undefined,
-    accounts: [],
+    account: undefined,
     sorting: undefined
 };
 
@@ -21,22 +21,14 @@ export const paymentFiltersSlice = createSlice({
         setPaymentMethod: (state, action: PayloadAction<PaymentFilterInterface['paymentMethod']>) => {
             state.paymentMethod = action.payload;
         },
-        setAccounts: (state, action: PayloadAction<PaymentFilterInterface['accounts']>) => {
-            state.accounts = action.payload;
+        setAccount: (state, action: PayloadAction<PaymentFilterInterface['account']>) => {
+            state.account = action.payload;
         },
         setSorting: (state, action: PayloadAction<PaymentFilterInterface['sorting']>) => {
             state.sorting = action.payload;
         },
-        addAccountsCheckbox: (state, action: PayloadAction<any>) => {
-            const isPresent = state.accounts?.find(item => item.id === action.payload.id)
-            if(isPresent) {
-                state.accounts = state.accounts?.filter(filterItem => filterItem.id !== action.payload.id)
-            } else {
-                state.accounts.push(action.payload)
-            }
-        },
         clearAll: (state) => {
-            state.accounts = [];
+            state.account = undefined;
             state.paymentMethod = undefined;
             state.sorting = undefined;
         },
@@ -44,7 +36,7 @@ export const paymentFiltersSlice = createSlice({
     },
 });
 
-export const { setPaymentMethod, setAccounts, setSorting, addAccountsCheckbox, clearAll } = paymentFiltersSlice.actions;
+export const { setPaymentMethod, setAccount, setSorting, clearAll } = paymentFiltersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

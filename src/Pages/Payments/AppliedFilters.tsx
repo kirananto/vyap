@@ -15,7 +15,7 @@ export default function AppliedFilters({ openFilters } : { openFilters: any}) {
         }
     }
     function hasFilters () {
-        return filters?.accounts?.length > 0 || (filters?.paymentMethod?.length ?? -1) > 0 || filters?.sorting !== undefined
+        return filters?.account || (filters?.paymentMethod?.length ?? -1) > 0 || filters?.sorting !== undefined
     }
     return (
         <div className="flex w-11/12 m-auto justify-between py-4">
@@ -25,7 +25,7 @@ export default function AppliedFilters({ openFilters } : { openFilters: any}) {
                     {hasFilters() && <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'} onClick={() => dispatch(clearAll())}>Clear all</div>}
                 </div>
                 {hasFilters() ? <div className="flex gap-2 mt-2">
-                        {filters?.accounts?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem?.recipient?.name}</div>)}
+                        {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.account?.name}</div>}
                         {filters?.paymentMethod &&  <div className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.paymentMethod}</div>}
                         {filters?.sorting && (
                             <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">

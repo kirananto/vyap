@@ -8,13 +8,15 @@ export const fetchOrderAPI = (token: string, id: string) => axiosClient({
         'authorization': `Bearer ${token}`
     }
 })
-export const fetchOrdersAPI = ({ token, orderStatus, offset, limit } : { token: string, orderStatus: OrderStatusType | undefined, offset: number, limit: number }) => axiosClient({
+export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, relatedId } : { token: string, orderStatus: OrderStatusType | undefined, offset: number, limit: number, ordering?: string, relatedId?: string }) => axiosClient({
     url: `/order`,
     method: 'GET',
     params: {
         orderStatus,
         offset,
-        limit
+        limit,
+        ordering,
+        relatedId
     },
     headers: {
         'authorization': `Bearer ${token}`

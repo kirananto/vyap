@@ -17,13 +17,13 @@ export default function Payments() {
     const filters = useSelector(selectPaymentFilters)
 
     useEffect(() => {
-        fetchAllPayments({ token: token!, limit: 100, offset: 0, paymentMethod: filters?.paymentMethod }).then((result: any) => {
+        fetchAllPayments({ token: token!, limit: 100, offset: 0, paymentMethod: filters?.paymentMethod, ordering: filters?.sorting, relatedId: filters?.account?.id }).then((result: any) => {
             console.log(result.data)
             setLoading(false)
             setPayments(result.data.data)
             //TODO handle the payments better
         })
-    }, [filters?.paymentMethod])
+    }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id])
     return (
         <div className="">
             {/* header */}
