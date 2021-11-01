@@ -2,6 +2,7 @@ import { SimpleHeader } from '../../Components/Header'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'
+import { patchUser } from 'src/API/user.axios'
 
 export default function Account() {
 
@@ -10,10 +11,11 @@ export default function Account() {
     const dispatch = useDispatch()
 
     function handleSave () {
-        // user.email
-        // user.name
         // user.organization.pinCode
         // user.organization.name
+        patchUser({ id: user?.id!, name: user?.name, email: user?.email }).then(result => {
+            console.log('user', result.data)
+        })
     }
 
     return (
@@ -119,7 +121,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
-                <button className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update account details</button>
+                <button onClick={handleSave} className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update account details</button>
             </div>
         </div>
     )
