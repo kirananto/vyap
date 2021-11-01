@@ -1,10 +1,21 @@
 import { SimpleHeader } from '../../Components/Header'
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { selectCredentials } from '../Login/credentialsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'
 
 export default function Account() {
+
     const { user } = useSelector(selectCredentials)
+
+    const dispatch = useDispatch()
+
+    function handleSave () {
+        // user.email
+        // user.name
+        // user.organization.pinCode
+        // user.organization.name
+    }
+
     return (
         <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
             <div className="w-full mb-2 bg-white shadow">
@@ -31,7 +42,7 @@ export default function Account() {
                     <input
                         name="tel"
                         value={user?.name}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setUserName(event?.target.value))}
                         id="tel"
                         placeholder="Your name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
@@ -44,7 +55,7 @@ export default function Account() {
                     <input
                         name="text"
                         value={user?.organization?.name}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setBusinessName(event?.target.value))}
                         id="text"
                         placeholder="Business name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
@@ -57,7 +68,7 @@ export default function Account() {
                     <input
                         name="email"
                         value={user?.email}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setUserEmail(event?.target.value))}
                         id="email"
                         placeholder="Email"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
@@ -70,7 +81,7 @@ export default function Account() {
                     <input
                         name="pin"
                         value={user?.organization?.pinCode}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setPinCode(event?.target.value))}
                         id="pin"
                         placeholder="Pin Code"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "

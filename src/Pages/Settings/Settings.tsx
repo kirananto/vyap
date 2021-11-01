@@ -47,7 +47,7 @@ export default function Settings() {
         </div>
         <ToggleButton value={user?.settings?.isDarkMode} onChange={changeDarkMode} />
         <div className="flex gap-3 mt-8 mb-3">
-          <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Set Language to malayalam ?</h1>
+          <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Set language to malayalam</h1>
         </div>
         <ToggleButton value={language === 'ml'} onChange={() => {
           dispatch(setLanguage(language === 'ml' ? 'en' : 'ml'))

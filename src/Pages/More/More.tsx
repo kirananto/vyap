@@ -61,13 +61,14 @@ export default function More() {
           <NavLink to="/reports" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <ReportsIcon />
             <Links linkName="Reports" />
+            <Tag tagName="Coming soon" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/stock-management" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <NavLink to="#" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <StockManagementIcon />
             <Links linkName="Stock Management" />
-            <Tag tagName="Beta" />
+            <Tag tagName="Coming soon" />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
@@ -83,10 +84,10 @@ export default function More() {
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <a href="mailto:mail@vyap.app" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <HelpIcon />
             <Links linkName="Help and Support" />
-          </div>
+          </a>
           {/* ----- */}
           {/* ----- */}
           <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
