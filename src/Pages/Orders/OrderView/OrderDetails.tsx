@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { PaymentInfo, PaymentInfoTick } from "../../../Components/PaymentInfo"
+import { PaymentInfo, PaymentInfoIcon } from "../../../Components/PaymentInfo"
 import { format } from "date-fns";
+import { OrderInfoIcon } from "src/Components/OrderInfo";
 
 function OrderDetailed({ order } : { order: any }) {
     return (
@@ -15,21 +16,22 @@ function OrderDetailed({ order } : { order: any }) {
                 info={order?.updatedAt ? format(new Date(order?.updatedAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
             />
             <PaymentInfo
-                heading="Shop name"
-                info="OMart Super market (+701232134)"
+                heading="Buyer name"
+                info={order?.buyer?.name}
             />
             <PaymentInfo
                 heading="Supplier name"
-                info="Cadbury Sellers (+91823423432)"
-                more={['Order taken by Jazeem', 'Delivered by - Kiran Anto']}
+                info={`${order?.supplier?.name} (+91${order?.supplier?.officeNumber})`}
+                more={[`Order placed by ${order?.initiatedBy?.name}`]}
             />
             <PaymentInfo
                 heading="Note"
                 info={order?.description ?? 'No information'}
             />
-            <PaymentInfoTick
+            <OrderInfoIcon
                 heading="Status"
-                info="Order Completed"
+                status={order?.orderStatus?.[0]?.status}
+                info={order?.orderStatus?.[0]?.note}
             />
         </div>
     )

@@ -14,7 +14,7 @@ function PaymentInfo(props: { heading: string; info: string; more?: string[] }) 
   );
 }
 
-function PaymentInfoTick(props: { heading: string; info: string }) {
+function PaymentInfoIcon(props: { heading: string; info: string }) {
   return (
     <div>
       <p className="text-sm font-medium text-gray-500 dark:text-gray-200">{props.heading}</p>
@@ -37,4 +37,4 @@ function PaymentInfoTick(props: { heading: string; info: string }) {
   );
 }
 
-export { PaymentInfo, PaymentInfoTick };
+export { PaymentInfo, PaymentInfoIcon };

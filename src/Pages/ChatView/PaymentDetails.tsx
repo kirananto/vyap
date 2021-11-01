@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Header } from "../../Components/Header";
-import { PaymentInfo, PaymentInfoTick } from "../../Components/PaymentInfo";
+import { PaymentInfo, PaymentInfoIcon } from "../../Components/PaymentInfo";
 import { format } from "date-fns";
 
 export default function PaymentDetails() {
@@ -77,7 +77,7 @@ export default function PaymentDetails() {
               heading="Supplier name"
               info="Cadbury Sellers(+91824568535)"
             />
-            <PaymentInfoTick heading="Status" info="Payment Completed" />
+            <PaymentInfoIcon heading="Status" info="Payment Completed" />
           </div>
         </div>
         {/* delete payment button */}
