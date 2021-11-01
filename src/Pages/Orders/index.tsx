@@ -22,7 +22,7 @@ export default function Orders() {
             token: token!,
             orderStatus: filters.orderStatus,
             ordering: filters?.sorting,
-            relatedId: filters?.account.id,
+            relatedId: filters?.account?.id,
             offset: 0,
             limit: 100
         }).then((result: any) => {
