@@ -17,14 +17,17 @@ export const PrintAll = ({ apiData }: IProps) => {
     }
   };
 
-  const payments: any[] = apiData.map((item) => {
+  const orders: any[] = apiData.map((item) => {
     return {
-      ID: "#" + item?.id?.split("-")[0],
+      ORDER_ID: "#" + item?.id?.split("-")[0],
       DATE: item.createdAt
         ? format(new Date(item.createdAt), "do MMM yyyy")
         : "",
-      NAME: item.receiver?.name,
-      AMOUNT: item.amount,
+      SUPPLIER: item?.supplier?.name,
+      BUYER: item?.buyer?.name,
+      AMOUNT: (
+        parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)
+      ).toFixed(2),
     };
   });
 
@@ -55,14 +58,15 @@ export const PrintAll = ({ apiData }: IProps) => {
         <table className="min-w-full divide-y divide-gray-200 ">
           <thead className="bg-gray-50 text-center">
             <tr>
-              <td>ID</td>
+              <td>ORDER_ID</td>
               <td>DATE</td>
-              <td>Name</td>
+              <td>SUPPLIER</td>
+              <td>BUYER</td>
               <td>Amount</td>
             </tr>
           </thead>
           <tbody>
-            {payments.map((item, index) => (
+            {orders.map((item, index) => (
               <tr key={index} className="text-center">
                 {Object.values(item).map((val: any) => (
                   <td key={val} className="px-6 py-2 whitespace-nowrap">
