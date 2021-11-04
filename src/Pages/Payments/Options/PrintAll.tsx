@@ -8,10 +8,12 @@ interface IProps {
 export const PrintAll = ({ apiData }: IProps) => {
   const onPrint = () => {
     if (document.getElementById("divContents")) {
-      var printContents = document.getElementById("divContents").innerHTML;
+      var printContents = document.getElementById("divContents")?.innerHTML;
       var originalContents = document.body.innerHTML;
-      document.body.innerHTML = printContents;
-      window.print();
+      if(printContents) {
+        document.body.innerHTML = printContents;
+        window.print();
+      }
       document.body.innerHTML = originalContents;
       window.location.reload();
     }
