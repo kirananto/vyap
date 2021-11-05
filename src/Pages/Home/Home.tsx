@@ -10,7 +10,7 @@ import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import profileImg from "src/assets/icons/profile/profile-icon.svg"
 import AddCustomerModal from "./AddCustomerModal";
 import Spinner from "src/Components/Style/Spinner";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export const Home = () => {
   const [inbox, setInbox] = React.useState<any[]>([]);
@@ -22,6 +22,7 @@ export const Home = () => {
   })
   const { user, token } = useSelector(selectCredentials)
   const history = useHistory()
+  const intl = useIntl();
   useEffect(() => {
     const limit = 10
     if (token) {
@@ -66,7 +67,10 @@ export const Home = () => {
         <div className="flex w-full h-full ">
           <Link to="/more" className="flex flex-col w-4/5">
             <h1 className="text-lg font-semibold text-gray-600 dark:text-gray-100 font-ProductSans">
-              Welcome👋
+              <FormattedMessage
+                id="home.welcome"
+                defaultMessage="Welcome 👋"
+              />
             </h1>
             <h1 className="text-lg font-black text-transparent product_sans_bold bg-clip-text bg-gradient-to-br from-blue-500  to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
               {user?.organization?.name}
@@ -89,7 +93,7 @@ export const Home = () => {
             id="input"
             value={paginationParams.search}
             className="w-full h-10 pl-4 pr-5 bg-gray-100 dark:bg-gray-500 dark:text-gray-100 rounded outline-none "
-            placeholder="Search"
+            placeholder={intl.formatMessage({ id: `action.search` })}
             onChange={(e) => {
               serPaginationParams(prevState => ({
                 ...prevState,

@@ -1,4 +1,72 @@
 {
+    "home.welcome": [{
+        "type": 0,
+        "value": "സ്വാഗതം 👋"
+    }],
+    "global.my_products": [{
+        "type": 0,
+        "value": "എന്റെ ഉൽപ്പന്നങ്ങൾ"
+    }],
+    "global.customers": [{
+        "type": 0,
+        "value": "ഉപഭോക്താക്കൾ"
+    }],
+    "global.more": [{
+        "type": 0,
+        "value": "കൂടുതൽ"
+    }],
+    "global.items": [{
+        "type": 0,
+        "value": "ഇനങ്ങൾ"
+    }],
+    "global.appliedFilters": [{
+        "type": 0,
+        "value": "പ്രയോഗിച്ച ഫിൽട്ടറുകൾ"
+    }],
+    "global.clearAll": [{
+        "type": 0,
+        "value": "എല്ലാം മായ്ക്കുക"
+    }],
+    "global.allPayments": [{
+        "type": 0,
+        "value": "എല്ലാ പേയ്‌മെന്റുകളും"
+    }],
+    "global.allOrders": [{
+        "type": 0,
+        "value": "എല്ലാ ഓർഡറുകളും"
+    }],
+    "global.reports": [{
+        "type": 0,
+        "value": "റിപ്പോർട്ടുകൾ"
+    }],
+    "global.stockManagement": [{
+        "type": 0,
+        "value": "സ്റ്റോക്ക് മാനേജ്മെന്റ്"
+    }],
+    "global.myAccount": [{
+        "type": 0,
+        "value": "എന്റെ അക്കൗണ്ട്"
+    }],
+    "global.settings": [{
+        "type": 0,
+        "value": "ക്രമീകരണങ്ങൾ"
+    }],
+    "global.help": [{
+        "type": 0,
+        "value": "സഹായസഹകരണങ്ങൾ"
+    }],
+    "global.offer": [{
+        "type": 0,
+        "value": "ഓഫർ മാനേജ്മെന്റ്"
+    }],
+    "global.logout": [{
+        "type": 0,
+        "value": "പുറത്തുകടക്കുക"
+    }],
+    "global.comingSoon": [{
+        "type": 0,
+        "value": "ഉടൻ വരുന്നു"
+    }],
     "action.updateApplication": [
         {
             "type": 0,
@@ -9,6 +77,30 @@
         {
             "type": 0,
             "value": "ഉപഭോക്താവിനെ ചേർക്കുക"
+        }
+    ],
+    "action.search": [
+        {
+            "type": 0,
+            "value": "തിരയുക"
+        }
+    ],
+    "action.addProduct": [
+        {
+            "type": 0,
+            "value": "ഉൽപ്പന്നം ചേർക്കുക"
+        }
+    ],
+    "action.exportAll": [
+        {
+            "type": 0,
+            "value": "Export All"
+        }
+    ],
+    "action.printAll": [
+        {
+            "type": 0,
+            "value": "പ്രിന്റ്"
         }
     ]
 }

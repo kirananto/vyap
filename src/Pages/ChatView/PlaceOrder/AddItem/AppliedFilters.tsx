@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 export default function AppliedFilters() {
     return (
@@ -9,8 +10,18 @@ export default function AppliedFilters() {
             <div className="flex justify-between py-2">
                 <div className="flex flex-col">
                     <div className="flex gap-2 items-end">
-                        <div className={'text-sm text-gray-600'}>Applied Filters</div>
-                        <div className={'text-xs text-blue-800 cursor-pointer'}>Clear all</div>
+                        <div className={'text-sm text-gray-600'}>
+                            <FormattedMessage
+                                id="global.appliedFilters"
+                                defaultMessage="Applied Filters"
+                            />
+                        </div>
+                        <div className={'text-xs text-blue-800 cursor-pointer'}>
+                            <FormattedMessage
+                                id="global.clearAll"
+                                defaultMessage="Clear All"
+                            />
+                        </div>
                     </div>
                     <div className="flex gap-2 mt-2">
                         <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 1</div>

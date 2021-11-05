@@ -3,12 +3,14 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'
 import { patchUser } from 'src/API/user.axios'
+import { useIntl } from 'react-intl'
 
 export default function Account() {
 
     const { user } = useSelector(selectCredentials)
 
     const dispatch = useDispatch()
+    const intl = useIntl()
 
     function handleSave () {
         // user.organization.pinCode
@@ -21,7 +23,7 @@ export default function Account() {
     return (
         <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
             <div className="w-full mb-2 bg-white shadow">
-                <SimpleHeader heading=" My Account " />
+                <SimpleHeader heading={intl.formatMessage({ id: 'global.myAccount'})} />
             </div>
             {/* Caard Container  */}
             <div className="flex flex-col items-center w-full gap-4 px-8 py-2 pt-20">

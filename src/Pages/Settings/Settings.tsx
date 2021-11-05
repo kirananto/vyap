@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { selecti18nConfig, setLanguage } from "src/i18nSlice";
@@ -13,6 +14,7 @@ export default function Settings() {
   const { user } = useSelector(selectCredentials)
   const language = useSelector(selecti18nConfig).language
   const dispatch = useDispatch()
+  const intl = useIntl()
 
   function changeDarkMode() {
     const newVal = !user?.settings?.isDarkMode
@@ -30,7 +32,7 @@ export default function Settings() {
 
   return (
     <div className="dark:bg-gray-900">
-      <SimpleHeader heading="Settings" />
+      <SimpleHeader heading={intl.formatMessage({ id: 'global.settings'})} />
       <div className="pt-20 pl-8 bg-white dark:bg-gray-900 h-screen">
         {/* ------ */}
         <div className="flex gap-3 mb-2">

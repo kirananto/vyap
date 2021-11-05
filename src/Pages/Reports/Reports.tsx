@@ -2,13 +2,15 @@ import React from "react";
 import { SimpleHeader } from "../../Components/Header";
 import {ReportCard, EmptyReportCard} from "./ReportCard";
 import shopImg from "../../assets/illustrations/Shop.svg"
+import { useIntl } from "react-intl";
 
 export default function Reports() {
+  const intl = useIntl()
   return (
     <div className="bg-white dark:bg-gray-900 h-screen">
       {/* Header */}
       <div className="bg-white shadow">
-        <SimpleHeader heading="Reports" />
+        <SimpleHeader heading={intl.formatMessage({ id: 'global.reports'})} />
       </div>
 
       {/* Card Container */}

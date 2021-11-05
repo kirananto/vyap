@@ -1,5 +1,6 @@
 import React from "react";
 import format from "date-fns/format";
+import { FormattedMessage } from "react-intl";
 
 interface IProps {
   apiData: any[];
@@ -10,7 +11,7 @@ export const PrintAll = ({ apiData }: IProps) => {
     if (document.getElementById("divContents")) {
       var printContents = document.getElementById("divContents")?.innerHTML;
       var originalContents = document.body.innerHTML;
-      if(printContents) {
+      if (printContents) {
         document.body.innerHTML = printContents;
         window.print();
       }
@@ -50,7 +51,10 @@ export const PrintAll = ({ apiData }: IProps) => {
             d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
           />
         </svg>
-        PrintAll
+        <FormattedMessage
+          id="action.printAll"
+          defaultMessage="Print All"
+        />
       </button>
 
       <div className="hidden" id="divContents">

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router'
 import Button from "./Style/Button";
+import { FormattedMessage } from "react-intl";
 
 function Footer() {
   const location = useLocation()
@@ -10,7 +11,7 @@ function Footer() {
     console.log('paths', paths)
     if (paths.includes(location.pathname)) {
 
-    console.log('return val', true)
+      console.log('return val', true)
       return true
     }
     console.log('return val', false)
@@ -39,7 +40,10 @@ function Footer() {
             />
           </svg>
           <figcaption className="text-sm font-semibold">
-            Customers
+            <FormattedMessage
+              id="global.customers"
+              defaultMessage="Customers"
+            />
           </figcaption>
         </figure>
       </Link>
@@ -66,7 +70,10 @@ function Footer() {
             />
           </svg>
           <figcaption className="text-sm font-semibold">
-            My Products
+            <FormattedMessage
+              id="global.my_products"
+              defaultMessage="My Products"
+            />
           </figcaption>
         </figure>
       </Link>
@@ -93,7 +100,10 @@ function Footer() {
             />
           </svg>
           <figcaption className="text-sm font-semibold">
-            More
+            <FormattedMessage
+              id="global.more"
+              defaultMessage="More"
+            />
           </figcaption>
         </figure>
       </Link>

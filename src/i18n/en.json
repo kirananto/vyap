@@ -1,14 +1,106 @@
 {
+    "home.welcome": [{
+        "type": 0,
+        "value": "Welcome 👋"
+    }],
+    "global.my_products": [{
+        "type": 0,
+        "value": "My Products"
+    }],
+    "global.customers": [{
+        "type": 0,
+        "value": "Customers"
+    }],
+    "global.more": [{
+        "type": 0,
+        "value": "More"
+    }],
+    "global.items": [{
+        "type": 0,
+        "value": "Items"
+    }],
+    "global.appliedFilters": [{
+        "type": 0,
+        "value": "Applied Filters"
+    }],
+    "global.clearAll": [{
+        "type": 0,
+        "value": "Clear All"
+    }],
+    "global.allPayments": [{
+        "type": 0,
+        "value": "All Payments"
+    }],
+    "global.allOrders": [{
+        "type": 0,
+        "value": "All Orders"
+    }],
+    "global.reports": [{
+        "type": 0,
+        "value": "Reports"
+    }],
+    "global.stockManagement": [{
+        "type": 0,
+        "value": "Stock Management"
+    }],
+    "global.myAccount": [{
+        "type": 0,
+        "value": "My Account"
+    }],
+    "global.settings": [{
+        "type": 0,
+        "value": "Settings"
+    }],
+    "global.help": [{
+        "type": 0,
+        "value": "Help and Support"
+    }],
+    "global.offer": [{
+        "type": 0,
+        "value": "Offer Management"
+    }],
+    "global.logout": [{
+        "type": 0,
+        "value": "Logout"
+    }],
+    "global.comingSoon": [{
+        "type": 0,
+        "value": "Coming soon"
+    }],
     "action.updateApplication": [
         {
             "type": 0,
             "value": "Reload to update this application"
         }
     ],
+    "action.search": [
+        {
+            "type": 0,
+            "value": "Search"
+        }
+    ],
     "action.addCustomer": [
         {
             "type": 0,
             "value": "Add Customer"
+        }
+    ],
+    "action.addProduct": [
+        {
+            "type": 0,
+            "value": "Add Product"
+        }
+    ],
+    "action.exportAll": [
+        {
+            "type": 0,
+            "value": "Export All"
+        }
+    ],
+    "action.printAll": [
+        {
+            "type": 0,
+            "value": "Print All"
         }
     ]
 }

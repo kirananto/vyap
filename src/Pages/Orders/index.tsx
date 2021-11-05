@@ -11,6 +11,7 @@ import { OrderStatusType } from "./enum";
 import { selectOrderFilters } from "./Filters/orderFiltersSlice";
 import { PrintAll } from "./Options/PrintAll";
 import { ExportAll } from "./Options/ExportAll";
+import { useIntl } from "react-intl";
 
 export default function Orders() {
   const [orders, setOrders] = useState<any[]>([]);
@@ -18,6 +19,7 @@ export default function Orders() {
   const [loading, setLoading] = useState(true);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const filters = useSelector(selectOrderFilters);
+  const intl = useIntl()
 
   useEffect(() => {
     fetchOrdersAPI({
@@ -37,7 +39,7 @@ export default function Orders() {
     <div className="dark:bg-gray-900">
       {/* header */}
       <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-        <Header heading="All Orders" />
+        <Header heading={intl.formatMessage({ id: 'global.allOrders'})} />
         <AppliedFilters
           openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
         />
