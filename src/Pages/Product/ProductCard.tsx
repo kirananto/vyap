@@ -2,11 +2,7 @@ import React from "react";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
 export default function ProductCard({ item, onClicked, onMore, isChecked }: { item: any, onClicked: any, onMore: any, isChecked: boolean }) {
-  const fontSize = {
-    fontSize: "10px",
-    top: "-8px",
-    marginLeft: "-4px",
-  };
+
   return (
     <div className="flex items-center justify-between w-11/12 gap-4 py-2 mx-auto bg-gray-100 dark:bg-gray-900 mt-2">
       {/*
@@ -65,7 +61,7 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          onClick={onMore}
+          onClick={() => onMore(item)}
         >
           <path
             stroke-linecap="round"

@@ -1,13 +1,22 @@
 import React from 'react'
-export function MorePopup() {
+import { useSelector } from 'react-redux';
+import { deleteProductById } from 'src/API/products.axios';
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
+export function MorePopup({ item, onClose }: any) {
+  const { token, user } = useSelector(selectCredentials)
+
+
   function deleteProduct() {
     console.log('product')
+    deleteProductById({ token: token!, id: item?.id }).then(result => {
+      onClose()
+    })
   }
   return (
     <div className="pb-8 pt-2 px-4">
       {/* Heading */}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-bold text-gray-500 dark:text-gray-200">More options</h1>
+        <h1 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">More options for {item?.centralCatalogue?.name} {item?.aliasName ? `(${item?.aliasName})` : ''}</h1>
       </div>
       {/* row-1 */}
       <div className="flex flex-col gap-4">

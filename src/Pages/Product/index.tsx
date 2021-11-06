@@ -30,7 +30,7 @@ export default function Product() {
   // !--------------->
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   // !------------------->
-  const [isMoreOpen, setisMoreOpen] = useState(false);
+  const [isMoreOpen, setisMoreOpen] = useState<any>(undefined);
   //  !--------Search-bar-more---------->
   const [isSearchMoreOpen, setisSearchMoreOpen] = useState(false);
   const [selectedProduct, setselectedProduct] = useState<any[]>([])
@@ -38,8 +38,8 @@ export default function Product() {
   // ! For second modal using first modal
   // !------------------------>
   //! ---------------->
-  function toggleMore() {
-    setisMoreOpen(!isMoreOpen);
+  function toggleMore(item?: any) {
+    setisMoreOpen(item);
   }
   // function toggleModal() {
   //   setIsOpen(!isOpen);
@@ -127,9 +127,12 @@ export default function Product() {
         onClose={() => setisSearchMoreOpen(false)}
       />
       <ModalViewer
-        body={<MorePopup />}
+        body={<MorePopup
+          item={isMoreOpen}
+          onClose={() => setisMoreOpen(undefined)}
+        />}
         isOpen={isMoreOpen}
-        onClose={() => setisMoreOpen(false)}
+        onClose={() => setisMoreOpen(undefined)}
       />
       <Link to="/add-product" className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         <FormattedMessage

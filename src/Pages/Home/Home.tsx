@@ -58,8 +58,8 @@ export const Home = () => {
       </div>
     }
     return customer?.customers?.map((item, index) => (
-        <ItemCard item={item} key={index} />
-      ))
+      <ItemCard item={item} key={index} />
+    ))
   }
 
   return (
