@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { selectAddProductInfo } from "../redux/addProductSlice";
 
 function ItemCard(props: any) {
 
   const productDetails = useSelector(selectAddProductInfo)
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   return (
     <div className="flex w-full gap-2">
@@ -34,7 +34,7 @@ function ItemCard(props: any) {
       {/* product handle-col */}
       <div className="flex items-center justify-center w-1/4 ">
         <button
-          onClick={() => history.push('/add-product')}
+          onClick={() => navigate('/add-product')}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

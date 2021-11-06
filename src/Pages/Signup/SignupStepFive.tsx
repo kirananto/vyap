@@ -1,9 +1,9 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import Button from "src/Components/Style/Button";
 
 export default function SignupStepFive() {
-  const history = useHistory()
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center h-screen bg-white dark:bg-gray-900">
       <svg
@@ -21,7 +21,7 @@ export default function SignupStepFive() {
       <h1 className="mt-4 mb-2 text-4xl font-bold text-gray-600 dark:text-gray-200">Success 🎉</h1>
       <p className="text-lg font-bold text-gray-400">You can now proceed using the app.</p>
 
-      <Button onClick={() => history.push('/add-product')} className="w-8/12 h-12 mt-24 ">Start by adding products</Button>
+      <Button onClick={() => navigate('/add-product')} className="w-8/12 h-12 mt-24 ">Start by adding products</Button>
     </div>
   );
 }

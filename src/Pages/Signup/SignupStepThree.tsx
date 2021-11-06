@@ -5,13 +5,13 @@ import vyapLogo from '../../assets/new_logo.svg'
 import { useDispatch, useSelector } from "react-redux";
 import { selectSignupInfo, setAddress, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from "./signupSlice";
 import { isEmail } from "class-validator";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 
 export default function SignupStepThree() {
   const logoStyle = { marginLeft: "-20px" };
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const signup = useSelector(selectSignupInfo)
   const [error, setError] = useState('')
 
@@ -20,7 +20,7 @@ export default function SignupStepThree() {
     const result = handleValidations()
     if (result) {
       // Proceed to next step
-      history.push('/signup-step-3')
+      navigate('/signup-step-3')
     }
   }
   function handleValidations() {

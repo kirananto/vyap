@@ -1,7 +1,7 @@
 import { Footer } from "../../Components/Footer";
 import React, { useEffect } from "react";
 import { ItemCard } from "./ItemCard";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
@@ -21,7 +21,7 @@ export const Home = () => {
     search: "",
   })
   const { user, token } = useSelector(selectCredentials)
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl();
   useEffect(() => {
     const limit = 10
@@ -37,7 +37,7 @@ export const Home = () => {
         console.log('data', result.data.data)
       })
     } else {
-      history.push('/login')
+      navigate('/login')
     }
   }, [paginationParams.search, addCustomerVisible])
 

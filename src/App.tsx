@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./old.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import Routes from "./Routes";
+import RouterComp from "./RouterComp";
 import { useSelector } from 'react-redux';
 import ServiceWorkerIntegration from "./ServiceWorkerIntegration";
 import { IntlProvider } from 'react-intl';
@@ -28,7 +28,7 @@ export const InitialRouter = () => {
         <div className="app-background dark:bg-gray-800">
           <ServiceWorkerIntegration />
           <Router>
-            <Routes />
+            <RouterComp />
           </Router>
         </div>
     </IntlProvider>

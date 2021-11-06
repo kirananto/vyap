@@ -17,7 +17,7 @@ import { Footer } from "../../Components/Footer";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import profPic from "src/assets/icons/profile/profile-icon.svg"
 import { useIntl } from "react-intl";
 
@@ -26,11 +26,11 @@ export default function More() {
   const intl = useIntl()
 
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     dispatch(setCredentials({ user: undefined, token: undefined }))
-    history.push('/login')
+    navigate('/login')
   }
 
   return (

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
 import { fetchCentralProductImages, IAddProduct, postAddCentralProduct, postAddProduct } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import dummy from '../MainScreen/dummy.svg'
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
@@ -23,7 +23,7 @@ function CreateProduct() {
   const { token } = useSelector(selectCredentials)
 
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const toggleTabs = (index: any) => {
     setToggleState(index);
@@ -87,7 +87,7 @@ function CreateProduct() {
       .then((response) => {
         setIsLoading(false)
         console.log('response', response)
-        history.push('/my-products')
+        navigate('/my-products')
       })
       .catch(error => {
         setIsLoading(false)

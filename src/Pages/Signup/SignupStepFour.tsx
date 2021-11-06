@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import vyapLogo from "../../assets/new_logo.svg";
 import "./Signup.css";
 import { SimpleFooter } from "../../Components/Footer";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { fetchCategories } from "src/API/category.axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
@@ -51,7 +51,7 @@ const Card = ({ title, description, isSelected, image, onSelect }: CardInterface
 export default function SignupStepTwo() {
   const logoStyle = { marginLeft: "-20px" };
   const [categories, setCategories] = useState<any[]>([])
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { token } = useSelector(selectCredentials)
   const signup = useSelector(selectSignupInfo)
@@ -87,7 +87,7 @@ export default function SignupStepTwo() {
       console.log('result,', result.data)
       dispatch(setCredentials(result.data))
       dispatch(clearAll())
-      history.push('/signup-step-4')
+      navigate('/signup-step-4')
     })
   }
 

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import PhoneForm from "../Login/PhoneForm";
 import OTPForm from "../Login/OTPForm";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { generateOtp, verifyPhone } from "../../API/login.axios";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../Login/credentialsSlice";
@@ -14,14 +14,14 @@ export default function SignupStep1() {
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const confirmOTP = (code: string) => {
     setError(null)
     verifyPhone(phoneNumberRef.current, code).then(res => {
       if (res.data) {
         console.log('res.data', res.data)
         dispatch(setPhone(phoneNumberRef.current))
-        history.push('/signup-step-2')
+        navigate('/signup-step-2')
       }
     })
       .catch((error: any) => {

@@ -14,10 +14,10 @@ export default function OrderDetails() {
     const [order, setOrder] = useState<any | undefined>()
 
     const { token } = useSelector(selectCredentials)
-    const { id } = useParams<{ id: string }>()
+    const { id } = useParams()
 
     useEffect(() => {
-        fetchOrderAPI(token!, id).then(result => {
+        fetchOrderAPI(token!, id!).then(result => {
             setOrder(result.data)
         })
     }, [])

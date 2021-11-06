@@ -4,7 +4,7 @@ import { Header, PaymentBottomHeader } from "../../Components/Header";
 import ChatList from './ChatList'
 import { useEffect } from "react";
 import { fetchInboxById } from "../../API/inbox.axios";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import type { InboxType } from './inbox.type'
 import { selectCredentials } from "../Login/credentialsSlice";
@@ -16,13 +16,13 @@ export const Payment = () => {
   const { token } = useSelector(selectCredentials)
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams()
   useEffect(() => {
     console.log('------------------------changed-----------')
     if (token) {
-      fetchInboxById(token, id).then(res => {
+      fetchInboxById(token, id!).then(res => {
         setInbox(res.data)
       })
     }
@@ -32,7 +32,7 @@ export const Payment = () => {
     <div className="overflow-y-auto dark:bg-gray-900">
       {/* header */}
       <div className="fixed w-full pb-3 bg-white shadow dark:bg-gray-800">
-        <Header onBackClick={() => history.push('/home')} heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
+        <Header onBackClick={() => navigate('/home')} heading="Chats" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
@@ -42,7 +42,7 @@ export const Payment = () => {
         <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button>
         <button onClick={() => {
           dispatch(setOrgId(inbox?.recipient?.id!))
-          history.push('/place-order')
+          navigate('/place-order')
         }} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Place Order</button>
       </div>
       {paymentModalVisible && <AddPaymentModal

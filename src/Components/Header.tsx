@@ -1,13 +1,13 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import walletSvg from "../assets/illustrations/wallet.svg"
 
 function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any }) {
-  const history = useHistory()
+  const navigate = useNavigate()
   return (
     <div className="flex w-11/12 pt-2 pb-2 m-auto ">
       {/* back icon  */}
-      <div onClick={onBackClick ? onBackClick : () => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
+      <div onClick={onBackClick ? onBackClick : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 dark:text-gray-300"
@@ -97,11 +97,11 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
 
 // ! Simple Header with only one heading and back button -->
 function SimpleHeader(props: { heading: string, backFn?: any }) {
-  const history = useHistory()
+  const navigate = useNavigate()
   return (
     <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300">
       {/* back icon  */}
-      <div onClick={props.backFn ? props.backFn : () => history.goBack()} className="flex items-center justify-start ml-2 cursor-pointer">
+      <div onClick={props.backFn ? props.backFn : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "
