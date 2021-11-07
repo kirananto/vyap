@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { deleteProductById } from 'src/API/products.axios';
+import { deleteProductById, patchProductById } from 'src/API/products.axios';
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
 export function MorePopup({ item, onClose }: any) {
   const { token, user } = useSelector(selectCredentials)
@@ -12,6 +12,14 @@ export function MorePopup({ item, onClose }: any) {
       onClose()
     })
   }
+
+  function markStockStatus(value: boolean) {
+    console.log('product')
+    patchProductById({ token: token!, id: item?.id , data: { outOfStock: value }}).then(result => {
+      onClose()
+    })
+  }
+  
   return (
     <div className="pb-8 pt-2 px-4">
       {/* Heading */}
@@ -38,7 +46,7 @@ export function MorePopup({ item, onClose }: any) {
           <span>Delete Products</span>
         </button>
         {/* ---- */}
-        <button className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+        <button onClick={() => markStockStatus(true)} className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -56,7 +64,7 @@ export function MorePopup({ item, onClose }: any) {
           <span>Mark out of stock</span>
         </button>
         {/* ---- */}
-        <button className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+        <button onClick={() => markStockStatus(false)} className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"

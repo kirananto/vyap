@@ -24,24 +24,12 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
       ==========
       */}
       <div className="flex w-3/4">
-        <div
-          className="relative p-2 bg-gray-100 border-2 rounded-lg w-14 h-14 bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100"
-          style={item?.thumbnailImage ? { backgroundImage: `url(${getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)}` } : {}}
-        >
-          {/* col-1 product */}
-          {/* <div
-            style={fontSize}
-            className="absolute flex items-center justify-center px-1 font-semibold text-red-400 bg-red-200 rounded"
-          >
-            Out of stock
-          </div> */}
-          {/* <div
-            className="bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full "
-          /> */}
+        <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+          {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
+          {item.outOfStock && <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">Out of stock</div>}
         </div>
-        {/* col-2 product */}
-        <div className="flex flex-col ml-4 mt-0">
-          <h1 className="font-semibold text-md dark:text-gray-200 ">{item?.centralCatalogue?.name} {item?.aliasName? `(${item?.aliasName})` : '' }</h1>
+        <div className="flex flex-col ml-4 mt-2">
+          <h1 className="font-semibold text-md dark:text-gray-200 ">{item?.centralCatalogue?.name} {item?.aliasName ? `(${item?.aliasName})` : ''}</h1>
           <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">#{item.id?.split('-')[0]}</p>
           <div className="flex gap-2">
             <p className="text-sm font-semibold text-gray-500  dark:text-gray-400 ">MRP: ₹{item?.mrpPrice}</p>
@@ -71,6 +59,6 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
           />
         </svg>
       </div>
-    </div>
+    </div >
   );
 }
