@@ -9,13 +9,17 @@ export default function AppliedFilters({
     onMoreClick,
     onFilterClick,
     setSearchValue,
-    searchValue
+    searchValue,
+    setCounter,
+    setselectedProduct
 }: {
     selectedProduct: any[],
     onMoreClick: any,
     onFilterClick: any,
     setSearchValue: any
-    searchValue: string
+    searchValue: string,
+    setCounter: any,
+    setselectedProduct: (value: any[]) => void
 }) {
 
     const filters = useSelector(selectProductFilters)
@@ -47,7 +51,7 @@ export default function AppliedFilters({
                 </div>
             </div>) : (
                 <div className={'my-2'}>
-                    <ProductCheckedOptions onMoreClick={onMoreClick} />
+                    <ProductCheckedOptions selectedProduct={selectedProduct} setselectedProduct={setselectedProduct} setCounter={setCounter} onMoreClick={onMoreClick} />
                 </div>
             )}
             <div className="flex justify-between py-2">

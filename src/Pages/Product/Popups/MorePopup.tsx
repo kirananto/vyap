@@ -2,9 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { deleteProductById, patchProductById } from 'src/API/products.axios';
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
-export function MorePopup({ item, onClose }: any) {
-  const { token } = useSelector(selectCredentials)
 
+export function MorePopup({ item, onClose }: any) {
+  
+  const { token } = useSelector(selectCredentials)
 
   function deleteProduct() {
     console.log('product')

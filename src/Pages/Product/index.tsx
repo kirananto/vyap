@@ -32,6 +32,7 @@ export default function Product() {
   // !------------------->
   const [isMoreOpen, setisMoreOpen] = useState<any>(undefined);
   const [searchValue, setSearchValue] = useState<any>(undefined);
+  const [reRenderCounter, setCounter] = useState(1)
   //  !--------Search-bar-more---------->
   const [isSearchMoreOpen, setisSearchMoreOpen] = useState(false);
   const [selectedProduct, setselectedProduct] = useState<any[]>([])
@@ -75,7 +76,7 @@ export default function Product() {
     }).finally(() => {
       setLoading(false)
     })
-  }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue])
+  }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue, isSearchMoreOpen, reRenderCounter])
 
   function renderProducts() {
     if (loading) {
@@ -108,6 +109,8 @@ export default function Product() {
               setSearchValue={setSearchValue}
               searchValue={searchValue}
               selectedProduct={selectedProduct}
+              setselectedProduct={setselectedProduct}
+              setCounter={setCounter}
               onMoreClick={() => setisSearchMoreOpen(true)}
               onFilterClick={() => setfilterPopupOpen(true)}
             />
@@ -126,9 +129,18 @@ export default function Product() {
         onClose={() => setfilterPopupOpen(false)}
       />
       <ModalViewer
-        body={<SearchMorePopup />}
+        body={<SearchMorePopup
+          selectedProduct={selectedProduct}
+          onClose={() => {
+            setselectedProduct([])
+            setisSearchMoreOpen(false)
+          }}
+        />}
         isOpen={isSearchMoreOpen}
-        onClose={() => setisSearchMoreOpen(false)}
+        onClose={() => {
+          setselectedProduct([])
+          setisSearchMoreOpen(false)
+        }}
       />
       <ModalViewer
         body={<MorePopup
