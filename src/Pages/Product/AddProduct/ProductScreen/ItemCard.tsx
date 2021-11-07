@@ -13,20 +13,16 @@ function ItemCard(props: any) {
     <div className="flex w-full gap-2">
       {/* image-col */}
       <div className="w-3/12">
-        <div className="flex items-center justify-center p-2 border border-gray-200 rounded-lg product-image">
-          <img
-            className="w-10 h-10"
-            src={props.productImage}
-            alt="product-image"
-          />
+        <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+          {props.productImage && <img src={props.productImage} alt="Avatar" className="object-cover w-full h-full" />}
         </div>
       </div>
       {/* detail-col */}
       <div className="w-full ml-2 mt-2">
-        <div className="text-base font-bold text-gray-700 dark:text-gray-300">
+        <div className="text-xl font-bold text-gray-700 dark:text-gray-300">
           {productDetails.centralCatalogue?.name}
         </div>
-        <div className="text-xs dark:text-gray-400">{productDetails?.centralCatalogue?.description}</div>
+        <div className="text-base text-gray-400 dark:text-gray-400">{productDetails?.centralCatalogue?.description}</div>
         {/* <div className="text-xs font-bold text-gray-400">
           MRP: {productDetails.price} ₹
         </div> */}

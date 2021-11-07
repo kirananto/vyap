@@ -94,12 +94,12 @@ export default function AddItem() {
         return itemList.map((item, index) => (<div className="flex pt-4 gap-2 justify-between border-b-2 border-gray-100 dark:border-gray-700 pb-2" key={`${index}`}>
             {/* TODO: Remove this console.log */}
             {console.log(item)}
-            <div className="flex gap-2 items-center">
-                <div className="flex h-12 w-12 rounded border border-gray-300 bg-white">
-                    <img className="h-full w-full" src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="" />
-                </div>
+            <div className="flex gap-4 items-center">
+                <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                        {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
+                    </div>
                 <div className="flex flex-col">
-                    <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
+                    <div className="flex text-xl font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
                     <div className="flex font-bold text-xs text-gray-300">#213r423423423423423</div>
                     <div className="flex font-bold text-xs text-gray-400">MRP:  ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                 </div>

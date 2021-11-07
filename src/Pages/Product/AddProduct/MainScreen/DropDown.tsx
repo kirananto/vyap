@@ -4,17 +4,16 @@ import { useNavigate } from "react-router";
 import { fetchCentralProductImages } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
-import dummy from './dummy.svg'
 import "./Drop.css";
 
 function List(props: any) {
   const { token } = useSelector(selectCredentials)
-  const [productImage, setProductImage] = useState(dummy)
+  const [productImage, setProductImage] = useState<any>(undefined)
 
   useEffect(() => {
     fetchCentralProductImages(token!, 100, 0, props?.opt?.id).then((result: any) => {
       const imageName = result.data?.data?.filter((filterItem: any) => filterItem.imageName?.includes('.'))?.[0]?.imageName
-      if(imageName) {
+      if (imageName) {
         setProductImage(getImageURL(imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE))
       }
     })
@@ -22,14 +21,14 @@ function List(props: any) {
 
   return (
     <div className="drop-main cursor-pointer" onClick={() => props.onSelect(props.opt)}>
-      <div className="overflow-hidden border border-gray-200 rounded-lg product-image">
-        <img className="w-10 h-10" src={productImage} alt={props.opt.name} />
+      <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+        {productImage && <img src={productImage} alt="Avatar" className="object-cover w-full h-full" />}
       </div>
-      <div className="product-details">
-        <div className="text-base font-bold text-gray-700">
+      <div>
+        <div className="text-xl font-bold text-gray-700">
           {props.opt.name}
         </div>
-        <div className="text-xs text-gray-400">{props.opt.description}</div>
+        <div className="text-base text-gray-400">{props.opt.description}</div>
         {/* <div className="text-xs font-bold text-gray-400">{props.opt.price}</div> */}
       </div>
     </div>

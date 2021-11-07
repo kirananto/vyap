@@ -4,7 +4,7 @@ export default function AddRemoveItems() {
 
     const [isExpanded, setIsExpanded] = useState(false)
 
-    const items = [1,1,1,1,1]
+    const items = [1, 1, 1, 1, 1]
 
     return (
         <div className="bg-white rounded-lg p-4 mt-4 w-full dark:bg-gray-700">
@@ -38,8 +38,8 @@ export default function AddRemoveItems() {
                     {/* TODO: Remove this console.log */}
                     {console.log(item)}
                     <div className="flex pt-4 gap-2">
-                        <div className="h-10 w-10 rounded border border-gray-300 bg-white">
-                            <img className="h-full w-full" src={DairySmall} alt="" />
+                        <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                            {DairySmall && <img src={DairySmall} alt="Avatar" className="object-cover w-full h-full" />}
                         </div>
                         <div className="flex flex-col">
                             <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">Dairy Milk Silk</div>

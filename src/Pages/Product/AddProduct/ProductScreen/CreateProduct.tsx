@@ -10,7 +10,6 @@ import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
 import { fetchCentralProductImages, IAddProduct, postAddCentralProduct, postAddProduct } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { useNavigate } from "react-router";
-import dummy from '../MainScreen/dummy.svg'
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
 
@@ -18,7 +17,7 @@ function CreateProduct() {
   const [toggleState, setToggleState] = useState(1);
   const [isLoading, setIsLoading] = useState(false)
 
-  const [productImage, setProductImage] = useState(dummy)
+  const [productImage, setProductImage] = useState<any>(undefined)
   const addProductInfo = useSelector(selectAddProductInfo)
   const { token } = useSelector(selectCredentials)
 

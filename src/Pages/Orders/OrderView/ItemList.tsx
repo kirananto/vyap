@@ -4,7 +4,7 @@ import { fetchOrderItems } from "src/API/order.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
-function Items({ order } : { order: any }) {
+function Items({ order }: { order: any }) {
     console.log('order', order?.id)
     const { token } = useSelector(selectCredentials)
     const [orderItems, setOrderItems] = useState<any[]>([])
@@ -19,8 +19,8 @@ function Items({ order } : { order: any }) {
         <div>
             {orderItems?.map((item: any, index: number) => (<div className="flex justify-between" key={`${index}`}>
                 <div className="flex pt-4 gap-4">
-                    <div className="h-14 w-14 rounded border border-gray-300 bg-white">
-                        <img className="h-full w-full" src={getImageURL(item?.product?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="" />
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                        {item?.product?.thumbnailImage && <img src={getImageURL(item?.product?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
                     </div>
                     <div className="flex flex-col">
                         <div className="flex text-sm font-bold text-gray-800 dark:text-gray-200">{item?.product?.centralCatalogue?.name}{item?.product?.aliasName ? `(${item?.product?.aliasName})` : ''}</div>
@@ -41,14 +41,14 @@ function Items({ order } : { order: any }) {
 
 
 
-export default function ItemList({ order } : { order: any }) {
+export default function ItemList({ order }: { order: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
     return (
         <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
             <div className={`flex ${isExpanded ? 'mb-4' : ''} items-center justify-between`}>
                 <div className="flex flex-col text-xl font-semibold text-gray-800 dark:text-gray-200">
                     Items
-            </div>
+                </div>
                 <div>
                     {isExpanded ? (<div className="flex text-gray-600 dark:text-gray-200" onClick={() => setIsExpanded(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">

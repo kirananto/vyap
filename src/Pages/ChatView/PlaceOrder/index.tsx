@@ -74,8 +74,8 @@ export default function PlaceOrder() {
                 {/* TODO: Remove this console.log */}
                 {console.log(item)}
                 <div className="flex pt-4 gap-2 items-center">
-                    <div className="h-10 w-10 rounded border border-gray-300 bg-white">
-                        <img className="h-full w-full" src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="" />
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                        {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
                     </div>
                     <div className="flex flex-col">
                         <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>

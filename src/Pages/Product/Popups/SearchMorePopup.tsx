@@ -3,7 +3,7 @@ import React from 'react'
 
 export function SearchMorePopup() {
   return (
-    <div className="pb-8 pt-2 px-4">
+    <div className="pb-8 pt-2 px-4 w-full">
       {/* Heading */}
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-bold text-gray-500 dark:text-gray-200">More Options</h1>
