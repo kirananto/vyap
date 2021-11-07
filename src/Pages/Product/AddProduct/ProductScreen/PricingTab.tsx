@@ -81,14 +81,7 @@ function PricingTab() {
           </button>
           {/* Modal */}
           <div>
-            <HSNmodal trigger={modal} setModal={setModal}>
-              <h3 className="font-bold text-gray-500 dark:text-gray-200">HSN Number</h3>
-              <p className="mt-10 text-xs font-bold text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-                maiores repellat provident eaque eligendi hic sed quidem
-                obcaecati exercitationem quia!
-              </p>
-            </HSNmodal>
+            <HSNmodal trigger={modal} setModal={setModal} />
           </div>
         </div>
       </div>}
