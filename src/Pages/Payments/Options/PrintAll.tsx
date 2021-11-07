@@ -1,12 +1,19 @@
 import React from "react";
 import format from "date-fns/format";
 import { FormattedMessage } from "react-intl";
+import vyapLogo from "../../../assets/new_logo.svg";
+import { selectCredentials } from "../../Login/credentialsSlice";
+import { useSelector } from "react-redux";
+
 
 interface IProps {
   apiData: any[];
 }
 
+let txnCount : number;
+
 export const PrintAll = ({ apiData }: IProps) => {
+  const { user } = useSelector(selectCredentials);
   const onPrint = () => {
     if (document.getElementById("divContents")) {
       var printContents = document.getElementById("divContents")?.innerHTML;
@@ -21,13 +28,17 @@ export const PrintAll = ({ apiData }: IProps) => {
   };
 
   const payments: any[] = apiData.map((item) => {
+    const credit : boolean = user?.organization?.name === item.receiver?.name;
+    txnCount = apiData.length;
     return {
-      ID: "#" + item?.id?.split("-")[0],
       DATE: item.createdAt
-        ? format(new Date(item.createdAt), "do MMM yyyy")
+        ? format(new Date(item.createdAt), "dd/MM/yyyy")
         : "",
-      NAME: item.receiver?.name,
-      AMOUNT: item.amount,
+      BUYER: item.senderOrg?.name,
+      SELLER: item.receiver?.name,
+      CREDIT:  credit ? item.amount : " ",
+      DEBIT: credit ? " " : item.amount,
+
     };
   });
 
@@ -57,21 +68,49 @@ export const PrintAll = ({ apiData }: IProps) => {
         />
       </button>
 
-      <div className="hidden" id="divContents">
-        <table className="min-w-full divide-y divide-gray-200 ">
-          <thead className="bg-gray-50 text-center">
-            <tr>
-              <td>ID</td>
-              <td>DATE</td>
-              <td>Name</td>
-              <td>Amount</td>
+      <div
+        className="divide-y divide-gray-200  hidden grid grid-cols-1"
+        id="divContents"
+      >
+      <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
+          <div className="col-start-1 col-span-1  -space-y-3 align-middle">
+            <img className="w-12 h-12" src={vyapLogo} />
+            <p className="text-2xl font-bold text-gray-700 ">
+              {" "}
+              vyap{" "}
+            </p>
+          </div>
+
+          <div className="col-start-2 col-span-3 space-y-3 flex flex-col align-middle">
+            <h2 className="text-2xl font-bold text-gray-600"> Payment Statement</h2>
+            <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
+          </div>
+
+          <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
+             <img className="w-12 h-12" src={vyapLogo} />
+              <div className="flex flex-col">
+                <p className="text-xl font-bold text-gray-600"> {user?.organization?.name}</p>
+               <p className="text-gray-300">{txnCount} Transactions</p>
+             </div>
+          </div>          
+        </div>
+
+        <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
+          <table className="min-w-full">
+            <thead className="text-gray-200 font-bold">
+              <tr className="p-5">
+              <td>Date</td>
+              <td>Buyer</td>
+              <td>Seller</td>
+              <td>Credit</td>
+              <td>Debit</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-gray-500">
             {payments.map((item, index) => (
-              <tr key={index} className="text-center">
+              <tr key={index} className="text-left">
                 {Object.values(item).map((val: any) => (
-                  <td key={val} className="px-6 py-2 whitespace-nowrap">
+                    <td key={val} className="px-1 py-2 whitespace-nowrap">
                     {val}
                   </td>
                 ))}
@@ -79,6 +118,7 @@ export const PrintAll = ({ apiData }: IProps) => {
             ))}
           </tbody>
         </table>
+       </div>
       </div>
     </>
   );

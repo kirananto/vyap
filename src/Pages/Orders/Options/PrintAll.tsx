@@ -2,6 +2,8 @@ import React from "react";
 import format from "date-fns/format";
 import vyapLogo from "../../../assets/new_logo.svg";
 import { FormattedMessage } from "react-intl";
+import { selectCredentials } from "../../Login/credentialsSlice";
+import { useSelector } from "react-redux";
 
 interface IProps {
   apiData: any[];
@@ -10,6 +12,7 @@ interface IProps {
 let txnCount : number;
 
 export const PrintAll = ({ apiData }: IProps) => {
+  const { user } = useSelector(selectCredentials);
   const onPrint = () => {
     if (document.getElementById("divContents")) {
       var printContents = document.getElementById("divContents")?.innerHTML;
@@ -30,7 +33,7 @@ export const PrintAll = ({ apiData }: IProps) => {
     return {
       ORDER_ID: "#" + item?.id?.split("-")[0],
       DATE: item.createdAt
-        ? format(new Date(item.createdAt), "dd/mm/yyyy")
+        ? format(new Date(item.createdAt), "dd/MM/yyyy")
         : "",
       SUPPLIER: item?.supplier?.name,
       BUYER: item?.buyer?.name,
@@ -87,7 +90,7 @@ export const PrintAll = ({ apiData }: IProps) => {
           <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
              <img className="w-12 h-12" src={vyapLogo} />
               <div className="flex flex-col">
-                <p className="text-xl font-bold text-gray-600"> Reliance Digital Trends</p>
+                <p className="text-xl font-bold text-gray-600"> {user?.organization?.name} </p>
                <p className="text-gray-300">{txnCount} Transactions</p>
              </div>
           </div>          
