@@ -57,6 +57,10 @@ export default function Product() {
       setselectedProduct(tempVal)
     }
   }
+
+  function hasFilters() {
+    return filters?.categories?.length > 0 || filters?.brands?.length > 0 || filters?.sorting !== undefined
+  }
   // ! ------===------->
 
   useEffect(() => {
@@ -118,7 +122,7 @@ export default function Product() {
         </div>
       </div>
 
-      <div className="custom-height bg-gray-100 dark:bg-gray-900">
+      <div className="custom-height bg-gray-100 dark:bg-gray-900" style={{ height: hasFilters() ? 'calc( 100vh - 274px )' : 'calc( 100vh - 200px )' }}>
         {renderProducts()}
       </div>
 

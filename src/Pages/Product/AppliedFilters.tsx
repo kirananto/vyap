@@ -54,7 +54,7 @@ export default function AppliedFilters({
                     <ProductCheckedOptions selectedProduct={selectedProduct} setselectedProduct={setselectedProduct} setCounter={setCounter} onMoreClick={onMoreClick} />
                 </div>
             )}
-            <div className="flex justify-between py-2">
+            {hasFilters() ? <div className="flex justify-between py-2">
                 <div className="flex flex-col">
                     <div className="flex gap-2 items-end">
                         <div className={'text-base font-bold text-gray-500 dark:text-gray-300'}>
@@ -70,16 +70,16 @@ export default function AppliedFilters({
                             />
                         </div>}
                     </div>
-                    {hasFilters() ? <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2">
                         {filters?.categories?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
                         {filters?.brands?.map(mapItem => <div key={mapItem.id} className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
                         {filters?.sorting && (
                             <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
                                 {filterText(filters?.sorting)}
                             </div>)}
-                    </div> : <div className="flex gap-2 mt-2 text-sm text-gray-400 dark:text-gray-300"> No filters applied</div>}
+                    </div>
                 </div>
-            </div>
+            </div> : null}
         </div>
     )
 }
