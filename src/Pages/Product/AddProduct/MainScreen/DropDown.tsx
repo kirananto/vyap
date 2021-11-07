@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { fetchCentralProductImages } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
@@ -44,7 +44,7 @@ function DropDown(props: any) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   function search(e: any) {
     let text = e.target.value;
@@ -74,7 +74,7 @@ function DropDown(props: any) {
     props.onSelect({
       name: value
     })
-    history.push('/create-product')
+    navigate('/create-product')
     setIsdisabled(true);
   }
   function select(e: any) {
@@ -83,7 +83,7 @@ function DropDown(props: any) {
     setValue(e.name);
     if (props.onSelect) {
       props.onSelect(e)
-      history.push('/create-product')
+      navigate('/create-product')
     }
   }
 

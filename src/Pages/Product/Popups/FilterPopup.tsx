@@ -3,6 +3,7 @@ import FilterCategory from "../FilterCategory";
 import FilterBrands from '../FilterBrands'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAll, selectProductFilters, setSorting } from '../productFiltersSlice';
+import { FormattedMessage } from 'react-intl';
 
 interface SortingProps {
   sortingName: string;
@@ -16,7 +17,7 @@ const Sorting = (props: SortingProps) => {
 
   const isChecked = filters?.sorting === props.value
 
-  function onChangeSorting () {
+  function onChangeSorting() {
     dispatch(setSorting(props.value))
   }
 
@@ -59,12 +60,17 @@ export function FilterPopup() {
         </div>
         {/* col-2 */}
         <div>
-          <p className="text-xs font-bold text-blue-500 cursor-pointer" onClick={() => dispatch(clearAll())}>Clear All</p>
+          <p className="text-xs font-bold text-blue-500 cursor-pointer" onClick={() => dispatch(clearAll())}>
+            <FormattedMessage
+              id="global.clearAll"
+              defaultMessage="Clear All"
+            />
+          </p>
         </div>
       </div>
       {/* --------- */}
       <div className="flex flex-col gap-4">
-        <FilterCategory heading="Based On Category" type="category"/>
+        <FilterCategory heading="Based On Category" type="category" />
         <FilterBrands heading="Based On Brands" type="brand" />
       </div>
       {/* Sorting */}
@@ -93,8 +99,8 @@ export function FilterPopup() {
       </div>
       <div className="flex flex-col gap-1 mt-2">
         <Sorting sortingName="Latest first" value="latest" />
-        <Sorting sortingName="Price-Low to High" value="price-high-low"  />
-        <Sorting sortingName="Price-High to Low" value="price-low-high"  />
+        <Sorting sortingName="Price-Low to High" value="price-high-low" />
+        <Sorting sortingName="Price-High to Low" value="price-low-high" />
       </div>
     </div>
   );

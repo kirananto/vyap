@@ -1,7 +1,7 @@
 import { SimpleHeader } from '../../../Components/Header'
 import React, { useState } from 'react'
 import ItemList from './ItemList'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function PurchaseOrder() {
 
@@ -9,7 +9,7 @@ export default function PurchaseOrder() {
 
     const [isExpanded, setIsExpanded] = useState<any>(undefined)
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     return (
         <div className="h-screen dark:bg-gray-900">
@@ -59,7 +59,7 @@ export default function PurchaseOrder() {
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-700">
                 <button 
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
-                    onClick={() => history.push('/purchase-order/new')}
+                    onClick={() => navigate('/purchase-order/new')}
                 >Add Purchase Order</button>
             </div>
         </div>

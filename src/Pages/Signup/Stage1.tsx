@@ -8,7 +8,7 @@ export default function SignupStage1() {
   // const confResRef = useRef<any>();
   const [error, setError] = useState(null);
 
-  // const history = useHistory()
+  // const navigate = useNavigate()
   const confirmOTP = (code: string) => {
     setError(null)
     console.log('code', code)
@@ -19,9 +19,9 @@ export default function SignupStage1() {
     //   getUserDocument(result.user.uid).then(res => {
     //     console.log('user', res)
     //     if(res) {
-    //       history.replace('/home')
+    //       navigate('/home')
     //     } else {
-    //       history.replace('/signup')
+    //       navigate('/signup')
     //       // TODO No user, redirect to signup process
     //     } 
     //   }).catch(error => {

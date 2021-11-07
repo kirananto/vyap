@@ -17,23 +17,25 @@ import { Footer } from "../../Components/Footer";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import profPic from "src/assets/icons/profile/profile-icon.svg"
+import { useIntl } from "react-intl";
 
 export default function More() {
   const { user } = useSelector(selectCredentials)
+  const intl = useIntl()
 
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     dispatch(setCredentials({ user: undefined, token: undefined }))
-    history.push('/login')
+    navigate('/login')
   }
 
   return (
     <div className="bg-white dark:bg-gray-900">
-      <SimpleHeader heading="More" />
+      <SimpleHeader heading={intl.formatMessage({ id: 'global.more'})} />
       <div className="h-screen overflow-y-auto pt-8 pb-48">
         <div className="flex flex-col items-center justify-center gap-2 py-5">
           <img
@@ -48,57 +50,58 @@ export default function More() {
         <div className="flex flex-col gap-2 pl-10 mt-2">
           <NavLink to="/all-payments" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
             <PaymentIcon />
-            <Links linkName="All Payments" />
+            <Links linkName={intl.formatMessage({ id: 'global.allPayments'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
           <NavLink to="/orders" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
             <AllOrdersIcon />
-            <Links linkName="All Orders" />
+            <Links linkName={intl.formatMessage({ id: 'global.allOrders'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
           <NavLink to="/reports" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <ReportsIcon />
-            <Links linkName="Reports" />
+            <Links linkName={intl.formatMessage({ id: 'global.reports'})} />
+            <Tag tagName={intl.formatMessage({ id: 'global.comingSoon'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/stock-management" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <NavLink to="#" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <StockManagementIcon />
-            <Links linkName="Stock Management" />
-            <Tag tagName="Beta" />
+            <Links linkName={intl.formatMessage({ id: 'global.stockManagement'})} />
+            <Tag tagName={intl.formatMessage({ id: 'global.comingSoon' }) } />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
           <NavLink to="/my-account" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <MyAccountIcon />
-            <Links linkName="My Account" />
+            <Links linkName={intl.formatMessage({ id: 'global.myAccount'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
           <NavLink to="/settings" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <SettingsIcon />
-            <Links linkName="Settings" />
+            <Links linkName={intl.formatMessage({ id: 'global.settings'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <a href="mailto:mail@vyap.app" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <HelpIcon />
-            <Links linkName="Help and Support" />
-          </div>
+            <Links linkName={intl.formatMessage({ id: 'global.help'})} />
+          </a>
           {/* ----- */}
           {/* ----- */}
           <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <OffersManagementIcon />
-            <Links linkName="Offer Management" />
-            <Tag tagName="Coming soon" />
+            <Links linkName={intl.formatMessage({ id: 'global.offer'})} />
+            <Tag tagName={intl.formatMessage({ id: 'global.comingSoon'})} />
           </div>
           {/* ----- */}
           {/* ----- */}
           <div onClick={handleLogout} className="cursor-pointer flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <LogoutIcon />
-            <Links linkName="Logout" />
+            <Links linkName={intl.formatMessage({ id: 'global.logout'})} />
           </div>
           {/* ----- */}
         </div>

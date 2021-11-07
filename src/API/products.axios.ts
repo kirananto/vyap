@@ -45,6 +45,23 @@ export const fetchProducts = ({ token, organizationId, limit, offset, categoryId
     }
 })
 
+export const deleteProductById = ({ token, id }: { token: string; id?: string }) => axiosClient({
+    url: `/organization-catalogue/${id}`,
+    method: 'DELETE',
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
+export const patchProductById = ({ token, id, data }: { token: string; id?: string, data: any }) => axiosClient({
+    url: `/organization-catalogue/${id}`,
+    method: 'PATCH',
+    data,
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
 export const fetchCentralProducts = (token: string, limit: number, offset: number) => axiosClient({
     url: `/central-catalogue`,
     method: 'GET',

@@ -32,7 +32,7 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
     const [currentPage] = useState(1)
 
 
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams()
 
     useEffect(() => {
         setError(false)

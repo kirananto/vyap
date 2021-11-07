@@ -5,7 +5,7 @@ import Button from 'src/Components/Style/Button'
 import DropList from 'src/Components/Style/DropList'
 import { useDispatch, useSelector } from 'react-redux'
 import { pushItemsToCart, selectPlaceOrderInfo } from '../placeOrderSlice'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../Product/assets/no_data.svg'
@@ -25,7 +25,7 @@ export default function AddItem() {
     const placeOrder = useSelector(selectPlaceOrderInfo)
 
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate = useNavigate()
 
     useEffect(() => {
         // TODO use placeOrder.orgId
@@ -37,7 +37,7 @@ export default function AddItem() {
     function onSubmit() {
         //TODO Add to dispatch
         dispatch(pushItemsToCart(selectedItems))
-        history.push('/place-order')
+        navigate('/place-order')
     }
 
     function handleAddItem(item: any, caseQuantity: number) {

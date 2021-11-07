@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
 import { fetchCentralProductImages, IAddProduct, postAddCentralProduct, postAddProduct } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import dummy from '../MainScreen/dummy.svg'
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 
@@ -23,7 +23,7 @@ function CreateProduct() {
   const { token } = useSelector(selectCredentials)
 
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const toggleTabs = (index: any) => {
     setToggleState(index);
@@ -87,7 +87,7 @@ function CreateProduct() {
       .then((response) => {
         setIsLoading(false)
         console.log('response', response)
-        history.push('/my-products')
+        navigate('/my-products')
       })
       .catch(error => {
         setIsLoading(false)
@@ -99,21 +99,21 @@ function CreateProduct() {
     <div className=" create-product-container dark:bg-gray-900">
       <SimpleHeader heading="Create Product" />
       <div className="w-11/12 pt-20  px-2 mx-auto">
-        <h1 className="mb-2 font-bold text-gray-500">What is the product?</h1>
+        <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">What is the product?</h1>
         {/* ===--===Product card===--=== */}
         <ItemCard productImage={productImage}/>
         {/* -------- */}
         <div className="flex justify-between py-4">
           <button
             onClick={() => toggleTabs(1)}
-            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1 ? "bg-blue-100 text-blue-600 " : "text-gray-500 dark:text-gray-300"}`}
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1 ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 " : "text-gray-500 dark:text-gray-300"}`}
           >
             Pricing
           </button>
           <button
             onClick={() => toggleTabs(2)}
             className={
-              `px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2 ? "bg-blue-100 text-blue-600" : "text-gray-500 dark:text-gray-300"}`
+              `px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2 ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300" : "text-gray-500 dark:text-gray-300"}`
             }
           >
             Others

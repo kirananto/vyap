@@ -1,14 +1,29 @@
 import { SimpleHeader } from '../../Components/Header'
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { selectCredentials } from '../Login/credentialsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'
+import { patchUser } from 'src/API/user.axios'
+import { useIntl } from 'react-intl'
 
 export default function Account() {
+
     const { user } = useSelector(selectCredentials)
+
+    const dispatch = useDispatch()
+    const intl = useIntl()
+
+    function handleSave () {
+        // user.organization.pinCode
+        // user.organization.name
+        patchUser({ id: user?.id!, name: user?.name, email: user?.email }).then(result => {
+            console.log('user', result.data)
+        })
+    }
+
     return (
         <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
             <div className="w-full mb-2 bg-white shadow">
-                <SimpleHeader heading=" My Account " />
+                <SimpleHeader heading={intl.formatMessage({ id: 'global.myAccount'})} />
             </div>
             {/* Caard Container  */}
             <div className="flex flex-col items-center w-full gap-4 px-8 py-2 pt-20">
@@ -31,7 +46,7 @@ export default function Account() {
                     <input
                         name="tel"
                         value={user?.name}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setUserName(event?.target.value))}
                         id="tel"
                         placeholder="Your name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
@@ -44,7 +59,7 @@ export default function Account() {
                     <input
                         name="text"
                         value={user?.organization?.name}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setBusinessName(event?.target.value))}
                         id="text"
                         placeholder="Business name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
@@ -57,7 +72,7 @@ export default function Account() {
                     <input
                         name="email"
                         value={user?.email}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setUserEmail(event?.target.value))}
                         id="email"
                         placeholder="Email"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
@@ -70,7 +85,7 @@ export default function Account() {
                     <input
                         name="pin"
                         value={user?.organization?.pinCode}
-                        onChange={(event) => console.log(event?.target.value)}
+                        onChange={(event) => dispatch(setPinCode(event?.target.value))}
                         id="pin"
                         placeholder="Pin Code"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
@@ -108,7 +123,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
-                <button className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update account details</button>
+                <button onClick={handleSave} className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update account details</button>
             </div>
         </div>
     )

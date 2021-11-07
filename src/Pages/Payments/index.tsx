@@ -10,6 +10,7 @@ import { FilterPopup } from "./Filters/FilterPopUp";
 import { selectPaymentFilters } from "./Filters/paymentFiltersSlice";
 import { ExportAll } from "./Options/ExportAll";
 import { PrintAll } from "./Options/PrintAll";
+import { useIntl } from "react-intl";
 
 export default function Payments() {
   const { token } = useSelector(selectCredentials);
@@ -17,6 +18,7 @@ export default function Payments() {
   const [loading, setLoading] = useState(true);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const filters = useSelector(selectPaymentFilters);
+  const intl = useIntl()
 
   useEffect(() => {
     fetchAllPayments({
@@ -37,7 +39,7 @@ export default function Payments() {
     <div className="">
       {/* header */}
       <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-        <Header heading="All Payments" />
+        <Header heading={intl.formatMessage({ id: 'global.allPayments'})} />
         <AppliedFilters
           openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
         />

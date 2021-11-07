@@ -1,37 +1,48 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearAll, selectPaymentFilters } from './Filters/paymentFiltersSlice'
 
-export default function AppliedFilters({ openFilters } : { openFilters: any}) {
+export default function AppliedFilters({ openFilters }: { openFilters: any }) {
 
     const filters = useSelector(selectPaymentFilters)
     const dispatch = useDispatch()
 
     const filterText = (value: string) => {
-        switch(value) {
+        switch (value) {
             case 'latest': return `Sort by latest`
             case 'price-high-low': return `Price-High to Low`
             case 'price-low-high': return `Price-Low to High`
         }
     }
-    function hasFilters () {
+    function hasFilters() {
         return filters?.account || (filters?.paymentMethod?.length ?? -1) > 0 || filters?.sorting !== undefined
     }
     return (
         <div className="flex w-11/12 m-auto justify-between py-4">
             <div className="flex flex-col ml-4">
                 <div className="flex gap-2 items-end">
-                    <div className={'text-sm text-gray-600 dark:text-gray-300'}>Applied Filters & Sorting</div>
-                    {hasFilters() && <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'} onClick={() => dispatch(clearAll())}>Clear all</div>}
+                    <div className={'text-sm text-gray-600 dark:text-gray-300'}>
+                        <FormattedMessage
+                            id="global.appliedFilters"
+                            defaultMessage="Applied Filters"
+                        />
+                    </div>
+                    {hasFilters() && <div className={'text-sm font-semibold text-blue-500  dark:text-blue-300 cursor-pointer'} onClick={() => dispatch(clearAll())}>
+                        <FormattedMessage
+                            id="global.clearAll"
+                            defaultMessage="Clear All"
+                        />
+                    </div>}
                 </div>
                 {hasFilters() ? <div className="flex gap-2 mt-2">
-                        {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.account?.name}</div>}
-                        {filters?.paymentMethod &&  <div className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.paymentMethod}</div>}
-                        {filters?.sorting && (
-                            <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
-                                {filterText(filters?.sorting)}
-                            </div>)}
-                    </div> : <div className="flex gap-2 mt-2 text-sm text-gray-400 dark:text-gray-300"> No filters applied</div>}
+                    {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.account?.name}</div>}
+                    {filters?.paymentMethod && <div className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.paymentMethod}</div>}
+                    {filters?.sorting && (
+                        <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
+                            {filterText(filters?.sorting)}
+                        </div>)}
+                </div> : <div className="flex gap-2 mt-2 text-sm text-gray-400 dark:text-gray-300"> No filters applied</div>}
             </div>
             <div className="flex " onClick={openFilters}>
                 <div className={'flex border border-gray-200 rounded place-items-center px-2 py-1 text-gray-600 cursor-pointer text-base font-semibold dark:border-gray-300 dark:text-gray-300'}>

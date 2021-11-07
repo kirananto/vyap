@@ -12,10 +12,10 @@ export default function PaymentDetails() {
   const textSize = { fontSize: "12px" };
   const [payment, setPayment] = useState<paymentObject | undefined>()
   const { token } = useSelector(selectCredentials)
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams()
 
   useEffect(() => {
-    fetchPaymentById(token!, id).then(result => {
+    fetchPaymentById(token!, id!).then(result => {
       setPayment(result.data)
     })
   }, [])

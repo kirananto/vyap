@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface IProps {
     id: string
@@ -9,7 +9,7 @@ export default function ItemList({
     id
 }: IProps) {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const a = [1, 1, 1, 1, 1, 1]
 
@@ -18,7 +18,7 @@ export default function ItemList({
             <div className="flex justify-end">
                 <div 
                     className="flex w-max border border-gray-300 rounded items-center pr-2 cursor-pointer dark:border-gray-400"
-                    onClick={() => history.push(`/purchase-order/${id}`)}
+                    onClick={() => navigate(`/purchase-order/${id}`)}
                 >
                     <div className="bg-white rounded-full w-min p-2 text-gray-600 dark:text-gray-400 dark:bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

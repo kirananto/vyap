@@ -36,7 +36,7 @@ export default function OrderContainer({
                         <div className="flex flex-col">
                             <div className="text-gray-400 dark:text-gray-300">#{item?.id?.split('-')[0]} • {item.createdAt ? format(new Date(item.createdAt), 'do MMM yyyy') : ''}</div>
                             <div className="text-gray-600 dark:text-gray-200 my-1">{item.supplier?.name} {'->'} {item?.buyer?.name}</div>
-                            <div className="flex w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">Order completed</div>
+                            <div className="flex w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">{item?.orderStatus?.[0]?.note}</div>
                         </div>
                     </div>
                     <div className="flex">

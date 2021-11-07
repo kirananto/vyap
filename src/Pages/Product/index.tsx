@@ -14,6 +14,7 @@ import ChatImg from './assets/no_data.svg'
 import ModalViewer from "src/Components/Style/ModalViewer";
 import AppliedFilters from "./AppliedFilters";
 import { selectProductFilters } from "./productFiltersSlice";
+import { FormattedMessage, useIntl } from "react-intl";
 
 
 // ! Main Component
@@ -23,11 +24,13 @@ export default function Product() {
   const [products, setProducts] = useState<any[]>([])
   const filters = useSelector(selectProductFilters)
 
+  const intl = useIntl()
+
   // ! Tracking the total number of products is checked..
   // !--------------->
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   // !------------------->
-  const [isMoreOpen, setisMoreOpen] = useState(false);
+  const [isMoreOpen, setisMoreOpen] = useState<any>(undefined);
   //  !--------Search-bar-more---------->
   const [isSearchMoreOpen, setisSearchMoreOpen] = useState(false);
   const [selectedProduct, setselectedProduct] = useState<any[]>([])
@@ -35,8 +38,8 @@ export default function Product() {
   // ! For second modal using first modal
   // !------------------------>
   //! ---------------->
-  function toggleMore() {
-    setisMoreOpen(!isMoreOpen);
+  function toggleMore(item?: any) {
+    setisMoreOpen(item);
   }
   // function toggleModal() {
   //   setIsOpen(!isOpen);
@@ -95,8 +98,8 @@ export default function Product() {
       <div className="bg-gray-100 dark:bg-gray-900">
         <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
           <Header
-            heading="My Products"
-            subHeading={`${products?.length ?? 0} Items`}
+            heading={intl.formatMessage({ id: 'global.my_products' })}
+            subHeading={`${products?.length ?? 0} ${intl.formatMessage({ id: 'global.items' })}`}
           />
           <div>
             <AppliedFilters
@@ -124,12 +127,18 @@ export default function Product() {
         onClose={() => setisSearchMoreOpen(false)}
       />
       <ModalViewer
-        body={<MorePopup />}
+        body={<MorePopup
+          item={isMoreOpen}
+          onClose={() => setisMoreOpen(undefined)}
+        />}
         isOpen={isMoreOpen}
-        onClose={() => setisMoreOpen(false)}
+        onClose={() => setisMoreOpen(undefined)}
       />
       <Link to="/add-product" className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
-        Add Product
+        <FormattedMessage
+          id="action.addProduct"
+          defaultMessage="Add Product"
+        />
       </Link>
       <Footer />
     </>
