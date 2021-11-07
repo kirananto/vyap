@@ -6,6 +6,8 @@ interface IProps {
   apiData: any[];
 }
 
+let txnCount : number;
+
 export const PrintAll = ({ apiData }: IProps) => {
   const onPrint = () => {
     if (document.getElementById("divContents")) {
@@ -19,10 +21,12 @@ export const PrintAll = ({ apiData }: IProps) => {
   };
 
   const orders: any[] = apiData.map((item) => {
+
+    txnCount = apiData.length;
     return {
       ORDER_ID: "#" + item?.id?.split("-")[0],
       DATE: item.createdAt
-        ? format(new Date(item.createdAt), "do MMM yyyy")
+        ? format(new Date(item.createdAt), "dd/mm/yyyy")
         : "",
       SUPPLIER: item?.supplier?.name,
       BUYER: item?.buyer?.name,
@@ -77,7 +81,7 @@ export const PrintAll = ({ apiData }: IProps) => {
              <img className="w-12 h-12" src={vyapLogo} />
               <div className="flex flex-col">
                 <p className="text-xl font-bold text-gray-600"> Reliance Digital Trends</p>
-               <p className="text-gray-300">15 Transactions</p>
+               <p className="text-gray-300">{txnCount} Transactions</p>
              </div>
           </div>          
         </div>
@@ -98,7 +102,7 @@ export const PrintAll = ({ apiData }: IProps) => {
               {orders.map((item, index) => (
                 <tr key={index} className="text-left ">
                   {Object.values(item).map((val: any, i) => (
-                    <td key={val} className="px-2 py-2 whitespace-nowrap">
+                    <td key={val} className="px-1 py-2 whitespace-nowrap">
                       { i==4 ? "₹"+val : val}
                     </td>
                   ))}
