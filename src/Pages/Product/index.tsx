@@ -31,6 +31,7 @@ export default function Product() {
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   // !------------------->
   const [isMoreOpen, setisMoreOpen] = useState<any>(undefined);
+  const [searchValue, setSearchValue] = useState<any>(undefined);
   //  !--------Search-bar-more---------->
   const [isSearchMoreOpen, setisSearchMoreOpen] = useState(false);
   const [selectedProduct, setselectedProduct] = useState<any[]>([])
@@ -63,6 +64,7 @@ export default function Product() {
       organizationId: user?.organizationId!,
       limit: 20,
       offset: 0,
+      search: searchValue,
       ordering: filters?.sorting,
       categoryIds: filters?.categories?.length ? `${filters?.categories?.map((item: { id: string }) => item.id).join(',')}` : undefined,
       brandIds: filters?.brands?.length ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}` : undefined
@@ -73,7 +75,7 @@ export default function Product() {
     }).finally(() => {
       setLoading(false)
     })
-  }, [filters?.categories, filters?.brands, filters?.sorting])
+  }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue])
 
   function renderProducts() {
     if (loading) {
@@ -103,6 +105,8 @@ export default function Product() {
           />
           <div>
             <AppliedFilters
+              setSearchValue={setSearchValue}
+              searchValue={searchValue}
               selectedProduct={selectedProduct}
               onMoreClick={() => setisSearchMoreOpen(true)}
               onFilterClick={() => setfilterPopupOpen(true)}

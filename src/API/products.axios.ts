@@ -29,7 +29,7 @@ export interface AddCentralCatalogueInterface {
     images: any
 }
 
-export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string }) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
@@ -38,6 +38,7 @@ export const fetchProducts = ({ token, organizationId, limit, offset, categoryId
         categoryIds,
         brandIds,
         ordering,
+        search,
         offset
     },
     headers: {
