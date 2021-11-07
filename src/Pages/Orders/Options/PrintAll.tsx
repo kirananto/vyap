@@ -1,12 +1,18 @@
 import React from "react";
 import format from "date-fns/format";
+import vyapLogo from "../../../assets/new_logo.svg";
 import { FormattedMessage } from "react-intl";
+import { selectCredentials } from "../../Login/credentialsSlice";
+import { useSelector } from "react-redux";
 
 interface IProps {
   apiData: any[];
 }
 
+let txnCount : number;
+
 export const PrintAll = ({ apiData }: IProps) => {
+  const { user } = useSelector(selectCredentials);
   const onPrint = () => {
     if (document.getElementById("divContents")) {
       var printContents = document.getElementById("divContents")?.innerHTML;
@@ -22,10 +28,12 @@ export const PrintAll = ({ apiData }: IProps) => {
   };
 
   const orders: any[] = apiData.map((item) => {
+
+    txnCount = apiData.length;
     return {
       ORDER_ID: "#" + item?.id?.split("-")[0],
       DATE: item.createdAt
-        ? format(new Date(item.createdAt), "do MMM yyyy")
+        ? format(new Date(item.createdAt), "dd/MM/yyyy")
         : "",
       SUPPLIER: item?.supplier?.name,
       BUYER: item?.buyer?.name,
@@ -61,29 +69,59 @@ export const PrintAll = ({ apiData }: IProps) => {
         />
       </button>
 
-      <div className="hidden" id="divContents">
-        <table className="min-w-full divide-y divide-gray-200 ">
-          <thead className="bg-gray-50 text-center">
-            <tr>
-              <td>ORDER_ID</td>
-              <td>DATE</td>
-              <td>SUPPLIER</td>
-              <td>BUYER</td>
-              <td>Amount</td>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((item, index) => (
-              <tr key={index} className="text-center">
-                {Object.values(item).map((val: any) => (
-                  <td key={val} className="px-6 py-2 whitespace-nowrap">
-                    {val}
-                  </td>
-                ))}
+      <div
+        className="divide-y divide-gray-200  hidden grid grid-cols-1"
+        id="divContents"
+      >
+        <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
+          <div className="col-start-1 col-span-1  -space-y-3 align-middle">
+            <img className="w-12 h-12" src={vyapLogo} />
+            <p className="text-2xl font-bold text-gray-700 ">
+              {" "}
+              vyap{" "}
+            </p>
+          </div>
+
+          <div className="col-start-2 col-span-3 space-y-3 flex flex-col align-middle">
+            <h2 className="text-2xl font-bold text-gray-600"> Order Statement</h2>
+            <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
+          </div>
+
+          <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
+             <img className="w-12 h-12" src={vyapLogo} />
+              <div className="flex flex-col">
+                <p className="text-xl font-bold text-gray-600"> {user?.organization?.name} </p>
+               <p className="text-gray-300">{txnCount} Transactions</p>
+             </div>
+          </div>          
+        </div>
+        <div>
+      
+        <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
+          <table className="min-w-full">
+            <thead className="text-gray-200 font-bold">
+              <tr className="p-5">
+                <td>Order_ID</td>
+                <td>Date</td>
+                <td>Supplier</td>
+                <td>Buyer</td>
+                <td>Amount</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="text-gray-500">
+              {orders.map((item, index) => (
+                <tr key={index} className="text-left ">
+                  {Object.values(item).map((val: any, i) => (
+                    <td key={val} className="px-1 py-2 whitespace-nowrap">
+                      { i==4 ? "₹"+val : val}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>  
+        </div>
       </div>
     </>
   );

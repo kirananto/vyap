@@ -3,20 +3,25 @@ import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl';
+import { selectCredentials } from "../../Login/credentialsSlice";
+import { useSelector } from "react-redux";
 
 interface IProps {
     apiData: any[]
 }
 
 export const ExportAll = ({ apiData }: IProps) => {
-
+    const { user } = useSelector(selectCredentials);
     let payments: any[] = apiData.map((item) => {
+        const credit : boolean = user?.organization?.name === item.receiver?.name;
         return {
-            ID: "#" + item?.id?.split('-')[0],
             DATE: item.createdAt ? format(new Date(item.createdAt), 'do MMM yyyy') : '',
-            NAME: item.receiver?.name,
-            AMOUNT: item.amount
-        }
+            BUYER: item.senderOrg?.name,
+            SELLER: item.receiver?.name,
+            CREDIT:  credit ? item.amount : " ",
+            DEBIT: credit ? " " : item.amount,
+      
+          };
     });
 
     const exportToCSV = () => {
