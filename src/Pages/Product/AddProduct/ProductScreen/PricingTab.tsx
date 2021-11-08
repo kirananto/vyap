@@ -54,12 +54,12 @@ function PricingTab() {
         />
       </div>
       {/* ---------- */}
-      {!addProductInfo?.centralCatalogue?.id && <div>
+      {!addProductInfo?.centralCatalogue?.id && addProductInfo.pricing?.taxEnabled && <div><div>
         <p className="text-base text-gray-500">HSN Number</p>
         <div className="des-modal-btn">
           <input
             onChange={(event: any) => dispatch(setHsnNumber(event.target.value))}
-            value={addProductInfo.pricing?.hsnNumber}
+            value={addProductInfo.pricing?.hsn?.hsn}
             type="number"
             placeholder="Enter price"
             className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
@@ -84,20 +84,20 @@ function PricingTab() {
             <HSNmodal trigger={modal} setModal={setModal} />
           </div>
         </div>
-      </div>}
-      {/* GST % */}
-      {!addProductInfo?.centralCatalogue?.id && <div>
-        <p className="text-base text-gray-500">GST Percentage</p>
-        <div className="flex">
-          <input
-            onChange={handleGstPercentage}
-            value={addProductInfo.pricing?.gstPercentage}
-            type="number"
-            max={100}
-            className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-          />
-          <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
-            %
+      </div>
+        <div>
+          <p className="mt-4 text-base text-gray-500">GST Percentage</p>
+          <div className="flex">
+            <input
+              onChange={handleGstPercentage}
+              value={addProductInfo.pricing?.hsn?.gstPercentage ?? addProductInfo.pricing?.gstPercentage}
+              type="number"
+              max={100}
+              className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+            />
+            <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
+              %
+            </div>
           </div>
         </div>
       </div>}

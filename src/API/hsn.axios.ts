@@ -10,15 +10,24 @@ export const getHSNs = ({
     limit: number,
     offset: number,
     search?: string
-}) => axiosClient({
-    url: `/hsn`,
-    method: 'GET',
-    headers: {
-        'authorization': `Bearer ${token}`
-    },
-    params: {
-        limit,
-        offset,
-        filter: search ? `chapter||$contL||${search}&or=description||$contL||${search}&or=hsn||$contL||${search}` : undefined
+}) => {
+    var params = new URLSearchParams();
+    params.append("limit", `${limit}`);
+    params.append("offset", `${offset}`);
+    if (search) {
+        params.append("or", `chapter||$contL||${search}`);
+        params.append("or", `description||$contL||${search}`);
+        params.append("or", `hsn||$contL||${search}`);
     }
-})
+    var request = {
+        params: params
+    };
+    return axiosClient({
+        url: `/hsn`,
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${token}`
+        },
+        params
+    })
+}

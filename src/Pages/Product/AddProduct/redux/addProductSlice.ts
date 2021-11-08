@@ -8,12 +8,20 @@ interface CentralCatalogueInterface {
     id: string
     name: string
 }
+
+export interface HSNInterface {
+    chapter: string
+    id: string
+    description: string
+    gstPercentage: number
+    hsn: string
+}
 export interface AddProductInterface {
     pricing: {
         mrpPrice: number
         salesPrice: number
         taxEnabled: boolean
-        hsnNumber: number
+        hsn?:  HSNInterface | undefined,
         gstPercentage: number
     },
     centralCatalogue?: CentralCatalogueInterface,
@@ -34,7 +42,7 @@ const initialState: AddProductInterface = {
         mrpPrice: 0,
         salesPrice: 0,
         taxEnabled: false,
-        hsnNumber: 0,
+        hsn: undefined,
         gstPercentage: 0
     },
     others: {
@@ -66,11 +74,13 @@ export const addProductSlice = createSlice({
         setTaxEnabled: (state, action: PayloadAction<boolean>) => {
             state.pricing.taxEnabled = action.payload
         },
-        setHsnNumber: (state, action: PayloadAction<number>) => {
-            state.pricing.hsnNumber = action.payload
+        setHsnNumber: (state, action: PayloadAction<AddProductInterface['pricing']['hsn']>) => {
+            state.pricing.hsn = action.payload
+            state.pricing.gstPercentage = 0
         },
         setGstPercentage: (state, action: PayloadAction<number>) => {
             state.pricing.gstPercentage = action.payload
+            state.pricing.hsn = undefined
         },
         setProductImage: (state: AddProductInterface, action: PayloadAction<any>) => {
             state.others.productImage = [

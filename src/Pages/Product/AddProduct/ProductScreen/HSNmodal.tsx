@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getHSNs } from "src/API/hsn.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { HSNInterface, setHsnNumber } from "../redux/addProductSlice";
 import "./HSNmodal.css";
 
 
@@ -10,7 +11,10 @@ function HSNmodal(props: any) {
   const { token } = useSelector(selectCredentials)
   const intl = useIntl()
   const [searchValue, setSearchValue] = useState(undefined)
-  const [hsnCodes, setHSNCodes] = useState(Array(10).fill(1))
+  const [hsnCodes, setHSNCodes] = useState<HSNInterface[]>([])
+
+  const dispatch = useDispatch()
+
   const handleInputChange = (event: any) => {
     setSearchValue(event.target?.value);
   };
@@ -20,6 +24,11 @@ function HSNmodal(props: any) {
       setHSNCodes(result.data?.data)
     })
   }, [searchValue])
+
+  function selectHSN (value: HSNInterface ) {
+    dispatch(setHsnNumber(value))
+    props.setModal(false)
+  }
 
   
   return props.trigger ? (
@@ -55,7 +64,7 @@ function HSNmodal(props: any) {
         </div>
         <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
           {hsnCodes.map((mapItem, index) => (
-          <div className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
+          <div onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
             <div className="text-gray-700 dark:text-gray-300">{mapItem.chapter} </div>
             <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>
             <div className="mt-2 grid grid-cols-2 text-gray-700 dark:text-gray-300">
