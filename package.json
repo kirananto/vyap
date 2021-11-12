@@ -37,7 +37,7 @@
     "react-router-dom": "6.0.1",
     "redux-persist": "6.0.0",
     "tailwindcss": "2.2.19",
-    "webpack": "^5.62.1",
+    "webpack": "^5.64.0",
     "workbox-build": "^6.3.0",
     "workbox-cacheable-response": "^6.3.0",
     "workbox-cli": "^6.3.0",
