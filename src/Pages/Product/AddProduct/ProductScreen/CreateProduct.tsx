@@ -69,11 +69,9 @@ function CreateProduct() {
       centralCatalogueId = centralProduct?.data?.id
     }
     const body: IAddProduct = {
-      organizationCatalogueCategory: {
-          name: addProductInfo.others?.category, // TODO replace with category name
-          description: '',
-          imageName: ''
-      },
+
+      organizationCatalogueCategoryId: addProductInfo?.others?.category?.id ?? undefined,
+      organizationCatalogueCategory: addProductInfo?.others?.category?.id  ? undefined : { name: addProductInfo?.others?.category?.name, description: addProductInfo?.others?.category?.name, imageName: addProductInfo?.others?.category?.name },
       thumbnailImage: addProductInfo?.others?.productImage?.[0]?.imageName,
       aliasName: addProductInfo?.centralCatalogue?.id ? addProductInfo?.others?.aliasName : '',
       centralCatalogueId,

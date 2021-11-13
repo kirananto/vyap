@@ -29,7 +29,12 @@ export interface AddProductInterface {
     others: {
         productImage: any[]
         skuCode: string
-        category: string
+        category?: {
+            id?: string,
+            name: string,
+            description?: string,
+            imageName?: string
+        }
         barCode: string
         brand?: BrandInterface
         brandId: string
@@ -51,7 +56,7 @@ const initialState: AddProductInterface = {
         productImage: [],
         aliasName: '',
         skuCode: '',
-        category: '',
+        category: undefined,
         barCode: '',
         brand: undefined,
         brandId: '',
@@ -102,7 +107,7 @@ export const addProductSlice = createSlice({
                 state.centralCatalogue.description = action.payload
             }
         },
-        setCategory: (state, action: PayloadAction<any>) => {
+        setCategory: (state, action: PayloadAction<AddProductInterface['others']['category']>) => {
             state.others.category = action.payload
         },
         setBarCode: (state, action: PayloadAction<any>) => {

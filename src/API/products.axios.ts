@@ -1,9 +1,9 @@
 import { axiosClient } from './apiClient'
 
 export interface IAddProduct {
-    organizationCatalogueCategory: {
-        name: string,
-        description: string,
+    organizationCatalogueCategory?: {
+        name?: string,
+        description?: string,
         imageName?: string,
         id?: string,
         createdAt?: string,
@@ -80,12 +80,13 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     }
 })
 
-export const fetchCentralProductCategories = (token: string, limit: number, offset: number) => axiosClient({
+export const fetchCentralProductCategories = (token: string, limit: number, offset: number, search?: string) => axiosClient({
     url: `/organization-catalogue-category`,
     method: 'GET',
     params: {
         limit,
         offset,
+        search
     },
     headers: {
         'authorization': `Bearer ${token}`

@@ -7,6 +7,7 @@ import { imageUpload } from "src/API/image.axios";
 import Spinner from "src/Components/Style/Spinner";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 import BrandModal from "./BrandModal";
+import OrganizationCategoryModal from "./OrganizationCategoryModal";
 
 const ImageContainer = (props: any) => {
   const { item } = props
@@ -69,6 +70,7 @@ const Input = (props: any) => {
 };
 function OthersTab() {
   const [modal, setModal] = useState(false);
+  const [categoryModal, setCategoryModal] = useState(false);
 
   const [spinner, setSpinner] = useState(false)
 
@@ -127,6 +129,10 @@ function OthersTab() {
     setModal(true);
   };
 
+  const handleCategoryModal = () => {
+    setCategoryModal(true);
+  };
+
   return (
     <div className="mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)' }}>
       {!addProductInfo?.centralCatalogue?.id && <>
@@ -166,7 +172,37 @@ function OthersTab() {
         <Input label="Your Item Code(SKU)" placeholder="Enter SKU Code" dispatch={dispatch} value={addProductInfo?.others?.skuCode} />
 
         {/* TODO: Need to make this input field a multiselect field*/}
-        <Input label="Category" placeholder="Enter category" dispatch={dispatch} value={addProductInfo?.others?.category} />
+        <div>
+          <p className="text-base text-gray-500">Category</p>
+          <div className="des-modal-btn">
+            <input
+              onChange={(event: any) => dispatch(setCategory({ id: undefined, name: event.target.value }))}
+              value={addProductInfo?.others?.category?.name}
+              type="text"
+              placeholder="Enter category"
+              className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+            />
+            {/* Modal handle btn */}
+            <button className="modal-btn dark:text-gray-300" onClick={handleCategoryModal}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            {/* Modal */}
+            <div>
+              <OrganizationCategoryModal trigger={categoryModal} setModal={setCategoryModal} />
+            </div>
+          </div>
+        </div>
         {!addProductInfo?.centralCatalogue?.id && <div className="barcode-input">
           <Input label="Barcode" placeholder="Enter or Scan Barcode" dispatch={dispatch} value={addProductInfo?.others?.barCode} />
           <div className="barcode-icon dark:text-gray-300">
