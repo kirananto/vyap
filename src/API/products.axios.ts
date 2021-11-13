@@ -27,6 +27,11 @@ export interface AddCentralCatalogueInterface {
     // TODO Unverified
     categories: any
     images: any
+    brand?: { 
+        name?: string
+        description?: string
+        imageName?: string
+    }
 }
 
 export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string }) => axiosClient({

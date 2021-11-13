@@ -62,8 +62,9 @@ function CreateProduct() {
           imageName: 'string'
         },
         images: addProductInfo?.others?.productImage,
-        // brandId: 'string',// TODO
-        // hsnId: 'string', // TODO
+        hsnId: addProductInfo?.pricing.hsn?.id,
+        brandId: addProductInfo?.others?.brand?.id ?? undefined,
+        brand: addProductInfo?.others?.brand?.id  ? undefined : { name: addProductInfo?.others?.brand?.name, description: addProductInfo?.others?.brand?.name, imageName: addProductInfo?.others?.brand?.name }
       })
       centralCatalogueId = centralProduct?.data?.id
     }

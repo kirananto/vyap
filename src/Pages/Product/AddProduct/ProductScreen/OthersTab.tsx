@@ -6,6 +6,7 @@ import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { imageUpload } from "src/API/image.axios";
 import Spinner from "src/Components/Style/Spinner";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
+import BrandModal from "./BrandModal";
 
 const ImageContainer = (props: any) => {
   const { item } = props
@@ -67,6 +68,7 @@ const Input = (props: any) => {
   );
 };
 function OthersTab() {
+  const [modal, setModal] = useState(false);
 
   const [spinner, setSpinner] = useState(false)
 
@@ -119,6 +121,11 @@ function OthersTab() {
         })
     }
   }
+
+
+  const handleModal = () => {
+    setModal(true);
+  };
 
   return (
     <div className="mt-2 overflow-auto" style={{ height: 'calc(100vh - 22rem)' }}>
@@ -188,7 +195,38 @@ function OthersTab() {
           </div>
         </div>}
         {addProductInfo?.centralCatalogue?.id && <Input label="Alias Name" placeholder="Enter alias name..." dispatch={dispatch} value={addProductInfo?.others?.aliasName} />}
-        {!addProductInfo?.centralCatalogue?.id && <Input label="Brand" placeholder="Enter brand..." dispatch={dispatch} value={addProductInfo?.others?.brand} />}
+        {!addProductInfo?.centralCatalogue?.id && <div>
+          <p className="text-base text-gray-500">Brand</p>
+          <div className="des-modal-btn">
+            <input
+              onChange={(event: any) => dispatch(setBrand({ id: undefined, name: event.target.value }))}
+              value={addProductInfo?.others?.brand?.name}
+              type="text"
+              placeholder="Enter brand"
+              className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+            />
+            {/* Modal handle btn */}
+            <button className="modal-btn dark:text-gray-300" onClick={handleModal}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            {/* Modal */}
+            <div>
+              <BrandModal trigger={modal} setModal={setModal} />
+            </div>
+          </div>
+        </div>
+        }
         {/* <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} /> */}
       </div>
     </div>

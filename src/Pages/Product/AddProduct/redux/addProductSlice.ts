@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { BrandInterface } from '../ProductScreen/BrandModal';
 
 interface CentralCatalogueInterface {
     barCode: string
@@ -30,7 +31,8 @@ export interface AddProductInterface {
         skuCode: string
         category: string
         barCode: string
-        brand: string
+        brand?: BrandInterface
+        brandId: string
         caseQuantity: number
         aliasName: string
     }
@@ -51,7 +53,8 @@ const initialState: AddProductInterface = {
         skuCode: '',
         category: '',
         barCode: '',
-        brand: '',
+        brand: undefined,
+        brandId: '',
         caseQuantity: 0
     }
 };
