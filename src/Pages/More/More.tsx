@@ -29,7 +29,7 @@ export default function More() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    dispatch(setCredentials({ user: undefined, token: undefined }))
+    // dispatch(setCredentials({ user: undefined, token: undefined }))
     navigate('/login')
   }
 

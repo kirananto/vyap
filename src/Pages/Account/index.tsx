@@ -15,7 +15,7 @@ export default function Account() {
     function handleSave () {
         // user.organization.pinCode
         // user.organization.name
-        patchUser({ id: user?.id!, name: user?.name, email: user?.email }).then(result => {
+        patchUser({ id: user?.id!, name: user?.name, email: user?.email! }).then(result => {
             console.log('user', result.data)
         })
     }
@@ -71,7 +71,7 @@ export default function Account() {
                     </label>
                     <input
                         name="email"
-                        value={user?.email}
+                        value={user?.email!}
                         onChange={(event) => dispatch(setUserEmail(event?.target.value))}
                         id="email"
                         placeholder="Email"

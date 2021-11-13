@@ -10,13 +10,15 @@ export interface Organization {
     listPrivately: boolean;
     officeNumber: string;
     profileImageUrl?: any;
-    gstNumber: string;
+    gstNumber: string | null;
     officeAddress: string;
-    email: string;
+    email: string | null;
     pinCode: string;
     isSupplier: boolean;
+    isActive: boolean;
     organizationLocationId?: any;
     categoryId?: any;
+    category?: any;
 }
 export interface UserSettings {
     id: string;
@@ -31,10 +33,10 @@ export interface User {
     updatedAt: Date;
     name: string;
     phone: string;
-    email: string;
+    email: string | null;
     lastSeen: Date;
     roleId: string;
-    profileImageUrl: string;
+    profileImageUrl: string | null;
     settingsId?: any;
     settings: UserSettings | null
     organizationId: string;
@@ -47,8 +49,45 @@ export interface CredentialsInterface {
 }
 
 const initialState: CredentialsInterface = {
-  token: undefined,
-  user: undefined,
+  token: 'EVxt0fOsBqyA59RPCIDaVv9Lu-kaWcj8X1H3gUfJMTOUef8YTYBOVyzrX2rqqYghJigaTifEtcrRTSDnxo2YB-_vIQWbmC26FNeU2wrSa98Y',
+  user: {
+    id: 'b2545594-cc4a-4917-90f5-f895cf6f5c64',
+    createdAt: new Date('2021-09-14T13:27:14.980Z'),
+    updatedAt: new Date('2021-11-04T01:57:41.773Z'),
+    name: 'Kiran Anto',
+    phone: '7012918926',
+    email: null,
+    lastSeen: new Date('2021-09-14T13:27:14.980Z'),
+    roleId: '56ec7303-4339-4954-a950-bd97297e81bf',
+    profileImageUrl: null,
+    settingsId: 'ec2779d3-16e2-46c5-b2f1-c73ae3473bd7',
+    organizationId: '29e260d0-89e5-43b7-89de-324fc6fbecdc',
+    organization: {
+      id: '29e260d0-89e5-43b7-89de-324fc6fbecdc',
+      createdAt: new Date('2021-09-14T13:27:14.980Z'),
+      updatedAt: new Date('2021-09-14T13:27:14.980Z'),
+      name: 'Kiran Anto',
+      description: 'Nil',
+      listPrivately: true,
+      officeNumber: '7012918926',
+      profileImageUrl: null,
+      gstNumber: null,
+      officeAddress: '2323',
+      email: null,
+      pinCode: '680125',
+      isSupplier: true,
+      isActive: false,
+      organizationLocationId: null,
+      categoryId: null,
+      category: null
+    },
+    settings: {
+      id: 'ec2779d3-16e2-46c5-b2f1-c73ae3473bd7',
+      createdAt: new Date('2021-09-14T13:27:14.980Z'),
+      updatedAt: new Date('2021-09-14T13:27:14.980Z'),
+      isDarkMode: false
+    }
+  }
 };
 
 
