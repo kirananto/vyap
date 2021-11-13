@@ -26,7 +26,7 @@ export default function AddProductMain() {
         heading="Add product"
         backFn={() => navigate("/my-products")}
       />
-      <div className="w-11/12 p-3 pt-20 mx-auto dark:bg-gray-900">
+      <div className="w-11/12 p-3 pt-48 mx-auto dark:bg-gray-900">
         <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">What is the product?</h1>
         <DropDown
           onSelect={(e: any) => dispatch(setCentralCatalogue(e))}

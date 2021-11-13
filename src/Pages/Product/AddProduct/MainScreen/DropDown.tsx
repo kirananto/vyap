@@ -38,8 +38,6 @@ function List(props: any) {
 function DropDown(props: any) {
   const [value, setValue] = useState("");
   const [opts, setOpts] = useState(props.options || []);
-  const [selected, setSelected] = useState({});
-  const [isdisabled, setIsdisabled] = useState(true);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -50,23 +48,15 @@ function DropDown(props: any) {
     setValue(text);
   }
 
-  useEffect(() => {
-    let dises = props.options.filter((a: any) => a.name.indexOf(value) != -1);
-    if (dises.length == 0) setIsdisabled(false);
-    else setIsdisabled(true);
-  }, [value])
-
   function getSearchedOpts() {
     let searched = props.options.filter((a: any) => a.name.indexOf(value) != -1);
-    console.log('opts', opts)
-    console.log('searched', searched)
 
     return searched
   }
 
   function add(e: any) {
     let key = e.nativeEvent.key || "Enter";
-    if (key == "Enter" && !isdisabled) {
+    if (key == "Enter") {
       setOpts([...opts, { name: value, value }]);
     }
     search({ target: { value } });
@@ -74,10 +64,8 @@ function DropDown(props: any) {
       name: value
     })
     navigate('/create-product')
-    setIsdisabled(true);
   }
   function select(e: any) {
-    setSelected(e);
     setIsOpen(false);
     setValue(e.name);
     if (props.onSelect) {
@@ -89,46 +77,62 @@ function DropDown(props: any) {
   function renderListItems() {
     const listItems = getSearchedOpts()
     if (listItems?.length === 0) {
-      return <div className="p-4">No existing products found, add this as a new product by Clicking Add Button.</div>
+      return <div className="p-4">
+        <button
+      className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+      onClick={add}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-8 h-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+          clipRule="evenodd"
+        />
+      </svg>
+      <div className="ml-4 mt-1">Create <strong>{value}</strong> as a new product </div>
+    </button>
+        <div className="text-center">No existing products found, add this as a new product by Clicking Add Button.
+        </div>
+      </div>
     }
-    return listItems.map((opt: any) => {
+    return [...(value.length > 0 ? [(<button
+      className="border w-full rounded p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+      onClick={add}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-8 h-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+          clipRule="evenodd"
+        />
+      </svg>
+      <div className="ml-4 mt-1">Create <strong>{value}</strong> as a new product </div>
+    </button>)] : []), , ...listItems.map((opt: any) => {
       console.log('opt1')
       return <List key={opt.id} opt={opt} onSelect={select} />
-    })
+    })]
   }
   return (
-    <div className="w-full dropdown-container">
-      <div className="flex gap-2">
+    <div className="w-full">
         <input
           type="text"
           onChange={search}
-          // onKeyPress={add}
           value={value}
           onFocus={() => setIsOpen(true)}
-          // onBlur={() => setIsOpen(false)}
-          className="p-2 pl-4 border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
+          className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
           placeholder="Search or create product..."
         />
-        <button
-          disabled={isdisabled}
-          className={`${isdisabled ? "hide-create-btn" : "show-create-btn"} bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500`}
-          onClick={add}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className={isOpen ? "drop-open" : "drop-close"}>
+      <div className={isOpen ? "drop-open h-72" : "drop-close"}>
         {isOpen
           ? renderListItems()
           : []}
