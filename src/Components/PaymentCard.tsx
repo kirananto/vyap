@@ -29,7 +29,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
   return (
     <div className={`flex ${className} w-full `}>
-      <NavLink to={`/payment/${thread.meta}`} className="flex flex-col w-10/12 gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600">
+      <NavLink to={`/payment/${thread.meta}`} className="flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600">
         <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
           Payment #{thread.meta?.split('-')[0]}
         </div>

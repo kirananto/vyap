@@ -39,16 +39,6 @@ background: #3f4694;
 
   /* background-color: yellow; */
 }
-.card-child-1,
-.card-child-2,
-.card-child-3 {
-  display: flex;
-  justify-content: center;
-}
-.card-child-1 {
-  width: 20%;
-  /* background-color: lightblue; */
-}
 .card-child-2 {
   flex-direction: column;
   width: 60%;
