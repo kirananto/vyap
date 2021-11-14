@@ -20,7 +20,6 @@ interface IProps {
 export class Post {
   @Length(10, 10)
   phoneNumber!: string;
-
 }
 
 export default function AddCustomerStep1({
