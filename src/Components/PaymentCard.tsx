@@ -29,11 +29,11 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
   return (
     <div className={`flex ${className} w-full `}>
-      <NavLink to={`/payment/${thread.meta}`} className="flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600">
+      <NavLink to={`/payment/${thread.meta}`} className={`flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
         <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
           Payment #{thread.meta?.split('-')[0]}
         </div>
-        <div className="text-4xl mt-2 text-gray-700 font-bold dark:text-gray-200">₹{payment?.amount ?? 0}</div>
+        <div className={`text-4xl mt-2 text-gray-700 font-bold dark:text-gray-200 ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${payment?.amount}` : null}</div>
 
         {/* bottom  */}
         <div className="flex items-center w-full">
