@@ -15,6 +15,7 @@ import ModalViewer from "src/Components/Style/ModalViewer";
 import AppliedFilters from "./AppliedFilters";
 import { selectProductFilters } from "./productFiltersSlice";
 import { FormattedMessage, useIntl } from "react-intl";
+import Spinner from "src/Components/Style/Spinner";
 
 
 // ! Main Component
@@ -84,7 +85,10 @@ export default function Product() {
 
   function renderProducts() {
     if (loading) {
-      return <div className="mt-12 p-12 text-center"> Loading...</div>
+      return<div className="p-12 mt-12 text-center dark:text-gray-100 grid">
+      <Spinner />
+      <div className="mt-4">Loading...</div>
+    </div>
     }
     if (products?.length === 0) {
       return <div>
