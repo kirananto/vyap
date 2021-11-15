@@ -18,7 +18,7 @@ interface IProps {
 }
 
 export class Post {
-  @Length(10, 10)
+  @Length(10, 12)
   phoneNumber!: string;
 }
 
