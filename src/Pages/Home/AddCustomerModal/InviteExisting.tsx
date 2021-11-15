@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { checkIfUserExists } from 'src/API/invite.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { currentPageEnum } from '.'
+import { Length, IsString, validate } from 'class-validator';
+import { useState } from 'react';
 
 interface IProps {
   address: any
@@ -14,6 +16,20 @@ interface IProps {
   setCurrentPage: any
   toggleVisibility: () => void
 }
+
+export class Post {
+  @Length(3, 30)
+  @IsString()
+  biz_name!: string;
+
+  @Length(3, 100)
+  address!: string;
+
+  @Length(6, 6)
+  pincode!: number;
+
+}
+
 export default function InviteExisting({
   toggleVisibility,
   address,
@@ -25,6 +41,10 @@ export default function InviteExisting({
   setCurrentPage
 }: IProps) {
   const { token } = useSelector(selectCredentials)
+  const [isValidBizName, setIsValidBizName] = useState<boolean>(true);
+  const [isValidAdress, setIsValidAdress] = useState<boolean>(true);
+  const [isValidPincode, setIsValidPincode] = useState<boolean>(true);
+
 
   const handleSubmit = () => {
     // checkIfUserExists(token!, phoneNumber).then(result => {
@@ -46,6 +66,50 @@ export default function InviteExisting({
     // }).catch(error => {
     //   // Do feedback for error
     // })
+
+    
+    let post = new Post();
+    post.biz_name = businessName;
+    post.address = address;
+    post.pincode = pinCode;
+
+    validate(post).then(errors => {
+      if (errors.length > 0) {
+          console.log("validation failed. errors: ", errors);
+
+          let errorList : string[] = [];
+          errors.forEach(item => {
+            errorList.push(item.property) ;
+          })
+
+          if(errorList.includes("biz_name")){
+            setIsValidBizName(false);
+          }else{
+            setIsValidBizName(true);
+          }
+
+          if(errorList.includes("address")){
+            setIsValidAdress(false);
+          }else{
+            setIsValidAdress(true);
+          }
+
+          if(errorList.includes("pincode")){
+            setIsValidPincode(false);
+          }else{
+            setIsValidPincode(true);
+          }
+
+        } else {
+          setIsValidAdress(true);
+          setIsValidBizName(true);
+          setIsValidPincode(true);
+          console.log("validation succeed");
+
+          setCurrentPage(currentPageEnum.PREVIEW);
+      }
+    });
+
   }
 
   return (
@@ -68,26 +132,33 @@ export default function InviteExisting({
           placeholder="Name of the shop or Business"
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
         />
+        <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " + (isValidBizName ? 'hidden' : '')}>
+		    	  Invalid business/shop name !
+		    </span>
       </div>
       <div className="mt-4">
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
           Address
         </label>
         <textarea
-          name="tel"
+          name="address"
           value={address}
           onChange={(event) => setAddress(event?.target.value)}
-          id="tel"
+          id="address"
           placeholder="Enter the address of the customer."
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
         />
+        
+        <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " + (isValidAdress ? 'hidden' : '')}>
+		    	  Invalid address !
+		    </span>
       </div>
       <div className="mt-4">
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
           Pin code
         </label>
         <input
-          type="tel"
+          type="number"
           name="tel"
           value={pinCode}
           onChange={(event) => setPinCode(event?.target.value)}
@@ -95,6 +166,9 @@ export default function InviteExisting({
           placeholder="Pin code of the customer"
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
         />
+        <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " + (isValidPincode ? 'hidden' : '')}>
+		    	  Invalid pincode !
+		    </span>
       </div>
       {/* <!-- btn popup --> */}
       <div className="flex my-8 p-2 gap-2">
@@ -102,7 +176,7 @@ export default function InviteExisting({
         <button onClick={() => setCurrentPage(currentPageEnum.STEP_1)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200">
           Back
         </button>
-        <button onClick={() => setCurrentPage(currentPageEnum.PREVIEW)} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+        <button onClick={handleSubmit} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
           Next
         </button>
       </div>
