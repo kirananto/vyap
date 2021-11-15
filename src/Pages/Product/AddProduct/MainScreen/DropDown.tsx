@@ -5,6 +5,13 @@ import { fetchCentralProductImages } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 import "./Drop.css";
+import { Length, validate } from 'class-validator';
+
+
+export class Post {
+  @Length(3, 50)
+  productName!: string;
+}
 
 function List(props: any) {
   const { token } = useSelector(selectCredentials)
@@ -40,6 +47,8 @@ function DropDown(props: any) {
   const [opts, setOpts] = useState(props.options || []);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isValidProduct, setIsValidProduct] = useState<boolean>(true);
+
 
   const navigate = useNavigate()
 
@@ -55,6 +64,10 @@ function DropDown(props: any) {
   }
 
   function add(e: any) {
+    
+    let post = new Post();
+    post.productName = value;
+
     let key = e.nativeEvent.key || "Enter";
     if (key == "Enter") {
       setOpts([...opts, { name: value, value }]);
@@ -63,8 +76,19 @@ function DropDown(props: any) {
     props.onSelect({
       name: value
     })
-    navigate('/create-product')
+
+    validate(post).then(errors => {
+      if (errors.length > 0) {
+          console.log("validation failed. errors: ", errors);
+          setIsValidProduct(false);
+      } else {
+        setIsValidProduct(true);
+          console.log("validation succeed");
+          navigate('/create-product')
+      }
+    });
   }
+
   function select(e: any) {
     setIsOpen(false);
     setValue(e.name);
@@ -100,7 +124,7 @@ function DropDown(props: any) {
         </div>
       </div>
     }
-    return [...(value.length > 0 ? [(<button
+    return [...(value.length > 0 ? [(<> <button
       className="border w-full rounded p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
       onClick={add}
     >
@@ -117,7 +141,16 @@ function DropDown(props: any) {
         />
       </svg>
       <div className="ml-4 mt-1">Create <strong>{value}</strong> as a new product </div>
-    </button>)] : []), , ...listItems.map((opt: any) => {
+    </button> 
+    
+    <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 " 
+        + (isValidProduct ? 'hidden' : '')}>
+			  Invalid product name !  
+		  </span>
+
+      </>
+    
+    )] : []), , ...listItems.map((opt: any) => {
       console.log('opt1')
       return <List key={opt.id} opt={opt} onSelect={select} />
     })]
