@@ -64,7 +64,7 @@ function DropDown(props: any) {
   }
 
   function add(e: any) {
-    
+
     let post = new Post();
     post.productName = value;
 
@@ -79,12 +79,12 @@ function DropDown(props: any) {
 
     validate(post).then(errors => {
       if (errors.length > 0) {
-          console.log("validation failed. errors: ", errors);
-          setIsValidProduct(false);
+        console.log("validation failed. errors: ", errors);
+        setIsValidProduct(false);
       } else {
         setIsValidProduct(true);
-          console.log("validation succeed");
-          navigate('/create-product')
+        console.log("validation succeed");
+        navigate('/create-product')
       }
     });
   }
@@ -103,23 +103,27 @@ function DropDown(props: any) {
     if (listItems?.length === 0) {
       return <div className="p-4">
         <button
-      className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
-      onClick={add}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-8 h-8"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-          clipRule="evenodd"
-        />
-      </svg>
-      <div className="ml-4 mt-1">Create <strong>{value}</strong> as a new product </div>
-    </button>
+          className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+          onClick={add}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-8 h-8"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <div className="ml-4 mt-1">Create <strong>{value}</strong> as a new product </div>
+        </button>
+        <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 "
+          + (isValidProduct ? 'hidden' : '')}>
+          Invalid product name !
+        </span>
         <div className="text-center">No existing products found, add this as a new product by Clicking Add Button.
         </div>
       </div>
@@ -141,15 +145,15 @@ function DropDown(props: any) {
         />
       </svg>
       <div className="ml-4 mt-1">Create <strong>{value}</strong> as a new product </div>
-    </button> 
-    
-    <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 " 
-        + (isValidProduct ? 'hidden' : '')}>
-			  Invalid product name !  
-		  </span>
+    </button>
 
-      </>
-    
+      <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 "
+        + (isValidProduct ? 'hidden' : '')}>
+        Invalid product name !
+      </span>
+
+    </>
+
     )] : []), , ...listItems.map((opt: any) => {
       console.log('opt1')
       return <List key={opt.id} opt={opt} onSelect={select} />
@@ -157,14 +161,14 @@ function DropDown(props: any) {
   }
   return (
     <div className="w-full">
-        <input
-          type="text"
-          onChange={search}
-          value={value}
-          onFocus={() => setIsOpen(true)}
-          className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
-          placeholder="Search or create product..."
-        />
+      <input
+        type="text"
+        onChange={search}
+        value={value}
+        onFocus={() => setIsOpen(true)}
+        className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
+        placeholder="Search or create product..."
+      />
       <div className={isOpen ? "drop-open h-72" : "drop-close"}>
         {isOpen
           ? renderListItems()
