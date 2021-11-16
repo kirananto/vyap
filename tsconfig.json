@@ -1,6 +1,7 @@
 {
   "include": ["src", "types"],
   "compilerOptions": {
+    "experimentalDecorators": true,
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
