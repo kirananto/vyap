@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { SimpleHeader } from 'src/Components/Header'
@@ -20,6 +20,9 @@ export default function PlaceOrder() {
         isOpen: any
     } | undefined>(undefined)
 
+    const [discountError, setDiscountError] = useState(false)
+    const [search, setSearch] = useState('')
+
     const placeOrder = useSelector(selectPlaceOrderInfo)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -40,23 +43,33 @@ export default function PlaceOrder() {
         return price
     }
 
+    function handleValidations() {
+        if (placeOrder.discount < 0) {
+            setDiscountError(true)
+            return false
+        }
+        return true
+    }
+
     function handleSubmit() {
-        console.log('handleSubmit')
-        placeOrderAPI(token!, {
-            description: placeOrder.note,
-            flatDiscount: placeOrder.discount,
-            supplierId: placeOrder.orgId,
-            buyerId: user?.organizationId!,
-            orderItems: placeOrder.cartItems?.map(mapItem => {
-                return {
-                    quantity: mapItem.quantity,
-                    purchasePrice: parseFloat(mapItem.rate),
-                    productId: mapItem.id
-                }
+        const validationsResult = handleValidations()
+        if (validationsResult) {
+            placeOrderAPI(token!, {
+                description: placeOrder.note,
+                flatDiscount: placeOrder.discount,
+                supplierId: placeOrder.orgId,
+                buyerId: user?.organizationId!,
+                orderItems: placeOrder.cartItems?.map(mapItem => {
+                    return {
+                        quantity: mapItem.quantity,
+                        purchasePrice: parseFloat(mapItem.rate),
+                        productId: mapItem.id
+                    }
+                })
+            }).then(result => {
+                navigate(`/chat/${localStorage?.getItem('inboxId')}`)
             })
-        }).then(result => {
-            navigate(`/chat/${localStorage?.getItem('inboxId')}`)
-        })
+        }
     }
 
     function renderCartItems() {
@@ -68,11 +81,10 @@ export default function PlaceOrder() {
         }
         return (<>
             <div className={'my-4'}>
-                <input placeholder={'Search'} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " />
+                <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder={'Search'} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 " />
             </div>
-            {placeOrder.cartItems.map((item, index) => (<div className="flex justify-between" key={`${index}`}>
-                {/* TODO: Remove this console.log */}
-                {console.log(item)}
+            {placeOrder.cartItems?.filter(filterItem => `${filterItem.centralCatalogue?.name?.toLowerCase()}${filterItem.aliasName?.toLowerCase()}`.includes(search))?.map((item, index) => (<div className="flex justify-between" key={`${index}`}>
+ 
                 <div className="flex pt-4 gap-2 items-center">
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
                         {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
@@ -168,6 +180,7 @@ export default function PlaceOrder() {
                     <span className="float-left mb-2 text-sm text-gray-500">Flat discount amount</span>
                     <input value={placeOrder.discount} onChange={(event) => dispatch(setFlatDiscount(parseFloat(event?.target.value as any)))} className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                         inputMode="numeric" type="number" />
+                        {discountError ? <div className="mt-2 text-red-600 text-xs">Please enter a valid amount for discount </div> : null}
                 </div>
                 <div className="border rounded-lg m-2 px-4 border-gray-200 dark:border-gray-700 pb-4 pt-4">
                     <div className="flex justify-between">
