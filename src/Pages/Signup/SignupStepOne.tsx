@@ -4,9 +4,9 @@ import OTPForm from "../Login/OTPForm";
 import { Link, useNavigate } from "react-router-dom";
 import { generateOtp, verifyPhone } from "../../API/login.axios";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../Login/credentialsSlice";
 import vyapLogo from '../../assets/new_logo.svg'
 import { setPhone } from "./signupSlice";
+
 
 export default function SignupStep1() {
   const [currentPage, setCurrentPage] = useState(0)

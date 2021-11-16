@@ -11,9 +11,9 @@ import StockManagement from "./Pages/StockManagement/StockManagement";
 import OrderDetails from "./Pages/Orders/OrderView";
 // ! SIGNUP----->
 import SignupStepOne from "./Pages/Signup/SignupStepOne";
-import SignupStepThree from "./Pages/Signup/SignupStepThree";
-import SignupStepFour from "./Pages/Signup/SignupStepFour";
-import SignupStepFive from "./Pages/Signup/SignupStepFive";
+import SignupStepThree from "./Pages/Signup/SignupStepTwo";
+import SignupStepFour from "./Pages/Signup/SignupStepThree";
+import SignupStepFive from "./Pages/Signup/SignupStepFour";
 import Settings from "./Pages/Settings/Settings";
 import More from "./Pages/More/More";
 import Orders from "./Pages/Orders";
