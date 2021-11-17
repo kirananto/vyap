@@ -23,8 +23,13 @@ export class PostSale {
   salePrice!: number;
 }
 
+export class PostHSN {
+  @Length(6, 6)
+  hsnNum!: number;
+}
+
 interface Props {
-  setValidation: (arg1: boolean,arg2: boolean) => void
+  setValidation: (arg1: boolean,arg2: boolean,arg3: boolean) => void
 }
 
 function PricingTab({ setValidation } : Props) {
@@ -32,8 +37,10 @@ function PricingTab({ setValidation } : Props) {
 
   const [isValidMRP, setIsValidMRP] = useState<boolean>(true);
   const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(true);
+  const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
 
-  setValidation(isValidMRP, isValidSalePrice);
+
+  setValidation(isValidMRP, isValidSalePrice, isValidHSN);
   
   const addProductInfo = useSelector(selectAddProductInfo);
 
@@ -64,8 +71,22 @@ function PricingTab({ setValidation } : Props) {
           setIsValidMRP(true);
         }
       });
-    } else {
-      console.log("sale");
+    }  else if(type == "hsn"){
+         let postHSN = new PostHSN();
+         postHSN.hsnNum = value;
+   
+         validate(postHSN).then((errors) => {
+           if (errors.length > 0) {
+             console.log("validation failed. errors mrp: ", errors);
+             setIsValidHSN(false);
+           } else {
+            setIsValidHSN(true);
+           }
+         });
+
+    }
+    
+    else {
       let postSalePrice = new PostSale();
       postSalePrice.salePrice = value;
       validate(postSalePrice).then((errors) => {
@@ -134,8 +155,10 @@ function PricingTab({ setValidation } : Props) {
         <div className="text-base font-bold text-gray-500">Tax Info</div>
         <ToggleButton
           className="mt-4"
-          onChange={() =>
-            dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled))
+          onChange={() =>{
+            dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled));
+            setIsValidHSN(!isValidHSN);
+          }
           }
           value={addProductInfo.pricing?.taxEnabled}
         />
@@ -148,14 +171,18 @@ function PricingTab({ setValidation } : Props) {
               <p className="text-base text-gray-500">HSN Number</p>
               <div className="des-modal-btn">
                 <input
-                  onChange={(event: any) =>
-                    dispatch(setHsnNumber(event.target.value))
+                  onChange={(event: any) =>{
+                    dispatch(setHsnNumber(event.target.value));
+                    handleValidation("hsn", event.target.value);
+                   }                    
                   }
                   value={addProductInfo.pricing?.hsn?.hsn}
                   type="number"
-                  placeholder="Enter price"
+                  placeholder="Enter HSN number"
                   className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                 />
+                
+
                 {/* Modal handle btn */}
                 <button
                   className="modal-btn dark:text-gray-300"
@@ -175,6 +202,15 @@ function PricingTab({ setValidation } : Props) {
                   </svg>
                 </button>
                 {/* Modal */}
+
+                <span
+                  className={
+                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+                    (isValidHSN ? "hidden" : "")
+                  }
+                >
+                  Invalid HSN !
+                </span>
                 <div>
                   <HSNmodal trigger={modal} setModal={setModal} />
                 </div>
