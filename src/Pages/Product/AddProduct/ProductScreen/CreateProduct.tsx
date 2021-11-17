@@ -16,6 +16,8 @@ import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 function CreateProduct() {
   const [toggleState, setToggleState] = useState(1);
   const [isLoading, setIsLoading] = useState(false)
+  const [isValid, setIsValid] = useState(true)
+
 
   const [productImage, setProductImage] = useState<any>(undefined)
   const addProductInfo = useSelector(selectAddProductInfo)
@@ -46,6 +48,19 @@ function CreateProduct() {
       })
     }
   }, [])
+
+  const doValidate = (isValidMRP : boolean, isValidSale : boolean) :void => {
+    if(isValidMRP && isValidSale)
+        setIsValid(true)
+      else
+        setIsValid(false)
+  }
+
+  const onProceed = () => {
+    if(isValid){
+      handleAddProduct()
+    }
+  }
 
   const handleAddProduct = async () => {
     
@@ -121,7 +136,7 @@ function CreateProduct() {
 
         {/* -------------------TAB-1----------------- */}
         <div className={toggleState === 1 ? "block" : "hidden"}>
-          <PricingTab />
+          <PricingTab setValidation={doValidate}/>
         </div>
 
         {/* -------------------TAB-1----------------- */}
@@ -129,7 +144,7 @@ function CreateProduct() {
          <OthersTab />
         </div>
       </div>
-      <SimpleFooter btnName={isLoading ? "Loading..." : "Add Product"} isDisabled={isLoading} onClick={handleAddProduct} />
+      <SimpleFooter btnName={isLoading ? "Loading..." : "Add Product"} isDisabled={isLoading} onClick={onProceed} />
     </div>
   );
 }
