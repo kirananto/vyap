@@ -49,8 +49,8 @@ function CreateProduct() {
     }
   }, [])
 
-  const doValidate = (isValidMRP : boolean, isValidSale : boolean) :void => {
-    if(isValidMRP && isValidSale)
+  const doValidate = (isValidMRP : boolean, isValidSale : boolean, isValidHSN : boolean) :void => {
+    if(isValidMRP && isValidSale && isValidHSN)
         setIsValid(true)
       else
         setIsValid(false)

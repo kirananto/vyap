@@ -1,9 +1,15 @@
 import { paymentMethod, paymentStatus } from '../../API/enum'
-import React from 'react'
+import React, {useState }  from 'react'
 import { createPayment } from 'src/API/payment.axios'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import Success from '../Home/AddCustomerModal/Success'
+import { Length, validate } from "class-validator";
+
+export class PostAmount {
+  @Length(1, 15)
+  amount!: number;
+}
 
 interface IProps {
   isVisible: boolean
@@ -20,6 +26,25 @@ export default function AddPaymentModal({
   const [amount, setAmount] = React.useState(0)
   const [isSuccess, setIsSuccess] = React.useState(false)
   const [note, setNote] = React.useState("")
+
+  const [isValidAmount, setIsValidAmount] = useState<boolean>(true);
+
+  const onValidate = (action : string) => {
+    let post = new PostAmount();
+    post.amount = amount;
+    console.log(amount);
+
+    validate(post).then(errors => {
+      if (errors.length > 0) {
+          console.log("validation failed. errors: ", errors);
+          setIsValidAmount(false);
+      } else {
+           setIsValidAmount(true);
+           console.log("validation succeed");
+           if(action == 'submit')
+             () => { handleSubmit();} 
+      }});
+    }
 
   const handleSubmit = () => {
     // DO validations before making API call
@@ -55,8 +80,19 @@ export default function AddPaymentModal({
         {/* <!-- Dropdown-3 --> */}
         <div className="p-2">
           <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">AMOUNT</span>
-          <input value={amount} onChange={(event) => setAmount(parseFloat(event?.target.value as any))} className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
-            inputMode="numeric" type="number" />
+          <input value={amount} 
+                onChange={(event) => { 
+                  setAmount(parseFloat(event?.target.value as any));
+                  onValidate('change');
+                }} 
+                className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                inputMode="numeric" 
+                type="number" />
+          
+          <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " + (isValidAmount ? 'hidden' : '')}>
+			      Invalid amount !
+		     </span>
+
         </div>
         {/* <!-- Textarea --> */}
         <div className="p-2">
@@ -69,7 +105,7 @@ export default function AddPaymentModal({
           <button onClick={() => toggleVisibility(false)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200">
             Cancel
           </button>
-          <button onClick={() => handleSubmit()} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+          <button onClick={() => onValidate('submit')} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
             Save Payment
           </button>
         </div>
