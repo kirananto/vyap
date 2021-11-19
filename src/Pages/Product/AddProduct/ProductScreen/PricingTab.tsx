@@ -2,7 +2,7 @@ import React, {useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ToggleButton from "../../../../Components/ToggleButton";
 import HSNmodal from "./HSNmodal";
-import { Length, validate } from "class-validator";
+import { Length, Min, validate } from "class-validator";
 
 import {
   selectAddProductInfo,
@@ -14,12 +14,12 @@ import {
 } from "../redux/addProductSlice";
 
 export class PostMRP {
-  @Length(1, 15)
+  @Min(1)
   mrpPrice!: number;
 }
 
 export class PostSale {
-  @Length(1, 15)
+  @Min(1)
   salePrice!: number;
 }
 
@@ -61,7 +61,7 @@ function PricingTab({ setValidation } : Props) {
   const handleValidation = (type: string, value: number) => {
     if (type == "mrp") {
       let postMrp = new PostMRP();
-      postMrp.mrpPrice = value;
+      postMrp.mrpPrice = Number(value);
 
       validate(postMrp).then((errors) => {
         if (errors.length > 0) {
@@ -88,7 +88,7 @@ function PricingTab({ setValidation } : Props) {
     
     else {
       let postSalePrice = new PostSale();
-      postSalePrice.salePrice = value;
+      postSalePrice.salePrice = Number(value);
       validate(postSalePrice).then((errors) => {
         if (errors.length > 0) {
           console.log("validation failed. errors: ", errors);

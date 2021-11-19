@@ -31,6 +31,7 @@ function CreateProduct() {
   const navigate = useNavigate();
 
   const toggleTabs = (index: any) => {
+    console.log("toggling...");
     setToggleState(index);
   };
 
@@ -80,6 +81,12 @@ function CreateProduct() {
   };
 
   const onProceed = () => {
+    if(isValid && !isValidOthers)
+      toggleTabs(2);
+    
+      if(!isValid && isValidOthers)
+      toggleTabs(1);
+
     if (isValid && isValidOthers) {
       handleAddProduct();
     }
