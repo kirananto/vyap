@@ -64,9 +64,10 @@ function CreateProduct() {
   const doValidate = (
     isValidMRP: boolean,
     isValidSale: boolean,
-    isValidHSN: boolean
+    isValidHSN: boolean,
+    isValidGST: boolean
   ): void => {
-    if (isValidMRP && isValidSale && isValidHSN) setIsValid(true);
+    if (isValidMRP && isValidSale && isValidHSN && isValidGST) setIsValid(true);
     else setIsValid(false);
   };
 
@@ -81,11 +82,9 @@ function CreateProduct() {
   };
 
   const onProceed = () => {
-    if(isValid && !isValidOthers)
-      toggleTabs(2);
-    
-      if(!isValid && isValidOthers)
-      toggleTabs(1);
+    if (isValid && !isValidOthers) toggleTabs(2);
+
+    if (!isValid && isValidOthers) toggleTabs(1);
 
     if (isValid && isValidOthers) {
       handleAddProduct();
