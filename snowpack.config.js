@@ -1,7 +1,9 @@
-const package = require('./package.json');
-process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION = package.version;
+process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION = require('child_process')
+.execSync('git rev-parse HEAD')
+.toString().trim()
 process.env.SNOWPACK_PUBLIC_SERVICE_WORKER = 'sw.js';
 
+console.log('process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION', process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION)
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
