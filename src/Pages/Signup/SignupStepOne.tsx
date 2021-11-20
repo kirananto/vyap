@@ -50,7 +50,7 @@ export default function SignupStep1() {
   function renderForm() {
     switch (currentPage) {
       case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => setCurrentPage(0)} error={error} />
-      default: return <PhoneForm onPressLogin={onPressLogin} error={error} />
+      default: return <PhoneForm text={"Sign up"} onPressLogin={onPressLogin} error={error} />
     }
   }
 

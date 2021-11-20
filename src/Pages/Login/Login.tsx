@@ -6,6 +6,7 @@ import { generateOtp, verifyOtp } from "../../API/login.axios";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./credentialsSlice";
 import vyapLogo from '../../assets/new_logo.svg'
+import Account from "../Account";
 
 export default function Login() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -30,7 +31,7 @@ export default function Login() {
     })
       .catch((error: any) => {
         console.log('error verifying otp', error.message)
-        setError('Please enter valid OTP')
+        setError(`Please enter valid OTP, If you don't have an Account please proceed to signup`)
         // User couldn't sign in (bad verification code?)
         // ...
       })
@@ -54,7 +55,7 @@ export default function Login() {
   function renderForm() {
     switch (currentPage) {
       case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => setCurrentPage(0)} error={error} />
-      default: return <PhoneForm onPressLogin={onPressLogin} error={error} />
+      default: return <PhoneForm text="Log in" onPressLogin={onPressLogin} error={error} />
     }
   }
 

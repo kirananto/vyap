@@ -4,9 +4,10 @@ import Button from "src/Components/Style/Button";
 interface IProps {
   onPressLogin: (phoneNumber: string) => void;
   error: any
+  text: string
 }
 
-export default function PhoneForm({ onPressLogin, error }: IProps) {
+export default function PhoneForm({ onPressLogin, error, text }: IProps) {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
@@ -39,7 +40,7 @@ export default function PhoneForm({ onPressLogin, error }: IProps) {
         We'll never share your phone number <br /> with anyone else.
       </div>
 
-      <Button className="mt-6">Log in</Button>
+      <Button className="mt-6">{text}</Button>
     </form>
   );
 }
