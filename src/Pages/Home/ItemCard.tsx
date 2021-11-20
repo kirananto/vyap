@@ -1,12 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { formatDistance } from 'date-fns'
+import { format, isToday, isYesterday } from 'date-fns'
 
 interface IProps {
   item: any;
 }
 
 export function ItemCard({ item }: IProps) {
+
+  function renderTime (date: Date) {
+    if(isToday(date)) {
+      return format(date, 'HH:mm aa')
+    }
+    if(isYesterday(date)) {
+      return 'Yesterday'
+    }
+    return format(date, 'dd/MM/yyyy')
+
+  }
   return (
 
     <div className="card-main">
@@ -34,10 +45,7 @@ export function ItemCard({ item }: IProps) {
         </div>
         <div className="w-1/5 lg:w-auto mt-5 text-right">
 
-          <h6 className="text-xs text-gray-500"> {formatDistance(
-            new Date(item.updatedAt),
-            new Date()
-          )}</h6>
+          <h6 className="text-xs text-gray-500"> {renderTime(new Date(item.updatedAt))}</h6>
           {item.unseenNumbers ?<div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">
             {item.unseenNumbers}
           </div> : null}
