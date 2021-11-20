@@ -34,7 +34,7 @@ export interface AddCentralCatalogueInterface {
     }
 }
 
-export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string }) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
@@ -44,7 +44,8 @@ export const fetchProducts = ({ token, organizationId, limit, offset, categoryId
         brandIds,
         ordering,
         search,
-        offset
+        offset,
+        outOfStock
     },
     headers: {
         'authorization': `Bearer ${token}`
