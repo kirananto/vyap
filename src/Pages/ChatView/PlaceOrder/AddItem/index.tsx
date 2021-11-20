@@ -173,7 +173,7 @@ export default function AddItem() {
     return (
         <div className="bg-white dark:bg-gray-900">
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
-                <Header heading="Add Item" />
+                <Header isSticky={false} heading="Add Item" />
                 <AppliedFilters />
             </div>
             <div className="px-4" style={{ height: 'calc(100vh - 12rem)' }}>

@@ -65,7 +65,7 @@ export const Home = () => {
   return (
     <div className="dark:bg-gray-900" >
       {/* <!-- * Header --> */}
-      <header className="flex flex-col gap-2 p-4 bg-white dark:bg-gray-800 shadow-md">
+      <header  className="flex flex-col gap-2 p-4 bg-white dark:bg-gray-800 shadow-md">
         <div className="flex w-full h-full ">
           <Link to="/more" className="flex flex-col w-4/5">
             <h1 className="text-lg font-semibold text-gray-600 dark:text-gray-100 font-ProductSans">

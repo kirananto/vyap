@@ -109,6 +109,7 @@ export default function Product() {
       <div className="bg-gray-100 dark:bg-gray-900">
         <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
           <Header
+           isSticky={false} 
             heading={intl.formatMessage({ id: 'global.my_products' })}
             subHeading={`${products?.length ?? 0} ${intl.formatMessage({ id: 'global.items' })}`}
           />

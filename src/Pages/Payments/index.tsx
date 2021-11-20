@@ -39,7 +39,7 @@ export default function Payments() {
     <div className="">
       {/* header */}
       <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-        <Header heading={intl.formatMessage({ id: 'global.allPayments'})} />
+        <Header  isSticky={false}  heading={intl.formatMessage({ id: 'global.allPayments'})} />
         <AppliedFilters
           openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
         />

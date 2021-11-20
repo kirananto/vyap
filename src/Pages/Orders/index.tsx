@@ -39,7 +39,7 @@ export default function Orders() {
     <div className="dark:bg-gray-900">
       {/* header */}
       <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-        <Header heading={intl.formatMessage({ id: 'global.allOrders'})} />
+        <Header  isSticky={false}  heading={intl.formatMessage({ id: 'global.allOrders'})} />
         <AppliedFilters
           openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
         />

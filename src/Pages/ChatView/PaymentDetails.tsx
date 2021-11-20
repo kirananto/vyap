@@ -21,14 +21,14 @@ export default function PaymentDetails() {
   }, [])
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Header */}
       <div className="w-full py-2 bg-white shadow dark:bg-gray-800">
           {/* Todo :: Share icon have to be added in the place of contact icon */}
-        <Header heading="Payment details" subHeading="XYZ Supplier" phoneNumber="" />
+        <Header isSticky={true} heading="Payment details" subHeading="XYZ Supplier" phoneNumber="" />
       </div>
       {/* Body */}
-      <div className="flex flex-col items-center gap-5 py-10">
+      <div className="flex flex-col items-center gap-5 py-24">
         <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
           ₹{payment?.amount}
         </h1>

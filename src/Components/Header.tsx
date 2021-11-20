@@ -2,10 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router";
 import walletSvg from "../assets/illustrations/wallet.svg"
 
-function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any }) {
+function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick, isSticky }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any, isSticky: boolean }) {
   const navigate = useNavigate()
   return (
-    <div className="flex w-11/12 pt-2 pb-2 m-auto ">
+    <div className={isSticky ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0' : "flex w-11/12 pt-2 pb-2 m-auto "}>
       {/* back icon  */}
       <div onClick={onBackClick ? onBackClick : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
         <svg
