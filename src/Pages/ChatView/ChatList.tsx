@@ -73,7 +73,7 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
         if (threads.length === 0) {
             return <div>
                 <img className="p-12 m-auto mt-12 h-96" src={ChatImg} />
-                <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200"> You do not have any transactions, Please invite a customer to start the transactions </div>
+                <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200"> You do not have any transactions, Create a transaction to get started. </div>
             </div>
         }
         return threads.map((thread) => {
