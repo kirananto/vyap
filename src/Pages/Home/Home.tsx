@@ -74,7 +74,7 @@ export const Home = () => {
                 defaultMessage="Welcome 👋"
               />
             </h1>
-            <h1 className="text-lg font-black text-transparent product_sans_bold bg-clip-text bg-gradient-to-br from-blue-500  to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
+            <h1 className="text-lg font-black text-transparent product_sans_bold bg-clip-text bg-gradient-to-br from-blue-500  to-indigo-900 dark:from-blue-200 dark:to-indigo-200 w-40 truncate">
               {user?.organization?.name}
             </h1>
           </Link>

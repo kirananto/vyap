@@ -26,7 +26,7 @@ export default function Account() {
                 <SimpleHeader heading={intl.formatMessage({ id: 'global.myAccount'})} />
             </div>
             {/* Caard Container  */}
-            <div className="flex flex-col items-center w-full gap-4 px-8 py-2 pt-20">
+            <div className="flex flex-col items-center w-full gap-4 px-8 py-20 pb-64">
                 <div 
                     className="relative w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-indigo-900"
                 >
@@ -123,7 +123,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
-                <button onClick={handleSave} className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update account details</button>
+                <button onClick={handleSave} className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update</button>
             </div>
         </div>
     )
