@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PaymentInfo, PaymentInfoIcon } from "../../../Components/PaymentInfo"
+import { PaymentInfo } from "../../../Components/PaymentInfo"
 import { format } from "date-fns";
 import { OrderInfoIcon } from "src/Components/OrderInfo";
 
@@ -9,11 +9,11 @@ function OrderDetailed({ order } : { order: any }) {
             <PaymentInfo heading="Order id" info={`#${order.id?.split('-')?.[0]}`} />
             <PaymentInfo
                 heading="Order placed on"
-                info={order?.createdAt ? format(new Date(order?.createdAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
+                info={order?.createdAt ? format(new Date(order?.createdAt), `yyyy-MM-dd HH:mm aa`) : 'Missing information'}
             />
             <PaymentInfo
                 heading="Last updated on"
-                info={order?.updatedAt ? format(new Date(order?.updatedAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
+                info={order?.updatedAt ? format(new Date(order?.updatedAt), `yyyy-MM-dd HH:mm aa`) : 'Missing information'}
             />
             <PaymentInfo
                 heading="Buyer name"

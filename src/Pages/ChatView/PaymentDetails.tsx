@@ -66,7 +66,7 @@ export default function PaymentDetails() {
             <PaymentInfo heading="Payment id" info={`#${id}`} />
             <PaymentInfo
               heading="Date of transaction"
-              info={payment?.updatedAt ? format(new Date(payment?.updatedAt), `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`) : 'Missing information'}
+              info={payment?.updatedAt ? format(new Date(payment?.updatedAt), `yyyy-MM-dd HH:mm aa`) : 'Missing information'}
             />
             <PaymentInfo heading="Payment method" info="Cash" />
             <PaymentInfo
