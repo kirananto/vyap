@@ -16,7 +16,7 @@ import AppliedFilters from "./AppliedFilters";
 import { selectProductFilters } from "./productFiltersSlice";
 import { FormattedMessage, useIntl } from "react-intl";
 import Spinner from "src/Components/Style/Spinner";
-
+import { useNavigate } from "react-router";
 
 // ! Main Component
 export default function Product() {
@@ -26,6 +26,8 @@ export default function Product() {
   const filters = useSelector(selectProductFilters)
 
   const intl = useIntl()
+  const navigate = useNavigate()
+
 
   // ! Tracking the total number of products is checked..
   // !--------------->
@@ -109,7 +111,8 @@ export default function Product() {
       <div className="bg-gray-100 dark:bg-gray-900">
         <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
           <Header
-           isSticky={false} 
+            isSticky={false}
+            backDisabled={true}
             heading={intl.formatMessage({ id: 'global.my_products' })}
             subHeading={`${products?.length ?? 0} ${intl.formatMessage({ id: 'global.items' })}`}
           />

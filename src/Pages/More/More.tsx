@@ -29,14 +29,14 @@ export default function More() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
+    //TODO Call logout api
     dispatch(setCredentials({ user: undefined, token: undefined }))
     navigate('/login')
   }
 
   return (
     <div className="bg-white dark:bg-gray-900">
-      <SimpleHeader heading={intl.formatMessage({ id: 'global.more'})} />
-      <div className="h-screen overflow-y-auto pt-8 pb-48">
+      <div className="h-screen overflow-y-auto pb-48">
         <div className="flex flex-col items-center justify-center gap-2 py-5">
           <img
             src={user?.profileImageUrl ?? profPic}

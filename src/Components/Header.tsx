@@ -2,13 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router";
 import walletSvg from "../assets/illustrations/wallet.svg"
 
-function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick, isSticky }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any, isSticky: boolean }) {
+function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick, isSticky, backDisabled }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any, isSticky: boolean, backDisabled?: boolean }) {
   const navigate = useNavigate()
   return (
     <div className={isSticky ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0' : "flex w-11/12 pt-2 pb-2 m-auto "}>
       {/* back icon  */}
       <div onClick={onBackClick ? onBackClick : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
-        <svg
+        {!backDisabled ? <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 dark:text-gray-300"
           fill="none"
@@ -21,7 +21,7 @@ function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick, i
             strokeWidth="2"
             d="M15 19l-7-7 7-7"
           />
-        </svg>
+        </svg> : null}
       </div>
 
       {/* Heading container */}
@@ -96,13 +96,13 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
 }
 
 // ! Simple Header with only one heading and back button -->
-function SimpleHeader(props: { heading: string, backFn?: any }) {
+function SimpleHeader(props: { heading: string, backFn?: any, backDisabled?: boolean }) {
   const navigate = useNavigate()
   return (
     <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0">
       {/* back icon  */}
       <div onClick={props.backFn ? props.backFn : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
-        <svg
+        {!props.backDisabled ? <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "
           fill="none"
@@ -115,7 +115,7 @@ function SimpleHeader(props: { heading: string, backFn?: any }) {
             strokeWidth="2"
             d="M15 19l-7-7 7-7"
           />
-        </svg>
+        </svg> : null}
       </div>
 
       {/* Heading container */}
