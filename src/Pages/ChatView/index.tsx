@@ -24,6 +24,7 @@ export const Payment = () => {
     if (token) {
       fetchInboxById(token, id!).then(res => {
         setInbox(res.data)
+        localStorage.setItem('isSupplier', res.data?.isSupplier)
       })
     }
   }, [paymentModalVisible, id, token])

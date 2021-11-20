@@ -52,13 +52,14 @@ export default function PlaceOrder() {
     }
 
     function handleSubmit() {
+        const isSupplier = localStorage.getItem('isSupplier')
         const validationsResult = handleValidations()
         if (validationsResult) {
             placeOrderAPI(token!, {
                 description: placeOrder.note,
                 flatDiscount: placeOrder.discount,
-                supplierId: placeOrder.orgId,
-                buyerId: user?.organizationId!,
+                supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
+                buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
                 orderItems: placeOrder.cartItems?.map(mapItem => {
                     return {
                         quantity: mapItem.quantity,

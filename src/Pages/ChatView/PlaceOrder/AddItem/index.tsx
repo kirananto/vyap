@@ -28,8 +28,10 @@ export default function AddItem() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        const isSupplier = localStorage.getItem('isSupplier')
+
         // TODO use placeOrder.orgId
-        fetchProducts({ token: token!, organizationId: placeOrder.orgId!, limit: 20, offset: 0 }).then((result: any) => {
+        fetchProducts({ token: token!, organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!, limit: 20, offset: 0 }).then((result: any) => {
             setItemList(result.data?.data ?? [])
         })
     }, [])
