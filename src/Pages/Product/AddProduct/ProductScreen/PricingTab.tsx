@@ -1,8 +1,8 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ToggleButton from "../../../../Components/ToggleButton";
 import HSNmodal from "./HSNmodal";
-import { Length, validate } from "class-validator";
+import { Min, validate } from "class-validator";
 
 import {
   selectAddProductInfo,
@@ -14,34 +14,44 @@ import {
 } from "../redux/addProductSlice";
 
 export class PostMRP {
-  @Length(1, 15)
+  @Min(1)
   mrpPrice!: number;
 }
 
 export class PostSale {
-  @Length(1, 15)
+  @Min(1)
   salePrice!: number;
 }
 
 export class PostHSN {
-  @Length(6, 6)
+  @Min(1)
   hsnNum!: number;
 }
 
-interface Props {
-  setValidation: (arg1: boolean,arg2: boolean,arg3: boolean) => void
+export class PostGST {
+  @Min(1)
+  gst!: number;
 }
 
-function PricingTab({ setValidation } : Props) {
+interface Props {
+  setValidation: (
+    arg1: boolean,
+    arg2: boolean,
+    arg3: boolean,
+    arg4: boolean
+  ) => void;
+}
+
+function PricingTab({ setValidation }: Props) {
   const [modal, setModal] = useState(false);
 
   const [isValidMRP, setIsValidMRP] = useState<boolean>(true);
   const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(true);
   const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
+  const [isValidGST, setIsValidGST] = useState<boolean>(true);
 
+  setValidation(isValidMRP, isValidSalePrice, isValidHSN, isValidGST);
 
-  setValidation(isValidMRP, isValidSalePrice, isValidHSN);
-  
   const addProductInfo = useSelector(selectAddProductInfo);
 
   const dispatch = useDispatch();
@@ -54,14 +64,15 @@ function PricingTab({ setValidation } : Props) {
     const tempVal = event.target.value;
     if (tempVal <= 100) {
       dispatch(setGstPercentage(tempVal));
+      handleValidation("gst", event.target.value);
+      console.log("gst" + event.target.value);
     }
-
   };
 
   const handleValidation = (type: string, value: number) => {
     if (type == "mrp") {
       let postMrp = new PostMRP();
-      postMrp.mrpPrice = value;
+      postMrp.mrpPrice = Number(value);
 
       validate(postMrp).then((errors) => {
         if (errors.length > 0) {
@@ -71,24 +82,33 @@ function PricingTab({ setValidation } : Props) {
           setIsValidMRP(true);
         }
       });
-    }  else if(type == "hsn"){
-         let postHSN = new PostHSN();
-         postHSN.hsnNum = value;
-   
-         validate(postHSN).then((errors) => {
-           if (errors.length > 0) {
-             console.log("validation failed. errors mrp: ", errors);
-             setIsValidHSN(false);
-           } else {
-            setIsValidHSN(true);
-           }
-         });
+    } else if (type == "hsn") {
+      let postHSN = new PostHSN();
+      postHSN.hsnNum = value * 1;
 
-    }
-    
-    else {
+      validate(postHSN).then((errors) => {
+        if (errors.length > 0) {
+          console.log("validation failed. errors mrp: ", errors);
+          setIsValidHSN(false);
+        } else {
+          setIsValidHSN(true);
+        }
+      });
+    } else if (type == "gst") {
+      let postGST = new PostGST();
+      postGST.gst = value * 1;
+      console.log("gst test");
+      validate(postGST).then((errors) => {
+        if (errors.length > 0) {
+          console.log("validation failed. errors mrp: ", errors);
+          setIsValidGST(false);
+        } else {
+          setIsValidGST(true);
+        }
+      });
+    } else {
       let postSalePrice = new PostSale();
-      postSalePrice.salePrice = value;
+      postSalePrice.salePrice = Number(value);
       validate(postSalePrice).then((errors) => {
         if (errors.length > 0) {
           console.log("validation failed. errors: ", errors);
@@ -155,11 +175,11 @@ function PricingTab({ setValidation } : Props) {
         <div className="text-base font-bold text-gray-500">Tax Info</div>
         <ToggleButton
           className="mt-4"
-          onChange={() =>{
+          onChange={() => {
             dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled));
             setIsValidHSN(!isValidHSN);
-          }
-          }
+            setIsValidGST(!isValidGST);
+          }}
           value={addProductInfo.pricing?.taxEnabled}
         />
       </div>
@@ -171,17 +191,15 @@ function PricingTab({ setValidation } : Props) {
               <p className="text-base text-gray-500">HSN Number</p>
               <div className="des-modal-btn">
                 <input
-                  onChange={(event: any) =>{
+                  onChange={(event: any) => {
                     dispatch(setHsnNumber(event.target.value));
                     handleValidation("hsn", event.target.value);
-                   }                    
-                  }
+                  }}
                   value={addProductInfo.pricing?.hsn?.hsn}
                   type="number"
                   placeholder="Enter HSN number"
                   className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                 />
-                
 
                 {/* Modal handle btn */}
                 <button
@@ -209,7 +227,7 @@ function PricingTab({ setValidation } : Props) {
                     (isValidHSN ? "hidden" : "")
                   }
                 >
-                  Invalid HSN !
+                  Enter valid HSN !
                 </span>
                 <div>
                   <HSNmodal trigger={modal} setModal={setModal} />
@@ -232,6 +250,14 @@ function PricingTab({ setValidation } : Props) {
                 <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
                   %
                 </div>
+                <span
+                  className={
+                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+                    (isValidGST ? "hidden" : "")
+                  }
+                >
+                  Enter valid GST !
+                </span>
               </div>
             </div>
           </div>
