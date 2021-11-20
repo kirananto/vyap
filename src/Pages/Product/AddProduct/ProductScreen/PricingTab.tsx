@@ -122,7 +122,7 @@ function PricingTab({ setValidation }: Props) {
 
   return (
     <div
-      className="flex flex-col gap-5 mt-2 overflow-auto"
+      className="flex flex-col gap-5 mt-2 pb-24 overflow-auto"
       style={{ height: "calc(100vh - 22rem)" }}
     >
       <div>

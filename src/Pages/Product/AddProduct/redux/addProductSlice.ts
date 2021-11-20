@@ -19,8 +19,8 @@ export interface HSNInterface {
 }
 export interface AddProductInterface {
     pricing: {
-        mrpPrice: number
-        salesPrice: number
+        mrpPrice?: number
+        salesPrice?: number
         taxEnabled: boolean
         hsn?:  HSNInterface | undefined,
         gstPercentage: number
@@ -46,8 +46,8 @@ export interface AddProductInterface {
 const initialState: AddProductInterface = {
     centralCatalogue: undefined,
     pricing: {
-        mrpPrice: 0,
-        salesPrice: 0,
+        mrpPrice: undefined,
+        salesPrice: undefined,
         taxEnabled: false,
         hsn: undefined,
         gstPercentage: 0

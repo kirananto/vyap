@@ -104,7 +104,7 @@ const handleInputChange = (
 
 const Input = (props: any, { validate }: PropsV) => {
   return (
-    <div className=" mt-2 ">
+    <div className=" mt-2  ">
       <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
         {props.label}
       </p>
@@ -237,7 +237,7 @@ function OthersTab({ setValidation }: Props) {
 
   return (
     <div
-      className="mt-2 overflow-auto"
+      className="mt-2 overflow-auto pb-36"
       style={{ height: "calc(100vh - 22rem)" }}
     >
       {!addProductInfo?.centralCatalogue?.id && (

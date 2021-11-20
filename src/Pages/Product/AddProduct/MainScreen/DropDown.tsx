@@ -32,10 +32,10 @@ function List(props: any) {
         {productImage && <img src={productImage} alt="Avatar" className="object-cover w-full h-full" />}
       </div>
       <div>
-        <div className="text-xl font-bold text-gray-700">
+        <div className="text-xl font-bold text-gray-700 dark:text-gray-200">
           {props.opt.name}
         </div>
-        <div className="text-base text-gray-400">{props.opt.description}</div>
+        <div className="text-base text-gray-400 dark:text-gray-300">{props.opt.description}</div>
         {/* <div className="text-xs font-bold text-gray-400">{props.opt.price}</div> */}
       </div>
     </div>
@@ -169,7 +169,7 @@ function DropDown(props: any) {
         className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
         placeholder="Search or create product..."
       />
-      <div className={isOpen ? "drop-open h-72" : "drop-close"}>
+      <div className={`dark:bg-gray-700 ${isOpen ? "drop-open h-72" : "drop-close"}`}>
         {isOpen
           ? renderListItems()
           : []}
