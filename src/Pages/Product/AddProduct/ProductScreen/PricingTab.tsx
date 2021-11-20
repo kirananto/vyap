@@ -45,8 +45,8 @@ interface Props {
 function PricingTab({ setValidation }: Props) {
   const [modal, setModal] = useState(false);
 
-  const [isValidMRP, setIsValidMRP] = useState<boolean>(true);
-  const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(true);
+  const [isValidMRP, setIsValidMRP] = useState<boolean>(false);
+  const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(false);
   const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
   const [isValidGST, setIsValidGST] = useState<boolean>(true);
 
@@ -145,7 +145,7 @@ function PricingTab({ setValidation }: Props) {
             (isValidMRP ? "hidden" : "")
           }
         >
-          Invalid MRP price !
+          * Enter Valid MRP price !
         </span>
       </div>
       <div>
@@ -167,7 +167,7 @@ function PricingTab({ setValidation }: Props) {
             (isValidSalePrice ? "hidden" : "")
           }
         >
-          Invalid Sale price !
+          * Enter valid Sale price !
         </span>
       </div>
       {/* Tax-info */}
@@ -227,7 +227,7 @@ function PricingTab({ setValidation }: Props) {
                     (isValidHSN ? "hidden" : "")
                   }
                 >
-                  Enter valid HSN !
+                  * Enter valid HSN !
                 </span>
                 <div>
                   <HSNmodal trigger={modal} setModal={setModal} />
@@ -256,7 +256,7 @@ function PricingTab({ setValidation }: Props) {
                     (isValidGST ? "hidden" : "")
                   }
                 >
-                  Enter valid GST !
+                 * Enter valid GST !
                 </span>
               </div>
             </div>
