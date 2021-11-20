@@ -29,7 +29,7 @@ export default function AddItem() {
 
     useEffect(() => {
         // TODO use placeOrder.orgId
-        fetchProducts({ token: token!, organizationId: user?.organizationId!, limit: 20, offset: 0 }).then((result: any) => {
+        fetchProducts({ token: token!, organizationId: placeOrder.orgId!, limit: 20, offset: 0 }).then((result: any) => {
             setItemList(result.data?.data ?? [])
         })
     }, [])
@@ -88,7 +88,7 @@ export default function AddItem() {
         if (itemList?.length === 0) {
             return <div>
                 <img className="mt-12 h-48 p-6 m-auto" src={ChatImg} />
-                <div className="text-center px-6 w-2/3 m-auto mb-8"> Sorry the seller has no products for sale. </div>
+                <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-gray-300"> Sorry the seller has no products for sale. </div>
             </div>
         }
         return itemList.map((item, index) => (<div className="flex pt-4 gap-2 justify-between border-b-2 border-gray-100 dark:border-gray-700 pb-2" key={`${index}`}>

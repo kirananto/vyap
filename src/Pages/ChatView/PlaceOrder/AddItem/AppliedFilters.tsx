@@ -10,13 +10,13 @@ export default function AppliedFilters() {
             <div className="flex justify-between py-2">
                 <div className="flex flex-col">
                     <div className="flex gap-2 items-end">
-                        <div className={'text-sm text-gray-600'}>
+                        <div className={'text-sm text-gray-600 dark:text-gray-300'}>
                             <FormattedMessage
                                 id="global.appliedFilters"
                                 defaultMessage="Applied Filters"
                             />
                         </div>
-                        <div className={'text-xs text-blue-800 cursor-pointer'}>
+                        <div className={'text-xs text-blue-800  dark:text-blue-300  cursor-pointer'}>
                             <FormattedMessage
                                 id="global.clearAll"
                                 defaultMessage="Clear All"
@@ -24,8 +24,9 @@ export default function AppliedFilters() {
                         </div>
                     </div>
                     <div className="flex gap-2 mt-2">
-                        <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 1</div>
-                        <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 2</div>
+                        <div className="flex gap-2 mt-2 text-sm text-gray-400 dark:text-gray-300"> No filters applied</div>
+                        {/* <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 1</div>
+                        <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">Category 2</div> */}
                     </div>
                 </div>
                 <div className={'flex border border-gray-200 rounded place-items-center px-4 py-1 text-gray-400 cursor-pointer text-base font-semibold'}>
