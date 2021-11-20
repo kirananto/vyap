@@ -1,6 +1,15 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "app.vyap.app.twa",
-                   "sha256_cert_fingerprints": ["F3:B1:3D:AE:94:37:25:D5:B0:05:67:65:5C:5C:D8:87:E9:54:6D:98:24:F5:2E:6D:78:02:AE:BD:49:6A:75:E5"] }
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "app.vyap.app.twa",
+            "sha256_cert_fingerprints": [
+                "6B:25:F7:55:CE:34:62:65:2B:7A:8A:21:E6:77:BA:90:A5:66:EA:4E:21:A4:8B:8F:7E:41:A5:FB:D9:AA:45:B0",
+                "F3:B1:3D:AE:94:37:25:D5:B0:05:67:65:5C:5C:D8:87:E9:54:6D:98:24:F5:2E:6D:78:02:AE:BD:49:6A:75:E5"
+            ]
+        }
     }
 ]
