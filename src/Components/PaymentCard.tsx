@@ -15,6 +15,10 @@ export interface paymentObject {
   status: number;
   initiatedByUserId: string;
   initiatedByOrgId: string;
+  senderOrgId?: string
+  receiverId?: string
+  receiver?: any
+  senderOrg?: any
 }
 
 export default function PaymentCard({ className, thread }: { className: string, thread: any }) {

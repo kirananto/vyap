@@ -11,7 +11,7 @@ import { format } from "date-fns";
 export default function PaymentDetails() {
   const textSize = { fontSize: "12px" };
   const [payment, setPayment] = useState<paymentObject | undefined>()
-  const { token } = useSelector(selectCredentials)
+  const { user, token } = useSelector(selectCredentials)
   const { id } = useParams()
 
   useEffect(() => {
@@ -20,12 +20,17 @@ export default function PaymentDetails() {
     })
   }, [])
 
+  function getCompanyName() {
+    const company = user?.organizationId === payment?.senderOrgId ? payment?.receiver : payment?.senderOrg
+    return company?.name
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Header */}
       <div className="w-full py-2 bg-white shadow dark:bg-gray-800">
           {/* Todo :: Share icon have to be added in the place of contact icon */}
-        <Header isSticky={true} heading="Payment details" subHeading="XYZ Supplier" phoneNumber="" />
+        <Header isSticky={true} heading="Payment details" subHeading={getCompanyName()} phoneNumber="" />
       </div>
       {/* Body */}
       <div className="flex flex-col items-center gap-5 py-24">
@@ -70,12 +75,12 @@ export default function PaymentDetails() {
             />
             <PaymentInfo heading="Payment method" info="Cash" />
             <PaymentInfo
-              heading="Shop Name"
-              info="OMart Super Market(+701232134)"
+              heading="Paid by"
+              info={payment?.senderOrg?.name}
             />
             <PaymentInfo
-              heading="Supplier name"
-              info="Cadbury Sellers(+91824568535)"
+              heading="Recieved by"
+              info={payment?.receiver?.name}
             />
             <PaymentInfoIcon heading="Status" info="Payment Completed" />
           </div>

@@ -13,7 +13,7 @@ export default function OrderDetails() {
 
     const [order, setOrder] = useState<any | undefined>()
 
-    const { token } = useSelector(selectCredentials)
+    const { user, token } = useSelector(selectCredentials)
     const { id } = useParams()
 
     useEffect(() => {
@@ -22,12 +22,17 @@ export default function OrderDetails() {
         })
     }, [])
 
+    function getCompanyName() {
+        const company = user?.organizationId === order?.supplierId ? order?.buyer : order?.supplier
+        return company?.name
+      }
+    
     return (
         <div className="min-h-screen bg-gray-100 overflow-auto dark:bg-gray-900">
             {/* Header */}
             <div className="w-full py-2 bg-white shadow dark:bg-gray-800">
                 {/* Todo :: Share icon have to be added in the place of contact icon */}
-                <Header  isSticky={true}  heading="Order details" subHeading="XYZ Supplier" shareDetails="bb" />
+                <Header  isSticky={true}  heading="Order details" subHeading={getCompanyName()} shareDetails="bb" />
             </div>
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-24">
