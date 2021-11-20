@@ -54,8 +54,8 @@ export default function AddPaymentModal({
       note,
       method,
       status: paymentStatus.SUCCESS,
-      senderOrgId: user?.organizationId!,
-      receiverId: receiverId!,
+      receiverId: user?.organizationId!,
+      senderOrgId: receiverId!,
     })
       .then((result) => {
         setIsSuccess(true);
@@ -86,7 +86,7 @@ export default function AddPaymentModal({
         ) : (
           <>
             <h2 className="text-left p-2 text-2xl mt-2 text-gray-700 dark:text-gray-200">
-              Add Payment
+              Add Payment you recieved.
             </h2>
             <div className="p-2">
               <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
