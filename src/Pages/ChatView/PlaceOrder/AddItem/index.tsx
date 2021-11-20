@@ -28,7 +28,7 @@ export default function AddItem() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const isSupplier = localStorage.getItem('isSupplier')
+        const isSupplier = localStorage.getItem('isSupplier') === 'true'
 
         // TODO use placeOrder.orgId
         fetchProducts({ token: token!, outOfStock: false, organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!, limit: 20, offset: 0 }).then((result: any) => {
