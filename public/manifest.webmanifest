@@ -4,7 +4,7 @@
   "start_url": "/",
   "background_color": "#fff",
   "description": "Vyap App",
-  "theme_color": "#3730A3",
+  "theme_color": "#1f2937",
   "display": "standalone",
   "orientation": "portrait",
   "lang": "English",
