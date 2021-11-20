@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { fetchCentralProductImages } from "src/API/products.axios";
+import { fetchCentralProductImages, fetchCentralProducts } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 import "./Drop.css";
@@ -44,11 +44,19 @@ function List(props: any) {
 
 function DropDown(props: any) {
   const [value, setValue] = useState("");
-  const [opts, setOpts] = useState(props.options || []);
+  const [options, setOptions] = useState<any[]>([])
 
   const [isOpen, setIsOpen] = useState(false);
   const [isValidProduct, setIsValidProduct] = useState<boolean>(true);
+  const { token } = useSelector(selectCredentials)
 
+
+  useEffect(() => {
+    fetchCentralProducts(token!, 100, 0, value).then((result: any) => {
+      console.log('result', result.data?.data)
+      setOptions(result.data?.data)
+    })
+  }, [value])
 
   const navigate = useNavigate()
 
@@ -57,30 +65,20 @@ function DropDown(props: any) {
     setValue(text);
   }
 
-  function getSearchedOpts() {
-    let searched = props.options.filter((a: any) => a.name.indexOf(value) != -1);
-
-    return searched
-  }
 
   function add(e: any) {
 
     let post = new Post();
     post.productName = value;
 
-    let key = e.nativeEvent.key || "Enter";
-    if (key == "Enter") {
-      setOpts([...opts, { name: value, value }]);
-    }
-    search({ target: { value } });
-    props.onSelect({
-      name: value
-    })
-
     validate(post).then(errors => {
       if (errors.length > 0) {
         console.log("validation failed. errors: ", errors);
         setIsValidProduct(false);
+
+        props.onSelect({
+          name: value
+        })
       } else {
         setIsValidProduct(true);
         console.log("validation succeed");
@@ -99,7 +97,7 @@ function DropDown(props: any) {
   }
 
   function renderListItems() {
-    const listItems = getSearchedOpts()
+    const listItems = options
     if (listItems?.length === 0) {
       return <div className="p-4">
         <button

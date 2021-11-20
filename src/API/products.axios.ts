@@ -68,12 +68,13 @@ export const patchProductById = ({ token, id, data }: { token: string; id?: stri
     }
 })
 
-export const fetchCentralProducts = (token: string, limit: number, offset: number) => axiosClient({
+export const fetchCentralProducts = (token: string, limit: number, offset: number, search?: string) => axiosClient({
     url: `/central-catalogue`,
     method: 'GET',
     params: {
         limit,
         offset,
+        filter: search ? `name||$contL||${search}` : undefined
     },
     headers: {
         'authorization': `Bearer ${token}`
