@@ -31,7 +31,7 @@ export default function Login() {
     })
       .catch((error: any) => {
         console.log('error verifying otp', error.message)
-        setError(`Please enter valid OTP, If you don't have an Account please proceed to signup`)
+        setError(`Please enter valid otp,If you don't have an account please proceed to sign up`)
         // User couldn't sign in (bad verification code?)
         // ...
       })
@@ -44,7 +44,7 @@ export default function Login() {
       setCurrentPage(1)
       phoneNumberRef.current = phoneNumber
     }).catch(error => {
-      if(error?.response?.data?.message) {
+      if (error?.response?.data?.message) {
         setError('Please enter a valid phone number')
       } else {
         setError('Please try again later')
@@ -54,7 +54,10 @@ export default function Login() {
 
   function renderForm() {
     switch (currentPage) {
-      case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => setCurrentPage(0)} error={error} />
+      case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => {
+        setError('')
+        setCurrentPage(0)
+      }} error={error} />
       default: return <PhoneForm text="Log in" onPressLogin={onPressLogin} error={error} />
     }
   }

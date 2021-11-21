@@ -26,7 +26,7 @@ export default function SignupStep1() {
     })
       .catch((error: any) => {
         console.log('error verifying otp', error.message)
-        setError('Could not verify otp')
+        setError('Please enter a valid OTP')
         // User couldn't sign in (bad verification code?)
         // ...
       })
@@ -49,7 +49,10 @@ export default function SignupStep1() {
 
   function renderForm() {
     switch (currentPage) {
-      case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => setCurrentPage(0)} error={error} />
+      case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => {
+        setError('')
+        setCurrentPage(0)
+      }} error={error} />
       default: return <PhoneForm text={"Sign up"} onPressLogin={onPressLogin} error={error} />
     }
   }

@@ -70,7 +70,7 @@ export default function SignupStage1() {
             </h2>
           </a>
           <h1 className="mt-8 text-xl font-semibold text-gray-700 tracking-ringtighter sm:text-3xl title-font">
-            Signup with Vyap to succeed.  
+            Signup to Vyap to succeed.  
           </h1>
          {renderForm()}
           <hr className="w-full my-6 border-indigo-100" />
