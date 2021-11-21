@@ -13,6 +13,12 @@ body {
     user-select: none;
 }
 
+@media print {
+    .showinprint {
+        display: block !important;
+    }
+}
+
 body:focus {
     outline: none; 
 }
