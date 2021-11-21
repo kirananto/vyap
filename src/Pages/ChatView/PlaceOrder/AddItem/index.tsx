@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from 'src/Components/Header'
 import AppliedFilters from './AppliedFilters'
 import Button from 'src/Components/Style/Button'
@@ -10,31 +10,50 @@ import { fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../Product/assets/no_data.svg'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import { selectAddItemsproductFilters } from './addProductFiltersSlice'
+import ModalViewer from 'src/Components/Style/ModalViewer'
+import { FilterPopup } from './FilterPopup'
 
 export default function AddItem() {
 
     const [itemList, setItemList] = React.useState<any[]>([])
     const [selectedItems, setSelectedItems] = React.useState<any>([])
+    const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+
     const [isDropOpen, setIsDropOpen] = React.useState<{
         isAdd: boolean,
         isOpen: any
     } | undefined>(undefined)
 
+    const filters = useSelector(selectAddItemsproductFilters)
+    const [searchValue, setSearchValue] = useState<any>(undefined);
+
+
     const { token, user } = useSelector(selectCredentials)
 
     const placeOrder = useSelector(selectPlaceOrderInfo)
+    const isSupplier = localStorage.getItem('isSupplier') === 'true'
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
-        const isSupplier = localStorage.getItem('isSupplier') === 'true'
-
         // TODO use placeOrder.orgId
-        fetchProducts({ token: token!, outOfStock: false, organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!, limit: 20, offset: 0 }).then((result: any) => {
+        fetchProducts({ 
+            token: token!,
+             outOfStock: false, 
+             organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!, 
+             limit: 20, 
+             offset: 0,
+             search: searchValue,
+             ordering: filters?.sorting,
+             categoryIds: filters?.categories?.length ? `${filters?.categories?.map((item: { id: string }) => item.id).join(',')}` : undefined,
+             brandIds: filters?.brands?.length ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}` : undefined
+            
+            }).then((result: any) => {
             setItemList(result.data?.data ?? [])
         })
-    }, [])
+    }, [token, isSupplier, user?.organizationId, placeOrder.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting, searchValue])
 
     function onSubmit() {
         //TODO Add to dispatch
@@ -98,8 +117,8 @@ export default function AddItem() {
             {console.log(item)}
             <div className="flex gap-4 items-center">
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
-                        {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
-                    </div>
+                    {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
+                </div>
                 <div className="flex flex-col">
                     <div className="flex text-xl font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
                     <div className="flex font-bold text-xs text-gray-300">#213r423423423423423</div>
@@ -176,8 +195,17 @@ export default function AddItem() {
         <div className="bg-white min-h-screen dark:bg-gray-900">
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
                 <Header isSticky={false} heading="Add Item" />
-                <AppliedFilters />
+                <AppliedFilters
+                    setSearchValue={setSearchValue}
+                    searchValue={searchValue}
+                    onFilterClick={() => setfilterPopupOpen(true)}
+                />
             </div>
+            <ModalViewer
+                body={<FilterPopup />}
+                isOpen={filterPopupOpen}
+                onClose={() => setfilterPopupOpen(false)}
+            />
             <div className="px-4" style={{ height: 'calc(100vh - 12rem)' }}>
                 {renderItems()}
             </div>

@@ -4,7 +4,7 @@ import { Footer } from "../../Components/Footer";
 import "./assets/Product.css";
 import ProductCard from "./ProductCard";
 import { fetchProducts } from "src/API/products.axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials } from "../Login/credentialsSlice";
 import { FilterPopup } from "./Popups/FilterPopup";
 import { MorePopup } from "./Popups/MorePopup";
@@ -13,10 +13,9 @@ import { Link } from "react-router-dom";
 import ChatImg from './assets/no_data.svg'
 import ModalViewer from "src/Components/Style/ModalViewer";
 import AppliedFilters from "./AppliedFilters";
-import { selectProductFilters } from "./productFiltersSlice";
+import { clearAll, selectProductFilters } from "./productFiltersSlice";
 import { FormattedMessage, useIntl } from "react-intl";
 import Spinner from "src/Components/Style/Spinner";
-import { useNavigate } from "react-router";
 
 // ! Main Component
 export default function Product() {
@@ -26,8 +25,7 @@ export default function Product() {
   const filters = useSelector(selectProductFilters)
 
   const intl = useIntl()
-  const navigate = useNavigate()
-
+  const dispatch = useDispatch()
 
   // ! Tracking the total number of products is checked..
   // !--------------->
@@ -85,6 +83,13 @@ export default function Product() {
     })
   }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue, isSearchMoreOpen, reRenderCounter])
 
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearAll())
+    }
+  }, [])
+  
   function renderProducts() {
     if (loading) {
       return<div className="p-12 mt-12 text-center dark:text-gray-100 grid">

@@ -1,0 +1,56 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCentralProductCategories } from "src/API/products.axios";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { selectAddItemsproductFilters, categoriesCheckbox } from "./addProductFiltersSlice";
+
+interface CategoryName {
+  name: String;
+  item: any
+}
+const Category = (props: CategoryName) => {
+
+  const dispatch = useDispatch()
+  const filters = useSelector(selectAddItemsproductFilters)
+
+  const isChecked = !!filters?.categories?.find(findItem => findItem.id === props?.item?.id)
+
+  function tickCheckBox() {
+    dispatch(categoriesCheckbox(props.item))
+  }
+
+  return (
+    <div className="flex items-center gap-2 ml-4">
+      <input type="checkbox" checked={isChecked} onChange={tickCheckBox} />
+      <label htmlFor="" className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+        {props.name}
+      </label>
+    </div>
+  );
+};
+
+interface FilterCategories {
+  heading: String;
+  type: 'brand' | 'category'
+}
+export default function FilterCategory(props: FilterCategories) {
+  const [items, setItems] = useState<any[]>([])
+  const { token } = useSelector(selectCredentials)
+
+  useEffect(() => {
+    fetchCentralProductCategories(token!, 10, 0).then((result: any) => {
+      setItems(result?.data?.data?.filter((item: any) => item?.name))
+    })
+  }, [])
+
+  return (
+    <div>
+      <h1 className="mb-1 text-base font-semibold text-gray-500 dark:text-gray-300">
+        {props.heading}
+      </h1>
+      <div className="flex flex-col gap-1 mt-2">
+        {items?.map(item => <Category key={item.id} item={item} name={item.name} />)}
+      </div>
+    </div>
+  );
+}
