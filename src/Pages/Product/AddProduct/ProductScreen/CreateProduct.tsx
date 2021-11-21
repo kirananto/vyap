@@ -58,8 +58,14 @@ function CreateProduct() {
           );
         }
       });
+    } else {
+      if(addProductInfo?.others?.productImage?.length > 0) {
+        setProductImage(
+          getImageURL(addProductInfo?.others?.productImage[0]?.imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)
+        );
+      }
     }
-  }, []);
+  }, [addProductInfo?.others?.productImage?.length]);
 
   const doValidate = (
     isValidMRP: boolean,
