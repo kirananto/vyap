@@ -173,7 +173,7 @@ export default function AddItem() {
     }
 
     return (
-        <div className="bg-white dark:bg-gray-900">
+        <div className="bg-white min-h-screen dark:bg-gray-900">
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
                 <Header isSticky={false} heading="Add Item" />
                 <AppliedFilters />

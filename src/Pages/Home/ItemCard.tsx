@@ -10,7 +10,7 @@ export function ItemCard({ item }: IProps) {
 
   function renderTime (date: Date) {
     if(isToday(date)) {
-      return format(date, 'HH:mm aa')
+      return format(date, 'hh:mm aa')
     }
     if(isYesterday(date)) {
       return 'Yesterday'
