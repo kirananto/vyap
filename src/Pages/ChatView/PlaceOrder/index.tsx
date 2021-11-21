@@ -66,7 +66,9 @@ export default function PlaceOrder() {
                     return {
                         quantity: mapItem.quantity,
                         purchasePrice: parseFloat(mapItem.rate),
-                        productId: mapItem.id
+                        productId: mapItem.id,
+                        aliasName: mapItem.aliasName,
+                        mrpPrice: parseFloat(mapItem.mrpPrice)
                     }
                 })
             }).then(result => {
