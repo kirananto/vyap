@@ -15,7 +15,7 @@ export interface HSNInterface {
     id: string
     description: string
     gstPercentage: number
-    hsn: string
+    hsn: number
 }
 export interface AddProductInterface {
     pricing: {

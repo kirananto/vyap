@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
-import { getHSNs } from "src/API/hsn.axios";
+import { createIfNotExists, getHSNs, getHSNsClearTax } from "src/API/hsn.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { HSNInterface, setHsnNumber } from "../redux/addProductSlice";
 import "./HSNmodal.css";
@@ -10,7 +10,7 @@ import "./HSNmodal.css";
 function HSNmodal(props: any) {
   const { token } = useSelector(selectCredentials)
   const intl = useIntl()
-  const [searchValue, setSearchValue] = useState(undefined)
+  const [searchValue, setSearchValue] = useState('')
   const [hsnCodes, setHSNCodes] = useState<HSNInterface[]>([])
 
   const dispatch = useDispatch()
@@ -20,17 +20,24 @@ function HSNmodal(props: any) {
   };
 
   useEffect(() => {
-    getHSNs({ token: token!, limit: 10, offset: 0, search: searchValue}).then(result => {
-      setHSNCodes(result.data?.data)
+    getHSNsClearTax({ search: searchValue }).then(result => {
+      setHSNCodes(result.data?.results?.[0]?.hits.map((mapItem: any) => ({
+        chapter: mapItem?.chapter_name,
+        description: mapItem.product_description,
+        gstPercentage: parseFloat(mapItem?.product_rate?.replace('%', '')),
+        hsn: mapItem?.product_hsn_code
+      })))
     })
   }, [searchValue])
 
-  function selectHSN (value: HSNInterface ) {
-    dispatch(setHsnNumber(value))
+  async function selectHSN(value: HSNInterface) {
+    const newVal = await createIfNotExists(token!, value)
+    console.log('newVal', newVal)
+    dispatch(setHsnNumber(newVal))
     props.setModal(false)
   }
 
-  
+
   return props.trigger ? (
     <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-gray-700 dark:border-gray-800">
       <div className="popup-inner">
@@ -50,7 +57,7 @@ function HSNmodal(props: any) {
         </button>
         <h3 className="font-bold text-gray-500 dark:text-gray-200">HSN Number</h3>
         <div className="text-gray-400 dark:text-gray-300 mt-2 text-xs font-light">
-        <strong className="font-bold text-gray-600 dark:text-gray-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information. We have sourced the HSN code information from the master codes published on the NIC's GST e-Invoice system. There may be variations due to updates by the government. Kindly note that we are not responsible for any wrong information. If you need information about the "Effective Date" for every GST or cess rates, then please visit the CBIC website.
+          <strong className="font-bold text-gray-600 dark:text-gray-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information. We have sourced the HSN code information from the master codes published on the NIC's GST e-Invoice system. There may be variations due to updates by the government. Kindly note that we are not responsible for any wrong information. If you need information about the "Effective Date" for every GST or cess rates, then please visit the CBIC website.
         </div>
         <div className="relative flex w-full mt-8">
           <input
@@ -64,12 +71,12 @@ function HSNmodal(props: any) {
         </div>
         <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
           {hsnCodes.map((mapItem, index) => (
-          <div onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
-            <div className="text-gray-700 dark:text-gray-300">{mapItem.chapter} </div>
-            <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>
-            <div className="mt-2 grid grid-cols-2 text-gray-700 dark:text-gray-300">
-              <div>HSN: {mapItem.hsn} </div> 
-              <div>Rate: {mapItem.gstPercentage}% </div>
+            <div onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
+              <div className="text-gray-700 dark:text-gray-300">{mapItem.chapter} </div>
+              <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>
+              <div className="mt-2 grid grid-cols-2 text-gray-700 dark:text-gray-300">
+                <div>HSN: {mapItem.hsn} </div>
+                <div>Rate: {mapItem.gstPercentage}% </div>
               </div>
             </div>
           ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ToggleButton from "../../../../Components/ToggleButton";
 import HSNmodal from "./HSNmodal";
@@ -120,6 +120,30 @@ function PricingTab({ setValidation }: Props) {
     }
   };
 
+  useEffect(() => {
+    handleValidation("mrp", addProductInfo.pricing?.mrpPrice!);
+  }, [addProductInfo.pricing?.mrpPrice])
+
+  useEffect(() => {
+    handleValidation("sale", addProductInfo.pricing?.salesPrice!);
+  }, [addProductInfo.pricing?.salesPrice])
+
+  useEffect(() => {
+    if (!addProductInfo.pricing?.taxEnabled) {
+      setIsValidHSN(true);
+      setIsValidGST(true);
+    }
+  }, [addProductInfo.pricing?.taxEnabled])
+
+  useEffect(() => {
+    handleValidation("hsn", addProductInfo.pricing?.hsn?.hsn!);
+  }, [addProductInfo.pricing?.hsn?.hsn])
+
+  useEffect(() => {
+    handleValidation("gst", addProductInfo.pricing?.hsn?.gstPercentage ??
+      addProductInfo.pricing?.gstPercentage);
+  }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage])
+
   return (
     <div
       className="flex flex-col gap-5 mt-2 pb-24 overflow-auto"
@@ -130,7 +154,6 @@ function PricingTab({ setValidation }: Props) {
         <input
           onChange={(event: any) => {
             dispatch(setMrpPrice(event.target.value));
-            handleValidation("mrp", event.target.value);
           }}
           value={addProductInfo.pricing?.mrpPrice}
           type="number"
@@ -153,7 +176,6 @@ function PricingTab({ setValidation }: Props) {
         <input
           onChange={(event: any) => {
             dispatch(setSalesPrice(event.target.value));
-            handleValidation("sale", event.target.value);
           }}
           value={addProductInfo.pricing?.salesPrice}
           type="number"
@@ -177,8 +199,6 @@ function PricingTab({ setValidation }: Props) {
           className="mt-4"
           onChange={() => {
             dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled));
-            setIsValidHSN(!isValidHSN);
-            setIsValidGST(!isValidGST);
           }}
           value={addProductInfo.pricing?.taxEnabled}
         />
@@ -193,7 +213,6 @@ function PricingTab({ setValidation }: Props) {
                 <input
                   onChange={(event: any) => {
                     dispatch(setHsnNumber(event.target.value));
-                    handleValidation("hsn", event.target.value);
                   }}
                   value={addProductInfo.pricing?.hsn?.hsn}
                   type="number"
@@ -256,7 +275,7 @@ function PricingTab({ setValidation }: Props) {
                     (isValidGST ? "hidden" : "")
                   }
                 >
-                 * Enter valid GST !
+                  * Enter valid GST !
                 </span>
               </div>
             </div>

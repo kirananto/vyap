@@ -121,7 +121,7 @@ function DropDown(props: any) {
           + (isValidProduct ? 'hidden' : '')}>
           Invalid product name !
         </span>
-        <div className="text-center">No existing products found, add this as a new product by Clicking Add Button.
+        <div className="text-center dark:text-gray-300">No existing products found, add this as a new product by Clicking Add Button.
         </div>
       </div>
     }
