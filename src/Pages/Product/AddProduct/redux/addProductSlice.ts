@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { BrandInterface } from '../ProductScreen/BrandModal';
 
 interface CentralCatalogueInterface {
-    barCode: string
-    brandId: string
+    barCode?: string
+    brandId?: string
     description: string
-    hsnId: string
-    id: string
-    name: string
+    hsnId?: string
+    id?: string
+    name?: string
 }
 
 export interface HSNInterface {
@@ -44,7 +44,7 @@ export interface AddProductInterface {
 }
 
 const initialState: AddProductInterface = {
-    centralCatalogue: undefined,
+    centralCatalogue: { description: '' },
     pricing: {
         mrpPrice: undefined,
         salesPrice: undefined,

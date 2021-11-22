@@ -102,7 +102,7 @@ const handleInputChange = (
   }
 };
 
-const Input = (props: any, { validate }: PropsV) => {
+const Input = (props: any) => {
   return (
     <div className=" mt-2  ">
       <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
@@ -111,9 +111,6 @@ const Input = (props: any, { validate }: PropsV) => {
       <input
         onChange={(event: any) => {
           handleInputChange(event, props.label, props.dispatch);
-          if (props.label == "Description") {
-            props.validate("desc", event.target.value);
-          }
         }}
         type="text"
         value={props.value}
@@ -198,6 +195,7 @@ function OthersTab({ setValidation }: Props) {
 
   const handleValidation = (type: string, value: string) => {
     if (type == "desc") {
+      console.log('validate description')
       let postDesc = new PostDescription();
       postDesc.description = value;
 
@@ -235,6 +233,18 @@ function OthersTab({ setValidation }: Props) {
     }
   };
 
+  useEffect(() => {
+    handleValidation("brand", addProductInfo?.others?.brand?.name!);
+  }, [addProductInfo?.others?.brand?.name])
+
+  useEffect(() => {
+    handleValidation("cat", addProductInfo?.others?.category?.name!);
+    }, [addProductInfo?.others?.category?.name])
+
+    useEffect(() => {
+      handleValidation("desc", addProductInfo?.centralCatalogue?.description!);
+      }, [addProductInfo?.centralCatalogue?.description])
+  
   return (
     <div
       className="mt-2 overflow-auto pb-36"
@@ -293,7 +303,6 @@ function OthersTab({ setValidation }: Props) {
         {!addProductInfo?.centralCatalogue?.id && (
           <>
             <Input
-              validate={handleValidation}
               label="Description"
               placeholder="Enter Description"
               dispatch={dispatch}
@@ -325,7 +334,6 @@ function OthersTab({ setValidation }: Props) {
                 dispatch(
                   setCategory({ id: undefined, name: event.target.value })
                 );
-                handleValidation("cat", event.target.value);
               }}
               value={addProductInfo?.others?.category?.name}
               type="text"
@@ -418,7 +426,6 @@ function OthersTab({ setValidation }: Props) {
                   dispatch(
                     setBrand({ id: undefined, name: event.target.value })
                   );
-                  handleValidation("brand", event.target.value);
                 }}
                 value={addProductInfo?.others?.brand?.name}
                 type="text"

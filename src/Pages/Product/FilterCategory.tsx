@@ -38,7 +38,7 @@ export default function FilterCategory(props: FilterCategories) {
   const { token } = useSelector(selectCredentials)
 
   useEffect(() => {
-    fetchCentralProductCategories(token!, 10, 0).then((result: any) => {
+    fetchCentralProductCategories(token!, 20, 0).then((result: any) => {
       setItems(result?.data?.data?.filter((item: any) => item?.name))
     })
   }, [])

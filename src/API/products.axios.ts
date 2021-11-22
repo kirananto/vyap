@@ -88,7 +88,7 @@ export const fetchCentralProductCategories = (token: string, limit: number, offs
     params: {
         limit,
         offset,
-        search
+        search,
     },
     headers: {
         'authorization': `Bearer ${token}`
