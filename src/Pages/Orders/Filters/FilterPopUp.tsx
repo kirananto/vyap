@@ -98,8 +98,8 @@ export function FilterPopup() {
       </div>
       <div className="flex flex-col gap-1 mt-2">
         <Sorting sortingName="Latest first" value="latest" />
-        <Sorting sortingName="Price-Low to High" value="price-high-low" />
-        <Sorting sortingName="Price-High to Low" value="price-low-high" />
+        <Sorting sortingName="Price-Low to High" value="price-low-high" />
+        <Sorting sortingName="Price-High to Low" value="price-high-low" />
       </div>
     </div>
   );
