@@ -24,7 +24,7 @@
     "@reduxjs/toolkit": "1.6.2",
     "@snowpack/plugin-webpack": "^3.0.0",
     "axios": "^0.24.0",
-    "class-validator": "^0.13.1",
+    "class-validator": "^0.13.2",
     "date-fns": "2.26.0",
     "file-saver": "^2.0.5",
     "get-user-locale": "^1.4.0",
