@@ -38,7 +38,7 @@ const Card = ({ title, description, isSelected, image, onSelect }: CardInterface
       {/* === */}
       <div className="flex flex-col custom-width-para-text ml-2">
         <h1 className="text-lg font-bold text-gray-600 dark:text-gray-200">{title}</h1>
-        <p className="text-xs text-gray-400 dark:text-gray-300">
+        <p className="text-xs text-gray-500 dark:text-gray-300 w-32 break-words	">
           {description}
         </p>
         {/* <img src="" alt="" /> */}
@@ -103,7 +103,7 @@ export default function SignupStepTwo() {
   }
 
   return (
-    <div className="flex flex-col items-start w-full h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex flex-col items-start w-full min-h-screen bg-gray-100 dark:bg-gray-900 pb-48">
       <div className="w-11/12 mx-auto ">
         <div className="flex items-center justify-start mt-32 mb-5">
           <img style={logoStyle} className="w-24 m--5" src={vyapLogo} alt="" />
