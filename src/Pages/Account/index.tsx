@@ -80,14 +80,14 @@ export default function Account() {
                 </div>
                 <div className="w-full">
                     <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 dark:text-gray-300">
-                        Pin Code
+                        Pin code
                     </label>
                     <input
                         name="pin"
                         value={user?.organization?.pinCode}
                         onChange={(event) => dispatch(setPinCode(event?.target.value))}
                         id="pin"
-                        placeholder="Pin Code"
+                        placeholder="Pin code"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                     />
                 </div>

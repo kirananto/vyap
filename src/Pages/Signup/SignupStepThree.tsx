@@ -127,7 +127,7 @@ export default function SignupStepTwo() {
           {categories.map(mapItem => <Card isSelected={mapItem.id === signup.category} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
         </div>
       </div>
-      <SimpleFooter btnName="Create account." onClick={handleSubmit} />
+      <SimpleFooter btnName="Create account" onClick={handleSubmit} />
     </div>
   );
 }
