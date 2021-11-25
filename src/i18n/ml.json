@@ -102,5 +102,18 @@
             "type": 0,
             "value": "പ്രിന്റ്"
         }
+    ],
+    
+    "action.printOne": [
+        {
+            "type": 0,
+            "value": "പ്രിന്റ്"
+        }
+    ],
+    "action.close": [
+        {
+            "type": 0,
+            "value": "ക്ലോസ്"
+        }
     ]
 }
