@@ -110,13 +110,13 @@ export const Home = () => {
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      <button onClick={() => setAddCustomerVisible(true)} className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
+      {user?.organization?.isSupplier && <button onClick={() => setAddCustomerVisible(true)} className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         <span className="pr-2">+</span>
         <FormattedMessage
           id="action.addCustomer"
           defaultMessage="Add Customer"
         />
-      </button>
+      </button>}
       {addCustomerVisible && <AddCustomerModal
         isVisible={addCustomerVisible}
         toggleVisibility={() => setAddCustomerVisible(!addCustomerVisible)}

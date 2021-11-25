@@ -55,6 +55,10 @@
         "type": 0,
         "value": "Help and Support"
     }],
+    "global.switch": [{
+        "type": 0,
+        "value": "Switch to Wholesaler Account"
+    }],
     "global.offer": [{
         "type": 0,
         "value": "Offer Management"

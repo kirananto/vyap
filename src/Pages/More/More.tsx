@@ -10,6 +10,7 @@ import {
   HelpIcon,
   OffersManagementIcon,
   LogoutIcon,
+  SwitchIcon,
 } from "./Icons/Payment";
 import Links from "./Links";
 import Tag from "./Tag";
@@ -67,11 +68,11 @@ export default function More() {
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="#" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          {user?.organization?.isSupplier && <NavLink to="#" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <StockManagementIcon />
             <Links linkName={intl.formatMessage({ id: 'global.stockManagement'})} />
             <Tag tagName={intl.formatMessage({ id: 'global.comingSoon' }) } />
-          </NavLink>
+          </NavLink>}
           {/* ----- */}
           {/* ----- */}
           <NavLink to="/my-account" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
@@ -90,13 +91,18 @@ export default function More() {
             <HelpIcon />
             <Links linkName={intl.formatMessage({ id: 'global.help'})} />
           </a>
+          
+          {user?.organization?.isSupplier === false && <a href="mailto:mail@vyap.app" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+            <SwitchIcon />
+            <Links linkName={intl.formatMessage({ id: 'global.switch'})} />
+          </a>}
           {/* ----- */}
           {/* ----- */}
-          <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          {user?.organization?.isSupplier && <div className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <OffersManagementIcon />
             <Links linkName={intl.formatMessage({ id: 'global.offer'})} />
             <Tag tagName={intl.formatMessage({ id: 'global.comingSoon'})} />
-          </div>
+          </div>}
           {/* ----- */}
           {/* ----- */}
           <div onClick={handleLogout} className="cursor-pointer flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
