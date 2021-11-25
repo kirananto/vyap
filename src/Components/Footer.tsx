@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { useLocation } from 'react-router'
 import Button from "./Style/Button";
 import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 
 function Footer() {
   const location = useLocation()
+  const { user } = useSelector(selectCredentials)
+
   const isActive = (paths: string[]) => {
     console.log('location.pathname', location.pathname)
     console.log('paths', paths)
@@ -50,7 +54,7 @@ function Footer() {
 
       {/* Nav-Item-2 */}
 
-      <Link
+      {user?.organization?.isSupplier && <Link
         to="/my-products"
 
         className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/my-products']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}      >
@@ -76,7 +80,7 @@ function Footer() {
             />
           </figcaption>
         </figure>
-      </Link>
+      </Link>}
 
       {/* Nav-Item-3 */}
 
