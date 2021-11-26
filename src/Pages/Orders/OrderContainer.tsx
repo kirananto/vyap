@@ -21,6 +21,10 @@ export default function OrderContainer({
             <div className="mt-4">Loading...</div>
         </div>
     }
+
+    const onMinimize = () => {
+        setIsExpanded(undefined);
+    }
     return (<>
         {orders.map((item, index) => (
             <div className={`${index === orders.length - 1 ? '' : 'border-b border-gray-300'}`} key={`${index}`}>
@@ -57,7 +61,7 @@ export default function OrderContainer({
                         </div>)}
                     </div>
                 </div>
-                {isExpanded === index && <OrderContainerDetail order={item} />}
+                {isExpanded === index && <OrderContainerDetail order={item} minimize={onMinimize} />}
             </div>))}
     </>
     )

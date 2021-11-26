@@ -106,5 +106,17 @@
             "type": 0,
             "value": "Print All"
         }
+    ],
+    "action.printOne": [
+        {
+            "type": 0,
+            "value": "Print"
+        }
+    ],
+    "action.close": [
+        {
+            "type": 0,
+            "value": "Close"
+        }
     ]
 }
