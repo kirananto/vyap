@@ -1,25 +1,25 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { checkIfUserExists } from 'src/API/invite.axios'
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { currentPageEnum } from '.'
-import { Length, validate } from 'class-validator';
-import { useState } from 'react';
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+import { checkIfUserExists } from "src/API/invite.axios";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { currentPageEnum } from ".";
+import { Length, validate } from "class-validator";
+import { useState } from "react";
 
 interface IProps {
-  phoneNumber: string
-  openingBalance: number
-  setOpeningBalance: any
-  setPhoneNumber: any
-  toggleVisibility: () => void
-  setCurrentPage: any
-  setIsExisting: any
-  isExisting: any
+  phoneNumber: string;
+  openingBalance: number;
+  setOpeningBalance: any;
+  setPhoneNumber: any;
+  toggleVisibility: () => void;
+  setCurrentPage: any;
+  setIsExisting: any;
+  isExisting: any;
 }
 
 export class Post {
   @Length(10, 12)
-  phoneNumber!: string;
+  phoneNumber!: string | null;
 }
 
 export default function AddCustomerStep1({
@@ -30,36 +30,39 @@ export default function AddCustomerStep1({
   setPhoneNumber,
   setCurrentPage,
   setIsExisting,
-  isExisting
+  isExisting,
 }: IProps) {
-  const { token } = useSelector(selectCredentials)
+  const { token } = useSelector(selectCredentials);
   const [isValid, setIsValid] = useState<boolean>(true);
+  const phoneRef = useRef<HTMLInputElement>(null);
 
-
-  const handleSubmit = () => {
-
+  const handleValidation = (action: string) => {
     let post = new Post();
-    post.phoneNumber = phoneNumber;
+    post.phoneNumber = phoneRef.current && phoneRef.current.value;
 
-    validate(post).then(errors => {
+    validate(post).then((errors) => {
       if (errors.length > 0) {
-          console.log("validation failed. errors: ", errors);
-          setIsValid(false);
+        console.log("validation failed. errors: ", errors);
+        setIsValid(false);
       } else {
-          setIsValid(true);
-          console.log("validation succeed");
-          checkIfUserExists(token!, phoneNumber).then(result => {
-            setIsExisting(true)
-            setCurrentPage(currentPageEnum.PREVIEW)
-      
-          }).catch(error => {
-            setIsExisting(false)
-            setCurrentPage(currentPageEnum.NEW_CUSTOMER_STEP)
-            // TODO user doesn't exist
-          })
+        setIsValid(true);
+        console.log("validation succeed");
+
+        if (action == "submit") {
+          checkIfUserExists(token!, phoneNumber)
+            .then((result) => {
+              setIsExisting(true);
+              setCurrentPage(currentPageEnum.PREVIEW);
+            })
+            .catch((error) => {
+              setIsExisting(false);
+              setCurrentPage(currentPageEnum.NEW_CUSTOMER_STEP);
+              // TODO user doesn't exist
+            });
+        }
       }
     });
-  }
+  };
 
   return (
     <form
@@ -77,21 +80,29 @@ export default function AddCustomerStep1({
           type="number"
           name="tel"
           value={phoneNumber}
-          onChange={(event) => setPhoneNumber(event?.target.value)}
+          onChange={(event) => {
+            setPhoneNumber(event?.target.value);
+            handleValidation("inputChange");
+          }}
           id="tel"
+          ref={phoneRef}
           placeholder="Your phone number"
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
         />
       </div>
 
-      <span className={"flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " + (isValid ? 'hidden' : '')}>
-			  Invalid mobile number !
-		  </span>
+      <span
+        className={
+          "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+          (isValid ? "hidden" : "")
+        }
+      >
+        * Enter valid mobile number !
+      </span>
 
       <div className="mt-2 text-xs text-gray-400">
         We'll never share your phone number with anyone else.
       </div>
-
 
       <div className="mt-4">
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
@@ -109,12 +120,19 @@ export default function AddCustomerStep1({
       </div>
       {/* <!-- btn popup --> */}
       <div className="flex my-8 p-2 gap-2">
-        <button onClick={() => toggleVisibility()} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200">
+        <button
+          onClick={() => toggleVisibility()}
+          className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200"
+        >
           Cancel
         </button>
-        <button onClick={() => handleSubmit()} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+        <button
+          onClick={() => handleValidation("submit")}
+          className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+        >
           Next
         </button>
       </div>
-    </form>)
+    </form>
+  );
 }
