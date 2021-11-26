@@ -16,6 +16,7 @@ import AppliedFilters from "./AppliedFilters";
 import { clearAll, selectProductFilters } from "./productFiltersSlice";
 import { FormattedMessage, useIntl } from "react-intl";
 import Spinner from "src/Components/Style/Spinner";
+import useQueryParam from "src/useQueryParams";
 
 // ! Main Component
 export default function Product() {
@@ -29,20 +30,24 @@ export default function Product() {
 
   // ! Tracking the total number of products is checked..
   // !--------------->
-  const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+  const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>("filterPopupOpen");
+
   // !------------------->
-  const [isMoreOpen, setisMoreOpen] = useState<any>(undefined);
+  const [isMoreOpen, setisMoreOpen] = useQueryParam<boolean>("isMoreOpen");
+  const [isMoreItem, setIsMoreItem] = useState<any>(undefined)
+  const [isSearchMoreOpen, setisSearchMoreOpen] = useQueryParam<boolean>("isSearchMoreOpen");
+
   const [searchValue, setSearchValue] = useState<any>(undefined);
   const [reRenderCounter, setCounter] = useState(1)
   //  !--------Search-bar-more---------->
-  const [isSearchMoreOpen, setisSearchMoreOpen] = useState(false);
   const [selectedProduct, setselectedProduct] = useState<any[]>([])
 
   // ! For second modal using first modal
   // !------------------------>
   //! ---------------->
   function toggleMore(item?: any) {
-    setisMoreOpen(item);
+    setisMoreOpen(item === undefined ? false : true);
+    setIsMoreItem(item)
   }
   // function toggleModal() {
   //   setIsOpen(!isOpen);
@@ -142,7 +147,7 @@ export default function Product() {
       {/* Filter Popup */}
       <ModalViewer
         body={<FilterPopup />}
-        isOpen={filterPopupOpen}
+        isOpen={filterPopupOpen!}
         onClose={() => setfilterPopupOpen(false)}
       />
       <ModalViewer
@@ -153,7 +158,7 @@ export default function Product() {
             setisSearchMoreOpen(false)
           }}
         />}
-        isOpen={isSearchMoreOpen}
+        isOpen={isSearchMoreOpen!}
         onClose={() => {
           setselectedProduct([])
           setisSearchMoreOpen(false)
@@ -161,11 +166,17 @@ export default function Product() {
       />
       <ModalViewer
         body={<MorePopup
-          item={isMoreOpen}
-          onClose={() => setisMoreOpen(undefined)}
+          item={isMoreItem}
+          onClose={() => {
+            setIsMoreItem(undefined)
+            setisMoreOpen(false)
+          }}
         />}
-        isOpen={isMoreOpen}
-        onClose={() => setisMoreOpen(undefined)}
+        isOpen={isMoreOpen!}
+        onClose={() => {
+          setIsMoreItem(undefined)
+          setisMoreOpen(false)
+        }}
       />
       <Link to="/add-product" className="text-white text-md rounded-full h-12 add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         <FormattedMessage

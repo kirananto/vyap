@@ -12,11 +12,12 @@ import AddCustomerModal from "./AddCustomerModal";
 import Spinner from "src/Components/Style/Spinner";
 import { FormattedMessage, useIntl } from "react-intl";
 import { selectCustomerInfo, setCustomers, setCustomerTotal } from "./customersSlice";
+import useQueryParam from "src/useQueryParams";
 
 export const Home = () => {
   const customer = useSelector(selectCustomerInfo)
   const dispatch = useDispatch()
-  const [addCustomerVisible, setAddCustomerVisible] = React.useState(false)
+  const [addCustomerVisible, setAddCustomerVisible] = useQueryParam<any>("addCustomer");
   const [loading, setLoading] = React.useState(customer.customers?.length === 0);
   const [paginationParams, serPaginationParams] = React.useState({
     page: 1,
@@ -110,7 +111,9 @@ export const Home = () => {
       </div>
       {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
-      {user?.organization?.isSupplier && <button onClick={() => setAddCustomerVisible(true)} className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
+      {user?.organization?.isSupplier && <button onClick={() => {
+        setAddCustomerVisible('true')
+      }} className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700">
         <span className="pr-2">+</span>
         <FormattedMessage
           id="action.addCustomer"
@@ -118,8 +121,10 @@ export const Home = () => {
         />
       </button>}
       {addCustomerVisible && <AddCustomerModal
-        isVisible={addCustomerVisible}
-        toggleVisibility={() => setAddCustomerVisible(!addCustomerVisible)}
+        isVisible={addCustomerVisible === 'true'}
+        toggleVisibility={() => {
+          setAddCustomerVisible(addCustomerVisible === 'true' ? 'false' : 'true')
+        }}
       />}
       <Footer />
     </div>

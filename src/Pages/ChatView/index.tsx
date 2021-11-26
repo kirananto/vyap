@@ -10,11 +10,13 @@ import type { InboxType } from './inbox.type'
 import { selectCredentials } from "../Login/credentialsSlice";
 import AddPaymentModal from "./AddPaymentModal";
 import { setOrgId } from "./PlaceOrder/placeOrderSlice";
+import useQueryParam from "src/useQueryParams";
 
 export const Payment = () => {
   const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
-  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<any>("paymentModalVisible");
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
