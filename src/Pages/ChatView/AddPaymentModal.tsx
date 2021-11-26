@@ -95,7 +95,7 @@ export default function AddPaymentModal({
               <select
                 value={method}
                 onChange={(event) =>
-                  setMethod(event?.target.value as unknown as paymentMethod)
+                  setMethod(parseInt(event?.target.value, 10) as unknown as paymentMethod)
                 }
                 className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                 name="payment"
