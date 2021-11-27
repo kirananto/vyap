@@ -13,12 +13,13 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectAddItemsproductFilters } from './addProductFiltersSlice'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FilterPopup } from './FilterPopup'
+import useQueryParam from 'src/useQueryParams'
 
 export default function AddItem() {
 
     const [itemList, setItemList] = React.useState<any[]>([])
     const [selectedItems, setSelectedItems] = React.useState<any>([])
-    const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+    const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>("filterPopupOpen");
 
     const [isDropOpen, setIsDropOpen] = React.useState<{
         isAdd: boolean,
@@ -203,7 +204,7 @@ export default function AddItem() {
             </div>
             <ModalViewer
                 body={<FilterPopup />}
-                isOpen={filterPopupOpen}
+                isOpen={filterPopupOpen!}
                 onClose={() => setfilterPopupOpen(false)}
             />
             <div className="px-4" style={{ height: 'calc(100vh - 12rem)' }}>

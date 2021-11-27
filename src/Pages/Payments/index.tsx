@@ -11,12 +11,13 @@ import { selectPaymentFilters } from "./Filters/paymentFiltersSlice";
 import { ExportAll } from "./Options/ExportAll";
 import { PrintAll } from "./Options/PrintAll";
 import { useIntl } from "react-intl";
+import useQueryParam from "src/useQueryParams";
 
 export default function Payments() {
   const { token } = useSelector(selectCredentials);
   const [payments, setPayments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+  const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>("filterPopupOpen");
   const filters = useSelector(selectPaymentFilters);
   const intl = useIntl()
 
@@ -56,7 +57,7 @@ export default function Payments() {
 
       <ModalViewer
         body={<FilterPopup />}
-        isOpen={filterPopupOpen}
+        isOpen={filterPopupOpen!}
         onClose={() => setfilterPopupOpen(false)}
       />
       {/* Footer */}

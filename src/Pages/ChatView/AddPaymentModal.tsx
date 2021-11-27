@@ -23,7 +23,7 @@ export default function AddPaymentModal({
 }: IProps) {
   const { token, user } = useSelector(selectCredentials);
   const [method, setMethod] = React.useState<paymentMethod>(paymentMethod.CASH);
-  const [amount, setAmount] = React.useState(0);
+  const [amount, setAmount] = React.useState<number | undefined>(undefined);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [note, setNote] = React.useState("");
 
@@ -50,7 +50,7 @@ export default function AddPaymentModal({
   const handleSubmit = () => {
     // DO validations before making API call
     createPayment(token!, {
-      amount,
+      amount: amount!,
       note,
       method,
       status: paymentStatus.SUCCESS,
@@ -95,7 +95,7 @@ export default function AddPaymentModal({
               <select
                 value={method}
                 onChange={(event) =>
-                  setMethod(event?.target.value as unknown as paymentMethod)
+                  setMethod(parseInt(event?.target.value, 10) as unknown as paymentMethod)
                 }
                 className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                 name="payment"
@@ -128,7 +128,7 @@ export default function AddPaymentModal({
                   (isValidAmount ? "hidden" : "")
                 }
               >
-                Invalid amount !
+                Please enter a amount !
               </span>
             </div>
             {/* <!-- Textarea --> */}
@@ -152,7 +152,7 @@ export default function AddPaymentModal({
                 Cancel
               </button>
               <button
-                onClick={() => onValidate("submit", amount , handleSubmit)}
+                onClick={() => onValidate("submit", amount! , handleSubmit)}
                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
               >
                 Save Payment
