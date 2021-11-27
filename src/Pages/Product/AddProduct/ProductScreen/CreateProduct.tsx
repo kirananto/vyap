@@ -73,7 +73,7 @@ function CreateProduct() {
     isValidHSN: boolean,
     isValidGST: boolean
   ): void => {
-    if (isValidMRP && isValidSale && isValidHSN && isValidGST) setIsValid(true);
+    if (isValidMRP && isValidSale && (addProductInfo?.pricing?.taxEnabled ? (isValidHSN && isValidGST) : true)) setIsValid(true);
     else setIsValid(false);
   };
 
@@ -111,7 +111,7 @@ function CreateProduct() {
           imageName: "string",
         },
         images: addProductInfo?.others?.productImage,
-        hsnId: addProductInfo?.pricing.hsn?.id,
+        hsnId: addProductInfo?.pricing?.taxEnabled ? addProductInfo?.pricing.hsn?.id : undefined,
         brandId: addProductInfo?.others?.brand?.id ?? undefined,
         brand: addProductInfo?.others?.brand?.id
           ? undefined
