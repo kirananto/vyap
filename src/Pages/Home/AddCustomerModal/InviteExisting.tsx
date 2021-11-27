@@ -134,7 +134,7 @@ export default function InviteExisting({
           }}
           id="tel"
           ref={refBizName}
-          placeholder="Name of the shop or Business"
+          placeholder="Name of the shop or business"
           className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
         />
         <span
@@ -174,7 +174,7 @@ export default function InviteExisting({
       </div>
       <div className="mt-4">
         <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
-          Pincode
+          Pin code
         </label>
         <input
           type="number"
@@ -195,7 +195,7 @@ export default function InviteExisting({
             (isValidPincode ? "hidden" : "")
           }
         >
-          * Enter valid pincode
+          * Enter valid pin code
         </span>
       </div>
       {/* <!-- btn popup --> */}
