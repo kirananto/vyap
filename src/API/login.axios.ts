@@ -25,3 +25,13 @@ export const verifyPhone = (phone: string, otp: string) => axiosClient({
         otp
     }
 })
+
+
+
+export const logOutAPI = (token: string) => axiosClient({
+    url: '/auth/logout',
+    method: 'POST',
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
