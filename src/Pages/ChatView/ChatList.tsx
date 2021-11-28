@@ -8,7 +8,8 @@ import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import Spinner from 'src/Components/Style/Spinner';
 import { useParams } from 'react-router';
 
-const limit = 10
+//TODO use virtualization over here
+const limit = 1000
 
 enum ThreadTypeEnum {
     'PAYMENT' = 0,
@@ -37,20 +38,22 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
     const messagesEndRef = useRef<any>(null)
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef.current?.scrollIntoView()
 
     }
 
 
     useEffect(() => {
-        setTimeout(scrollToBottom, 500)
+        if (threads?.length > 2) {
+            setTimeout(scrollToBottom, 100)
+        }
     }, [threads?.length]);
 
 
     useEffect(() => {
         setError(false)
         fetchThreadsById({ token: token!, inboxId: inboxId!, offset: ((currentPage - 1) * limit), limit }).then((res: any) => {
-            setThreads(res.data.data)
+            setThreads(res.data.data?.reverse())
             localStorage.setItem('inboxId', `${id}`)
             setLoading(false)
         }).catch(error => {
@@ -89,8 +92,8 @@ export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toR
     }
 
     return (
-        <div 
-          className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
+        <div
+            className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
             {renderChats()}
             <div ref={messagesEndRef} />
             {/* <p className="text-sm font-medium text-center text-gray-500">Today</p> */}
