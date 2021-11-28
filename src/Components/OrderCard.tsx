@@ -1,20 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavLink  } from "react-router-dom";
 import { format } from 'date-fns'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector,  } from "react-redux";
+import { useParams } from 'react-router';
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { fetchOrderAPI } from "src/API/order.axios";
+import { setOrderInfo, ThreadInterface } from "src/Pages/ChatView/chatListSlice";
 
+export interface orderInterface {
+  totalAmount: string
+  flatDiscount: string
+  numberOfItems: number
+  id: string
+}
 
-export default React.memo(function OrderCard({ className, thread }: { className: string, thread: any }) {
-  const [order, setOrder] = useState<any | undefined>()
+export default function OrderCard({ className, thread }: { className: string, thread: ThreadInterface }) {
   const { token } = useSelector(selectCredentials)
+
+  const { id } = useParams()
+
+  const order = thread.order
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     fetchOrderAPI(token!, thread.meta).then(result => {
-      setOrder(result.data)
+      dispatch(setOrderInfo({ inboxId: id!, threadId: thread?.id, order: result.data }))
     })
-  }, [])
+  }, [order?.id])
 
   return (
     <div className={`flex ${className} w-full`}>
@@ -71,4 +84,4 @@ export default React.memo(function OrderCard({ className, thread }: { className:
       </NavLink>
     </div>
   );
-}, (prevProps, nextProps) => prevProps.thread.id === nextProps.thread.id)
+}

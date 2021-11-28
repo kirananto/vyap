@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchInboxById, fetchThreadsById } from 'src/API/inbox.axios';
+import type { orderInterface } from 'src/Components/OrderCard';
+import type { paymentObject } from 'src/Components/PaymentCard';
 import type { Organization } from '../Login/credentialsSlice';
 
 interface chatListInterface {
@@ -39,6 +41,9 @@ export interface ThreadInterface {
     msg: string;
     type: ThreadTypeEnum;
     meta: string;
+    payment?: paymentObject
+    order?: orderInterface
+
 }
 
 const initialState: chatListInterface = {}
@@ -52,7 +57,7 @@ export const fetchThreadsByInbox = createAsyncThunk(
             id: id,
             isLoading: false,
             error: false,
-            threads: response.data?.data
+            threads: response.data?.data as ThreadInterface[]
         }
     }
 )
@@ -69,6 +74,14 @@ export const chatListInterface = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
+        setPaymentInfo: (state, action: PayloadAction<{ inboxId: string, threadId: string, payment: paymentObject }>) => {
+            const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
+            state[action.payload.inboxId].threads[threadIndex].payment = action.payload.payment
+        },
+        setOrderInfo: (state, action: PayloadAction<{ inboxId: string, threadId: string, order: orderInterface }>) => {
+            const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
+            state[action.payload.inboxId].threads[threadIndex].order = action.payload.order
+        },
         clearAll: () => {
             return {}
         },
@@ -78,7 +91,16 @@ export const chatListInterface = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(fetchThreadsByInbox.fulfilled, (state, action) => {
             // Add user to the state array
-            state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload };
+            if(state[action.payload.id]?.threads) {
+                const existingItems = state[action.payload.id].threads
+                const newItems = action.payload.threads
+                state[action.payload.id].threads = newItems.map(item => {
+                    const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
+                    return { ...existingItem, ...item }
+                })
+            } else {
+                state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
+            }
         }),
         builder.addCase(fetchThreadsByInbox.pending, (state, action: any) => {
             // Add user to the state array
@@ -116,6 +138,8 @@ export const chatListInterface = createSlice({
 });
 
 export const {
+    setOrderInfo,
+    setPaymentInfo,
     clearAll
 } = chatListInterface.actions;
 

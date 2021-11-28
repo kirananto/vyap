@@ -62,12 +62,12 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
         return chats?.threads?.map((thread) => {
             const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
             if (thread.type === ThreadTypeEnum.PAYMENT) {
-                return <PaymentCard className={layout} thread={thread} />
+                return <PaymentCard key={thread.id} className={layout} thread={thread} />
             }
             if (thread.type === ThreadTypeEnum.ORDER) {
-                return <OrderCard className={layout} thread={thread} />
+                return <OrderCard key={thread.id} className={layout} thread={thread} />
             }
-            return <div>{thread.msg}</div>
+            return <div key={thread.id}>{thread.msg}</div>
         }).reverse()
     }
 
