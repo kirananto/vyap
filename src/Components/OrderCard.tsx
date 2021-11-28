@@ -6,7 +6,7 @@ import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { fetchOrderAPI } from "src/API/order.axios";
 
 
-export default function OrderCard({ className, thread }: { className: string, thread: any }) {
+export default React.memo(function OrderCard({ className, thread }: { className: string, thread: any }) {
   const [order, setOrder] = useState<any | undefined>()
   const { token } = useSelector(selectCredentials)
 
@@ -71,4 +71,4 @@ export default function OrderCard({ className, thread }: { className: string, th
       </NavLink>
     </div>
   );
-}
+}, (prevProps, nextProps) => prevProps.thread.id === nextProps.thread.id)

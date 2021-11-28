@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import profPic from "src/assets/icons/profile/profile-icon.svg"
 import { useIntl } from "react-intl";
 import { logOutAPI } from "src/API/login.axios";
+import { clearAll } from "../ChatView/chatListSlice";
 
 export default function More() {
   const { user, token } = useSelector(selectCredentials)
@@ -38,6 +39,8 @@ export default function More() {
     }).catch(error => {  
       dispatch(setCredentials({ user: undefined, token: undefined }))
       navigate('/login')
+    }).finally(() => {
+      dispatch(clearAll())
     })
   }
 

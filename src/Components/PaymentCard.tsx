@@ -21,7 +21,7 @@ export interface paymentObject {
   senderOrg?: any
 }
 
-export default function PaymentCard({ className, thread }: { className: string, thread: any }) {
+export default React.memo(function PaymentCard({ className, thread }: { className: string, thread: any }) {
   const [payment, setPayment] = useState<paymentObject | undefined>()
   const { token } = useSelector(selectCredentials)
 
@@ -84,4 +84,4 @@ export default function PaymentCard({ className, thread }: { className: string, 
       </NavLink>
     </div>
   );
-}
+}, (prevProps, nextProps) => prevProps.thread.id === nextProps.thread.id)

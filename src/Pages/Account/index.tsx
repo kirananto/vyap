@@ -9,6 +9,7 @@ import { IsEmail, IsString, Length, validate } from 'class-validator'
 
 
 export class Organization {
+    
     @Length(3, 64)
     @IsString()
     name?: string;
