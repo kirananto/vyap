@@ -1,99 +1,81 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PaymentCard from "../../Components/PaymentCard";
 import OrderCard from "../../Components/OrderCard";
-import { fetchThreadsById } from "../../API/inbox.axios";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
 import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import Spinner from 'src/Components/Style/Spinner';
+import { fetchThreadsByInbox, selectChatList, ThreadTypeEnum } from './chatListSlice';
 import { useParams } from 'react-router';
 
-const limit = 10
+//TODO use virtualization over here
+const limit = 1000
 
-enum ThreadTypeEnum {
-    'PAYMENT' = 0,
-    'ORDER' = 1,
-    'MESSAGE' = 2
-}
-export default function ChatList({ inboxId, toRefresh }: { inboxId?: string, toRefresh: boolean }) {
+export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string, toRefresh: boolean }) {
     const { user, token } = useSelector(selectCredentials)
-    const [loading, setLoading] = React.useState(true);
-    const [error, setError] = React.useState(false)
-    const [threads, setThreads] = useState<{
-        id: string;
-        createdAt: string;
-        updatedAt: string;
-        inboxHash: string;
-        senderId: string;
-        msg: string;
-        type: ThreadTypeEnum;
-        meta: string;
-    }[]>([]);
     const [currentPage] = useState(1)
+    const chatList = useSelector(selectChatList)
 
+    const dispatch = useDispatch()
 
     const { id } = useParams()
+    const chats = chatList[`${id}`]
+
 
     const messagesEndRef = useRef<any>(null)
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef.current?.scrollIntoView()
 
     }
 
 
     useEffect(() => {
-        setTimeout(scrollToBottom, 500)
-    }, [threads?.length]);
+        if (chats?.threads?.length > 2) {
+            setTimeout(scrollToBottom, 100)
+        }
+    }, [chats?.threads?.length]);
 
 
     useEffect(() => {
-        setError(false)
-        fetchThreadsById({ token: token!, inboxId: inboxId!, offset: ((currentPage - 1) * limit), limit }).then((res: any) => {
-            setThreads(res.data.data)
-            localStorage.setItem('inboxId', `${id}`)
-            setLoading(false)
-        }).catch(error => {
-            if (inboxId) {
-                setError(true)
-            }
-        })
-    }, [toRefresh, token, inboxId, currentPage])
+        if(inboxHash) {
+            dispatch(fetchThreadsByInbox({ token: token!, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
+        }
+    }, [toRefresh, token, inboxHash, currentPage])
 
     function renderChats() {
-        if (error) {
+        if (chats?.error) {
             return <div className="p-12 mt-12 text-center dark:text-gray-100"> Error loading chats...</div>
         }
-        if (loading) {
+        if (chats?.isLoading && chats?.threads?.length < 1) {
             return <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
                 <Spinner />
                 <div className="mt-4">Loading...</div>
             </div>
         }
-        if (threads.length === 0) {
+        if (chats?.threads?.length <= 1) {
             return <div>
-                <img className="p-12 m-auto mt-12 h-96" src={ChatImg} />
+                <img className="p-12 m-auto mt-6 h-72" src={ChatImg} />
                 <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200"> You do not have any transactions, Create a transaction to get started. </div>
             </div>
         }
-        return threads.map((thread) => {
+        return chats?.threads?.map((thread) => {
             const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
             if (thread.type === ThreadTypeEnum.PAYMENT) {
-                return <PaymentCard className={layout} thread={thread} />
+                return <PaymentCard key={thread.id} className={layout} thread={thread} />
             }
             if (thread.type === ThreadTypeEnum.ORDER) {
-                return <OrderCard className={layout} thread={thread} />
+                return <OrderCard key={thread.id} className={layout} thread={thread} />
             }
-            return <div>{thread.msg}</div>
-        })
+            return <div key={thread.id}>{thread.msg}</div>
+        }).reverse()
     }
 
     return (
-        <div 
-          className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
+        <div
+            className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
             {renderChats()}
             <div ref={messagesEndRef} />
-            {/* <p className="text-sm font-medium text-center text-gray-500">Today</p> */}
         </div>
     )
 }

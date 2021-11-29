@@ -58,7 +58,7 @@ export const Home = () => {
         <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200"> You do not have any transactions, Please invite a customer to start the transactions </div>
       </div>
     }
-    return customer?.customers?.map((item, index) => (
+    return customer?.customers?.filter(filterItem => filterItem.recipient?.name?.toLowerCase()?.includes(paginationParams.search?.toLowerCase())).map((item, index) => (
       <ItemCard item={item} key={index} />
     ))
   }

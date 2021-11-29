@@ -14,6 +14,7 @@ import paymentFiltersSlice from 'src/Pages/Payments/Filters/paymentFiltersSlice'
 import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice';
 import customersSlice from 'src/Pages/Home/customersSlice';
 import addItemsproductFiltersSlice from 'src/Pages/ChatView/PlaceOrder/AddItem/addProductFiltersSlice';
+import chatListSlice from 'src/Pages/ChatView/chatListSlice';
 
 
 const rootReducer = combineReducers({
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     addItemsproductFilters: addItemsproductFiltersSlice,
     paymentFilters: paymentFiltersSlice,
     orderFilters: orderFiltersSlice,
-    customers: customersSlice
+    customers: customersSlice,
+    chatList: chatListSlice
 })
 const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 'placeorder', 'paymentFilters', 'orderFilters', 'addproduct', 'productFilters', 'addItemsproductFilters'] }
 const persistedReducer = persistReducer(persistConfig, rootReducer)

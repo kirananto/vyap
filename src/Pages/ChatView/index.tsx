@@ -6,31 +6,32 @@ import { useEffect } from "react";
 import { fetchInboxById } from "../../API/inbox.axios";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import type { InboxType } from './inbox.type'
 import { selectCredentials } from "../Login/credentialsSlice";
 import AddPaymentModal from "./AddPaymentModal";
 import { setOrgId } from "./PlaceOrder/placeOrderSlice";
 import useQueryParam from "src/useQueryParams";
+import { fetchInboxAction, selectChatList } from "./chatListSlice";
 
 export const Payment = () => {
-  const [inbox, setInbox] = useState<InboxType>();
   const { token } = useSelector(selectCredentials)
   const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<any>("paymentModalVisible");
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const chatList = useSelector(selectChatList)
 
   const { id } = useParams()
+  const inbox = chatList[`${id}`]
   useEffect(() => {
     console.log('------------------------changed-----------')
     if (token) {
-      fetchInboxById(token, id!).then(res => {
-        setInbox(res.data)
-        localStorage.setItem('isSupplier', res.data?.isSupplier)
-      })
+      dispatch(fetchInboxAction({ token: token!, id: id!}))
     }
   }, [paymentModalVisible, id, token])
 
+  useEffect(() => {
+    localStorage.setItem('isSupplier', `${inbox?.isSupplier}`)
+  }, [inbox?.isSupplier])
   return (
     <div className="overflow-y-auto dark:bg-gray-900">
       {/* header */}
@@ -39,7 +40,7 @@ export const Payment = () => {
         <PaymentBottomHeader amount={inbox?.outstandingAmount} />
       </div>
       {/* body */}
-      <ChatList inboxId={inbox?.inboxHash} toRefresh={paymentModalVisible}  />
+      <ChatList inboxHash={inbox?.inboxHash} toRefresh={paymentModalVisible}  />
       {/* Footer */}
       <div className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-gray-800" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
         {inbox?.isSupplier ? <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button> : null}

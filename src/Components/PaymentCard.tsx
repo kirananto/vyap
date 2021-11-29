@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { format } from 'date-fns'
 import { fetchPaymentById } from "../API/payment.axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials } from "../Pages/Login/credentialsSlice";
 import { NavLink  } from "react-router-dom";
+import { setPaymentInfo, ThreadInterface } from "src/Pages/ChatView/chatListSlice";
+import { useParams } from 'react-router';
 
 export interface paymentObject {
   id: string;
@@ -21,15 +23,19 @@ export interface paymentObject {
   senderOrg?: any
 }
 
-export default function PaymentCard({ className, thread }: { className: string, thread: any }) {
-  const [payment, setPayment] = useState<paymentObject | undefined>()
+export default function PaymentCard({ className, thread }: { className: string, thread: ThreadInterface }) {
   const { token } = useSelector(selectCredentials)
+
+  const { id } = useParams()
+
+  const payment = thread.payment
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetchPaymentById(token!, thread.meta).then(result => {
-      setPayment(result.data)
+        dispatch(setPaymentInfo({ inboxId: id!, threadId: thread?.id, payment: result.data }))
     })
-  }, [])
+  }, [payment?.id])
 
   return (
     <div className={`flex ${className} w-full `}>

@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface customersInterface {
-    customers: {
-        
-    }[];
+    customers: any[];
     total: number
 }
 
