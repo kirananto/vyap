@@ -17,7 +17,7 @@
     "cli:formatjs": "formatjs"
   },
   "dependencies": {
-    "@emotion/react": "^11.6.0",
+    "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@formatjs/cli": "^4.4.0",
     "@material-ui/core": "^4.12.3",
