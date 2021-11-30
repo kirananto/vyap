@@ -73,22 +73,28 @@ function PaymentBottomHeader({ amount }: { amount?: string }) {
   const fontSize = {
     fontSize: "11.5px",
   };
+
+  const parsedAmount = parseFloat(`${amount ?? 0}`)
+  
   return (
     <div className="flex items-center justify-center w-full mt-1">
       {/* card container */}
-      <div className="relative flex w-11/12 h-auto bg-gray-100 dark:bg-gray-700 border border-gray-400 rounded-md">
+      <div className={`relative flex w-11/12 h-auto bg-gray-100 dark:bg-gray-700 border ${parsedAmount == 0 ? 'border-green-400' : 'border-gray-400'} rounded-md`}>
         <div className="flex flex-col w-4/5 p-2 pl-3">
-          <h6 style={fontSize} className="font-bold text-gray-800 dark:text-gray-300">
-            {parseFloat(`${amount ?? 0}`) > 0 ? 'You have to pay' : 'You get'}
-          </h6>
-          <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-200">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>
+          {parsedAmount !== 0 && <h6 style={fontSize} className="font-bold text-gray-800 dark:text-gray-300">
+            {parsedAmount > 0 ? 'You have to pay' : 'You get'}
+          </h6>}
+          {parsedAmount !== 0 && <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-200">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>}
+          {parsedAmount == 0 && <h1 className={`text-md font-semibold ${parsedAmount == 0 ? 'text-green-800 dark:text-green-400' : 'text-gray-700 dark:text-gray-200'}`}>Dues Settled</h1>}
         </div>
         <div className="flex justify-end w-5/12 pr-4 ">
-          <img
+          {parsedAmount !== 0 ? <img
             className="self-end w-20 "
             src={walletSvg}
             alt=""
-          />
+          /> : <svg xmlns="http://www.w3.org/2000/svg" className="mt-1 text-green-400 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>}
         </div>
       </div>
     </div>
