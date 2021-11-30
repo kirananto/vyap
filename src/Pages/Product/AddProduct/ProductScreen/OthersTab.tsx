@@ -26,12 +26,12 @@ export class PostDescription {
 }
 
 export class PostCategory {
-  @Length(1, 15)
+  @Length(1, 30)
   category!: string;
 }
 
 export class PostBrand {
-  @Length(1, 15)
+  @Length(1, 30)
   brand!: string;
 }
 
@@ -195,7 +195,7 @@ function OthersTab({ setValidation }: Props) {
 
   const handleValidation = (type: string, value: string) => {
     if (type == "desc") {
-      console.log('validate description')
+      console.log("validate description");
       let postDesc = new PostDescription();
       postDesc.description = value;
 
@@ -235,16 +235,16 @@ function OthersTab({ setValidation }: Props) {
 
   useEffect(() => {
     handleValidation("brand", addProductInfo?.others?.brand?.name!);
-  }, [addProductInfo?.others?.brand?.name])
+  }, [addProductInfo?.others?.brand?.name]);
 
   useEffect(() => {
     handleValidation("cat", addProductInfo?.others?.category?.name!);
-    }, [addProductInfo?.others?.category?.name])
+  }, [addProductInfo?.others?.category?.name]);
 
-    useEffect(() => {
-      handleValidation("desc", addProductInfo?.centralCatalogue?.description!);
-      }, [addProductInfo?.centralCatalogue?.description])
-  
+  useEffect(() => {
+    handleValidation("desc", addProductInfo?.centralCatalogue?.description!);
+  }, [addProductInfo?.centralCatalogue?.description]);
+
   return (
     <div
       className="mt-2 overflow-auto pb-36"
