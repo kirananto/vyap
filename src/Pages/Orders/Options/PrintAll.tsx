@@ -104,7 +104,7 @@ export const PrintAll = ({ apiData }: IProps) => {
           <div>
             <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
               <table className="min-w-full">
-                <thead className="text-gray-200 font-bold">
+                <thead className="text-gray-300 font-bold">
                   <tr className="p-5">
                     <td>Order_ID</td>
                     <td>Date</td>
