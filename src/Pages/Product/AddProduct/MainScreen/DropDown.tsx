@@ -72,7 +72,7 @@ function DropDown(props: any) {
   const myRef = useRef<HTMLInputElement>(null);
 
   const handleClickOutside = (e: any) => {
-    if (myRef?.current?.contains(e.target)) {
+    if (!myRef?.current?.contains(e.target)) {
       setIsOpen(false);
     }
   };
