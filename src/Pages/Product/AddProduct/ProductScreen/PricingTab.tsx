@@ -46,7 +46,11 @@ function PricingTab({ setValidation }: Props) {
   const [modal, setModal] = useState(false);
 
   const [isValidMRP, setIsValidMRP] = useState<boolean>(false);
+  const [changedMRP, setChangedMRP] = useState<boolean>(false);
+
   const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(false);
+  const [changedSP, setChangedSP] = useState<boolean>(false);
+  
   const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
   const [isValidGST, setIsValidGST] = useState<boolean>(true);
 
@@ -121,12 +125,14 @@ function PricingTab({ setValidation }: Props) {
   };
 
   useEffect(() => {
-    handleValidation("mrp", addProductInfo.pricing?.mrpPrice!);
-  }, [addProductInfo.pricing?.mrpPrice])
+    if(changedMRP)
+       handleValidation("mrp", addProductInfo.pricing?.mrpPrice!);
+  }, [addProductInfo.pricing?.mrpPrice, changedMRP])
 
   useEffect(() => {
-    handleValidation("sale", addProductInfo.pricing?.salesPrice!);
-  }, [addProductInfo.pricing?.salesPrice])
+    if(changedSP)
+       handleValidation("sale", addProductInfo.pricing?.salesPrice!);
+  }, [addProductInfo.pricing?.salesPrice, changedSP])
 
   useEffect(() => {
     if (!addProductInfo.pricing?.taxEnabled) {
@@ -155,6 +161,7 @@ function PricingTab({ setValidation }: Props) {
           onChange={(event: any) => {
             dispatch(setMrpPrice(event.target.value));
           }}
+          onBlur={() =>  setChangedMRP(true)  }
           value={addProductInfo.pricing?.mrpPrice}
           type="number"
           min="0"
@@ -165,7 +172,7 @@ function PricingTab({ setValidation }: Props) {
         <span
           className={
             "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (isValidMRP ? "hidden" : "")
+            (changedMRP ? (isValidMRP ? "hidden" : "") : "hidden")
           }
         >
           * Enter Valid MRP price !
@@ -177,6 +184,7 @@ function PricingTab({ setValidation }: Props) {
           onChange={(event: any) => {
             dispatch(setSalesPrice(event.target.value));
           }}
+          onBlur={() =>  setChangedSP(true)  }
           value={addProductInfo.pricing?.salesPrice}
           type="number"
           min="0"
@@ -186,7 +194,7 @@ function PricingTab({ setValidation }: Props) {
         <span
           className={
             "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (isValidSalePrice ? "hidden" : "")
+            (changedSP ? (isValidSalePrice ? "hidden" : "") : "hidden")
           }
         >
           * Enter valid Sale price !
