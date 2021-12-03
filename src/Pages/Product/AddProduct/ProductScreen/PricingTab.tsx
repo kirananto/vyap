@@ -39,10 +39,11 @@ interface Props {
     arg2: boolean,
     arg3: boolean,
     arg4: boolean
-  ) => void;
+  ) => void,
+  submitStatus: boolean
 }
 
-function PricingTab({ setValidation }: Props) {
+function PricingTab({ setValidation, submitStatus }: Props) {
   const [modal, setModal] = useState(false);
 
   const [isValidMRP, setIsValidMRP] = useState<boolean>(false);
@@ -50,7 +51,7 @@ function PricingTab({ setValidation }: Props) {
 
   const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(false);
   const [changedSP, setChangedSP] = useState<boolean>(false);
-  
+
   const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
   const [isValidGST, setIsValidGST] = useState<boolean>(true);
 
@@ -149,6 +150,14 @@ function PricingTab({ setValidation }: Props) {
     handleValidation("gst", addProductInfo.pricing?.hsn?.gstPercentage ??
       addProductInfo.pricing?.gstPercentage);
   }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage])
+
+  
+  useEffect(() => {
+    if(submitStatus){
+      setChangedSP(true);
+      setChangedMRP(true);
+    }
+  }, [submitStatus])
 
   return (
     <div
