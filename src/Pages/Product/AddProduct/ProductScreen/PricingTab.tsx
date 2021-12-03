@@ -53,7 +53,11 @@ function PricingTab({ setValidation, submitStatus }: Props) {
   const [changedSP, setChangedSP] = useState<boolean>(false);
 
   const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
+  const [changedHSN, setChangedHSN] = useState<boolean>(false);
+
   const [isValidGST, setIsValidGST] = useState<boolean>(true);
+  const [changedGST, setChangedGST] = useState<boolean>(false);
+
 
   setValidation(isValidMRP, isValidSalePrice, isValidHSN, isValidGST);
 
@@ -143,19 +147,24 @@ function PricingTab({ setValidation, submitStatus }: Props) {
   }, [addProductInfo.pricing?.taxEnabled])
 
   useEffect(() => {
-    handleValidation("hsn", addProductInfo.pricing?.hsn?.hsn!);
-  }, [addProductInfo.pricing?.hsn?.hsn])
+    if(changedHSN)
+      handleValidation("hsn", addProductInfo.pricing?.hsn?.hsn!);
+  }, [addProductInfo.pricing?.hsn?.hsn, changedHSN])
 
   useEffect(() => {
+    if(changedGST){
     handleValidation("gst", addProductInfo.pricing?.hsn?.gstPercentage ??
       addProductInfo.pricing?.gstPercentage);
-  }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage])
+    }
+  }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage, changedGST])
 
   
   useEffect(() => {
     if(submitStatus){
       setChangedSP(true);
       setChangedMRP(true);
+      setChangedGST(true);
+      setChangedHSN(true);
     }
   }, [submitStatus])
 
@@ -231,6 +240,7 @@ function PricingTab({ setValidation, submitStatus }: Props) {
                   onChange={(event: any) => {
                     dispatch(setHsnNumber(event.target.value));
                   }}
+                  onBlur={() =>  setChangedHSN(true)  }
                   value={addProductInfo.pricing?.hsn?.hsn}
                   type="number"
                   placeholder="Enter HSN number"
@@ -260,7 +270,7 @@ function PricingTab({ setValidation, submitStatus }: Props) {
                 <span
                   className={
                     "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (isValidHSN ? "hidden" : "")
+                    (changedHSN ? (isValidHSN ? "hidden" : "") : "hidden")
                   }
                 >
                   * Enter valid HSN !
@@ -275,6 +285,7 @@ function PricingTab({ setValidation, submitStatus }: Props) {
               <div className="flex">
                 <input
                   onChange={handleGstPercentage}
+                  onBlur={() =>  setChangedGST(true)  }
                   value={
                     addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage
@@ -289,7 +300,7 @@ function PricingTab({ setValidation, submitStatus }: Props) {
                 <span
                   className={
                     "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (isValidGST ? "hidden" : "")
+                    (changedGST ? (isValidGST ? "hidden" : "") : "hidden")
                   }
                 >
                   * Enter valid GST !
