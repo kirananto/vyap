@@ -1,17 +1,17 @@
-import { Header } from "../../Components/Header";
-import React, { useState, useEffect } from "react";
-import AppliedFilters from "./AppliedFilters";
-import OrderContainer from "./OrderContainer";
-import { fetchOrdersAPI } from "src/API/order.axios";
-import { useSelector } from "react-redux";
-import { selectCredentials } from "../Login/credentialsSlice";
-import ModalViewer from "src/Components/Style/ModalViewer";
-import { FilterPopup } from "./Filters/FilterPopUp";
-import { OrderStatusType } from "./enum";
-import { selectOrderFilters } from "./Filters/orderFiltersSlice";
-import { PrintAll } from "./Options/PrintAll";
-import { ExportAll } from "./Options/ExportAll";
+import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { fetchOrdersAPI } from "src/API/order.axios";
+import ModalViewer from "src/Components/Style/ModalViewer";
+import { Header } from "../../Components/Header";
+import { selectCredentials } from "../Login/credentialsSlice";
+import AppliedFilters from "./AppliedFilters";
+import { FilterPopup } from "./Filters/FilterPopUp";
+import { selectOrderFilters } from "./Filters/orderFiltersSlice";
+import { ExportAll } from "./Options/ExportAll";
+import { PrintAll } from "./Options/PrintAll";
+import OrderContainer from "./OrderContainer";
 
 export default function Orders() {
   const [orders, setOrders] = useState<any[]>([]);
@@ -20,7 +20,7 @@ export default function Orders() {
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const filters = useSelector(selectOrderFilters);
   const intl = useIntl()
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchOrdersAPI({
       token: token!,
@@ -39,7 +39,7 @@ export default function Orders() {
     <div className="dark:bg-gray-900">
       {/* header */}
       <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-        <Header  isSticky={false}  heading={intl.formatMessage({ id: 'global.allOrders'})} />
+        <Header  isSticky={false}  onBackClick={() => navigate('/home')}  heading={intl.formatMessage({ id: 'global.allOrders'})} />
         <AppliedFilters
           openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
         />

@@ -195,7 +195,7 @@ export default function AddItem() {
     return (
         <div className="bg-white min-h-screen dark:bg-gray-900">
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800">
-                <Header isSticky={false} heading="Add Item" />
+                <Header isSticky={false} onBackClick={() => navigate('/place-order')}heading="Add Item" />
                 <AppliedFilters
                     setSearchValue={setSearchValue}
                     searchValue={searchValue}
