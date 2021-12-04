@@ -30,6 +30,10 @@ export const Payment = () => {
   }, [paymentModalVisible, id, token])
 
   useEffect(() => {
+    localStorage?.setItem("inboxId", inbox?.id)
+  }, [inbox?.id])
+
+  useEffect(() => {
     localStorage.setItem('isSupplier', `${inbox?.isSupplier}`)
   }, [inbox?.isSupplier])
   return (
@@ -37,7 +41,7 @@ export const Payment = () => {
       {/* header */}
       <div className="fixed w-full z-10 pb-3 bg-white shadow dark:bg-gray-800">
         <Header isSticky={false} onBackClick={() => navigate('/home')} heading="Transactions" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
-        <PaymentBottomHeader amount={inbox?.outstandingAmount} />
+        <PaymentBottomHeader amount={inbox?.outstandingAmount} isLoading={inbox?.isLoading === undefined ? true : inbox?.isLoading}/>
       </div>
       {/* body */}
       <ChatList inboxHash={inbox?.inboxHash} toRefresh={paymentModalVisible}  />

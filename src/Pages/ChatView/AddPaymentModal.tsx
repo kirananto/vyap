@@ -114,8 +114,8 @@ export default function AddPaymentModal({
               <input
                 value={amount}
                 onChange={(event) => {
-                  setAmount(parseFloat(event?.target.value as any));
-                  onValidate("change",event?.target.value as any, () => {});
+                  setAmount(parseFloat(event?.target.value as any) > 0 ? parseFloat(event?.target.value as any) : 0);
+                  onValidate("change",parseFloat(event?.target.value as any) > 0 ? parseFloat(event?.target.value as any) : 0, () => {});
                 }}
                 className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                 inputMode="numeric"

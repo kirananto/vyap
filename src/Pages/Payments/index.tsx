@@ -12,6 +12,7 @@ import { ExportAll } from "./Options/ExportAll";
 import { PrintAll } from "./Options/PrintAll";
 import { useIntl } from "react-intl";
 import useQueryParam from "src/useQueryParams";
+import { useNavigate } from "react-router";
 
 export default function Payments() {
   const { token } = useSelector(selectCredentials);
@@ -20,6 +21,7 @@ export default function Payments() {
   const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>("filterPopupOpen");
   const filters = useSelector(selectPaymentFilters);
   const intl = useIntl()
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchAllPayments({
@@ -40,7 +42,7 @@ export default function Payments() {
     <div className="">
       {/* header */}
       <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-        <Header  isSticky={false}  heading={intl.formatMessage({ id: 'global.allPayments'})} />
+        <Header  isSticky={false}  onBackClick={() => navigate('/more')} heading={intl.formatMessage({ id: 'global.allPayments'})} />
         <AppliedFilters
           openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
         />
