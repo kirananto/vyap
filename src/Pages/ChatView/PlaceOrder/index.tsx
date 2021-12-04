@@ -262,7 +262,7 @@ export default function PlaceOrder() {
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="w-full bg-white shadow ">
-        <SimpleHeader heading={"Place Order"} />
+        <SimpleHeader backFn={() => navigate(`/chat/${localStorage?.getItem("inboxId")}`)} heading={"Place Order"} />
       </div>
       <div className={"p-2 pt-20"}>
         {/* <!-- Textarea --> */}
