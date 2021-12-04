@@ -23,6 +23,8 @@ function CreateProduct() {
   const [isValid, setIsValid] = useState(true);
   const [isValidOthers, setIsValidOthers] = useState(false);
 
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const [productImage, setProductImage] = useState<any>(undefined);
   const addProductInfo = useSelector(selectAddProductInfo);
   const { token } = useSelector(selectCredentials);
@@ -88,6 +90,8 @@ function CreateProduct() {
   };
 
   const onProceed = () => {
+    setIsSubmit(true);
+    console.log("submitting..");
     if (isValid && !isValidOthers) toggleTabs(2);
 
     if (!isValid && isValidOthers) toggleTabs(1);
@@ -192,7 +196,7 @@ function CreateProduct() {
 
         {/* -------------------TAB-1----------------- */}
         <div className={toggleState === 1 ? "block" : "hidden"}>
-          <PricingTab setValidation={doValidate} />
+          <PricingTab setValidation={doValidate}  submitStatus={isSubmit} />
         </div>
 
         {/* -------------------TAB-1----------------- */}

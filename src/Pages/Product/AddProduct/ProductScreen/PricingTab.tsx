@@ -39,16 +39,25 @@ interface Props {
     arg2: boolean,
     arg3: boolean,
     arg4: boolean
-  ) => void;
+  ) => void,
+  submitStatus: boolean
 }
 
-function PricingTab({ setValidation }: Props) {
+function PricingTab({ setValidation, submitStatus }: Props) {
   const [modal, setModal] = useState(false);
 
   const [isValidMRP, setIsValidMRP] = useState<boolean>(false);
+  const [changedMRP, setChangedMRP] = useState<boolean>(false);
+
   const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(false);
+  const [changedSP, setChangedSP] = useState<boolean>(false);
+
   const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
+  const [changedHSN, setChangedHSN] = useState<boolean>(false);
+
   const [isValidGST, setIsValidGST] = useState<boolean>(true);
+  const [changedGST, setChangedGST] = useState<boolean>(false);
+
 
   setValidation(isValidMRP, isValidSalePrice, isValidHSN, isValidGST);
 
@@ -121,12 +130,14 @@ function PricingTab({ setValidation }: Props) {
   };
 
   useEffect(() => {
-    handleValidation("mrp", addProductInfo.pricing?.mrpPrice!);
-  }, [addProductInfo.pricing?.mrpPrice])
+    if(changedMRP)
+       handleValidation("mrp", addProductInfo.pricing?.mrpPrice!);
+  }, [addProductInfo.pricing?.mrpPrice, changedMRP])
 
   useEffect(() => {
-    handleValidation("sale", addProductInfo.pricing?.salesPrice!);
-  }, [addProductInfo.pricing?.salesPrice])
+    if(changedSP)
+       handleValidation("sale", addProductInfo.pricing?.salesPrice!);
+  }, [addProductInfo.pricing?.salesPrice, changedSP])
 
   useEffect(() => {
     if (!addProductInfo.pricing?.taxEnabled) {
@@ -136,13 +147,26 @@ function PricingTab({ setValidation }: Props) {
   }, [addProductInfo.pricing?.taxEnabled])
 
   useEffect(() => {
-    handleValidation("hsn", addProductInfo.pricing?.hsn?.hsn!);
-  }, [addProductInfo.pricing?.hsn?.hsn])
+    if(changedHSN)
+      handleValidation("hsn", addProductInfo.pricing?.hsn?.hsn!);
+  }, [addProductInfo.pricing?.hsn?.hsn, changedHSN])
 
   useEffect(() => {
+    if(changedGST){
     handleValidation("gst", addProductInfo.pricing?.hsn?.gstPercentage ??
       addProductInfo.pricing?.gstPercentage);
-  }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage])
+    }
+  }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage, changedGST])
+
+  
+  useEffect(() => {
+    if(submitStatus){
+      setChangedSP(true);
+      setChangedMRP(true);
+      setChangedGST(true);
+      setChangedHSN(true);
+    }
+  }, [submitStatus])
 
   return (
     <div
@@ -155,6 +179,7 @@ function PricingTab({ setValidation }: Props) {
           onChange={(event: any) => {
             dispatch(setMrpPrice(event.target.value));
           }}
+          onBlur={() =>  setChangedMRP(true)  }
           value={addProductInfo.pricing?.mrpPrice}
           type="number"
           min="0"
@@ -165,7 +190,7 @@ function PricingTab({ setValidation }: Props) {
         <span
           className={
             "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (isValidMRP ? "hidden" : "")
+            (changedMRP ? (isValidMRP ? "hidden" : "") : "hidden")
           }
         >
           * Enter Valid MRP price !
@@ -177,6 +202,7 @@ function PricingTab({ setValidation }: Props) {
           onChange={(event: any) => {
             dispatch(setSalesPrice(event.target.value));
           }}
+          onBlur={() =>  setChangedSP(true)  }
           value={addProductInfo.pricing?.salesPrice}
           type="number"
           min="0"
@@ -186,7 +212,7 @@ function PricingTab({ setValidation }: Props) {
         <span
           className={
             "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (isValidSalePrice ? "hidden" : "")
+            (changedSP ? (isValidSalePrice ? "hidden" : "") : "hidden")
           }
         >
           * Enter valid Sale price !
@@ -214,6 +240,7 @@ function PricingTab({ setValidation }: Props) {
                   onChange={(event: any) => {
                     dispatch(setHsnNumber(event.target.value));
                   }}
+                  onBlur={() =>  setChangedHSN(true)  }
                   value={addProductInfo.pricing?.hsn?.hsn}
                   type="number"
                   placeholder="Enter HSN number"
@@ -243,7 +270,7 @@ function PricingTab({ setValidation }: Props) {
                 <span
                   className={
                     "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (isValidHSN ? "hidden" : "")
+                    (changedHSN ? (isValidHSN ? "hidden" : "") : "hidden")
                   }
                 >
                   * Enter valid HSN !
@@ -258,6 +285,7 @@ function PricingTab({ setValidation }: Props) {
               <div className="flex">
                 <input
                   onChange={handleGstPercentage}
+                  onBlur={() =>  setChangedGST(true)  }
                   value={
                     addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage
@@ -272,7 +300,7 @@ function PricingTab({ setValidation }: Props) {
                 <span
                   className={
                     "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (isValidGST ? "hidden" : "")
+                    (changedGST ? (isValidGST ? "hidden" : "") : "hidden")
                   }
                 >
                   * Enter valid GST !
