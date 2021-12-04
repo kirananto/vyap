@@ -121,7 +121,7 @@ export default function AddItem() {
                     {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
                 </div>
                 <div className="flex flex-col">
-                    <div className="flex text-xl font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
+                    <div className="flex text-xl font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name}  ${item?.aliasName ? `(${item?.aliasName})` : ''}`}</div>
                     <div className="flex font-bold text-xs text-gray-300">#213r423423423423423</div>
                     <div className="flex font-bold text-xs text-gray-400">MRP:  ₹{item?.mrpPrice} Cost: ₹{item?.rate}</div>
                 </div>

@@ -220,16 +220,20 @@ function OthersTab({ setValidation }: Props) {
         }
       });
     } else {
-      let postBrand = new PostBrand();
-      postBrand.brand = value;
-      validate(postBrand).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors: ", errors);
-          setIsValidBrand(false);
-        } else {
-          setIsValidBrand(true);
-        }
-      });
+      if(!addProductInfo?.centralCatalogue?.id) {
+        let postBrand = new PostBrand();
+        postBrand.brand = value;
+        validate(postBrand).then((errors) => {
+          if (errors.length > 0) {
+            console.log("validation failed. errors: ", errors);
+            setIsValidBrand(false);
+          } else {
+            setIsValidBrand(true);
+          }
+        });
+      } else {
+        setIsValidBrand(true);
+      }
     }
   };
 
