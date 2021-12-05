@@ -24,7 +24,7 @@ export default function ProductCard({ item, onClicked, onMore, isChecked }: { it
       ==========
       */}
       <div className="flex w-3/4">
-        <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+        <div className="relative w-20 h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
           {item?.thumbnailImage && <img src={getImageURL(item?.thumbnailImage, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)} alt="Avatar" className="object-cover w-full h-full" />}
           {item.outOfStock && <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">Out of stock</div>}
         </div>

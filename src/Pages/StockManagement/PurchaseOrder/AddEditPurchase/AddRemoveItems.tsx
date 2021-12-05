@@ -38,7 +38,7 @@ export default function AddRemoveItems() {
                     {/* TODO: Remove this console.log */}
                     {console.log(item)}
                     <div className="flex pt-4 gap-2">
-                        <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                        <div className="relative w-20 h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
                             {DairySmall && <img src={DairySmall} alt="Avatar" className="object-cover w-full h-full" />}
                         </div>
                         <div className="flex flex-col">
