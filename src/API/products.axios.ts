@@ -85,13 +85,14 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     }
 })
 
-export const fetchOrganizationProductCategories = (token: string, limit: number, offset: number, search?: string) => axiosClient({
+export const fetchOrganizationProductCategories = (token: string, limit: number, offset: number, search?: string, orgId?: string) => axiosClient({
     url: `/organization-catalogue-category`,
     method: 'GET',
     params: {
         limit,
         offset,
         search,
+        orgId,
     },
     headers: {
         'authorization': `Bearer ${token}`

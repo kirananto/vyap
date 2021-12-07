@@ -13,7 +13,7 @@ export interface BrandInterface {
 }
 
 function OrganizationCategoryModal(props: any) {
-  const { token } = useSelector(selectCredentials)
+  const { user, token } = useSelector(selectCredentials)
   const intl = useIntl()
   const [searchValue, setSearchValue] = useState(undefined)
   const [items, setItems] = useState<BrandInterface[]>([])
@@ -25,7 +25,7 @@ function OrganizationCategoryModal(props: any) {
   };
 
   useEffect(() => {
-    fetchOrganizationProductCategories(token!, 100, 0, searchValue).then(result => {
+    fetchOrganizationProductCategories(token!, 100, 0, searchValue, user?.organizationId).then(result => {
       setItems(result.data?.data?.filter((item: any) => item.name))
     })
   }, [searchValue])

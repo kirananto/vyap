@@ -44,13 +44,21 @@ export default function FilterBrand(props: FilterBrands) {
     })
   }, [])
 
+  
+  function renderItems () {
+    if(items?.length < 1) {
+      return <div className="text-gray-700 dark:text-gray-100 text-xs"> No {props.type} present </div>
+    }
+    return items?.map(item => <Category key={item.id} item={item} name={item.name} />)
+  }
+
   return (
     <div>
       <h1 className="mb-1 text-base font-semibold text-gray-500 dark:text-gray-300">
         {props.heading}
       </h1>
       <div className="flex flex-col gap-1 mt-2">
-        {items?.map(item => <Category key={item.id} item={item} name={item.name} />)}
+        {renderItems()}
       </div>
     </div>
   );

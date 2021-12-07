@@ -35,13 +35,20 @@ interface FilterCategories {
 }
 export default function FilterCategory(props: FilterCategories) {
   const [items, setItems] = useState<any[]>([])
-  const { token } = useSelector(selectCredentials)
+  const { user, token } = useSelector(selectCredentials)
 
   useEffect(() => {
-    fetchOrganizationProductCategories(token!, 20, 0).then((result: any) => {
+    fetchOrganizationProductCategories(token!, 20, 0, undefined, user?.organizationId).then((result: any) => {
       setItems(result?.data?.data?.filter((item: any) => item?.name))
     })
   }, [])
+  
+  function renderItems () {
+    if(items?.length === 0) {
+      return <div className="text-gray-700 dark:text-gray-100 text-xs"> No {props.type} present </div>
+    }
+    return items?.map(item => <Category key={item.id} item={item} name={item.name} />)
+  }
 
   return (
     <div>
@@ -49,7 +56,7 @@ export default function FilterCategory(props: FilterCategories) {
         {props.heading}
       </h1>
       <div className="flex flex-col gap-1 mt-2">
-        {items?.map(item => <Category key={item.id} item={item} name={item.name} />)}
+        {renderItems()}
       </div>
     </div>
   );
