@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCentralProductCategories } from "src/API/products.axios";
+import { fetchOrganizationProductCategories } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { selectAddItemsproductFilters, categoriesCheckbox } from "./addProductFiltersSlice";
 
@@ -38,7 +38,7 @@ export default function FilterCategory(props: FilterCategories) {
   const { token } = useSelector(selectCredentials)
 
   useEffect(() => {
-    fetchCentralProductCategories(token!, 10, 0).then((result: any) => {
+    fetchOrganizationProductCategories(token!, 10, 0).then((result: any) => {
       setItems(result?.data?.data?.filter((item: any) => item?.name))
     })
   }, [])

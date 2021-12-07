@@ -27,7 +27,7 @@ function CreateProduct() {
 
   const [productImage, setProductImage] = useState<any>(undefined);
   const addProductInfo = useSelector(selectAddProductInfo);
-  const { token } = useSelector(selectCredentials);
+  const { user, token } = useSelector(selectCredentials);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -109,11 +109,13 @@ function CreateProduct() {
       const centralProduct: any = await postAddCentralProduct(token!, {
         name: addProductInfo?.centralCatalogue?.name!,
         description: addProductInfo?.centralCatalogue?.description ?? "",
-        categories: {
-          name: "string",
-          description: "string",
-          imageName: "string",
+        categories: addProductInfo?.others?.centralCategory?.id ? undefined : {
+          name: addProductInfo?.others?.centralCategory?.name,
+          description: addProductInfo?.others?.centralCategory?.name,
+          imageName: addProductInfo?.others?.centralCategory?.name,
         },
+        categoriesId: addProductInfo?.others?.centralCategory?.id,
+        barCode: addProductInfo?.others?.barCode,
         images: addProductInfo?.others?.productImage,
         hsnId: addProductInfo?.pricing?.taxEnabled ? addProductInfo?.pricing.hsn?.id : undefined,
         brandId: addProductInfo?.others?.brand?.id ?? undefined,
@@ -136,6 +138,7 @@ function CreateProduct() {
             name: addProductInfo?.others?.category?.name,
             description: addProductInfo?.others?.category?.name,
             imageName: addProductInfo?.others?.category?.name,
+            organizationId: user?.organizationId
           },
       thumbnailImage: addProductInfo?.others?.productImage?.[0]?.imageName,
       aliasName: addProductInfo?.centralCatalogue?.id

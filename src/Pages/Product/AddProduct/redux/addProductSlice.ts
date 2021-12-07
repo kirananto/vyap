@@ -34,7 +34,13 @@ export interface AddProductInterface {
             name: string,
             description?: string,
             imageName?: string
-        }
+        },
+        centralCategory?: {
+            id?: string,
+            name: string,
+            description?: string,
+            imageName?: string
+        },
         barCode: string
         brand?: BrandInterface
         brandId: string
@@ -110,6 +116,9 @@ export const addProductSlice = createSlice({
         setCategory: (state, action: PayloadAction<AddProductInterface['others']['category']>) => {
             state.others.category = action.payload
         },
+        setCentralCategory: (state, action: PayloadAction<AddProductInterface['others']['centralCategory']>) => {
+            state.others.centralCategory = action.payload
+        },
         setBarCode: (state, action: PayloadAction<any>) => {
             state.others.barCode = action.payload
         },
@@ -133,6 +142,7 @@ export const {
     setBrand,
     setCaseQuantity,
     setCategory,
+    setCentralCategory,
     setGstPercentage,
     setHsnNumber,
     setProductImage,

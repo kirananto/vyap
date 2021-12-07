@@ -6,6 +6,7 @@ export interface IAddProduct {
         description?: string,
         imageName?: string,
         id?: string,
+        organizationId?: string
         createdAt?: string,
         updatedAt?: string
     },
@@ -24,7 +25,9 @@ export interface AddCentralCatalogueInterface {
     description: string
     brandId?: string
     hsnId?: string
+    barCode?: string
     // TODO Unverified
+    categoriesId?: string
     categories: any
     images: any
     brand?: { 
@@ -82,8 +85,21 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     }
 })
 
-export const fetchCentralProductCategories = (token: string, limit: number, offset: number, search?: string) => axiosClient({
+export const fetchOrganizationProductCategories = (token: string, limit: number, offset: number, search?: string) => axiosClient({
     url: `/organization-catalogue-category`,
+    method: 'GET',
+    params: {
+        limit,
+        offset,
+        search,
+    },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
+export const fetchCentralProductCategories = (token: string, limit: number, offset: number, search?: string) => axiosClient({
+    url: `/central-catalogue-category`,
     method: 'GET',
     params: {
         limit,

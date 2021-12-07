@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrganizationProductCategories } from "src/API/products.axios";
+import { fetchCentralProductCategories } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { setCategory } from "../redux/addProductSlice";
+import { setCentralCategory } from "../redux/addProductSlice";
 import "./HSNmodal.css";
 
 export interface BrandInterface {
@@ -12,7 +12,7 @@ export interface BrandInterface {
   description: string
 }
 
-function OrganizationCategoryModal(props: any) {
+function CentralCategoryModal(props: any) {
   const { token } = useSelector(selectCredentials)
   const intl = useIntl()
   const [searchValue, setSearchValue] = useState(undefined)
@@ -25,13 +25,13 @@ function OrganizationCategoryModal(props: any) {
   };
 
   useEffect(() => {
-    fetchOrganizationProductCategories(token!, 100, 0, searchValue).then(result => {
+    fetchCentralProductCategories(token!, 100, 0, searchValue).then(result => {
       setItems(result.data?.data?.filter((item: any) => item.name))
     })
   }, [searchValue])
 
   function selectHSN(value: BrandInterface) {
-    dispatch(setCategory(value))
+    dispatch(setCentralCategory(value))
     props.setModal(false)
   }
 
@@ -53,7 +53,7 @@ function OrganizationCategoryModal(props: any) {
             />
           </svg>
         </button>
-        <h3 className="font-bold text-gray-500 dark:text-gray-200">Tag</h3>
+        <h3 className="font-bold text-gray-500 dark:text-gray-200">Categories</h3>
         <div className="text-gray-400 dark:text-gray-300 mt-2 text-xs font-light">
           {/* <strong className="font-bold text-gray-600 dark:text-gray-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information. We have sourced the HSN code information from the master codes published on the NIC's GST e-Invoice system. There may be variations due to updates by the government. Kindly note that we are not responsible for any wrong information. If you need information about the "Effective Date" for every GST or cess rates, then please visit the CBIC website. */}
         </div>
@@ -81,4 +81,4 @@ function OrganizationCategoryModal(props: any) {
   ) : null;
 }
 
-export default OrganizationCategoryModal;
+export default CentralCategoryModal;
