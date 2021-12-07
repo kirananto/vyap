@@ -38,7 +38,7 @@
     "react-to-print": "^2.14.1",
     "redux-persist": "6.0.0",
     "tailwindcss": "2.2.19",
-    "webpack": "^5.64.4",
+    "webpack": "^5.65.0",
     "workbox-build": "^6.4.2",
     "workbox-cacheable-response": "^6.4.2",
     "workbox-cli": "^6.4.2",
