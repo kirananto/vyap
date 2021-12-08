@@ -52,6 +52,13 @@ export default function PlaceOrder() {
     dispatch(removeItemsFromCart({ id: item.id, quantity: caseQuantity }));
   }
 
+  function closeDropList() {
+    setIsDropOpen({
+        isAdd: false,
+        isOpen: undefined
+    })
+  }
+
   function getTotalPrice() {
     const price = placeOrder.cartItems?.reduce(
       (a: any, b: any) => a + b.quantity * parseFloat(b?.rate),
@@ -59,6 +66,7 @@ export default function PlaceOrder() {
     );
     return price;
   }
+  
 
   function handleDiscountValue(){
     if (!placeOrder.discount) {
@@ -161,13 +169,20 @@ export default function PlaceOrder() {
                       {
                         appearance: "danger",
                         label: "Remove 1 Item",
-                        onClick: () => handleRemoveItemItem(item, 1),
+                        onClick: () => {
+                          handleRemoveItemItem(item, 1),
+                          closeDropList();                         
+                        }
                       },
-                      {
-                        appearance: "danger",
-                        label: "Remove 1 Case (10 Pc)",
-                        onClick: () => handleRemoveItemItem(item, 10),
-                      },
+                      //Hidden 1 case
+                      // {
+                      //   appearance: "danger",
+                      //   label: "Remove 1 Case (10 Pc)",
+                      //   onClick: () => { 
+                      //     handleRemoveItemItem(item, 10),
+                      //     closeDropList();   
+                      //   }                      
+                      // }
                     ]}
                     trigger={
                       <svg
@@ -210,13 +225,20 @@ export default function PlaceOrder() {
                       {
                         appearance: "primary",
                         label: "Add 1 Item",
-                        onClick: () => handleAddItem(item, 1),
+                        onClick: () => { handleAddItem(item, 1),
+                          closeDropList();                         
+                        }
                       },
-                      {
-                        appearance: "primary",
-                        label: "Add 1 Case (10 Pc)",
-                        onClick: () => handleAddItem(item, 10),
-                      },
+   
+                      //Hidden 1 case
+
+                      // {
+                      //   appearance: "primary",
+                      //   label: "Add 1 Case (10 Pc)",
+                      //   onClick: () => { handleAddItem(item, 10), 
+                      //     closeDropList();                         
+                      //   }
+                      // },
                     ]}
                     trigger={
                       <svg
