@@ -55,7 +55,6 @@ function OrganizationCategoryModal(props: any) {
         </button>
         <h3 className="font-bold text-gray-500 dark:text-gray-200">Tag</h3>
         <div className="text-gray-400 dark:text-gray-300 mt-2 text-xs font-light">
-          {/* <strong className="font-bold text-gray-600 dark:text-gray-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information. We have sourced the HSN code information from the master codes published on the NIC's GST e-Invoice system. There may be variations due to updates by the government. Kindly note that we are not responsible for any wrong information. If you need information about the "Effective Date" for every GST or cess rates, then please visit the CBIC website. */}
         </div>
         <div className="relative flex w-full mt-8">
           <input
