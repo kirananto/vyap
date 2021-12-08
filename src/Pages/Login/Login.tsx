@@ -31,7 +31,11 @@ export default function Login() {
     })
       .catch((error: any) => {
         console.log('error verifying otp', error.message)
-        setError(`Please enter valid otp,If you don't have an account please proceed to sign up`)
+        if(error?.response?.data) {
+          setError(`Please enter valid otp,If you don't have an account please proceed to sign up`)
+        } else {
+          setError('No internet connection, please connect to a network and try again.')
+        }
         // User couldn't sign in (bad verification code?)
         // ...
       })

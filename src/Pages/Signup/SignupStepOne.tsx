@@ -26,7 +26,11 @@ export default function SignupStep1() {
     })
       .catch((error: any) => {
         console.log('error verifying otp', error.message)
-        setError('Please enter a valid OTP')
+        if (error?.response?.data) {
+          setError('Please enter a valid OTP')
+        } else {
+          setError('No internet connection, please connect to a network and try again.')
+        }
         // User couldn't sign in (bad verification code?)
         // ...
       })
