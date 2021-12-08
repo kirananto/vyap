@@ -287,6 +287,7 @@ export default function PlaceOrder() {
               className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
               inputMode="numeric"
               type="number"
+              min= {0}
             />
           </div>
         ) : null}
