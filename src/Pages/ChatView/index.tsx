@@ -8,9 +8,10 @@ import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials } from "../Login/credentialsSlice";
 import AddPaymentModal from "./AddPaymentModal";
-import { setOrgId } from "./PlaceOrder/placeOrderSlice";
+import { setOrgId, clearAll } from "./PlaceOrder/placeOrderSlice";
 import useQueryParam from "src/useQueryParams";
 import { fetchInboxAction, selectChatList } from "./chatListSlice";
+
 
 export const Payment = () => {
   const { token } = useSelector(selectCredentials)
@@ -22,6 +23,13 @@ export const Payment = () => {
 
   const { id } = useParams()
   const inbox = chatList[`${id}`]
+
+  useEffect(() => {
+    dispatch(
+      clearAll()
+    )   
+  }, []);
+
   useEffect(() => {
     console.log('------------------------changed-----------')
     if (token) {
