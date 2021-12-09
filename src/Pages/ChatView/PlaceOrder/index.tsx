@@ -31,6 +31,7 @@ export default function PlaceOrder() {
 
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isValidCart, setIsValidCart] = useState<boolean>(false);
+  const [isValidDiscount, setIsValidDiscount] = useState<boolean>(false);
 
 
   const [search, setSearch] = useState("");
@@ -48,6 +49,19 @@ export default function PlaceOrder() {
       setIsValidCart(false);
     }
   }, [placeOrder.cartItems])
+
+
+  useEffect(() => {
+
+    let discountPrice =  placeOrder.discount;
+    let finalPrice = getTotalPrice();
+           
+    if(discountPrice > finalPrice){
+      setIsValidDiscount(false);
+    }else{
+      setIsValidDiscount(true);
+    }
+  }, [placeOrder.cartItems, placeOrder.discount])
 
   function handleAddItem(item: any, caseQuantity: number) {
     dispatch(
@@ -90,10 +104,18 @@ export default function PlaceOrder() {
 
   function updateDiscount(event : any){
     let inputValue =  event?.target.value;
+    let finalPrice = getTotalPrice();
     if (inputValue) {
-            dispatch(
-                setFlatDiscount(parseFloat(inputValue as any))
-              )   
+            if(inputValue > finalPrice){
+              setIsValidDiscount(false);
+            }
+            else{
+                setIsValidDiscount(true);
+                dispatch(
+                  setFlatDiscount(parseFloat(inputValue as any))
+                )  
+              }
+             
      }else{
         dispatch(
             setFlatDiscount(inputValue as any)
@@ -103,7 +125,7 @@ export default function PlaceOrder() {
 
     function handleSubmit() {
       setIsSubmit(true);
-      if(placeOrder.cartItems?.length !== 0){
+      if(placeOrder.cartItems?.length !== 0 && isValidDiscount){
         placeOrderAPI(token!, {
           description: placeOrder.note,
           flatDiscount: placeOrder.discount,
@@ -122,7 +144,7 @@ export default function PlaceOrder() {
           navigate(`/chat/${localStorage?.getItem("inboxId")}`);
         });
       }else{
-        setIsValidCart(false);
+        //setIsValidCart(false);
       }
     }
 
@@ -328,7 +350,17 @@ export default function PlaceOrder() {
               type="number"
               min= {0}
             />
+
+            <span
+                  className={
+                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-2 ml-4 " +
+                    (isValidDiscount ? "hidden" : "")
+                  }
+                >
+                  * Maximum Discount Applicable:  ₹{getTotalPrice()}
+                </span>
           </div>
+          
         ) : null}
         <div className="border rounded-lg m-2 px-4 border-gray-200 dark:border-gray-700 pb-4 pt-4">
           <div className="flex justify-between">
