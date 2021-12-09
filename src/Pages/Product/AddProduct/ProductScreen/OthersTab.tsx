@@ -23,7 +23,7 @@ import { Length, validate } from "class-validator";
 import CentralCategoryModal from "./CentralCategoryModal";
 
 export class PostDescription {
-  @Length(1, 80)
+  @Length(0, 80)
   description!: string;
 }
 

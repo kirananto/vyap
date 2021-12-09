@@ -2,6 +2,7 @@
 .create-product-container{
     /* height: 85vh; */
     overflow-y: auto;
+    min-height: calc(100vh - 2rem);
     padding-bottom: 20px;
 }
 
@@ -21,6 +22,6 @@
 }
 .barcode-icon{
     position: absolute;
-    top: 36px;
+    top: 42px;
     right: 15px;
 }

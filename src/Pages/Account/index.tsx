@@ -5,7 +5,7 @@ import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserNa
 import { patchUser } from 'src/API/user.axios'
 import { useIntl } from 'react-intl'
 import { patchOrganization } from 'src/API/organization.axios'
-import { IsEmail, IsString, Length, validate } from 'class-validator'
+import { IsEmail, IsString, Length, validate, IsOptional } from 'class-validator'
 
 
 export class Organization {
@@ -19,6 +19,7 @@ export class Organization {
     bizName?: string;
 
     @IsEmail()
+    @IsOptional()
     email?: string;
 
     @Length(6)

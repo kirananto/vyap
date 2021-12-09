@@ -236,21 +236,13 @@ function PricingTab({ setValidation, submitStatus }: Props) {
             <div>
               <p className="text-base text-gray-500">HSN Number</p>
               <div className="des-modal-btn">
-                <input
-                  onChange={(event: any) => {
-                    dispatch(setHsnNumber(event.target.value));
-                  }}
-                  onBlur={() =>  setChangedHSN(true)  }
-                  value={addProductInfo.pricing?.hsn?.hsn}
-                  type="number"
-                  min= {0}
-                  placeholder="Enter HSN number"
-                  className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-                />
+                <div  className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600">
+                {addProductInfo.pricing?.hsn?.hsn}
+                  </div>
 
                 {/* Modal handle btn */}
                 <button
-                  className="modal-btn dark:text-gray-300"
+                  className="modal-btn dark:text-gray-300 -mt-2"
                   onClick={handleModal}
                 >
                   <svg
