@@ -29,6 +29,10 @@ export default function PlaceOrder() {
     | undefined
   >(undefined);
 
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [isValidCart, setIsValidCart] = useState<boolean>(false);
+
+
   const [search, setSearch] = useState("");
 
   const placeOrder = useSelector(selectPlaceOrderInfo);
@@ -36,6 +40,14 @@ export default function PlaceOrder() {
   const navigate = useNavigate();
 
   const isSupplier = localStorage.getItem("isSupplier") === "true";
+
+  useEffect(() => {
+    if(placeOrder.cartItems?.length !== 0){
+      setIsValidCart(true);
+    }else{
+      setIsValidCart(false);
+    }
+  }, [placeOrder.cartItems])
 
   function handleAddItem(item: any, caseQuantity: number) {
     dispatch(
@@ -89,25 +101,30 @@ export default function PlaceOrder() {
      }
     }
 
-  function handleSubmit() {
-      placeOrderAPI(token!, {
-        description: placeOrder.note,
-        flatDiscount: placeOrder.discount,
-        supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
-        buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
-        orderItems: placeOrder.cartItems?.map((mapItem) => {
-          return {
-            quantity: mapItem.quantity,
-            purchasePrice: parseFloat(mapItem.rate),
-            productId: mapItem.id,
-            aliasName: mapItem.aliasName,
-            mrpPrice: parseFloat(mapItem.mrpPrice),
-          };
-        }),
-      }).then((result) => {
-        navigate(`/chat/${localStorage?.getItem("inboxId")}`);
-      });
-  }
+    function handleSubmit() {
+      setIsSubmit(true);
+      if(placeOrder.cartItems?.length !== 0){
+        placeOrderAPI(token!, {
+          description: placeOrder.note,
+          flatDiscount: placeOrder.discount,
+          supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
+          buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
+          orderItems: placeOrder.cartItems?.map((mapItem) => {
+            return {
+              quantity: mapItem.quantity,
+              purchasePrice: parseFloat(mapItem.rate),
+              productId: mapItem.id,
+              aliasName: mapItem.aliasName,
+              mrpPrice: parseFloat(mapItem.mrpPrice),
+            };
+          }),
+        }).then((result) => {
+          navigate(`/chat/${localStorage?.getItem("inboxId")}`);
+        });
+      }else{
+        setIsValidCart(false);
+      }
+    }
 
   function renderCartItems() {
     if (placeOrder.cartItems?.length === 0) {
@@ -377,6 +394,16 @@ export default function PlaceOrder() {
                   Add more items
                 </div>
               </div>
+
+              <span
+                  className={
+                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-2 ml-4 " +
+                    (isSubmit ? (isValidCart ? "hidden" : "") : "hidden")
+                  }
+                >
+                  * Add items to cart to continue order
+                </span>
+
               <div className="mt-4 text-right">
                 <div className="text-gray-400 dark:text-gray-300 text-xl font-extrabold">
                   Total
