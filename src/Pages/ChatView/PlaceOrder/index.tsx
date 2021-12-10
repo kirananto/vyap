@@ -33,7 +33,6 @@ export default function PlaceOrder() {
   const [isValidCart, setIsValidCart] = useState<boolean>(false);
   const [isValidDiscount, setIsValidDiscount] = useState<boolean>(false);
 
-
   const [search, setSearch] = useState("");
 
   const placeOrder = useSelector(selectPlaceOrderInfo);
@@ -43,25 +42,23 @@ export default function PlaceOrder() {
   const isSupplier = localStorage.getItem("isSupplier") === "true";
 
   useEffect(() => {
-    if(placeOrder.cartItems?.length !== 0){
+    if (placeOrder.cartItems?.length !== 0) {
       setIsValidCart(true);
-    }else{
+    } else {
       setIsValidCart(false);
     }
-  }, [placeOrder.cartItems])
-
+  }, [placeOrder.cartItems]);
 
   useEffect(() => {
-
-    let discountPrice =  placeOrder.discount;
+    let discountPrice = placeOrder.discount;
     let finalPrice = getTotalPrice();
-           
-    if(discountPrice > finalPrice){
+
+    if (discountPrice > finalPrice) {
       setIsValidDiscount(false);
-    }else{
+    } else {
       setIsValidDiscount(true);
     }
-  }, [placeOrder.cartItems, placeOrder.discount])
+  }, [placeOrder.cartItems, placeOrder.discount]);
 
   function handleAddItem(item: any, caseQuantity: number) {
     dispatch(
@@ -80,9 +77,9 @@ export default function PlaceOrder() {
 
   function closeDropList() {
     setIsDropOpen({
-        isAdd: false,
-        isOpen: undefined
-    })
+      isAdd: false,
+      isOpen: undefined,
+    });
   }
 
   function getTotalPrice() {
@@ -92,9 +89,8 @@ export default function PlaceOrder() {
     );
     return price;
   }
-  
 
-  function handleDiscountValue(){
+  function handleDiscountValue() {
     if (!placeOrder.discount) {
       dispatch(setFlatDiscount(parseFloat("0")));
     } else {
@@ -102,51 +98,49 @@ export default function PlaceOrder() {
     }
   }
 
-  function updateDiscount(event : any){
-    let inputValue =  event?.target.value;
+  function updateDiscount(event: any) {
+    let inputValue = event?.target.value;
     let finalPrice = getTotalPrice();
     if (inputValue) {
-            if(inputValue > finalPrice){
-              setIsValidDiscount(false);
-            }
-            else{
-                setIsValidDiscount(true);
-                dispatch(
-                  setFlatDiscount(parseFloat(inputValue as any))
-                )  
-              }
-             
-     }else{
-        dispatch(
-            setFlatDiscount(inputValue as any)
-          )   
-     }
-    }
-
-    function handleSubmit() {
-      setIsSubmit(true);
-      if(placeOrder.cartItems?.length !== 0 && isValidDiscount){
-        placeOrderAPI(token!, {
-          description: placeOrder.note,
-          flatDiscount: placeOrder.discount,
-          supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
-          buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
-          orderItems: placeOrder.cartItems?.map((mapItem) => {
-            return {
-              quantity: mapItem.quantity,
-              purchasePrice: parseFloat(mapItem.rate),
-              productId: mapItem.id,
-              aliasName: mapItem.aliasName,
-              mrpPrice: parseFloat(mapItem.mrpPrice),
-            };
-          }),
-        }).then((result) => {
-          navigate(`/chat/${localStorage?.getItem("inboxId")}`);
-        });
-      }else{
-        //setIsValidCart(false);
+      if (inputValue > finalPrice) {
+        setIsValidDiscount(false);
+        dispatch(setFlatDiscount(finalPrice as any));
+        setTimeout(() => {
+          setIsValidDiscount(true);
+        }, 5000);
+      } else {
+        setIsValidDiscount(true);
+        dispatch(setFlatDiscount(parseFloat(inputValue as any)));
       }
+    } else {
+      dispatch(setFlatDiscount(inputValue as any));
     }
+  }
+
+  function handleSubmit() {
+    setIsSubmit(true);
+    if (placeOrder.cartItems?.length !== 0 && isValidDiscount) {
+      placeOrderAPI(token!, {
+        description: placeOrder.note,
+        flatDiscount: placeOrder.discount,
+        supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
+        buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
+        orderItems: placeOrder.cartItems?.map((mapItem) => {
+          return {
+            quantity: mapItem.quantity,
+            purchasePrice: parseFloat(mapItem.rate),
+            productId: mapItem.id,
+            aliasName: mapItem.aliasName,
+            mrpPrice: parseFloat(mapItem.mrpPrice),
+          };
+        }),
+      }).then((result) => {
+        navigate(`/chat/${localStorage?.getItem("inboxId")}`);
+      });
+    } else {
+      //setIsValidCart(false);
+    }
+  }
 
   function renderCartItems() {
     if (placeOrder.cartItems?.length === 0) {
@@ -209,18 +203,17 @@ export default function PlaceOrder() {
                         appearance: "danger",
                         label: "Remove 1 Item",
                         onClick: () => {
-                          handleRemoveItemItem(item, 1),
-                          closeDropList();                         
-                        }
+                          handleRemoveItemItem(item, 1), closeDropList();
+                        },
                       },
                       //Hidden 1 case
                       // {
                       //   appearance: "danger",
                       //   label: "Remove 1 Case (10 Pc)",
-                      //   onClick: () => { 
+                      //   onClick: () => {
                       //     handleRemoveItemItem(item, 10),
-                      //     closeDropList();   
-                      //   }                      
+                      //     closeDropList();
+                      //   }
                       // }
                     ]}
                     trigger={
@@ -264,18 +257,18 @@ export default function PlaceOrder() {
                       {
                         appearance: "primary",
                         label: "Add 1 Item",
-                        onClick: () => { handleAddItem(item, 1),
-                          closeDropList();                         
-                        }
+                        onClick: () => {
+                          handleAddItem(item, 1), closeDropList();
+                        },
                       },
-   
+
                       //Hidden 1 case
 
                       // {
                       //   appearance: "primary",
                       //   label: "Add 1 Case (10 Pc)",
-                      //   onClick: () => { handleAddItem(item, 10), 
-                      //     closeDropList();                         
+                      //   onClick: () => { handleAddItem(item, 10),
+                      //     closeDropList();
                       //   }
                       // },
                     ]}
@@ -323,7 +316,10 @@ export default function PlaceOrder() {
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="w-full bg-white shadow ">
-        <SimpleHeader backFn={() => navigate(`/chat/${localStorage?.getItem("inboxId")}`)} heading={"Place Order"} />
+        <SimpleHeader
+          backFn={() => navigate(`/chat/${localStorage?.getItem("inboxId")}`)}
+          heading={"Place Order"}
+        />
       </div>
       <div className={"p-2 pt-20"}>
         {/* <!-- Textarea --> */}
@@ -344,23 +340,22 @@ export default function PlaceOrder() {
             <input
               value={placeOrder.discount}
               onBlur={handleDiscountValue}
-              onChange={(event) => updateDiscount(event) }
+              onChange={(event) => updateDiscount(event)}
               className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
               inputMode="numeric"
               type="number"
-              min= {0}
+              min={0}
             />
 
             <span
-                  className={
-                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-2 ml-4 " +
-                    (isValidDiscount ? "hidden" : "")
-                  }
-                >
-                  * Maximum Discount Applicable:  ₹{getTotalPrice()}
-                </span>
+              className={
+                "flex items-center font-medium tracking-wide text-green-500 text-xs mt-2 ml-4 " +
+                (isValidDiscount ? "hidden" : "")
+              }
+            >
+              * Maximum Discount Applicable: ₹{getTotalPrice()}
+            </span>
           </div>
-          
         ) : null}
         <div className="border rounded-lg m-2 px-4 border-gray-200 dark:border-gray-700 pb-4 pt-4">
           <div className="flex justify-between">
@@ -428,13 +423,13 @@ export default function PlaceOrder() {
               </div>
 
               <span
-                  className={
-                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-2 ml-4 " +
-                    (isSubmit ? (isValidCart ? "hidden" : "") : "hidden")
-                  }
-                >
-                  * Add items to cart to continue order
-                </span>
+                className={
+                  "flex items-center font-medium tracking-wide text-red-500 text-xs mt-2 ml-4 " +
+                  (isSubmit ? (isValidCart ? "hidden" : "") : "hidden")
+                }
+              >
+                * Add items to cart to continue order
+              </span>
 
               <div className="mt-4 text-right">
                 <div className="text-gray-400 dark:text-gray-300 text-xl font-extrabold">
@@ -444,7 +439,9 @@ export default function PlaceOrder() {
                   ₹{getTotalPrice()}
                 </div>
                 <div className="text-xl font-extrabold dark:text-gray-400">
-                  ₹{getTotalPrice() - (placeOrder.discount ? placeOrder.discount: 0) }
+                  ₹
+                  {getTotalPrice() -
+                    (placeOrder.discount ? placeOrder.discount : 0)}
                 </div>
               </div>
               <div className="mt-4">
