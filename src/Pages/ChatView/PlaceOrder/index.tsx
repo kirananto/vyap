@@ -431,19 +431,42 @@ export default function PlaceOrder() {
                 * Add items to cart to continue order
               </span>
 
-              <div className="mt-4 text-right">
+              <div className="mt-10 text-right">
                 <div className="text-gray-400 dark:text-gray-300 text-xl font-extrabold">
-                  Total
-                </div>
-                <div className="text-xl font-extrabold dark:text-gray-400">
-                  ₹{getTotalPrice()}
-                </div>
-                <div className="text-xl font-extrabold dark:text-gray-400">
-                  ₹
-                  {getTotalPrice() -
-                    (placeOrder.discount ? placeOrder.discount : 0)}
+                  Order Summary
                 </div>
               </div>
+
+              <div className="grid grid-cols-5 gap-3 mt-2">
+                <div className="col-span-3 mt-1 ml-10">
+                  <div className="text-gray-400 dark:text-gray-300 text-base">
+                    Cart Total :
+                  </div>
+
+                  <div className="text-gray-400 dark:text-gray-300 text-base">
+                    Discount :
+                  </div>
+
+                  <div className="text-gray-400 font-extrabold mt-1 dark:text-gray-300 text-lg">
+                    Grand Total :
+                  </div>
+                </div>
+
+                <div className="col-span-2  mt-1 text-right">
+                  <div className="text-base  dark:text-gray-400">
+                    ₹{getTotalPrice()}
+                  </div>
+                  <div className="text-base dark:text-gray-400">
+                    ₹{placeOrder.discount}
+                  </div>
+                  <div className="text-lg font-extrabold mt-1 dark:text-gray-400">
+                    ₹
+                    {getTotalPrice() -
+                      (placeOrder.discount ? placeOrder.discount : 0)}
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-4">
                 <Button onClick={handleSubmit}>Place order</Button>
               </div>
