@@ -1,4 +1,5 @@
-import { Button, Snackbar } from '@material-ui/core';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Workbox, messageSW } from 'workbox-window';

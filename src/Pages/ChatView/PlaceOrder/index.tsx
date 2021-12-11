@@ -402,14 +402,14 @@ export default function PlaceOrder() {
               <div
                 className="bg-gradient-to-br from-blue-50 to-blue-100 
                   text-indigo-700 transition duration-500 ease-in-out transform rounded-full 
-                    border border-indigo-600
+                    border border-indigo-600 dark:bg-gradient-to-br dark:from-blue-500 dark:to-indigo-700
                     flex mx-10  py-2 mt-4 cursor-pointer justify-center items-center"
                 onClick={() => navigate("/place-order/add-item")}
               >
-                <div className="flex bg-gradient-to-br from-blue-500 to-indigo-700 rounded-full">
+                <div className="flex bg-gradient-to-br from-blue-500 to-indigo-700 rounded-full dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-300 "
+                    className="h-5 w-5 text-gray-300 dark:text-gray-100 "
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -420,7 +420,7 @@ export default function PlaceOrder() {
                     />
                   </svg>
                 </div>
-                <div className="flex  text-lg ml-2">Add more items</div>
+                <div className="flex  text-lg ml-2 dark:text-white">Add more items</div>
               </div>
 
               <span
