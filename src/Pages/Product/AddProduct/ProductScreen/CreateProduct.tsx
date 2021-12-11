@@ -44,6 +44,25 @@ function CreateProduct() {
   }, []);
 
   useEffect(() => {
+    /* avoid accidental back button hit - confirm alert */
+    let trackBackBtn = true;
+    history.pushState(null, location.href, location.href);
+    window.addEventListener("popstate", function (event) {
+      if (trackBackBtn) {
+        const leavePageAlert = confirm(
+          "Are you sure to Go back?... Inputs will be lost."
+        );
+        if (leavePageAlert) {
+          trackBackBtn = false;
+          history.back();
+        } else {
+          history.pushState(null, location.href, location.href);
+        }
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (addProductInfo?.centralCatalogue?.id) {
       fetchCentralProductImages(
         token!,
@@ -61,9 +80,12 @@ function CreateProduct() {
         }
       });
     } else {
-      if(addProductInfo?.others?.productImage?.length > 0) {
+      if (addProductInfo?.others?.productImage?.length > 0) {
         setProductImage(
-          getImageURL(addProductInfo?.others?.productImage[0]?.imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)
+          getImageURL(
+            addProductInfo?.others?.productImage[0]?.imageName,
+            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+          )
         );
       }
     }
@@ -75,7 +97,12 @@ function CreateProduct() {
     isValidHSN: boolean,
     isValidGST: boolean
   ): void => {
-    if (isValidMRP && isValidSale && (addProductInfo?.pricing?.taxEnabled ? (isValidHSN && isValidGST) : true)) setIsValid(true);
+    if (
+      isValidMRP &&
+      isValidSale &&
+      (addProductInfo?.pricing?.taxEnabled ? isValidHSN && isValidGST : true)
+    )
+      setIsValid(true);
     else setIsValid(false);
   };
 
@@ -109,15 +136,19 @@ function CreateProduct() {
       const centralProduct: any = await postAddCentralProduct(token!, {
         name: addProductInfo?.centralCatalogue?.name!,
         description: addProductInfo?.centralCatalogue?.description ?? "",
-        categories: addProductInfo?.others?.centralCategory?.id ? undefined : {
-          name: addProductInfo?.others?.centralCategory?.name,
-          description: addProductInfo?.others?.centralCategory?.name,
-          imageName: addProductInfo?.others?.centralCategory?.name,
-        },
+        categories: addProductInfo?.others?.centralCategory?.id
+          ? undefined
+          : {
+              name: addProductInfo?.others?.centralCategory?.name,
+              description: addProductInfo?.others?.centralCategory?.name,
+              imageName: addProductInfo?.others?.centralCategory?.name,
+            },
         categoriesId: addProductInfo?.others?.centralCategory?.id,
         barCode: addProductInfo?.others?.barCode,
         images: addProductInfo?.others?.productImage,
-        hsnId: addProductInfo?.pricing?.taxEnabled ? addProductInfo?.pricing.hsn?.id : undefined,
+        hsnId: addProductInfo?.pricing?.taxEnabled
+          ? addProductInfo?.pricing.hsn?.id
+          : undefined,
         brandId: addProductInfo?.others?.brand?.id ?? undefined,
         brand: addProductInfo?.others?.brand?.id
           ? undefined
@@ -138,7 +169,7 @@ function CreateProduct() {
             name: addProductInfo?.others?.category?.name,
             description: addProductInfo?.others?.category?.name,
             imageName: addProductInfo?.others?.category?.name,
-            organizationId: user?.organizationId
+            organizationId: user?.organizationId,
           },
       thumbnailImage: addProductInfo?.others?.productImage?.[0]?.imageName,
       aliasName: addProductInfo?.centralCatalogue?.id
@@ -199,7 +230,7 @@ function CreateProduct() {
 
         {/* -------------------TAB-1----------------- */}
         <div className={toggleState === 1 ? "block" : "hidden"}>
-          <PricingTab setValidation={doValidate}  submitStatus={isSubmit} />
+          <PricingTab setValidation={doValidate} submitStatus={isSubmit} />
         </div>
 
         {/* -------------------TAB-1----------------- */}
