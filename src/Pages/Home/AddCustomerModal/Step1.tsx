@@ -79,6 +79,7 @@ export default function AddCustomerStep1({
         <input
           type="number"
           name="tel"
+          min= {0}
           value={phoneNumber}
           onChange={(event) => {
             setPhoneNumber(event?.target.value);

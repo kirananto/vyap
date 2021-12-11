@@ -29,6 +29,10 @@ export default function PlaceOrder() {
     | undefined
   >(undefined);
 
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [isValidCart, setIsValidCart] = useState<boolean>(false);
+  const [isValidDiscount, setIsValidDiscount] = useState<boolean>(false);
+
   const [search, setSearch] = useState("");
 
   const placeOrder = useSelector(selectPlaceOrderInfo);
@@ -36,6 +40,25 @@ export default function PlaceOrder() {
   const navigate = useNavigate();
 
   const isSupplier = localStorage.getItem("isSupplier") === "true";
+
+  useEffect(() => {
+    if (placeOrder.cartItems?.length !== 0) {
+      setIsValidCart(true);
+    } else {
+      setIsValidCart(false);
+    }
+  }, [placeOrder.cartItems]);
+
+  useEffect(() => {
+    let discountPrice = placeOrder.discount;
+    let finalPrice = getTotalPrice();
+
+    if (discountPrice > finalPrice) {
+      setIsValidDiscount(false);
+    } else {
+      setIsValidDiscount(true);
+    }
+  }, [placeOrder.cartItems, placeOrder.discount]);
 
   function handleAddItem(item: any, caseQuantity: number) {
     dispatch(
@@ -52,6 +75,13 @@ export default function PlaceOrder() {
     dispatch(removeItemsFromCart({ id: item.id, quantity: caseQuantity }));
   }
 
+  function closeDropList() {
+    setIsDropOpen({
+      isAdd: false,
+      isOpen: undefined,
+    });
+  }
+
   function getTotalPrice() {
     const price = placeOrder.cartItems?.reduce(
       (a: any, b: any) => a + b.quantity * parseFloat(b?.rate),
@@ -60,7 +90,7 @@ export default function PlaceOrder() {
     return price;
   }
 
-  function handleDiscountValue(){
+  function handleDiscountValue() {
     if (!placeOrder.discount) {
       dispatch(setFlatDiscount(parseFloat("0")));
     } else {
@@ -68,20 +98,28 @@ export default function PlaceOrder() {
     }
   }
 
-  function updateDiscount(event : any){
-    let inputValue =  event?.target.value;
+  function updateDiscount(event: any) {
+    let inputValue = event?.target.value;
+    let finalPrice = getTotalPrice();
     if (inputValue) {
-            dispatch(
-                setFlatDiscount(parseFloat(inputValue as any))
-              )   
-     }else{
-        dispatch(
-            setFlatDiscount(inputValue as any)
-          )   
-     }
+      if (inputValue > finalPrice) {
+        setIsValidDiscount(false);
+        dispatch(setFlatDiscount(finalPrice as any));
+        setTimeout(() => {
+          setIsValidDiscount(true);
+        }, 5000);
+      } else {
+        setIsValidDiscount(true);
+        dispatch(setFlatDiscount(parseFloat(inputValue as any)));
+      }
+    } else {
+      dispatch(setFlatDiscount(inputValue as any));
     }
+  }
 
   function handleSubmit() {
+    setIsSubmit(true);
+    if (placeOrder.cartItems?.length !== 0 && isValidDiscount) {
       placeOrderAPI(token!, {
         description: placeOrder.note,
         flatDiscount: placeOrder.discount,
@@ -99,6 +137,9 @@ export default function PlaceOrder() {
       }).then((result) => {
         navigate(`/chat/${localStorage?.getItem("inboxId")}`);
       });
+    } else {
+      //setIsValidCart(false);
+    }
   }
 
   function renderCartItems() {
@@ -161,13 +202,19 @@ export default function PlaceOrder() {
                       {
                         appearance: "danger",
                         label: "Remove 1 Item",
-                        onClick: () => handleRemoveItemItem(item, 1),
+                        onClick: () => {
+                          handleRemoveItemItem(item, 1), closeDropList();
+                        },
                       },
-                      {
-                        appearance: "danger",
-                        label: "Remove 1 Case (10 Pc)",
-                        onClick: () => handleRemoveItemItem(item, 10),
-                      },
+                      //Hidden 1 case
+                      // {
+                      //   appearance: "danger",
+                      //   label: "Remove 1 Case (10 Pc)",
+                      //   onClick: () => {
+                      //     handleRemoveItemItem(item, 10),
+                      //     closeDropList();
+                      //   }
+                      // }
                     ]}
                     trigger={
                       <svg
@@ -210,13 +257,20 @@ export default function PlaceOrder() {
                       {
                         appearance: "primary",
                         label: "Add 1 Item",
-                        onClick: () => handleAddItem(item, 1),
+                        onClick: () => {
+                          handleAddItem(item, 1), closeDropList();
+                        },
                       },
-                      {
-                        appearance: "primary",
-                        label: "Add 1 Case (10 Pc)",
-                        onClick: () => handleAddItem(item, 10),
-                      },
+
+                      //Hidden 1 case
+
+                      // {
+                      //   appearance: "primary",
+                      //   label: "Add 1 Case (10 Pc)",
+                      //   onClick: () => { handleAddItem(item, 10),
+                      //     closeDropList();
+                      //   }
+                      // },
                     ]}
                     trigger={
                       <svg
@@ -262,7 +316,10 @@ export default function PlaceOrder() {
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="w-full bg-white shadow ">
-        <SimpleHeader backFn={() => navigate(`/chat/${localStorage?.getItem("inboxId")}`)} heading={"Place Order"} />
+        <SimpleHeader
+          backFn={() => navigate(`/chat/${localStorage?.getItem("inboxId")}`)}
+          heading={"Place Order"}
+        />
       </div>
       <div className={"p-2 pt-20"}>
         {/* <!-- Textarea --> */}
@@ -283,11 +340,21 @@ export default function PlaceOrder() {
             <input
               value={placeOrder.discount}
               onBlur={handleDiscountValue}
-              onChange={(event) => updateDiscount(event) }
+              onChange={(event) => updateDiscount(event)}
               className="p-2 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
               inputMode="numeric"
               type="number"
+              min={0}
             />
+
+            <span
+              className={
+                "flex items-center font-medium tracking-wide text-green-500 text-xs mt-2 ml-4 " +
+                (isValidDiscount ? "hidden" : "")
+              }
+            >
+              * Maximum Discount Applicable: ₹{getTotalPrice()}
+            </span>
           </div>
         ) : null}
         <div className="border rounded-lg m-2 px-4 border-gray-200 dark:border-gray-700 pb-4 pt-4">
@@ -333,13 +400,16 @@ export default function PlaceOrder() {
             <div>
               {renderCartItems()}
               <div
-                className="flex w-full border border-dashed dark:border-gray-500 py-2 mt-4 cursor-pointer justify-center items-center"
+                className="bg-gradient-to-br from-blue-50 to-blue-100 
+                  text-indigo-700 transition duration-500 ease-in-out transform rounded-full 
+                    border border-indigo-600
+                    flex mx-10  py-2 mt-4 cursor-pointer justify-center items-center"
                 onClick={() => navigate("/place-order/add-item")}
               >
-                <div className="flex ">
+                <div className="flex bg-gradient-to-br from-blue-500 to-indigo-700 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-600 dark:text-gray-300 "
+                    className="h-5 w-5 text-gray-300 "
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -350,21 +420,54 @@ export default function PlaceOrder() {
                     />
                   </svg>
                 </div>
-                <div className="flex font-bold text-gray-600 dark:text-gray-300 text-lg">
-                  Add more items
-                </div>
+                <div className="flex  text-lg ml-2">Add more items</div>
               </div>
-              <div className="mt-4 text-right">
+
+              <span
+                className={
+                  "flex items-center font-medium tracking-wide text-red-500 text-xs mt-2 ml-4 " +
+                  (isSubmit ? (isValidCart ? "hidden" : "") : "hidden")
+                }
+              >
+                * Add items to cart to continue order
+              </span>
+
+              <div className="mt-10 text-right">
                 <div className="text-gray-400 dark:text-gray-300 text-xl font-extrabold">
-                  Total
-                </div>
-                <div className="text-xl font-extrabold dark:text-gray-400">
-                  ₹{getTotalPrice()}
-                </div>
-                <div className="text-xl font-extrabold dark:text-gray-400">
-                  ₹{getTotalPrice() - (placeOrder.discount ? placeOrder.discount: 0) }
+                  Order Summary
                 </div>
               </div>
+
+              <div className="grid grid-cols-5 gap-3 mt-2">
+                <div className="col-span-3 mt-1 ml-10">
+                  <div className="text-gray-400 dark:text-gray-300 text-base">
+                    Cart Total :
+                  </div>
+
+                  <div className="text-gray-400 dark:text-gray-300 text-base">
+                    Discount :
+                  </div>
+
+                  <div className="text-gray-600 font-extrabold mt-1 dark:text-gray-300 text-lg">
+                    Grand Total :
+                  </div>
+                </div>
+
+                <div className="col-span-2  mt-1 text-right">
+                  <div className="text-base  dark:text-gray-400">
+                    ₹{getTotalPrice()}
+                  </div>
+                  <div className="text-base dark:text-gray-400">
+                    ₹{placeOrder.discount}
+                  </div>
+                  <div className="text-lg font-extrabold mt-1 dark:text-gray-400">
+                    ₹
+                    {getTotalPrice() -
+                      (placeOrder.discount ? placeOrder.discount : 0)}
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-4">
                 <Button onClick={handleSubmit}>Place order</Button>
               </div>
