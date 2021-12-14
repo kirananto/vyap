@@ -196,7 +196,14 @@ export default function PlaceOrder() {
                   </div>
                 </div>
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                  <DropList
+                   <svg xmlns="http://www.w3.org/2000/svg" 
+                            onClick={() => {
+                                handleRemoveItemItem(item, 1);
+                            }}
+                             className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  {/* <DropList
                     isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
                     list={[
                       {
@@ -245,13 +252,18 @@ export default function PlaceOrder() {
                         });
                       }
                     }}
-                  />
+                  /> */}
                 </div>
                 <div className="flex items-center dark:text-gray-200">
                   {item.quantity ?? 0}
                 </div>
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                  <DropList
+
+                <svg xmlns="http://www.w3.org/2000/svg" onClick = {() => {
+                                handleAddItem(item, 1);}} className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                 </svg>
+                  {/* <DropList
                     isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
                     list={[
                       {
@@ -301,7 +313,7 @@ export default function PlaceOrder() {
                         });
                       }
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="flex text-lg font-bold text-gray-600 items-center dark:text-gray-200">
