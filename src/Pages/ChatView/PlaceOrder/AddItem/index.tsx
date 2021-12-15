@@ -86,6 +86,31 @@ export default function AddItem() {
         }
     }
 
+    function updateItem(item: any, caseQuantity: number) {
+        const isAlreadyPresent = selectedItems?.some((someItem: any) => someItem.id === item.id)
+        if (isAlreadyPresent) {
+            const _selectedItems = selectedItems?.map((mapItem: any) => {
+                if (mapItem.id === item.id) {
+                    return {
+                        ...mapItem,
+                        quantity: Math.abs(caseQuantity)
+                    }
+                }
+                return mapItem
+            }).filter((filterItem: any) => filterItem.quantity > 0)
+
+            setSelectedItems(_selectedItems)
+        } else {
+            const _selectedItems = [...selectedItems, {
+                ...item,
+                quantity: Math.abs(caseQuantity)
+            }]
+
+            setSelectedItems(_selectedItems)
+        }
+
+    }
+
 
     function handleRemoveItemItem(item: any, caseQuantity: number) {
         const _selectedItems = selectedItems?.map((mapItem: any) => {
@@ -137,7 +162,6 @@ export default function AddItem() {
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
 
                          <svg xmlns="http://www.w3.org/2000/svg" 
-                         
                             onClick={() => {
                                 handleRemoveItemItem(item, 1);
                             }}
@@ -186,7 +210,17 @@ export default function AddItem() {
                         }}
                     /> */}
                 </div>
-                <div className="flex items-center dark:text-gray-200">{selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? 0}</div>
+                <div className="flex items-center dark:text-gray-200">
+                 <form autoComplete="off" >
+                    <input className='w-10 border-dashed border px-1 border-indigo-300 ' type="number" name="qty" id="qty" 
+                         onChange={(e) => {
+                            updateItem(item, parseInt(e.target.value.toString()));
+                         }}
+                         value={selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? (0)}
+                    />
+                  </form>  
+                </div>
+
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
 
                          <svg xmlns="http://www.w3.org/2000/svg" onClick = {() => {
