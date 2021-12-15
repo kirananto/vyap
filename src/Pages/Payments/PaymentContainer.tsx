@@ -55,7 +55,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
           ref={componentRef}
           className="p-3 m-3 border border-gray-300 dark:border-gray-500 rounded"
         >
-          <h1> Payment Summary:</h1>
+          <h1 className="dark:text-white"> Payment Summary:</h1>
           {item ? (
             <div className={`flex w-full justify-between mt-2 pb-2`}>
               <div className="flex gap-2">
