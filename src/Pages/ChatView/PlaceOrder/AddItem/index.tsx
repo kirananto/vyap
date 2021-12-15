@@ -212,7 +212,7 @@ export default function AddItem() {
                 </div>
                 <div className="flex items-center dark:text-gray-200">
                  <form autoComplete="off" >
-                    <input className='w-10 border-dashed border px-1 border-indigo-300 ' type="number" name="qty" id="qty" 
+                    <input className='w-10 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 ' type="number" name="qty" id="qty" 
                          onChange={(e) => {
                             updateItem(item, parseInt(e.target.value.toString()));
                          }}
