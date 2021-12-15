@@ -40,6 +40,30 @@ export const placeOrderSlice = createSlice({
             })
             state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned];
         },
+        updateItemsOnCart: (state, action: PayloadAction<any>) => {
+            const oldCartItemsModified = state.cartItems?.map(mapItem => {
+                const payloadQuantity = action.payload?.find((findItem: any) => findItem.id === mapItem.id)?.quantity ?? 0
+
+                if(payloadQuantity > 0){
+                    return {
+                        ...mapItem,
+                        quantity:  payloadQuantity
+                    }
+                }else{
+                    return {
+                        ...mapItem,
+                        quantity:  mapItem.quantity + payloadQuantity
+                    }
+                }
+                
+            })
+            const newCartItemCleaned = action.payload?.filter((filterItem: any) => {
+                const isItAlreadyPresent = oldCartItemsModified?.some(someItem => someItem.id === filterItem.id)
+                return !isItAlreadyPresent
+            })
+            state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned];
+
+        },
         removeItemsFromCart: (state, action: PayloadAction<{ id: string, quantity: number }>) => {
             state.cartItems = state.cartItems?.map(mapItem => {
                 if(mapItem.id === action.payload.id) {
@@ -64,7 +88,7 @@ export const placeOrderSlice = createSlice({
     },
 });
 
-export const { setNote, setFlatDiscount, pushItemsToCart, removeItemsFromCart, setOrgId, clearAll } = placeOrderSlice.actions;
+export const { setNote, setFlatDiscount, pushItemsToCart, updateItemsOnCart, removeItemsFromCart, setOrgId, clearAll } = placeOrderSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

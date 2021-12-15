@@ -8,6 +8,7 @@ import DropList from "src/Components/Style/DropList";
 
 import {
   pushItemsToCart,
+  updateItemsOnCart,
   removeItemsFromCart,
   selectPlaceOrderInfo,
   setFlatDiscount,
@@ -69,6 +70,18 @@ export default function PlaceOrder() {
         },
       ])
     );
+  }
+
+  function updateItem(item: any, caseQuantity: number) {
+    dispatch(
+      updateItemsOnCart([
+        {
+          ...item,
+          quantity: caseQuantity,
+        },
+      ])
+    );
+    
   }
 
   function handleRemoveItemItem(item: any, caseQuantity: number) {
@@ -254,9 +267,21 @@ export default function PlaceOrder() {
                     }}
                   /> */}
                 </div>
+
                 <div className="flex items-center dark:text-gray-200">
-                  {item.quantity ?? 0}
+                 <form autoComplete="off" >
+                    <input className='w-10 border-dashed border px-1 border-indigo-300 ' type="number" name="qty" id="qty" 
+                         onChange={(e) => {
+                            updateItem(item, parseInt(e.target.value));
+                         }}
+                         onBlur={(e) => {
+                          item.quantity ? parseInt(e.target.value) : updateItem(item, 1);
+                         }}
+                         value={item.quantity ?? 0}
+                    />
+                  </form>  
                 </div>
+
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
 
                 <svg xmlns="http://www.w3.org/2000/svg" onClick = {() => {
