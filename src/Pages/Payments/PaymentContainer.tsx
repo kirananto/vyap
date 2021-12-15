@@ -136,7 +136,6 @@ export default function PaymentContainer({ payments, loading }: IProps) {
             index === payments.length - 1 ? "" : "border-b border-gray-300"
           }`}
           key={`${index}`}
-          onClick={() => openPaymentSummary(item)}
         >
           <div className="flex flex-row mt-2 mb-3">
             <div className="">
@@ -148,7 +147,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
               </div>
             </div>
 
-            <div className="w-full">
+            <div className="w-full" onClick={() => openPaymentSummary(item)}>
               <div className="grid grid-rows-3 content-start">
                 <div className="grid grid-flow-col auto-cols-max gap-1 row-span-3">
                   <div className="text-gray-500 dark:text-gray-300">
