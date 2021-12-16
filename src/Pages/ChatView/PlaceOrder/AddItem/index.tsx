@@ -86,6 +86,31 @@ export default function AddItem() {
         }
     }
 
+    function updateItem(item: any, caseQuantity: number) {
+        const isAlreadyPresent = selectedItems?.some((someItem: any) => someItem.id === item.id)
+        if (isAlreadyPresent) {
+            const _selectedItems = selectedItems?.map((mapItem: any) => {
+                if (mapItem.id === item.id) {
+                    return {
+                        ...mapItem,
+                        quantity: Math.abs(caseQuantity)
+                    }
+                }
+                return mapItem
+            }).filter((filterItem: any) => filterItem.quantity > 0)
+
+            setSelectedItems(_selectedItems)
+        } else {
+            const _selectedItems = [...selectedItems, {
+                ...item,
+                quantity: Math.abs(caseQuantity)
+            }]
+
+            setSelectedItems(_selectedItems)
+        }
+
+    }
+
 
     function handleRemoveItemItem(item: any, caseQuantity: number) {
         const _selectedItems = selectedItems?.map((mapItem: any) => {
@@ -135,7 +160,16 @@ export default function AddItem() {
             </div>
             <div className="flex gap-2">
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                    <DropList
+
+                         <svg xmlns="http://www.w3.org/2000/svg" 
+                            onClick={() => {
+                                handleRemoveItemItem(item, 1);
+                            }}
+                             className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                    {/* <DropList
                         isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
                         list={[{
                             appearance: 'danger',
@@ -174,11 +208,27 @@ export default function AddItem() {
                                 })
                             }
                         }}
-                    />
+                    /> */}
                 </div>
-                <div className="flex items-center dark:text-gray-200">{selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? 0}</div>
+                <div className="flex items-center dark:text-gray-200">
+                 <form autoComplete="off" >
+                    <input className='w-10 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 ' type="number" name="qty" id="qty" 
+                         onChange={(e) => {
+                            updateItem(item, parseInt(e.target.value.toString()));
+                         }}
+                         value={selectedItems?.find((findItem: any) => findItem.id === item.id)?.quantity ?? (0)}
+                    />
+                  </form>  
+                </div>
+
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                    <DropList
+
+                         <svg xmlns="http://www.w3.org/2000/svg" onClick = {() => {
+                                handleAddItem(item, 1);}} className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        
+                    {/* <DropList
                         isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
                         list={[{
                             appearance: 'primary',
@@ -217,7 +267,8 @@ export default function AddItem() {
                                 })
                             }
                         }}
-                    />
+                    /> */}
+
                 </div>
             </div>
         </div>))

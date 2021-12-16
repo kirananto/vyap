@@ -8,6 +8,7 @@ import DropList from "src/Components/Style/DropList";
 
 import {
   pushItemsToCart,
+  updateItemsOnCart,
   removeItemsFromCart,
   selectPlaceOrderInfo,
   setFlatDiscount,
@@ -63,6 +64,17 @@ export default function PlaceOrder() {
   function handleAddItem(item: any, caseQuantity: number) {
     dispatch(
       pushItemsToCart([
+        {
+          ...item,
+          quantity: caseQuantity,
+        },
+      ])
+    );
+  }
+
+  function updateItem(item: any, caseQuantity: number) {
+    dispatch(
+      updateItemsOnCart([
         {
           ...item,
           quantity: caseQuantity,
@@ -187,7 +199,10 @@ export default function PlaceOrder() {
                   )}
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name} (${item.aliasName})`}</div>
+                  <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">
+                    {`${item.centralCatalogue?.name} ` +
+                      (item.aliasName ? `(${item.aliasName})` : "")}
+                  </div>
                   <div className="flex font-bold text-xs text-gray-300 dark:text-gray-300">
                     {item?.centralCatalogue?.description}
                   </div>
@@ -196,7 +211,24 @@ export default function PlaceOrder() {
                   </div>
                 </div>
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                  <DropList
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    onClick={() => {
+                      handleRemoveItemItem(item, 1);
+                    }}
+                    className="h-6 w-6 cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  {/* <DropList
                     isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
                     list={[
                       {
@@ -245,13 +277,48 @@ export default function PlaceOrder() {
                         });
                       }
                     }}
-                  />
+                  /> */}
                 </div>
+
                 <div className="flex items-center dark:text-gray-200">
-                  {item.quantity ?? 0}
+                  <form autoComplete="off">
+                    <input
+                      className="w-10 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                      type="number"
+                      name="qty"
+                      id="qty"
+                      onChange={(e) => {
+                        updateItem(item, parseInt(e.target.value));
+                      }}
+                      onBlur={(e) => {
+                        item.quantity
+                          ? parseInt(e.target.value)
+                          : updateItem(item, 1);
+                      }}
+                      value={item.quantity ?? 0}
+                    />
+                  </form>
                 </div>
+
                 <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                  <DropList
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    onClick={() => {
+                      handleAddItem(item, 1);
+                    }}
+                    className="h-6 w-6 cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  {/* <DropList
                     isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
                     list={[
                       {
@@ -301,7 +368,7 @@ export default function PlaceOrder() {
                         });
                       }
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="flex text-lg font-bold text-gray-600 items-center dark:text-gray-200">
@@ -420,7 +487,9 @@ export default function PlaceOrder() {
                     />
                   </svg>
                 </div>
-                <div className="flex  text-lg ml-2 dark:text-white">Add more items</div>
+                <div className="flex  text-lg ml-2 dark:text-white">
+                  Add more items
+                </div>
               </div>
 
               <span
