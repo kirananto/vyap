@@ -144,14 +144,11 @@ function CreateProduct() {
       const centralProduct: any = await postAddCentralProduct(token!, {
         name: addProductInfo?.centralCatalogue?.name!,
         description: addProductInfo?.centralCatalogue?.description ?? "",
-        categories: addProductInfo?.others?.centralCategory?.id
-          ? undefined
-          : {
-              name: addProductInfo?.others?.centralCategory?.name,
-              description: addProductInfo?.others?.centralCategory?.name,
-              imageName: addProductInfo?.others?.centralCategory?.name,
-            },
-        categoriesId: addProductInfo?.others?.centralCategory?.id,
+        categories: {
+          name: addProductInfo?.others?.centralCategory?.name,
+          description: addProductInfo?.others?.centralCategory?.name,
+          imageName: addProductInfo?.others?.centralCategory?.name,
+        },
         barCode: addProductInfo?.others?.barCode,
         images: addProductInfo?.others?.productImage,
         hsnId: addProductInfo?.pricing?.taxEnabled
@@ -161,10 +158,10 @@ function CreateProduct() {
         brand: addProductInfo?.others?.brand?.id
           ? undefined
           : {
-              name: addProductInfo?.others?.brand?.name,
-              description: addProductInfo?.others?.brand?.name,
-              imageName: addProductInfo?.others?.brand?.name,
-            },
+            name: addProductInfo?.others?.brand?.name,
+            description: addProductInfo?.others?.brand?.name,
+            imageName: addProductInfo?.others?.brand?.name,
+          },
       });
       centralCatalogueId = centralProduct?.data?.id;
     }
@@ -174,11 +171,11 @@ function CreateProduct() {
       organizationCatalogueCategory: addProductInfo?.others?.category?.id
         ? undefined
         : {
-            name: addProductInfo?.others?.category?.name,
-            description: addProductInfo?.others?.category?.name,
-            imageName: addProductInfo?.others?.category?.name,
-            organizationId: user?.organizationId,
-          },
+          name: addProductInfo?.others?.category?.name,
+          description: addProductInfo?.others?.category?.name,
+          imageName: addProductInfo?.others?.category?.name,
+          organizationId: user?.organizationId,
+        },
       thumbnailImage: addProductInfo?.others?.productImage?.[0]?.imageName,
       aliasName: addProductInfo?.centralCatalogue?.id
         ? addProductInfo?.others?.aliasName
@@ -215,21 +212,19 @@ function CreateProduct() {
         <div className="flex justify-between py-4">
           <button
             onClick={() => toggleTabs(1)}
-            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${
-              toggleState === 1
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1
                 ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 "
                 : "text-gray-500 dark:text-gray-300"
-            }`}
+              }`}
           >
             Pricing
           </button>
           <button
             onClick={() => toggleTabs(2)}
-            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${
-              toggleState === 2
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2
                 ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                 : "text-gray-500 dark:text-gray-300"
-            }`}
+              }`}
           >
             Others
           </button>
