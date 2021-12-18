@@ -142,7 +142,7 @@ export default function PlaceOrder() {
             quantity: mapItem.quantity,
             purchasePrice: parseFloat(mapItem.rate),
             productId: mapItem.id,
-            aliasName: mapItem.aliasName,
+            aliasName: mapItem.aliasName ?? '',
             mrpPrice: parseFloat(mapItem.mrpPrice),
           };
         }),
