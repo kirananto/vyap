@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         '10/20/60/10': '13% 20% 57% 10%',
+        '20/50/30': '20% 50% 30%',
       },
     },
   },
