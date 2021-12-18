@@ -8,7 +8,11 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        '10/20/60/10': '13% 20% 57% 10%',
+      },
+    },
   },
   plugins: [],
 }

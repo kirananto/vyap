@@ -289,10 +289,10 @@ export default function AddItem() {
                 isOpen={filterPopupOpen!}
                 onClose={() => setfilterPopupOpen(false)}
             />
-            <div className="px-4" style={{ height: 'calc(100vh - 12rem)' }}>
+            <div className="px-4 pb-24">
                 {renderItems()}
             </div>
-            <div className="fixed bottom-12 m-auto left-0 right-0 px-4">
+            <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
                 <Button onClick={onSubmit}>Add {selectedItems?.length} items (₹{calculatePriceOfSelected()})</Button>
             </div>
         </div>
