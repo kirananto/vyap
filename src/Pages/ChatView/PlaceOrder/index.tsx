@@ -87,6 +87,8 @@ export default function PlaceOrder() {
     dispatch(removeItemsFromCart({ id: item.id, quantity: caseQuantity }));
   }
 
+
+
   function closeDropList() {
     setIsDropOpen({
       isAdd: false,
@@ -142,7 +144,7 @@ export default function PlaceOrder() {
             quantity: mapItem.quantity,
             purchasePrice: parseFloat(mapItem.rate),
             productId: mapItem.id,
-            aliasName: mapItem.aliasName ?? '',
+            aliasName: mapItem.aliasName ?? "",
             mrpPrice: parseFloat(mapItem.mrpPrice),
           };
         }),
@@ -184,73 +186,49 @@ export default function PlaceOrder() {
             )
           )
           ?.map((item, index) => (
-            <div className="flex justify-between" key={`${index}`}>
-              <div className="flex pt-4 gap-2 items-center">
-                <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
-                  {item?.thumbnailImage && (
-                    <img
-                      src={getImageURL(
-                        item?.thumbnailImage,
-                        IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                      )}
-                      alt="Avatar"
-                      className="object-cover w-full h-full"
-                    />
-                  )}
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex text-base font-bold text-gray-600 dark:text-gray-200">
-                    {`${item.centralCatalogue?.name} ` +
-                      (item.aliasName ? `(${item.aliasName})` : "")}
+            <div className="my-5 border-b border-gray-300">
+              <div className="grid grid-rows-2" key={`${index}`}>
+                <div className="grid grid-cols-3 ">
+                  <div className="shadow-xl self-center w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                    {item?.thumbnailImage && (
+                      <img
+                        src={getImageURL(
+                          item?.thumbnailImage,
+                          IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                        )}
+                        alt="Avatar"
+                        className="object-cover w-full h-full "
+                      />
+                    )}
                   </div>
-                  <div className="flex font-bold text-xs text-gray-300 dark:text-gray-300">
+
+                  <div className="col-span-2">
+                    <div className=" text-base font-bold text-gray-600 dark:text-gray-200">
+                      {`${item.centralCatalogue?.name} `}
+                    </div>
+                    <div className=" font-bold text-sm text-gray-600 dark:text-gray-300">
+                      {item.aliasName ? `( ${item.aliasName})` : ""}
+                    </div>
+                    <div className=" font-bold text-xs text-gray-500 dark:text-gray-400">
+                      MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}
+                    </div>
+                  
+                  <div className=" font-bold text-xs text-gray-400 dark:text-gray-500">
                     {item?.centralCatalogue?.description}
                   </div>
-                  <div className="flex font-bold text-xs text-gray-400 dark:text-gray-400">
-                    MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}
                   </div>
                 </div>
-                <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => {
-                      handleRemoveItemItem(item, 1);
-                    }}
-                    className="h-6 w-6 cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  {/* <DropList
-                    isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
-                    list={[
-                      {
-                        appearance: "danger",
-                        label: "Remove 1 Item",
-                        onClick: () => {
-                          handleRemoveItemItem(item, 1), closeDropList();
-                        },
-                      },
-                      //Hidden 1 case
-                      // {
-                      //   appearance: "danger",
-                      //   label: "Remove 1 Case (10 Pc)",
-                      //   onClick: () => {
-                      //     handleRemoveItemItem(item, 10),
-                      //     closeDropList();
-                      //   }
-                      // }
-                    ]}
-                    trigger={
+
+                <div className="grid grid-cols-3 self-center">
+                  
+                  {/* plus minus buttons */}
+                  <div className="grid grid-cols-3 self-center">
+                    <div className=" text-blue-600 dark:text-blue-400">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
+                        onClick={() => {
+                          handleRemoveItemItem(item, 1);
+                        }}
                         className="h-6 w-6 cursor-pointer"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -263,85 +241,84 @@ export default function PlaceOrder() {
                           d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                    }
-                    onClick={() => {
-                      if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
-                        setIsDropOpen({
-                          isAdd: false,
-                          isOpen: undefined,
-                        });
-                      } else {
-                        setIsDropOpen({
-                          isAdd: false,
-                          isOpen: index,
-                        });
-                      }
-                    }}
-                  /> */}
-                </div>
+                      {/* <DropList
+                            isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
+                            list={[
+                              {
+                                appearance: "danger",
+                                label: "Remove 1 Item",
+                                onClick: () => {
+                                  handleRemoveItemItem(item, 1), closeDropList();
+                                },
+                              },
+                              //Hidden 1 case
+                              // {
+                              //   appearance: "danger",
+                              //   label: "Remove 1 Case (10 Pc)",
+                              //   onClick: () => {
+                              //     handleRemoveItemItem(item, 10),
+                              //     closeDropList();
+                              //   }
+                              // }
+                            ]}
+                            trigger={
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 cursor-pointer"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                            }
+                            onClick={() => {
+                              if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
+                                setIsDropOpen({
+                                  isAdd: false,
+                                  isOpen: undefined,
+                                });
+                              } else {
+                                setIsDropOpen({
+                                  isAdd: false,
+                                  isOpen: index,
+                                });
+                              }
+                            }}
+                          /> */}
+                    </div>
 
-                <div className="flex items-center dark:text-gray-200">
-                  <form autoComplete="off">
-                    <input
-                      className="w-10 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-                      type="number"
-                      name="qty"
-                      id="qty"
-                      onChange={(e) => {
-                        updateItem(item, parseInt(e.target.value));
-                      }}
-                      onBlur={(e) => {
-                        item.quantity
-                          ? parseInt(e.target.value)
-                          : updateItem(item, 1);
-                      }}
-                      value={item.quantity ?? 0}
-                    />
-                  </form>
-                </div>
+                    <div className=" items-center dark:text-gray-200">
+                      <form autoComplete="off">
+                        <input
+                          className="w-10 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                          type="number"
+                          name="qty"
+                          id="qty"
+                          onChange={(e) => {
+                            updateItem(item, parseInt(e.target.value));
+                          }}
+                          onBlur={(e) => {
+                            item.quantity
+                              ? parseInt(e.target.value)
+                              : updateItem(item, 1);
+                          }}
+                          value={item.quantity ?? 0}
+                        />
+                      </form>
+                    </div>
 
-                <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => {
-                      handleAddItem(item, 1);
-                    }}
-                    className="h-6 w-6 cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  {/* <DropList
-                    isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
-                    list={[
-                      {
-                        appearance: "primary",
-                        label: "Add 1 Item",
-                        onClick: () => {
-                          handleAddItem(item, 1), closeDropList();
-                        },
-                      },
-
-                      //Hidden 1 case
-
-                      // {
-                      //   appearance: "primary",
-                      //   label: "Add 1 Case (10 Pc)",
-                      //   onClick: () => { handleAddItem(item, 10),
-                      //     closeDropList();
-                      //   }
-                      // },
-                    ]}
-                    trigger={
+                    <div className=" text-blue-600 dark:text-blue-400 items-center ml-3">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
+                        onClick={() => {
+                          handleAddItem(item, 1);
+                        }}
                         className="h-6 w-6 cursor-pointer"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -354,25 +331,74 @@ export default function PlaceOrder() {
                           d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                    }
-                    onClick={() => {
-                      if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
-                        setIsDropOpen({
-                          isAdd: true,
-                          isOpen: undefined,
-                        });
-                      } else {
-                        setIsDropOpen({
-                          isAdd: true,
-                          isOpen: index,
-                        });
-                      }
-                    }}
-                  /> */}
+                      {/* <DropList
+                            isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
+                            list={[
+                              {
+                                appearance: "primary",
+                                label: "Add 1 Item",
+                                onClick: () => {
+                                  handleAddItem(item, 1), closeDropList();
+                                },
+                              },
+
+                              //Hidden 1 case
+
+                              // {
+                              //   appearance: "primary",
+                              //   label: "Add 1 Case (10 Pc)",
+                              //   onClick: () => { handleAddItem(item, 10),
+                              //     closeDropList();
+                              //   }
+                              // },
+                            ]}
+                            trigger={
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 cursor-pointer"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                            }
+                            onClick={() => {
+                              if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
+                                setIsDropOpen({
+                                  isAdd: true,
+                                  isOpen: undefined,
+                                });
+                              } else {
+                                setIsDropOpen({
+                                  isAdd: true,
+                                  isOpen: index,
+                                });
+                              }
+                            }}
+                          /> */}
+                    </div>
+                  </div>
+
+                  <div className="place-self-center pb-1">
+                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 text-xs font-semibold hover:text-white py-1 px-2 mt-1 border border-blue-500 hover:border-transparent rounded"
+                        onClick={() => {
+                          handleRemoveItemItem(item, item?.quantity || 0);
+                        }}
+                        >
+                      Delete
+                    </button>{" "}
+                  </div>
+
+                  <div className="text-right text-lg font-bold text-gray-600  dark:text-gray-200">
+                    ₹{item?.quantity * parseFloat(item?.rate)}
+                  </div>
                 </div>
-              </div>
-              <div className="flex text-lg font-bold text-gray-600 items-center dark:text-gray-200">
-                ₹{item?.quantity * parseFloat(item?.rate)}
               </div>
             </div>
           ))}
