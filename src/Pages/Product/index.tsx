@@ -149,6 +149,7 @@ export default function Product() {
         body={<FilterPopup />}
         isOpen={filterPopupOpen!}
         onClose={() => setfilterPopupOpen(false)}
+        name={"filter"}
       />
       <ModalViewer
         body={<SearchMorePopup

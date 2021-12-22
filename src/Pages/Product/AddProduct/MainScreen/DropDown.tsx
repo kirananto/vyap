@@ -36,10 +36,10 @@ function List(props: any) {
 
   return (
     <div
-      className="drop-main cursor-pointer"
+      className="drop-main cursor-pointer grid grid-cols-12 gap-2"
       onClick={() => props.onSelect(props.opt)}
     >
-      <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+      <div className="col-span-3 sm:col-span-4 md:col-span-1 w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
         {productImage && (
           <img
             src={productImage}
@@ -48,7 +48,7 @@ function List(props: any) {
           />
         )}
       </div>
-      <div>
+      <div className="col-span-9 sm:col-span-8 md:col-span-11 ml-2">
         <div className="text-xl font-bold text-gray-700 dark:text-gray-200">
           {props.opt.name}
         </div>

@@ -59,6 +59,7 @@ export default function Orders() {
         body={<FilterPopup />}
         isOpen={filterPopupOpen}
         onClose={() => setfilterPopupOpen(false)}
+        name={"filter"}
       />
 
       <div className="fixed bottom-0 w-full h-20 bg-white dark:bg-gray-800 shadow px-8 grid">

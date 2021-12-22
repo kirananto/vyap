@@ -61,6 +61,7 @@ export default function Payments() {
         body={<FilterPopup />}
         isOpen={filterPopupOpen!}
         onClose={() => setfilterPopupOpen(false)}
+        name={"filter"}
       />
       {/* Footer */}
 
