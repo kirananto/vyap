@@ -46,7 +46,7 @@ export default function AddItem() {
       token: token!,
       outOfStock: false,
       organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
-      limit: 20,
+      limit: 100,
       offset: 0,
       search: searchValue,
       ordering: filters?.sorting,
