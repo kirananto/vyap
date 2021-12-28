@@ -74,13 +74,7 @@ export const Home = () => {
         </div>
       );
     }
-    return customer?.customers
-      ?.filter((filterItem) =>
-        filterItem.recipient?.name
-          ?.toLowerCase()
-          ?.includes(paginationParams.search?.toLowerCase())
-      )
-      .map((item, index) => <ItemCard item={item} key={index} />);
+    return customer?.customers?.map((item, index) => <ItemCard item={item} key={index} />);
   }
 
   return (
