@@ -107,6 +107,7 @@ export const Home = () => {
           <input
             type="text"
             id="input"
+            autoComplete="off"
             value={paginationParams.search}
             className="w-full h-10 pl-4 pr-5 bg-gray-100 dark:bg-gray-500 dark:text-gray-100 rounded outline-none "
             placeholder={intl.formatMessage({ id: `action.search` })}
