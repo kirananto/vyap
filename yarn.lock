@@ -1147,6 +1147,19 @@
     prop-types "^15.7.2"
     react-is "^17.0.2"
 
+"@mui/base@5.0.0-alpha.62":
+  version "5.0.0-alpha.62"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.62.tgz#d86ff07f33d7b49ebb545f29e184750c0270c3f8"
+  integrity sha512-ItmdSZwHKQbLbAsS3sWguR7OHqYqh2cYWahoVmHb13Kc6bMdmVUTY4x57IlDSU712B0yuA0Q/gPTq7xADKnFow==
+  dependencies:
+    "@babel/runtime" "^7.16.3"
+    "@emotion/is-prop-valid" "^1.1.1"
+    "@mui/utils" "^5.2.3"
+    "@popperjs/core" "^2.4.4"
+    clsx "^1.1.1"
+    prop-types "^15.7.2"
+    react-is "^17.0.2"
+
 "@mui/material@^5.2.5":
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.2.5.tgz#0e3fb756964798d261cf3473a25e50bd0ae669cb"
