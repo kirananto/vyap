@@ -43,7 +43,7 @@ export default function ProductCard({
 
         <div className="pl-5 self-center">
           <div className="font-semibold text-md dark:text-gray-200 ">{item?.centralCatalogue?.name}</div>
-          <div>{item?.aliasName ? `(${item?.aliasName})` : ""}</div>
+          <div className="dark:text-gray-300 ">{item?.aliasName ? `(${item?.aliasName})` : ""}</div>
 
           <div>
             <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">
