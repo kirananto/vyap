@@ -70,7 +70,7 @@ export function FilterPopup() {
       </div>
       {/* --------- */}
       <div className="flex flex-col gap-4">
-        <FilterCategory heading="Based On Category" type="category" />
+        <FilterCategory heading="Based On Tags" type="category" />
         <FilterBrands heading="Based On Brands" type="brand" />
       </div>
       {/* Sorting */}
