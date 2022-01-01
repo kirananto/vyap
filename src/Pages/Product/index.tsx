@@ -73,7 +73,7 @@ export default function Product() {
     fetchProducts({
       token: token!,
       organizationId: user?.organizationId!,
-      limit: 20,
+      limit: 5000,
       offset: 0,
       search: searchValue,
       ordering: filters?.sorting,
