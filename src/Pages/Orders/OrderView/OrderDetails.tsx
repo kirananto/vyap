@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PaymentInfo } from "../../../Components/PaymentInfo"
 import { format } from "date-fns";
 import { OrderInfoIcon } from "src/Components/OrderInfo";
@@ -37,8 +37,15 @@ function OrderDetailed({ order } : { order: any }) {
     )
 }
 
-export default function OrderDetail({ order } : { order: any }) {
-    const [isExpanded, setIsExpanded] = useState(false)
+export default function OrderDetail({ order, shareON } : { order: any, shareON?:boolean }) {
+    const [isExpanded, setIsExpanded] = useState(shareON? true : false)
+
+    useEffect(() => {
+        if(shareON == true){
+                setIsExpanded(true);
+        }
+    }, [shareON])
+
     return (
         <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
             <div className={`flex ${isExpanded ? 'mb-4': ''} items-center justify-between`}>

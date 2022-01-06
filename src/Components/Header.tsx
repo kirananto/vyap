@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import walletSvg from "../assets/illustrations/wallet.svg"
 
-function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick, isSticky, backDisabled }: { heading?: string, subHeading?: string, phoneNumber?: string, shareDetails?: string, onBackClick?: any, isSticky: boolean, backDisabled?: boolean }) {
+function Header({ heading, subHeading, phoneNumber, shareAction, onBackClick, isSticky, backDisabled }: { heading?: string, subHeading?: string, phoneNumber?: string, shareAction?: () => void, onBackClick?: any, isSticky: boolean, backDisabled?: boolean }) {
   const navigate = useNavigate()
   return (
     <div className={isSticky ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0' : "flex w-11/12 pt-2 pb-2 m-auto "}>
@@ -51,7 +51,7 @@ function Header({ heading, subHeading, phoneNumber, shareDetails, onBackClick, i
         </svg>
       </a>)}
       {/* Share Icon container*/}
-      {shareDetails && (<a href="" className="flex items-center justify-center rounded-full ali w-14 h-14">
+      {shareAction && (<a onClick={shareAction} className="flex items-center justify-center rounded-full ali w-14 h-14">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 dark:text-gray-300"
