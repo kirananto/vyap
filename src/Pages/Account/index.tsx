@@ -36,11 +36,18 @@ export default function Account() {
     const [bizNameError, setBizNameError] = useState(false)
     const [emailError, setEmailError] = useState(false)
     const [pinCodeError, setPinCodeError] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     const dispatch = useDispatch()
     const intl = useIntl()
 
     function handleValidation() {
+
+        setNameError(false)
+        setBizNameError(false)
+        setPinCodeError(false)
+        setEmailError(false)
 
         let post = new Organization();
         post.name = user?.name;
@@ -48,6 +55,7 @@ export default function Account() {
         post.pinCode = user?.organization?.pinCode
         post.email = user?.email
 
+        console.log(post)
         validate(post).then(errors => {
             console.log('errors', errors)
             if(errors.length > 0) {
@@ -66,13 +74,16 @@ export default function Account() {
     }
 
     function handleSave() {
+        setLoading(true)
         // TODO location
         // TODO category
-        patchUser({ token: token!, id: user?.id!, name: user?.name, email: user?.email }).then(result => {
-            console.log('user', result.data)
-        })
-        patchOrganization({ token: token!, id: user?.organizationId!, pinCode: user?.organization?.pinCode, name: user?.organization?.name! }).then(result => {
-            console.log('patched')
+        Promise.allSettled([
+            patchUser({ token: token!, id: user?.id!, name: user?.name, email: user?.email }),
+            patchOrganization({ token: token!, id: user?.organizationId!, pinCode: user?.organization?.pinCode, name: user?.organization?.name! })
+        ]).then(() => {
+            setSuccess(true)
+            setTimeout(() => setSuccess(false), 2000)
+            setLoading(false)
         })
     }
 
@@ -191,7 +202,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
-                <button onClick={handleValidation} className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">Update</button>
+                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-bold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success': 'Update'}</button>
             </div>
         </div>
     )
