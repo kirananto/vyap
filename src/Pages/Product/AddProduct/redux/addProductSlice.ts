@@ -1,6 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { BrandInterface } from '../ProductScreen/BrandModal';
 
+interface CatalogueImageInterface {
+    id:          string;
+    createdAt:   Date;
+    updatedAt:   Date;
+    deletedAt:   null;
+    productId:   string;
+    imageName:   string;
+    title:       string;
+    description: string;
+}
+
 interface CentralCatalogueInterface {
     barCode?: string
     brandId?: string
@@ -8,6 +19,7 @@ interface CentralCatalogueInterface {
     hsnId?: string
     id?: string
     name?: string
+    images?: CatalogueImageInterface[]
 }
 
 export interface HSNInterface {
