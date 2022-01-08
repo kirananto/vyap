@@ -12,7 +12,7 @@ export interface SignupInterface {
     pinCode: string;
     organizationLocation: OrganizationLocationInterface
     businessName: string
-    category: string
+    category: string[]
     address: string,
     listPrivately: boolean
 }
@@ -28,7 +28,7 @@ const initialState: SignupInterface = {
     },
     address: '',
     businessName: '',
-    category: '',
+    category: [],
     listPrivately: false
 
 };
@@ -65,7 +65,11 @@ export const signupSlice = createSlice({
             state.organizationLocation.lng = action.payload.lng;
         },
         setCategory: (state, action: PayloadAction<string>) => {
-            state.category = action.payload;
+            if(state.category.includes(action.payload)) {
+                state.category = state.category.filter(filterItem => filterItem !== action.payload)
+            } else {
+                state.category = [...state.category, action.payload]
+            }
         },
         clearAll: (state) => {
             state.name = '';
@@ -76,7 +80,7 @@ export const signupSlice = createSlice({
             state.organizationLocation.lng = 41;
             state.address = '';
             state.businessName = '';
-            state.category = '';
+            state.category = [];
             state.listPrivately = false
         },
 
