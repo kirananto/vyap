@@ -78,7 +78,7 @@ export default function SignupStepTwo() {
         email: signup.email,
         businessName: signup.businessName,
         address: signup.address,
-        categoryId: signup.category.map(item => ({ id: item })),
+        category: signup.category.map(item => ({ id: item })),
         pinCode: signup.pinCode,
         listPrivately: signup.listPrivately,
         organizationLocation: {
