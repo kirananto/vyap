@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./old.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
@@ -13,6 +13,7 @@ import mlMessages from './i18n/ml.json'
 import { selecti18nConfig } from "./i18nSlice";
 import { setDarkMode } from "./Pages/Login/credentialsSlice";
 
+
 const messages: IntlMessages = {
   en: enMessages,
   ml: mlMessages
@@ -23,6 +24,7 @@ export const InitialRouter = () => {
   const userInterfaceLanguage = useSelector(selecti18nConfig).language
 
   const dispatch = useDispatch()
+
 
   console.log('userInterfaceLanguage', userInterfaceLanguage)
 
