@@ -69,7 +69,7 @@ export default function SignupStepTwo() {
 
   function handleSubmit() {
     //TODO Fix this
-    if(signup.category) {
+    if (signup.category) {
       setError(undefined)
       setCategoryError(false)
       signupAPI({
@@ -78,7 +78,7 @@ export default function SignupStepTwo() {
         email: signup.email,
         businessName: signup.businessName,
         address: signup.address,
-        categoryId: signup.category,
+        category: signup.category.map(item => ({ id: item })),
         pinCode: signup.pinCode,
         listPrivately: signup.listPrivately,
         organizationLocation: {
@@ -95,6 +95,7 @@ export default function SignupStepTwo() {
         dispatch(clearAll())
         navigate('/signup-step-4')
       }).catch(error => {
+        console.log('error.', error.response)
         setError(error?.response?.data?.message ?? true)
       })
     } else {
@@ -107,7 +108,7 @@ export default function SignupStepTwo() {
       <div className="w-11/12 mx-auto ">
         <div className="flex items-center justify-start mt-32 mb-5">
           <img style={logoStyle} className="w-24 m--5" src={vyapLogo} alt="" />
-          <h1 className="text-4xl font-bold text-gray-600 ">VYAP</h1>
+          <h1 className="text-4xl font-bold text-gray-600 dark:text-gray-300">VYAP</h1>
         </div>
 
         <h1 className="text-lg font-bold text-gray-600 dark:text-gray-300">
@@ -116,15 +117,15 @@ export default function SignupStepTwo() {
 
         {categoryError && <div className="text-red-500 dark:text-red-400 mt-2 text-xs">
           * Please select a category to proceed
-        </div> }
+        </div>}
         {error && <div className="text-red-500 dark:text-red-400 mt-2 text-xs">
-          <span className="pl-4">* Something went wrong during the signup. </span>
-          <ul className="border border-gray-300 dark:border-gray-700 p-4 px-8 rounded bg-gray-200 dark:bg-gray-900 m-2 mx-2 text-xs list-disc">
-          {error?.map((mapItem: string) => <li>{mapItem} </li>)}
-          </ul>
-        </div> }
+          <span className="pl-1">* {typeof error === 'string' ? error : 'Something went wrong during the signup.'} </span>
+          {Array.isArray(error) ? <ul className="border border-gray-300 dark:border-gray-700 p-4 px-8 rounded bg-gray-200 dark:bg-gray-900 m-2 mx-2 text-xs list-disc">
+            {error?.map((mapItem: string) => <li>{mapItem} </li>)}
+          </ul> : null}
+        </div>}
         <div className="flex flex-col gap-4 mt-6">
-          {categories.map(mapItem => <Card isSelected={mapItem.id === signup.category} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
+          {categories.map(mapItem => <Card isSelected={signup.category?.includes(mapItem.id)} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
         </div>
       </div>
       <SimpleFooter btnName="Create account" onClick={handleSubmit} />

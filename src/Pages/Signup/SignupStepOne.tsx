@@ -6,6 +6,7 @@ import { generateOtp, verifyPhone } from "../../API/login.axios";
 import { useDispatch } from "react-redux";
 import vyapLogo from '../../assets/new_logo.svg'
 import { setPhone } from "./signupSlice";
+import { setCredentials } from "../Login/credentialsSlice";
 
 
 export default function SignupStep1() {
@@ -20,8 +21,13 @@ export default function SignupStep1() {
     verifyPhone(phoneNumberRef.current, code).then(res => {
       if (res.data) {
         console.log('res.data', res.data)
-        dispatch(setPhone(phoneNumberRef.current))
-        navigate('/signup-step-2')
+        if(res.data?.token) {
+          dispatch(setCredentials(res.data))
+          navigate('/home')
+        } else {
+          dispatch(setPhone(phoneNumberRef.current))
+          navigate('/signup-step-2')
+        }
       }
     })
       .catch((error: any) => {

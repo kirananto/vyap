@@ -176,7 +176,7 @@ function CreateProduct() {
           imageName: addProductInfo?.others?.category?.name,
           organizationId: user?.organizationId,
         },
-      thumbnailImage: addProductInfo?.others?.productImage?.[0]?.imageName,
+      thumbnailImage: addProductInfo?.centralCatalogue?.images?.[0]?.imageName ?? '',
       aliasName: addProductInfo?.centralCatalogue?.id
         ? addProductInfo?.others?.aliasName
         : "",
