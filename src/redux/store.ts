@@ -15,6 +15,7 @@ import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice';
 import customersSlice from 'src/Pages/Home/customersSlice';
 import addItemsproductFiltersSlice from 'src/Pages/ChatView/PlaceOrder/AddItem/addProductFiltersSlice';
 import chatListSlice from 'src/Pages/ChatView/chatListSlice';
+import editProductSlice from './../Pages/Product/EditProduct/redux/editProductSlice';
 
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     signup: signupSlice,
     placeorder: placeOrderSlice,
     addproduct: addProductSlice,
+    editproduct: editProductSlice,
     i18n: i18nSlice,
     productFilters: productFiltersSlice,
     addItemsproductFilters: addItemsproductFiltersSlice,
@@ -30,7 +32,7 @@ const rootReducer = combineReducers({
     customers: customersSlice,
     chatList: chatListSlice
 })
-const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 'placeorder', 'paymentFilters', 'orderFilters', 'addproduct', 'productFilters', 'addItemsproductFilters'] }
+const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 'placeorder', 'paymentFilters', 'orderFilters', 'addproduct','editproduct', 'productFilters', 'addItemsproductFilters'] }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({ reducer: persistedReducer, middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }), })
 export const persistor = persistStore(store)

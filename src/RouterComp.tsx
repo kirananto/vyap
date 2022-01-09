@@ -35,6 +35,7 @@ import { clearAll } from "./Pages/ChatView/chatListSlice";
 import { selectCredentials, setCredentials } from "./Pages/Login/credentialsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
+import EditProduct from "./Pages/Product/EditProduct/EditProduct";
 
 function RouterComp() {
 
@@ -82,6 +83,7 @@ function RouterComp() {
       <Route path="/add-product" element={<RequiredAuth><AddProductMain /></RequiredAuth>} />
       <Route path="/settings" element={<RequiredAuth><Settings /></RequiredAuth>} />
       <Route path="/create-product" element={<RequiredAuth><CreateProduct /></RequiredAuth>} />
+      <Route path="/edit-product" element={<RequiredAuth><EditProduct /></RequiredAuth>} />
       <Route path="/more" element={<RequiredAuth><More /></RequiredAuth>} />
       <Route path="/home" element={<RequiredAuth><Home /></RequiredAuth>} />
       <Route path="/" element={<RequiredAuth><Home /></RequiredAuth>} />

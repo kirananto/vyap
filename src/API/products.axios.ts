@@ -20,6 +20,12 @@ export interface IAddProduct {
     rate: number
 }
 
+export interface IEditProduct {
+    aliasName: string,
+    mrpPrice: number,
+    rate: number
+}
+
 export interface AddCentralCatalogueInterface {
     name: string
     description: string
