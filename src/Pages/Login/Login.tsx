@@ -6,7 +6,6 @@ import { generateOtp, verifyOtp } from "../../API/login.axios";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./credentialsSlice";
 import vyapLogo from '../../assets/new_logo.svg'
-import Account from "../Account";
 
 export default function Login() {
   const [currentPage, setCurrentPage] = useState(0)
