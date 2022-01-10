@@ -33,26 +33,30 @@ export default function AddCustomerStep1({
   isExisting,
 }: IProps) {
   const { token } = useSelector(selectCredentials);
-  const [isValid, setIsValid] = useState<boolean>(true);
   const phoneRef = useRef<HTMLInputElement>(null);
+  const [phoneError, setPhoneError] = useState<string | undefined>(undefined)
 
   const handleValidation = (action: string) => {
+    setPhoneError(undefined)
     let post = new Post();
     post.phoneNumber = phoneRef.current && phoneRef.current.value;
 
     validate(post).then((errors) => {
       if (errors.length > 0) {
         console.log("validation failed. errors: ", errors);
-        setIsValid(false);
+        setPhoneError('Enter valid mobile number !')
       } else {
-        setIsValid(true);
         console.log("validation succeed");
 
         if (action == "submit") {
           checkIfUserExists(token!, phoneNumber)
             .then((result) => {
-              setIsExisting(true);
-              setCurrentPage(currentPageEnum.PREVIEW);
+              if(result.data?.code === 'E234') {
+                setPhoneError(`The phone number you're trying to add is already associated.`)
+              } else {
+                setIsExisting(true);
+                setCurrentPage(currentPageEnum.PREVIEW);
+              }
             })
             .catch((error) => {
               setIsExisting(false);
@@ -96,10 +100,10 @@ export default function AddCustomerStep1({
       <span
         className={
           "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-          (isValid ? "hidden" : "")
+          (!phoneError ? "hidden" : "")
         }
       >
-        * Enter valid mobile number !
+        * {phoneError}
       </span>
 
       <div className="mt-2 text-xs text-gray-400">
