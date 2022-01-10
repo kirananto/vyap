@@ -8,6 +8,10 @@
     src: local("ProductSansBold"), url("/fonts/productSans/ProductSansBold.ttf") format("truetype");
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     font-family: "ProductSans" !important;
     user-select: none;
