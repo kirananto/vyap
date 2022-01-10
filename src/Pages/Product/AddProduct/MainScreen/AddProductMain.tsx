@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { SimpleHeader } from "../../../../Components/Header";
-import { setCentralCatalogue, setEditProductId } from "../redux/addProductSlice";
+import { clearAll, setCentralCatalogue } from "../redux/addProductSlice";
 import DropDown from "./DropDown";
 
 export default function AddProductMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  dispatch(setEditProductId(""));
+
+  useEffect(() => {
+    dispatch(clearAll());
+  }, []);
 
   return (
     <div className="w-full h-screen dark:bg-gray-900">

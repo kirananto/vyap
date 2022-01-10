@@ -47,7 +47,7 @@ function CreateProduct() {
         dispatch(clearAll());
       };
     }
-  }, []);
+  }, [addProductInfo?.editProductId]);
 
   useEffect(() => {
     /* avoid accidental back button hit - confirm alert */
