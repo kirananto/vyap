@@ -38,7 +38,8 @@ export class PostBrand {
 }
 
 interface Props {
-  setValidation: (arg1: boolean, arg2: boolean, arg3: boolean) => void;
+  setValidation: (arg1: boolean, arg2: boolean, arg3: boolean) => void,
+  action : string
 }
 
 interface PropsV {
@@ -126,7 +127,7 @@ const Input = (props: any) => {
     </div>
   );
 };
-function OthersTab({ setValidation }: Props) {
+function OthersTab({ setValidation, action }: Props) {
   const [modal, setModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
   const [tagsModal, setTagsModal] = useState(false);
@@ -314,6 +315,7 @@ function OthersTab({ setValidation }: Props) {
       {/* Image container ENDS */}
       {/* Details-container */}
       <div className="flex flex-col gap-2">
+            {/* Description-Input */}
         {!addProductInfo?.centralCatalogue?.id && (
           <>
             <Input
@@ -332,14 +334,20 @@ function OthersTab({ setValidation }: Props) {
             </span>
           </>
         )}
-        <Input
-          label="Your Item Code(SKU)"
-          placeholder="Enter SKU Code"
-          dispatch={dispatch}
-          value={addProductInfo?.others?.skuCode}
-        />
+
+       {/* SKU-Input */}
+       { action === "add" && 
+            <Input
+              label="Your Item Code(SKU)"
+              placeholder="Enter SKU Code"
+              dispatch={dispatch}
+              value={addProductInfo?.others?.skuCode}
+            />
+        }
+
+        {/* Category-Input */}
         {!addProductInfo?.centralCatalogue?.id && (
-          < div >
+          <div>
           <p className="text-base text-gray-500">Category</p>
           <div className="des-modal-btn">
             <input
@@ -389,6 +397,9 @@ function OthersTab({ setValidation }: Props) {
           </div>
         </div>
 )}
+            
+      {/* Tag-Input */}
+      { action === "add" && 
       <div>
         <p className="text-base text-gray-500">Tag</p>
         <div className="des-modal-btn">
@@ -438,6 +449,8 @@ function OthersTab({ setValidation }: Props) {
           </div>
         </div>
       </div>
+    }
+
       {!addProductInfo?.centralCatalogue?.id && (
         <div className="barcode-input">
           <Input
@@ -472,6 +485,9 @@ function OthersTab({ setValidation }: Props) {
           </div>
         </div>
       )}
+
+          {/* Alias-Input */}
+
       {addProductInfo?.centralCatalogue?.id && (
         <Input
           label="Alias Name"

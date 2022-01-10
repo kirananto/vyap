@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProductById, patchProductById } from 'src/API/products.axios';
+import { deleteProductById, fetchCentralProduct, patchProductById } from 'src/API/products.axios';
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
 import { useNavigate } from "react-router";
-import { setMrpPrice, setSalesPrice , setAliasName, setEditProduct} from '../EditProduct/redux/editProductSlice';
+import { setAliasName, setCentralCatalogue, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice';
 
 
 export function MorePopup({ item, onClose }: any) {
@@ -12,7 +12,7 @@ export function MorePopup({ item, onClose }: any) {
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
-
+  
   function deleteProduct() {
     console.log('product')
     deleteProductById({ token: token!, id: item?.id }).then(result => {
@@ -22,7 +22,12 @@ export function MorePopup({ item, onClose }: any) {
 
   function editProduct() {
     if (item?.id) {
-      dispatch(setEditProduct(item));
+      fetchCentralProduct({ token: token!, id: item?.centralCatalogueId }).then((result: any) => {
+        if(result?.data){
+          dispatch(setCentralCatalogue(result?.data));
+        }
+      });
+      dispatch(setEditProductId(item?.id));
       dispatch(setMrpPrice(item?.mrpPrice));
       dispatch(setSalesPrice(item?.rate));
       dispatch(setAliasName(item?.aliasName));

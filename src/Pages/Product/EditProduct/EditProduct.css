@@ -1,7 +1,0 @@
-/* px-8 py-1 font-semibold text-gray-500 focus:bg-blue-200 focus:px-8 focus:py-1 focus:rounded-full focus:text-blue-600 */
-.edit-product-container{
-    /* height: 85vh; */
-    overflow-y: auto;
-    min-height: calc(100vh - 2rem);
-    padding-bottom: 20px;
-}
