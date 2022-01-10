@@ -10,6 +10,8 @@ import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
 import {
   fetchCentralProductImages,
   IAddProduct,
+  IEditProduct,
+  patchProductById,
   postAddCentralProduct,
   postAddProduct,
 } from "src/API/products.axios";
@@ -22,13 +24,15 @@ function CreateProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [isValidOthers, setIsValidOthers] = useState(false);
-
+  const [isValidEdit, setIsValidEdit] = useState(true);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const [productImage, setProductImage] = useState<any>(undefined);
   const addProductInfo = useSelector(selectAddProductInfo);
   const { user, token } = useSelector(selectCredentials);
 
+  let action = addProductInfo.editProductId ? "edit" : "add";
+  const [pageAction, setPageAction] = useState(action);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,10 +42,12 @@ function CreateProduct() {
   };
 
   useEffect(() => {
-    return () => {
-      dispatch(clearAll());
-    };
-  }, []);
+    if(!addProductInfo?.editProductId){
+      return () => {
+        dispatch(clearAll());
+      };
+    }
+  }, [addProductInfo?.editProductId]);
 
   useEffect(() => {
     /* avoid accidental back button hit - confirm alert */
@@ -78,8 +84,8 @@ function CreateProduct() {
         0,
         addProductInfo?.centralCatalogue?.id
       ).then((result: any) => {
-        const imageName = result.data?.data?.filter((filterItem: any) =>
-          filterItem.imageName?.includes(".")
+        const imageName = result?.data?.data?.filter((filterItem: any) =>
+          filterItem?.imageName?.includes(".")
         )?.[0]?.imageName;
         if (imageName) {
           setProductImage(
@@ -97,7 +103,7 @@ function CreateProduct() {
         );
       }
     }
-  }, [addProductInfo?.others?.productImage?.length]);
+  }, [addProductInfo?.others?.productImage?.length,addProductInfo?.centralCatalogue?.id]);
 
   const doValidate = (
     isValidMRP: boolean,
@@ -105,6 +111,17 @@ function CreateProduct() {
     isValidHSN: boolean,
     isValidGST: boolean
   ): void => {
+
+    //validation for edit
+    if (
+      isValidMRP &&
+      isValidSale){
+        setIsValidEdit(true);
+      }else{
+        setIsValidEdit(false);
+      }
+
+    //validation for add
     if (
       isValidMRP &&
       isValidSale &&
@@ -126,7 +143,6 @@ function CreateProduct() {
 
   const onProceed = () => {
     setIsSubmit(true);
-    console.log("submitting..");
     if (isValid && !isValidOthers) toggleTabs(2);
 
     if (!isValid && isValidOthers) toggleTabs(1);
@@ -199,9 +215,47 @@ function CreateProduct() {
       });
   };
 
+  //Edit Product Actions
+  const onProceedEdit = () => {
+    setIsSubmit(true);
+
+    if (isValidEdit) {
+      handleEditProduct();
+    }
+  };
+
+  const handleEditProduct = async () => {
+    setIsLoading(true);
+    let organizationCatalogueId: string = addProductInfo?.editProductId!;
+
+    const body: IEditProduct = {
+      aliasName: addProductInfo?.others?.aliasName
+        ? addProductInfo?.others?.aliasName
+        : "",
+      mrpPrice: parseFloat(`${addProductInfo.pricing?.mrpPrice}`),
+      rate: parseFloat(`${addProductInfo.pricing?.salesPrice}`),
+    };
+
+
+    patchProductById({token: token!, id: organizationCatalogueId, data: body})
+      .then((response) => {
+        setIsLoading(false);
+        console.log("response", response);
+        navigate("/my-products");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log("Edit product error", error);
+      });
+  };
+
+
   return (
     <div className=" create-product-container dark:bg-gray-900">
-      <SimpleHeader heading="Create Product" />
+      <SimpleHeader   heading={`${pageAction === "edit"
+                ? "Edit Product "
+                : "Create Product"}`} />
+
       <div className="w-11/12 pt-20  px-2 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">
           What is the product?
@@ -233,19 +287,38 @@ function CreateProduct() {
 
         {/* -------------------TAB-1----------------- */}
         <div className={toggleState === 1 ? "block" : "hidden"}>
-          <PricingTab setValidation={doValidate} submitStatus={isSubmit} />
+          <PricingTab 
+              setValidation={doValidate} 
+              submitStatus={isSubmit}  
+              action={`${pageAction === "edit"
+                ? "edit"
+                : "add"}`} 
+          />
         </div>
 
         {/* -------------------TAB-1----------------- */}
         <div className={toggleState === 2 ? "block" : "hidden"}>
-          <OthersTab setValidation={doValidateOthers} />
+          <OthersTab 
+            setValidation={doValidateOthers}
+            action={`${pageAction === "edit"
+                ? "edit"
+                : "add"}`} 
+           />
         </div>
       </div>
-      <SimpleFooter
-        btnName={isLoading ? "Loading..." : "Add Product"}
-        isDisabled={isLoading}
-        onClick={onProceed}
-      />
+
+      {pageAction === "edit"
+                ? <SimpleFooter
+                    btnName={isLoading ? "Loading..." : "Update Product"}
+                    isDisabled={isLoading}
+                    onClick={onProceedEdit}
+                  />
+                : <SimpleFooter
+                    btnName={isLoading ? "Loading..." : "Add Product"}
+                    isDisabled={isLoading}
+                    onClick={onProceed}
+                  />
+      }
     </div>
   );
 }

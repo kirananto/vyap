@@ -40,10 +40,11 @@ interface Props {
     arg3: boolean,
     arg4: boolean
   ) => void,
-  submitStatus: boolean
+  submitStatus: boolean,
+  action?: string
 }
 
-function PricingTab({ setValidation, submitStatus }: Props) {
+function PricingTab({ setValidation, submitStatus, action }: Props) {
   const [modal, setModal] = useState(false);
 
   const [isValidMRP, setIsValidMRP] = useState<boolean>(false);
@@ -173,6 +174,9 @@ function PricingTab({ setValidation, submitStatus }: Props) {
       className="flex flex-col gap-5 mt-2 pb-24 overflow-auto"
       style={{ height: "calc(100vh - 22rem)" }}
     >
+
+                  {/* MRP Price */}
+
       <div>
         <p className="text-base font-bold text-gray-500">MRP</p>
         <input
@@ -196,6 +200,9 @@ function PricingTab({ setValidation, submitStatus }: Props) {
           * Enter Valid MRP price !
         </span>
       </div>
+
+            {/* Sale Price */}
+
       <div>
         <p className="text-base font-bold text-gray-500">Sale Price</p>
         <input
@@ -218,7 +225,10 @@ function PricingTab({ setValidation, submitStatus }: Props) {
           * Enter valid Sale price !
         </span>
       </div>
+
       {/* Tax-info */}
+
+      { action === "add" && 
       <div className="mt-2">
         <div className="text-base font-bold text-gray-500">Tax Info</div>
         <ToggleButton
@@ -229,10 +239,13 @@ function PricingTab({ setValidation, submitStatus }: Props) {
           value={addProductInfo.pricing?.taxEnabled}
         />
       </div>
+      }
+
       {/* ---------- */}
       {!addProductInfo?.centralCatalogue?.id &&
         addProductInfo.pricing?.taxEnabled && (
           <div>
+                        {/* HSN section */}
             <div>
               <p className="text-base text-gray-500">HSN Number</p>
               <div className="des-modal-btn">
@@ -273,6 +286,7 @@ function PricingTab({ setValidation, submitStatus }: Props) {
                 </div>
               </div>
             </div>
+                        {/* GST section */}
             <div>
               <p className="mt-4 text-base text-gray-500">GST Percentage</p>
               <div className="flex">
@@ -301,6 +315,7 @@ function PricingTab({ setValidation, submitStatus }: Props) {
                 </span>
               </div>
             </div>
+
           </div>
         )}
     </div>

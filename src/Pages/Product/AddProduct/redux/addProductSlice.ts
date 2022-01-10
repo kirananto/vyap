@@ -30,6 +30,7 @@ export interface HSNInterface {
     hsn: number
 }
 export interface AddProductInterface {
+    editProductId? :string,
     pricing: {
         mrpPrice?: number
         salesPrice?: number
@@ -62,6 +63,7 @@ export interface AddProductInterface {
 }
 
 const initialState: AddProductInterface = {
+    editProductId:'',
     centralCatalogue: { description: '' },
     pricing: {
         mrpPrice: undefined,
@@ -88,6 +90,9 @@ export const addProductSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
+        setEditProductId: (state: AddProductInterface, action: PayloadAction<string>) => {
+            state.editProductId = action.payload;
+        },
         setCentralCatalogue: (state: AddProductInterface, action: PayloadAction<CentralCatalogueInterface>) => {
             state.centralCatalogue = action.payload;
         },
@@ -148,6 +153,7 @@ export const addProductSlice = createSlice({
 });
 
 export const {
+    setEditProductId,
     setCentralCatalogue,
     setMrpPrice,
     setBarCode,

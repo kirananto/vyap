@@ -6,6 +6,7 @@ import { selectAddProductInfo } from "../redux/addProductSlice";
 function ItemCard(props: any) {
 
   const productDetails = useSelector(selectAddProductInfo)
+  let action = productDetails.editProductId ? "edit" : "add";
 
   const navigate = useNavigate()
 
@@ -30,7 +31,11 @@ function ItemCard(props: any) {
       {/* product handle-col */}
       <div className="flex items-center justify-center w-1/4 ">
         <button
-          onClick={() => navigate('/add-product')}
+          onClick={() => {
+            action === "edit"
+                ? navigate('/my-products')
+                : navigate('/add-product')
+          } }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

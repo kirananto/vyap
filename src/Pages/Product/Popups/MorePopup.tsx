@@ -1,17 +1,38 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { deleteProductById, patchProductById } from 'src/API/products.axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProductById, fetchCentralProduct, patchProductById } from 'src/API/products.axios';
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
+import { useNavigate } from "react-router";
+import { setAliasName, setCentralCatalogue, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice';
+
 
 export function MorePopup({ item, onClose }: any) {
   
   const { token } = useSelector(selectCredentials)
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  
   function deleteProduct() {
     console.log('product')
     deleteProductById({ token: token!, id: item?.id }).then(result => {
       onClose()
     })
+  }
+
+  function editProduct() {
+    if (item?.id) {
+      fetchCentralProduct({ token: token!, id: item?.centralCatalogueId }).then((result: any) => {
+        if(result?.data){
+          dispatch(setCentralCatalogue(result?.data));
+        }
+      });
+      dispatch(setEditProductId(item?.id));
+      dispatch(setMrpPrice(item?.mrpPrice));
+      dispatch(setSalesPrice(item?.rate));
+      dispatch(setAliasName(item?.aliasName));
+      navigate("/edit-product");
+    }
   }
 
   function markStockStatus(value: boolean) {
@@ -98,7 +119,7 @@ export function MorePopup({ item, onClose }: any) {
               d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
             />
           </svg>
-          <span>Edit product</span>
+          <span onClick={editProduct}>Edit product</span>
         </button>
       </div>
     </div>

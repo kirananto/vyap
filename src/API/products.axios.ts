@@ -20,6 +20,12 @@ export interface IAddProduct {
     rate: number
 }
 
+export interface IEditProduct {
+    aliasName: string,
+    mrpPrice: number,
+    rate: number
+}
+
 export interface AddCentralCatalogueInterface {
     name: string
     description: string
@@ -67,6 +73,14 @@ export const patchProductById = ({ token, id, data }: { token: string; id?: stri
     url: `/organization-catalogue/${id}`,
     method: 'PATCH',
     data,
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
+export const fetchCentralProduct = ({ token, id }: { token: string; id?: string}) => axiosClient({
+    url: `/central-catalogue/${id}`,
+    method: 'GET',
     headers: {
         'authorization': `Bearer ${token}`
     }
