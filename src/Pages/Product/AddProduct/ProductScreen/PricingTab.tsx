@@ -59,8 +59,10 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
   const [isValidGST, setIsValidGST] = useState<boolean>(true);
   const [changedGST, setChangedGST] = useState<boolean>(false);
 
+  useEffect(() => {
+    setValidation(isValidMRP, isValidSalePrice, isValidHSN, isValidGST);
+  }, [isValidMRP, isValidSalePrice, isValidHSN, isValidGST]) 
 
-  setValidation(isValidMRP, isValidSalePrice, isValidHSN, isValidGST);
 
   const addProductInfo = useSelector(selectAddProductInfo);
 

@@ -138,7 +138,10 @@ function OthersTab({ setValidation, action }: Props) {
   const [isValidCategory, setIsValidCategory] = useState<boolean>(false);
   const [isValidBrand, setIsValidBrand] = useState<boolean>(false);
 
-  setValidation(isValidCategory, isValidDescription, isValidBrand);
+  useEffect(() => {
+    setValidation(isValidCategory, isValidDescription, isValidBrand);
+  }, [isValidCategory, isValidDescription, isValidBrand])
+
 
   const dispatch = useDispatch();
   const { token } = useSelector(selectCredentials);
