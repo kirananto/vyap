@@ -11,16 +11,12 @@ function Footer() {
   const { user } = useSelector(selectCredentials)
 
   const isActive = (paths: string[]) => {
-    console.log('location.pathname', location.pathname)
-    console.log('paths', paths)
     if (paths.includes(location.pathname)) {
-
-      console.log('return val', true)
       return true
     }
-    console.log('return val', false)
     return false
   }
+  
   return (
     <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-800 dark:border-gray-800">
       {/* Nav-Item-1 */}

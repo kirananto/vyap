@@ -35,7 +35,6 @@ import { clearAll } from "./Pages/ChatView/chatListSlice";
 import { selectCredentials, setCredentials } from "./Pages/Login/credentialsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
-import EditProduct from "./Pages/Product/EditProduct/EditProduct";
 
 function RouterComp() {
 
