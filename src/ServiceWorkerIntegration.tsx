@@ -45,7 +45,7 @@ export default function ServiceWorkerIntegration() {
         </svg>
       </div>
       <div className="flex flex-col items-start justify-center ml-4 cursor-default">
-        <h1 className="text-base text-gray-200 font-semibold leading-none tracking-wider">New version available</h1>
+        <h1 className="text-base text-gray-200 font-semibold leading-none tracking-wider">New version available !</h1>
         <p className="text-sm text-gray-400 mt-2 leading-relaxed tracking-wider">
           {intl.formatMessage({
             id: 'action.updateApplication',
