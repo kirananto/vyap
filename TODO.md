@@ -1,8 +1,0 @@
-- Filters in all payments
-- Refining creation of product
-- Validation at all palces
-- Integration of account details and settings
-- Modals Fix
-- Filters in All Orders
-- Filters in products
-- Dark mode toggling

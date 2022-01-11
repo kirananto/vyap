@@ -17,12 +17,12 @@ export default function Employees() {
       </div>
       {/* Caard Container  */}
       <div className="flex flex-col items-center w-full gap-4 py-2 pt-20">
-        <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
-        <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
-        <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
-        <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
-        <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
-        <EmployeesCard name="Manoharan Pilla" orderTaker="+915620454465" />
+        <EmployeesCard name="Test User" orderTaker="+915620454465" />
+        <EmployeesCard name="Test User" orderTaker="+915620454465" />
+        <EmployeesCard name="Test User" orderTaker="+915620454465" />
+        <EmployeesCard name="Test User" orderTaker="+915620454465" />
+        <EmployeesCard name="Test User" orderTaker="+915620454465" />
+        <EmployeesCard name="Test User" orderTaker="+915620454465" />
       </div>
 
       {/* Footer */}
