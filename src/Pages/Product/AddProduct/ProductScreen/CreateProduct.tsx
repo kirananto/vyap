@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SimpleHeader } from "../../../../Components/Header";
 import { SimpleFooter } from "../../../../Components/Footer";
 import ItemCard from "./ItemCard";
@@ -31,8 +31,8 @@ function CreateProduct() {
   const addProductInfo = useSelector(selectAddProductInfo);
   const { user, token } = useSelector(selectCredentials);
 
-  let action = addProductInfo.editProductId ? "edit" : "add";
-  const [pageAction, setPageAction] = useState(action);
+  let pageAction = addProductInfo.editProductId ? "edit" : "add";
+  const trackBackBtn = useRef(true)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,31 +49,40 @@ function CreateProduct() {
     }
   }, [addProductInfo?.editProductId]);
 
+  function popStateHandler () {
+    console.trace('data')
+    if (trackBackBtn.current) {
+      const leavePageAlert = confirm(
+        "Are you sure to Go back?... Inputs will be lost."
+      );
+      if (leavePageAlert) {
+        trackBackBtn.current = false;
+        history.back();
+      } else {
+        trackBackBtn.current = true;
+        history.pushState(null, location.href, location.href);
+      }
+    }
+  }
+
+  function handleBeforeUnload(e: any) {
+    var confirmationMessage = "o/";
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Webkit, Safari, Chrome
+  }
   useEffect(() => {
     /* avoid accidental back button hit - confirm alert */
-    let trackBackBtn = true;
     history.pushState(null, location.href, location.href);
-    window.addEventListener("popstate", function (event) {
-      if (trackBackBtn) {
-        const leavePageAlert = confirm(
-          "Are you sure to Go back?... Inputs will be lost."
-        );
-        if (leavePageAlert) {
-          trackBackBtn = false;
-          history.back();
-        } else {
-          history.pushState(null, location.href, location.href);
-        }
-      }
-    });
+    window.addEventListener("popstate", popStateHandler);
 
     //Reload confirmation alert
-    window.addEventListener("beforeunload", function (e) {
-      var confirmationMessage = "o/";
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
-      (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-      return confirmationMessage; //Webkit, Safari, Chrome
-    });
+    return () => {
+      window.removeEventListener("popstate", popStateHandler)
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+    }
   }, []);
 
   useEffect(() => {
