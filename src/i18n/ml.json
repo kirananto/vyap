@@ -5,7 +5,7 @@
     }],
     "global.my_products": [{
         "type": 0,
-        "value": "എന്റെ ഉൽപ്പന്നങ്ങൾ"
+        "value": "ഉൽപ്പന്നങ്ങൾ"
     }],
     "global.customers": [{
         "type": 0,
@@ -21,7 +21,7 @@
     }],
     "global.appliedFilters": [{
         "type": 0,
-        "value": "പ്രയോഗിച്ച ഫിൽട്ടറുകൾ"
+        "value": "ഫിൽട്ടറുകൾ"
     }],
     "global.clearAll": [{
         "type": 0,
