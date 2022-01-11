@@ -14,6 +14,7 @@ export default function ServiceWorkerIntegration() {
   };
 
   const updateApplication = (currentRegistration?: ServiceWorkerRegistration) => () => {
+    console.log('updating application')
     // skip waiting until all service workers are closed to force update
     if (currentRegistration && currentRegistration.waiting) {
       messageSW(currentRegistration.waiting, { type: 'SKIP_WAITING' });
@@ -33,7 +34,7 @@ export default function ServiceWorkerIntegration() {
     }
   }, []);
 
-  return updateNotificationOpen ? (
+  return !updateNotificationOpen ? (
     <div
       className={`fixed top-1 flex flex-row items-center justify-between w-96 bg-gray-900 px-4 py-6 text-white shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-xl transition-all duration-500 ease-in-out  self-center z-10`}
       style={{ left: `calc(50% - 12rem)` }}
@@ -53,7 +54,7 @@ export default function ServiceWorkerIntegration() {
           })}
         </p>
 
-        <button onClick={() => updateApplication(registration)} className="mt-2 text-sm border p-1 px-4 rounded-lg">
+        <button onClick={updateApplication(registration)} className="mt-2 text-sm border p-1 px-4 rounded-lg hover:bg-gray-800">
           <FormattedMessage id="action.reload" defaultMessage="Tap to Refresh" description="Action to reload something" />
         </button>
       </div>
