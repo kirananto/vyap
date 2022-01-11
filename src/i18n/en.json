@@ -74,7 +74,7 @@
     "action.updateApplication": [
         {
             "type": 0,
-            "value": "Reload to update this application"
+            "value": "An improved version of vyap is now available, refresh to update"
         }
     ],
     "action.search": [

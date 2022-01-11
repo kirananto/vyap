@@ -169,7 +169,7 @@ function OthersTab({ setValidation, action }: Props) {
             .map((item: any) => ({ label: "ssdd", value: item }))
         )
       )
-      .catch(() => console.log("Error loading data"));
+      .catch(() => console.log("Error loadng data"));
   }, []);
 
   function uploadImage() {
