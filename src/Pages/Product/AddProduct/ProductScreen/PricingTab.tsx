@@ -100,7 +100,7 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
 
       validate(postHSN).then((errors) => {
         if (errors.length > 0) {
-          console.log("validation failed. errors mrp: ", errors);
+          console.log("validation failed. errors HSN: ", errors);
           setIsValidHSN(false);
         } else {
           setIsValidHSN(true);
@@ -112,7 +112,7 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
       console.log("gst test");
       validate(postGST).then((errors) => {
         if (errors.length > 0) {
-          console.log("validation failed. errors mrp: ", errors);
+          console.log("validation failed. errors gst: ", errors);
           setIsValidGST(false);
         } else {
           setIsValidGST(true);
@@ -123,7 +123,7 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
       postSalePrice.salePrice = Number(value);
       validate(postSalePrice).then((errors) => {
         if (errors.length > 0) {
-          console.log("validation failed. errors: ", errors);
+          console.log("validation failed. errors: SP", errors);
           setIsValidSalePrice(false);
         } else {
           setIsValidSalePrice(true);
@@ -166,8 +166,10 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
     if(submitStatus){
       setChangedSP(true);
       setChangedMRP(true);
-      setChangedGST(true);
-      setChangedHSN(true);
+     if(action === "add" ){
+        setChangedGST(true);
+        setChangedHSN(true);
+     }
     }
   }, [submitStatus])
 
