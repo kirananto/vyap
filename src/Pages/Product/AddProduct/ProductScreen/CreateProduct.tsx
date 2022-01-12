@@ -1,56 +1,53 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SimpleHeader } from "../../../../Components/Header";
-import { SimpleFooter } from "../../../../Components/Footer";
-import ItemCard from "./ItemCard";
-import "./CreateProduct.css";
-import PricingTab from "./PricingTab";
-import OthersTab from "./OthersTab";
 import { useDispatch, useSelector } from "react-redux";
-import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
+import { useNavigate } from "react-router";
 import {
   fetchCentralProductImages,
   IAddProduct,
   IEditProduct,
   patchProductById,
   postAddCentralProduct,
-  postAddProduct,
+  postAddProduct
 } from "src/API/products.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { useNavigate } from "react-router";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
+import { SimpleFooter } from "../../../../Components/Footer";
+import { SimpleHeader } from "../../../../Components/Header";
+import { clearAll, selectAddProductInfo } from "../redux/addProductSlice";
+import "./CreateProduct.css";
+import ItemCard from "./ItemCard";
+import OthersTab from "./OthersTab";
+import PricingTab from "./PricingTab";
+import { PAGE_ACTION, TABS } from "./types";
+import { isValidBrand, isValidCategory, isValidDescription, isValidGST, isValidHSN, isValidMRP, isValidSalePrice } from "./validations";
 
 function CreateProduct() {
-  const [toggleState, setToggleState] = useState(1);
+  const [toggleState, setToggleState] = useState(TABS.PRICING);
   const [isLoading, setIsLoading] = useState(false);
-  const [isValid, setIsValid] = useState(true);
-  const [isValidOthers, setIsValidOthers] = useState(false);
-  const [isValidEdit, setIsValidEdit] = useState(true);
-  const [isSubmit, setIsSubmit] = useState(false);
-
+  const [saveAttempt, setSaveAttempt] = useState(0)
   const [productImage, setProductImage] = useState<any>(undefined);
   const addProductInfo = useSelector(selectAddProductInfo);
   const { user, token } = useSelector(selectCredentials);
 
-  let pageAction = addProductInfo.editProductId ? "edit" : "add";
+  let pageAction = addProductInfo.editProductId ? PAGE_ACTION.EDIT : PAGE_ACTION.ADD;
   const trackBackBtn = useRef(true)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const toggleTabs = (index: any) => {
-    console.log("toggling...");
-    setToggleState(index);
+  const toggleTabs = (tab: TABS) => {
+    console.log(`toggling...${tab}`);
+    setToggleState(tab);
   };
 
   useEffect(() => {
-    if(!addProductInfo?.editProductId){
+    if (!addProductInfo?.editProductId) {
       return () => {
         dispatch(clearAll());
       };
     }
   }, [addProductInfo?.editProductId]);
 
-  function popStateHandler () {
-    console.trace('data')
+  function popStateHandler() {
     if (trackBackBtn.current) {
       const leavePageAlert = confirm(
         "Are you sure to Go back?... Inputs will be lost."
@@ -112,52 +109,40 @@ function CreateProduct() {
         );
       }
     }
-  }, [addProductInfo?.others?.productImage?.length,addProductInfo?.centralCatalogue?.id]);
+  }, [addProductInfo?.others?.productImage?.length, addProductInfo?.centralCatalogue?.id]);
 
-  const doValidate = (
-    isValidMRP: boolean,
-    isValidSale: boolean,
-    isValidHSN: boolean,
-    isValidGST: boolean
-  ): void => {
 
+  const validatePricing = () => {
     //validation for edit
-    if (
-      isValidMRP &&
-      isValidSale){
-        setIsValidEdit(true);
-      }else{
-        setIsValidEdit(false);
-      }
-
-    //validation for add
-    if (
-      isValidMRP &&
-      isValidSale &&
-      (addProductInfo?.pricing?.taxEnabled ? isValidHSN && isValidGST : true)
+    return (
+      isValidMRP(addProductInfo.pricing?.mrpPrice) &&
+      isValidSalePrice(addProductInfo.pricing?.salesPrice) &&
+      isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
+        addProductInfo.pricing?.gstPercentage) &&
+      isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn!)
     )
-      setIsValid(true);
-    else setIsValid(false);
   };
 
-  const doValidateOthers = (
-    isValidDescription: boolean,
-    isValidCategory: boolean,
-    isValidBrand: boolean
-  ): void => {
-    if (isValidDescription && isValidCategory && isValidBrand)
-      setIsValidOthers(true);
-    else setIsValidOthers(false);
+  const validateOthers = () => {
+    return (isValidDescription(addProductInfo?.centralCatalogue?.description!) &&
+      isValidCategory(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.category?.name!) &&
+      isValidBrand(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.brand?.name!))
   };
 
-  const onProceed = () => {
-    setIsSubmit(true);
-    if (isValid && !isValidOthers) toggleTabs(2);
+  const onProceed = (isEdit: boolean) => {
+    const isValidPricing = validatePricing()
+    const isValidOthers = validateOthers()
+    setSaveAttempt(value => value + 1)
+    if (isValidPricing && !isValidOthers) toggleTabs(TABS.OTHERS);
 
-    if (!isValid && isValidOthers) toggleTabs(1);
+    if (!isValidPricing && isValidOthers) toggleTabs(TABS.PRICING);
 
-    if (isValid && isValidOthers) {
-      handleAddProduct();
+    if (isValidPricing && isValidOthers) {
+      if (isEdit) {
+        handleEditProduct();
+      } else {
+        handleAddProduct();
+      }
     }
   };
 
@@ -224,15 +209,6 @@ function CreateProduct() {
       });
   };
 
-  //Edit Product Actions
-  const onProceedEdit = () => {
-    setIsSubmit(true);
-
-    if (isValidEdit) {
-      handleEditProduct();
-    }
-  };
-
   const handleEditProduct = async () => {
     setIsLoading(true);
     let organizationCatalogueId: string = addProductInfo?.editProductId!;
@@ -246,7 +222,7 @@ function CreateProduct() {
     };
 
 
-    patchProductById({token: token!, id: organizationCatalogueId, data: body})
+    patchProductById({ token: token!, id: organizationCatalogueId, data: body })
       .then((response) => {
         setIsLoading(false);
         console.log("response", response);
@@ -261,9 +237,9 @@ function CreateProduct() {
 
   return (
     <div className=" create-product-container dark:bg-gray-900">
-      <SimpleHeader   heading={`${pageAction === "edit"
-                ? "Edit Product "
-                : "Create Product"}`} />
+      <SimpleHeader heading={`${pageAction === PAGE_ACTION.EDIT
+        ? "Edit Product "
+        : "Create Product"}`} />
 
       <div className="w-11/12 pt-20  px-2 mx-auto">
         <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">
@@ -274,19 +250,19 @@ function CreateProduct() {
         {/* -------- */}
         <div className="flex justify-between py-4">
           <button
-            onClick={() => toggleTabs(1)}
-            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 1
-                ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 "
-                : "text-gray-500 dark:text-gray-300"
+            onClick={() => toggleTabs(TABS.PRICING)}
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === TABS.PRICING
+              ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 "
+              : "text-gray-500 dark:text-gray-300"
               }`}
           >
             Pricing
           </button>
           <button
-            onClick={() => toggleTabs(2)}
-            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === 2
-                ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                : "text-gray-500 dark:text-gray-300"
+            onClick={() => toggleTabs(TABS.OTHERS)}
+            className={`px-6 py-2 rounded-lg font-semibold w-1/2 ${toggleState === TABS.OTHERS
+              ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
+              : "text-gray-500 dark:text-gray-300"
               }`}
           >
             Others
@@ -295,38 +271,33 @@ function CreateProduct() {
         {/* -------- */}
 
         {/* -------------------TAB-1----------------- */}
-        <div className={toggleState === 1 ? "block" : "hidden"}>
-          <PricingTab 
-              setValidation={doValidate} 
-              submitStatus={isSubmit}  
-              action={`${pageAction === "edit"
-                ? "edit"
-                : "add"}`} 
+        <div className={toggleState === TABS.PRICING ? "block" : "hidden"}>
+          <PricingTab
+            saveAttempt={saveAttempt}
+            action={pageAction}
           />
         </div>
 
         {/* -------------------TAB-1----------------- */}
-        <div className={toggleState === 2 ? "block" : "hidden"}>
-          <OthersTab 
-            setValidation={doValidateOthers}
-            action={`${pageAction === "edit"
-                ? "edit"
-                : "add"}`} 
-           />
+        <div className={toggleState === TABS.OTHERS ? "block" : "hidden"}>
+          <OthersTab
+            saveAttempt={saveAttempt}
+            action={pageAction}
+          />
         </div>
       </div>
 
-      {pageAction === "edit"
-                ? <SimpleFooter
-                    btnName={isLoading ? "Loading..." : "Update Product"}
-                    isDisabled={isLoading}
-                    onClick={onProceedEdit}
-                  />
-                : <SimpleFooter
-                    btnName={isLoading ? "Loading..." : "Add Product"}
-                    isDisabled={isLoading}
-                    onClick={onProceed}
-                  />
+      {pageAction === PAGE_ACTION.EDIT
+        ? <SimpleFooter
+          btnName={isLoading ? "Loading..." : "Update Product"}
+          isDisabled={isLoading}
+          onClick={() => onProceed(true)}
+        />
+        : <SimpleFooter
+          btnName={isLoading ? "Loading..." : "Add Product"}
+          isDisabled={isLoading}
+          onClick={() => onProceed(false)}
+        />
       }
     </div>
   );

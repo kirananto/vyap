@@ -1,5 +1,10 @@
 import React, { Dispatch, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchBrands } from "src/API/brand.axios";
+import { imageUpload } from "src/API/image.axios";
+import Spinner from "src/Components/Style/Spinner";
+import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 import {
   selectAddProductInfo,
   setAliasName,
@@ -10,40 +15,18 @@ import {
   setCentralCategory,
   setDescription,
   setProductImage,
-  setSkuCode,
+  setSkuCode
 } from "../redux/addProductSlice";
-import { fetchBrands } from "src/API/brand.axios";
-import { selectCredentials } from "src/Pages/Login/credentialsSlice";
-import { imageUpload } from "src/API/image.axios";
-import Spinner from "src/Components/Style/Spinner";
-import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
 import BrandModal from "./BrandModal";
-import OrganizationCategoryModal from "./OrganizationCategoryModal";
-import { Length, validate } from "class-validator";
 import CentralCategoryModal from "./CentralCategoryModal";
+import OrganizationCategoryModal from "./OrganizationCategoryModal";
+import { PAGE_ACTION } from "./types";
+import { isValidBrand, isValidCategory, isValidDescription, isValidTag } from "./validations";
 
-export class PostDescription {
-  @Length(0, 80)
-  description!: string;
-}
-
-export class PostCategory {
-  @Length(1, 30)
-  category!: string;
-}
-
-export class PostBrand {
-  @Length(1, 30)
-  brand!: string;
-}
 
 interface Props {
-  setValidation: (arg1: boolean, arg2: boolean, arg3: boolean) => void,
-  action : string
-}
-
-interface PropsV {
-  validate: (arg1: string, arg2: string) => void;
+  action: PAGE_ACTION
+  saveAttempt: number
 }
 
 const ImageContainer = (props: any) => {
@@ -127,21 +110,13 @@ const Input = (props: any) => {
     </div>
   );
 };
-function OthersTab({ setValidation, action }: Props) {
+function OthersTab({ action, saveAttempt }: Props) {
+  console.log('saveAttempt', saveAttempt)
   const [modal, setModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
   const [tagsModal, setTagsModal] = useState(false);
 
   const [spinner, setSpinner] = useState(false);
-
-  const [isValidDescription, setIsValidDescription] = useState<boolean>(false);
-  const [isValidCategory, setIsValidCategory] = useState<boolean>(false);
-  const [isValidBrand, setIsValidBrand] = useState<boolean>(false);
-
-  useEffect(() => {
-    setValidation(isValidCategory, isValidDescription, isValidBrand);
-  }, [isValidCategory, isValidDescription, isValidBrand])
-
 
   const dispatch = useDispatch();
   const { token } = useSelector(selectCredentials);
@@ -207,62 +182,6 @@ function OthersTab({ setValidation, action }: Props) {
     setTagsModal(!tagsModal);
   };
 
-  const handleValidation = (type: string, value: string) => {
-    if (type == "desc") {
-      console.log("validate description");
-      let postDesc = new PostDescription();
-      postDesc.description = value;
-
-      validate(postDesc).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors : ", errors);
-          setIsValidDescription(false);
-        } else {
-          setIsValidDescription(true);
-        }
-      });
-    } else if (type == "cat") {
-      let postCat = new PostCategory();
-      postCat.category = value;
-
-      validate(postCat).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors : ", errors);
-          setIsValidCategory(false);
-        } else {
-          setIsValidCategory(true);
-        }
-      });
-    } else {
-      if (!addProductInfo?.centralCatalogue?.id) {
-        let postBrand = new PostBrand();
-        postBrand.brand = value;
-        validate(postBrand).then((errors) => {
-          if (errors.length > 0) {
-            console.log("validation failed. errors: ", errors);
-            setIsValidBrand(false);
-          } else {
-            setIsValidBrand(true);
-          }
-        });
-      } else {
-        setIsValidBrand(true);
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleValidation("brand", addProductInfo?.others?.brand?.name!);
-  }, [addProductInfo?.others?.brand?.name]);
-
-  useEffect(() => {
-    handleValidation("cat", addProductInfo?.others?.category?.name!);
-  }, [addProductInfo?.others?.category?.name]);
-
-  useEffect(() => {
-    handleValidation("desc", addProductInfo?.centralCatalogue?.description!);
-  }, [addProductInfo?.centralCatalogue?.description]);
-
   return (
     <div
       className="mt-2 overflow-auto pb-36"
@@ -318,7 +237,7 @@ function OthersTab({ setValidation, action }: Props) {
       {/* Image container ENDS */}
       {/* Details-container */}
       <div className="flex flex-col gap-2">
-            {/* Description-Input */}
+        {/* Description-Input */}
         {!addProductInfo?.centralCatalogue?.id && (
           <>
             <Input
@@ -330,7 +249,7 @@ function OthersTab({ setValidation, action }: Props) {
             <span
               className={
                 "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                (isValidDescription ? "hidden" : "")
+                (isValidDescription(addProductInfo?.centralCatalogue?.description!) ? "hidden" : "")
               }
             >
               * Enter valid description !
@@ -338,217 +257,217 @@ function OthersTab({ setValidation, action }: Props) {
           </>
         )}
 
-       {/* SKU-Input */}
-       { action === "add" && 
-            <Input
-              label="Your Item Code(SKU)"
-              placeholder="Enter SKU Code"
-              dispatch={dispatch}
-              value={addProductInfo?.others?.skuCode}
-            />
+        {/* SKU-Input */}
+        {action === PAGE_ACTION.ADD &&
+          <Input
+            label="Your Item Code(SKU)"
+            placeholder="Enter SKU Code"
+            dispatch={dispatch}
+            value={addProductInfo?.others?.skuCode}
+          />
         }
 
         {/* Category-Input */}
         {!addProductInfo?.centralCatalogue?.id && (
           <div>
-          <p className="text-base text-gray-500">Category</p>
-          <div className="des-modal-btn">
-            <input
-              onChange={(event: any) => {
-                dispatch(
-                  setCentralCategory({ id: undefined, name: event.target.value })
-                );
-              }}
-              value={addProductInfo?.others?.centralCategory?.name}
-              type="text"
-              placeholder="Enter category"
-              className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-            />
-            {/* Modal handle btn */}
-            <button
-              className="modal-btn dark:text-gray-300"
-              onClick={handleCategoryModal}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-            <span
-              className={
-                "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                (isValidCategory ? "hidden" : "")
-              }
-            >
-              * Enter valid Category !
-            </span>
-            {/* Modal */}
-            <div>
-              <CentralCategoryModal
-                trigger={categoryModal}
-                setModal={setCategoryModal}
+            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Category</p>
+            <div className="des-modal-btn">
+              <input
+                onChange={(event: any) => {
+                  dispatch(
+                    setCentralCategory({ id: undefined, name: event.target.value })
+                  );
+                }}
+                value={addProductInfo?.others?.centralCategory?.name}
+                type="text"
+                placeholder="Enter category"
+                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
               />
+              {/* Modal handle btn */}
+              <button
+                className="modal-btn dark:text-gray-300"
+                onClick={handleCategoryModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <span
+                className={
+                  "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+                  (isValidCategory(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.centralCategory?.name!) ? "hidden" : "")
+                }
+              >
+                * Enter valid Category !
+              </span>
+              {/* Modal */}
+              <div>
+                <CentralCategoryModal
+                  trigger={categoryModal}
+                  setModal={setCategoryModal}
+                />
+              </div>
             </div>
           </div>
-        </div>
-)}
-            
-      {/* Tag-Input */}
-      { action === "add" && 
-      <div>
-        <p className="text-base text-gray-500">Tag</p>
-        <div className="des-modal-btn">
-          <input
-            onChange={(event: any) => {
-              dispatch(
-                setCategory({ id: undefined, name: event.target.value })
-              );
-            }}
-            value={addProductInfo?.others?.category?.name}
-            type="text"
-            placeholder="Enter Tags"
-            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-          />
-          {/* Modal handle btn */}
-          <button
-            className="modal-btn dark:text-gray-300"
-            onClick={handleTagsModal}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-          <span
-            className={
-              "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-              (isValidCategory ? "hidden" : "")
-            }
-          >
-            * Enter valid Tag !
-          </span>
-          {/* Modal */}
+        )}
+
+        {/* Tag-Input */}
+        {action === PAGE_ACTION.ADD &&
           <div>
-            <OrganizationCategoryModal
-              trigger={tagsModal}
-              setModal={handleTagsModal}
-            />
-          </div>
-        </div>
-      </div>
-    }
-
-      {!addProductInfo?.centralCatalogue?.id && (
-        <div className="barcode-input">
-          <Input
-            label="Barcode"
-            placeholder="Enter or Scan Barcode"
-            dispatch={dispatch}
-            value={addProductInfo?.others?.barCode}
-          />
-          <div className="barcode-icon dark:text-gray-300">
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Tag</p>
+            <div className="des-modal-btn">
+              <input
+                onChange={(event: any) => {
+                  dispatch(
+                    setCategory({ id: undefined, name: event.target.value })
+                  );
+                }}
+                value={addProductInfo?.others?.category?.name}
+                type="text"
+                placeholder="Enter Tags"
+                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+              />
+              {/* Modal handle btn */}
+              <button
+                className="modal-btn dark:text-gray-300"
+                onClick={handleTagsModal}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
-          {/* Alias-Input */}
-
-      {addProductInfo?.centralCatalogue?.id && (
-        <Input
-          label="Alias Name"
-          placeholder="Enter alias name..."
-          dispatch={dispatch}
-          value={addProductInfo?.others?.aliasName}
-        />
-      )}
-      {!addProductInfo?.centralCatalogue?.id && (
-        <div>
-          <p className="text-base text-gray-500">Brand</p>
-          <div className="des-modal-btn">
-            <input
-              onChange={(event: any) => {
-                dispatch(
-                  setBrand({ id: undefined, name: event.target.value })
-                );
-              }}
-              value={addProductInfo?.others?.brand?.name}
-              type="text"
-              placeholder="Enter brand"
-              className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-            />
-            {/* Modal handle btn */}
-            <button
-              className="modal-btn dark:text-gray-300"
-              onClick={handleModal}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <span
+                className={
+                  "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+                  (isValidTag(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.category?.name!) ? "hidden" : "")
+                }
               >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
+                * Enter valid Tag !
+              </span>
+              {/* Modal */}
+              <div>
+                <OrganizationCategoryModal
+                  trigger={tagsModal}
+                  setModal={handleTagsModal}
                 />
-              </svg>
-            </button>
-            <span
-              className={
-                "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                (isValidBrand ? "hidden" : "")
-              }
-            >
-              * Enter valid brand !
-            </span>
-            {/* Modal */}
-            <div>
-              <BrandModal trigger={modal} setModal={setModal} />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      {/* <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} /> */}
-    </div>
+        }
+
+        {!addProductInfo?.centralCatalogue?.id && (
+          <div className="barcode-input">
+            <Input
+              label="Barcode"
+              placeholder="Enter or Scan Barcode"
+              dispatch={dispatch}
+              value={addProductInfo?.others?.barCode}
+            />
+            <div className="barcode-icon dark:text-gray-300">
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Alias-Input */}
+
+        {addProductInfo?.centralCatalogue?.id && (
+          <Input
+            label="Alias Name"
+            placeholder="Enter alias name..."
+            dispatch={dispatch}
+            value={addProductInfo?.others?.aliasName}
+          />
+        )}
+        {!addProductInfo?.centralCatalogue?.id && (
+          <div>
+            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Brand</p>
+            <div className="des-modal-btn">
+              <input
+                onChange={(event: any) => {
+                  dispatch(
+                    setBrand({ id: undefined, name: event.target.value })
+                  );
+                }}
+                value={addProductInfo?.others?.brand?.name}
+                type="text"
+                placeholder="Enter brand"
+                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+              />
+              {/* Modal handle btn */}
+              <button
+                className="modal-btn dark:text-gray-300"
+                onClick={handleModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <span
+                className={
+                  "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+                  (isValidBrand(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.brand?.name!) ? "hidden" : "")
+                }
+              >
+                * Enter valid brand !
+              </span>
+              {/* Modal */}
+              <div>
+                <BrandModal trigger={modal} setModal={setModal} />
+              </div>
+            </div>
+          </div>
+        )}
+        {/* <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} /> */}
+      </div>
     </div >
   );
 }
