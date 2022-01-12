@@ -36,7 +36,7 @@ export default function ServiceWorkerIntegration() {
 
   return updateNotificationOpen ? (
     <div
-      className={`fixed top-1 flex flex-row items-center justify-between w-96 bg-gray-900 px-4 py-6 text-white shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-xl transition-all duration-500 ease-in-out  self-center z-10`}
+      className={`fixed top-1 flex flex-row items-center justify-between w-96 bg-gray-900 px-4 py-6 text-white shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-xl transition-all duration-500 ease-in-out  self-center z-50`}
       style={{ left: `calc(50% - 12rem)` }}
     >
       <div className="text-xl">
