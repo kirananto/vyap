@@ -17,6 +17,7 @@ import {
 import { placeOrderAPI } from "src/API/order.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
+import { hapticFeedback } from "src/utils/vibrate";
 
 export default function PlaceOrder() {
   const { token, user } = useSelector(selectCredentials);
@@ -24,9 +25,9 @@ export default function PlaceOrder() {
   const [isOpen, setIsOpen] = React.useState(true);
   const [isDropOpen, setIsDropOpen] = React.useState<
     | {
-        isAdd: boolean;
-        isOpen: any;
-      }
+      isAdd: boolean;
+      isOpen: any;
+    }
     | undefined
   >(undefined);
 
@@ -212,21 +213,22 @@ export default function PlaceOrder() {
                     <div className=" font-bold text-xs text-gray-500 dark:text-gray-400">
                       MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}
                     </div>
-                  
-                  <div className=" font-bold text-xs text-gray-400 dark:text-gray-500">
-                    {item?.centralCatalogue?.description}
-                  </div>
+
+                    <div className=" font-bold text-xs text-gray-400 dark:text-gray-500">
+                      {item?.centralCatalogue?.description}
+                    </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 self-center">
-                  
+
                   {/* plus minus buttons */}
                   <div className="grid grid-cols-3 self-center">
                     <div className=" text-blue-600 dark:text-blue-400">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         onClick={() => {
+                          hapticFeedback()
                           handleRemoveItemItem(item, 1);
                         }}
                         className="h-6 w-6 cursor-pointer"
@@ -317,6 +319,7 @@ export default function PlaceOrder() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         onClick={() => {
+                          hapticFeedback()
                           handleAddItem(item, 1);
                         }}
                         className="h-6 w-6 cursor-pointer"
@@ -387,10 +390,11 @@ export default function PlaceOrder() {
 
                   <div className="place-self-center pb-1">
                     <button className="bg-transparent hover:bg-blue-500 text-blue-700 text-xs font-semibold hover:text-white py-1 px-2 mt-1 border border-blue-500 hover:border-transparent rounded"
-                        onClick={() => {
-                          handleRemoveItemItem(item, item?.quantity || 0);
-                        }}
-                        >
+                      onClick={() => {
+                        hapticFeedback()
+                        handleRemoveItemItem(item, item?.quantity || 0);
+                      }}
+                    >
                       Delete
                     </button>{" "}
                   </div>
@@ -564,7 +568,10 @@ export default function PlaceOrder() {
               </div>
 
               <div className="mt-4">
-                <Button onClick={handleSubmit}>Place order</Button>
+                <Button onClick={() => {
+                  hapticFeedback()
+                  handleSubmit()
+                }}>Place order</Button>
               </div>
             </div>
           )}

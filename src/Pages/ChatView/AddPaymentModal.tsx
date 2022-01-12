@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import Success from "../Home/AddCustomerModal/Success";
 import { Length, IsDivisibleBy, Min, validate } from "class-validator";
+import { hapticFeedback } from "src/utils/vibrate";
 
 export class PostAmount {
   @Min(1)
@@ -68,15 +69,16 @@ export default function AddPaymentModal({
   return (
     <div>
       <div
-        onClick={() => toggleVisibility(false)}
-        className={`fixed pin top-0 z-10 ${
-          isVisible ? "show" : "hidden"
-        } overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
+        onClick={() => {
+          hapticFeedback()
+          toggleVisibility(false)
+        }}
+        className={`fixed pin top-0 z-10 ${isVisible ? "show" : "hidden"
+          } overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
       />
       <div
-        className={`popup ${
-          isVisible ? "show" : ""
-        } animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-gray-700`}
+        className={`popup ${isVisible ? "show" : ""
+          } animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-gray-700`}
       >
         {isSuccess ? (
           <Success
@@ -115,7 +117,7 @@ export default function AddPaymentModal({
                 value={amount}
                 onChange={(event) => {
                   setAmount(parseFloat(event?.target.value as any) > 0 ? parseFloat(event?.target.value as any) : 0);
-                  onValidate("change",parseFloat(event?.target.value as any) > 0 ? parseFloat(event?.target.value as any) : 0, () => {});
+                  onValidate("change", parseFloat(event?.target.value as any) > 0 ? parseFloat(event?.target.value as any) : 0, () => { });
                 }}
                 className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                 inputMode="numeric"
@@ -146,13 +148,19 @@ export default function AddPaymentModal({
             {/* <!-- btn popup --> */}
             <div className="flex mt-4 p-2 gap-2">
               <button
-                onClick={() => toggleVisibility(false)}
+                onClick={() => {
+                  hapticFeedback()
+                  toggleVisibility(false)
+                }}
                 className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200"
               >
                 Cancel
               </button>
               <button
-                onClick={() => onValidate("submit", amount! , handleSubmit)}
+                onClick={() => {
+                  hapticFeedback()
+                  onValidate("submit", amount!, handleSubmit)
+                }}
                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
               >
                 Save Payment

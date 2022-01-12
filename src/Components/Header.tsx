@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { hapticFeedback } from "src/utils/vibrate";
 import walletSvg from "../assets/illustrations/wallet.svg"
 
 function Header({ heading, subHeading, phoneNumber, shareAction, onBackClick, isSticky, backDisabled }: { heading?: string, subHeading?: string, phoneNumber?: string, shareAction?: () => void, onBackClick?: any, isSticky: boolean, backDisabled?: boolean }) {
@@ -7,7 +8,10 @@ function Header({ heading, subHeading, phoneNumber, shareAction, onBackClick, is
   return (
     <div className={isSticky ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0' : "flex w-11/12 pt-2 pb-2 m-auto "}>
       {/* back icon  */}
-      <div onClick={onBackClick ? onBackClick : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
+      <div onClick={() => {
+        hapticFeedback()
+        onBackClick ? onBackClick() : navigate(-1)
+      }} className="flex items-center justify-start ml-2 cursor-pointer">
         {!backDisabled ? <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 dark:text-gray-300"
@@ -51,7 +55,10 @@ function Header({ heading, subHeading, phoneNumber, shareAction, onBackClick, is
         </svg>
       </a>)}
       {/* Share Icon container*/}
-      {shareAction && (<a onClick={shareAction} className="flex items-center justify-center rounded-full ali w-14 h-14">
+      {shareAction && (<a onClick={() => {
+        hapticFeedback()
+        shareAction()
+      }} className="flex items-center justify-center rounded-full ali w-14 h-14">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 dark:text-gray-300"
@@ -109,7 +116,10 @@ function SimpleHeader(props: { heading: string, backFn?: any, backDisabled?: boo
   return (
     <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0">
       {/* back icon  */}
-      <div onClick={props.backFn ? props.backFn : () => navigate(-1)} className="flex items-center justify-start ml-2 cursor-pointer">
+      <div onClick={() => {
+        hapticFeedback()
+        props.backFn ? props.backFn() : navigate(-1)
+      }} className="flex items-center justify-start ml-2 cursor-pointer">
         {!props.backDisabled ? <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 "

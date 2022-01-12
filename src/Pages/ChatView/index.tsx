@@ -11,6 +11,7 @@ import AddPaymentModal from "./AddPaymentModal";
 import { setOrgId, clearAll } from "./PlaceOrder/placeOrderSlice";
 import useQueryParam from "src/useQueryParams";
 import { fetchInboxAction, selectChatList } from "./chatListSlice";
+import { hapticFeedback } from "src/utils/vibrate";
 
 
 export const Payment = () => {
@@ -57,6 +58,7 @@ export const Payment = () => {
       <div className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-gray-800" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
         {inbox?.isSupplier ? <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button> : null}
         <button onClick={() => {
+          hapticFeedback()
           dispatch(setOrgId(inbox?.recipient?.id!))
           navigate('/place-order')
         }} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Place Order</button>

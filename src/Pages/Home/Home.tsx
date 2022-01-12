@@ -17,6 +17,7 @@ import {
   setCustomerTotal,
 } from "./customersSlice";
 import useQueryParam from "src/useQueryParams";
+import { hapticFeedback } from "src/utils/vibrate";
 
 export const Home = () => {
   const customer = useSelector(selectCustomerInfo);
@@ -128,6 +129,7 @@ export const Home = () => {
       {user?.organization?.isSupplier && (
         <button
           onClick={() => {
+            hapticFeedback()
             setAddCustomerVisible("true");
           }}
           className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700"

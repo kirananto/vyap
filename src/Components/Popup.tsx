@@ -1,4 +1,5 @@
 import React from "react";
+import { hapticFeedback } from "src/utils/vibrate";
 import "./Style/Popup.css";
 
 function Popup(props: any) {
@@ -6,7 +7,10 @@ function Popup(props: any) {
     <div className="border-t border-gray-200 shadow-2xl main-popup-container dark:bg-gray-700 dark:border-gray-800">
       <div className="main-popup-inner">
         <button
-          onClick={() => props.setModalEmployee(false)}
+          onClick={() => {
+            hapticFeedback()
+            props.setModalEmployee(false)
+          }}
           className="main-popup-btn"
         >
           <svg

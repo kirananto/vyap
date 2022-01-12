@@ -14,6 +14,7 @@ import { selectAddItemsproductFilters } from "./addProductFiltersSlice";
 import ModalViewer from "src/Components/Style/ModalViewer";
 import { FilterPopup } from "./FilterPopup";
 import useQueryParam from "src/useQueryParams";
+import { hapticFeedback } from "src/utils/vibrate";
 
 export default function AddItem() {
   const [itemList, setItemList] = React.useState<any[]>([]);
@@ -228,6 +229,7 @@ export default function AddItem() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               onClick={() => {
+                hapticFeedback()
                 handleRemoveItemItem(item, 1);
               }}
               className="h-6 w-6 cursor-pointer"
@@ -307,6 +309,7 @@ export default function AddItem() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               onClick={() => {
+                hapticFeedback()
                 handleAddItem(item, 1);
               }}
               className="h-6 w-6 cursor-pointer"
