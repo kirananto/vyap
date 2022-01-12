@@ -5,6 +5,7 @@ import Button from "./Style/Button";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
+import { hapticFeedback } from "src/utils/vibrate";
 
 function Footer() {
   const location = useLocation()
@@ -16,12 +17,13 @@ function Footer() {
     }
     return false
   }
-  
+
   return (
     <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-800 dark:border-gray-800">
       {/* Nav-Item-1 */}
       <Link
         to="/"
+        onClick={hapticFeedback}
         className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/home', '/']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}
       >
         <figure className="grid justify-items-center">
@@ -52,7 +54,7 @@ function Footer() {
 
       {user?.organization?.isSupplier && <Link
         to="/my-products"
-
+        onClick={hapticFeedback}
         className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/my-products']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}      >
         <figure className="grid justify-items-center">
           <svg
@@ -82,7 +84,7 @@ function Footer() {
 
       <Link
         to="/more"
-
+        onClick={hapticFeedback}
         className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/more']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-400 dark:text-gray-500'} `}      >
         <figure className="grid justify-items-center">
           <svg
@@ -116,7 +118,10 @@ function Footer() {
 function SimpleFooter(props: { btnName: string, onClick?: any, isDisabled?: boolean }) {
   return (
     <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow shadow-2xl dark:bg-gray-800">
-      <Button onClick={props.onClick} className="w-8/12 h-12" isDisabled={props.isDisabled}>
+      <Button onClick={() => {
+        hapticFeedback()
+        props.onClick()
+      }} className="w-8/12 h-12" isDisabled={props.isDisabled}>
         {props.btnName}
       </Button>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Workbox, messageSW } from 'workbox-window';
+import { hapticFeedback } from './utils/vibrate';
 
 
 export default function ServiceWorkerIntegration() {
@@ -15,6 +16,7 @@ export default function ServiceWorkerIntegration() {
 
   const updateApplication = (currentRegistration?: ServiceWorkerRegistration) => () => {
     console.log('updating application')
+    hapticFeedback()
     // skip waiting until all service workers are closed to force update
     if (currentRegistration && currentRegistration.waiting) {
       messageSW(currentRegistration.waiting, { type: 'SKIP_WAITING' });
@@ -58,7 +60,10 @@ export default function ServiceWorkerIntegration() {
           <FormattedMessage id="action.reload" defaultMessage="Tap to Refresh" description="Action to reload something" />
         </button>
       </div>
-      <div className="absolute top-4 right-4 cursor-pointer text-lg" onClick={() => setUpdateNotificationOpen(false)}>
+      <div className="absolute top-4 right-4 cursor-pointer text-lg" onClick={() => {
+        hapticFeedback()
+        setUpdateNotificationOpen(false)
+      }}>
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
