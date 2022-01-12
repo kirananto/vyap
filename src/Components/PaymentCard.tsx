@@ -6,6 +6,7 @@ import { selectCredentials } from "../Pages/Login/credentialsSlice";
 import { NavLink  } from "react-router-dom";
 import { setPaymentInfo, ThreadInterface } from "src/Pages/ChatView/chatListSlice";
 import { useParams } from 'react-router';
+import { hapticFeedback } from "src/utils/vibrate";
 
 export interface paymentObject {
   id: string;
@@ -39,7 +40,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
   return (
     <div className={`flex ${className} w-full `}>
-      <NavLink to={`/payment/${thread.meta}`} className={`flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
+      <NavLink to={`/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
         <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
           Payment #{thread.meta?.split('-')[0]}
         </div>

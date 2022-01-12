@@ -28,13 +28,13 @@ export const Payment = () => {
   useEffect(() => {
     dispatch(
       clearAll()
-    )   
+    )
   }, []);
 
   useEffect(() => {
     console.log('------------------------changed-----------')
     if (token) {
-      dispatch(fetchInboxAction({ token: token!, id: id!}))
+      dispatch(fetchInboxAction({ token: token!, id: id! }))
     }
   }, [paymentModalVisible, id, token])
 
@@ -50,13 +50,17 @@ export const Payment = () => {
       {/* header */}
       <div className="fixed w-full z-10 pb-3 bg-white shadow dark:bg-gray-800">
         <Header isSticky={false} onBackClick={() => navigate('/home')} heading="Transactions" subHeading={inbox?.recipient?.name} phoneNumber={inbox?.recipient?.officeNumber} />
-        <PaymentBottomHeader amount={inbox?.outstandingAmount} isLoading={inbox?.isLoading === undefined ? true : inbox?.isLoading}/>
+        <PaymentBottomHeader amount={inbox?.outstandingAmount} isLoading={inbox?.isLoading === undefined ? true : inbox?.isLoading} />
       </div>
       {/* body */}
-      <ChatList inboxHash={inbox?.inboxHash} toRefresh={paymentModalVisible}  />
+      <ChatList inboxHash={inbox?.inboxHash} toRefresh={paymentModalVisible} />
       {/* Footer */}
       <div className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-gray-800" style={{ boxShadow: '0px -6px 28px #0000002e' }}>
-        {inbox?.isSupplier ? <button onClick={() => setPaymentModalVisible(true)} className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button> : null}
+        {inbox?.isSupplier ? <button onClick={() => {
+          hapticFeedback()
+          setPaymentModalVisible(true)
+        }}
+          className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 ">Add Payment</button> : null}
         <button onClick={() => {
           hapticFeedback()
           dispatch(setOrgId(inbox?.recipient?.id!))

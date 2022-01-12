@@ -1,5 +1,6 @@
 import React from "react";
 import { getImageURL, IMAGEKIT_FOLDERS } from "src/utils/imageKit";
+import { hapticFeedback } from "src/utils/vibrate";
 
 export default function ProductCard({
   item,
@@ -77,7 +78,10 @@ export default function ProductCard({
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              onClick={() => onMore(item)}
+              onClick={() => {
+                hapticFeedback()
+                onMore(item)
+              }}
             >
               <path
                 strokeLinecap="round"

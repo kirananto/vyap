@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { format, isToday, isYesterday } from 'date-fns'
 import { useSelector } from "react-redux";
 import { selectCredentials } from "../Login/credentialsSlice";
+import { hapticFeedback } from "src/utils/vibrate";
 
 interface IProps {
   item: any;
@@ -24,7 +25,7 @@ export function ItemCard({ item }: IProps) {
   return (
 
     <div className="card-main">
-      <Link to={`/chat/${item.id}`} className="flex gap-2 px-4 w-full">
+      <Link to={`/chat/${item.id}`} onClick={hapticFeedback} className="flex gap-2 px-4 w-full">
         <div className="w-1/5 lg:w-24">
           {item.isSupplier && user?.organization?.isSupplier ? <svg
             xmlns="http://www.w3.org/2000/svg"

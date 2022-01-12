@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { hapticFeedback } from 'src/utils/vibrate'
 
 interface IProps {
     id: string
@@ -16,9 +17,12 @@ export default function ItemList({
     return (
         <div className="p-4">
             <div className="flex justify-end">
-                <div 
+                <div
                     className="flex w-max border border-gray-300 rounded items-center pr-2 cursor-pointer dark:border-gray-400"
-                    onClick={() => navigate(`/purchase-order/${id}`)}
+                    onClick={() => {
+                        hapticFeedback()
+                        navigate(`/purchase-order/${id}`)
+                    }}
                 >
                     <div className="bg-white rounded-full w-min p-2 text-gray-600 dark:text-gray-400 dark:bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

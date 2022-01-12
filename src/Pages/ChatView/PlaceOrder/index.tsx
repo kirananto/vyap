@@ -461,7 +461,10 @@ export default function PlaceOrder() {
               {!isOpen ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  onClick={() => setIsOpen(true)}
+                  onClick={() => {
+                    hapticFeedback()
+                    setIsOpen(true)
+                  }}
                   className="h-6 w-6 cursor-pointer"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -477,7 +480,10 @@ export default function PlaceOrder() {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    hapticFeedback()
+                    setIsOpen(false)
+                  }}
                   className="h-6 w-6 cursor-pointer"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -501,7 +507,10 @@ export default function PlaceOrder() {
                   text-indigo-700 transition duration-500 ease-in-out transform rounded-full 
                     border border-indigo-600 dark:bg-gradient-to-br dark:from-blue-500 dark:to-indigo-700
                     flex mx-10  py-2 mt-4 cursor-pointer justify-center items-center"
-                onClick={() => navigate("/place-order/add-item")}
+                onClick={() => {
+                  hapticFeedback()
+                  navigate("/place-order/add-item")
+                }}
               >
                 <div className="flex bg-gradient-to-br from-blue-500 to-indigo-700 rounded-full dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
                   <svg
@@ -569,7 +578,6 @@ export default function PlaceOrder() {
 
               <div className="mt-4">
                 <Button onClick={() => {
-                  hapticFeedback()
                   handleSubmit()
                 }}>Place order</Button>
               </div>

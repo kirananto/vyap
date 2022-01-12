@@ -2,10 +2,11 @@ import { SimpleHeader } from '../../../Components/Header'
 import React, { useState } from 'react'
 import ItemList from './ItemList'
 import { useNavigate } from 'react-router-dom'
+import { hapticFeedback } from 'src/utils/vibrate'
 
 export default function PurchaseOrder() {
 
-    const payments = [1,1,1,1,1,1,1,1,1]
+    const payments = [1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     const [isExpanded, setIsExpanded] = useState<any>(undefined)
 
@@ -36,13 +37,20 @@ export default function PurchaseOrder() {
                                         <div className="text-gray-600 text-lg font-extrabold dark:text-gray-300">₹ 5000</div>
                                         <div className="text-gray-400 text-xs font-extrabold mx-auto dark:text-gray-200">(5 items)</div>
                                     </div>
-                                    {isExpanded === index ? (<div className="flex text-gray-600" onClick={() => setIsExpanded(undefined)}>
+                                    {isExpanded === index ? (<div className="flex text-gray-600" onClick={() => {
+                                        hapticFeedback()
+                                        setIsExpanded(undefined)
+                                    }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                                         </svg>
                                     </div>
 
-                                    ) : (<div className="flex text-gray-600" onClick={() => setIsExpanded(index)}>
+                                    ) : (<div className="flex text-gray-600"
+                                        onClick={() => {
+                                            hapticFeedback()
+                                            setIsExpanded(index)
+                                        }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                         </svg>
@@ -57,9 +65,12 @@ export default function PurchaseOrder() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-700">
-                <button 
+                <button
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
-                    onClick={() => navigate('/purchase-order/new')}
+                    onClick={() => {
+                        hapticFeedback()
+                        navigate('/purchase-order/new')
+                    }}
                 >Add Purchase Order</button>
             </div>
         </div>

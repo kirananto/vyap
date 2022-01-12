@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCredentials, setCredentials } from "../Login/credentialsSlice";
 import { clearAll, selectSignupInfo, setCategory } from "./signupSlice";
 import { signupAPI } from "src/API/signup.axios";
+import { hapticFeedback } from "src/utils/vibrate";
 
 interface CardInterface {
   title: string
@@ -19,7 +20,10 @@ interface CardInterface {
 
 const Card = ({ title, description, isSelected, image, onSelect }: CardInterface) => {
   return (
-    <div onClick={onSelect} className="flex cursor-pointer items-center gap-3 bg-white custom dark:bg-gray-700">
+    <div onClick={() => {
+      hapticFeedback()
+      onSelect ? onSelect() : undefined
+      }} className="flex cursor-pointer items-center gap-3 bg-white custom dark:bg-gray-700">
       {/* ===tick-div=== */}
       <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200 dark:bg-gray-500'}`}>
         {isSelected && <svg
