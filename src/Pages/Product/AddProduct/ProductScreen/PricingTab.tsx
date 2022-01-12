@@ -1,69 +1,26 @@
-import React, { useState, useEffect } from "react";
+import { isNumber } from "class-validator";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ToggleButton from "../../../../Components/ToggleButton";
-import HSNmodal from "./HSNmodal";
-import { Min, validate } from "class-validator";
-
 import {
   selectAddProductInfo,
   setGstPercentage,
-  setHsnNumber,
   setMrpPrice,
   setSalesPrice,
-  setTaxEnabled,
+  setTaxEnabled
 } from "../redux/addProductSlice";
+import HSNmodal from "./HSNmodal";
+import { PAGE_ACTION } from "./types";
+import { isValidGST, isValidHSN, isValidMRP, isValidSalePrice } from "./validations";
 
-export class PostMRP {
-  @Min(1)
-  mrpPrice!: number;
-}
-
-export class PostSale {
-  @Min(1)
-  salePrice!: number;
-}
-
-export class PostHSN {
-  @Min(1)
-  hsnNum!: number;
-}
-
-export class PostGST {
-  @Min(1)
-  gst!: number;
-}
 
 interface Props {
-  setValidation: (
-    arg1: boolean,
-    arg2: boolean,
-    arg3: boolean,
-    arg4: boolean
-  ) => void,
-  submitStatus: boolean,
-  action?: string
+  action?: PAGE_ACTION
+  saveAttempt: number
 }
 
-function PricingTab({ setValidation, submitStatus, action }: Props) {
+function PricingTab({ action, saveAttempt }: Props) {
   const [modal, setModal] = useState(false);
-
-  const [isValidMRP, setIsValidMRP] = useState<boolean>(false);
-  const [changedMRP, setChangedMRP] = useState<boolean>(false);
-
-  const [isValidSalePrice, setIsValidSalePrice] = useState<boolean>(false);
-  const [changedSP, setChangedSP] = useState<boolean>(false);
-
-  const [isValidHSN, setIsValidHSN] = useState<boolean>(true);
-  const [changedHSN, setChangedHSN] = useState<boolean>(false);
-
-  const [isValidGST, setIsValidGST] = useState<boolean>(true);
-  const [changedGST, setChangedGST] = useState<boolean>(false);
-
-  useEffect(() => {
-    setValidation(isValidMRP, isValidSalePrice, isValidHSN, isValidGST);
-  }, [isValidMRP, isValidSalePrice, isValidHSN, isValidGST]) 
-
-
   const addProductInfo = useSelector(selectAddProductInfo);
 
   const dispatch = useDispatch();
@@ -76,100 +33,19 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
     const tempVal = event.target.value;
     if (tempVal <= 100) {
       dispatch(setGstPercentage(tempVal));
-      handleValidation("gst", event.target.value);
-      console.log("gst" + event.target.value);
     }
   };
 
-  const handleValidation = (type: string, value: number) => {
-    if (type == "mrp") {
-      let postMrp = new PostMRP();
-      postMrp.mrpPrice = Number(value);
+  const resetSalesToZero = () => dispatch(setSalesPrice(isNumber(parseInt(`${addProductInfo.pricing?.salesPrice}`, 10)) ? addProductInfo.pricing?.salesPrice! : 0))
 
-      validate(postMrp).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors mrp: ", errors);
-          setIsValidMRP(false);
-        } else {
-          setIsValidMRP(true);
-        }
-      });
-    } else if (type == "hsn") {
-      let postHSN = new PostHSN();
-      postHSN.hsnNum = value * 1;
+  const resetMRPToZero = () => dispatch(setMrpPrice(isNumber(parseInt(`${addProductInfo.pricing?.mrpPrice}`, 10)) ? addProductInfo.pricing?.mrpPrice! : 0))
 
-      validate(postHSN).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors mrp: ", errors);
-          setIsValidHSN(false);
-        } else {
-          setIsValidHSN(true);
-        }
-      });
-    } else if (type == "gst") {
-      let postGST = new PostGST();
-      postGST.gst = value * 1;
-      console.log("gst test");
-      validate(postGST).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors mrp: ", errors);
-          setIsValidGST(false);
-        } else {
-          setIsValidGST(true);
-        }
-      });
-    } else {
-      let postSalePrice = new PostSale();
-      postSalePrice.salePrice = Number(value);
-      validate(postSalePrice).then((errors) => {
-        if (errors.length > 0) {
-          console.log("validation failed. errors: ", errors);
-          setIsValidSalePrice(false);
-        } else {
-          setIsValidSalePrice(true);
-        }
-      });
+  useEffect(() => {
+    if (saveAttempt) {
+      resetSalesToZero()
+      resetMRPToZero()
     }
-  };
-
-  useEffect(() => {
-    if(changedMRP)
-       handleValidation("mrp", addProductInfo.pricing?.mrpPrice!);
-  }, [addProductInfo.pricing?.mrpPrice, changedMRP])
-
-  useEffect(() => {
-    if(changedSP)
-       handleValidation("sale", addProductInfo.pricing?.salesPrice!);
-  }, [addProductInfo.pricing?.salesPrice, changedSP])
-
-  useEffect(() => {
-    if (!addProductInfo.pricing?.taxEnabled) {
-      setIsValidHSN(true);
-      setIsValidGST(true);
-    }
-  }, [addProductInfo.pricing?.taxEnabled])
-
-  useEffect(() => {
-    if(changedHSN)
-      handleValidation("hsn", addProductInfo.pricing?.hsn?.hsn!);
-  }, [addProductInfo.pricing?.hsn?.hsn, changedHSN])
-
-  useEffect(() => {
-    if(changedGST){
-    handleValidation("gst", addProductInfo.pricing?.hsn?.gstPercentage ??
-      addProductInfo.pricing?.gstPercentage);
-    }
-  }, [addProductInfo.pricing?.gstPercentage, addProductInfo.pricing?.hsn?.gstPercentage, changedGST])
-
-  
-  useEffect(() => {
-    if(submitStatus){
-      setChangedSP(true);
-      setChangedMRP(true);
-      setChangedGST(true);
-      setChangedHSN(true);
-    }
-  }, [submitStatus])
+  }, [saveAttempt])
 
   return (
     <div
@@ -177,15 +53,15 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
       style={{ height: "calc(100vh - 22rem)" }}
     >
 
-                  {/* MRP Price */}
+      {/* MRP Price */}
 
       <div>
-        <p className="text-base font-bold text-gray-500">MRP</p>
+        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">MRP</p>
         <input
           onChange={(event: any) => {
             dispatch(setMrpPrice(event.target.value));
           }}
-          onBlur={() =>  setChangedMRP(true)  }
+          onBlur={resetMRPToZero}
           value={addProductInfo.pricing?.mrpPrice}
           type="number"
           min="0"
@@ -196,22 +72,22 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
         <span
           className={
             "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (changedMRP ? (isValidMRP ? "hidden" : "") : "hidden")
+            (addProductInfo.pricing?.mrpPrice === undefined || isValidMRP(addProductInfo.pricing?.mrpPrice) ? "hidden" : "")
           }
         >
           * Enter Valid MRP price !
         </span>
       </div>
 
-            {/* Sale Price */}
+      {/* Sale Price */}
 
       <div>
-        <p className="text-base font-bold text-gray-500">Sale Price</p>
+        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sale Price</p>
         <input
           onChange={(event: any) => {
             dispatch(setSalesPrice(event.target.value));
           }}
-          onBlur={() =>  setChangedSP(true)  }
+          onBlur={resetSalesToZero}
           value={addProductInfo.pricing?.salesPrice}
           type="number"
           min="0"
@@ -221,7 +97,7 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
         <span
           className={
             "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (changedSP ? (isValidSalePrice ? "hidden" : "") : "hidden")
+            (addProductInfo.pricing?.salesPrice === undefined || isValidSalePrice(addProductInfo.pricing?.salesPrice) ? "hidden" : "")
           }
         >
           * Enter valid Sale price !
@@ -230,30 +106,30 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
 
       {/* Tax-info */}
 
-      { action === "add" && 
-      <div className="mt-2">
-        <div className="text-base font-bold text-gray-500">Tax Info</div>
-        <ToggleButton
-          className="mt-4"
-          onChange={() => {
-            dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled));
-          }}
-          value={addProductInfo.pricing?.taxEnabled}
-        />
-      </div>
+      {action === PAGE_ACTION.ADD &&
+        <div className="mt-2">
+          <div className="text-sm font-bold text-gray-500 dark:text-gray-300">Tax Info</div>
+          <ToggleButton
+            className="mt-4"
+            onChange={() => {
+              dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled));
+            }}
+            value={addProductInfo.pricing?.taxEnabled}
+          />
+        </div>
       }
 
       {/* ---------- */}
       {!addProductInfo?.centralCatalogue?.id &&
         addProductInfo.pricing?.taxEnabled && (
           <div>
-                        {/* HSN section */}
+            {/* HSN section */}
             <div>
-              <p className="text-base text-gray-500">HSN Number</p>
+              <p className="text-sm font-bold text-gray-500 dark:text-gray-300">HSN Number</p>
               <div className="des-modal-btn">
-                <div  className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600">
-                {addProductInfo.pricing?.hsn?.hsn}
-                  </div>
+                <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600">
+                  {addProductInfo.pricing?.hsn?.hsn}
+                </div>
 
                 {/* Modal handle btn */}
                 <button
@@ -278,7 +154,7 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
                 <span
                   className={
                     "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (changedHSN ? (isValidHSN ? "hidden" : "") : "hidden")
+                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn!) ? "hidden" : "")
                   }
                 >
                   * Enter valid HSN !
@@ -288,20 +164,22 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
                 </div>
               </div>
             </div>
-                        {/* GST section */}
+            {/* GST section */}
             <div>
-              <p className="mt-4 text-base text-gray-500">GST Percentage</p>
+              <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-300">GST Percentage</p>
               <div className="flex">
                 <input
                   onChange={handleGstPercentage}
-                  onBlur={() =>  setChangedGST(true)  }
+                  onBlur={() => isNumber(addProductInfo.pricing?.hsn?.gstPercentage ??
+                    addProductInfo.pricing?.gstPercentage) ? null : dispatch(setGstPercentage(0))}
+
                   value={
                     addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage
                   }
                   type="number"
                   max={100}
-                  min= {0}
+                  min={0}
                   className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                 />
                 <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
@@ -310,7 +188,8 @@ function PricingTab({ setValidation, submitStatus, action }: Props) {
                 <span
                   className={
                     "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (changedGST ? (isValidGST ? "hidden" : "") : "hidden")
+                    (isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
+                      addProductInfo.pricing?.gstPercentage) ? "hidden" : "")
                   }
                 >
                   * Enter valid GST !

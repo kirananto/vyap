@@ -68,7 +68,7 @@ function OrganizationCategoryModal(props: any) {
         </div>
         <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
           {items.map((mapItem, index) => (
-            <div onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
+            <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
               <div className="text-gray-700 dark:text-gray-300">{mapItem.name} </div>
               <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>
             </div>
