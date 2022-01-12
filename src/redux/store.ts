@@ -30,7 +30,7 @@ const rootReducer = combineReducers({
     customers: customersSlice,
     chatList: chatListSlice
 })
-const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 'placeorder', 'paymentFilters', 'orderFilters', 'addproduct', 'productFilters', 'addItemsproductFilters'] }
+const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 'placeorder', 'paymentFilters', 'orderFilters', 'productFilters', 'addItemsproductFilters'] }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({ reducer: persistedReducer, middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }), })
 export const persistor = persistStore(store)
