@@ -23,6 +23,7 @@ import profPic from "src/assets/icons/profile/profile-icon.svg"
 import { useIntl } from "react-intl";
 import { logOutAPI } from "src/API/login.axios";
 import { clearAll } from "../ChatView/chatListSlice";
+import { hapticFeedback } from "src/utils/vibrate";
 
 export default function More() {
   const { user, token } = useSelector(selectCredentials)
@@ -58,50 +59,50 @@ export default function More() {
         {/* Menu */}
         {/* ----- */}
         <div className="flex flex-col gap-2 pl-10 mt-2">
-          <NavLink to="/all-payments" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
+          <NavLink to="/all-payments" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
             <PaymentIcon />
             <Links linkName={intl.formatMessage({ id: 'global.allPayments'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/orders" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
+          <NavLink to="/orders" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
             <AllOrdersIcon />
             <Links linkName={intl.formatMessage({ id: 'global.allOrders'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/reports" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <NavLink to="/reports" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <ReportsIcon />
             <Links linkName={intl.formatMessage({ id: 'global.reports'})} />
             <Tag tagName={intl.formatMessage({ id: 'global.comingSoon'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          {user?.organization?.isSupplier && <NavLink to="#" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          {user?.organization?.isSupplier && <NavLink to="#" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <StockManagementIcon />
             <Links linkName={intl.formatMessage({ id: 'global.stockManagement'})} />
             <Tag tagName={intl.formatMessage({ id: 'global.comingSoon' }) } />
           </NavLink>}
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/my-account" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <NavLink to="/my-account" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <MyAccountIcon />
             <Links linkName={intl.formatMessage({ id: 'global.myAccount'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <NavLink to="/settings" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <NavLink to="/settings" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <SettingsIcon />
             <Links linkName={intl.formatMessage({ id: 'global.settings'})} />
           </NavLink>
           {/* ----- */}
           {/* ----- */}
-          <a href="mailto:mail@vyap.app" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          <a href="mailto:mail@vyap.app" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <HelpIcon />
             <Links linkName={intl.formatMessage({ id: 'global.help'})} />
           </a>
           
-          {user?.organization?.isSupplier === false && <a href="mailto:mail@vyap.app" className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
+          {user?.organization?.isSupplier === false && <a href="mailto:mail@vyap.app" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500">
             <SwitchIcon />
             <Links linkName={intl.formatMessage({ id: 'global.switch'})} />
           </a>}

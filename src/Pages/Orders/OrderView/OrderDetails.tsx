@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PaymentInfo } from "../../../Components/PaymentInfo";
 import { format } from "date-fns";
 import { OrderInfoIcon } from "src/Components/OrderInfo";
+import { hapticFeedback } from "src/utils/vibrate";
 
 function OrderDetailed({ order }: { order: any }) {
   return (
@@ -71,7 +72,10 @@ export default function OrderDetail({
           {isExpanded ? (
             <div
               className="flex text-gray-600 dark:text-gray-200"
-              onClick={() => setIsExpanded(false)}
+              onClick={() => { 
+                hapticFeedback()
+                setIsExpanded(false)
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +95,10 @@ export default function OrderDetail({
           ) : (
             <div
               className="flex text-gray-600 dark:text-gray-200"
-              onClick={() => setIsExpanded(true)}
+              onClick={() => {
+                hapticFeedback()
+                setIsExpanded(true)
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
