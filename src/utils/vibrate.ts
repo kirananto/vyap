@@ -1,3 +1,3 @@
 export function hapticFeedback () {
-    navigator.vibrate ? navigator.vibrate(120) : null
+    navigator.vibrate ? navigator.vibrate(80) : null
 }
