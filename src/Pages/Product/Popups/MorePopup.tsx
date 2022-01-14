@@ -50,11 +50,11 @@ export function MorePopup({ item, onClose }: any) {
         <h1 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">More options for {item?.centralCatalogue?.name} {item?.aliasName ? `(${item?.aliasName})` : ''}</h1>
       </div>
       {/* row-1 */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col mt-6">
         <button onClick={() => {
           hapticFeedback()
           deleteProduct()
-        }} className="flex items-center gap-2 text-sm font-semibold text-red-500 dark:text-red-300 custom-btn">
+        }} className="flex items-center py-3 gap-2 text-md font-semibold text-red-500 dark:text-red-300 custom-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -75,7 +75,7 @@ export function MorePopup({ item, onClose }: any) {
         <button onClick={() => {
           hapticFeedback()
           markStockStatus(true)
-        }} className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+        }} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -96,7 +96,7 @@ export function MorePopup({ item, onClose }: any) {
         <button onClick={() => {
           hapticFeedback()
           markStockStatus(false)
-        }} className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+        }} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
@@ -114,7 +114,7 @@ export function MorePopup({ item, onClose }: any) {
           <span>Mark in stock</span>
         </button>
         {/* --------- */}
-        <button className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
+        <button className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn  ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
