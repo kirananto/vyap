@@ -14,8 +14,8 @@ function ItemCard(props: any) {
     <div className="flex w-full gap-2">
       {/* image-col */}
       <div className="w-3/12">
-        <div className="relative w-20 h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
-          {props.productImage && <img src={props.productImage} alt="Avatar" className="object-cover w-full h-full" />}
+        <div className="relative w-20 min-h-full h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+          {props.productImage && props.productImage !== '' && <img src={props.productImage} alt="Avatar" className="object-cover w-full h-full" />}
         </div>
       </div>
       {/* detail-col */}
