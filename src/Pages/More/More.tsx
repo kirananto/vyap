@@ -62,7 +62,7 @@ export default function More() {
         </div>
         </div>
         {/* Menu */}
-        <div className="m-auto w-full px-4">
+        <div className="m-auto w-full px-3">
           <div className="bg-green-200 border border-green-700 m-auto w-full my-4 p-4 inline-flex items-center rounded-lg">
             <img src={giftSvg} className="w-20 h-20" />
             <div className="flex-grow flex flex-col pl-4">
