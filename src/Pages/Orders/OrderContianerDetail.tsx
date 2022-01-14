@@ -70,7 +70,7 @@ export default function OrderContainerDetail({
         id="print"
         ref={componentRef}
       >
-        <h2> Order Summary: </h2>
+        <h2 className="dark:text-gray-300"> Order Summary: </h2>
 
         <div className={`flex w-full justify-between mt-2 pb-2 `}>
           {/* TODO: Remove this console.log */}
