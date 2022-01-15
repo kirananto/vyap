@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import "./old.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import RouterComp from "./RouterComp";
+import RouterComp from "./Router/RouterComp";
 import { useDispatch, useSelector } from 'react-redux';
 import ServiceWorkerIntegration from "./ServiceWorkerIntegration";
 import { IntlProvider } from 'react-intl';

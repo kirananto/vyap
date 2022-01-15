@@ -6,7 +6,6 @@ import { selecti18nConfig, setLanguage } from "src/i18nSlice";
 import { SimpleHeader } from "../../Components/Header";
 import ToggleButton from "../../Components/ToggleButton";
 import { selectCredentials, setDarkMode } from "../Login/credentialsSlice";
-import "./Settings.css";
 
 
 export default function Settings() {
@@ -37,7 +36,7 @@ export default function Settings() {
         {/* ------ */}
         <div className="flex gap-3 mb-2">
           <h1 className="font-bold text-gray-700 text-md dark:text-gray-300">Team members</h1>
-          <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min side-div">
+          <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min bg-green-200 text-green-700 dark:bg-green-900 dark:text-green-400">
             Coming soon
           </div>
         </div>
@@ -57,7 +56,7 @@ export default function Settings() {
         {/* --------- */}
         <div className="flex gap-3 mb-2 mt-9">
           <h1 className="font-semibold text-gray-500 text-md dark:text-gray-300">Import Customer CSV</h1>
-          <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min side-div">
+          <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min bg-green-200 text-green-700 dark:bg-green-900 dark:text-green-400">
             Coming soon
           </div>
         </div>
