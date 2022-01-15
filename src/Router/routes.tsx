@@ -17,13 +17,14 @@ const Product = lazily(() => import('src/Pages/Product')).default
 const Account = lazily(() => import('src/Pages/Account')).default
 const AllPayments = lazily(() => import('src/Pages/Payments')).default
 
-const PageNotFound = lazily(() => import('src/Pages/404NotFound')).default
 const AddItem = lazily(() => import('src/Pages/ChatView/PlaceOrder/AddItem')).default
 const PlaceOrder = lazily(() => import('src/Pages/ChatView/PlaceOrder')).default
 const CreateProduct = lazily(() => import('src/Pages/Product/AddProduct/ProductScreen/CreateProduct')).default
 const AddEditPurchase = lazily(() => import('src/Pages/StockManagement/PurchaseOrder/AddEditPurchase')).default
 const PurchaseOrder = lazily(() => import('src/Pages/StockManagement/PurchaseOrder')).default
 const AddProductMain = lazily(() => import('src/Pages/Product/AddProduct/MainScreen/AddProductMain')).default
+const OrderDetails = lazily(() => import('src/Pages/Orders/OrderView')).default
+const { Payment } = lazily(() => import('src/Pages/ChatView'))
 
 export const routes: {
     path: string;
@@ -113,6 +114,56 @@ export const routes: {
     {
         path: '/all-payments',
         Component: AllPayments,
+        requireAuth: true
+    },
+    {
+        path: '/chat/:id',
+        Component: Payment,
+        requireAuth: true
+    },
+    {
+        path: '/add-product',
+        Component: AddProductMain,
+        requireAuth: true
+    },
+    {
+        path: '/create-product',
+        Component: CreateProduct,
+        requireAuth: true
+    },
+    {
+        path: '/edit-product',
+        Component: CreateProduct,
+        requireAuth: true
+    },
+    {
+        path: '/purchase-order',
+        Component: PurchaseOrder,
+        requireAuth: true
+    },
+    {
+        path: '/purchase-order/new',
+        Component: AddEditPurchase,
+        requireAuth: true
+    },
+    {
+        path: '/purchase-order/:id',
+        Component: AddEditPurchase,
+        requireAuth: true
+    },
+    {
+        path: '/order/:id',
+        Component: OrderDetails,
+        requireAuth: true
+    },
+    {
+        path: '/place-order',
+        Component: PlaceOrder,
+        requireAuth: true
+    },
+    {
+        path: '/place-order/add-item',
+        Component: AddItem,
         requireAuth: true
     }
 ]
