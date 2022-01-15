@@ -11,6 +11,7 @@ import { selectCredentials, setCredentials } from "../Pages/Login/credentialsSli
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { routes } from "./routes";
+import FallBackUI from "./FallBackUI";
 
 function RouterComp() {
 
@@ -47,7 +48,7 @@ function RouterComp() {
       {routes.map(route => <Route
         path={route.path}
         key={route.path}
-        element={<Suspense fallback={<>...</>}>
+        element={<Suspense fallback={<FallBackUI />}>
           {route.requireAuth ? (<RequiredAuth><route.Component /></RequiredAuth>) : (<UnAuthenticated><route.Component /></UnAuthenticated>)}
         </Suspense>}
       />)}
