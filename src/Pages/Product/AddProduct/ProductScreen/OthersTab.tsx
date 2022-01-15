@@ -38,7 +38,7 @@ const ImageContainer = (props: any) => {
     >
       <img
         key={item?.imageName}
-        alt=""
+        alt="Placeholder"
         src={getImageURL(
           item?.imageName,
           IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE

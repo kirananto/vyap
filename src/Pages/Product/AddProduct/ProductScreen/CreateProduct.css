@@ -1,27 +1,27 @@
 /* px-8 py-1 font-semibold text-gray-500 focus:bg-blue-200 focus:px-8 focus:py-1 focus:rounded-full focus:text-blue-600 */
-.create-product-container{
-    /* height: 85vh; */
-    overflow-y: auto;
-    min-height: calc(100vh - 2rem);
-    padding-bottom: 20px;
+.create-product-container {
+  /* height: 85vh; */
+  overflow-y: auto;
+  min-height: calc(100vh - 2rem);
+  padding-bottom: 20px;
 }
 
 /* ! ===Modal DESIGNING=== */
-.des-modal-btn{
-    position: relative;
+.des-modal-btn {
+  position: relative;
 }
-.modal-btn{
-    position: absolute;
-    top: 18px;
-    right: 15px;
+.modal-btn {
+  position: absolute;
+  top: 18px;
+  right: 15px;
 }
 /* ! ===Modal DESIGNING=== */
 
-.barcode-input{
-    position: relative;
+.barcode-input {
+  position: relative;
 }
-.barcode-icon{
-    position: absolute;
-    top: 42px;
-    right: 15px;
+.barcode-icon {
+  position: absolute;
+  top: 42px;
+  right: 15px;
 }

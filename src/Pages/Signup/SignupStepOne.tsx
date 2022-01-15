@@ -72,7 +72,7 @@ export default function SignupStep1() {
       <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
         <div className="w-80 h-100">
           <a className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
-            <img className="w-12 h-12" src={vyapLogo} />
+            <img className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
             <h2 className="text-2xl font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400 dark:text-indigo-100">
               {" "}
               Vyap {" "}

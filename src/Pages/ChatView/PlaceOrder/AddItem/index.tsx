@@ -177,7 +177,7 @@ export default function AddItem() {
     if (itemList?.length === 0) {
       return (
         <div>
-          <img className="mt-12 h-48 p-6 m-auto" src={ChatImg} />
+          <img className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
           <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-gray-300">
             {" "}
             Sorry the seller has no products for sale.{" "}

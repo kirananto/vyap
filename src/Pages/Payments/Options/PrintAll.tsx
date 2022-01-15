@@ -85,7 +85,7 @@ export const PrintAll = ({ apiData }: IProps) => {
         >
           <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
             <div className="col-start-1 col-span-1  -space-y-3 align-middle">
-              <img className="w-12 h-12" src={vyapLogo} />
+              <img className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
               <p className="text-2xl font-bold text-gray-700 "> vyap </p>
             </div>
 
@@ -98,7 +98,7 @@ export const PrintAll = ({ apiData }: IProps) => {
             </div>
 
             <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
-              <img className="w-12 h-12" src={vyapLogo} />
+              <img className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
               <div className="flex flex-col">
                 <p className="text-xl font-bold text-gray-600">
                   {" "}

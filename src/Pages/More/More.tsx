@@ -64,7 +64,7 @@ export default function More() {
         {/* Menu */}
         <div className="m-auto w-full px-3">
           <div className="bg-green-200 border border-green-700 m-auto w-full my-4 p-4 inline-flex items-center rounded-lg">
-            <img src={giftSvg} className="w-20 h-20" />
+            <img src={giftSvg} alt="gift" className="w-20 h-20" />
             <div className="flex-grow flex flex-col pl-4">
               <h2 className="title-font font-bold text-gray-800 tracking-wider">Enjoy your 3 months of <br/> free service 🎉</h2>
               <p className="text-sm dark:text-gray-600">and then it's only <strong>₹299/month</strong></p>

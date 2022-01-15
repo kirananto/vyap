@@ -55,7 +55,7 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
         }
         if (chats?.threads?.length <= 0) {
             return <div>
-                <img className="p-12 m-auto mt-6 h-72" src={ChatImg} />
+                <img className="p-12 m-auto mt-6 h-72" alt="no Chats" src={ChatImg} />
                 <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200"> You do not have any transactions, Create a transaction to get started. </div>
             </div>
         }

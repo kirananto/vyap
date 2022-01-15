@@ -67,7 +67,7 @@ export default function SignupStepThree() {
           style={logoStyle}
           className="w-24"
           src={vyapLogo}
-          alt=""
+          alt="vyap-logo"
         />
         <h1 className="text-4xl font-bold text-gray-600 dark:text-gray-300">VYAP</h1>
       </div>

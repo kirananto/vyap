@@ -119,7 +119,7 @@ const OrderBill = ({ order }: { order: any }) => {
               <div className="flex flex-row flex-wrap justify-end py-1 mt-6 px-5 border-t border-zinc-200">
                 <div className="item w-1/6 place-self-center">
                   <div className=" -space-y-4 ">
-                    <img className="w-6 h-6" src={vyapLogo} />
+                    <img className="w-6 h-6" alt="vyap-logo" src={vyapLogo} />
                     <p className="text-sm font-bold text-gray-700 "> vyap </p>
                   </div>
                 </div>

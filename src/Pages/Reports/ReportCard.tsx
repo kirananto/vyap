@@ -11,7 +11,7 @@ function ReportCard(props: { bgIllus: any, heading: string }) {
         <img
           className="justify-end w-8/12"
           src={props.bgIllus}
-          alt=""
+          alt="vyap"
         />
       </div>
     </div>
