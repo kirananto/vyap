@@ -76,11 +76,11 @@ export function isValidCategory(hasCatalogueId: boolean, value: string) {
 }
 
 export function isValidTag(hasCatalogueId: boolean, value: string) {
-    if (hasCatalogueId) { return true }
-    let postCat = new PostTag();
-    postCat.tag = value;
+    //if (hasCatalogueId) { return true }
+    let postTag = new PostTag();
+    postTag.tag = value;
 
-    const errors = validateSync(postCat)
+    const errors = validateSync(postTag)
     if (errors.length > 0) {
         console.log('[VALIDATION]: Error in tag')
     }
