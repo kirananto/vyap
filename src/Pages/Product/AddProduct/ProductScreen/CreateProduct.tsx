@@ -19,7 +19,7 @@ import ItemCard from "./ItemCard";
 import OthersTab from "./OthersTab";
 import PricingTab from "./PricingTab";
 import { PAGE_ACTION, TABS } from "./types";
-import { isValidBrand, isValidCategory, isValidDescription, isValidGST, isValidHSN, isValidMRP, isValidSalePrice } from "./validations";
+import { isValidBrand, isValidCategory, isValidDescription, isValidGST, isValidHSN, isValidMRP, isValidSalePrice, isValidTag } from "./validations";
 
 function CreateProduct() {
   const [toggleState, setToggleState] = useState(TABS.PRICING);
@@ -125,7 +125,8 @@ function CreateProduct() {
 
   const validateOthers = () => {
     return (isValidDescription(addProductInfo?.centralCatalogue?.description!) &&
-      isValidCategory(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.category?.name!) &&
+      isValidCategory(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.centralCategory?.name!) &&
+      isValidTag(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.category?.name!) &&
       isValidBrand(!!addProductInfo?.centralCatalogue?.id, addProductInfo?.others?.brand?.name!))
   };
 
