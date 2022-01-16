@@ -130,17 +130,6 @@ function OthersTab({ action, saveAttempt }: Props) {
       .then((result: any) =>
         console.log(
           result.data.data
-            // .sort((a: any, b: any) => {
-            //     const nameA = a.application_name.toLowerCase()
-            //     const nameB = b.application_name.toLowerCase()
-            //     if (nameA < nameB) {
-            //         return -1
-            //     }
-            //     if (nameA > nameB) {
-            //         return 1
-            //     }
-            //     return 0
-            // })
             .map((item: any) => ({ label: "ssdd", value: item }))
         )
       )
@@ -192,7 +181,7 @@ function OthersTab({ action, saveAttempt }: Props) {
           <h1 className="font-bold text-gray-500 dark:text-gray-400 ">
             Add product images
           </h1>
-          <p className="text-xs font-bold text-gray-300 mt-2">
+          <p className="text-xs font-bold text-gray-400 dark:text-gray-300 mt-2">
             Add upto 5 images. First image is your product's cover
             <br /> image that will be highlighted everywhere{" "}
           </p>
@@ -202,7 +191,7 @@ function OthersTab({ action, saveAttempt }: Props) {
               <ImageContainer key={item.imageName} item={item} />
             ))}
             <div
-              className="flex items-center justify-center w-16 h-16 p-1 border border-gray-200 rounded-lg shadow-sm cursor-pointer dark:text-gray-300"
+              className="flex items-center justify-center w-16 h-16 p-1 border border-gray-400 rounded-lg shadow-sm cursor-pointer dark:text-gray-300"
               onClick={() => fileUploaderRef.current!.click()}
             >
               {!spinner ? (

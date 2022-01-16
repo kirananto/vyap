@@ -35,8 +35,6 @@ export default function Login() {
         } else {
           setError('No internet connection, please connect to a network and try again.')
         }
-        // User couldn't sign in (bad verification code?)
-        // ...
       })
   }
 

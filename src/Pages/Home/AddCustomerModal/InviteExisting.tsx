@@ -1,7 +1,4 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
-import { checkIfUserExists } from "src/API/invite.axios";
-import { selectCredentials } from "src/Pages/Login/credentialsSlice";
 import { currentPageEnum } from ".";
 import { Length, IsString, validate } from "class-validator";
 import { useState } from "react";
@@ -30,7 +27,6 @@ export class Post {
 }
 
 export default function InviteExisting({
-  toggleVisibility,
   address,
   setAddress,
   businessName,
@@ -39,7 +35,6 @@ export default function InviteExisting({
   setPinCode,
   setCurrentPage,
 }: IProps) {
-  const { token } = useSelector(selectCredentials);
   const [isValidBizName, setIsValidBizName] = useState<boolean>(true);
   const [isValidAdress, setIsValidAdress] = useState<boolean>(true);
   const [isValidPincode, setIsValidPincode] = useState<boolean>(true);
@@ -49,25 +44,6 @@ export default function InviteExisting({
   const refPincode = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (action: string) => {
-    // checkIfUserExists(token!, phoneNumber).then(result => {
-    //   console.log('data',)
-    // }).catch(error => {
-    //   // TODO user doesn't exist
-    // })
-    // TODO DO validations before making API call
-    // createPayment(token!, {
-    //   amount,
-    //   note,
-    //   method,
-    //   status: paymentStatus.SUCCESS,
-    //   senderOrgId: user?.organizationId!,
-    //   receiverId: receiverId!,
-    // }).then(result => {
-    //   // DO feedback for success
-    //   toggleVisibility(false)
-    // }).catch(error => {
-    //   // Do feedback for error
-    // })
 
     let post = new Post();
     post.biz_name = refBizName.current && refBizName.current.value;

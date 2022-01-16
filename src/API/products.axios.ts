@@ -32,7 +32,6 @@ export interface AddCentralCatalogueInterface {
     brandId?: string
     hsnId?: string
     barCode?: string
-    // TODO Unverified
     categoriesId?: string
     categories: any
     images: any

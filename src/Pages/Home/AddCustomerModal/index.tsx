@@ -1,8 +1,4 @@
-import { paymentMethod, paymentStatus } from '../../../API/enum'
 import React from 'react'
-// import { createPayment } from 'src/API/payment.axios'
-import { useSelector } from 'react-redux'
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import AddCustomerStep1 from './Step1'
 import InviteExisting from './InviteExisting'
 import PreviewScreen from './Preview'
@@ -23,7 +19,6 @@ export default function AddCustomerModal({
   isVisible,
   toggleVisibility
 }: IProps) {
-  const { token, user } = useSelector(selectCredentials)
   const [currentPage, setCurrentPage] = React.useState<currentPageEnum>(currentPageEnum.STEP_1)
   const [isExisting, setIsExisting] = React.useState(false)
   const [phoneNumber, setPhoneNumber] = React.useState('')
@@ -32,29 +27,6 @@ export default function AddCustomerModal({
   const [businessName, setBusinessName] = React.useState("")
   const [pinCode, setPinCode] = React.useState("")
 
-
-
-  const handleSubmit = () => {
-    // TODO DO validations before making API call
-    // createPayment(token!, {
-    //   amount,
-    //   note,
-    //   method,
-    //   status: paymentStatus.SUCCESS,
-    //   senderOrgId: user?.organizationId!,
-    //   receiverId: receiverId!,
-    // }).then(result => {
-    //   // DO feedback for success
-    //   toggleVisibility(false)
-    // }).catch(error => {
-    //   // Do feedback for error
-    // })
-  }
-
-  function setState(phone: string, _openingBalance: number) {
-    setPhoneNumber(phone)
-    setOpeningBalance(_openingBalance)
-  }
 
   function renderCurrentPage() {
     switch (currentPage) {
@@ -84,7 +56,6 @@ export default function AddCustomerModal({
         return <PreviewScreen
           address={address}
           setCurrentPage={setCurrentPage}
-          toggleVisibility={toggleVisibility}
           isExisting={isExisting}
           openingBalance={openingBalance}
           phoneNumber={phoneNumber}

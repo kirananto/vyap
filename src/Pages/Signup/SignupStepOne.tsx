@@ -37,8 +37,6 @@ export default function SignupStep1() {
         } else {
           setError('No internet connection, please connect to a network and try again.')
         }
-        // User couldn't sign in (bad verification code?)
-        // ...
       })
   }
 
@@ -48,9 +46,6 @@ export default function SignupStep1() {
       console.log('result', result)
       setCurrentPage(1)
       phoneNumberRef.current = phoneNumber
-      // confResRef.current = confirmationResult;
-      // setCurrentPage(1)
-      // console.log('resultSignin', confirmationResult)
     }).catch(error => {
       console.log('error', error)
       setError(error.message)

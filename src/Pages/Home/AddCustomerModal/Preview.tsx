@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { checkIfUserExists, inviteExisting, inviteNew } from 'src/API/invite.axios'
+import { inviteExisting, inviteNew } from 'src/API/invite.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { currentPageEnum } from '.'
 
@@ -12,10 +12,8 @@ interface IProps {
   pinCode: any
   isExisting: boolean
   setCurrentPage: any
-  toggleVisibility: () => void
 }
 export default function PreviewScreen({
-  toggleVisibility,
   address,
   businessName,
   pinCode,

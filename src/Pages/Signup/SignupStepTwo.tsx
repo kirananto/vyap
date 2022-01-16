@@ -24,7 +24,6 @@ export default function SignupStepThree() {
     e.preventDefault()
     const result = handleValidations()
     if (result) {
-      // Proceed to next step
       navigate('/signup-step-3')
     }
   }

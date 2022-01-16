@@ -1,6 +1,5 @@
 
 import React, { useEffect } from "react";
-import "./old.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import RouterComp from "./Router/RouterComp";
@@ -38,7 +37,7 @@ export const InitialRouter = () => {
 
   return (
     <IntlProvider locale={userInterfaceLanguage} messages={messages[userInterfaceLanguage]} defaultLocale={defaultUserInterfaceLanguage}>
-      <div className="bg-gray-100 dark:bg-gray-800">
+      <div className="app_background dark:bg-gray-800">
         <ServiceWorkerIntegration />
         <Router>
           <RouterComp />

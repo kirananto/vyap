@@ -1,10 +1,62 @@
+/* Old CSS Start*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  overflow: auto;
+}
+
+/* Customer Card */
+.card-main-container {
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  width: 100%;
+}
+
+.scrollDes::-webkit-scrollbar {
+  width: 0px;
+}
+
+.card-main {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  margin-top: 10px;
+}
+.card-container {
+  display: flex;
+  width: 100%;
+}
+/* Customer Card Field Ends */
+
+/* Add Customer Button */
+.add-cutomer-btn {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  width: 160px;
+  transition: 0.1s;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.add-cutomer-btn:active {
+  transform: scale(0.95);
+}
+
+/* Old css end */
 
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  font-family:  Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji !important;
+  font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji !important;
   user-select: none;
 }
 
@@ -16,6 +68,10 @@ body {
 
 body:focus {
   outline: none;
+}
+
+.app_background {
+  background-color: #fbfbfb;
 }
 
 /* Ripple effect */
@@ -39,7 +95,7 @@ body:focus {
 }
 
 .dark .empty_image_background {
-    background-color: #373464;
+  background-color: #373464;
 }
 
 :root {

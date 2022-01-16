@@ -72,7 +72,6 @@ export const fetchInboxAction = createAsyncThunk(
 export const chatListInterface = createSlice({
     name: 'chatList',
     initialState,
-    // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setPaymentInfo: (state, action: PayloadAction<{ inboxId: string, threadId: string, payment: paymentObject }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
@@ -88,9 +87,7 @@ export const chatListInterface = createSlice({
 
     },
     extraReducers: (builder) => {
-        // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(fetchThreadsByInbox.fulfilled, (state, action) => {
-            // Add user to the state array
             if(state[action.payload.id]?.threads) {
                 const existingItems = state[action.payload.id].threads
                 const newItems = action.payload.threads
@@ -103,32 +100,27 @@ export const chatListInterface = createSlice({
             }
         }),
         builder.addCase(fetchThreadsByInbox.pending, (state, action: any) => {
-            // Add user to the state array
             if (state[action.meta?.args?.id]) {
                 state[action.meta?.args?.id].error = false
                 state[action.meta?.args?.id].isLoading = true
             }
         }),
         builder.addCase(fetchThreadsByInbox.rejected, (state, action: any) => {
-            // Add user to the state array
             if (state[action.meta?.args?.id]) {
                 state[action.meta?.args?.id].error = true
                 state[action.meta?.args?.id].isLoading = false
             }
         }),
         builder.addCase(fetchInboxAction.fulfilled, (state, action) => {
-            // Add user to the state array
             state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload };
         }),
         builder.addCase(fetchInboxAction.pending, (state, action: any) => {
-            // Add user to the state array
             if (state[action.meta?.args?.id]) {
                 state[action.meta?.args?.id].error = false
                 state[action.meta?.args?.id].isLoading = true
             }
         }),
         builder.addCase(fetchInboxAction.rejected, (state, action: any) => {
-            // Add user to the state array
             if (state[action.meta?.args?.id]) {
                 state[action.meta?.args?.id].error = true
                 state[action.meta?.args?.id].isLoading = false
