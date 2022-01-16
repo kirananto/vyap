@@ -1,17 +1,17 @@
-import { isNumber } from "class-validator";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ToggleButton from "../../../../Components/ToggleButton";
+import { isNumber } from 'class-validator'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ToggleButton from '../../../../Components/ToggleButton'
 import {
-  selectAddProductInfo,
-  setGstPercentage,
-  setMrpPrice,
-  setSalesPrice,
-  setTaxEnabled
-} from "../redux/addProductSlice";
-import HSNmodal from "./HSNmodal";
-import { PAGE_ACTION } from "./types";
-import { isValidGST, isValidHSN, isValidMRP, isValidSalePrice } from "./validations";
+    selectAddProductInfo,
+    setGstPercentage,
+    setMrpPrice,
+    setSalesPrice,
+    setTaxEnabled
+} from '../redux/addProductSlice'
+import HSNmodal from './HSNmodal'
+import { PAGE_ACTION } from './types'
+import { isValidGST, isValidHSN, isValidMRP, isValidSalePrice } from './validations'
 
 
 interface Props {
@@ -20,187 +20,187 @@ interface Props {
 }
 
 function PricingTab({ action, saveAttempt }: Props) {
-  const [modal, setModal] = useState(false);
-  const addProductInfo = useSelector(selectAddProductInfo);
+    const [modal, setModal] = useState(false)
+    const addProductInfo = useSelector(selectAddProductInfo)
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-  const handleModal = () => {
-    setModal(true);
-  };
-
-  const handleGstPercentage = (event: any) => {
-    const tempVal = event.target.value;
-    if (tempVal <= 100) {
-      dispatch(setGstPercentage(tempVal));
+    const handleModal = () => {
+        setModal(true)
     }
-  };
 
-  const resetSalesToZero = () => dispatch(setSalesPrice(isNumber(parseInt(`${addProductInfo.pricing?.salesPrice}`, 10)) ? addProductInfo.pricing?.salesPrice! : 0))
-
-  const resetMRPToZero = () => dispatch(setMrpPrice(isNumber(parseInt(`${addProductInfo.pricing?.mrpPrice}`, 10)) ? addProductInfo.pricing?.mrpPrice! : 0))
-
-  useEffect(() => {
-    if (saveAttempt) {
-      resetSalesToZero()
-      resetMRPToZero()
+    const handleGstPercentage = (event: any) => {
+        const tempVal = event.target.value
+        if (tempVal <= 100) {
+            dispatch(setGstPercentage(tempVal))
+        }
     }
-  }, [saveAttempt])
 
-  return (
-    <div
-      className="flex flex-col gap-5 mt-2 pb-24 overflow-auto"
-      style={{ height: "calc(100vh - 22rem)" }}
-    >
+    const resetSalesToZero = () => dispatch(setSalesPrice(isNumber(parseInt(`${addProductInfo.pricing?.salesPrice}`, 10)) ? addProductInfo.pricing?.salesPrice! : 0))
 
-      {/* MRP Price */}
+    const resetMRPToZero = () => dispatch(setMrpPrice(isNumber(parseInt(`${addProductInfo.pricing?.mrpPrice}`, 10)) ? addProductInfo.pricing?.mrpPrice! : 0))
 
-      <div>
-        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">MRP</p>
-        <input
-          onChange={(event: any) => {
-            dispatch(setMrpPrice(event.target.value));
-          }}
-          onBlur={resetMRPToZero}
-          value={addProductInfo.pricing?.mrpPrice}
-          type="number"
-          min="0"
-          placeholder="Enter price"
-          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-        />
+    useEffect(() => {
+        if (saveAttempt) {
+            resetSalesToZero()
+            resetMRPToZero()
+        }
+    }, [saveAttempt])
 
-        <span
-          className={
-            "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (addProductInfo.pricing?.mrpPrice === undefined || isValidMRP(addProductInfo.pricing?.mrpPrice) ? "hidden" : "")
-          }
+    return (
+        <div
+            className="flex flex-col gap-5 mt-2 pb-24 overflow-auto"
+            style={{ height: 'calc(100vh - 22rem)' }}
         >
-          * Enter Valid MRP price !
-        </span>
-      </div>
 
-      {/* Sale Price */}
+            {/* MRP Price */}
 
-      <div>
-        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sale Price</p>
-        <input
-          onChange={(event: any) => {
-            dispatch(setSalesPrice(event.target.value));
-          }}
-          onBlur={resetSalesToZero}
-          value={addProductInfo.pricing?.salesPrice}
-          type="number"
-          min="0"
-          placeholder="Enter price"
-          className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-        />
-        <span
-          className={
-            "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-            (addProductInfo.pricing?.salesPrice === undefined || isValidSalePrice(addProductInfo.pricing?.salesPrice) ? "hidden" : "")
-          }
-        >
-          * Enter valid Sale price !
-        </span>
-      </div>
-
-      {/* Tax-info */}
-
-      {action === PAGE_ACTION.ADD &&
-        <div className="mt-2">
-          <div className="text-sm font-bold text-gray-500 dark:text-gray-300">Tax Info</div>
-          <ToggleButton
-            className="mt-4"
-            onChange={() => {
-              dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled));
-            }}
-            value={addProductInfo.pricing?.taxEnabled}
-          />
-        </div>
-      }
-
-      {/* ---------- */}
-      {!addProductInfo?.centralCatalogue?.id &&
-        addProductInfo.pricing?.taxEnabled && (
-          <div>
-            {/* HSN section */}
             <div>
-              <p className="text-sm font-bold text-gray-500 dark:text-gray-300">HSN Number</p>
-              <div className="des-modal-btn">
-                <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600">
-                  {addProductInfo.pricing?.hsn?.hsn}
-                </div>
-
-                {/* Modal handle btn */}
-                <button
-                  className="modal-btn dark:text-gray-300 -mt-2"
-                  onClick={handleModal}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-                {/* Modal */}
+                <p className="text-sm font-bold text-gray-500 dark:text-gray-300">MRP</p>
+                <input
+                    onChange={(event: any) => {
+                        dispatch(setMrpPrice(event.target.value))
+                    }}
+                    onBlur={resetMRPToZero}
+                    value={addProductInfo.pricing?.mrpPrice}
+                    type="number"
+                    min="0"
+                    placeholder="Enter price"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                />
 
                 <span
-                  className={
-                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
-                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn!) ? "hidden" : "")
-                  }
+                    className={
+                        'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+            (addProductInfo.pricing?.mrpPrice === undefined || isValidMRP(addProductInfo.pricing?.mrpPrice) ? 'hidden' : '')
+                    }
                 >
-                  * Enter valid HSN !
+          * Enter Valid MRP price !
                 </span>
-                <div>
-                  <HSNmodal trigger={modal} setModal={setModal} />
-                </div>
-              </div>
             </div>
-            {/* GST section */}
+
+            {/* Sale Price */}
+
             <div>
-              <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-300">GST Percentage</p>
-              <div className="flex">
+                <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sale Price</p>
                 <input
-                  onChange={handleGstPercentage}
-                  onBlur={() => isNumber(addProductInfo.pricing?.hsn?.gstPercentage ??
+                    onChange={(event: any) => {
+                        dispatch(setSalesPrice(event.target.value))
+                    }}
+                    onBlur={resetSalesToZero}
+                    value={addProductInfo.pricing?.salesPrice}
+                    type="number"
+                    min="0"
+                    placeholder="Enter price"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                />
+                <span
+                    className={
+                        'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+            (addProductInfo.pricing?.salesPrice === undefined || isValidSalePrice(addProductInfo.pricing?.salesPrice) ? 'hidden' : '')
+                    }
+                >
+          * Enter valid Sale price !
+                </span>
+            </div>
+
+            {/* Tax-info */}
+
+            {action === PAGE_ACTION.ADD &&
+        <div className="mt-2">
+            <div className="text-sm font-bold text-gray-500 dark:text-gray-300">Tax Info</div>
+            <ToggleButton
+                className="mt-4"
+                onChange={() => {
+                    dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled))
+                }}
+                value={addProductInfo.pricing?.taxEnabled}
+            />
+        </div>
+            }
+
+            {/* ---------- */}
+            {!addProductInfo?.centralCatalogue?.id &&
+        addProductInfo.pricing?.taxEnabled && (
+                <div>
+                    {/* HSN section */}
+                    <div>
+                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">HSN Number</p>
+                        <div className="des-modal-btn">
+                            <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600">
+                                {addProductInfo.pricing?.hsn?.hsn}
+                            </div>
+
+                            {/* Modal handle btn */}
+                            <button
+                                className="modal-btn dark:text-gray-300 -mt-2"
+                                onClick={handleModal}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-5 h-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                            {/* Modal */}
+
+                            <span
+                                className={
+                                    'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn!) ? 'hidden' : '')
+                                }
+                            >
+                  * Enter valid HSN !
+                            </span>
+                            <div>
+                                <HSNmodal trigger={modal} setModal={setModal} />
+                            </div>
+                        </div>
+                    </div>
+                    {/* GST section */}
+                    <div>
+                        <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-300">GST Percentage</p>
+                        <div className="flex">
+                            <input
+                                onChange={handleGstPercentage}
+                                onBlur={() => isNumber(addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage) ? null : dispatch(setGstPercentage(0))}
 
-                  value={
-                    addProductInfo.pricing?.hsn?.gstPercentage ??
+                                value={
+                                    addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage
-                  }
-                  type="number"
-                  max={100}
-                  min={0}
-                  className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-                />
-                <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
+                                }
+                                type="number"
+                                max={100}
+                                min={0}
+                                className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                            />
+                            <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
                   %
-                </div>
-                <span
-                  className={
-                    "flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 " +
+                            </div>
+                            <span
+                                className={
+                                    'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
                     (isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
-                      addProductInfo.pricing?.gstPercentage) ? "hidden" : "")
-                  }
-                >
+                      addProductInfo.pricing?.gstPercentage) ? 'hidden' : '')
+                                }
+                            >
                   * Enter valid GST !
-                </span>
-              </div>
-            </div>
+                            </span>
+                        </div>
+                    </div>
 
-          </div>
-        )}
-    </div>
-  );
+                </div>
+            )}
+        </div>
+    )
 }
 
-export default PricingTab;
+export default PricingTab

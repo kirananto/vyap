@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
-import PaymentCard from "../../Components/PaymentCard";
-import OrderCard from "../../Components/OrderCard";
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice';
+import PaymentCard from '../../Components/PaymentCard'
+import OrderCard from '../../Components/OrderCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
-import Spinner from 'src/Components/Style/Spinner';
-import { fetchThreadsByInbox, selectChatList, ThreadTypeEnum } from './chatListSlice';
-import { useParams } from 'react-router';
+import Spinner from 'src/Components/Style/Spinner'
+import { fetchThreadsByInbox, selectChatList, ThreadTypeEnum } from './chatListSlice'
+import { useParams } from 'react-router'
 
 //TODO use virtualization over here
 const limit = 1000
@@ -34,7 +34,7 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
         if (chats?.threads?.length > 2) {
             setTimeout(scrollToBottom, 100)
         }
-    }, [chats?.threads?.length]);
+    }, [chats?.threads?.length])
 
 
     useEffect(() => {

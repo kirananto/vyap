@@ -1,6 +1,6 @@
-import { lazily } from "react-lazily";
-const { Home } = lazily(() => import('src/Pages/Home/Home'));
-const Login = lazily(() => import('src/Pages/Login/Login')).default;
+import { lazily } from 'react-lazily'
+const { Home } = lazily(() => import('src/Pages/Home/Home'))
+const Login = lazily(() => import('src/Pages/Login/Login')).default
 const SignupStepOne = lazily(() => import('src/Pages/Signup/SignupStepOne')).default
 const SignupStepThree = lazily(() => import('src/Pages/Signup/SignupStepTwo')).default
 const SignupStepFour = lazily(() => import('src/Pages/Signup/SignupStepThree')).default

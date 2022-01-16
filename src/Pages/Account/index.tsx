@@ -12,19 +12,19 @@ export class Organization {
     
     @Length(3, 64)
     @IsString()
-    name?: string;
+        name?: string
 
     @Length(3, 64)
     @IsString()
-    bizName?: string;
+        bizName?: string
 
     @IsEmail()
     @IsOptional()
-    email?: string;
+        email?: string
 
     @Length(6)
     @IsString()
-    pinCode?: string;
+        pinCode?: string
 
 
 }
@@ -49,8 +49,8 @@ export default function Account() {
         setPinCodeError(false)
         setEmailError(false)
 
-        let post = new Organization();
-        post.name = user?.name;
+        const post = new Organization()
+        post.name = user?.name
         post.bizName = user?.organization?.name
         post.pinCode = user?.organization?.pinCode
         post.email = user?.email
@@ -61,13 +61,14 @@ export default function Account() {
             if(errors.length > 0) {
                 errors.forEach(errorItem => {
                     switch(errorItem.property) {
-                        case 'name' : setNameError(true); break;
-                        case 'bizName' : setBizNameError(true); break;
-                        case 'pinCode' : setPinCodeError(true); break;
-                        case 'email' : setEmailError(true); break;
+                        case 'name' : setNameError(true); break
+                        case 'bizName' : setBizNameError(true); break
+                        case 'pinCode' : setPinCodeError(true); break
+                        case 'email' : setEmailError(true); break
                     }
                 })
-            } else {
+            }
+            else {
                 handleSave()
             }
         })
@@ -118,7 +119,7 @@ export default function Account() {
                         placeholder="Your name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                     />
-                    {nameError && <span  className={"font-medium tracking-wide text-red-500 text-xs mt-1"} >
+                    {nameError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid name
                     </span>}
                 </div>
@@ -134,7 +135,7 @@ export default function Account() {
                         placeholder="Business name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                     />
-                    {bizNameError && <span  className={"font-medium tracking-wide text-red-500 text-xs mt-1"} >
+                    {bizNameError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid business name
                     </span>}
                 </div>
@@ -150,7 +151,7 @@ export default function Account() {
                         placeholder="Email"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                     />
-                    {emailError && <span  className={"font-medium tracking-wide text-red-500 text-xs mt-1"} >
+                    {emailError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid email
                     </span>}
                 </div>
@@ -166,7 +167,7 @@ export default function Account() {
                         placeholder="Pin code"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                     />
-                    {pinCodeError && <span  className={"font-medium tracking-wide text-red-500 text-xs mt-1"} >
+                    {pinCodeError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid pin code
                     </span>}
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DairySmall from "../../../../assets/img/DairySmall.jpeg"
+import DairySmall from '../../../../assets/img/DairySmall.jpeg'
 export default function AddRemoveItems() {
 
     const [isExpanded, setIsExpanded] = useState(false)

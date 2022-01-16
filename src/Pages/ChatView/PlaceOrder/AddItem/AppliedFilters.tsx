@@ -31,7 +31,7 @@ export default function AppliedFilters({
     }
     return (
         <div className="px-4">
-           <div className={'flex my-2 gap-4'}>
+            <div className={'flex my-2 gap-4'}>
                 <div className="w-10/12">
                     <input value={searchValue} onChange={(event: any) => setSearchValue(event?.target.value)} placeholder={intl.formatMessage({ id: `action.search` })} className="p-2 pl-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 dark:placeholder-gray-50 " />
                 </div>

@@ -10,7 +10,7 @@ export default function AddEditPurchase() {
         <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
             {/* header */}
             <div className="w-full mb-2 bg-white shadow">
-                <SimpleHeader heading={location.pathname.replace('/purchase-order/', '') === 'new' ? "Add Purchase Order" : "Edit Purchase Order"} />
+                <SimpleHeader heading={location.pathname.replace('/purchase-order/', '') === 'new' ? 'Add Purchase Order' : 'Edit Purchase Order'} />
             </div>
 
             {/* body */}
