@@ -24,7 +24,7 @@ export default function ProductCard({
           />
         </div>
 
-        <div className="text-center relative w-20 h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+        <div className="text-center relative w-18 aspect-square mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
             {item?.thumbnailImage && (
               <img
                 src={getImageURL(
@@ -43,29 +43,28 @@ export default function ProductCard({
           </div>
 
         <div className="pl-5 self-center">
-          <div className="font-semibold text-md dark:text-gray-200 ">{item?.centralCatalogue?.name}</div>
-          <div className="dark:text-gray-300 ">{item?.aliasName ? `(${item?.aliasName})` : ""}</div>
+          <div className="font-semibold text-md dark:text-gray-200 truncate ">{item?.aliasName ? `${item?.aliasName}` : ""} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name}</div>
 
           <div>
-            <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">
+            {/* <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">
               #{item.id?.split("-")[0]}
-            </p>
+            </p> */}
             </div>
           <div className="grid grid-cols-2">
             <div className="text-sm font-semibold text-gray-500  dark:text-gray-400">
               <p>
-                MRP:
+                MRP
               </p>
-              <p>
+              <p className="font-semibold">
                 ₹{item?.mrpPrice}
               </p>
             </div>
             <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
               <p >
-                Cost: 
+                Cost
               </p>
-              <p >
-                {item?.rate}
+              <p className="font-semibold" >
+              ₹{item?.rate}
               </p>
             </div>
           </div>

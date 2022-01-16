@@ -53,7 +53,7 @@ export function ItemCard({ item }: IProps) {
         </div>
         <div className="w-3/5 mt-4">
           {user?.organization?.isSupplier && <div>
-            {item.isSupplier ? <div className="text-green-700 border bg-green-100 tracking-wider w-min rounded px-1 -mt-2 text-xs dark:bg-green-900 dark:text-green-100"> Retailer </div> : <div className="text-blue-700 bg-blue-100 tracking-wider w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
+            {item.isSupplier ? <div className="text-green-700 border bg-green-100 tracking-wider w-min rounded px-1 -mt-2 text-xs dark:bg-green-800 dark:border-green-900 dark:text-green-300"> Retailer </div> : <div className="text-blue-700 bg-blue-100 tracking-wider w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
           </div>}
           <h2 className="font-extrabold text-gray-600 dark:text-gray-200 truncate">{item.recipient?.name}</h2>
           <h5 className="text-xs text-gray-500 dark:text-gray-400 leading truncate">{item.lastMsg}</h5>

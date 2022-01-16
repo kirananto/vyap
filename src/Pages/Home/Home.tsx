@@ -84,10 +84,10 @@ export const Home = () => {
       <header className="flex flex-col gap-2 p-4 bg-white dark:bg-gray-800 shadow-md">
         <div className="flex w-full h-full ">
           <Link to="/more" className="flex flex-col w-4/5">
-            <h1 className="text-lg font-semibold text-gray-600 dark:text-gray-100 font-ProductSans">
+            <h1 className="text-lg font-semibold text-gray-600 dark:text-gray-100">
               <FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />
             </h1>
-            <h1 className="text-lg font-black text-transparent product_sans_bold bg-clip-text bg-gradient-to-br from-blue-500  to-indigo-900 dark:from-blue-200 dark:to-indigo-200 w-40 truncate">
+            <h1 className="text-lg font-black text-transparent tracking-wide font-bold bg-clip-text bg-gradient-to-br from-blue-500  to-indigo-900 dark:from-blue-200 dark:to-indigo-200 w-40 truncate">
               {user?.organization?.name}
             </h1>
           </Link>

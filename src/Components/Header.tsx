@@ -8,11 +8,11 @@ function Header({ heading, subHeading, phoneNumber, shareAction, onBackClick, is
   return (
     <div className={isSticky ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0' : "flex w-11/12 pt-2 pb-2 m-auto "}>
       {/* back icon  */}
-      <div onClick={() => {
+      {!backDisabled ? <div onClick={() => {
         hapticFeedback()
         onBackClick ? onBackClick() : navigate(-1)
       }} className="flex items-center justify-start ml-2 cursor-pointer">
-        {!backDisabled ? <svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-8 dark:text-gray-300"
           fill="none"
@@ -25,15 +25,15 @@ function Header({ heading, subHeading, phoneNumber, shareAction, onBackClick, is
             strokeWidth="2"
             d="M15 19l-7-7 7-7"
           />
-        </svg> : null}
-      </div>
+        </svg>
+      </div> : null}
 
       {/* Heading container */}
-      <div className={`flex ${subHeading ? 'flex-col' : 'items-center'} w-4/5 pl-4 text-gray-600 dark:text-gray-300 `}>
-        <h1 className="text-lg font-semibold  font-ProductSans">
+      <div className={`flex ${subHeading ? 'flex-col' : 'items-center'} w-4/5  ${backDisabled ? 'pl-1' : 'pl-4'} text-gray-600 dark:text-gray-300 `}>
+        <h1 className="text-lg font-semibold">
           {heading}
         </h1>
-        {subHeading && (<h1 className="text-lg font-black text-transparent product_sans_bold bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
+        {subHeading && (<h1 className="text-lg font-black text-transparent font-bold tracking-wide bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200">
           {subHeading}
         </h1>)}
       </div>
@@ -92,7 +92,7 @@ function PaymentBottomHeader({ amount, isLoading }: { amount?: string, isLoading
             {parsedAmount !== 0 && <h6 style={fontSize} className="font-bold text-gray-800 dark:text-gray-300">
               {parsedAmount > 0 ? 'You have to pay' : 'You get'}
             </h6>}
-            {parsedAmount !== 0 && <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-200">₹ {Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>}
+            {parsedAmount !== 0 && <h1 className="text-4xl font-bold text-gray-700 dark:text-gray-200">₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}</h1>}
             {parsedAmount == 0 && <h1 className={`text-md font-semibold ${parsedAmount == 0 ? 'text-green-800 dark:text-green-400' : 'text-gray-700 dark:text-gray-200'}`}>Dues Settled</h1>}
           </>}
         </div>
@@ -138,7 +138,7 @@ function SimpleHeader(props: { heading: string, backFn?: any, backDisabled?: boo
 
       {/* Heading container */}
       <div className="flex flex-col w-4/5 pl-4 ">
-        <h1 className="text-xl font-bold text-gray-600 dark:text-gray-300 font-ProductSans">
+        <h1 className="text-xl font-bold text-gray-600 dark:text-gray-300">
           {props.heading}
         </h1>
       </div>
