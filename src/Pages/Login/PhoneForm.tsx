@@ -19,7 +19,7 @@ export default function PhoneForm({ onPressLogin, error, text }: IProps) {
       }}
     >
       <div>
-        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
           Phone number
         </label>
         <input
@@ -40,7 +40,7 @@ export default function PhoneForm({ onPressLogin, error, text }: IProps) {
         * {error}
       </div>
 
-      <div className="mt-2 text-xs text-gray-400">
+      <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
         We'll never share your phone number <br /> with anyone else.
       </div>
 

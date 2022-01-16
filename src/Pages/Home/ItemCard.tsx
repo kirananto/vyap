@@ -53,14 +53,14 @@ export function ItemCard({ item }: IProps) {
         </div>
         <div className="w-3/5 mt-4">
           {user?.organization?.isSupplier && <div>
-            {item.isSupplier ? <div className="text-green-500 bg-green-100 w-min rounded px-1 -mt-2 text-xs dark:bg-green-900 dark:text-green-100"> Retailer </div> : <div className="text-blue-500 bg-blue-100 w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
+            {item.isSupplier ? <div className="text-green-700 border bg-green-100 tracking-wider w-min rounded px-1 -mt-2 text-xs dark:bg-green-900 dark:text-green-100"> Retailer </div> : <div className="text-blue-700 bg-blue-100 tracking-wider w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
           </div>}
           <h2 className="font-extrabold text-gray-600 dark:text-gray-200 truncate">{item.recipient?.name}</h2>
           <h5 className="text-xs text-gray-500 dark:text-gray-400 leading truncate">{item.lastMsg}</h5>
         </div>
         <div className="w-1/5 lg:w-auto mt-5 text-right">
 
-          <h6 className="text-xs text-gray-500"> {renderTime(new Date(item.updatedAt))}</h6>
+          <h6 className="text-xs text-gray-500 dark:text-gray-400"> {renderTime(new Date(item.updatedAt))}</h6>
           {item.unseenNumbers ? <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">
             {item.unseenNumbers}
           </div> : null}

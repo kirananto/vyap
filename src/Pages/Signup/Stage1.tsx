@@ -62,13 +62,13 @@ export default function SignupStage1() {
     <section className="flex flex-col items-center h-screen md:flex-row ">
       <div className="flex items-center justify-center w-full h-screen px-6  md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
         <div className="w-80 h-100">
-          <a className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
-            <img className="w-12 h-12" src="../new_logo.svg" alt="vyap-logo"/>
+          <div className="flex items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
+            <img height={48} width={48} className="w-12 h-12" src="../new_logo.svg" alt="vyap-logo"/>
             <h2 className="text-lg font-bold text-gray-700 uppercase duration-500 ease-in-out transform ttransition hover:text-lightBlue-500 dark:text-indigo-400">
               {" "}
               Vyap
             </h2>
-          </a>
+          </div>
           <h1 className="mt-8 text-xl font-semibold text-gray-700 tracking-ringtighter sm:text-3xl title-font">
             Signup to Vyap to succeed.  
           </h1>
@@ -78,7 +78,7 @@ export default function SignupStage1() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-semibold text-blue-500 hover:text-blue-700"
+              className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700"
             >
               Log in
             </Link>

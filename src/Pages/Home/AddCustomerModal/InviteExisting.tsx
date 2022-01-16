@@ -122,7 +122,7 @@ export default function InviteExisting({
       autoComplete="off"
     >
       <div className="mt-4">
-        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
           Business name or shop name
         </label>
         <input
@@ -148,7 +148,7 @@ export default function InviteExisting({
         </span>
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
           Address
         </label>
         <textarea
@@ -174,7 +174,7 @@ export default function InviteExisting({
         </span>
       </div>
       <div className="mt-4">
-        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
           Pin code
         </label>
         <input

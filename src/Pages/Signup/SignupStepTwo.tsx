@@ -140,7 +140,7 @@ export default function SignupStepThree() {
 
           </div>
           <div className="mt-2">
-            <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-500 text-grey-700">
+            <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
               Address
             </label>
             <textarea

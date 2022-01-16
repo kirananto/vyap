@@ -65,7 +65,7 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
       </div>
       <Button className="mt-6">Verify OTP</Button>
       <div className="text-sm mt-4 text-center text-gray-600 dark:text-gray-400">
-        Didn't recieve OTP ? <a className="font-semibold text-blue-500 hover:text-blue-700" href="#" onClick={goBack}> Resend the OTP</a>
+        Didn't recieve OTP ? <a className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700" href="#" onClick={goBack}> Resend the OTP</a>
       </div>
     </form>
   );
