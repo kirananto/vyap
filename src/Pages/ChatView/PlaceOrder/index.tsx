@@ -7,12 +7,12 @@ import ChatImg from "../../Product/assets/no_data.svg";
 // import DropList from 'src/Components/Style/DropList'
 
 import {
-  pushItemsToCart,
-  updateItemsOnCart,
-  removeItemsFromCart,
-  selectPlaceOrderInfo,
-  setFlatDiscount,
-  setNote,
+    pushItemsToCart,
+    updateItemsOnCart,
+    removeItemsFromCart,
+    selectPlaceOrderInfo,
+    setFlatDiscount,
+    setNote,
 } from "./placeOrderSlice";
 import { placeOrderAPI } from "src/API/order.axios";
 import { selectCredentials } from "src/Pages/Login/credentialsSlice";
@@ -24,11 +24,11 @@ import AddPaymentModal from "../AddPaymentModal";
 import { BUTTON_ACTION } from "./types";
 
 export default function PlaceOrder() {
-  const { token, user } = useSelector(selectCredentials);
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+    const { token, user } = useSelector(selectCredentials);
+    const [isSuccess, setIsSuccess] = React.useState(false);
+    const [paymentModalVisible, setPaymentModalVisible] = useState(false);
 
-  const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(true);
   //     const [isDropOpen, setIsDropOpen] = React.useState<
   //     | {
   //       isAdd: boolean;
