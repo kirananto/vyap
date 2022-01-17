@@ -1,0 +1,4 @@
+export enum BUTTON_ACTION {
+    'ADD_PAYMENT' = 'ADD_PAYMENT',
+    'PLACE_ORDER' = 'PLACE_ORDER'
+}
