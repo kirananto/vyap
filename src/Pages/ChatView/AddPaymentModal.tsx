@@ -34,7 +34,7 @@ export default function AddPaymentModal({
     const [note, setNote] = React.useState('')
 
     const [isFullPay, setIsFullPay] = useState<boolean>(true)
-    const [customAmount, setCustomAmount] = useState<number>(0)
+    const [customAmount, setCustomAmount] = useState<number>(undefined)
 
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
@@ -108,13 +108,14 @@ export default function AddPaymentModal({
                             <>
                                 <div
                                     className={
-                                        'm-2  p-4' + isFullPay
+                                        `p-2 mt-4 ${isFullPay
                                             ? 'border rounded-lg border-blue-600  dark:border-gray-700'
-                                            : 'border rounded-lg border-gray-200 dark:border-gray-700'
-                                    }
+                                            : 'border rounded-lg border-gray-200 dark:border-gray-700'}
+                                            
+                                    `}
                                     onClick={() => setIsFullPay(true)}
                                 >
-                                    <label className="inline-flex items-center mt-3 mb-4">
+                                    <label className="inline-flex items-center mt-3 mb-2">
                                         <input
                                             type="radio"
                                             className="form-radio h-5 w-5 text-orange-600"
@@ -122,13 +123,14 @@ export default function AddPaymentModal({
                                         />
                                         <span className="ml-2 text-gray-700"> Full Payment</span>
                                     </label>
-                                </div>
+                                </div> <br/>
+
                                 <div
                                     className={
-                                        'm-2 p-4' + isFullPay
-                                            ? ' border rounded-lg  border-gray-200  dark:border-gray-700'
-                                            : 'border rounded-lg border-blue-600  dark:border-gray-700'
-                                    }
+                                        `p-2 pb-4 mt-2 ${isFullPay
+                                            ? ' border rounded-lg  border-gray-300  dark:border-gray-700'
+                                            : 'border rounded-lg border-blue-600  dark:border-gray-700'}
+                                    `}
                                     onClick={() => setIsFullPay(false)}
                                 >
                                     <label className="inline-flex items-center mt-3">
@@ -141,13 +143,33 @@ export default function AddPaymentModal({
                                     </label>{' '}
                                     <br />
                                     {!isFullPay && (
-                                        <label className="mt-5">
-                                            <span className="ml-2 text-gray-700"> Amount:</span>
+                                        <label className="flex mt-5 place-self-center">
+                                            <span className="ml-2 text-gray-700 mr-5 self-center"> Amount:</span>
+                                            
                                             <input
-                                                type="number"
-                                                className="form-radio h-5 w-5 text-orange-600"
                                                 value={customAmount}
-                                                onChange={(e: any) => setCustomAmount(e?.target?.value)}
+                                                onChange={(event) => {
+                                                    setCustomAmount(
+                                                        parseFloat(event?.target.value as any) > 0
+                                                            ? parseFloat(event?.target.value as any)
+                                                            : 0
+                                                    )
+                                                    onValidate(
+                                                        'change',
+                                                        parseFloat(event?.target.value as any) > 0
+                                                            ? parseFloat(event?.target.value as any)
+                                                            : 0,
+                                                        () => {
+                                                            console.log('validate')
+                                                        }
+                                                    )
+                                                }}
+                                                className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform 
+                                                border-transparent rounded-lg bg-gray-200 opacity-75 
+                                                focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 
+                                                dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                                inputMode="numeric"
+                                                type="number"
                                             />
                                         </label>
                                     )}
@@ -249,7 +271,7 @@ export default function AddPaymentModal({
                                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
                                 {btnAction === BUTTON_ACTION.PLACE_ORDER
-                                    ? 'Confirm Order:' + customAmount
+                                    ? 'Confirm Order'
                                     : 'Save Payment'}
                             </button>
                         </div>
