@@ -19,6 +19,7 @@ interface IProps {
   receiverId?: string;
   orderAmount?: number;
   btnAction?: string;
+  placeOrder?: () => void
 }
 export default function AddPaymentModal({
     isVisible,
@@ -26,19 +27,28 @@ export default function AddPaymentModal({
     receiverId,
     orderAmount,
     btnAction,
+    placeOrder
 }: IProps) {
     const { token, user } = useSelector(selectCredentials)
     const [method, setMethod] = React.useState<paymentMethod>(paymentMethod.CASH)
-    const [amount, setAmount] = React.useState<number | undefined>(undefined)
+    console.log("btnAction="+btnAction);
+    console.log("Amount="+orderAmount);
+
+    const [amount, setAmount] = React.useState<number | undefined>((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? orderAmount! : undefined)
+
     const [isSuccess, setIsSuccess] = React.useState(false)
     const [note, setNote] = React.useState('')
 
     const [isFullPay, setIsFullPay] = useState<boolean>(true)
-    const [customAmount, setCustomAmount] = useState<number>(undefined)
+    const [customAmount, setCustomAmount] = useState<number | undefined>(undefined)
 
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
     const onValidate = (action: string, value: number, handle: () => void) => {
+        console.log("Amount set="+amount);
+        console.log("recived vaidation amount="+value);
+
+
         const post = new PostAmount()
         post.amount = Number(value)
 
@@ -50,7 +60,7 @@ export default function AddPaymentModal({
             else {
                 setIsValidAmount(true)
                 console.log('validation succeed')
-                if (action == 'submit') {
+                if (action === 'submit') {
                     handle()
                 }
             }
@@ -59,8 +69,12 @@ export default function AddPaymentModal({
 
     const handleSubmit = () => {
     // DO validations before making API call
+        
+        console.log('Receiver:'+ user?.organizationId!)
+        console.log('Sender:'+ receiverId!)
+
         createPayment(token!, {
-            amount: amount!,
+            amount: (btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!,
             note,
             method,
             status: paymentStatus.SUCCESS,
@@ -68,7 +82,12 @@ export default function AddPaymentModal({
             senderOrgId: receiverId!,
         })
             .then(() => {
+                console.log('payment success')
+                console.log((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!)
                 setIsSuccess(true)
+                if(btnAction === BUTTON_ACTION.PLACE_ORDER){
+                    placeOrder && placeOrder()
+                }
             })
             .catch(() => {
                 // Do feedback for error
@@ -106,11 +125,17 @@ export default function AddPaymentModal({
 
                         {btnAction === BUTTON_ACTION.PLACE_ORDER ? (
                             <>
+                                <div className='text-left pl-3 my-5'>
+                                    <span className="font-bold">
+                                        <span className="pr-3">Order Total:</span>  ₹ {orderAmount}
+                                    </span>
+                                </div>
+
                                 <div
                                     className={
                                         `p-2 mt-4 ${isFullPay
-                                            ? 'border rounded-lg border-blue-600  dark:border-gray-700'
-                                            : 'border rounded-lg border-gray-200 dark:border-gray-700'}
+                                            ? 'border-2 rounded-lg border-blue-600  dark:border-gray-700'
+                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-700'}
                                             
                                     `}
                                     onClick={() => setIsFullPay(true)}
@@ -123,13 +148,13 @@ export default function AddPaymentModal({
                                         />
                                         <span className="ml-2 text-gray-700"> Full Payment</span>
                                     </label>
-                                </div> <br/>
+                                </div> 
 
                                 <div
                                     className={
-                                        `p-2 pb-4 mt-2 ${isFullPay
-                                            ? ' border rounded-lg  border-gray-300  dark:border-gray-700'
-                                            : 'border rounded-lg border-blue-600  dark:border-gray-700'}
+                                        `p-2 pb-4 mt-4 ${isFullPay
+                                            ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-700'
+                                            : 'border-2 rounded-lg border-blue-600  dark:border-gray-700'}
                                     `}
                                     onClick={() => setIsFullPay(false)}
                                 >
@@ -142,7 +167,7 @@ export default function AddPaymentModal({
                                         <span className="ml-2 text-gray-700"> Partial Payment</span>
                                     </label>{' '}
                                     <br />
-                                    {!isFullPay && (
+                                    {!isFullPay && (<>
                                         <label className="flex mt-5 place-self-center">
                                             <span className="ml-2 text-gray-700 mr-5 self-center"> Amount:</span>
                                             
@@ -171,8 +196,27 @@ export default function AddPaymentModal({
                                                 inputMode="numeric"
                                                 type="number"
                                             />
+                                           
                                         </label>
+
+                                        <span
+                                            className={
+                                                'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 pl-24' +
+(isValidAmount ? 'hidden' : '')
+                                            }
+                                        >
+Please enter a valid amount !
+                                        </span></>
+
+
+                                        
                                     )}
+                                </div>
+
+                                <div className='text-left pl-3 my-7'>
+                                    <span className="font-bold">
+                                        <span className="">Confirm Place Order by receiving </span>{isFullPay ? 'the full payment of ₹'+orderAmount : 'a partial payment of ₹'+customAmount}
+                                    </span>
                                 </div>
                             </>
                         ) : (
@@ -234,7 +278,7 @@ export default function AddPaymentModal({
                       (isValidAmount ? 'hidden' : '')
                                         }
                                     >
-                    Please enter a amount !
+                    Please enter a valid amount !
                                     </span>
                                 </div>
                                 {/* <!-- Remarks Textarea --> */}
@@ -266,7 +310,7 @@ export default function AddPaymentModal({
                             <button
                                 onClick={() => {
                                     hapticFeedback()
-                                    onValidate('submit', amount!, handleSubmit)
+                                    onValidate('submit',((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!), handleSubmit)
                                 }}
                                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
