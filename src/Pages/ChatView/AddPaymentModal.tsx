@@ -201,12 +201,13 @@ export default function AddPaymentModal({
 
                                         <span
                                             className={
-                                                'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 pl-24' +
-(isValidAmount ? 'hidden' : '')
+                                                `flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 pl-24+${isValidAmount ? 'hidden' : ''}`
                                             }
                                         >
 Please enter a valid amount !
-                                        </span></>
+                                        </span>
+                                        
+                                    </>
 
 
                                         
