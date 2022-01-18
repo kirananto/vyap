@@ -144,7 +144,7 @@ export default function AddPaymentModal({
                                         <input
                                             type="radio"
                                             className="form-radio h-5 w-5 text-orange-600"
-                                            checked={isFullPay}
+                                            defaultChecked={isFullPay}
                                         />
                                         <span className="ml-2 text-gray-700"> Full Payment</span>
                                     </label>
@@ -162,7 +162,7 @@ export default function AddPaymentModal({
                                         <input
                                             type="radio"
                                             className="form-radio h-5 w-5 text-orange-600"
-                                            checked={!isFullPay}
+                                            defaultChecked={!isFullPay}
                                         />
                                         <span className="ml-2 text-gray-700"> Partial Payment</span>
                                     </label>{' '}
@@ -311,7 +311,7 @@ Please enter a valid amount !
                             <button
                                 onClick={() => {
                                     hapticFeedback()
-                                    onValidate('submit',((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!), handleSubmit)
+                                    onValidate('submit', Number(((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!)), handleSubmit)
                                 }}
                                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
