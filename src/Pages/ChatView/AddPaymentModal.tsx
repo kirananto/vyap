@@ -30,14 +30,11 @@ export default function AddPaymentModal({
     placeOrder
 }: IProps) {
     const { token, user } = useSelector(selectCredentials)
-    const [method, setMethod] = React.useState<paymentMethod>(paymentMethod.CASH)
-    console.log("btnAction="+btnAction);
-    console.log("Amount="+orderAmount);
+    const [method, setMethod] = useState<paymentMethod>(paymentMethod.CASH)
+    const [amount, setAmount] = useState<number | undefined>((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? orderAmount! : undefined)
 
-    const [amount, setAmount] = React.useState<number | undefined>((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? orderAmount! : undefined)
-
-    const [isSuccess, setIsSuccess] = React.useState(false)
-    const [note, setNote] = React.useState('')
+    const [isSuccess, setIsSuccess] = useState(false)
+    const [note, setNote] = useState('')
 
     const [isFullPay, setIsFullPay] = useState<boolean>(true)
     const [customAmount, setCustomAmount] = useState<number | undefined>(undefined)
@@ -45,10 +42,7 @@ export default function AddPaymentModal({
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
     const onValidate = (action: string, value: number, handle: () => void) => {
-        console.log("Amount set="+amount);
-        console.log("recived vaidation amount="+value);
-
-
+     
         const post = new PostAmount()
         post.amount = Number(value)
 
@@ -69,12 +63,8 @@ export default function AddPaymentModal({
 
     const handleSubmit = () => {
     // DO validations before making API call
-        
-        console.log('Receiver:'+ user?.organizationId!)
-        console.log('Sender:'+ receiverId!)
-
         createPayment(token!, {
-            amount: (btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!,
+            amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && !isFullPay) ? customAmount! : amount!,
             note,
             method,
             status: paymentStatus.SUCCESS,
@@ -82,8 +72,6 @@ export default function AddPaymentModal({
             senderOrgId: receiverId!,
         })
             .then(() => {
-                console.log('payment success')
-                console.log((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!)
                 setIsSuccess(true)
                 if(btnAction === BUTTON_ACTION.PLACE_ORDER){
                     placeOrder && placeOrder()
@@ -311,7 +299,7 @@ Please enter a valid amount !
                             <button
                                 onClick={() => {
                                     hapticFeedback()
-                                    onValidate('submit', Number(((btnAction === BUTTON_ACTION.PLACE_ORDER ) ? customAmount! : amount!)), handleSubmit)
+                                    onValidate('submit', Number(((btnAction === BUTTON_ACTION.PLACE_ORDER && !isFullPay ) ? customAmount! : amount!)), handleSubmit)
                                 }}
                                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
