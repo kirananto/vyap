@@ -37,7 +37,7 @@ export default function AddPaymentModal({
     const [note, setNote] = useState('')
 
     const [isFullPay, setIsFullPay] = useState<boolean>(true)
-    const [customAmount, setCustomAmount] = useState<number | undefined>(undefined)
+    const [customAmount, setCustomAmount] = useState<number | undefined>(0)
 
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
@@ -117,7 +117,7 @@ export default function AddPaymentModal({
 
                         {btnAction === BUTTON_ACTION.PLACE_ORDER ? (
                             <>
-                                <div className='text-left pl-3 my-5'>
+                                <div className='text-left dark:text-gray-200 pl-3 my-5'>
                                     <span className="font-bold">
                                         <span className="pr-3">Order Total:</span>  ₹ {orderAmount}
                                     </span>
@@ -126,8 +126,8 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 mt-4 ${isFullPay
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-gray-700'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-700'}
+                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
+                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
                                             
                                     `}
                                     onClick={() => setIsFullPay(true)}
@@ -135,33 +135,33 @@ export default function AddPaymentModal({
                                     <label className="inline-flex items-center mt-3 mb-2">
                                         <input
                                             type="radio"
-                                            className="form-radio h-5 w-5 text-orange-600"
+                                            className="form-radio h-5 w-5 text-blue-300"
                                             defaultChecked={isFullPay}
                                         />
-                                        <span className="ml-2 text-gray-700"> Full Payment</span>
+                                        <span className="ml-2 text-gray-700 dark:text-gray-300"> Full Payment</span>
                                     </label>
                                 </div> 
 
                                 <div
                                     className={
                                         `p-2 pb-4 mt-4 ${isFullPay
-                                            ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-700'
-                                            : 'border-2 rounded-lg border-blue-600  dark:border-gray-700'}
+                                            ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-600'
+                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-600'}
                                     `}
                                     onClick={() => setIsFullPay(false)}
                                 >
                                     <label className="inline-flex items-center mt-3">
                                         <input
                                             type="radio"
-                                            className="form-radio h-5 w-5 text-orange-600"
+                                            className="form-radio h-5 w-5 text-blue-300"
                                             defaultChecked={!isFullPay}
                                         />
-                                        <span className="ml-2 text-gray-700"> Partial Payment</span>
+                                        <span className="ml-2 text-gray-700 dark:text-gray-300"> Partial Payment</span>
                                     </label>{' '}
                                     <br />
                                     {!isFullPay && (<>
                                         <label className="flex mt-5 place-self-center">
-                                            <span className="ml-2 text-gray-700 mr-5 self-center"> Amount:</span>
+                                            <span className="ml-2 text-gray-700 mr-5 self-center dark:text-gray-300"> Amount:</span>
                                             
                                             <input
                                                 value={customAmount}
@@ -206,7 +206,7 @@ Please enter a valid amount !
                                     )}
                                 </div>
 
-                                <div className='text-left pl-3 my-7'>
+                                <div className='text-left dark:text-gray-200 pl-3 my-7'>
                                     <span className="font-bold">
                                         <span className="">Confirm Place Order by receiving </span>{isFullPay ? 'the full payment of ₹'+orderAmount : 'a partial payment of ₹'+customAmount}
                                     </span>

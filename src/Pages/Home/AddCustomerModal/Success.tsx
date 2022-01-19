@@ -4,8 +4,8 @@ import { currentPageEnum } from '.'
 interface IProps {
   text: string
   toggleVisibility: () => void
-  setCurrentPage: any
-  resetFields: () => void
+  setCurrentPage?: any
+  resetFields?: () => void
 }
 export default function Success({
     toggleVisibility,
@@ -15,7 +15,7 @@ export default function Success({
 }: IProps) {
 
     const successAction = () => {
-        resetFields()
+        resetFields && resetFields()
         setCurrentPage && setCurrentPage(currentPageEnum.STEP_1)
         toggleVisibility()
     }
