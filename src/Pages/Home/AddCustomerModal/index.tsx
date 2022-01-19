@@ -27,6 +27,15 @@ export default function AddCustomerModal({
     const [businessName, setBusinessName] = React.useState('')
     const [pinCode, setPinCode] = React.useState('')
 
+    const resetFields = () => {
+        setIsExisting(false)
+        setPhoneNumber('')
+        setOpeningBalance(0)
+        setAddress('')
+        setBusinessName('')
+        setPinCode('')
+    }
+
 
     function renderCurrentPage() {
         switch (currentPage) {
@@ -66,13 +75,13 @@ export default function AddCustomerModal({
                     text="Successfully invited the customer"
                     toggleVisibility={toggleVisibility}
                     setCurrentPage={setCurrentPage}
+                    resetFields = {resetFields}
                 />
             default: return <div> Loading </div>
         }
     }
 
     return (<div>
-        <div onClick={toggleVisibility} className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'} overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`} />
         <div className={`popup ${isVisible ? 'show' : ''} animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-gray-700`}>
             {currentPage !== currentPageEnum.SUCCESS ? <h2 className="text-left p-2 text-2xl mt-2 text-gray-700 dark:text-gray-300">Add Customer</h2> : null}
             {renderCurrentPage()}

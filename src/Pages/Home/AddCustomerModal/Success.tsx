@@ -5,14 +5,17 @@ interface IProps {
   text: string
   toggleVisibility: () => void
   setCurrentPage: any
+  resetFields: () => void
 }
 export default function Success({
     toggleVisibility,
     text,
-    setCurrentPage
+    setCurrentPage,
+    resetFields
 }: IProps) {
 
     const successAction = () => {
+        resetFields()
         setCurrentPage && setCurrentPage(currentPageEnum.STEP_1)
         toggleVisibility()
     }
