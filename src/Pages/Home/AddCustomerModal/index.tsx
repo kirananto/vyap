@@ -65,6 +65,7 @@ export default function AddCustomerModal({
                 return <Success
                     text="Successfully invited the customer"
                     toggleVisibility={toggleVisibility}
+                    setCurrentPage={setCurrentPage}
                 />
             default: return <div> Loading </div>
         }
