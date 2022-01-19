@@ -104,7 +104,7 @@ export default function AddPaymentModal({
             >
                 {isSuccess ? (
                     <Success
-                        text="successfully created payment record"
+                        text="Successfully updated the payment"
                         toggleVisibility={() => toggleVisibility(false)}
                     />
                 ) : (
