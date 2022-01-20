@@ -118,9 +118,10 @@ function Footer() {
 function SimpleFooter(props: { btnName: string, onClick?: any, isDisabled?: boolean }) {
     return (
         <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow shadow-2xl dark:bg-gray-800">
-            <Button onClick={() => {
+            <Button onClick={(event: any) => {
+                // if(event.preventDefault) event.preventDefault()
                 hapticFeedback()
-                props.onClick()
+                props.onClick(event)
             }} className="w-8/12 h-12" isDisabled={props.isDisabled}>
                 {props.btnName}
             </Button>
