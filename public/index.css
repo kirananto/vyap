@@ -46,6 +46,21 @@ body {
   transform: scale(0.95);
 }
 
+.add-cutomer-btn-sm {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  width: 50px;
+  padding-left: 7px;
+  transition: 0.1s;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.add-cutomer-btn-sm:active {
+  transform: scale(0.95);
+}
+
 /* Old css end */
 
 * {
