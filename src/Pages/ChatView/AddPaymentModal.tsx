@@ -97,9 +97,7 @@ export default function AddPaymentModal({
                 className={`popup ${
                     isVisible ? 'show' : ''
                 }
-                ${
-        btnAction === BUTTON_ACTION.PLACE_ORDER ? 'mb-[-200px]' : ''
-        }
+                
                  animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-gray-700`}
             >
                 {isSuccess ? (
