@@ -143,9 +143,9 @@ export default function PlaceOrder() {
         isValidCart && setPaymentModalVisible(true)
     }
 
-    function proceedPlaceOrder() {
+    async function proceedPlaceOrder() {
         if (placeOrder.cartItems?.length !== 0 && isValidDiscount) {
-            placeOrderAPI(token!, {
+            const order = await placeOrderAPI(token!, {
                 description: placeOrder.note,
                 flatDiscount: placeOrder.discount,
                 supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
@@ -159,13 +159,13 @@ export default function PlaceOrder() {
                         mrpPrice: parseFloat(mapItem.mrpPrice),
                     }
                 }),
-            }).then(() => {
-                navigate(`/chat/${localStorage?.getItem('inboxId')}`)
             })
+            // .then(() => {
+                // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
+            // })
+            return order?.data
         }
-        else {
-            //setIsValidCart(false);
-        }
+        return undefined
     }
 
     function renderCartItems() {
