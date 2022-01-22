@@ -15,7 +15,7 @@ export default function ServiceWorkerIntegration() {
     }
 
     const updateApplication = (currentRegistration?: ServiceWorkerRegistration) => () => {
-        console.log('Updating application')
+        // console.log('Updating application')
         hapticFeedback()
         // skip waiting until all service workers are closed to force update
         if (currentRegistration && currentRegistration.waiting) {

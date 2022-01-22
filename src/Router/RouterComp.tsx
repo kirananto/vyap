@@ -28,15 +28,12 @@ function RouterComp() {
             error => {
                 const { status } = error.response
                 if (status === UNAUTHORIZED || status === FORBIDDEN) {
-                    logOutAPI(token!).then(() => {
-                        dispatch(setCredentials({ user: undefined, token: undefined }))
-                        navigate('/login')
-                    }).catch(() => {
-                        dispatch(setCredentials({ user: undefined, token: undefined }))
-                        navigate('/login')
-                    }).finally(() => {
-                        dispatch(clearAll())
-                    })
+                    if(token) {
+                        logOutAPI(token!)
+                    }
+                    dispatch(setCredentials({ user: undefined, token: undefined }))
+                    navigate('/login')
+                    dispatch(clearAll())
                 }
                 return Promise.reject(error)
             }

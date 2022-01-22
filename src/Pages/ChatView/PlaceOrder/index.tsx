@@ -163,6 +163,7 @@ export default function PlaceOrder() {
             // .then(() => {
             // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
             // })
+            console.log('order2', order)
             return order?.data
         }
         return undefined

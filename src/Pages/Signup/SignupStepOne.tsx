@@ -20,7 +20,7 @@ export default function SignupStep1() {
         setError(null)
         verifyPhone(phoneNumberRef.current, code).then(res => {
             if (res.data) {
-                console.log('res.data', res.data)
+                // console.log('res.data', res.data)
                 if(res.data?.token) {
                     dispatch(setCredentials(res.data))
                     navigate('/home')
@@ -32,7 +32,7 @@ export default function SignupStep1() {
             }
         })
             .catch((error: any) => {
-                console.log('error verifying otp', error.message)
+                // console.log('error verifying otp', error.message)
                 if (error?.response?.data) {
                     setError('Please enter a valid OTP')
                 }
@@ -45,11 +45,11 @@ export default function SignupStep1() {
     const onPressLogin = (phoneNumber: string) => {
         setError(null)
         generateOtp(phoneNumber).then(result => {
-            console.log('result', result)
+            // console.log('result', result)
             setCurrentPage(1)
             phoneNumberRef.current = phoneNumber
         }).catch(error => {
-            console.log('error', error)
+            // console.log('error', error)
             setError(error.message)
         })
     }
