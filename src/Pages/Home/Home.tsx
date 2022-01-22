@@ -173,7 +173,7 @@ export const Home = () => {
                     className={`p-3 add-cutomer-btn transition duration-500 ease-in-out
                      text-white rounded-full text-md bg-gradient-to-br from-blue-500 to-indigo-700 shadow-sm`}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={ floatBtnLarge ? 'M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' : 'M12 6v6m0 0v6m0-6h6m-6 0H6'} />
                     </svg>     
 

@@ -196,7 +196,7 @@ export default function AddPaymentModal({
                             <>
                                 <div className='text-left dark:text-gray-200 pl-0 mt-6 mb-4'>
                                     <span className="font-semibold">
-                                        <span className="text-gray-500 pr-3 text-xl">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
+                                        <span className="text-gray-500 pr-3 text-xl dark:text-gray-200">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
                                     </span>
                                 </div>
 
@@ -205,7 +205,7 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 mt-4 text-left ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
+                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
                                             : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
             
     `}
@@ -219,7 +219,7 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 mt-4 text-left ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
+                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
                                             : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
                                             
                                     `}
@@ -234,7 +234,7 @@ export default function AddPaymentModal({
                                     className={
                                         `p-2 pb-4 mt-4 text-left ${!(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
                                             ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-600'
-                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-600'}
+                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-400'}
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)}
                                 >
