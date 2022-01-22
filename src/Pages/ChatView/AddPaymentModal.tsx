@@ -6,7 +6,7 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import Success from '../Home/AddCustomerModal/Success'
 import { Min, validate } from 'class-validator'
 import { hapticFeedback } from 'src/utils/vibrate'
-import { BUTTON_ACTION, PAYMENT_OPTIONS } from './PlaceOrder/types'
+import { BUTTON_ACTION } from './PlaceOrder/types'
 
 export class PostAmount {
   @Min(1)
@@ -37,8 +37,6 @@ export default function AddPaymentModal({
     const [note, setNote] = useState('')
 
     const [isFullPay, setIsFullPay] = useState<boolean>(true)
-
-    const [paymentOption, setPaymentOption] = useState<string>(PAYMENT_OPTIONS.PAY_LATER)
     const [customAmount, setCustomAmount] = useState<number | undefined>(0)
 
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
@@ -52,11 +50,6 @@ export default function AddPaymentModal({
             if (errors.length > 0) {
                 console.log('validation failed. errors: ', errors)
                 setIsValidAmount(false)
-                if(btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption === PAYMENT_OPTIONS.PAY_LATER){
-                    console.log('validation ignored')
-                    setIsValidAmount(true)
-                    handle()
-                }
             }
             else {
                 setIsValidAmount(true)
@@ -66,69 +59,6 @@ export default function AddPaymentModal({
                 }
             }
         })
-    }
-
-    //.....Order Confirmation message
-    function orderConfirmText() {
-        const orderTextStart = 'Confirm Place Order '
-        let orderTextMid = '...'
-        let orderTextEnd = '...'
-
-        if (btnAction === BUTTON_ACTION.PLACE_ORDER) {
-            switch (paymentOption) {
-                case PAYMENT_OPTIONS.FULL_PAYMENT:
-                    orderTextMid = ' by receiving the full payment of ₹'
-                    orderTextEnd = ''+orderAmount
-                    break
-                case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
-                    orderTextMid = ' by receiving a partial payment of ₹'
-                    orderTextEnd = ''+customAmount
-                    break
-                case PAYMENT_OPTIONS.PAY_LATER:
-                    orderTextMid = 'by PAYING LATER'
-                    orderTextEnd = ''
-                    break
-                default:
-                    orderTextMid = '...error'
-                    break
-            }
-        }
-        return <span className="font-bold">
-            { orderTextStart + orderTextMid + orderTextEnd}
-        </span>
-    }
-
-    //.....Confirm Order Button Action
-    function onConfirmOrder() {
-        hapticFeedback()
-        let validateAmount = 0
-        if (btnAction === BUTTON_ACTION.PLACE_ORDER) {
-            switch (paymentOption) {
-                case PAYMENT_OPTIONS.FULL_PAYMENT:
-                    validateAmount = amount!
-                    break
-                case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
-                    validateAmount = amount!
-                    break
-                case PAYMENT_OPTIONS.PAY_LATER:
-                    validateAmount = customAmount!
-                    break
-                default:
-                    validateAmount = 0
-                    break
-            }
-        }
-        else {
-            validateAmount = amount!
-        }
-        onValidate(
-            'submit',
-            Number(validateAmount),
-            proceedToPlaceOrder)
-    }
-
-    const proceedToPlaceOrder = () => {
-        placeOrder && placeOrder()
     }
 
     const handleSubmit = () => {
@@ -152,10 +82,9 @@ export default function AddPaymentModal({
             })
     }
 
-
     return (
         <div>
-            {/* <div
+            <div
                 onClick={() => {
                     hapticFeedback()
                     toggleVisibility(false)
@@ -163,7 +92,7 @@ export default function AddPaymentModal({
                 className={`fixed pin top-0 z-10 ${
                     isVisible ? 'show' : 'hidden'
                 } overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
-            /> */}
+            />
             <div
                 className={`popup ${
                     isVisible ? 'show' : ''
@@ -192,51 +121,43 @@ export default function AddPaymentModal({
                                     </span>
                                 </div>
 
-                                {/* ------- full payment button ---------*/}
-
-
                                 <div
                                     className={
-                                        `p-2 mt-4 ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
+                                        `p-2 mt-4 ${isFullPay
                                             ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
                                             : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
                                             
                                     `}
-                                    onClick={() => setPaymentOption(PAYMENT_OPTIONS.FULL_PAYMENT)}
+                                    onClick={() => setIsFullPay(true)}
                                 >
                                     <label className="inline-flex items-center mt-3 mb-2">
                                         <input
                                             type="radio"
                                             className="form-radio h-5 w-5 text-blue-300"
-                                            checked={paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT}
-                                            readOnly
+                                            defaultChecked={isFullPay}
                                         />
                                         <span className="ml-2 text-gray-700 dark:text-gray-300"> Full Payment</span>
                                     </label>
                                 </div> 
 
-                                {/* ------- partial payment button ---------*/}
-
-
                                 <div
                                     className={
-                                        `p-2 pb-4 mt-4 ${(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
+                                        `p-2 pb-4 mt-4 ${isFullPay
+                                            ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-600'
+                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-600'}
                                     `}
-                                    onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)} 
+                                    onClick={() => setIsFullPay(false)}
                                 >
                                     <label className="inline-flex items-center mt-3">
                                         <input
                                             type="radio"
                                             className="form-radio h-5 w-5 text-blue-300"
-                                            checked={paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT}
-                                            readOnly
+                                            defaultChecked={!isFullPay}
                                         />
                                         <span className="ml-2 text-gray-700 dark:text-gray-300"> Partial Payment</span>
                                     </label>{' '}
                                     <br />
-                                    {(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT) && (<>
+                                    {!isFullPay && (<>
                                         <label className="flex mt-5 place-self-center">
                                             <span className="ml-2 text-gray-700 mr-5 self-center dark:text-gray-300"> Amount:</span>
                                             
@@ -283,31 +204,10 @@ Please enter a valid amount !
                                     )}
                                 </div>
 
-
-                                {/* ------- pay later button ---------*/}
-
-                                <div
-                                    className={
-                                        `p-2 mt-4 ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
-                                            
-                                    `}
-                                    onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAY_LATER)}
-                                >
-                                    <label className="inline-flex items-center mt-3 mb-2">
-                                        <input
-                                            type="radio"
-                                            className="form-radio h-5 w-5 text-blue-300"
-                                            checked={paymentOption === PAYMENT_OPTIONS.PAY_LATER}
-                                            readOnly
-                                        />
-                                        <span className="ml-2 text-gray-700 dark:text-gray-300"> Pay Later</span>
-                                    </label>
-                                </div> 
-
                                 <div className='text-left dark:text-gray-200 pl-3 my-7'>
-                                    {orderConfirmText()}
+                                    <span className="font-bold">
+                                        <span className="">Confirm Place Order by receiving </span>{isFullPay ? 'the full payment of ₹'+orderAmount : 'a partial payment of ₹'+customAmount}
+                                    </span>
                                 </div>
                             </>
                         ) : (
@@ -400,7 +300,8 @@ Please enter a valid amount !
                             </button>
                             <button
                                 onClick={() => {
-                                    onConfirmOrder()
+                                    hapticFeedback()
+                                    onValidate('submit', Number(((btnAction === BUTTON_ACTION.PLACE_ORDER && !isFullPay ) ? customAmount! : amount!)), handleSubmit)
                                 }}
                                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
@@ -414,5 +315,4 @@ Please enter a valid amount !
             </div>
         </div>
     )
-
 }
