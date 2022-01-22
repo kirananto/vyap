@@ -161,7 +161,7 @@ export default function PlaceOrder() {
                 }),
             })
             // .then(() => {
-                // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
+            // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
             // })
             return order?.data
         }

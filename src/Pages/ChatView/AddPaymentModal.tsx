@@ -12,7 +12,7 @@ import './payment.css'
 
 export class PostAmount {
     @Min(1)
-    amount!: number
+        amount!: number
 }
 
 interface IProps {
@@ -39,9 +39,7 @@ export default function AddPaymentModal({
     const [isSuccess, setIsSuccess] = useState(false)
     const [note, setNote] = useState('')
 
-    const [isFullPay, setIsFullPay] = useState<boolean>(true)
     const [customAmount, setCustomAmount] = useState<number | undefined>(0)
-
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
     const onValidate = (action: string, value: number, handle: () => void) => {
@@ -55,11 +53,13 @@ export default function AddPaymentModal({
                     console.log('validation ignored')
                     setIsValidAmount(true)
                     handle()
-                } else {
+                }
+                else {
                     console.log('validation failed. errors: ', errors)
                     setIsValidAmount(false)
                 }
-            } else {
+            }
+            else {
                 setIsValidAmount(true)
                 console.log('validation succeed')
                 if (action === 'submit') {
@@ -97,9 +97,39 @@ export default function AddPaymentModal({
                 .catch(() => {
                     // TODO feedback for error
                 })
-        } else {
+        }
+        else {
             navigate(`/chat/${localStorage?.getItem('inboxId')}`)
         }
+    }
+
+    //.....Confirm Order Button Action
+    function onConfirmOrder() {
+        hapticFeedback()
+        let validateAmount = 0
+        if (btnAction === BUTTON_ACTION.PLACE_ORDER) {
+            switch (paymentOption) {
+                case PAYMENT_OPTIONS.FULL_PAYMENT:
+                    validateAmount = amount!
+                    break
+                case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
+                    validateAmount = customAmount!
+                    break
+                case PAYMENT_OPTIONS.PAY_LATER:
+                    validateAmount = customAmount!
+                    break
+                default:
+                    validateAmount = 0
+                    break
+            }
+        }
+        else {
+            validateAmount = amount!
+        }
+        onValidate(
+            'submit',
+            Number(validateAmount),
+            handleSubmit)
     }
 
     //.....Order Confirmation message
@@ -140,11 +170,11 @@ export default function AddPaymentModal({
                     toggleVisibility(false)
                 }}
                 className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'
-                    } overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
+                } overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
             />
             <div
                 className={`popup ${isVisible ? 'show' : ''
-                    }
+                }
                 
                  animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-gray-700`}
             >
@@ -205,6 +235,7 @@ export default function AddPaymentModal({
                                             type="radio"
                                             className="form-radio h-5 w-5 text-blue-300"
                                             checked={paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT}
+                                            readOnly
                                         />
                                         <span className="ml-2 text-gray-700 dark:text-gray-300"> Full Payment</span>
                                     </label>
@@ -223,6 +254,7 @@ export default function AddPaymentModal({
                                             type="radio"
                                             className="form-radio h-5 w-5 text-blue-300"
                                             checked={paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT}
+                                            readOnly
                                         />
                                         <span className="ml-2 text-gray-700 dark:text-gray-300"> Partial Payment</span>
                                     </label>{' '}
@@ -371,8 +403,7 @@ export default function AddPaymentModal({
                             </button>
                             <button
                                 onClick={() => {
-                                    hapticFeedback()
-                                    onValidate('submit', Number(((btnAction === BUTTON_ACTION.PLACE_ORDER && !isFullPay) ? customAmount! : amount!)), handleSubmit)
+                                    onConfirmOrder()
                                 }}
                                 className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
