@@ -56,7 +56,7 @@ export default function More() {
                             alt="profile-pic"
                         />
                         <div className="flex-grow flex flex-col pl-6">
-                            <h1 className="text-xl font-bold text-gray-500 dark:text-gray-200">Welcome, {user?.organization?.name} 🎉</h1>
+                            <h1 className="text-xl font-bold text-gray-500 dark:text-gray-200">Welcome, <br/> {user?.organization?.name} 🎉</h1>
                             <p className="dark:text-gray-400 text-sm tracking-wider">+91{user?.organization?.officeNumber}</p>
                         </div>
                     </div>

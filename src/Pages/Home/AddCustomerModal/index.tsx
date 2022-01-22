@@ -27,6 +27,15 @@ export default function AddCustomerModal({
     const [businessName, setBusinessName] = React.useState('')
     const [pinCode, setPinCode] = React.useState('')
 
+    const resetFields = () => {
+        setIsExisting(false)
+        setPhoneNumber('')
+        setOpeningBalance(0)
+        setAddress('')
+        setBusinessName('')
+        setPinCode('')
+    }
+
 
     function renderCurrentPage() {
         switch (currentPage) {
@@ -65,6 +74,8 @@ export default function AddCustomerModal({
                 return <Success
                     text="Successfully invited the customer"
                     toggleVisibility={toggleVisibility}
+                    setCurrentPage={setCurrentPage}
+                    resetFields = {resetFields}
                 />
             default: return <div> Loading </div>
         }

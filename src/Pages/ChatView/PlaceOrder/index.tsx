@@ -18,9 +18,12 @@ import { placeOrderAPI } from 'src/API/order.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
+import AddPaymentModal from '../AddPaymentModal'
+import { BUTTON_ACTION } from './types'
 
 export default function PlaceOrder() {
     const { token, user } = useSelector(selectCredentials)
+    const [paymentModalVisible, setPaymentModalVisible] = useState(false)
 
     const [isOpen, setIsOpen] = React.useState(true)
     //     const [isDropOpen, setIsDropOpen] = React.useState<
@@ -90,8 +93,6 @@ export default function PlaceOrder() {
         dispatch(removeItemsFromCart({ id: item.id, quantity: caseQuantity }))
     }
 
-
-
     // function closeDropList() {
     //     setIsDropOpen({
     //         isAdd: false,
@@ -139,8 +140,12 @@ export default function PlaceOrder() {
 
     function handleSubmit() {
         setIsSubmit(true)
+        isValidCart && setPaymentModalVisible(true)
+    }
+
+    async function proceedPlaceOrder() {
         if (placeOrder.cartItems?.length !== 0 && isValidDiscount) {
-            placeOrderAPI(token!, {
+            const order = await placeOrderAPI(token!, {
                 description: placeOrder.note,
                 flatDiscount: placeOrder.discount,
                 supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
@@ -154,13 +159,13 @@ export default function PlaceOrder() {
                         mrpPrice: parseFloat(mapItem.mrpPrice),
                     }
                 }),
-            }).then(() => {
-                navigate(`/chat/${localStorage?.getItem('inboxId')}`)
             })
+            // .then(() => {
+            // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
+            // })
+            return order?.data
         }
-        else {
-            //setIsValidCart(false);
-        }
+        return undefined
     }
 
     function renderCartItems() {
@@ -227,7 +232,6 @@ export default function PlaceOrder() {
                                 </div>
 
                                 <div className="grid grid-cols-3 self-center">
-
                                     {/* plus minus buttons */}
                                     <div className="grid grid-cols-3 self-center">
                                         <div className=" text-blue-600 dark:text-blue-400">
@@ -395,7 +399,8 @@ export default function PlaceOrder() {
                                     </div>
 
                                     <div className="place-self-center pb-1">
-                                        <button className="bg-transparent hover:bg-blue-500 text-blue-700 text-xs font-semibold hover:text-white py-1 px-2 mt-1 border border-blue-500 hover:border-transparent rounded"
+                                        <button
+                                            className="bg-transparent hover:bg-blue-500 text-blue-700 text-xs font-semibold hover:text-white py-1 px-2 mt-1 border border-blue-500 hover:border-transparent rounded"
                                             onClick={() => {
                                                 hapticFeedback()
                                                 handleRemoveItemItem(item, item?.quantity || 0)
@@ -583,14 +588,29 @@ export default function PlaceOrder() {
                             </div>
 
                             <div className="mt-4">
-                                <Button onClick={() => {
-                                    handleSubmit()
-                                }}>Place order</Button>
+                                <Button
+                                    onClick={() => {
+                                        handleSubmit()
+                                    }}
+                                >
+                  Place order
+                                </Button>
                             </div>
                         </div>
                     )}
                 </div>
             </div>
+
+            {paymentModalVisible && (
+                <AddPaymentModal
+                    isVisible={paymentModalVisible}
+                    toggleVisibility={setPaymentModalVisible}
+                    receiverId={isSupplier ? placeOrder.orgId : user?.organizationId!}
+                    orderAmount={getTotalPrice() - (placeOrder.discount ? placeOrder.discount : 0)}
+                    btnAction={BUTTON_ACTION.PLACE_ORDER}
+                    placeOrder={proceedPlaceOrder}
+                />
+            )}
         </div>
     )
 }

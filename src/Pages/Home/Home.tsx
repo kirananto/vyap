@@ -1,5 +1,5 @@
 import { Footer } from '../../Components/Footer'
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 import { ItemCard } from './ItemCard'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -18,6 +18,7 @@ import {
 } from './customersSlice'
 import useQueryParam from 'src/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
+import { useScrollDirection } from 'react-use-scroll-direction'
 
 export const Home = () => {
     const customer = useSelector(selectCustomerInfo)
@@ -35,7 +36,7 @@ export const Home = () => {
     const navigate = useNavigate()
     const intl = useIntl()
     useEffect(() => {
-        const limit = 10
+        const limit = 30
         if (token) {
             fetchInboxes({
                 token,
@@ -67,7 +68,11 @@ export const Home = () => {
         if (customer?.customers?.length === 0) {
             return (
                 <div>
-                    <img className="p-12 m-auto mt-12 h-96" alt="no transactions" src={ChatImg} />
+                    <img
+                        className="p-12 m-auto mt-12 h-96"
+                        alt="no transactions"
+                        src={ChatImg}
+                    />
                     <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200">
                         {' '}
             You do not have any transactions, Please invite a customer to start
@@ -76,8 +81,37 @@ export const Home = () => {
                 </div>
             )
         }
-        return customer?.customers?.map((item, index) => <ItemCard item={item} key={index} />)
+        return customer?.customers?.map((item, index) => (
+            <ItemCard item={item} key={index} />
+        ))
     }
+
+    // ....  Button resizing onscroll - start !
+    const [floatBtnLarge, setFloatBtnLarge] = useState(true)
+    const [scrollTargetRef, target] = useCallbackRef()
+    const { scrollDirection, isScrollingUp, isScrollingDown } =
+    useScrollDirection(target)
+
+    function useCallbackRef() {
+        const [value, setValue] = React.useState<any>()
+        const ref = useCallback((node: HTMLElement) => {
+            if (node !== null) setValue(node)
+        }, [])
+        return [ref, value]
+    }
+
+    useEffect(() => {
+        if (scrollDirection) {
+            if (isScrollingUp) {
+                setFloatBtnLarge(true)
+            }
+            if (isScrollingDown) {
+                setFloatBtnLarge(false)
+            }
+        }
+    }, [scrollDirection])
+
+    // ......  Button resizing onscroll - end.........!
 
     return (
         <div className="dark:bg-gray-900">
@@ -122,7 +156,10 @@ export const Home = () => {
                     />
                 </div>
             </header>
-            <div className="relative divide-y card-main-container scrollDes divide-light-blue-400 dark:divide-gray-700">
+            <div
+                ref={scrollTargetRef}
+                className="relative divide-y card-main-container scrollDes divide-light-blue-400 dark:divide-gray-700"
+            >
                 {renderChats()}
             </div>
             {/* <!-- Customer Card End -->
@@ -133,13 +170,21 @@ export const Home = () => {
                         hapticFeedback()
                         setAddCustomerVisible('true')
                     }}
-                    className="h-12 text-white rounded-full text-md add-cutomer-btn bg-gradient-to-br from-blue-500 to-indigo-700"
+                    className={`p-3 add-cutomer-btn transition duration-500 ease-in-out
+                     text-white rounded-full text-md bg-gradient-to-br from-blue-500 to-indigo-700 shadow-sm`}
                 >
-                    <span className="pr-2">+</span>
-                    <FormattedMessage
-                        id="action.addCustomer"
-                        defaultMessage="Add Customer"
-                    />
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={ floatBtnLarge ? 'M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' : 'M12 6v6m0 0v6m0-6h6m-6 0H6'} />
+                    </svg>     
+
+                    {floatBtnLarge && (
+                        <span className="pl-1 transition duration-500 ease-in-out">
+                            <FormattedMessage
+                                id="action.addCustomer"
+                                defaultMessage="Add Customer"
+                            />
+                        </span>
+                    )}
                 </button>
             )}
             {addCustomerVisible && (
