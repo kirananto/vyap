@@ -104,6 +104,24 @@ body:focus {
   --animate-repeat: 1;
 }
 
+/* Popup container */
+.popup {
+  display: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  padding: 20px;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.show {
+  display: block;
+}
+
 /* // Animations */
 
 @keyframes fadeInUpBig {

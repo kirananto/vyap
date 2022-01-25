@@ -70,6 +70,10 @@ export default function PaymentDetails() {
                     <div className="flex flex-col gap-3">
                         <PaymentInfo heading="Payment id" info={`#${id}`} />
                         <PaymentInfo
+                            heading="Note"
+                            info={payment?.note ? payment.note : '--'}
+                        />
+                        <PaymentInfo
                             heading="Date of transaction"
                             info={payment?.updatedAt ? format(new Date(payment?.updatedAt), `yyyy-MM-dd hh:mm aa`) : 'Missing information'}
                         />

@@ -18,9 +18,9 @@ function Items({ order }: { order: any }) {
     return (
         <div>
             {orderItems?.map((item: any, index: number) => (
-                <div className="flex justify-between" key={`${index}`}>
-                    <div className="flex pt-4 gap-4">
-                        <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                <div className="flex justify-between pt-4" key={`${index}`}>
+                    <div className="flex gap-4">
+                        <div className="text-center relative w-18 aspect-square mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
                             {item?.product?.thumbnailImage && (
                                 <img
                                     src={getImageURL(
@@ -39,18 +39,18 @@ function Items({ order }: { order: any }) {
                                     ? `(${item?.product?.aliasName})`
                                     : ''}
                             </div>
-                            <div className="flex font-bold text-xs text-gray-400">
+                            {/* <div className="flex font-bold text-xs text-gray-400">
                                 {item?.product?.centralCatalogue?.description}
-                            </div>
+                            </div> */}
                             <div className="flex font-bold text-xs text-gray-600 dark:text-gray-300">
                 Rate: ₹{item?.purchasePrice}
                             </div>
                         </div>
-                        <div className="flex h-5 w-10 rounded text-xs bg-gray-200 self-center items-center justify-center">
+                        <div className="flex h-5 px-2 w-16 font-bold tracking-wide rounded text-xs bg-gray-200 dark:bg-gray-600 dark:text-gray-300 self-center items-center justify-center">
               X {item?.quantity}
                         </div>
                     </div>
-                    <div className="flex text-lg font-bold text-gray-600 items-center dark:text-gray-200">
+                    <div className="flex text-lg ml-4 font-bold text-gray-600 dark:text-gray-200 items-center">
             ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)}
                     </div>
                 </div>

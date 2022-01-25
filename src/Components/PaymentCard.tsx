@@ -45,7 +45,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
           Payment #{thread.meta?.split('-')[0]}
                 </div>
                 <div className={`text-4xl mt-2 text-gray-700 font-bold dark:text-gray-200 ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${payment?.amount}` : null}</div>
-
+                {payment?.note && payment.note?.length > 1 ? <div className="border border-1 border-gray-300 dark:border-gray-600 p-1 px-4 pl-3 mt-2 mb-4 bg-gray-100 dark:bg-gray-700 w-fit text-xs text-gray-700 dark:text-gray-300 rounded">{payment?.note}</div> : ''}
                 {/* bottom  */}
                 <div className="flex items-center w-full">
                     {/* col-1 */}

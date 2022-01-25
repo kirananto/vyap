@@ -39,7 +39,7 @@ export default function AddPaymentModal({
     const [isSuccess, setIsSuccess] = useState(false)
     const [note, setNote] = useState('')
 
-    const [customAmount, setCustomAmount] = useState<number | undefined>(0)
+    const [customAmount, setCustomAmount] = useState<number | undefined>(amount)
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
     const onValidate = (action: string, value: number, handle: () => void) => {
@@ -78,6 +78,7 @@ export default function AddPaymentModal({
         if (btnAction === BUTTON_ACTION.PLACE_ORDER && placeOrder) {
             order = await placeOrder()
         }
+        console.log('order', order)
         if (btnAction === BUTTON_ACTION.PLACE_ORDER ? paymentOption !== PAYMENT_OPTIONS.PAY_LATER : true) {
             // TODO validations before making API call
             createPayment(token!, {
@@ -185,7 +186,7 @@ export default function AddPaymentModal({
                     />
                 ) : (
                     <>
-                        <h2 className="text-left p-2 text-2xl mt-2 text-gray-700 dark:text-gray-200">
+                        <h2 className="text-left p-2 pl-0 text-2xl mt-2 text-gray-700 dark:text-gray-200">
                             {btnAction === BUTTON_ACTION.PLACE_ORDER
                                 ? 'Payment Details'
                                 : 'Add Payment you recieved.'}
@@ -193,9 +194,9 @@ export default function AddPaymentModal({
 
                         {btnAction === BUTTON_ACTION.PLACE_ORDER ? (
                             <>
-                                <div className='text-left dark:text-gray-200 pl-3 my-5'>
-                                    <span className="font-bold">
-                                        <span className="pr-3">Order Total:</span>  ₹ {orderAmount}
+                                <div className='text-left dark:text-gray-200 pl-0 mt-6 mb-4'>
+                                    <span className="font-semibold">
+                                        <span className="text-gray-500 pr-3 text-xl dark:text-gray-200">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
                                     </span>
                                 </div>
 
@@ -203,65 +204,47 @@ export default function AddPaymentModal({
 
                                 <div
                                     className={
-                                        `p-2 mt-4 ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
+                                        `p-2 mt-4 text-left ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
+                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
                                             : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
             
     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAY_LATER)}
                                 >
-                                    <label className="inline-flex items-center mt-3 mb-2">
-                                        <input
-                                            type="radio"
-                                            className="form-radio h-5 w-5 text-blue-300"
-                                            checked={paymentOption === PAYMENT_OPTIONS.PAY_LATER}
-                                            readOnly
-                                        />
-                                        <span className="ml-2 text-gray-700 dark:text-gray-300"> Pay Later</span>
+                                    <label className="inline-flex font-bold mt-2 mb-2 ml-4">
+                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.PAY_LATER ? 'text-blue-700 dark:text-blue-300' :  'text-gray-700 dark:text-gray-300'}`}> Pay Later</span>
                                     </label>
                                 </div>
 
                                 <div
                                     className={
-                                        `p-2 mt-4 ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-600'
+                                        `p-2 mt-4 text-left ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
+                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
                                             : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
                                             
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.FULL_PAYMENT)}
                                 >
-                                    <label className="inline-flex items-center mt-3 mb-2">
-                                        <input
-                                            type="radio"
-                                            className="form-radio h-5 w-5 text-blue-300"
-                                            checked={paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT}
-                                            readOnly
-                                        />
-                                        <span className="ml-2 text-gray-700 dark:text-gray-300"> Full Payment</span>
+                                    <label className="inline-flex  font-bold mt-2 mb-2 ml-4">
+                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT ? 'text-blue-700 dark:text-blue-300' :  'text-gray-700 dark:text-gray-300'}`}> Full Payment</span>
                                     </label>
                                 </div>
 
                                 <div
                                     className={
-                                        `p-2 pb-4 mt-4 ${!(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
+                                        `p-2 pb-4 mt-4 text-left ${!(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
                                             ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-600'
-                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-600'}
+                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-400'}
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)}
                                 >
-                                    <label className="inline-flex items-center mt-3">
-                                        <input
-                                            type="radio"
-                                            className="form-radio h-5 w-5 text-blue-300"
-                                            checked={paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT}
-                                            readOnly
-                                        />
-                                        <span className="ml-2 text-gray-700 dark:text-gray-300"> Partial Payment</span>
+                                    <label className="inline-flex mt-2 font-bold ml-4">
+                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT ? 'text-blue-700 dark:text-blue-300' :  'text-gray-700 dark:text-gray-300'}`}> Partial Payment</span>
                                     </label>{' '}
                                     <br />
                                     {(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT) && (<>
-                                        <label className="flex mt-5 place-self-center">
-                                            <span className="ml-2 text-gray-700 mr-5 self-center dark:text-gray-300"> Amount:</span>
+                                        <label className="mt-5 place-self-center">
+                                            <div className="ml-4 mt-4 text-gray-700 mr-5 self-center dark:text-gray-300"> Amount:</div>
 
                                             <input
                                                 value={customAmount}
@@ -281,7 +264,7 @@ export default function AddPaymentModal({
                                                         }
                                                     )
                                                 }}
-                                                className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform 
+                                                className="p-4 m-2 w-auto text-base text-black transition duration-500 ease-in-out transform 
                                                 border-transparent rounded-lg bg-gray-200 opacity-75 
                                                 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 
                                                 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
@@ -309,14 +292,14 @@ export default function AddPaymentModal({
 
 
 
-                                <div className='text-left dark:text-gray-200 pl-3 my-7'>
+                                <div className='text-left text-gray-500 italic dark:text-gray-200 pl-2 my-7'>
                                     {orderConfirmText()}
                                 </div>
                             </>
                         ) : (
                             <>
                                 {/* <!-- Payment Mode Dropdown --> */}
-                                <div className="p-2">
+                                <div className="p-2 pl-0">
                                     <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
                                         Payment mode
                                     </span>
@@ -339,7 +322,7 @@ export default function AddPaymentModal({
                                     </select>
                                 </div>
                                 {/* <!-- Amount --> */}
-                                <div className="p-2">
+                                <div className="p-2 pl-0">
                                     <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
                                         AMOUNT
                                     </span>
@@ -376,7 +359,7 @@ export default function AddPaymentModal({
                                     </span>
                                 </div>
                                 {/* <!-- Remarks Textarea --> */}
-                                <div className="p-2">
+                                <div className="p-2 pl-0">
                                     <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
                                         REMARKS
                                     </span>
