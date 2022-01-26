@@ -160,14 +160,16 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-flow-col">
-                                    <div className="col-start-1 text-gray-600 dark:text-gray-200 ">
+                                <div className="flex w-full m-auto justify-between">
+                                    <div className="basis-7/12 text-gray-600 dark:text-gray-200">
                                         {item.receiver?.name}
                                     </div>
-                                    <div className="col-end-12 self-center text-gray-600 dark:text-gray-200 text-lg font-extrabold">
+                                    <div className="flex justify-end basis-5/12 self-center text-gray-600 dark:text-gray-200 text-lg font-extrabold">
                     ₹ {item.amount}
                                     </div>
                                 </div>
+
+
                                 <div className=" w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">
                                     {paymentMethod[item.method]}
                                 </div>
