@@ -53,7 +53,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
             <>
                 <div
                     ref={componentRef}
-                    className="p-3 m-3 border border-gray-300 dark:border-gray-500 rounded"
+                    className="p-3 m-3 mt-6 border border-gray-300 dark:border-gray-500 rounded"
                 >
                     <h1 className="dark:text-white"> Payment Summary:</h1>
                     {item ? (
@@ -85,7 +85,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                     )}
                 </div>
 
-                <div className="flex flex-row mt-2 mb-10 ml-12 mr-4 flex justify-end">
+                <div className="flex justify-between space-x-3 mt-2 mb-8 mx-3">
                     <ReactToPrint
                         content={reactToPrintContent}
                         documentTitle={`Vyap All Orders`}
