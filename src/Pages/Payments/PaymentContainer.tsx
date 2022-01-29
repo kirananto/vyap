@@ -138,7 +138,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
             {payments.map((item, index) => (
                 <div
                     className={`${
-                        index === payments.length - 1 ? '' : 'border-b border-gray-300'
+                        index === payments.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
                     }`}
                     key={`${index}`}
                 >
@@ -155,10 +155,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                         <div className="w-full" onClick={() => openPaymentSummary(item)}>
                             <div className="grid grid-rows-3 content-start">
                                 <div className="row-span-3 grid auto-cols-max grid-flow-col gap-1">
-                                    <div className="text-gray-500 dark:text-gray-300">
-                    #{item?.id?.split('-')[0]} •
-                                    </div>
-                                    <div className="text-gray-500 dark:text-gray-300">
+                                    <div className="text-xs mt-1 text-gray-500 dark:text-gray-400">
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
@@ -166,7 +163,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                 </div>
 
                                 <div className="m-auto flex w-full justify-between">
-                                    <div className="basis-7/12 text-gray-600 dark:text-gray-200">
+                                    <div className="basis-7/12 text-gray-600 font-semibold  dark:text-gray-200">
                                         {user?.organizationId === item?.senderOrgId
                                             ? item.receiver?.name
                                             : item.senderOrg?.name}
@@ -175,10 +172,12 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                     ₹ {item.amount}
                                     </div>
                                 </div>
-
-                                <div className=" w-max items-center rounded bg-green-200 px-2 text-sm font-bold text-green-800">
-                                    {paymentMethod[item.method]}
+                                <div className="flex gap-1">
+                                    <span className=" w-max items-center rounded bg-green-200 px-2 text-sm font-bold text-green-800">
+                                        {paymentMethod[item.method]}
+                                    </span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
