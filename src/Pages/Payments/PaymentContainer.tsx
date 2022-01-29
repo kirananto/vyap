@@ -64,7 +64,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                             <div className="flex gap-2">
                                 <div className="flex flex-col">
                                     <div className="text-gray-500 dark:text-gray-300">
-
+                    #{item?.id?.split('-')[0]} •{' '}
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
@@ -137,7 +137,8 @@ export default function PaymentContainer({ payments, loading }: IProps) {
         <>
             {payments.map((item, index) => (
                 <div
-                    className={`${index === payments.length - 1 ? '' : 'border-b border-gray-300'
+                    className={`${
+                        index === payments.length - 1 ? '' : 'border-b border-gray-300'
                     }`}
                     key={`${index}`}
                 >

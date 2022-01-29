@@ -1,5 +1,9 @@
 {
   "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["typescript"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#93e6fc",
     "activityBar.activeBorder": "#fa45d4",
