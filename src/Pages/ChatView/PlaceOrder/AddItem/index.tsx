@@ -47,7 +47,8 @@ export default function AddItem() {
     useEffect(() => {
         fetchPrevOrderedProducts({
             token: token!,
-            organizationId: !isSupplier ? user?.organizationId! : placeOrder.orgId!,
+            buyerId: !isSupplier ? user?.organizationId! : placeOrder.orgId!,
+            supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
             limit: 10,
             offset: 0
         }).then((result: any) => {
