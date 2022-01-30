@@ -56,12 +56,12 @@ export default function AddCustomerStep1({
                                 )
                             }
                             else {
-                                setIsExisting(true)
+                                setIsExisting(result.data?.username)
                                 setCurrentPage(currentPageEnum.PREVIEW)
                             }
                         })
                         .catch(() => {
-                            setIsExisting(false)
+                            setIsExisting(undefined)
                             setCurrentPage(currentPageEnum.NEW_CUSTOMER_STEP)
                             // TODO user doesn't exist
                         })

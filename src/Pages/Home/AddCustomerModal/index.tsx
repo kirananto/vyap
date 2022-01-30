@@ -20,7 +20,7 @@ export default function AddCustomerModal({
     toggleVisibility
 }: IProps) {
     const [currentPage, setCurrentPage] = React.useState<currentPageEnum>(currentPageEnum.STEP_1)
-    const [isExisting, setIsExisting] = React.useState(false)
+    const [isExisting, setIsExisting] = React.useState<string | undefined>(undefined)
     const [phoneNumber, setPhoneNumber] = React.useState('')
     const [openingBalance, setOpeningBalance] = React.useState(0)
     const [address, setAddress] = React.useState('')
@@ -28,7 +28,7 @@ export default function AddCustomerModal({
     const [pinCode, setPinCode] = React.useState('')
 
     const resetFields = () => {
-        setIsExisting(false)
+        setIsExisting(undefined)
         setPhoneNumber('')
         setOpeningBalance(0)
         setAddress('')

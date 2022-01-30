@@ -10,7 +10,7 @@ interface IProps {
   address: any
   businessName: any
   pinCode: any
-  isExisting: boolean
+  isExisting: string | undefined
   setCurrentPage: any
 }
 export default function PreviewScreen({
@@ -61,7 +61,7 @@ export default function PreviewScreen({
             <div className="mt-4 dark:text-gray-400">
         Please confirm the below information
                 <div className="my-6 bg-gray-200 p-4 rounded-lg dark:bg-gray-600 dark:text-gray-200">
-          You are inviting {phoneNumber}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(2)} </span>
+          You are inviting {returnName(phoneNumber, isExisting, businessName)}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(2)} </span>
 
                 </div>
             </div>
@@ -76,4 +76,14 @@ export default function PreviewScreen({
                 </button>
             </div>
         </form>)
+}
+
+
+function returnName (phoneNumber: string, isExisting: string | undefined, businessName?: string) {
+
+    if(!isExisting) {
+        return `${businessName} (+91 ${phoneNumber})`
+    }
+    return `${isExisting}(+91 ${phoneNumber})`
+    
 }
