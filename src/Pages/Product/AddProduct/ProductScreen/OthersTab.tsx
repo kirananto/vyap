@@ -24,13 +24,14 @@ import { PAGE_ACTION } from './types'
 import {
     isValidBrand,
     isValidCategory,
-    isValidDescription,
+    // isValidDescription,
     isValidTag,
 } from './validations'
 
+import Compressor from 'compressorjs'
 interface Props {
-  action: PAGE_ACTION;
-  saveAttempt: number;
+    action: PAGE_ACTION;
+    saveAttempt: number;
 }
 
 const ImageContainer = (props: any) => {
@@ -142,24 +143,41 @@ function OthersTab({ action, saveAttempt }: Props) {
     function uploadImage() {
         if (fileUploaderRef.current?.files?.length > 0) {
             setSpinner(true)
-            const data = new FormData()
-            data.append('file', fileUploaderRef.current?.files?.[0])
-            imageUpload(token!, data)
-                .then((result: any) => {
-                    console.log('data', result.data)
-                    dispatch(
-                        setProductImage({
-                            imageName: result.data.name,
-                            title: addProductInfo?.centralCatalogue?.name ?? 'name',
-                            description: `${addProductInfo?.centralCatalogue?.name}`,
+            new Compressor(fileUploaderRef.current?.files?.[0], {
+                quality: 0.6,
+                maxWidth: 300,
+                maxHeight: 300,
+
+                // The compression process is asynchronous,
+                // which means you have to access the `result` in the `success` hook function.
+                success(result) {
+                    const data = new FormData()
+                    data.append('file', result)
+                    imageUpload(token!, data)
+                        .then((result: any) => {
+                            console.log('data', result.data)
+                            dispatch(
+                                setProductImage({
+                                    imageName: result.data.name,
+                                    title: addProductInfo?.centralCatalogue?.name ?? 'name',
+                                    description: `${addProductInfo?.centralCatalogue?.name}`,
+                                })
+                            )
+                            setSpinner(false)
                         })
-                    )
+                        .catch((error) => {
+                            //TODO Handle Error
+                            console.log('error', error)
+                            setSpinner(false)
+                        })
+                },
+                error(err) {
+                    //TODO Handle Error
+                    console.log(err.message)
                     setSpinner(false)
-                })
-                .catch((error) => {
-                    console.log('error', error)
-                    setSpinner(false)
-                })
+                },
+            })
+
         }
     }
 
@@ -182,10 +200,10 @@ function OthersTab({ action, saveAttempt }: Props) {
             {!addProductInfo?.centralCatalogue?.id && (
                 <>
                     <h1 className="font-bold text-gray-500 dark:text-gray-400 ">
-            Add product images
+                        Add product images
                     </h1>
                     <p className="mt-2 text-xs font-bold text-gray-400 dark:text-gray-300">
-            Add upto 5 images. First image is your product's cover
+                        Add upto 5 images. First image is your product's cover
                         <br /> image that will be highlighted everywhere{' '}
                     </p>
                     {/* image-container */}
@@ -220,7 +238,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             type="file"
                             style={{ display: 'none' }}
                             ref={fileUploaderRef}
-                            accept={'image/png,image/jpeg'}
+                            accept={'image/*'}
                             onChange={uploadImage}
                         />
                     </div>
@@ -233,7 +251,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div>
                         <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
-              Brand
+                            Brand
                         </p>
                         <div className="des-modal-btn">
                             <input
@@ -268,15 +286,15 @@ function OthersTab({ action, saveAttempt }: Props) {
                             <span
                                 className={
                                     'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
-                  (isValidBrand(
-                      !!addProductInfo?.centralCatalogue?.id,
-                    addProductInfo?.others?.brand?.name!
-                  )
-                      ? 'hidden'
-                      : '')
+                                    (isValidBrand(
+                                        !!addProductInfo?.centralCatalogue?.id,
+                                        addProductInfo?.others?.brand?.name!
+                                    )
+                                        ? 'hidden'
+                                        : '')
                                 }
                             >
-                * Enter valid brand !
+                                * Enter valid brand !
                             </span>
                             {/* Modal */}
                             <div>
@@ -290,7 +308,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div>
                         <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
-              Category
+                            Category
                         </p>
                         <div className="des-modal-btn">
                             <input
@@ -328,15 +346,15 @@ function OthersTab({ action, saveAttempt }: Props) {
                             <span
                                 className={
                                     'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
-                  (isValidCategory(
-                      !!addProductInfo?.centralCatalogue?.id,
-                    addProductInfo?.others?.centralCategory?.name!
-                  )
-                      ? 'hidden'
-                      : '')
+                                    (isValidCategory(
+                                        !!addProductInfo?.centralCatalogue?.id,
+                                        addProductInfo?.others?.centralCategory?.name!
+                                    )
+                                        ? 'hidden'
+                                        : '')
                                 }
                             >
-                * Enter valid Category !
+                                * Enter valid Category !
                             </span>
                             {/* Modal */}
                             <div>
@@ -353,7 +371,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {action === PAGE_ACTION.ADD && (
                     <div>
                         <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
-              Tag
+                            Tag
                         </p>
                         <div className="des-modal-btn">
                             <input
@@ -388,15 +406,15 @@ function OthersTab({ action, saveAttempt }: Props) {
                             <span
                                 className={
                                     'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
-                  (isValidTag(
-                      !!addProductInfo?.centralCatalogue?.id,
-                    addProductInfo?.others?.category?.name!
-                  )
-                      ? 'hidden'
-                      : '')
+                                    (isValidTag(
+                                        !!addProductInfo?.centralCatalogue?.id,
+                                        addProductInfo?.others?.category?.name!
+                                    )
+                                        ? 'hidden'
+                                        : '')
                                 }
                             >
-                * Enter valid Tag !
+                                * Enter valid Tag !
                             </span>
                             {/* Modal */}
                             <div>
