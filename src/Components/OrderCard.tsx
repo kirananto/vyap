@@ -32,7 +32,7 @@ export default function OrderCard({ className, thread }: { className: string, th
 
     return (
         <div className={`flex ${className} w-full`}>
-            <NavLink to={`/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  md:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
           Order #{thread.meta?.split('-')[0]}
                 </div>
@@ -63,11 +63,11 @@ export default function OrderCard({ className, thread }: { className: string, th
                             format(
                                 new Date(thread.updatedAt),
                                 'do MMM'
-                            )} ●</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-300">{order?.numberOfItems} items</p>
+                            )}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-300">  ● {order?.numberOfItems} items</p>
                     </div>
 
-                    <svg
+                    {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="justify-end w-5 h-5 text-gray-500 dark:text-gray-300"
                         fill="none"
@@ -80,7 +80,7 @@ export default function OrderCard({ className, thread }: { className: string, th
                             strokeWidth="2"
                             d="M17 8l4 4m0 0l-4 4m4-4H3"
                         />
-                    </svg>
+                    </svg> */}
                 </div>
             </NavLink>
         </div>

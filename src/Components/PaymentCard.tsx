@@ -40,7 +40,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
     return (
         <div className={`flex ${className} w-full `}>
-            <NavLink to={`/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  md:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
           Payment #{thread.meta?.split('-')[0]}
                 </div>
@@ -72,21 +72,6 @@ export default function PaymentCard({ className, thread }: { className: string, 
                             'do MMM'
                         )}</p>
                     </div>
-
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="justify-end w-5 h-5 text-gray-500  dark:text-gray-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                    </svg>
                 </div>
             </NavLink>
         </div>
