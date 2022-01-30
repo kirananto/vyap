@@ -207,9 +207,9 @@ export default function PlaceOrder() {
                         )
                     )
                     ?.map((item) => (
-                        <div key={item.id} className="my-5 border-b border-gray-300">
+                        <div key={item.id} className="my-5 border-b border-gray-300 dark:border-gray-700">
                             <div className="grid grid-rows-2">
-                                <div className="grid grid-cols-3 ">
+                                <div className="flex ">
                                     <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center shadow-xl">
                                         {item?.thumbnailImage && (
                                             <img
@@ -223,7 +223,7 @@ export default function PlaceOrder() {
                                         )}
                                     </div>
 
-                                    <div className="col-span-2">
+                                    <div className="ml-4">
                                         <div className=" text-base font-bold text-gray-600 dark:text-gray-200">
                                             {`${item.centralCatalogue?.name} `}
                                         </div>
@@ -317,7 +317,7 @@ export default function PlaceOrder() {
                                         <div className=" items-center dark:text-gray-200">
                                             <form autoComplete="off">
                                                 <input
-                                                    className="w-10 border border-dashed border-indigo-300 px-1 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                                    className="w-12 border border-dashed border-indigo-300 px-2 rounded dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                                                     type="number"
                                                     name="qty"
                                                     id="qty"
@@ -334,7 +334,7 @@ export default function PlaceOrder() {
                                             </form>
                                         </div>
 
-                                        <div className=" ml-3 items-center text-blue-600 dark:text-blue-400">
+                                        <div className=" ml-6 items-center text-blue-600 dark:text-blue-400">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 onClick={() => {
@@ -409,7 +409,7 @@ export default function PlaceOrder() {
 
                                     <div className="place-self-center pb-1">
                                         <button
-                                            className="mt-1 rounded border border-blue-500 bg-transparent py-1 px-2 text-xs font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
+                                            className="mt-1 ml-6 rounded border border-blue-500 bg-transparent py-1 px-4 text-xs font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"
                                             onClick={() => {
                                                 hapticFeedback()
                                                 handleRemoveItemItem(item, item?.quantity || 0)

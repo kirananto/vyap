@@ -138,7 +138,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
             {payments.map((item, index) => (
                 <div
                     className={`${
-                        index === payments.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
+                        index === payments.length - 1 ? '' : 'border-b border-gray-200 dark:border-gray-700'
                     }`}
                     key={`${index}`}
                 >
@@ -155,11 +155,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                         <div className="w-full" onClick={() => openPaymentSummary(item)}>
                             <div className="grid grid-rows-3 content-start">
                                 <div className="row-span-3 grid auto-cols-max grid-flow-col gap-1">
-                                    <div className="text-xs mt-1 text-gray-500 dark:text-gray-400">
-                                        {item.createdAt
-                                            ? format(new Date(item.createdAt), 'do MMM yyyy')
-                                            : ''}
-                                    </div>
+                                    
                                 </div>
 
                                 <div className="m-auto flex w-full justify-between">
@@ -167,6 +163,11 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                         {user?.organizationId === item?.senderOrgId
                                             ? item.receiver?.name
                                             : item.senderOrg?.name}
+                                        <div className="text-xs mb-1 text-gray-400 dark:text-gray-400">
+                                            {item.createdAt
+                                                ? format(new Date(item.createdAt), 'do MMM yyyy')
+                                                : ''}
+                                        </div>
                                     </div>
                                     <div className="flex basis-5/12 justify-end self-center text-lg font-extrabold text-gray-600 dark:text-gray-200">
                     ₹ {item.amount}

@@ -15,14 +15,16 @@ import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FilterPopup } from './FilterPopup'
 import useQueryParam from 'src/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
+import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
+import ProductSuggestionCard from './ProductSuggestionCard'
 
 export default function AddItem() {
-    const [itemList, setItemList] = React.useState<any[]>([])
-    const [selectedItems, setSelectedItems] = React.useState<any>([])
-    const [filterPopupOpen, setfilterPopupOpen] =
-    useQueryParam<boolean>('filterPopupOpen')
+    const [itemList, setItemList] = useState<any[]>([])
+    const [selectedItems, setSelectedItems] = useState<any[]>([])
+    const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>('filterPopupOpen')
 
-    //   const [isDropOpen, setIsDropOpen] = React.useState<
+    const [prevOrdered, setPrevOrdered] = useState<any[]>([])
+    //   const [isDropOpen, setIsDropOpen] = useState<
     //   | {
     //       isAdd: boolean;
     //       isOpen: any;
@@ -41,8 +43,21 @@ export default function AddItem() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+
     useEffect(() => {
-    // TODO use placeOrder.orgId
+        fetchPrevOrderedProducts({
+            token: token!,
+            organizationId: !isSupplier ? user?.organizationId! : placeOrder.orgId!,
+            limit: 10,
+            offset: 0
+        }).then((result: any) => {
+            setPrevOrdered(result.data?.data)
+        })
+    }, [])
+
+
+    useEffect(() => {
+        // TODO use placeOrder.orgId
         fetchProducts({
             token: token!,
             outOfStock: false,
@@ -75,7 +90,7 @@ export default function AddItem() {
     ])
 
     function onSubmit() {
-    //TODO Add to dispatch
+        //TODO Add to dispatch
         dispatch(pushItemsToCart(selectedItems))
         navigate('/place-order')
     }
@@ -182,17 +197,17 @@ export default function AddItem() {
                     <img className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
                     <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-gray-300">
                         {' '}
-            Sorry the seller has no products for sale.{' '}
+                        Sorry the seller has no products for sale.{' '}
                     </div>
                 </div>
             )
         }
         return itemList.map((item, index) => (
             <div
-                className="grid grid-cols-20/50/30 w-full bg-white-200 mt-2 border-b-2 border-gray-100 dark:border-gray-700 py-4"
+                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-gray-100 dark:border-gray-800 py-4"
                 key={`${index}`}
             >
-                <div className="relative self-center w-16 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                <div className="relative self-center w-1/5 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
                     {item?.thumbnailImage && (
                         <img
                             src={getImageURL(
@@ -204,169 +219,86 @@ export default function AddItem() {
                         />
                     )}
                 </div>
-
-                <div className="flex flex-col ml-2 self-center">
-                    <div className="flex text-xl font-bold text-gray-600 dark:text-gray-200">{`${item.centralCatalogue?.name}`}</div>
-                    <div className="flex text-sm font-bold text-gray-600 dark:text-gray-200">{` ${
-                        item?.aliasName ? `( ${item?.aliasName})` : ''
-                    }`}</div>
-                    <div className="flex font-bold text-xs text-gray-300">
-            #213r423423423423423
+                <div className="w-4/5 pl-4 ">
+                    <div className=" text-lg font-bold mb-1 text-gray-600 dark:text-gray-200">
+                        {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name}
                     </div>
-
-                    <div className="grid grid-cols-2 mt-1">
-                        <div className="text-xs font-semibold text-gray-500  dark:text-gray-400">
-                            <p>MRP:</p>
-                            <p>₹{item?.mrpPrice}</p>
+                    <div className="grid grid-cols-2 space-between">
+                        <div className="flex flex-col">
+                            <div className="grid grid-cols-2 mt-1">
+                                <div className="text-xs font-semibold text-gray-500  dark:text-gray-400">
+                                    <p>MRP:</p>
+                                    <p>₹{item?.mrpPrice}</p>
+                                </div>
+                                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                    <p>Cost:</p>
+                                    <p>{item?.rate}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                            <p>Cost:</p>
-                            <p>{item?.rate}</p>
+                    
+
+                        <div className="flex gap-2">
+                            <div className="flex text-blue-600 dark:text-blue-400 items-center">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    onClick={() => {
+                                        hapticFeedback()
+                                        handleRemoveItemItem(item, 1)
+                                    }}
+                                    className="h-6 w-6 cursor-pointer"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <div className="flex items-center dark:text-gray-200">
+                                <form autoComplete="off">
+                                    <input
+                                        className="w-16 rounded border-dashed border px-2 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                        type="number"
+                                        name="qty"
+                                        id="qty"
+                                        onChange={(e) => {
+                                            updateItem(item, parseInt(e.target.value.toString()))
+                                        }}
+                                        value={
+                                            selectedItems?.find(
+                                                (findItem: any) => findItem.id === item.id
+                                            )?.quantity ?? 0
+                                        }
+                                    />
+                                </form>
+                            </div>
+
+                            <div className="flex text-blue-600 dark:text-blue-400 items-center">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    onClick={() => {
+                                        hapticFeedback()
+                                        handleAddItem(item, 1)
+                                    }}
+                                    className="h-6 w-6 cursor-pointer"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div className="flex gap-2">
-                    <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            onClick={() => {
-                                hapticFeedback()
-                                handleRemoveItemItem(item, 1)
-                            }}
-                            className="h-6 w-6 cursor-pointer"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
-
-                        {/* <DropList
-                        isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
-                        list={[{
-                            appearance: 'danger',
-                            label: 'Remove 1 Item',
-                            onClick: () => {
-                                handleRemoveItemItem(item, 1);
-                                closeDropList();                         
-                            }
-                        }
-
-                        //Hidden 1 Case
-                        
-                        // , {
-                        //     appearance: 'danger',
-                        //     label: 'Remove 1 Case (10 Pc)',
-                        //     onClick: () => {
-                        //         handleRemoveItemItem(item, 10);
-                        //         closeDropList();                         
-                        //     }
-                        // }
-                    
-                        ]}
-                        trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>}
-                        onClick={() => {
-                            if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
-                                setIsDropOpen({
-                                    isAdd: false,
-                                    isOpen: undefined
-                                })
-                            } else {
-                                setIsDropOpen({
-                                    isAdd: false,
-                                    isOpen: index
-                                })
-                            }
-                        }}
-                    /> */}
-                    </div>
-                    <div className="flex items-center dark:text-gray-200">
-                        <form autoComplete="off">
-                            <input
-                                className="w-10 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
-                                type="number"
-                                name="qty"
-                                id="qty"
-                                onChange={(e) => {
-                                    updateItem(item, parseInt(e.target.value.toString()))
-                                }}
-                                value={
-                                    selectedItems?.find(
-                                        (findItem: any) => findItem.id === item.id
-                                    )?.quantity ?? 0
-                                }
-                            />
-                        </form>
-                    </div>
-
-                    <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            onClick={() => {
-                                hapticFeedback()
-                                handleAddItem(item, 1)
-                            }}
-                            className="h-6 w-6 cursor-pointer"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
-
-                        {/* <DropList
-                        isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
-                        list={[{
-                            appearance: 'primary',
-                            label: 'Add 1 Item',
-                            onClick: () => {
-                                handleAddItem(item, 1);
-                                closeDropList();                         
-                            }
-                        }
-                         
-                        //Hidden 1 Case option
-
-                        // ,{
-                        //     appearance: 'primary',
-                        //     label: 'Add 1 Case (10 Pc)',
-                        //     onClick: () => {
-                        //         handleAddItem(item, 10);
-                        //         closeDropList();                         
-                        //     }
-                        // }
-                    
-                        ]}
-                        trigger={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>}
-                        onClick={() => {
-                            if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
-                                setIsDropOpen({
-                                    isAdd: true,
-                                    isOpen: undefined
-                                })
-                            } else {
-                                setIsDropOpen({
-                                    isAdd: true,
-                                    isOpen: index
-                                })
-                            }
-                        }}
-                    /> */}
                     </div>
                 </div>
             </div>
@@ -392,10 +324,25 @@ export default function AddItem() {
                 isOpen={filterPopupOpen!}
                 onClose={() => setfilterPopupOpen(false)}
             />
-            <div className="px-4 pb-24">{renderItems()}</div>
+            <div className="px-4 pb-24">
+                {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded-lg mb-2">
+                    <div className="dark:text-gray-400 mb-1">Choose previously ordered items...</div>
+                    <div className="flex gap-2 overflow-scroll">
+                        {prevOrdered?.map(productId => <ProductSuggestionCard
+                            key={productId}
+                            productId={productId}
+                            handleAddItem={handleAddItem}
+                            handleRemoveItemItem={handleRemoveItemItem}
+                            updateItem={updateItem}
+                            selectedItems={selectedItems}
+                        />)}
+                    </div>
+                </div> : null}
+                {renderItems()}
+            </div>
             <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
                 <Button onClick={onSubmit}>
-          Add {selectedItems?.length} items (₹{calculatePriceOfSelected()})
+                    Add {selectedItems?.length} items (₹{calculatePriceOfSelected()})
                 </Button>
             </div>
         </div>
