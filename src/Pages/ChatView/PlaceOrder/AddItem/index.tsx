@@ -327,7 +327,7 @@ export default function AddItem() {
             <div className="px-4 pb-24">
                 {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded-lg mb-2">
                     <div className="dark:text-gray-400 mb-1">Choose previously ordered items...</div>
-                    <div className="flex gap-2 overflow-scroll">
+                    <div className="flex gap-2 overflow-x-scroll">
                         {prevOrdered?.map(productId => <ProductSuggestionCard
                             key={productId}
                             productId={productId}
