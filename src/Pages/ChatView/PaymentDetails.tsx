@@ -34,7 +34,7 @@ export default function PaymentDetails() {
             </div>
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-24">
-                <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
+                <h1 className="text-4xl md:text-6xl font-black text-center text-gray-600 dark:text-gray-300">
           ₹{payment?.amount}
                 </h1>
                 {/* ---------------- */}
@@ -62,7 +62,7 @@ export default function PaymentDetails() {
 
                 {/* Payment detail Card */}
                 {/* ------------------- */}
-                <div className="w-11/12 p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-gray-800">
+                <div className="w-11/12 p-4 md:p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-gray-800">
                     <h1 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">
             Payment details
                     </h1>

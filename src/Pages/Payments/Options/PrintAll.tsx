@@ -44,7 +44,7 @@ export const PrintAll = ({ apiData }: IProps) => {
         // Good
         return (
             <button
-                className="flex justify-center gap-1 items-center w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+                className="flex justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                 // onClick={onPrint}
             >
                 <svg

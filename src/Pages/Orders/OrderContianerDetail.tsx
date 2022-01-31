@@ -70,23 +70,23 @@ export default function OrderContainerDetail({
                 id="print"
                 ref={componentRef}
             >
-                <h2 className="dark:text-gray-300"> Order Summary: </h2>
+                <h2 className="dark:text-gray-300 font-bold"> Order Summary: </h2>
 
                 <div className={`flex w-full justify-between mt-2 pb-2 `}>
                     {/* TODO: Remove this console.log */}
                     {console.log('order', order)}
                     <div className="flex gap-2">
                         <div className="flex flex-col">
-                            <div className="text-gray-400 dark:text-gray-300">
-                #{order?.id?.split('-')[0]} •{' '}
+                            
+                            <div className="text-gray-600 font-semibold dark:text-gray-200 my-1">
+                                {order.supplier?.name} {'->'} {order?.buyer?.name}
+                            </div>
+                            <div className="text-gray-400 text-xs  dark:text-gray-300">
                                 {order.createdAt
                                     ? format(new Date(order.createdAt), 'do MMM yyyy')
                                     : ''}
                             </div>
-                            <div className="text-gray-600 dark:text-gray-200 my-1">
-                                {order.supplier?.name} {'->'} {order?.buyer?.name}
-                            </div>
-                            <div className="flex w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">
+                            <div className="flex mt-4 w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">
                                 {order?.orderStatus?.[0]?.note}
                             </div>
                         </div>
@@ -133,13 +133,13 @@ export default function OrderContainerDetail({
                             />
                             <div className="flex flex-col">
                                 <div className="flex gap-4">
-                                    <div className="text-gray-600 dark:text-gray-200">
+                                    <div className="text-gray-600 text-sm md:text-md dark:text-gray-200">
                                         {item?.product?.centralCatalogue?.name}
                                         {item?.product?.aliasName
                                             ? `(${item?.product?.aliasName})`
                                             : ''}
                                     </div>
-                                    <div className="text-gray-600 dark:text-gray-300">
+                                    <div className="text-gray-600 dark:text-gray-300  ">
                     x {item?.quantity}
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@ export default function OrderContainerDetail({
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row mt-2 mb-10 ml-12 mr-4 justify-end">
+            <div className="flex flex-row mt-2 mb-10 ml-4 mr-4 gap-2 justify-end">
                 <ReactToPrint
                     content={reactToPrintContent}
                     documentTitle={`Vyap All Orders`}

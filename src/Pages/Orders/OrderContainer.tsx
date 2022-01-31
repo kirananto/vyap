@@ -28,7 +28,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
             {orders.map((item, index) => (
                 <div
                     className={`${
-                        index === orders.length - 1 ? '' : 'border-b border-gray-300'
+                        index === orders.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
                     }`}
                     key={`${index}`}
                 >
@@ -45,9 +45,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                         <div className="w-full">
                             <div className="grid grid-rows-3 content-start">
                                 <div className="grid grid-flow-col  gap-1 row-span-3">
-                                    <div className="col-start-1 text-gray-500 dark:text-gray-300">
-                    #{item?.id?.split('-')[0]} •
-                                    </div>
+                                    
                                     <div className="text-gray-500 dark:text-gray-300">
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')

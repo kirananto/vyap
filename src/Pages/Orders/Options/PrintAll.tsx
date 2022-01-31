@@ -23,7 +23,7 @@ export const PrintAll = ({ apiData }: IProps) => {
 
     const reactToPrintTrigger = React.useCallback(() => {
         return (
-            <button className="flex justify-center gap-1 items-center w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+            <button className="flex justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
