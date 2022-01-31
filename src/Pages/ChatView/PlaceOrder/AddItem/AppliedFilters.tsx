@@ -57,8 +57,8 @@ export default function AppliedFilters({
                             />
                         </div>}
                     </div>
-                    <div className="flex gap-2 mt-2">
-                        {filters?.categories?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
+                    <div className="flex flex-wrap gap-2 mt-2">
+                        {filters?.categories?.map(mapItem => <div key={mapItem.id} className="flex flex-none bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
                         {filters?.brands?.map(mapItem => <div key={mapItem.id} className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
                         {filters?.sorting && (
                             <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">

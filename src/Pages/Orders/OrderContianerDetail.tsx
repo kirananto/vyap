@@ -6,7 +6,6 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { FormattedMessage } from 'react-intl'
 import ReactToPrint from 'react-to-print'
-import format from 'date-fns/format'
 
 export default function OrderContainerDetail({
     order,
@@ -66,16 +65,16 @@ export default function OrderContainerDetail({
     return (
         <div>
             <div
-                className="p-4 m-4 border border-gray-300 dark:border-gray-500 rounded"
+                className="p-4 m-4 mt-2 border border-gray-300 dark:border-gray-500 rounded"
                 id="print"
                 ref={componentRef}
             >
-                <h2 className="dark:text-gray-300 font-bold"> Order Summary: </h2>
+                <h2 className="dark:text-gray-300 font-bold"> Order items </h2>
 
-                <div className={`flex w-full justify-between mt-2 pb-2 `}>
+                <div className={`flex w-full justify-between mt-1 pb-2 `}>
                     {/* TODO: Remove this console.log */}
-                    {console.log('order', order)}
-                    <div className="flex gap-2">
+                    {/* {console.log('order', order)} */}
+                    {/* <div className="flex gap-2">
                         <div className="flex flex-col">
                             
                             <div className="text-gray-600 font-semibold dark:text-gray-200 my-1">
@@ -90,8 +89,8 @@ export default function OrderContainerDetail({
                                 {order?.orderStatus?.[0]?.note}
                             </div>
                         </div>
-                    </div>
-                    <div className="flex">
+                    </div> */}
+                    {/* <div className="flex">
                         <div className="flex flex-col">
                             <div className="text-gray-600 text-lg font-extrabold dark:text-gray-200">
                 ₹{' '}
@@ -104,21 +103,22 @@ export default function OrderContainerDetail({
                 ({order?.numberOfItems} items)
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {orderItems.map((item, index) => (
                     <div
-                        className={`flex justify-between pb-4 mb-2 ${
+                        className={`flex justify-between pb-2 ${
                             index === orderItems.length - 1
-                                ? 'border-b-2 border-dashed border-gray-300 dark:border-gray-600 mb-2 pb-2'
+                                ? 'border-b-2 border-dashed border-gray-300 dark:border-gray-600 mb-2 pb-4'
                                 : ''
                         }`}
                         key={`${index}`}
                     >
                         <div className="flex gap-2">
+                            <div className="flex-none mt-2 text-gray-400 text-xs dark:text-gray-400">{item?.quantity} X </div>
                             <div
-                                className="bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-8 w-8"
+                                className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6"
                                 style={
                                     item?.product?.thumbnailImage
                                         ? {
@@ -131,30 +131,31 @@ export default function OrderContainerDetail({
                                         : {}
                                 }
                             />
-                            <div className="flex flex-col">
-                                <div className="flex gap-4">
-                                    <div className="text-gray-600 text-sm md:text-md dark:text-gray-200">
-                                        {item?.product?.centralCatalogue?.name}
-                                        {item?.product?.aliasName
-                                            ? `(${item?.product?.aliasName})`
-                                            : ''}
-                                    </div>
-                                    <div className="text-gray-600 dark:text-gray-300  ">
-                    x {item?.quantity}
-                                    </div>
-                                </div>
-                                <div className="flex gap-4 text-xs font-bold">
-                                    <div className="text-gray-400 dark:text-gray-400">
-                    Purchase Price: ₹{item?.purchasePrice}
-                                    </div>
-                                    <div className="text-gray-400 dark:text-gray-400">
-                    MRP: ₹{item?.product?.mrpPrice}
-                                    </div>
-                                </div>
+                            {/* <div className="flex flex-col"> */}
+                            {/* <div className="flex gap-4"> */}
+                            <div className="text-gray-600 pr-4 self-center text-xs font-semibold md:text-md dark:text-gray-200">
+                                {item?.product?.centralCatalogue?.name}
+                                {item?.product?.aliasName
+                                    ? `(${item?.product?.aliasName})`
+                                    : ''}
                             </div>
+                            {/* <div className="text-gray-600 dark:text-gray-300  ">
+                    x 
+                                    </div> */}
+                            {/* </div> */}
+                            {/* <div className="flex gap-4 text-xs font-bold"> */}
+                            {/* <div className="text-gray-400 text-xs dark:text-gray-400">
+                                    {item?.quantity} quantity
+                                </div> */}
+                            {/* <div className="text-gray-400 dark:text-gray-400">
+                    MRP: ₹{item?.product?.mrpPrice}
+                                    </div> */}
+                            {/* </div> */}
+                            {/* </div> */}
                         </div>
                         <div className="flex text-gray-400 text-xs font-extrabold dark:text-gray-300 self-center">
-              ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)}
+                            {/* ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)} */}
+              ₹{item?.purchasePrice}
                         </div>
                     </div>
                 ))}
