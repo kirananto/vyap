@@ -224,9 +224,9 @@ export default function AddItem() {
                     <div className=" text-lg font-bold mb-1 text-gray-600 dark:text-gray-200">
                         {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name}
                     </div>
-                    <div className="grid grid-cols-2 space-between">
+                    <div className="flex flex-wrap gap-3 space-between">
                         <div className="flex flex-col">
-                            <div className="grid grid-cols-2 mt-1">
+                            <div className="flex gap-2 mt-1">
                                 <div className="text-xs font-semibold text-gray-500  dark:text-gray-400">
                                     <p>MRP:</p>
                                     <p>₹{item?.mrpPrice}</p>
