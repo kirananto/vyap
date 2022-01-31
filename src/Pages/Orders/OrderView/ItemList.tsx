@@ -16,24 +16,27 @@ function Items({ order }: { order: any }) {
     }, [token, order.id])
 
     return (
-        <div>
+        <div className="divide-y divide-gray-100 dark:divide-gray-700">
             {orderItems?.map((item: any, index: number) => (
-                <div className="flex justify-between pt-4" key={`${index}`}>
-                    <div className="flex gap-4">
-                        <div className="text-center relative w-18 aspect-square mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
-                            {item?.product?.thumbnailImage && (
-                                <img
-                                    src={getImageURL(
-                                        item?.product?.thumbnailImage,
-                                        IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                                    )}
-                                    alt="Avatar"
-                                    className="object-cover w-full h-full"
-                                />
-                            )}
-                        </div>
-                        <div className="flex flex-col">
-                            <div className="flex text-sm font-bold text-gray-800 dark:text-gray-200">
+                <div className="flex justify-between py-2" key={`${index}`}>
+                    <div className="flex w-full gap-4">
+                        <div className="flex-none mt-2 text-gray-400 text-xs dark:text-gray-400">{item?.quantity} X </div>
+                        <div 
+                            className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6"
+                            style={
+                                item?.product?.thumbnailImage
+                                    ? {
+                                        backgroundImage: `url(${getImageURL(
+                                            item?.product?.thumbnailImage,
+                                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                                        )}`,
+                                        backgroundSize: 'contain',
+                                    }
+                                    : {}
+                            }
+                        />
+                        <div className="flex w-3/5 flex-col">
+                            <div className="flex  text-sm font-bold text-gray-800 dark:text-gray-200">
                                 {item?.product?.centralCatalogue?.name}
                                 {item?.product?.aliasName
                                     ? `(${item?.product?.aliasName})`
@@ -42,15 +45,15 @@ function Items({ order }: { order: any }) {
                             {/* <div className="flex font-bold text-xs text-gray-400">
                                 {item?.product?.centralCatalogue?.description}
                             </div> */}
-                            <div className="flex font-bold text-xs text-gray-600 dark:text-gray-300">
+                            <div className="flex font-bold text-xs text-gray-600 dark:text-gray-500">
                 Rate: ₹{item?.purchasePrice}
                             </div>
                         </div>
-                        <div className="flex h-5 px-2 w-16 font-bold tracking-wide rounded text-xs bg-gray-200 dark:bg-gray-600 dark:text-gray-300 self-center items-center justify-center">
+                        {/* <div className="flex-none flex-col h-5 px-2 w-auto font-bold tracking-wide rounded text-xs bg-gray-200 dark:bg-gray-600 dark:text-gray-300 self-center items-center justify-center">
               X {item?.quantity}
-                        </div>
+                        </div> */}
                     </div>
-                    <div className="flex text-lg ml-4 font-bold text-gray-600 dark:text-gray-200 items-center">
+                    <div className="flex-wrap text-lg ml-4 min-w-[20%] font-bold text-gray-600 dark:text-gray-200 text-right">
             ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)}
                     </div>
                 </div>
@@ -78,7 +81,7 @@ export default function ItemList({
     }, [shareON])
 
     return (
-        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
+        <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
             <div
                 className={`flex ${
                     isExpanded ? 'mb-4' : ''

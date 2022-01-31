@@ -59,7 +59,7 @@ export default function OrderDetail({
     }, [shareON])
 
     return (
-        <div className="w-11/12 p-8 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
+        <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
             <div
                 className={`flex ${
                     isExpanded ? 'mb-4' : ''
