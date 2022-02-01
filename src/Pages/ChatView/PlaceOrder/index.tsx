@@ -407,9 +407,9 @@ export default function PlaceOrder() {
                                         </div>
                                     </div>
 
-                                    <div className="place-self-center pb-1">
+                                    <div className="place-self-center pb-1 ml-9">
                                         <button
-                                            className="mt-1 ml-6 rounded border border-blue-500 bg-transparent py-1 px-4 text-xs font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"
+                                            className="mt-1  rounded border border-blue-500 bg-transparent py-1 px-4 text-xs font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"
                                             onClick={() => {
                                                 hapticFeedback()
                                                 handleRemoveItemItem(item, item?.quantity || 0)

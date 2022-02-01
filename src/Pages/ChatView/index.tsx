@@ -81,7 +81,7 @@ export const Payment = () => {
                     onClick={() => {
                         hapticFeedback()
                         dispatch(setOrgId(inbox?.recipient?.id!))
-                        navigate('/place-order')
+                        navigate('/place-order/add-item')
                     }}
                     className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 "
                 >

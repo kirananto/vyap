@@ -42,9 +42,9 @@ export default function PaymentCard({ className, thread }: { className: string, 
         <div className={`flex ${className} w-full `}>
             <NavLink to={`/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  md:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
-          Payment #{thread.meta?.split('-')[0]}
+          Payment
                 </div>
-                <div className={`text-4xl mt-2 text-gray-700 font-bold dark:text-gray-200 ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${payment?.amount}` : null}</div>
+                <div className={`text-4xl mt-1 text-gray-700 font-bold dark:text-gray-200 ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${payment?.amount}` : null}</div>
                 {payment?.note && payment.note?.length > 1 ? <div className="border border-1 border-gray-300 dark:border-gray-600 p-1 px-4 pl-3 mt-2 mb-4 bg-gray-100 dark:bg-gray-700 w-fit text-xs text-gray-700 dark:text-gray-300 rounded">{payment?.note}</div> : ''}
                 {/* bottom  */}
                 <div className="flex items-center w-full">
