@@ -181,8 +181,8 @@ export default function PlaceOrder() {
         if (placeOrder.cartItems?.length === 0) {
             return (
                 <div>
-                    <img className="m-auto mt-12 h-48 p-6" alt="no items" src={ChatImg} />
-                    <div className="m-auto mb-8 w-2/3 px-6 text-center dark:text-gray-300">
+                    <img className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
+                    <div className="m-auto text-sm mb-8 w-2/3  md:px-6 text-center dark:text-gray-300">
                         {' '}
             You do not have any items in your cart, please add by tapping add
             more below.{' '}
@@ -407,9 +407,9 @@ export default function PlaceOrder() {
                                         </div>
                                     </div>
 
-                                    <div className="place-self-center pb-1">
+                                    <div className="place-self-center pb-1 ml-9">
                                         <button
-                                            className="mt-1 ml-6 rounded border border-blue-500 bg-transparent py-1 px-4 text-xs font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"
+                                            className="mt-1  rounded border border-blue-500 bg-transparent py-1 px-4 text-xs font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"
                                             onClick={() => {
                                                 hapticFeedback()
                                                 handleRemoveItemItem(item, item?.quantity || 0)
@@ -439,41 +439,7 @@ export default function PlaceOrder() {
                 />
             </div>
             <div className={'p-2 pt-20'}>
-                {/* <!-- Textarea --> */}
-                <div className="p-2">
-                    <span className="float-left mb-2 text-sm text-gray-500">Note</span>
-                    <textarea
-                        value={placeOrder.note}
-                        onChange={(event) => dispatch(setNote(event.target.value as any))}
-                        className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-4 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
-                        id=""
-                    ></textarea>
-                </div>
-                {isSupplier ? (
-                    <div className="m-2 rounded-lg border border-gray-200 px-4 pb-8 pt-4  dark:border-gray-700">
-                        <span className="float-left mb-2 text-sm text-gray-500">
-              Flat discount amount
-                        </span>
-                        <input
-                            value={placeOrder.discount}
-                            onBlur={handleDiscountValue}
-                            onChange={(event) => updateDiscount(event)}
-                            className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-2 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
-                            inputMode="numeric"
-                            type="number"
-                            min={0}
-                        />
-
-                        <span
-                            className={
-                                'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-green-500 ' +
-                (isValidDiscount ? 'hidden' : '')
-                            }
-                        >
-              * Maximum Discount Applicable: ₹{getTotalPrice()}
-                        </span>
-                    </div>
-                ) : null}
+                
                 <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4 dark:border-gray-700">
                     <div className="flex justify-between">
                         <div className="text-xl font-bold dark:text-gray-300">Items</div>
@@ -523,7 +489,7 @@ export default function PlaceOrder() {
                         <div>
                             {renderCartItems()}
                             <div
-                                className="mx-10 mt-4 flex 
+                                className="m-auto w-fit px-4 my-4 flex flex-wrap 
                   transform cursor-pointer items-center justify-center rounded-full border 
                     border-indigo-600 bg-gradient-to-br from-blue-50 to-blue-100 py-2
                     text-indigo-700 transition  duration-500 ease-in-out dark:bg-gradient-to-br dark:from-blue-500 dark:to-indigo-700"
@@ -532,7 +498,7 @@ export default function PlaceOrder() {
                                     navigate('/place-order/add-item')
                                 }}
                             >
-                                <div className="flex rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
+                                <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="h-5 w-5 text-gray-300 dark:text-gray-100 "
@@ -546,67 +512,100 @@ export default function PlaceOrder() {
                                         />
                                     </svg>
                                 </div>
-                                <div className="ml-2  flex text-lg dark:text-white">
+                                <div className="ml-2 text-lg dark:text-white">
                   Add more items
                                 </div>
                             </div>
 
-                            <span
-                                className={
-                                    'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
-                  (isSubmit ? (isValidCart ? 'hidden' : '') : 'hidden')
-                                }
-                            >
-                * Add items to cart to continue order
-                            </span>
-
-                            <div className="mt-10 text-right">
-                                <div className="text-xl font-extrabold text-gray-400 dark:text-gray-300">
-                  Order Summary
-                                </div>
-                            </div>
-
-                            <div className="mt-2 grid grid-cols-5 gap-3">
-                                <div className="col-span-3 mt-1 ml-10">
-                                    <div className="text-base text-gray-400 dark:text-gray-300">
-                    Cart Total :
-                                    </div>
-
-                                    <div className="text-base text-gray-400 dark:text-gray-300">
-                    Discount :
-                                    </div>
-
-                                    <div className="mt-1 text-lg font-extrabold text-gray-600 dark:text-gray-300">
-                    Grand Total :
-                                    </div>
-                                </div>
-
-                                <div className="col-span-2  mt-1 text-right">
-                                    <div className="text-base  dark:text-gray-400">
-                    ₹{getTotalPrice()}
-                                    </div>
-                                    <div className="text-base dark:text-gray-400">
-                    ₹{placeOrder.discount}
-                                    </div>
-                                    <div className="mt-1 text-lg font-extrabold dark:text-gray-400">
-                    ₹
-                                        {getTotalPrice() -
-                      (placeOrder.discount ? placeOrder.discount : 0)}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-4">
-                                <Button
-                                    onClick={() => {
-                                        handleSubmit()
-                                    }}
-                                >
-                  Place order
-                                </Button>
-                            </div>
+                            
                         </div>
                     )}
+                </div>
+                {isSupplier ? (
+                    <div className="m-2 rounded-lg border border-gray-200 px-4 pb-8 pt-4  dark:border-gray-700">
+                        <span className="float-left mb-2 text-sm text-gray-500">
+              Flat discount amount
+                        </span>
+                        <input
+                            value={placeOrder.discount}
+                            onBlur={handleDiscountValue}
+                            onChange={(event) => updateDiscount(event)}
+                            className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-2 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                            inputMode="numeric"
+                            type="number"
+                            min={0}
+                        />
+
+                        <span
+                            className={
+                                'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-green-500 ' +
+                (isValidDiscount ? 'hidden' : '')
+                            }
+                        >
+              * Maximum Discount Applicable: ₹{getTotalPrice()}
+                        </span>
+                    </div>
+                ) : null}
+                {/* <!-- Textarea --> */}
+                <div className="p-2">
+                    <span className="float-left mb-2 text-sm text-gray-500">Note</span>
+                    <textarea
+                        value={placeOrder.note}
+                        placeholder="Enter a description or reason for the order"
+                        onChange={(event) => dispatch(setNote(event.target.value as any))}
+                        className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-4 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                        id=""
+                    />
+                </div>
+                <div className="">
+                    <span
+                        className={
+                            'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                  (isSubmit ? (isValidCart ? 'hidden' : '') : 'hidden')
+                        }
+                    >
+                * Add items to cart to continue order
+                    </span>
+
+                    <div className="mt-2 grid grid-cols-5 gap-3">
+                        <div className="col-span-3 mt-1 ml-4">
+                            <div className="text-base text-gray-400 dark:text-gray-300">
+                    Cart Total :
+                            </div>
+
+                            <div className="text-base text-gray-400 dark:text-gray-300">
+                    Discount :
+                            </div>
+
+                            <div className="mt-1 text-lg font-extrabold text-gray-600 dark:text-gray-300">
+                    Grand Total :
+                            </div>
+                        </div>
+
+                        <div className="col-span-2  mt-1 text-right mr-4">
+                            <div className="text-base  dark:text-gray-400">
+                    ₹{getTotalPrice()}
+                            </div>
+                            <div className="text-base dark:text-gray-400">
+                    ₹{placeOrder.discount}
+                            </div>
+                            <div className="mt-1 text-lg font-extrabold dark:text-gray-400">
+                    ₹
+                                {getTotalPrice() -
+                      (placeOrder.discount ? placeOrder.discount : 0)}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="m-4">
+                        <Button
+                            onClick={() => {
+                                handleSubmit()
+                            }}
+                        >
+                  Place order
+                        </Button>
+                    </div>
                 </div>
             </div>
 

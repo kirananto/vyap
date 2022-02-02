@@ -72,7 +72,7 @@ export default function More() {
                     </div>
                 </div>
                 {/* ----- */}
-                <div className="flex flex-col gap-2 pl-6 md:pl-10 mt-2">
+                <div className="flex flex-col gap-2 pl-6 sm:pl-10 mt-2">
                     <NavLink to="/all-payments" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
                         <PaymentIcon />
                         <Links linkName={intl.formatMessage({ id: 'global.allPayments' })} />

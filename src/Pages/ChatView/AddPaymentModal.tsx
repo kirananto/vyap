@@ -42,6 +42,8 @@ export default function AddPaymentModal({
     const [customAmount, setCustomAmount] = useState<number | undefined>(amount)
     const [isValidAmount, setIsValidAmount] = useState<boolean>(true)
 
+    const parsedcustomAmount = parseInt(`${customAmount}`, 10) ? parseInt(`${customAmount}`, 10) : 0
+
     const onValidate = (action: string, value: number, handle: () => void) => {
 
         const post = new PostAmount()
@@ -82,7 +84,7 @@ export default function AddPaymentModal({
         if (btnAction === BUTTON_ACTION.PLACE_ORDER ? paymentOption !== PAYMENT_OPTIONS.PAY_LATER : true) {
             // TODO validations before making API call
             createPayment(token!, {
-                amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? customAmount! : amount!,
+                amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? parsedcustomAmount! : amount!,
                 note: order ? getNoteText(order) : note,
                 method,
                 status: paymentStatus.SUCCESS,
@@ -114,10 +116,10 @@ export default function AddPaymentModal({
                     validateAmount = amount!
                     break
                 case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
-                    validateAmount = customAmount!
+                    validateAmount = parsedcustomAmount!
                     break
                 case PAYMENT_OPTIONS.PAY_LATER:
-                    validateAmount = customAmount!
+                    validateAmount = parsedcustomAmount!
                     break
                 default:
                     validateAmount = 0
@@ -133,6 +135,7 @@ export default function AddPaymentModal({
             handleSubmit)
     }
 
+
     //.....Order Confirmation message
     function orderConfirmText() {
         const orderTextStart = 'Confirm Place Order '
@@ -147,7 +150,7 @@ export default function AddPaymentModal({
                     break
                 case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
                     orderTextMid = ' by receiving a partial payment of ₹'
-                    orderTextEnd = '' + customAmount
+                    orderTextEnd = '' + parsedcustomAmount
                     break
                 case PAYMENT_OPTIONS.PAY_LATER:
                     orderTextMid = 'by PAYING LATER'
@@ -249,19 +252,10 @@ export default function AddPaymentModal({
                                             <input
                                                 value={customAmount}
                                                 onChange={(event) => {
-                                                    setCustomAmount(
-                                                        parseFloat(event?.target.value as any) > 0
-                                                            ? parseFloat(event?.target.value as any)
-                                                            : 0
-                                                    )
+                                                    setCustomAmount(event?.target.value as any)
                                                     onValidate(
                                                         'change',
-                                                        parseFloat(event?.target.value as any) > 0
-                                                            ? parseFloat(event?.target.value as any)
-                                                            : 0,
-                                                        () => {
-                                                            console.log('validate')
-                                                        }
+                                                        event?.target.value as any, () => console.log('data')
                                                     )
                                                 }}
                                                 className="p-4 m-2 w-auto text-base text-black transition duration-500 ease-in-out transform 
@@ -276,7 +270,7 @@ export default function AddPaymentModal({
 
                                         <span
                                             className={
-                                                `flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 pl-24 ${isValidAmount ? 'hidden' : ''}`
+                                                `flex items-center font-medium tracking-wide text-red-500 dark:text-red-400 text-xs mt-1 ml-1 pl-2 ${isValidAmount ? 'hidden' : ''}`
                                             }
                                         >
                                             Please enter a valid amount !

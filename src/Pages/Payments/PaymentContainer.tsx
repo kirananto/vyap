@@ -174,7 +174,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                     </div>
                                 </div>
                                 <div className="flex gap-1">
-                                    <span className=" w-max items-center rounded bg-green-200 px-2 text-xs md:text-sm font-bold text-green-800">
+                                    <span className=" w-max items-center rounded bg-green-200 px-2 text-xs sm:text-sm font-bold text-green-800">
                                         {paymentMethod[item.method]}
                                     </span>
                                 </div>

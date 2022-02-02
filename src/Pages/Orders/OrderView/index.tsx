@@ -135,14 +135,14 @@ export default function OrderDetails() {
                         />
                     </div>
                 </span>
-                <div className="px-20">
+                <div className="flex justify-center">
                     <Button
-                        className="mt-6 mb-64"
+                        className="w-40 px-4 mb-64"
                         onClick={() => {
                             shareBill()
                         }}
                     >
-                        <div className="flex items-center">
+                        <div className="flex w-full items-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6 dark:text-gray-300"
@@ -157,7 +157,7 @@ export default function OrderDetails() {
                                     d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
                                 />
                             </svg>
-                            <p className="pl-10">Share Bill</p>
+                            <span className="pl-6">Share Bill</span>
                         </div>
                     </Button>
                 </div>

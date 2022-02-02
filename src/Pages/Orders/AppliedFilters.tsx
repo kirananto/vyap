@@ -35,7 +35,7 @@ export default function AppliedFilters({ openFilters }: { openFilters: any }) {
                         />
                     </div>}
                 </div>
-                {hasFilters() ? <div className="flex gap-2 mt-2">
+                {hasFilters() ? <div className="flex flex-wrap gap-2 mt-2">
                     {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.account?.name}</div>}
                     {filters?.orderStatus && <div className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.orderStatus}</div>}
                     {filters?.sorting && (

@@ -58,7 +58,7 @@ function Header({
             {/* Heading container */}
             <div
                 className={`flex ${subHeading ? 'flex-col' : 'items-center'}   ${
-                    shareAction ? 'w-9/12' : 'w-3/5 md:w-4/5'
+                    shareAction ? 'w-9/12' : 'w-3/5 sm:w-4/5'
                 }   ${
                     backDisabled ? 'pl-1' : 'pl-4'
                 } text-gray-600 dark:text-gray-300 `}
@@ -66,7 +66,7 @@ function Header({
                 <h1 className="text-lg font-semibold">{heading}</h1>
                 {subHeading && (
                     <h1
-                        className={`text-md w-full md:text-lg text-transparent font-bold tracking-wide truncate
+                        className={`text-md w-full sm:text-lg text-transparent font-bold tracking-wide truncate
            bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200`}
                     >
                         {subHeading}

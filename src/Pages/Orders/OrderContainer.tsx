@@ -46,7 +46,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                             <div className="grid grid-rows-3 content-start">
                                 <div className="grid grid-flow-col  gap-1 row-span-3">
                                     
-                                    <div className="text-gray-500 dark:text-gray-300">
+                                    <div className="text-gray-500 mt-1 text-xs dark:text-gray-300">
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
@@ -95,13 +95,13 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                     )}
                                 </div>
 
-                                <div className="text-gray-600 dark:text-gray-200 my-1">
+                                <div className="text-gray-600 font-semibold dark:text-gray-200 -mt-1 mb-1">
                                     {item.supplier?.name} {'->'} {item?.buyer?.name}
                                 </div>
 
                                 <div className="grid grid-flow-col">
                                     <div className="col-start-1 w-max  items-center mt-3">
-                                        <span className="bg-green-200 font-bold text-sm text-green-800 px-2 py-1 rounded">
+                                        <span className="bg-green-200 font-bold text-xs text-green-800 px-2 py-1 rounded">
                                             {item?.orderStatus?.[0]?.note}
                                         </span>
                                     </div>
