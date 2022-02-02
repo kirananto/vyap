@@ -17,12 +17,14 @@ import { clearAll, selectProductFilters } from './productFiltersSlice'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Spinner from 'src/Components/Style/Spinner'
 import useQueryParam from 'src/useQueryParams'
+import type { IProduct } from 'src/types/product'
+import type { IProductList } from 'src/types/fetchProducts'
 
 // ! Main Component
 export default function Product() {
     const { token, user } = useSelector(selectCredentials)
     const [loading, setLoading] = useState(true)
-    const [products, setProducts] = useState<any[]>([])
+    const [products, setProducts] = useState<IProduct[]>([])
     const filters = useSelector(selectProductFilters)
 
     const intl = useIntl()
@@ -35,19 +37,19 @@ export default function Product() {
 
     // !------------------->
     const [isMoreOpen, setisMoreOpen] = useQueryParam<boolean>('isMoreOpen')
-    const [isMoreItem, setIsMoreItem] = useState<any>(undefined)
+    const [isMoreItem, setIsMoreItem] = useState<IProduct>()
     const [isSearchMoreOpen, setisSearchMoreOpen] =
     useQueryParam<boolean>('isSearchMoreOpen')
 
-    const [searchValue, setSearchValue] = useState<any>(undefined)
+    const [searchValue, setSearchValue] = useState<string>('')
     const [reRenderCounter, setCounter] = useState(1)
     //  !--------Search-bar-more---------->
-    const [selectedProduct, setselectedProduct] = useState<any[]>([])
+    const [selectedProduct, setselectedProduct] = useState<IProduct[]>([])
 
     // ! For second modal using first modal
     // !------------------------>
     //! ---------------->
-    function toggleMore(item?: any) {
+    function toggleMore(item?: IProduct) {
         setisMoreOpen(item === undefined ? false : true)
         setIsMoreItem(item)
     }
@@ -55,7 +57,7 @@ export default function Product() {
     //   setIsOpen(!isOpen);
     // }
     // !---Condition if a single product is checked the filter bar will appear->and this function will pass as a function in Product Card component==>
-    function CheckboxClicked(item: any) {
+    function CheckboxClicked(item: IProduct) {
         const tempSelectedProductGlobal = selectedProduct
         if (
             tempSelectedProductGlobal.find((findItem) => findItem?.id === item?.id)
@@ -97,7 +99,7 @@ export default function Product() {
                 ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}`
                 : undefined,
         })
-            .then((result: any) => {
+            .then((result: IProductList) => {
                 setProducts(result.data?.data ?? [])
             })
             .catch((error) => {
