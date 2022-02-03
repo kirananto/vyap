@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrganizationProductCategories } from 'src/API/products.axios'
+import type { IDataEntity, IOrganizationProductCategories } from 'src/types/organizationProductCategories'
 import { selectCredentials } from '../Login/credentialsSlice'
 import {
     categoriesCheckbox,
@@ -9,7 +10,7 @@ import {
 
 interface CategoryName {
   name: string;
-  item: any;
+  item: IDataEntity;
 }
 const Category = (props: CategoryName) => {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ interface FilterCategories {
   type: 'brand' | 'category';
 }
 export default function FilterCategory(props: FilterCategories) {
-    const [items, setItems] = useState<any[]>([])
+    const [items, setItems] = useState<IDataEntity[] | undefined>([])
     const { user, token } = useSelector(selectCredentials)
 
     useEffect(() => {
@@ -51,8 +52,8 @@ export default function FilterCategory(props: FilterCategories) {
       0,
       undefined,
       user?.organizationId
-        ).then((result: any) => {
-            setItems(result?.data?.data?.filter((item: any) => item?.name))
+        ).then((result: IOrganizationProductCategories) => {
+            setItems(result?.data?.data?.filter((item: IDataEntity) => item?.name))
         })
     }, [])
 
