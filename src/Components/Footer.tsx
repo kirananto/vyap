@@ -115,13 +115,14 @@ function Footer() {
 
 // ! (SimpleFooter) Footer with only one button-->:
 
-function SimpleFooter(props: { btnName: string, onClick?: any, isDisabled?: boolean }) {
+function SimpleFooter(props: { btnName: string, onClick?: (e: React.MouseEvent<HTMLInputElement>) => void 
+, isDisabled?: boolean }) {
     return (
         <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow shadow-2xl dark:bg-gray-800">
-            <Button onClick={(event: any) => {
+            <Button onClick={(event: React.MouseEvent<HTMLInputElement>) => {
                 // if(event.preventDefault) event.preventDefault()
                 hapticFeedback()
-                props.onClick(event)
+                props.onClick?.(event)
             }} className="w-8/12 h-12" isDisabled={props.isDisabled}>
                 {props.btnName}
             </Button>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { hapticFeedback } from 'src/utils/vibrate'
 
-export default function SearchBar({ onFilterClick }: { onFilterClick: any }) {
+export default function SearchBar({ onFilterClick }: { onFilterClick: () => void }) {
     return (
         <div className="relative flex justify-center w-full gap-2 mt-2">
             <input
