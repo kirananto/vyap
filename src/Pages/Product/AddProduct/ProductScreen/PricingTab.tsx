@@ -29,8 +29,8 @@ function PricingTab({ action, saveAttempt }: Props) {
         setModal(true)
     }
 
-    const handleGstPercentage = (event: any) => {
-        const tempVal = event.target.value
+    const handleGstPercentage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const tempVal = Number(event.target.value)
         if (tempVal <= 100) {
             dispatch(setGstPercentage(tempVal))
         }
@@ -58,8 +58,8 @@ function PricingTab({ action, saveAttempt }: Props) {
             <div>
                 <p className="text-sm font-bold text-gray-500 dark:text-gray-300">MRP</p>
                 <input
-                    onChange={(event: any) => {
-                        dispatch(setMrpPrice(event.target.value))
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        dispatch(setMrpPrice(Number(event.target.value)))
                     }}
                     onBlur={resetMRPToZero}
                     value={addProductInfo.pricing?.mrpPrice}
@@ -84,8 +84,8 @@ function PricingTab({ action, saveAttempt }: Props) {
             <div>
                 <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sale Price</p>
                 <input
-                    onChange={(event: any) => {
-                        dispatch(setSalesPrice(event.target.value))
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        dispatch(setSalesPrice(Number(event.target.value)))
                     }}
                     onBlur={resetSalesToZero}
                     value={addProductInfo.pricing?.salesPrice}

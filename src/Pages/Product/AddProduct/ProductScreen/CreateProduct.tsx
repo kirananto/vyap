@@ -10,6 +10,8 @@ import {
     postAddProduct,
 } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import type { IAddCentralProductResponse } from 'src/types/addCentralProductResponse'
+import type { ICentralCatalogue, IDataEntity } from 'src/types/centralCatalogue'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { SimpleFooter } from '../../../../Components/Footer'
 import { SimpleHeader } from '../../../../Components/Header'
@@ -22,7 +24,7 @@ import { PAGE_ACTION, TABS } from './types'
 import {
     isValidBrand,
     isValidCategory,
-    isValidDescription,
+    // isValidDescription,
     isValidGST,
     isValidHSN,
     isValidMRP,
@@ -34,7 +36,7 @@ function CreateProduct() {
     const [toggleState, setToggleState] = useState(TABS.PRICING)
     const [isLoading, setIsLoading] = useState(false)
     const [saveAttempt, setSaveAttempt] = useState(0)
-    const [productImage, setProductImage] = useState<any>(undefined)
+    const [productImage, setProductImage] = useState<string>()
     const addProductInfo = useSelector(selectAddProductInfo)
     const { user, token } = useSelector(selectCredentials)
 
@@ -80,6 +82,7 @@ function CreateProduct() {
         (e || window.event).returnValue = confirmationMessage //Gecko + IE
         return confirmationMessage //Webkit, Safari, Chrome
     }
+    
     useEffect(() => {
     /* avoid accidental back button hit - confirm alert */
         history.pushState(null, location.href, location.href)
@@ -101,8 +104,8 @@ function CreateProduct() {
         100,
         0,
         addProductInfo?.centralCatalogue?.id
-            ).then((result: any) => {
-                const imageName = result?.data?.data?.filter((filterItem: any) =>
+            ).then((result: ICentralCatalogue) => {
+                const imageName = result?.data?.data?.filter((filterItem: IDataEntity) =>
                     filterItem?.imageName?.includes('.')
                 )?.[0]?.imageName
                 if (imageName) {
@@ -111,6 +114,9 @@ function CreateProduct() {
                     )
                 }
             })
+            return () => {
+                setProductImage('') 
+            }
         }
         else {
             if (addProductInfo?.others?.productImage?.length > 0) {
@@ -187,7 +193,7 @@ function CreateProduct() {
         let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
 
         if (!addProductInfo?.centralCatalogue?.id) {
-            const centralProduct: any = await postAddCentralProduct(token!, {
+            const centralProduct: IAddCentralProductResponse | null = await postAddCentralProduct(token!, {
                 name: addProductInfo?.centralCatalogue?.name!,
                 description: addProductInfo?.centralCatalogue?.description ?? '',
                 categories: {

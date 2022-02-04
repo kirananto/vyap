@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { BrandInterface } from '../ProductScreen/BrandModal';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { BrandInterface } from '../ProductScreen/BrandModal'
 
 interface CatalogueImageInterface {
-    id:          string;
-    createdAt:   Date;
-    updatedAt:   Date;
-    deletedAt:   null;
-    productId:   string;
-    imageName:   string;
-    title:       string;
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: null;
+    productId: string;
+    imageName: string;
+    title: string;
     description: string;
 }
 
@@ -30,12 +30,12 @@ export interface HSNInterface {
     hsn: number
 }
 export interface AddProductInterface {
-    editProductId? :string,
+    editProductId?: string,
     pricing: {
         mrpPrice?: number
         salesPrice?: number
         taxEnabled: boolean
-        hsn?:  HSNInterface | undefined,
+        hsn?: HSNInterface | undefined,
         gstPercentage: number
     },
     centralCatalogue?: CentralCatalogueInterface,
@@ -63,7 +63,7 @@ export interface AddProductInterface {
 }
 
 const initialState: AddProductInterface = {
-    editProductId:'',
+    editProductId: '',
     centralCatalogue: { description: '' },
     pricing: {
         mrpPrice: undefined,
@@ -82,7 +82,7 @@ const initialState: AddProductInterface = {
         brandId: '',
         caseQuantity: 0
     }
-};
+}
 
 
 export const addProductSlice = createSlice({
@@ -91,16 +91,16 @@ export const addProductSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setEditProductId: (state: AddProductInterface, action: PayloadAction<string>) => {
-            state.editProductId = action.payload;
+            state.editProductId = action.payload
         },
         setCentralCatalogue: (state: AddProductInterface, action: PayloadAction<CentralCatalogueInterface>) => {
-            state.centralCatalogue = action.payload;
+            state.centralCatalogue = action.payload
         },
         setMrpPrice: (state: AddProductInterface, action: PayloadAction<number>) => {
-            state.pricing.mrpPrice = action.payload;
+            state.pricing.mrpPrice = action.payload
         },
         setSalesPrice: (state: AddProductInterface, action: PayloadAction<number>) => {
-            state.pricing.salesPrice = action.payload;
+            state.pricing.salesPrice = action.payload
         },
         setTaxEnabled: (state, action: PayloadAction<boolean>) => {
             state.pricing.taxEnabled = action.payload
@@ -150,7 +150,7 @@ export const addProductSlice = createSlice({
         },
 
     },
-});
+})
 
 export const {
     setEditProductId,
@@ -170,12 +170,12 @@ export const {
     setAliasName,
     setDescription,
     clearAll
-} = addProductSlice.actions;
+} = addProductSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectAddProductInfo = (state: any): AddProductInterface => state.addproduct;
+export const selectAddProductInfo = (state: any): AddProductInterface => state.addproduct
 
 
-export default addProductSlice.reducer;
+export default addProductSlice.reducer
