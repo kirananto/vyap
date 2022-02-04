@@ -29,12 +29,29 @@ import {
 } from './validations'
 
 import Compressor from 'compressorjs'
+import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'
 interface Props {
     action: PAGE_ACTION;
     saveAttempt: number;
 }
 
-const ImageContainer = (props: any) => {
+interface IImageProps {
+    key: string;
+    item: {
+        fileId: string;
+        imageName:string
+    };
+}
+
+interface IInput {
+    event: React.ChangeEvent<HTMLInputElement>,
+    label: string,
+    dispatch: Dispatch<any>
+    value: string
+    placeholder: string
+}
+
+const ImageContainer = (props: IImageProps) => {
     const { item } = props
     return (
         <div
@@ -53,12 +70,11 @@ const ImageContainer = (props: any) => {
     )
 }
 
-const handleInputChange = (
-    event: any,
+const handleInputChange = (  
+    event: React.ChangeEvent<HTMLInputElement>,
     label: string,
-    dispatch: Dispatch<any>
-) => {
-    const tempVal = event.target.value
+    dispatch: Dispatch<any>) => {
+    const tempVal : any = event.target.value
     switch (label) {
         case 'Your Item Code(SKU)':
             dispatch(setSkuCode(tempVal))
@@ -97,14 +113,14 @@ const handleInputChange = (
     }
 }
 
-const Input = (props: any) => {
+const Input = (props: IInput) => {
     return (
         <div className=" mt-2  ">
             <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
                 {props.label}
             </p>
             <input
-                onChange={(event: any) => {
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     handleInputChange(event, props.label, props.dispatch)
                 }}
                 type="text"
@@ -128,7 +144,7 @@ function OthersTab({ action, saveAttempt }: Props) {
 
     const addProductInfo = useSelector(selectAddProductInfo)
 
-    const fileUploaderRef: any = useRef(null)
+    const fileUploaderRef  = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         fetchBrands(token!, 100, 0)
@@ -141,44 +157,47 @@ function OthersTab({ action, saveAttempt }: Props) {
     }, [])
 
     function uploadImage() {
-        if (fileUploaderRef.current?.files?.length > 0) {
-            setSpinner(true)
-            new Compressor(fileUploaderRef.current?.files?.[0], {
-                quality: 0.6,
-                maxWidth: 300,
-                maxHeight: 300,
+        if(fileUploaderRef.current?.files){
+            if (fileUploaderRef.current?.files?.length > 0) {
+                setSpinner(true)
+                new Compressor(fileUploaderRef.current?.files?.[0], {
+                    quality: 0.6,
+                    maxWidth: 300,
+                    maxHeight: 300,
 
-                // The compression process is asynchronous,
-                // which means you have to access the `result` in the `success` hook function.
-                success(result) {
-                    const data = new FormData()
-                    data.append('file', result)
-                    imageUpload(token!, data)
-                        .then((result: any) => {
-                            console.log('data', result.data)
-                            dispatch(
-                                setProductImage({
-                                    imageName: result.data.name,
-                                    title: addProductInfo?.centralCatalogue?.name ?? 'name',
-                                    description: `${addProductInfo?.centralCatalogue?.name}`,
-                                })
-                            )
-                            setSpinner(false)
-                        })
-                        .catch((error) => {
+                    // The compression process is asynchronous,
+                    // which means you have to access the `result` in the `success` hook function.
+                    success(result) {
+                        const data = new FormData()
+                        data.append('file', result)
+                        imageUpload(token!, data)
+                            .then((result: IProductImageUploadResult) => {
+                                console.log('data', result.data)
+                                dispatch(
+                                    setProductImage({
+                                        imageName: result.data.name,
+                                        title: addProductInfo?.centralCatalogue?.name ?? 'name',
+                                        description: `${addProductInfo?.centralCatalogue?.name}`,
+                                    })
+                                )
+                                setSpinner(false)
+                            })
+                            .catch((error) => {
                             //TODO Handle Error
-                            console.log('error', error)
-                            setSpinner(false)
-                        })
-                },
-                error(err) {
+                                console.log('error', error)
+                                setSpinner(false)
+                            })
+                    },
+                    error(err) {
                     //TODO Handle Error
-                    console.log(err.message)
-                    setSpinner(false)
-                },
-            })
+                        console.log(err.message)
+                        setSpinner(false)
+                    },
+                })
 
+            }
         }
+        
     }
 
     const handleModal = () => {
@@ -255,7 +274,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         </p>
                         <div className="des-modal-btn">
                             <input
-                                onChange={(event: any) => {
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                     dispatch(
                                         setBrand({ id: undefined, name: event.target.value })
                                     )
@@ -312,7 +331,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         </p>
                         <div className="des-modal-btn">
                             <input
-                                onChange={(event: any) => {
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                     dispatch(
                                         setCentralCategory({
                                             id: undefined,
@@ -375,7 +394,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         </p>
                         <div className="des-modal-btn">
                             <input
-                                onChange={(event: any) => {
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                     dispatch(
                                         setCategory({ id: undefined, name: event.target.value })
                                     )
