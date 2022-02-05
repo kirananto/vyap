@@ -43,11 +43,10 @@ interface IImageProps {
     };
 }
 
-interface IInput {
-    event: React.ChangeEvent<HTMLInputElement>,
+interface IInputProps {
     label: string,
     dispatch: Dispatch<any>
-    value: string
+    value: string | undefined
     placeholder: string
 }
 
@@ -113,7 +112,7 @@ const handleInputChange = (
     }
 }
 
-const Input = (props: IInput) => {
+const Input = (props: IInputProps) => {
     return (
         <div className=" mt-2  ">
             <p className="text-sm font-bold text-gray-500 dark:text-gray-300">

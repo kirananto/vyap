@@ -3,11 +3,17 @@ import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { createIfNotExists, getHSNsClearTax } from 'src/API/hsn.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import type { HitsEntity } from 'src/types/getHSNsClearTax'
 import { HSNInterface, setHsnNumber } from '../redux/addProductSlice'
 import './HSNmodal.css'
 
 
-function HSNmodal(props: any) {
+interface IProps {
+    trigger: boolean
+    setModal: (arg: boolean) => void
+}
+
+function HSNmodal({ setModal, trigger } : IProps) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
     const [searchValue, setSearchValue] = useState('')
@@ -15,13 +21,13 @@ function HSNmodal(props: any) {
 
     const dispatch = useDispatch()
 
-    const handleInputChange = (event: any) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target?.value)
     }
 
     useEffect(() => {
         getHSNsClearTax({ search: searchValue }).then(result => {
-            setHSNCodes(result.data?.results?.[0]?.hits.map((mapItem: any) => ({
+            setHSNCodes(result.data?.results?.[0]?.hits.map((mapItem: HitsEntity) => ({
                 chapter: mapItem?.chapter_name,
                 description: mapItem.product_description,
                 gstPercentage: parseFloat(mapItem?.product_rate?.replace('%', '')),
@@ -34,14 +40,14 @@ function HSNmodal(props: any) {
         const newVal = await createIfNotExists(token!, value)
         console.log('newVal', newVal)
         dispatch(setHsnNumber(newVal))
-        props.setModal(false)
+        setModal(false)
     }
 
 
-    return props.trigger ? (
+    return trigger ? (
         <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-gray-700 dark:border-gray-800">
             <div className="popup-inner">
-                <button className="popup-btn" onClick={() => props.setModal(false)}>
+                <button className="popup-btn" onClick={() => setModal(false)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-8 h-8 text-blue-600 dark:text-blue-400"
