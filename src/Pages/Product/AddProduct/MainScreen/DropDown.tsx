@@ -9,20 +9,28 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import './Drop.css'
 import { Length, validate } from 'class-validator'
+import type { ICentralProduct, IFetchCentralProducts } from 'src/types/fetchCentralProducts'
+import type { ICentralImage, IFetchCentralProductImages } from 'src/types/fetchCentralProductImages'
 
 export class Post {
   @Length(3, 50)
       productName!: string
 }
 
-function List(props: any) {
+interface IProps {
+    key : string
+    opt: ICentralProduct
+    onSelect: (e: any) => void
+}
+
+function List(props: IProps) {
     const { token } = useSelector(selectCredentials)
-    const [productImage, setProductImage] = useState<any>(undefined)
+    const [productImage, setProductImage] = useState<string>()
 
     useEffect(() => {
         fetchCentralProductImages(token!, 100, 0, props?.opt?.id).then(
-            (result: any) => {
-                const imageName = result.data?.data?.filter((filterItem: any) =>
+            (result: IFetchCentralProductImages) => {
+                const imageName = result.data?.data?.filter((filterItem: ICentralImage) =>
                     filterItem.imageName?.includes('.')
                 )?.[0]?.imageName
                 if (imageName) {
@@ -32,6 +40,10 @@ function List(props: any) {
                 }
             }
         )
+        return () => {
+            setProductImage('') 
+        }
+
     }, [])
 
     return (
@@ -63,7 +75,7 @@ function List(props: any) {
 
 function DropDown(props: any) {
     const [value, setValue] = useState('')
-    const [options, setOptions] = useState<any[]>([])
+    const [options, setOptions] = useState<ICentralProduct[]>([])
 
     const [isOpen, setIsOpen] = useState(false)
     const [isValidProduct, setIsValidProduct] = useState<boolean>(true)
@@ -83,9 +95,9 @@ function DropDown(props: any) {
     })
 
     useEffect(() => {
-        fetchCentralProducts(token!, 100, 0, value).then((result: any) => {
+        fetchCentralProducts(token!, 100, 0, value).then((result: IFetchCentralProducts) => {
             console.log('result', result.data?.data)
-            setOptions(result.data?.data)
+            setOptions(result.data?.data!)
         })
     }, [value])
 
@@ -201,8 +213,7 @@ function DropDown(props: any) {
                     </>,
                 ]
                 : []),
-            ...listItems.map((opt: any) => {
-                console.log('opt1')
+            ...listItems.map((opt: ICentralProduct) => {
                 return <List key={opt.id} opt={opt} onSelect={select} />
             }),
         ]

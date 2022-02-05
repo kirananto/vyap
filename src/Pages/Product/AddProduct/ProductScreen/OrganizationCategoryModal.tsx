@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrganizationProductCategories } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import type { IFetchOrganizationProductCategories, IFetchOrganizationProductCategory } from 'src/types/fetchOrganizationProductCategories'
 import { setCategory } from '../redux/addProductSlice'
 import './HSNmodal.css'
 
@@ -12,22 +13,29 @@ export interface BrandInterface {
   description: string
 }
 
-function OrganizationCategoryModal(props: any) {
+interface IProps {
+    trigger: boolean
+    setModal: (arg0: boolean) => void
+}
+
+function OrganizationCategoryModal(props: IProps) {
     const { user, token } = useSelector(selectCredentials)
     const intl = useIntl()
-    const [searchValue, setSearchValue] = useState(undefined)
-    const [items, setItems] = useState<BrandInterface[]>([])
+    const [searchValue, setSearchValue] = useState<string>()
+    const [items, setItems] = useState<BrandInterface[]>()
 
     const dispatch = useDispatch()
 
-    const handleInputChange = (event: any) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target?.value)
     }
 
     useEffect(() => {
-        fetchOrganizationProductCategories(token!, 100, 0, searchValue, user?.organizationId).then(result => {
-            setItems(result.data?.data?.filter((item: any) => item.name))
-        })
+        fetchOrganizationProductCategories(token!, 100, 0, searchValue, user?.organizationId)
+            .then((result : IFetchOrganizationProductCategories) => {
+                console.log('test....:',result)
+                setItems(result.data?.data?.filter((item: IFetchOrganizationProductCategory) => item.name))
+            })
     }, [searchValue])
 
     function selectHSN(value: BrandInterface) {
@@ -67,7 +75,7 @@ function OrganizationCategoryModal(props: any) {
                     />
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
-                    {items.map((mapItem) => (
+                    {items?.map((mapItem) => (
                         <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
                             <div className="text-gray-700 dark:text-gray-300">{mapItem.name} </div>
                             <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>

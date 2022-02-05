@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCentralProductCategories } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import type { ICategories } from 'src/types/categories'
 import { setCentralCategory } from '../redux/addProductSlice'
 import './HSNmodal.css'
 
@@ -12,21 +13,26 @@ export interface BrandInterface {
   description: string
 }
 
-function CentralCategoryModal(props: any) {
+interface IProps {
+    trigger: boolean
+    setModal: (arg: boolean) => void
+}
+
+function CentralCategoryModal(props: IProps) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
-    const [searchValue, setSearchValue] = useState(undefined)
+    const [searchValue, setSearchValue] = useState<string>()
     const [items, setItems] = useState<BrandInterface[]>([])
 
     const dispatch = useDispatch()
 
-    const handleInputChange = (event: any) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target?.value)
     }
 
     useEffect(() => {
         fetchCentralProductCategories(token!, 100, 0, searchValue).then(result => {
-            setItems(result.data?.data?.filter((item: any) => item.name))
+            setItems(result.data?.data?.filter((item: ICategories) => item.name))
         })
     }, [searchValue])
 

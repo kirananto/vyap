@@ -9,6 +9,7 @@ import { selectCredentials, setCredentials } from '../Login/credentialsSlice'
 import { clearAll, selectSignupInfo, setCategory } from './signupSlice'
 import { signupAPI } from 'src/API/signup.axios'
 import { hapticFeedback } from 'src/utils/vibrate'
+import type { ICategories, IFetchCategories } from 'src/types/categories'
 
 interface CardInterface {
   title: string
@@ -53,17 +54,16 @@ const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
 
 export default function SignupStepTwo() {
     const logoStyle = { marginLeft: '-20px' }
-    const [categories, setCategories] = useState<any[]>([])
+    const [categories, setCategories] = useState<ICategories[]>([])
     const [categoryError, setCategoryError] = useState(false)
-    const [error, setError] = useState<any>(undefined)
+    const [error, setError] = useState<boolean | undefined>(undefined)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { token } = useSelector(selectCredentials)
     const signup = useSelector(selectSignupInfo)
 
     useEffect(() => {
-        fetchCategories(token!).then((result: any) => {
-            console.log('data', result.data)
+        fetchCategories(token!).then((result: IFetchCategories) => {
             setCategories(result.data?.data)
         }).catch(() => {
             console.log('error')

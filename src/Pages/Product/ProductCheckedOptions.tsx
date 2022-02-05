@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { deleteProductById, patchProductById } from 'src/API/products.axios'
+import type { IProduct } from 'src/types/product'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { selectCredentials } from '../Login/credentialsSlice'
 
@@ -10,10 +11,10 @@ export default function FilterBar({
     setCounter,
     setselectedProduct
 }: {
-  onMoreClick: any
-  setCounter: any
-  selectedProduct: any[]
-  setselectedProduct: (value: any[]) => void
+  onMoreClick: () => void
+  setCounter: React.Dispatch<React.SetStateAction<number>>
+  selectedProduct: IProduct[]
+  setselectedProduct: (value: IProduct[]) => void
 }) {
 
 
@@ -25,7 +26,7 @@ export default function FilterBar({
             await deleteProductById({ token: token!, id: item?.id })
         }
         setselectedProduct([])
-        setCounter((value: any) => value + 1)
+        setCounter((value: number) => value + 1)
     }
 
     async function markStockStatus(value: boolean) {
@@ -34,7 +35,7 @@ export default function FilterBar({
             await patchProductById({ token: token!, id: item?.id, data: { outOfStock: value } })
         }
         setselectedProduct([])
-        setCounter((value: any) => value + 1)
+        setCounter((value: number) => value + 1)
     }
 
     return (

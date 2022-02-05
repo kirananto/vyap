@@ -16,7 +16,7 @@ function Header({
   subHeading?: string;
   phoneNumber?: string;
   shareAction?: () => void;
-  onBackClick?: any;
+  onBackClick?: () => void;
   isSticky: boolean;
   backDisabled?: boolean;
 }) {
@@ -209,7 +209,7 @@ function PaymentBottomHeader({
 // ! Simple Header with only one heading and back button -->
 function SimpleHeader(props: {
   heading: string;
-  backFn?: any;
+  backFn?: () => void ;
   backDisabled?: boolean;
 }) {
     const navigate = useNavigate()

@@ -20,7 +20,7 @@ export default function SignupStepThree() {
     const [pinCodeError, setPinCodeError] = useState('')
 
 
-    function handleProceed(e: any) {
+    function handleProceed(e: React.MouseEvent<HTMLInputElement>) {
         e.preventDefault()
         const result = handleValidations()
         if (result) {
@@ -86,7 +86,7 @@ export default function SignupStepThree() {
                             className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                             type="text"
                             value={signup.name}
-                            onChange={(event: any) => dispatch(setName(event.target.value))}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setName(event.target.value))}
                             placeholder="Enter your name"
                         />
                         {nameError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{nameError}</div> : null}
@@ -101,7 +101,7 @@ export default function SignupStepThree() {
                             type="text"
                             placeholder="Name of the shop or business"
                             value={signup.businessName}
-                            onChange={(event: any) => dispatch(setBusinessName(event.target.value))}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setBusinessName(event.target.value))}
                         />
                         {businessNameError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{businessNameError}</div> : null}
 
@@ -117,7 +117,7 @@ export default function SignupStepThree() {
                             type="text"
                             placeholder="Your email"
                             value={signup.email}
-                            onChange={(event: any) => dispatch(setEmail(event.target.value))}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setEmail(event.target.value))}
                         />
                         {emailError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{emailError}</div> : null}
 
@@ -133,7 +133,7 @@ export default function SignupStepThree() {
                             type="text"
                             placeholder="Enter the pincode of your location"
                             value={signup.pinCode}
-                            onChange={(event: any) => dispatch(setPinCode(event.target.value))}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setPinCode(event.target.value))}
                         />
                         {pinCodeError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{pinCodeError}</div> : null}
 

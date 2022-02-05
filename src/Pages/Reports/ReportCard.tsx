@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function ReportCard(props: { bgIllus: any, heading: string }) {
+function ReportCard(props: { bgIllus: string, heading: string }) {
     return (
         <div className="flex flex-col h-auto p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <h1 className="pr-10 text-2xl font-black text-gray-500 dark:text-gray-200">

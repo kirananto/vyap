@@ -8,7 +8,7 @@ export default function PurchaseOrder() {
 
     const payments = [1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-    const [isExpanded, setIsExpanded] = useState<any>(undefined)
+    const [isExpanded, setIsExpanded] = useState<number | undefined>(undefined)
 
     const navigate = useNavigate()
 

@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { selectAddProductInfo } from '../redux/addProductSlice'
 
-function ItemCard(props: any) {
+interface IProps {
+    productImage: string
+}
+function ItemCard({productImage} : IProps) {
 
     const productDetails = useSelector(selectAddProductInfo)
     const action = productDetails.editProductId ? 'edit' : 'add'
@@ -15,7 +18,7 @@ function ItemCard(props: any) {
             {/* image-col */}
             <div className="w-3/12">
                 <div className="relative w-20 min-h-full h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
-                    {props.productImage && props.productImage !== '' && <img src={props.productImage} alt="Avatar" className="object-cover w-full h-full" />}
+                    {productImage && productImage !== '' && <img src={productImage} alt="Avatar" className="object-cover w-full h-full" />}
                 </div>
             </div>
             {/* detail-col */}

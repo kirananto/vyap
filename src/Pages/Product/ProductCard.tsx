@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IProduct } from 'src/types/product'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
 
@@ -8,9 +9,9 @@ export default function ProductCard({
     onMore,
     isChecked,
 }: {
-  item: any;
-  onClicked: any;
-  onMore: any;
+  item: IProduct;
+  onClicked: (item: IProduct) => void;
+  onMore: (item?: IProduct | undefined) => void;
   isChecked: boolean;
 }) {
     return (
