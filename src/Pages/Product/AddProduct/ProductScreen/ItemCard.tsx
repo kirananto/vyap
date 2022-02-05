@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { selectAddProductInfo } from '../redux/addProductSlice'
 
 interface IProps {
-    productImage: string
+    productImage?: string
 }
 function ItemCard({productImage} : IProps) {
 
