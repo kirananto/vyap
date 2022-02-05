@@ -14,7 +14,7 @@ export default function ModalViewer(props: IModalViewerProps) {
                 <div onClick={props.onClose} className="h-screen w-screen" />
                 <div className="absolute bottom-0 rounded-t-2xl flex flex-col w-full gap-3 bg-white text-left dark:bg-gray-700 px-4 pt-4 animate__animated animate__fadeInUpBig animate__faster">
                     {props.body}
-                    {props.name ? (props.name == 'filter' &&
+                    {props.name ? (props.name === 'filter' &&
             <div className="w-full mb-5">
                 <button
                     className="flex justify-center gap-1 items-center w-full h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
