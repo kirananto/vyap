@@ -7,16 +7,17 @@ import { FormattedMessage } from 'react-intl'
 import ReactToPrint from 'react-to-print'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
+import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 
 interface IProps {
-  payments: any[];
+  payments?: IFetchAllPaymentsDataEntity[];
   loading: boolean;
 }
 
 export default function PaymentContainer({ payments, loading }: IProps) {
-    const { user, token } = useSelector(selectCredentials)
+    const { user } = useSelector(selectCredentials)
     const [paymentSummaryOpen, setPaymentSummaryOpen] = useState<boolean>(false)
-    const [itemClicked, setItemClicked] = useState()
+    const [itemClicked, setItemClicked] = useState<IFetchAllPaymentsDataEntity>()
     const componentRef = React.useRef<HTMLDivElement>(null)
 
     const reactToPrintContent = React.useCallback(() => {
@@ -45,13 +46,13 @@ export default function PaymentContainer({ payments, loading }: IProps) {
         )
     }, [])
 
-    const openPaymentSummary = (item: any) => {
+    const openPaymentSummary = (item: IFetchAllPaymentsDataEntity) => {
         setPaymentSummaryOpen(true)
         setItemClicked(item)
     }
 
     function paymentSummary() {
-        const item: any = itemClicked
+        const item: IFetchAllPaymentsDataEntity | undefined = itemClicked
         return (
             <>
                 <div
@@ -135,7 +136,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
     }
     return (
         <>
-            {payments.map((item, index) => (
+            {payments?.map((item, index) => (
                 <div
                     className={`${
                         index === payments.length - 1 ? '' : 'border-b border-gray-200 dark:border-gray-700'

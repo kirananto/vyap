@@ -5,9 +5,17 @@ import vyapLogo from '../../../assets/new_logo.svg'
 import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 import ReactToPrint from 'react-to-print'
+import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 
 interface IProps {
-  apiData: any[];
+  apiData?: IFetchAllPaymentsDataEntity[];
+}
+
+interface IPaymentsProps {
+    DATE: string
+    BUYER: string
+    SELLER: string
+    DEBIT: string
 }
 
 let txnCount: number
@@ -16,7 +24,7 @@ export const PrintAll = ({ apiData }: IProps) => {
     const componentRef = React.useRef(null)
     const { user } = useSelector(selectCredentials)
 
-    const payments: any[] = apiData.map((item) => {
+    const payments: IPaymentsProps[] | undefined = apiData?.map((item) => {
         const credit: boolean = user?.organization?.name === item.receiver?.name
         txnCount = apiData.length
         return {
@@ -121,9 +129,9 @@ export const PrintAll = ({ apiData }: IProps) => {
                                 </tr>
                             </thead>
                             <tbody className="text-gray-500">
-                                {payments.map((item, index) => (
+                                {payments?.map((item, index) => (
                                     <tr key={index} className="text-left">
-                                        {Object.values(item).map((val: any) => (
+                                        {Object.values(item).map((val: string) => (
                                             <td key={val} className="px-1 py-2 whitespace-nowrap">
                                                 {val}
                                             </td>
