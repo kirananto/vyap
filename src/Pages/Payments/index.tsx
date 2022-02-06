@@ -13,10 +13,11 @@ import { PrintAll } from './Options/PrintAll'
 import { useIntl } from 'react-intl'
 import useQueryParam from 'src/useQueryParams'
 import { useNavigate } from 'react-router'
+import type { IFetchAllPayments, IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 
 export default function Payments() {
     const { token } = useSelector(selectCredentials)
-    const [payments, setPayments] = useState<any[]>([])
+    const [payments, setPayments] = useState<IFetchAllPaymentsDataEntity[]>()
     const [loading, setLoading] = useState(true)
     const [filterPopupOpen, setfilterPopupOpen] =
     useQueryParam<boolean>('filterPopupOpen')
@@ -32,10 +33,10 @@ export default function Payments() {
             paymentMethod: filters?.paymentMethod,
             ordering: filters?.sorting ? filters?.sorting : 'latest',
             relatedId: filters?.account?.id,
-        }).then((result: any) => {
+        }).then((result: IFetchAllPayments) => {
             console.log(result.data)
             setLoading(false)
-            setPayments(result.data.data)
+            setPayments(result?.data?.data!)
             //TODO handle the payments better
         })
     }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id])
