@@ -1,18 +1,19 @@
 import React from 'react'
 
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { Navigate, useLocation } from 'react-router'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import useOnlineStatus from '@rehooks/online-status'
 
 export function RequiredAuth({ children }: { children: JSX.Element }) {
 
     const { user, token } = useSelector(selectCredentials)
-    const navigate = useNavigate()
     const onlineStatus = useOnlineStatus()
+    const location = useLocation()
 
     if (user === undefined || token === undefined) {
-        navigate('/login')
+
+        return <Navigate to="/login" state={{ from: location }} replace />
     }
 
     return <div>

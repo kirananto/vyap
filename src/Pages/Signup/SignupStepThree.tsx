@@ -52,7 +52,7 @@ const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
     )
 }
 
-export default function SignupStepTwo() {
+export default function SignupStepThree() {
     const logoStyle = { marginLeft: '-20px' }
     const [categories, setCategories] = useState<ICategories[]>([])
     const [categoryError, setCategoryError] = useState(false)

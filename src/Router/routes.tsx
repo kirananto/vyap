@@ -2,9 +2,9 @@ import { lazily } from 'react-lazily'
 const { Home } = lazily(() => import('src/Pages/Home/Home'))
 const Login = lazily(() => import('src/Pages/Login/Login')).default
 const SignupStepOne = lazily(() => import('src/Pages/Signup/SignupStepOne')).default
-const SignupStepThree = lazily(() => import('src/Pages/Signup/SignupStepTwo')).default
-const SignupStepFour = lazily(() => import('src/Pages/Signup/SignupStepThree')).default
-const SignupStepFive = lazily(() => import('src/Pages/Signup/SignupStepFour')).default
+const SignupStepTwo = lazily(() => import('src/Pages/Signup/SignupStepTwo')).default
+const SignupStepThree = lazily(() => import('src/Pages/Signup/SignupStepThree')).default
+const SignupStepFour = lazily(() => import('src/Pages/Signup/SignupStepFour')).default
 
 const Settings = lazily(() => import('src/Pages/Settings/Settings')).default
 const PaymentDetails = lazily(() => import('src/Pages/ChatView/PaymentDetails')).default
@@ -53,18 +53,18 @@ export const routes: {
     },
     {
         path: '/signup-step-2',
-        Component: SignupStepThree,
+        Component: SignupStepTwo,
         requireAuth: false
     },
     {
         path: '/signup-step-3',
-        Component: SignupStepFour,
+        Component: SignupStepThree,
         requireAuth: false
     },
     {
         path: '/signup-step-4',
-        Component: SignupStepFive,
-        requireAuth: false
+        Component: SignupStepFour,
+        requireAuth: true
     },
     {
         path: '/payment/:id',
