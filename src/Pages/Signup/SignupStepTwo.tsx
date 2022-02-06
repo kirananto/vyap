@@ -8,7 +8,7 @@ import { isEmail } from 'class-validator'
 import { useNavigate } from 'react-router'
 
 
-export default function SignupStepThree() {
+export default function SignupStepTwo() {
     const logoStyle = { marginLeft: '-20px' }
     const dispatch = useDispatch()
     const navigate = useNavigate()

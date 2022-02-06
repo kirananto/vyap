@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router'
 import Button from 'src/Components/Style/Button'
 
-export default function SignupStepFive() {
+export default function SignupStepFour() {
     const navigate = useNavigate()
     return (
         <div className="flex flex-col items-center h-screen bg-white dark:bg-gray-900">
