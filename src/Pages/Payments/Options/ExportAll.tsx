@@ -5,14 +5,21 @@ import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
 import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
+import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 
 interface IProps {
-    apiData: any[]
+    apiData?: IFetchAllPaymentsDataEntity[]
+}
+interface IPaymentsProps {
+    DATE: string
+    BUYER: string
+    SELLER: string
+    DEBIT: string
 }
 
 export const ExportAll = ({ apiData }: IProps) => {
     const { user } = useSelector(selectCredentials)
-    const payments: any[] = apiData.map((item) => {
+    const payments: IPaymentsProps[] | undefined = apiData?.map((item) => {
         const credit : boolean = user?.organization?.name === item.receiver?.name
         return {
             DATE: item.createdAt ? format(new Date(item.createdAt), 'do MMM yyyy') : '',
@@ -26,12 +33,12 @@ export const ExportAll = ({ apiData }: IProps) => {
 
     const exportToCSV = () => {
         /* making worksheet */
-        const ws = XLSX.utils.json_to_sheet(payments)
-
-        /* writing workbook (use type 'binary') */
-        const csv = XLSX.utils.sheet_to_csv(ws)
-        FileSaver.saveAs(new Blob([csv], { type: 'application/octet-stream' }), 'Payment_list.csv')
-
+        if(payments) {
+            const ws = XLSX.utils.json_to_sheet(payments)
+            /* writing workbook (use type 'binary') */
+            const csv = XLSX.utils.sheet_to_csv(ws)
+            FileSaver.saveAs(new Blob([csv], { type: 'application/octet-stream' }), 'Payment_list.csv')
+        }
     }
 
     return (
