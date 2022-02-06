@@ -165,10 +165,10 @@ function PaymentBottomHeader({
                   ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}
                                 </h1>
                             )}
-                            {parsedAmount == 0 && (
+                            {parsedAmount === 0 && (
                                 <h1
                                     className={`text-md font-semibold ${
-                                        parsedAmount == 0
+                                        parsedAmount === 0
                                             ? 'text-green-800 dark:text-green-400'
                                             : 'text-gray-700 dark:text-gray-200'
                                     }`}

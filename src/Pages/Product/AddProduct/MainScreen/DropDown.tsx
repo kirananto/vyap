@@ -77,29 +77,29 @@ function DropDown(props: any) {
     const [value, setValue] = useState('')
     const [options, setOptions] = useState<ICentralProduct[]>([])
 
-    const [isOpen, setIsOpen] = useState(false)
+    // const [isOpen, setIsOpen] = useState(false)
     const [isValidProduct, setIsValidProduct] = useState<boolean>(true)
     const { token } = useSelector(selectCredentials)
 
-    const myRef = useRef<HTMLInputElement>(null)
+    // const myRef = useRef<HTMLInputElement>(null)
 
-    const handleClickOutside = (e: any) => {
-        if (!myRef?.current?.contains(e.target)) {
-            setIsOpen(false)
-        }
-    }
+    // const handleClickOutside = (e: any) => {
+    //     if (!myRef?.current?.contains(e.target)) {
+    //         setIsOpen(false)
+    //     }
+    // }
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    })
+    // useEffect(() => {
+    //     document.addEventListener('mousedown', handleClickOutside)
+    //     return () => document.removeEventListener('mousedown', handleClickOutside)
+    // })
 
     useEffect(() => {
         fetchCentralProducts(token!, 100, 0, value).then((result: IFetchCentralProducts) => {
             console.log('result', result.data?.data)
             setOptions(result.data?.data!)
         })
-    }, [value])
+    }, [token, value])
 
     const navigate = useNavigate()
 
@@ -129,7 +129,7 @@ function DropDown(props: any) {
     }
 
     function select(e: any) {
-        setIsOpen(false)
+        // setIsOpen(false)
         setValue(e.name)
         if (props.onSelect) {
             props.onSelect(e)
@@ -224,26 +224,15 @@ function DropDown(props: any) {
                 type="text"
                 onChange={search}
                 value={value}
-                onFocus={() => setIsOpen(true)}
                 className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
                 placeholder="Search or create product..."
             />
             <div
-                ref={myRef}
-                className={`dark:bg-gray-700 ${
-                    isOpen ? 'drop-open h-72' : 'drop-close'
-                }`}
+                // ref={myRef}
+                className={`dark:bg-gray-700 ${'drop-open h-72'}`}
             >
-                {isOpen ? renderListItems() : []}
-
-                {
-                    //TODO : remove leftover code
-                    /* <div className={isdisabled ? "hide-create-div" : "show-create-div"}>
-          <p className="font-bold text-gray-600">+ Add this new product</p>
-        </div> */
-                }
+                {renderListItems()}
             </div>
-            {/* <div className="close-dropdown" onClick={() => setIsOpen(false)}></div> */}
         </div>
     )
 }
