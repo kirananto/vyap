@@ -19,6 +19,7 @@ import Spinner from 'src/Components/Style/Spinner'
 import useQueryParam from 'src/useQueryParams'
 import type { IProduct } from 'src/types/product'
 import type { IProductList } from 'src/types/fetchProducts'
+import { hapticFeedback } from 'src/utils/vibrate'
 
 // ! Main Component
 export default function Product() {
@@ -75,6 +76,7 @@ export default function Product() {
     // }
     // !---Condition if a single product is checked the filter bar will appear->and this function will pass as a function in Product Card component==>
     function CheckboxClicked(item: IProduct) {
+        hapticFeedback()
         const tempSelectedProductGlobal = selectedProduct
         if (
             tempSelectedProductGlobal.find((findItem) => findItem?.id === item?.id)

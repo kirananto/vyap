@@ -31,7 +31,7 @@ export default function ProductCard({
         //onFinish: () => console.log('Long press finished'),
         //onCancel: () => console.log('Press cancelled'),
         //onMove: () => console.log("Detected mouse or touch movement"),
-        threshold: 500,
+        threshold: 400,
         captureEvent: true,
         cancelOnMovement: false,
         detect: LongPressDetectEvents.BOTH
