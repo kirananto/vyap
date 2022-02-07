@@ -26,6 +26,7 @@ export default function Product() {
     const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState<IProduct[]>([])
     const filters = useSelector(selectProductFilters)
+    const [longPresEnabled, setLongPressEnabled] = useState(true)
 
     const intl = useIntl()
     const dispatch = useDispatch()
@@ -36,6 +37,7 @@ export default function Product() {
     useQueryParam<boolean>('filterPopupOpen')
 
     // !------------------->
+    const [isMoreEnabled, setisMoreEnabled] = useState<boolean>(true)
     const [isMoreOpen, setisMoreOpen] = useQueryParam<boolean>('isMoreOpen')
     const [isMoreItem, setIsMoreItem] = useState<IProduct>()
     const [isSearchMoreOpen, setisSearchMoreOpen] =
@@ -46,12 +48,27 @@ export default function Product() {
     //  !--------Search-bar-more---------->
     const [selectedProduct, setselectedProduct] = useState<IProduct[]>([])
 
+    useEffect(() => {
+        if(selectedProduct.length === 0)
+            setLongPressEnabled(true)
+    }, [selectedProduct])
+
+    useEffect(() => {
+        if(longPresEnabled)
+            setisMoreEnabled(true)
+        else
+            setisMoreEnabled(false)
+    }, [longPresEnabled])
+    
+
     // ! For second modal using first modal
     // !------------------------>
     //! ---------------->
     function toggleMore(item?: IProduct) {
-        setisMoreOpen(item === undefined ? false : true)
-        setIsMoreItem(item)
+        if(isMoreEnabled){
+            setisMoreOpen(item === undefined ? false : true)
+            setIsMoreItem(item)
+        }
     }
     // function toggleModal() {
     //   setIsOpen(!isOpen);
@@ -124,6 +141,7 @@ export default function Product() {
         }
     }, [])
 
+
     function renderProducts() {
         if (loading) {
             return (
@@ -158,6 +176,8 @@ export default function Product() {
                         ) === undefined
                     )
                 }
+                longPresEnabled={longPresEnabled}
+                setLongPressEnabled={setLongPressEnabled}
             />
         ))
     }
