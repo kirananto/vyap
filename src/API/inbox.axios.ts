@@ -9,7 +9,7 @@ export function fetchInboxes({ token, offset, limit, search } : { token: string,
         },
         params: {
             offset,
-            search,
+            search: search?.trim(),
             limit
         }
     })

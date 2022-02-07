@@ -6,7 +6,7 @@ export const fetchBrands = (token: string, limit: number, offset: number, search
     params: {
         limit,
         offset,
-        filter: search ? `name||$contL||${search}` : undefined
+        filter: search?.trim() ? `name||$contL||${search?.trim()}` : undefined
     },
     headers: {
         'authorization': `Bearer ${token}`

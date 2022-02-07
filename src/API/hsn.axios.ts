@@ -4,10 +4,10 @@ export const getHSNsClearTax = ({ search }: { search: string }) => axiosClient({
     url: `/hsn/hsnlist`,
     method: 'POST',
     data: {
-        "requests": [
+        'requests': [
             {
-                "indexName": "HSN_SAC_2021",
-                "params": `query=${search}&optionalWords=${search}&hitsPerPage=100&highlightPreTag=%3Cstrong%3E&highlightPostTag=%3C%2Fstrong%3E&typoTolerance=false`
+                'indexName': 'HSN_SAC_2021',
+                'params': `query=${search.trim()}&optionalWords=${search.trim()}&hitsPerPage=100&highlightPreTag=%3Cstrong%3E&highlightPostTag=%3C%2Fstrong%3E&typoTolerance=false`
             }
         ]
     }
@@ -27,13 +27,15 @@ export const createIfNotExists = async (token: string, data: { hsn: number, chap
                 filter: `hsn||$eq||${data.hsn}` 
             }
         })
-    } catch(e) {
+    }
+    catch(e) {
         apiResponse = undefined
     }
     if(!apiResponse?.data?.data?.[0]?.id) {
         const res = await createHSNAPI(token, data) 
         return res.data
-    } else {
+    }
+    else {
         return apiResponse?.data?.data?.[0]
     }
 
@@ -61,13 +63,13 @@ export const getHSNs = ({
     offset: number,
     search?: string
 }) => {
-    var params = new URLSearchParams();
-    params.append("limit", `${limit}`);
-    params.append("offset", `${offset}`);
-    if (search) {
-        params.append("or", `chapter||$contL||${search}`);
-        params.append("or", `description||$contL||${search}`);
-        params.append("or", `hsn||$contL||${search}`);
+    const params = new URLSearchParams()
+    params.append('limit', `${limit}`)
+    params.append('offset', `${offset}`)
+    if (search?.trim()) {
+        params.append('or', `chapter||$contL||${search?.trim()}`)
+        params.append('or', `description||$contL||${search?.trim()}`)
+        params.append('or', `hsn||$contL||${search?.trim()}`)
     }
     return axiosClient({
         url: `/hsn`,

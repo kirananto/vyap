@@ -88,7 +88,7 @@ export default function Product() {
             organizationId: user?.organizationId!,
             limit: 5000,
             offset: 0,
-            search: searchValue,
+            search: searchValue.trim(),
             ordering: filters?.sorting,
             categoryIds: filters?.categories?.length
                 ? `${filters?.categories

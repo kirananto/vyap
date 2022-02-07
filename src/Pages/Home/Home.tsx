@@ -28,7 +28,7 @@ export const Home = () => {
     const [loading, setLoading] = React.useState(
         customer.customers?.length === 0
     )
-    const [paginationParams, serPaginationParams] = React.useState({
+    const [paginationParams, setPaginationParams] = React.useState({
         page: 1,
         search: '',
     })
@@ -43,7 +43,7 @@ export const Home = () => {
                 offset: (paginationParams.page - 1) * limit,
                 limit,
                 search:
-          paginationParams.search === '' ? undefined : paginationParams.search,
+          paginationParams.search.trim() === '' ? undefined : paginationParams.search.trim(),
             }).then((result: any) => {
                 dispatch(setCustomers(result.data.data))
                 dispatch(setCustomerTotal(result.data.total))
@@ -81,7 +81,22 @@ export const Home = () => {
                 </div>
             )
         }
-        return customer?.customers?.map((item, index) => (
+        return customer?.customers?.filter(filterItem => {
+            const search = paginationParams.search?.trim()?.toLowerCase()
+            if(filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
+                return true
+            }
+            if(filterItem.lastMsg?.toLowerCase()?.includes(search)) {
+                return true
+            }
+            if(filterItem.recipient?.officeNumber?.toLowerCase()?.includes(search)) {
+                return true
+            }
+            if(filterItem.recipient?.email?.toLowerCase()?.includes(search)) {
+                return true
+            }
+            return false
+        }).map((item, index) => (
             <ItemCard item={item} key={index} />
         ))
     }
@@ -148,7 +163,7 @@ export const Home = () => {
                         className="h-10 w-full rounded bg-gray-100 pl-4 pr-5 outline-none dark:bg-gray-500 dark:text-gray-100 "
                         placeholder={intl.formatMessage({ id: `action.search` })}
                         onChange={(e) => {
-                            serPaginationParams((prevState) => ({
+                            setPaginationParams((prevState) => ({
                                 ...prevState,
                                 search: e.target?.value,
                             }))

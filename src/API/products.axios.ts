@@ -51,7 +51,7 @@ export const fetchProducts = ({ token, organizationId, limit, offset, categoryId
         categoryIds,
         brandIds,
         ordering,
-        search,
+        search: search?.trim(),
         offset,
         outOfStock
     },
@@ -99,7 +99,7 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     params: {
         limit,
         offset,
-        filter: search ? `name||$contL||${search}` : undefined
+        filter: search ? `name||$contL||${search?.trim()}` : undefined
     },
     headers: {
         'authorization': `Bearer ${token}`
@@ -112,7 +112,7 @@ export const fetchOrganizationProductCategories = (token: string, limit: number,
     params: {
         limit,
         offset,
-        search,
+        search: search?.trim(),
         orgId,
     },
     headers: {
@@ -126,7 +126,7 @@ export const fetchCentralProductCategories = (token: string, limit: number, offs
     params: {
         limit,
         offset,
-        search,
+        search: search?.trim(),
     },
     headers: {
         'authorization': `Bearer ${token}`
