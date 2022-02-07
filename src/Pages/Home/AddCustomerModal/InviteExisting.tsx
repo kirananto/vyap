@@ -4,13 +4,13 @@ import { Length, IsString, validate } from 'class-validator'
 import { useState } from 'react'
 
 interface IProps {
-  address: any;
-  setAddress: any;
-  businessName: any;
-  setBusinessName: any;
-  pinCode: any;
-  setPinCode: any;
-  setCurrentPage: any;
+  address: string;
+  setAddress: React.Dispatch<React.SetStateAction<string>>;
+  businessName: string;
+  setBusinessName: React.Dispatch<React.SetStateAction<string>>;
+  pinCode: string;
+  setPinCode: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<currentPageEnum>>;
   toggleVisibility: () => void;
 }
 
@@ -96,7 +96,7 @@ export default function InviteExisting({
     return (
         <form
             className="mt-4 text-left"
-            onSubmit={(event: any) => {
+            onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
             }}
             autoComplete="off"

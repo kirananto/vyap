@@ -9,11 +9,11 @@ import { useState } from 'react'
 interface IProps {
   phoneNumber: string;
   openingBalance: number;
-  setOpeningBalance: any;
-  setPhoneNumber: any;
+  setOpeningBalance: React.Dispatch<React.SetStateAction<number>>;
+  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
   toggleVisibility: () => void;
-  setCurrentPage: any;
-  setIsExisting: any;
+  setCurrentPage: React.Dispatch<React.SetStateAction<currentPageEnum>>;
+  setIsExisting: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export class Post {
@@ -73,7 +73,7 @@ export default function AddCustomerStep1({
     return (
         <form
             className="mt-4 text-left"
-            onSubmit={(event: any) => {
+            onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
                 // onPressLogin(phoneNumber.replace('+91', ''));
             }}
@@ -121,8 +121,8 @@ export default function AddCustomerStep1({
                     name="openingBalance"
                     value={openingBalance}
                     min={0}
-                    onChange={(event: any) =>
-                        setOpeningBalance(event?.target.value < 0 ? 0 : event?.target.value)
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setOpeningBalance(Number(Number(event?.target.value) < 0 ? 0 : event?.target.value))
                     }
                     id="openingBalance"
                     placeholder="Opening balance of the customer"
