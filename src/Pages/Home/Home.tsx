@@ -173,7 +173,7 @@ export const Home = () => {
             </header>
             <div
                 ref={scrollTargetRef}
-                className="card-main-container scrollDes divide-light-blue-400 relative divide-y pb-20 dark:divide-gray-700"
+                className="card-main-container scrollDes relative divide-y pb-20 divide-gray-100 dark:divide-gray-800"
             >
                 {renderChats()}
             </div>

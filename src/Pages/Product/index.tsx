@@ -184,7 +184,7 @@ export default function Product() {
     return (
         <>
             <div className="bg-gray-100 dark:bg-gray-900">
-                <div className="w-full bg-white pb-3 shadow dark:bg-gray-800">
+                <div className="w-full bg-white pb-3 drop-shadow-md z-10 dark:bg-gray-800">
                     <Header
                         isSticky={false}
                         backDisabled={true}
@@ -208,7 +208,7 @@ export default function Product() {
             </div>
 
             <div
-                className="custom-height bg-gray-100 pb-[13vh] dark:bg-gray-900"
+                className="custom-height bg-white pb-[13vh] dark:bg-gray-900"
                 style={{
                     height: hasFilters()
                         ? 'calc( 100vh - 274px )'

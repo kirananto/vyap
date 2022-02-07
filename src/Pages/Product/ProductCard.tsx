@@ -45,7 +45,7 @@ export default function ProductCard({
     return (
         <div 
             {...bind} 
-            className={`flex justify-between w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-300 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
+            className={`flex justify-between w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
             onClick={onItemClick}
         >
             {/* <div className="text-center place-self-center px-5 pr-6 ">
@@ -57,7 +57,7 @@ export default function ProductCard({
                 />
             </div> */}
 
-            <div className="basis-3/12 w-full h-full text-center border border-gray-300 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+            <div className="basis-3/12 w-full h-full text-center border border-gray-200 dark:border-gray-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
                 {item?.thumbnailImage && (
                     <img
                         src={getImageURL(
