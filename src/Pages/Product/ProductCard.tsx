@@ -45,7 +45,7 @@ export default function ProductCard({
     return (
         <div 
             {...bind} 
-            className={`flex justify-between w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-300 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
+            className={`flex justify-between w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-300 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
             onClick={onItemClick}
         >
             {/* <div className="text-center place-self-center px-5 pr-6 ">
