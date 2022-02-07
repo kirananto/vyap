@@ -7,11 +7,11 @@ import { currentPageEnum } from '.'
 interface IProps {
   phoneNumber: string
   openingBalance: number
-  address: any
-  businessName: any
-  pinCode: any
+  address: string
+  businessName: string
+  pinCode: string
   isExisting: string | undefined
-  setCurrentPage: any
+  setCurrentPage: React.Dispatch<React.SetStateAction<currentPageEnum>>
 }
 export default function PreviewScreen({
     address,
@@ -53,7 +53,7 @@ export default function PreviewScreen({
     return (
         <form
             className="mt-4 text-left"
-            onSubmit={(event: any) => {
+            onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
                 // onPressLogin(phoneNumber.replace('+91', ''));
             }}

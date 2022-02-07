@@ -4,7 +4,7 @@ import { currentPageEnum } from '.'
 interface IProps {
   text: string
   toggleVisibility: () => void
-  setCurrentPage?: any
+  setCurrentPage?: React.Dispatch<React.SetStateAction<currentPageEnum>>
   resetFields?: () => void
 }
 export default function Success({
