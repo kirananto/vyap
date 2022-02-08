@@ -153,7 +153,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 )
             )
             .catch(() => console.log('Error loadng data'))
-    }, [])
+    }, [token])
 
     function uploadImage() {
         if(fileUploaderRef.current?.files){

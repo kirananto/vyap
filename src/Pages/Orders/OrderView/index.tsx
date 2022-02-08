@@ -57,7 +57,7 @@ export default function OrderDetails() {
 
     async function share(type: string) {
         await delay(200)
-        const getImg = type == 'page' ? await getImage() : await getBill()
+        const getImg = type === 'page' ? await getImage() : await getBill()
         const images = await fetch(getImg)
         const blob: any = await images.blob()
         const file = new File([blob], 'order_summary.png', { type: 'image/png' })

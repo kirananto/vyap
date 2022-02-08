@@ -74,7 +74,7 @@ export default function ItemList({
     const [isExpanded, setIsExpanded] = useState(shareON ? true : false)
 
     useEffect(() => {
-        if (shareON == true) {
+        if (shareON === true) {
             setIsExpanded(true)
             shareProceed && shareProceed('page')
         }

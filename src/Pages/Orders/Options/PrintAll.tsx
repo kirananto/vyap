@@ -118,7 +118,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                                         <tr key={index} className="text-left ">
                                             {Object.values(item).map((val: any, i) => (
                                                 <td key={val} className="px-1 py-2 whitespace-nowrap">
-                                                    {i == 4 ? '₹' + val : val}
+                                                    {i === 4 ? '₹' + val : val}
                                                 </td>
                                             ))}
                                         </tr>
