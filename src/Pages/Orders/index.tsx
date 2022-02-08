@@ -22,24 +22,26 @@ export default function Orders() {
     const intl = useIntl()
     const navigate = useNavigate()
     useEffect(() => {
-        fetchOrdersAPI({
-            token: token!,
-            orderStatus: filters.orderStatus,
-            ordering: filters?.sorting,
-            relatedId: filters?.account?.id,
-            offset: 0,
-            limit: 100,
-        }).then((result: any) => {
-            setLoading(false)
-            setOrders(result?.data?.data ?? [])
-        })
-    }, [filters.orderStatus, filters?.sorting, filters?.account])
+        if (token) {
+            fetchOrdersAPI({
+                token: token,
+                orderStatus: filters.orderStatus,
+                ordering: filters?.sorting,
+                relatedId: filters?.account?.id,
+                offset: 0,
+                limit: 100,
+            }).then((result) => {
+                setLoading(false)
+                setOrders(result?.data?.data ?? [])
+            })
+        }
+    }, [filters.orderStatus, filters?.sorting, filters?.account, token])
 
     return (
         <div className="dark:bg-gray-900">
             {/* header */}
             <div className="w-full pb-3 bg-white shadow dark:bg-gray-800 ">
-                <Header  isSticky={false}  onBackClick={() => navigate('/home')}  heading={intl.formatMessage({ id: 'global.allOrders'})} />
+                <Header isSticky={false} onBackClick={() => navigate('/home')} heading={intl.formatMessage({ id: 'global.allOrders' })} />
                 <AppliedFilters
                     openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
                 />

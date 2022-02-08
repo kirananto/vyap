@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export const imageUpload = (token: string, data: FormData) => axiosClient({
+export const imageUpload = (token?: string, data: FormData) => axiosClient({
     url: `/image-upload/upload`,
     method: 'POST',
     data,

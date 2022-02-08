@@ -10,7 +10,7 @@ function Items({ order }: { order: any }) {
     const [orderItems, setOrderItems] = useState<any[]>([])
 
     useEffect(() => {
-        fetchOrderItems(token!, order.id, 100, 0).then((result: any) => {
+        fetchOrderItems(token, order.id, 100, 0).then((result: any) => {
             setOrderItems(result?.data?.data)
         })
     }, [token, order.id])
@@ -74,11 +74,11 @@ export default function ItemList({
     const [isExpanded, setIsExpanded] = useState(shareON ? true : false)
 
     useEffect(() => {
-        if (shareON == true) {
+        if (shareON === true) {
             setIsExpanded(true)
-            shareProceed && shareProceed('page')
+            shareProceed?.('page')
         }
-    }, [shareON])
+    }, [shareON, shareProceed])
 
     return (
         <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">

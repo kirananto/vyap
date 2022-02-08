@@ -54,18 +54,34 @@ export const Home = () => {
         else {
             navigate('/login')
         }
-    }, [paginationParams.search, addCustomerVisible])
+    }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
+
+    function customerFilter(filterItem: any) {
+        const search = paginationParams.search?.trim()?.toLowerCase()
+        if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
+            return true
+        }
+        if (filterItem.lastMsg?.toLowerCase()?.includes(search)) {
+            return true
+        }
+        if (filterItem.recipient?.officeNumber?.toLowerCase()?.includes(search)) {
+            return true
+        }
+        if (filterItem.recipient?.email?.toLowerCase()?.includes(search)) {
+            return true
+        }
+        return false
+    }
 
     function renderChats() {
         if (loading) {
             return (
                 <div className="mt-12 grid p-12 text-center dark:text-gray-100">
                     <Spinner />
-                    <div className="mt-4">Loading...</div>
                 </div>
             )
         }
-        if (customer?.customers?.length === 0) {
+        if (customer?.customers?.filter(customerFilter)?.length === 0) {
             return (
                 <div>
                     <img
@@ -81,22 +97,7 @@ export const Home = () => {
                 </div>
             )
         }
-        return customer?.customers?.filter(filterItem => {
-            const search = paginationParams.search?.trim()?.toLowerCase()
-            if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
-                return true
-            }
-            if (filterItem.lastMsg?.toLowerCase()?.includes(search)) {
-                return true
-            }
-            if (filterItem.recipient?.officeNumber?.toLowerCase()?.includes(search)) {
-                return true
-            }
-            if (filterItem.recipient?.email?.toLowerCase()?.includes(search)) {
-                return true
-            }
-            return false
-        }).map((item, index) => (
+        return customer?.customers?.filter(customerFilter).map((item, index) => (
             <ItemCard item={item} key={index} />
         ))
     }
@@ -124,7 +125,7 @@ export const Home = () => {
                 setFloatBtnLarge(false)
             }
         }
-    }, [scrollDirection])
+    }, [isScrollingDown, isScrollingUp, scrollDirection])
 
     // ......  Button resizing onscroll - end.........!
 

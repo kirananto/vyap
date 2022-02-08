@@ -79,8 +79,8 @@ export default function Account() {
         // TODO location
         // TODO category
         Promise.allSettled([
-            patchUser({ token: token!, id: user?.id!, name: user?.name, email: user?.email }),
-            patchOrganization({ token: token!, id: user?.organizationId!, pinCode: user?.organization?.pinCode, name: user?.organization?.name! })
+            patchUser({ token: token, id: user?.id!, name: user?.name, email: user?.email }),
+            patchOrganization({ token: token, id: user?.organizationId!, pinCode: user?.organization?.pinCode, name: user?.organization?.name! })
         ]).then(() => {
             setSuccess(true)
             setTimeout(() => setSuccess(false), 2000)

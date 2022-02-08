@@ -86,7 +86,7 @@ export default function InviteExisting({
                 setIsValidPincode(true)
                 console.log('validation succeed')
 
-                if (action == 'submit') {
+                if (action === 'submit') {
                     setCurrentPage(currentPageEnum.PREVIEW)
                 }
             }

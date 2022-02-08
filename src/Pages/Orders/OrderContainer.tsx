@@ -16,7 +16,6 @@ export default function OrderContainer({ orders, loading }: IProps) {
         return (
             <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
                 <Spinner />
-                <div className="mt-4">Loading...</div>
             </div>
         )
     }
@@ -27,7 +26,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
             <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
             <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
                 {' '}
-                You don't have any transactions. Please do some transactions and visit here later.{' '}
+                You don{`'`}t have any transactions. Please do some transactions and visit here later.{' '}
             </div>
         </div>
     }

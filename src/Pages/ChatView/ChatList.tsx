@@ -51,9 +51,9 @@ export default function ChatList({
 
     useEffect(() => {
         if(inboxHash) {
-            dispatch(fetchThreadsByInbox({ token: token!, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
+            dispatch(fetchThreadsByInbox({ token: token, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
         }
-    }, [toRefresh, token, inboxHash, currentPage])
+    }, [toRefresh, token, inboxHash, currentPage, dispatch, id])
 
     function renderChats() {
         if (chats?.error) {
@@ -62,7 +62,6 @@ export default function ChatList({
         if (chats?.isLoading && chats?.threads?.length < 1) {
             return <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
                 <Spinner />
-                <div className="mt-4">Loading...</div>
             </div>
         }
         if (chats?.threads?.length <= 0) {

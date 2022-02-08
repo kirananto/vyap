@@ -15,10 +15,10 @@ export default function PaymentDetails() {
     const { id } = useParams()
 
     useEffect(() => {
-        fetchPaymentById(token!, id!).then(result => {
+        fetchPaymentById(token, id!).then(result => {
             setPayment(result.data)
         })
-    }, [])
+    }, [id, token])
 
     function getCompanyName() {
         const company = user?.organizationId === payment?.senderOrgId ? payment?.receiver : payment?.senderOrg

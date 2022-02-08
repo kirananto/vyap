@@ -58,7 +58,7 @@ function CreateProduct() {
                 dispatch(clearAll())
             }
         }
-    }, [addProductInfo?.editProductId])
+    }, [addProductInfo?.editProductId, dispatch])
 
     function popStateHandler() {
         if (trackBackBtn.current) {
@@ -100,10 +100,10 @@ function CreateProduct() {
     useEffect(() => {
         if (addProductInfo?.centralCatalogue?.id) {
             fetchCentralProductImages(
-        token!,
-        100,
-        0,
-        addProductInfo?.centralCatalogue?.id
+                token,
+                100,
+                0,
+                addProductInfo?.centralCatalogue?.id
             ).then((result: ICentralCatalogue) => {
                 const imageName = result?.data?.data?.filter((filterItem: IDataEntity) =>
                     filterItem?.imageName?.includes('.')
@@ -128,10 +128,8 @@ function CreateProduct() {
                 )
             }
         }
-    }, [
-        addProductInfo?.others?.productImage?.length,
-        addProductInfo?.centralCatalogue?.id,
-    ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ addProductInfo?.others?.productImage?.length, addProductInfo?.centralCatalogue?.id, ])
 
     const validatePricing = () => {
     //validation for edit
@@ -193,7 +191,7 @@ function CreateProduct() {
         let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
 
         if (!addProductInfo?.centralCatalogue?.id) {
-            const centralProduct: IAddCentralProductResponse | null = await postAddCentralProduct(token!, {
+            const centralProduct: IAddCentralProductResponse | null = await postAddCentralProduct(token, {
                 name: addProductInfo?.centralCatalogue?.name!,
                 description: addProductInfo?.centralCatalogue?.description ?? '',
                 categories: {
@@ -241,7 +239,7 @@ function CreateProduct() {
             rate: parseFloat(`${addProductInfo?.pricing?.salesPrice}`),
         }
 
-        postAddProduct(token!, body)
+        postAddProduct(token, body)
             .then((response) => {
                 setIsLoading(false)
                 console.log('response', response)
@@ -265,7 +263,7 @@ function CreateProduct() {
             rate: parseFloat(`${addProductInfo.pricing?.salesPrice}`),
         }
 
-        patchProductById({ token: token!, id: organizationCatalogueId, data: body })
+        patchProductById({ token: token, id: organizationCatalogueId, data: body })
             .then((response) => {
                 setIsLoading(false)
                 console.log('response', response)

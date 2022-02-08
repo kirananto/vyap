@@ -43,7 +43,7 @@ export interface User {
 
 export interface CredentialsInterface {
     user: User | undefined;
-    token: string | undefined;
+    token?: string | undefined;
 }
 
 const initialState: CredentialsInterface = {

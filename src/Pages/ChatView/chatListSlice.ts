@@ -50,8 +50,8 @@ const initialState: chatListInterface = {}
 
 export const fetchThreadsByInbox = createAsyncThunk(
     'chatList/fetchThreadsByInbox',
-    async ({ token, inboxHash, offset, limit, id }: { token: string; inboxHash: string; offset: number; id: string; limit: number }) => {
-        const response = await fetchThreadsById({ token: token!, inboxId: inboxHash!, offset, limit })
+    async ({ token, inboxHash, offset, limit, id }: { token?: string; inboxHash: string; offset: number; id: string; limit: number }) => {
+        const response = await fetchThreadsById({ token: token, inboxId: inboxHash!, offset, limit })
         return {
             inboxHash: inboxHash,
             id: id,
@@ -63,7 +63,7 @@ export const fetchThreadsByInbox = createAsyncThunk(
 )
 export const fetchInboxAction = createAsyncThunk(
     'chatList/fetchInboxAction',
-    async ({ token, id }: { token: string; id: string }) => {
+    async ({ token, id }: { token?: string; id: string }) => {
         const response = await fetchInboxById(token, id!)
         return response.data
     }

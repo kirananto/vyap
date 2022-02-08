@@ -27,7 +27,7 @@ export default function Payments() {
 
     useEffect(() => {
         fetchAllPayments({
-            token: token!,
+            token: token,
             limit: 100,
             offset: 0,
             paymentMethod: filters?.paymentMethod,
@@ -39,7 +39,7 @@ export default function Payments() {
             setPayments(result?.data?.data!)
             //TODO handle the payments better
         })
-    }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id])
+    }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id, token])
     return (
         <div className="">
             {/* header */}

@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export const inviteExisting = (token: string, phone: string, openingBalance?: number) => axiosClient({
+export const inviteExisting = (token?: string, phone: string, openingBalance?: number) => axiosClient({
     url: `/invite/existing`,
     method: 'POST',
     data: {
@@ -11,7 +11,7 @@ export const inviteExisting = (token: string, phone: string, openingBalance?: nu
         'authorization': `Bearer ${token}`
     }
 })
-export const checkIfUserExists = (token: string, phone: string) => axiosClient({
+export const checkIfUserExists = (token?: string, phone: string) => axiosClient({
     url: `/invite/user-exists`,
     method: 'GET',
     params: {
@@ -22,7 +22,7 @@ export const checkIfUserExists = (token: string, phone: string) => axiosClient({
     }
 })
 
-export const inviteNew = (token: string, data: {
+export const inviteNew = (token?: string, data: {
     openingBalance: number
     phone: string,
     businessName: string,

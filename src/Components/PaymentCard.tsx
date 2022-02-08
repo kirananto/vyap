@@ -33,10 +33,10 @@ export default function PaymentCard({ className, thread }: { className: string, 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetchPaymentById(token!, thread.meta).then(result => {
+        fetchPaymentById(token, thread.meta).then(result => {
             dispatch(setPaymentInfo({ inboxId: id!, threadId: thread?.id, payment: result.data }))
         })
-    }, [payment?.id])
+    }, [dispatch, id, payment?.id, thread?.id, thread.meta, token])
 
     return (
         <div className={`flex ${className} w-full `}>

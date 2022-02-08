@@ -26,7 +26,7 @@ export default function PreviewScreen({
 
     const handleSubmit = () => {
         if (isExisting) {
-            inviteExisting(token!, phoneNumber, parseFloat(`${openingBalance}`)).then(result => {
+            inviteExisting(token, phoneNumber, parseFloat(`${openingBalance}`)).then(result => {
                 console.log('Success', result.data)
                 setCurrentPage(currentPageEnum.SUCCESS)
             }).catch(error => {
@@ -34,7 +34,7 @@ export default function PreviewScreen({
             })
         }
         else {
-            inviteNew(token!, {
+            inviteNew(token, {
                 openingBalance: parseFloat(`${openingBalance}`),
                 phone: phoneNumber,
                 businessName,

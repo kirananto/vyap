@@ -28,15 +28,16 @@ export default function OrderDetails() {
     const getImage = () => takeScreenshot(ref.current)
 
     useEffect(() => {
-        fetchOrderAPI(token!, id!).then((result) => {
+        fetchOrderAPI(token, id!).then((result) => {
             setOrder(result.data)
         })
-    }, [])
+    }, [id, token])
 
     // ....Bill Actions....  
     //Show the bill in DOM on Share Click and then Hide after a delay
     useEffect(() => {
         billActive && share('bill')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [billActive])
 
     function shareBill() {
@@ -57,7 +58,7 @@ export default function OrderDetails() {
 
     async function share(type: string) {
         await delay(200)
-        const getImg = type == 'page' ? await getImage() : await getBill()
+        const getImg = type === 'page' ? await getImage() : await getBill()
         const images = await fetch(getImg)
         const blob: any = await images.blob()
         const file = new File([blob], 'order_summary.png', { type: 'image/png' })

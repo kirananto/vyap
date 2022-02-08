@@ -34,7 +34,7 @@ export default function More() {
 
     const handleLogout = () => {
     //TODO Add hooks to other data's that need's to be cleared too.
-        logOutAPI(token!).then(() => {
+        logOutAPI(token).then(() => {
             dispatch(setCredentials({ user: undefined, token: undefined }))
             navigate('/login')
         }).catch(() => {

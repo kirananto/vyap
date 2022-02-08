@@ -31,14 +31,14 @@ export const Payment = () => {
 
     useEffect(() => {
         dispatch(clearAll())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         console.log('------------------------changed-----------')
         if (token) {
-            dispatch(fetchInboxAction({ token: token!, id: id! }))
+            dispatch(fetchInboxAction({ token: token, id: id! }))
         }
-    }, [paymentModalVisible, id, token])
+    }, [paymentModalVisible, id, token, dispatch])
 
     useEffect(() => {
         localStorage?.setItem('inboxId', inbox?.id)

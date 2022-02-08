@@ -21,9 +21,6 @@ export default function PaymentContainer({ payments, loading }: IProps) {
     const [itemClicked, setItemClicked] = useState<IFetchAllPaymentsDataEntity>()
     const componentRef = React.useRef<HTMLDivElement>(null)
 
-    const reactToPrintContent = React.useCallback(() => {
-        return componentRef.current
-    }, [componentRef.current])
 
     const reactToPrintTrigger = React.useCallback(() => {
         return (
@@ -94,7 +91,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
 
                 <div className="mx-3 mt-2 mb-8 flex justify-between space-x-3">
                     <ReactToPrint
-                        content={reactToPrintContent}
+                        content={() => componentRef.current}
                         documentTitle={`Vyap All Orders`}
                         // onAfterPrint={handleAfterPrint}
                         // onBeforeGetContent={handleOnBeforeGetContent}
@@ -131,7 +128,6 @@ export default function PaymentContainer({ payments, loading }: IProps) {
         return (
             <div className="mt-12 grid p-12 text-center dark:text-gray-100">
                 <Spinner />
-                <div className="mt-4">Loading...</div>
             </div>
         )
     }

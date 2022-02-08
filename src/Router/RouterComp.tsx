@@ -29,7 +29,7 @@ function RouterComp() {
                 const { status } = error.response
                 if (status === UNAUTHORIZED || status === FORBIDDEN) {
                     if(token) {
-                        logOutAPI(token!)
+                        logOutAPI(token)
                     }
                     dispatch(setCredentials({ user: undefined, token: undefined }))
                     navigate('/login')
@@ -38,7 +38,7 @@ function RouterComp() {
                 return Promise.reject(error)
             }
         )
-    }, [])
+    }, [dispatch, navigate, token])
 
     return (
         <Routes>

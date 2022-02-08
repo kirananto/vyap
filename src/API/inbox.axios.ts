@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export function fetchInboxes({ token, offset, limit, search } : { token: string, offset?: number, limit?: number, search?: string }) {
+export function fetchInboxes({ token, offset, limit, search } : { token?: string, offset?: number, limit?: number, search?: string }) {
     return axiosClient({
         url: '/inbox',
         method: 'GET',
@@ -16,7 +16,7 @@ export function fetchInboxes({ token, offset, limit, search } : { token: string,
 }
 
 
-export const fetchInboxById = (token: string, id: string) => axiosClient({
+export const fetchInboxById = (token?: string, id: string) => axiosClient({
     url: `/inbox/${id}`,
     method: 'GET',
     headers: {
@@ -24,7 +24,7 @@ export const fetchInboxById = (token: string, id: string) => axiosClient({
     }
 })
 
-export function fetchThreadsById({ token, inboxId, offset, limit }: { token: string; inboxId: string; offset: number; limit: number }) {
+export function fetchThreadsById({ token, inboxId, offset, limit }: { token?: string; inboxId: string; offset: number; limit: number }) {
     return axiosClient({
         url: `/thread`,
         method: 'GET',

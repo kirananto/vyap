@@ -31,12 +31,12 @@ function OrganizationCategoryModal(props: IProps) {
     }
 
     useEffect(() => {
-        fetchOrganizationProductCategories(token!, 100, 0, searchValue, user?.organizationId)
+        fetchOrganizationProductCategories(token, 100, 0, searchValue, user?.organizationId)
             .then((result : IFetchOrganizationProductCategories) => {
                 console.log('test....:',result)
                 setItems(result.data?.data?.filter((item: IFetchOrganizationProductCategory) => item.name))
             })
-    }, [searchValue])
+    }, [searchValue, token, user?.organizationId])
 
     function selectHSN(value: BrandInterface) {
         dispatch(setCategory(value))

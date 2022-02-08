@@ -46,7 +46,7 @@ export default function AddItem() {
 
     useEffect(() => {
         fetchPrevOrderedProducts({
-            token: token!,
+            token: token,
             buyerId: !isSupplier ? user?.organizationId! : placeOrder.orgId!,
             supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
             limit: 10,
@@ -54,13 +54,13 @@ export default function AddItem() {
         }).then((result: any) => {
             setPrevOrdered(result.data?.data)
         })
-    }, [])
+    }, [isSupplier, placeOrder.orgId, token, user?.organizationId])
 
 
     useEffect(() => {
         // TODO use placeOrder.orgId
         fetchProducts({
-            token: token!,
+            token: token,
             outOfStock: false,
             organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
             limit: 100,
@@ -78,17 +78,7 @@ export default function AddItem() {
         }).then((result: any) => {
             setItemList(result.data?.data ?? [])
         })
-    }, [
-        token,
-        isSupplier,
-        user?.organizationId,
-        placeOrder.orgId,
-        searchValue,
-        filters?.categories,
-        filters?.brands,
-        filters?.sorting,
-        searchValue,
-    ])
+    }, [token, isSupplier, user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
 
     function onSubmit() {
         //TODO Add to dispatch

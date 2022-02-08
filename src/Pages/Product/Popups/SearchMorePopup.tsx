@@ -12,7 +12,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
     async function deleteProducts() {
         console.log('product')
         for await (const item of selectedProduct) {
-            await deleteProductById({ token: token!, id: item?.id })
+            await deleteProductById({ token: token, id: item?.id })
         }
 
         onClose()
@@ -21,7 +21,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
     async function markStockStatus(value: boolean) {
         console.log('product')
         for await (const item of selectedProduct) {
-            await patchProductById({ token: token!, id: item?.id, data: { outOfStock: value } })
+            await patchProductById({ token: token, id: item?.id, data: { outOfStock: value } })
         }
         onClose()
     }

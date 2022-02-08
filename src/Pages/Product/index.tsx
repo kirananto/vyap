@@ -103,7 +103,7 @@ export default function Product() {
 
     useEffect(() => {
         fetchProducts({
-            token: token!,
+            token: token,
             organizationId: user?.organizationId!,
             limit: 5000,
             offset: 0,
@@ -127,21 +127,13 @@ export default function Product() {
             .finally(() => {
                 setLoading(false)
             })
-    }, [
-        filters?.categories,
-        filters?.brands,
-        filters?.sorting,
-        isMoreOpen,
-        searchValue,
-        isSearchMoreOpen,
-        reRenderCounter,
-    ])
+    }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue, isSearchMoreOpen, reRenderCounter, token, user?.organizationId])
 
     useEffect(() => {
         return () => {
             dispatch(clearAll())
         }
-    }, [])
+    }, [dispatch])
 
 
     function renderProducts() {
@@ -149,7 +141,6 @@ export default function Product() {
             return (
                 <div className="mt-12 grid p-12 text-center dark:text-gray-100">
                     <Spinner />
-                    <div className="mt-4">Loading...</div>
                 </div>
             )
         }

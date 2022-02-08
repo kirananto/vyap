@@ -45,6 +45,7 @@ function PricingTab({ action, saveAttempt }: Props) {
             resetSalesToZero()
             resetMRPToZero()
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [saveAttempt])
 
     return (
