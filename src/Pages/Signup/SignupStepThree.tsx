@@ -63,7 +63,7 @@ export default function SignupStepThree() {
     const signup = useSelector(selectSignupInfo)
 
     useEffect(() => {
-        fetchCategories(token!).then((result: IFetchCategories) => {
+        fetchCategories(token).then((result: IFetchCategories) => {
             setCategories(result.data?.data)
         }).catch(() => {
             console.log('error')

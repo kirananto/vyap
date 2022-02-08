@@ -83,7 +83,7 @@ export default function AddPaymentModal({
         console.log('order', order)
         if (btnAction === BUTTON_ACTION.PLACE_ORDER ? paymentOption !== PAYMENT_OPTIONS.PAY_LATER : true) {
             // TODO validations before making API call
-            createPayment(token!, {
+            createPayment(token, {
                 amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? parsedcustomAmount! : amount!,
                 note: order ? getNoteText(order) : note,
                 method,

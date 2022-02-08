@@ -48,7 +48,7 @@ export default function AddCustomerStep1({
                 console.log('validation succeed')
 
                 if (action === 'submit') {
-                    checkIfUserExists(token!, phoneNumber)
+                    checkIfUserExists(token, phoneNumber)
                         .then((result) => {
                             if (result.data?.code === 'E234') {
                                 setPhoneError(

@@ -19,10 +19,6 @@ export default function OrderContainerDetail({
     const [loading, setLoading] = React.useState(true)
     const componentRef = React.useRef<HTMLDivElement>(null)
 
-    const reactToPrintContent = React.useCallback(() => {
-        return componentRef.current
-    }, [componentRef.current])
-
     const reactToPrintTrigger = React.useCallback(() => {
         return (
             <button className="flex justify-center gap-1 items-center w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
@@ -46,7 +42,7 @@ export default function OrderContainerDetail({
     }, [])
 
     useEffect(() => {
-        fetchOrderItems(token!, order.id, 100, 0).then((result: any) => {
+        fetchOrderItems(token, order.id, 100, 0).then((result: any) => {
             setOrderItems(result?.data?.data)
             setLoading(false)
         })
@@ -185,7 +181,7 @@ export default function OrderContainerDetail({
             </div>
             <div className="flex flex-row mt-2 mb-10 ml-4 mr-4 gap-2 justify-end">
                 <ReactToPrint
-                    content={reactToPrintContent}
+                    content={() => componentRef.current}
                     documentTitle={`Vyap All Orders`}
                     // onAfterPrint={handleAfterPrint}
                     // onBeforeGetContent={handleOnBeforeGetContent}

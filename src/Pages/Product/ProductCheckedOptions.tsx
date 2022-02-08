@@ -23,7 +23,7 @@ export default function FilterBar({
     async function deleteProducts() {
         console.log('product')
         for await (const item of selectedProduct) {
-            await deleteProductById({ token: token!, id: item?.id })
+            await deleteProductById({ token: token, id: item?.id })
         }
         setselectedProduct([])
         setCounter((value: number) => value + 1)
@@ -32,7 +32,7 @@ export default function FilterBar({
     async function markStockStatus(value: boolean) {
         console.log('product')
         for await (const item of selectedProduct) {
-            await patchProductById({ token: token!, id: item?.id, data: { outOfStock: value } })
+            await patchProductById({ token: token, id: item?.id, data: { outOfStock: value } })
         }
         setselectedProduct([])
         setCounter((value: number) => value + 1)

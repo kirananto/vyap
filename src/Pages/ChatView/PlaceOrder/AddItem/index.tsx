@@ -46,7 +46,7 @@ export default function AddItem() {
 
     useEffect(() => {
         fetchPrevOrderedProducts({
-            token: token!,
+            token: token,
             buyerId: !isSupplier ? user?.organizationId! : placeOrder.orgId!,
             supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
             limit: 10,
@@ -60,7 +60,7 @@ export default function AddItem() {
     useEffect(() => {
         // TODO use placeOrder.orgId
         fetchProducts({
-            token: token!,
+            token: token,
             outOfStock: false,
             organizationId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
             limit: 100,

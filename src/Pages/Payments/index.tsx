@@ -27,7 +27,7 @@ export default function Payments() {
 
     useEffect(() => {
         fetchAllPayments({
-            token: token!,
+            token: token,
             limit: 100,
             offset: 0,
             paymentMethod: filters?.paymentMethod,

@@ -37,7 +37,7 @@ function HSNmodal({ setModal, trigger } : IProps) {
     }, [searchValue])
 
     async function selectHSN(value: HSNInterface) {
-        const newVal = await createIfNotExists(token!, value)
+        const newVal = await createIfNotExists(token, value)
         console.log('newVal', newVal)
         dispatch(setHsnNumber(newVal))
         setModal(false)

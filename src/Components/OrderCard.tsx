@@ -25,7 +25,7 @@ export default function OrderCard({ className, thread }: { className: string, th
 
 
     useEffect(() => {
-        fetchOrderAPI(token!, thread.meta).then(result => {
+        fetchOrderAPI(token, thread.meta).then(result => {
             dispatch(setOrderInfo({ inboxId: id!, threadId: thread?.id, order: result.data }))
         })
     }, [dispatch, id, order?.id, thread?.id, thread.meta, token])

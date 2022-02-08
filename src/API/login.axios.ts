@@ -28,7 +28,7 @@ export const verifyPhone = (phone: string, otp: string) => axiosClient({
 
 
 
-export const logOutAPI = (token: string) => axiosClient({
+export const logOutAPI = (token?: string) => axiosClient({
     url: '/auth/logout',
     method: 'POST',
     headers: {

@@ -17,9 +17,6 @@ export const PrintAll = ({ apiData }: IProps) => {
     const { user } = useSelector(selectCredentials)
     const componentRef = React.useRef<HTMLDivElement>(null)
 
-    const reactToPrintContent = React.useCallback(() => {
-        return componentRef.current
-    }, [componentRef.current])
 
     const reactToPrintTrigger = React.useCallback(() => {
         return (
@@ -61,7 +58,7 @@ export const PrintAll = ({ apiData }: IProps) => {
     return (
         <>
             <ReactToPrint
-                content={reactToPrintContent}
+                content={() => componentRef.current}
                 documentTitle={`Vyap All Orders`}
                 // onAfterPrint={handleAfterPrint}
                 // onBeforeGetContent={handleOnBeforeGetContent}

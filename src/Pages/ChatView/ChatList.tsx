@@ -39,7 +39,7 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
 
     useEffect(() => {
         if(inboxHash) {
-            dispatch(fetchThreadsByInbox({ token: token!, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
+            dispatch(fetchThreadsByInbox({ token: token, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
         }
     }, [toRefresh, token, inboxHash, currentPage, dispatch, id])
 

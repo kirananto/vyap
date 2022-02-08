@@ -32,7 +32,7 @@ export const Payment = () => {
     useEffect(() => {
         console.log('------------------------changed-----------')
         if (token) {
-            dispatch(fetchInboxAction({ token: token!, id: id! }))
+            dispatch(fetchInboxAction({ token: token, id: id! }))
         }
     }, [paymentModalVisible, id, token, dispatch])
 

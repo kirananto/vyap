@@ -16,14 +16,14 @@ export function MorePopup({ item, onClose }: any) {
 
     function deleteProduct() {
         console.log('product')
-        deleteProductById({ token: token!, id: item?.id }).then(() => {
+        deleteProductById({ token: token, id: item?.id }).then(() => {
             onClose()
         })
     }
 
     function editProduct() {
         if (item?.id) {
-            fetchCentralProduct({ token: token!, id: item?.centralCatalogueId }).then((result: any) => {
+            fetchCentralProduct({ token: token, id: item?.centralCatalogueId }).then((result: any) => {
                 if (result?.data) {
                     dispatch(setCentralCatalogue(result?.data))
                 }
@@ -38,7 +38,7 @@ export function MorePopup({ item, onClose }: any) {
 
     function markStockStatus(value: boolean) {
         console.log('product')
-        patchProductById({ token: token!, id: item?.id, data: { outOfStock: value } }).then(() => {
+        patchProductById({ token: token, id: item?.id, data: { outOfStock: value } }).then(() => {
             onClose()
         })
     }

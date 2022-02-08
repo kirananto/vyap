@@ -28,7 +28,7 @@ function List(props: IProps) {
     const [productImage, setProductImage] = useState<string>()
 
     useEffect(() => {
-        fetchCentralProductImages(token!, 100, 0, props?.opt?.id).then(
+        fetchCentralProductImages(token, 100, 0, props?.opt?.id).then(
             (result: IFetchCentralProductImages) => {
                 const imageName = result.data?.data?.filter((filterItem: ICentralImage) =>
                     filterItem.imageName?.includes('.')
@@ -95,7 +95,7 @@ function DropDown(props: any) {
     // })
 
     useEffect(() => {
-        fetchCentralProducts(token!, 100, 0, value).then((result: IFetchCentralProducts) => {
+        fetchCentralProducts(token, 100, 0, value).then((result: IFetchCentralProducts) => {
             console.log('result', result.data?.data)
             setOptions(result.data?.data!)
         })

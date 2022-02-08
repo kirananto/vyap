@@ -103,7 +103,7 @@ export default function Product() {
 
     useEffect(() => {
         fetchProducts({
-            token: token!,
+            token: token,
             organizationId: user?.organizationId!,
             limit: 5000,
             offset: 0,

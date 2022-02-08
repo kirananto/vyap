@@ -1,14 +1,14 @@
 import type { OrderStatusType } from 'src/Pages/Orders/enum'
 import { axiosClient } from './apiClient'
 
-export const fetchOrderAPI = (token: string, id: string) => axiosClient({
+export const fetchOrderAPI = (token?: string, id: string) => axiosClient({
     url: `/order/${id}`,
     method: 'GET',
     headers: {
         'authorization': `Bearer ${token}`
     }
 })
-export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, relatedId } : { token: string, orderStatus: OrderStatusType | undefined, offset: number, limit: number, ordering?: string, relatedId?: string }) => axiosClient({
+export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, relatedId } : { token?: string, orderStatus: OrderStatusType | undefined, offset: number, limit: number, ordering?: string, relatedId?: string }) => axiosClient({
     url: `/order`,
     method: 'GET',
     params: {
@@ -23,7 +23,7 @@ export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, re
     }
 })
 
-export const placeOrderAPI = (token: string, data: {
+export const placeOrderAPI = (token?: string, data: {
     description: string
     supplierId: string
     buyerId: string
@@ -43,7 +43,7 @@ export const placeOrderAPI = (token: string, data: {
 })
 
 
-export function fetchOrderItems(token: string, orderId: string, limit: number, offset: number) {
+export function fetchOrderItems(token?: string, orderId: string, limit: number, offset: number) {
     return axiosClient({
         url: `/order-item`,
         method: 'GET',

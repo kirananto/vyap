@@ -22,7 +22,7 @@ export default function ProductSuggestionCard({
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
-        fetchProductById({ token: token!, id: productId }).then(result => {
+        fetchProductById({ token: token, id: productId }).then(result => {
             console.log('da', result.data)
             setItem(result.data)
         })

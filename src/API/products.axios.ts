@@ -42,7 +42,7 @@ export interface AddCentralCatalogueInterface {
     }
 }
 
-export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token?: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
@@ -60,7 +60,7 @@ export const fetchProducts = ({ token, organizationId, limit, offset, categoryId
     }
 })
 
-export const deleteProductById = ({ token, id }: { token: string; id?: string }) => axiosClient({
+export const deleteProductById = ({ token, id }: { token?: string; id?: string }) => axiosClient({
     url: `/organization-catalogue/${id}`,
     method: 'DELETE',
     headers: {
@@ -68,7 +68,7 @@ export const deleteProductById = ({ token, id }: { token: string; id?: string })
     }
 })
 
-export const fetchProductById = ({ token, id }: { token: string; id?: string }) => axiosClient({
+export const fetchProductById = ({ token, id }: { token?: string; id?: string }) => axiosClient({
     url: `/organization-catalogue/${id}`,
     method: 'GET',
     headers: {
@@ -76,7 +76,7 @@ export const fetchProductById = ({ token, id }: { token: string; id?: string }) 
     }
 })
 
-export const patchProductById = ({ token, id, data }: { token: string; id?: string, data: any }) => axiosClient({
+export const patchProductById = ({ token, id, data }: { token?: string; id?: string, data: any }) => axiosClient({
     url: `/organization-catalogue/${id}`,
     method: 'PATCH',
     data,
@@ -85,7 +85,7 @@ export const patchProductById = ({ token, id, data }: { token: string; id?: stri
     }
 })
 
-export const fetchCentralProduct = ({ token, id }: { token: string; id?: string}) => axiosClient({
+export const fetchCentralProduct = ({ token, id }: { token?: string; id?: string}) => axiosClient({
     url: `/central-catalogue/${id}`,
     method: 'GET',
     headers: {
@@ -93,7 +93,7 @@ export const fetchCentralProduct = ({ token, id }: { token: string; id?: string}
     }
 })
 
-export const fetchCentralProducts = (token: string, limit: number, offset: number, search?: string) => axiosClient({
+export const fetchCentralProducts = (token?: string, limit: number, offset: number, search?: string) => axiosClient({
     url: `/central-catalogue`,
     method: 'GET',
     params: {
@@ -106,7 +106,7 @@ export const fetchCentralProducts = (token: string, limit: number, offset: numbe
     }
 })
 
-export const fetchOrganizationProductCategories = (token: string, limit: number, offset: number, search?: string, orgId?: string) => axiosClient({
+export const fetchOrganizationProductCategories = (token?: string, limit: number, offset: number, search?: string, orgId?: string) => axiosClient({
     url: `/organization-catalogue-category`,
     method: 'GET',
     params: {
@@ -120,7 +120,7 @@ export const fetchOrganizationProductCategories = (token: string, limit: number,
     }
 })
 
-export const fetchCentralProductCategories = (token: string, limit: number, offset: number, search?: string) => axiosClient({
+export const fetchCentralProductCategories = (token?: string, limit: number, offset: number, search?: string) => axiosClient({
     url: `/central-catalogue-category`,
     method: 'GET',
     params: {
@@ -133,7 +133,7 @@ export const fetchCentralProductCategories = (token: string, limit: number, offs
     }
 })
 
-export const fetchCentralProductImages = (token: string, limit: number, offset: number, catalogueId: string) => axiosClient({
+export const fetchCentralProductImages = (token?: string, limit: number, offset: number, catalogueId: string) => axiosClient({
     url: `/central-catalogue-image`,
     method: 'GET',
     params: {
@@ -146,7 +146,7 @@ export const fetchCentralProductImages = (token: string, limit: number, offset: 
     }
 })
 
-export const postAddCentralProduct = (token: string, data: AddCentralCatalogueInterface) => axiosClient({
+export const postAddCentralProduct = (token?: string, data: AddCentralCatalogueInterface) => axiosClient({
     url: `/central-catalogue`,
     method: 'POST',
     data,
@@ -155,7 +155,7 @@ export const postAddCentralProduct = (token: string, data: AddCentralCatalogueIn
     }
 })
 
-export const postAddProduct = (token: string, data: IAddProduct) => axiosClient({
+export const postAddProduct = (token?: string, data: IAddProduct) => axiosClient({
     url: `/organization-catalogue`,
     method: 'POST',
     data,

@@ -46,11 +46,11 @@ export default function FilterCategory(props: FilterCategories) {
 
     useEffect(() => {
         fetchOrganizationProductCategories(
-      token!,
-      10,
-      0,
-      undefined,
-      user?.organizationId
+            token,
+            10,
+            0,
+            undefined,
+            user?.organizationId
         ).then((result: any) => {
             setItems(result?.data?.data?.filter((item: any) => item?.name))
         })
