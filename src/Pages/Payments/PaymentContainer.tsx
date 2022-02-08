@@ -131,7 +131,6 @@ export default function PaymentContainer({ payments, loading }: IProps) {
         return (
             <div className="mt-12 grid p-12 text-center dark:text-gray-100">
                 <Spinner />
-                <div className="mt-4">Loading...</div>
             </div>
         )
     }

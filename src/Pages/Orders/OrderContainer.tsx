@@ -16,7 +16,6 @@ export default function OrderContainer({ orders, loading }: IProps) {
         return (
             <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
                 <Spinner />
-                <div className="mt-4">Loading...</div>
             </div>
         )
     }

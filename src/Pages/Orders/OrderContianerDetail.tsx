@@ -57,7 +57,6 @@ export default function OrderContainerDetail({
             <div className="p-4 m-4 border border-gray-300 dark:border-gray-500 rounded">
                 <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
                     <Spinner />
-                    <div className="mt-4">Loading...</div>
                 </div>
             </div>
         )

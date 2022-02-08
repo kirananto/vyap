@@ -50,7 +50,6 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
         if (chats?.isLoading && chats?.threads?.length < 1) {
             return <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
                 <Spinner />
-                <div className="mt-4">Loading...</div>
             </div>
         }
         if (chats?.threads?.length <= 0) {
