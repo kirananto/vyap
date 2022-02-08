@@ -147,7 +147,7 @@ export default function PlaceOrder() {
 
     async function proceedPlaceOrder() {
         if (placeOrder.cartItems?.length !== 0 && isValidDiscount) {
-            const order = await placeOrderAPI(token!, {
+            const order = await placeOrderAPI(token, {
                 description: placeOrder.note,
                 flatDiscount: placeOrder.discount,
                 supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
