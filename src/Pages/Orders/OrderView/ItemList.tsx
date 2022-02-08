@@ -76,9 +76,9 @@ export default function ItemList({
     useEffect(() => {
         if (shareON === true) {
             setIsExpanded(true)
-            shareProceed && shareProceed('page')
+            shareProceed?.('page')
         }
-    }, [shareON])
+    }, [shareON, shareProceed])
 
     return (
         <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">

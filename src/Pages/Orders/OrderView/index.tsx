@@ -37,6 +37,7 @@ export default function OrderDetails() {
     //Show the bill in DOM on Share Click and then Hide after a delay
     useEffect(() => {
         billActive && share('bill')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [billActive])
 
     function shareBill() {

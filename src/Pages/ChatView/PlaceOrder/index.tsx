@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { SimpleHeader } from 'src/Components/Header'
@@ -55,6 +55,14 @@ export default function PlaceOrder() {
         }
     }, [placeOrder.cartItems])
 
+    const getTotalPrice = useCallback(() => {
+        const price = placeOrder.cartItems?.reduce(
+            (a: any, b: any) => a + b.quantity * parseFloat(b?.rate),
+            0
+        )
+        return price
+    }, [placeOrder.cartItems])
+
     useEffect(() => {
         const discountPrice = placeOrder.discount
         const finalPrice = getTotalPrice()
@@ -65,7 +73,7 @@ export default function PlaceOrder() {
         else {
             setIsValidDiscount(true)
         }
-    }, [placeOrder.cartItems, placeOrder.discount])
+    }, [getTotalPrice, placeOrder.cartItems, placeOrder.discount])
 
     function handleAddItem(item: any, caseQuantity: number) {
         dispatch(
@@ -99,14 +107,6 @@ export default function PlaceOrder() {
     //         isOpen: undefined,
     //     })
     // }
-
-    function getTotalPrice() {
-        const price = placeOrder.cartItems?.reduce(
-            (a: any, b: any) => a + b.quantity * parseFloat(b?.rate),
-            0
-        )
-        return price
-    }
 
     function handleDiscountValue() {
         if (!placeOrder.discount) {

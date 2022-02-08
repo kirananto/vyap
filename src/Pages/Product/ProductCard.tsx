@@ -25,13 +25,14 @@ export default function ProductCard({
         //alert('Long pressed!')
         onClicked(item)     
         setLongPressEnabled(false)   
-    }, [])
+    }, [item, onClicked, setLongPressEnabled])
+
     const bind = useLongPress(longPresEnabled ? callback : null, {
         //onStart: () => console.log('Press started'),
         //onFinish: () => console.log('Long press finished'),
         //onCancel: () => console.log('Press cancelled'),
         //onMove: () => console.log("Detected mouse or touch movement"),
-        threshold: 400,
+        threshold: 200,
         captureEvent: true,
         cancelOnMovement: false,
         detect: LongPressDetectEvents.BOTH

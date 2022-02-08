@@ -33,7 +33,7 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
         return () => {
             signal.abort()
         }
-    }, [])
+    }, [onPressConfirm])
 
     return (
         <form

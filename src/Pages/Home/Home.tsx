@@ -125,7 +125,7 @@ export const Home = () => {
                 setFloatBtnLarge(false)
             }
         }
-    }, [scrollDirection])
+    }, [isScrollingDown, isScrollingUp, scrollDirection])
 
     // ......  Button resizing onscroll - end.........!
 
