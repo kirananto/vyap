@@ -8,20 +8,21 @@ export const fetchOrderAPI = (token: string, id: string) => axiosClient({
         'authorization': `Bearer ${token}`
     }
 })
-export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, relatedId } : { token: string, orderStatus: OrderStatusType | undefined, offset: number, limit: number, ordering?: string, relatedId?: string }) => axiosClient({
-    url: `/order`,
-    method: 'GET',
-    params: {
-        orderStatus,
-        offset,
-        limit,
-        ordering,
-        relatedId
-    },
-    headers: {
-        'authorization': `Bearer ${token}`
-    }
-})
+export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, relatedId }:
+    { token: string, orderStatus: OrderStatusType | undefined, offset: number, limit: number, ordering?: string, relatedId?: string }) => axiosClient({
+        url: `/order`,
+        method: 'GET',
+        params: {
+            orderStatus,
+            offset,
+            limit,
+            ordering,
+            relatedId
+        },
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    })
 
 export const placeOrderAPI = (token: string, data: {
     description: string
@@ -57,3 +58,12 @@ export function fetchOrderItems(token: string, orderId: string, limit: number, o
         }
     })
 }
+
+export const updateOrderStatus = ({ token, id, data }: { token: string; id?: string, data: any }) => axiosClient({
+    url: `/order-status/${id}`,
+    method: 'PATCH',
+    data,
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})

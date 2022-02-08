@@ -11,7 +11,20 @@ import { useParams } from 'react-router'
 //TODO use virtualization over here
 const limit = 1000
 
-export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string, toRefresh: boolean }) {
+interface iProps { 
+    inboxHash?: string,
+    toRefresh: boolean,
+    setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    setcurrentOrderStatusId: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function ChatList({ 
+    inboxHash, 
+    toRefresh , 
+    setorderOptionModalVisible, 
+    setcurrentOrderStatusId}
+    : iProps
+) {
     const { user, token } = useSelector(selectCredentials)
     const [currentPage] = useState(1)
     const chatList = useSelector(selectChatList)
@@ -28,7 +41,6 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
         messagesEndRef.current?.scrollIntoView()
 
     }
-
 
     useEffect(() => {
         if (chats?.threads?.length > 2) {
@@ -65,7 +77,12 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
                 return <PaymentCard key={thread.id} className={layout} thread={thread} />
             }
             if (thread.type === ThreadTypeEnum.ORDER) {
-                return <OrderCard key={thread.id} className={layout} thread={thread} />
+                return <OrderCard 
+                    setorderOptionModalVisible={setorderOptionModalVisible} 
+                    setcurrentOrderStatusId={setcurrentOrderStatusId}
+                    key={thread.id} 
+                    className={layout} 
+                    thread={thread} />
             }
             return <div key={thread.id}>{thread.msg}</div>
         }).reverse()
