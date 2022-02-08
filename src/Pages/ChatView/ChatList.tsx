@@ -41,7 +41,7 @@ export default function ChatList({ inboxHash, toRefresh }: { inboxHash?: string,
         if(inboxHash) {
             dispatch(fetchThreadsByInbox({ token: token!, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
         }
-    }, [toRefresh, token, inboxHash, currentPage])
+    }, [toRefresh, token, inboxHash, currentPage, dispatch, id])
 
     function renderChats() {
         if (chats?.error) {

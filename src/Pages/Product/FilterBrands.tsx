@@ -45,7 +45,7 @@ export default function FilterBrand(props: FilterBrands) {
         fetchBrands(token!, 10, 0).then((result: any) => {
             setItems(result?.data?.data)
         })
-    }, [])
+    }, [token])
 
     function renderItems() {
         if (items?.length < 1) {

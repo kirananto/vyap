@@ -38,7 +38,7 @@ function RouterComp() {
                 return Promise.reject(error)
             }
         )
-    }, [])
+    }, [dispatch, navigate, token])
 
     return (
         <Routes>

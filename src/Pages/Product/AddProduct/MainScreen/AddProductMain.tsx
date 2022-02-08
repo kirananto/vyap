@@ -11,7 +11,7 @@ export default function AddProductMain() {
 
     useEffect(() => {
         dispatch(clearAll())
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="w-full h-screen dark:bg-gray-900">

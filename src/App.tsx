@@ -34,7 +34,7 @@ export const InitialRouter = () => {
         else {
             dispatch(setDarkMode(false))
         }
-    }, [])
+    }, [dispatch])
 
     return (
         <IntlProvider locale={userInterfaceLanguage} messages={messages[userInterfaceLanguage]} defaultLocale={defaultUserInterfaceLanguage}>

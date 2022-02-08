@@ -31,7 +31,7 @@ export default function OrderDetails() {
         fetchOrderAPI(token!, id!).then((result) => {
             setOrder(result.data)
         })
-    }, [])
+    }, [id, token])
 
     // ....Bill Actions....  
     //Show the bill in DOM on Share Click and then Hide after a delay

@@ -54,7 +54,7 @@ export const Home = () => {
         else {
             navigate('/login')
         }
-    }, [paginationParams.search, addCustomerVisible])
+    }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
     function customerFilter(filterItem: any) {
         const search = paginationParams.search?.trim()?.toLowerCase()

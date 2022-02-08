@@ -36,7 +36,7 @@ function OrganizationCategoryModal(props: IProps) {
                 console.log('test....:',result)
                 setItems(result.data?.data?.filter((item: IFetchOrganizationProductCategory) => item.name))
             })
-    }, [searchValue])
+    }, [searchValue, token, user?.organizationId])
 
     function selectHSN(value: BrandInterface) {
         dispatch(setCategory(value))

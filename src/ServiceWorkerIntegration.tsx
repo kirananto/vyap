@@ -3,10 +3,10 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Workbox, messageSW } from 'workbox-window'
 import { hapticFeedback } from './utils/vibrate'
 
+const workbox = new Workbox(import.meta.env.SNOWPACK_PUBLIC_SERVICE_WORKER)
 
 export default function ServiceWorkerIntegration() {
     const intl = useIntl()
-    const workbox = new Workbox(import.meta.env.SNOWPACK_PUBLIC_SERVICE_WORKER)
     const [updateNotificationOpen, setUpdateNotificationOpen] = React.useState(false)
     const [registration, setRegistration] = React.useState<ServiceWorkerRegistration>()
 

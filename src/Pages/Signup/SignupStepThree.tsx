@@ -68,7 +68,7 @@ export default function SignupStepThree() {
         }).catch(() => {
             console.log('error')
         })
-    }, [])
+    }, [token])
 
     function handleSubmit() {
     //TODO Fix this

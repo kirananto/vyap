@@ -81,7 +81,7 @@ export default function FilterCategory(props: FilterCategories) {
                 }
             )
         }
-    }, [])
+    }, [props.type, token])
 
     return (
         <div>

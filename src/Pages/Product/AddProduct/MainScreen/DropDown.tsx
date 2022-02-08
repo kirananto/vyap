@@ -44,7 +44,7 @@ function List(props: IProps) {
             setProductImage('') 
         }
 
-    }, [])
+    }, [props?.opt?.id, token])
 
     return (
         <div

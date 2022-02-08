@@ -54,7 +54,7 @@ export default function FilterCategory(props: FilterCategories) {
         ).then((result: any) => {
             setItems(result?.data?.data?.filter((item: any) => item?.name))
         })
-    }, [])
+    }, [token, user?.organizationId])
 
     function renderItems() {
         if (items?.length === 0) {

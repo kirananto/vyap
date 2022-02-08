@@ -34,7 +34,7 @@ function CentralCategoryModal(props: IProps) {
         fetchCentralProductCategories(token!, 100, 0, searchValue).then(result => {
             setItems(result.data?.data?.filter((item: ICategories) => item.name))
         })
-    }, [searchValue])
+    }, [searchValue, token])
 
     function selectHSN(value: BrandInterface) {
         dispatch(setCentralCategory(value))

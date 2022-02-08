@@ -54,7 +54,7 @@ export default function AddItem() {
         }).then((result: any) => {
             setPrevOrdered(result.data?.data)
         })
-    }, [])
+    }, [isSupplier, placeOrder.orgId, token, user?.organizationId])
 
 
     useEffect(() => {
@@ -78,17 +78,7 @@ export default function AddItem() {
         }).then((result: any) => {
             setItemList(result.data?.data ?? [])
         })
-    }, [
-        token,
-        isSupplier,
-        user?.organizationId,
-        placeOrder.orgId,
-        searchValue,
-        filters?.categories,
-        filters?.brands,
-        filters?.sorting,
-        searchValue,
-    ])
+    }, [token, isSupplier, user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
 
     function onSubmit() {
         //TODO Add to dispatch

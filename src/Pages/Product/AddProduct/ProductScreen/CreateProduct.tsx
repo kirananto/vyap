@@ -58,7 +58,7 @@ function CreateProduct() {
                 dispatch(clearAll())
             }
         }
-    }, [addProductInfo?.editProductId])
+    }, [addProductInfo?.editProductId, dispatch])
 
     function popStateHandler() {
         if (trackBackBtn.current) {
@@ -128,10 +128,8 @@ function CreateProduct() {
                 )
             }
         }
-    }, [
-        addProductInfo?.others?.productImage?.length,
-        addProductInfo?.centralCatalogue?.id,
-    ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ addProductInfo?.others?.productImage?.length, addProductInfo?.centralCatalogue?.id, ])
 
     const validatePricing = () => {
     //validation for edit

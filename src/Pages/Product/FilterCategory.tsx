@@ -55,7 +55,7 @@ export default function FilterCategory(props: FilterCategories) {
         ).then((result: IOrganizationProductCategories) => {
             setItems(result?.data?.data?.filter((item: IDataEntity) => item?.name))
         })
-    }, [])
+    }, [token, user?.organizationId])
 
     function renderItems() {
         if (items?.length === 0) {

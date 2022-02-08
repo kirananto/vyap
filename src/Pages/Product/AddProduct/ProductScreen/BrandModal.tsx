@@ -28,7 +28,7 @@ function BrandModal(props: any) {
         fetchBrands(token!, 100, 0, searchValue).then(result => {
             setBrands(result.data?.data)
         })
-    }, [searchValue])
+    }, [searchValue, token])
 
     function selectHSN(value: BrandInterface) {
         dispatch(setBrand(value))

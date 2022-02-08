@@ -39,7 +39,7 @@ export default function Payments() {
             setPayments(result?.data?.data!)
             //TODO handle the payments better
         })
-    }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id])
+    }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id, token])
     return (
         <div className="">
             {/* header */}

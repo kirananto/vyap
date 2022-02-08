@@ -26,7 +26,7 @@ export default function ProductSuggestionCard({
             console.log('da', result.data)
             setItem(result.data)
         })
-    }, [productId])
+    }, [productId, token])
 
     return ( <div
         className="grid flex-none w-48 bg-white-200 dark:bg-gray-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"
