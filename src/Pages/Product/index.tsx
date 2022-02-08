@@ -35,14 +35,14 @@ export default function Product() {
     // ! Tracking the total number of products is checked..
     // !--------------->
     const [filterPopupOpen, setfilterPopupOpen] =
-    useQueryParam<boolean>('filterPopupOpen')
+        useQueryParam<boolean>('filterPopupOpen')
 
     // !------------------->
     const [isMoreEnabled, setisMoreEnabled] = useState<boolean>(true)
     const [isMoreOpen, setisMoreOpen] = useQueryParam<boolean>('isMoreOpen')
     const [isMoreItem, setIsMoreItem] = useState<IProduct>()
     const [isSearchMoreOpen, setisSearchMoreOpen] =
-    useQueryParam<boolean>('isSearchMoreOpen')
+        useQueryParam<boolean>('isSearchMoreOpen')
 
     const [searchValue, setSearchValue] = useState<string>('')
     const [reRenderCounter, setCounter] = useState(1)
@@ -50,23 +50,23 @@ export default function Product() {
     const [selectedProduct, setselectedProduct] = useState<IProduct[]>([])
 
     useEffect(() => {
-        if(selectedProduct.length === 0)
+        if (selectedProduct.length === 0)
             setLongPressEnabled(true)
     }, [selectedProduct])
 
     useEffect(() => {
-        if(longPresEnabled)
+        if (longPresEnabled)
             setisMoreEnabled(true)
         else
             setisMoreEnabled(false)
     }, [longPresEnabled])
-    
+
 
     // ! For second modal using first modal
     // !------------------------>
     //! ---------------->
     function toggleMore(item?: IProduct) {
-        if(isMoreEnabled){
+        if (isMoreEnabled) {
             setisMoreOpen(item === undefined ? false : true)
             setIsMoreItem(item)
         }
@@ -95,8 +95,8 @@ export default function Product() {
     function hasFilters() {
         return (
             filters?.categories?.length > 0 ||
-      filters?.brands?.length > 0 ||
-      filters?.sorting !== undefined
+            filters?.brands?.length > 0 ||
+            filters?.sorting !== undefined
         )
     }
     // ! ------===------->
@@ -159,8 +159,8 @@ export default function Product() {
                     <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
                     <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
                         {' '}
-            You do not have any products added. Please add a product to begin
-            listing it to your shops.{' '}
+                        {searchValue?.trim() === '' ? `You do not have any products added. Please add a product to begin
+            listing it to your shops.` : `Sorry no results found for the search criteria.`}{' '}
                     </div>
                 </div>
             )

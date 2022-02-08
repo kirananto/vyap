@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import OrderContainerDetail from './OrderContianerDetail'
 import format from 'date-fns/format'
 import Spinner from 'src/Components/Style/Spinner'
+import ChatImg from '../Product/assets/no_data.svg'
 
 interface IProps {
   orders: any[];
@@ -18,6 +19,17 @@ export default function OrderContainer({ orders, loading }: IProps) {
                 <div className="mt-4">Loading...</div>
             </div>
         )
+    }
+
+    
+    if (orders?.length === 0) {
+        return <div>
+            <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
+            <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+                {' '}
+                You don't have any transactions. Please do some transactions and visit here later.{' '}
+            </div>
+        </div>
     }
 
     const onMinimize = () => {

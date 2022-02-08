@@ -24,7 +24,7 @@ export const Home = () => {
     const customer = useSelector(selectCustomerInfo)
     const dispatch = useDispatch()
     const [addCustomerVisible, setAddCustomerVisible] =
-    useQueryParam<any>('addCustomer')
+        useQueryParam<any>('addCustomer')
     const [loading, setLoading] = React.useState(
         customer.customers?.length === 0
     )
@@ -43,7 +43,7 @@ export const Home = () => {
                 offset: (paginationParams.page - 1) * limit,
                 limit,
                 search:
-          paginationParams.search.trim() === '' ? undefined : paginationParams.search.trim(),
+                    paginationParams.search.trim() === '' ? undefined : paginationParams.search.trim(),
             }).then((result: any) => {
                 dispatch(setCustomers(result.data.data))
                 dispatch(setCustomerTotal(result.data.total))
@@ -75,24 +75,24 @@ export const Home = () => {
                     />
                     <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
                         {' '}
-            You do not have any transactions, Please invite a customer to start
-            the transactions{' '}
+                        {paginationParams.search.trim() === '' ? `You do not have any transactions, Please invite a customer to start
+            the transactions` : `Sorry no results found for the search.`}: {' '}
                     </div>
                 </div>
             )
         }
         return customer?.customers?.filter(filterItem => {
             const search = paginationParams.search?.trim()?.toLowerCase()
-            if(filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
+            if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
                 return true
             }
-            if(filterItem.lastMsg?.toLowerCase()?.includes(search)) {
+            if (filterItem.lastMsg?.toLowerCase()?.includes(search)) {
                 return true
             }
-            if(filterItem.recipient?.officeNumber?.toLowerCase()?.includes(search)) {
+            if (filterItem.recipient?.officeNumber?.toLowerCase()?.includes(search)) {
                 return true
             }
-            if(filterItem.recipient?.email?.toLowerCase()?.includes(search)) {
+            if (filterItem.recipient?.email?.toLowerCase()?.includes(search)) {
                 return true
             }
             return false
@@ -105,7 +105,7 @@ export const Home = () => {
     const [floatBtnLarge, setFloatBtnLarge] = useState(true)
     const [scrollTargetRef, target] = useCallbackRef()
     const { scrollDirection, isScrollingUp, isScrollingDown } =
-    useScrollDirection(target)
+        useScrollDirection(target)
 
     function useCallbackRef() {
         const [value, setValue] = React.useState<any>()

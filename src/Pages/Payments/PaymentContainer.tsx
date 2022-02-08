@@ -8,10 +8,11 @@ import ReactToPrint from 'react-to-print'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
+import ChatImg from '../Product/assets/no_data.svg'
 
 interface IProps {
-  payments?: IFetchAllPaymentsDataEntity[];
-  loading: boolean;
+    payments?: IFetchAllPaymentsDataEntity[];
+    loading: boolean;
 }
 
 export default function PaymentContainer({ payments, loading }: IProps) {
@@ -65,7 +66,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                             <div className="flex gap-2">
                                 <div className="flex flex-col">
                                     <div className="text-gray-500 dark:text-gray-300">
-                    #{item?.id?.split('-')[0]} •{' '}
+                                        #{item?.id?.split('-')[0]} •{' '}
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
@@ -82,7 +83,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                             </div>
                             <div className="flex items-center">
                                 <div className="text-lg font-extrabold text-gray-600 dark:text-gray-200">
-                  ₹ {item.amount}
+                                    ₹ {item.amount}
                                 </div>
                             </div>
                         </div>
@@ -134,13 +135,22 @@ export default function PaymentContainer({ payments, loading }: IProps) {
             </div>
         )
     }
+
+    if (payments?.length === 0) {
+        return <div>
+            <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
+            <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+                {' '}
+                You don't have any transactions. Please do some transactions and visit here later.{' '}
+            </div>
+        </div>
+    }
+
     return (
         <>
             {payments?.map((item, index) => (
                 <div
-                    className={`${
-                        index === payments.length - 1 ? '' : 'border-b border-gray-200 dark:border-gray-700'
-                    }`}
+                    className={`${index === payments.length - 1 ? '' : 'border-b border-gray-200 dark:border-gray-700'}`}
                     key={`${index}`}
                 >
                     <div className="mt-2 mb-3 flex flex-row">
@@ -156,7 +166,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                         <div className="w-full" onClick={() => openPaymentSummary(item)}>
                             <div className="grid grid-rows-3 content-start">
                                 <div className="row-span-3 grid auto-cols-max grid-flow-col gap-1">
-                                    
+
                                 </div>
 
                                 <div className="m-auto flex w-full justify-between">
@@ -171,7 +181,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                         </div>
                                     </div>
                                     <div className="flex basis-5/12 justify-end self-center text-sm md:text-lg font-extrabold text-gray-600 dark:text-gray-200">
-                    ₹ {item.amount}
+                                        ₹ {item.amount}
                                     </div>
                                 </div>
                                 <div className="flex gap-1">
