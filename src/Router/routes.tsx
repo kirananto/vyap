@@ -25,6 +25,8 @@ const PurchaseOrder = lazily(() => import('src/Pages/StockManagement/PurchaseOrd
 const AddProductMain = lazily(() => import('src/Pages/Product/AddProduct/MainScreen/AddProductMain')).default
 const OrderDetails = lazily(() => import('src/Pages/Orders/OrderView')).default
 const { Payment } = lazily(() => import('src/Pages/ChatView'))
+const ProductDetail = lazily(() => import('src/Pages/Product/ProductDetail')).default
+
 
 export const routes: {
     path: string;
@@ -119,6 +121,11 @@ export const routes: {
     {
         path: '/chat/:id',
         Component: Payment,
+        requireAuth: true
+    },
+    {
+        path: '/product/:id',
+        Component: ProductDetail,
         requireAuth: true
     },
     {
