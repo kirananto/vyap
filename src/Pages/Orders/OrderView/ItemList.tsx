@@ -1,19 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { fetchOrderItems } from 'src/API/order.axios'
+import Spinner from 'src/Components/Style/Spinner'
+import { selectChatList, setOrderItems } from 'src/Pages/ChatView/chatListSlice'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
 function Items({ order }: { order: any }) {
-    console.log('order', order?.id)
+
+    const { id, chatId } = useParams()
     const { token } = useSelector(selectCredentials)
-    const [orderItems, setOrderItems] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+    const chatList = useSelector(selectChatList)
+    const thread = chatList[`${chatId}`]?.threads?.find(findItem => findItem?.order?.id === id)
+    // const order = thread?.order
+    const orderItems = order?.orderItems
+    // const [orderItems, setOrderItems] = useState<any[]>([])
+    const dispatch = useDispatch()
 
     useEffect(() => {
         fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result: any) => {
-            setOrderItems(result?.data?.data)
-        })
-    }, [token, order.id])
+            // setOrderItems(result?.data?.data)
+            dispatch(setOrderItems({ inboxId: chatId!, threadId: thread?.id!, orderItems: result?.data?.data }))
+        }).finally(() => setLoading(false))
+    }, [token, order.id, dispatch, chatId, thread?.id])
+
+    if(loading && orderItems?.length === 0) {
+        return (
+            <div className="mt-12 grid p-12 text-center dark:text-gray-100">
+                <Spinner />
+            </div>
+        )
+    }
 
     return (
         <div className="divide-y divide-gray-100 dark:divide-gray-700">

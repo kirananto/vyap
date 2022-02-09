@@ -67,7 +67,7 @@ export const routes: {
         requireAuth: true
     },
     {
-        path: '/payment/:id',
+        path: 'chat/:chatId/payment/:id',
         Component: PaymentDetails,
         requireAuth: true
     },
@@ -152,7 +152,7 @@ export const routes: {
         requireAuth: true
     },
     {
-        path: '/order/:id',
+        path: 'chat/:chatId/order/:id',
         Component: OrderDetails,
         requireAuth: true
     },
