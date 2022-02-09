@@ -100,11 +100,7 @@ function CreateProduct() {
     useEffect(() => {
         if (addProductInfo?.centralCatalogue?.id) {
             fetchCentralProductImages(
-                token,
-                100,
-                0,
-                addProductInfo?.centralCatalogue?.id
-            ).then((result: ICentralCatalogue) => {
+                { token, limit: 100, offset: 0, catalogueId: addProductInfo?.centralCatalogue?.id }            ).then((result: ICentralCatalogue) => {
                 const imageName = result?.data?.data?.filter((filterItem: IDataEntity) =>
                     filterItem?.imageName?.includes('.')
                 )?.[0]?.imageName
@@ -191,27 +187,29 @@ function CreateProduct() {
         let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
 
         if (!addProductInfo?.centralCatalogue?.id) {
-            const centralProduct: IAddCentralProductResponse | null = await postAddCentralProduct(token, {
-                name: addProductInfo?.centralCatalogue?.name!,
-                description: addProductInfo?.centralCatalogue?.description ?? '',
-                categories: {
-                    name: addProductInfo?.others?.centralCategory?.name,
-                    description: addProductInfo?.others?.centralCategory?.name,
-                    imageName: addProductInfo?.others?.centralCategory?.name,
-                },
-                barCode: addProductInfo?.others?.barCode,
-                images: addProductInfo?.others?.productImage,
-                hsnId: addProductInfo?.pricing?.taxEnabled
-                    ? addProductInfo?.pricing.hsn?.id
-                    : undefined,
-                brandId: addProductInfo?.others?.brand?.id ?? undefined,
-                brand: addProductInfo?.others?.brand?.id
-                    ? undefined
-                    : {
-                        name: addProductInfo?.others?.brand?.name,
-                        description: addProductInfo?.others?.brand?.name,
-                        imageName: addProductInfo?.others?.brand?.name,
+            const centralProduct: IAddCentralProductResponse | null = await postAddCentralProduct({
+                token, data: {
+                    name: addProductInfo?.centralCatalogue?.name!,
+                    description: addProductInfo?.centralCatalogue?.description ?? '',
+                    categories: {
+                        name: addProductInfo?.others?.centralCategory?.name,
+                        description: addProductInfo?.others?.centralCategory?.name,
+                        imageName: addProductInfo?.others?.centralCategory?.name,
                     },
+                    barCode: addProductInfo?.others?.barCode,
+                    images: addProductInfo?.others?.productImage,
+                    hsnId: addProductInfo?.pricing?.taxEnabled
+                        ? addProductInfo?.pricing.hsn?.id
+                        : undefined,
+                    brandId: addProductInfo?.others?.brand?.id ?? undefined,
+                    brand: addProductInfo?.others?.brand?.id
+                        ? undefined
+                        : {
+                            name: addProductInfo?.others?.brand?.name,
+                            description: addProductInfo?.others?.brand?.name,
+                            imageName: addProductInfo?.others?.brand?.name,
+                        },
+                }
             })
             centralCatalogueId = centralProduct?.data?.id
         }
@@ -239,7 +237,7 @@ function CreateProduct() {
             rate: parseFloat(`${addProductInfo?.pricing?.salesPrice}`),
         }
 
-        postAddProduct(token, body)
+        postAddProduct({ token, data: body })
             .then((response) => {
                 setIsLoading(false)
                 console.log('response', response)

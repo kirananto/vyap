@@ -31,7 +31,7 @@ function OrganizationCategoryModal(props: IProps) {
     }
 
     useEffect(() => {
-        fetchOrganizationProductCategories(token, 100, 0, searchValue, user?.organizationId)
+        fetchOrganizationProductCategories({ token, limit: 100, offset: 0, search: searchValue, orgId: user?.organizationId })
             .then((result : IFetchOrganizationProductCategories) => {
                 console.log('test....:',result)
                 setItems(result.data?.data?.filter((item: IFetchOrganizationProductCategory) => item.name))

@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export const fetchBrands = (token?: string, limit: number, offset: number, search?: string) => axiosClient({
+export const fetchBrands = ({ token, limit, offset, search }: { token?: string; limit: number; offset: number; search?: string }) => axiosClient({
     url: `/brand`,
     method: 'GET',
     params: {

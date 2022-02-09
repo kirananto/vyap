@@ -146,7 +146,7 @@ function OthersTab({ action, saveAttempt }: Props) {
     const fileUploaderRef  = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        fetchBrands(token, 100, 0)
+        fetchBrands({ token, limit: 100, offset: 0 })
             .then((result: any) =>
                 console.log(
                     result.data.data.map((item: any) => ({ label: 'ssdd', value: item }))
@@ -169,7 +169,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                     success(result) {
                         const data = new FormData()
                         data.append('file', result)
-                        imageUpload(token, data)
+                        imageUpload({ token, data })
                             .then((result: IProductImageUploadResult) => {
                                 console.log('data', result.data)
                                 dispatch(

@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchInboxById, fetchThreadsById } from 'src/API/inbox.axios';
-import type { orderInterface } from 'src/Components/OrderCard';
-import type { paymentObject } from 'src/Components/PaymentCard';
-import type { Organization } from '../Login/credentialsSlice';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { fetchInboxById, fetchThreadsById } from 'src/API/inbox.axios'
+import type { orderInterface } from 'src/Components/OrderCard'
+import type { paymentObject } from 'src/Components/PaymentCard'
+import type { Organization } from '../Login/credentialsSlice'
 
 interface chatListInterface {
     [key: string]: IndividualChatInterface
@@ -64,7 +64,7 @@ export const fetchThreadsByInbox = createAsyncThunk(
 export const fetchInboxAction = createAsyncThunk(
     'chatList/fetchInboxAction',
     async ({ token, id }: { token?: string; id: string }) => {
-        const response = await fetchInboxById(token, id!)
+        const response = await fetchInboxById({ token, id: id! })
         return response.data
     }
 )
@@ -95,7 +95,8 @@ export const chatListInterface = createSlice({
                     const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
                     return { ...existingItem, ...item }
                 })
-            } else {
+            }
+            else {
                 state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
             }
         }),
@@ -112,7 +113,7 @@ export const chatListInterface = createSlice({
             }
         }),
         builder.addCase(fetchInboxAction.fulfilled, (state, action) => {
-            state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload };
+            state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
         }),
         builder.addCase(fetchInboxAction.pending, (state, action: any) => {
             if (state[action.meta?.args?.id]) {
@@ -127,18 +128,18 @@ export const chatListInterface = createSlice({
             }
         })
     },
-});
+})
 
 export const {
     setOrderInfo,
     setPaymentInfo,
     clearAll
-} = chatListInterface.actions;
+} = chatListInterface.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectChatList = (state: any): chatListInterface => state.chatList;
+export const selectChatList = (state: any): chatListInterface => state.chatList
 
 
-export default chatListInterface.reducer;
+export default chatListInterface.reducer

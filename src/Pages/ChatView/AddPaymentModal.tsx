@@ -83,13 +83,15 @@ export default function AddPaymentModal({
         console.log('order', order)
         if (btnAction === BUTTON_ACTION.PLACE_ORDER ? paymentOption !== PAYMENT_OPTIONS.PAY_LATER : true) {
             // TODO validations before making API call
-            createPayment(token, {
-                amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? parsedcustomAmount! : amount!,
-                note: order ? getNoteText(order) : note,
-                method,
-                status: paymentStatus.SUCCESS,
-                receiverId: user?.organizationId!,
-                senderOrgId: receiverId!,
+            createPayment({
+                token, data: {
+                    amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? parsedcustomAmount! : amount!,
+                    note: order ? getNoteText(order) : note,
+                    method,
+                    status: paymentStatus.SUCCESS,
+                    receiverId: user?.organizationId!,
+                    senderOrgId: receiverId!,
+                }
             })
                 .then(() => {
                     setIsSuccess(true)

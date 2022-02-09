@@ -31,7 +31,7 @@ function CentralCategoryModal(props: IProps) {
     }
 
     useEffect(() => {
-        fetchCentralProductCategories(token, 100, 0, searchValue).then(result => {
+        fetchCentralProductCategories({ token, limit: 100, offset: 0, search: searchValue }).then(result => {
             setItems(result.data?.data?.filter((item: ICategories) => item.name))
         })
     }, [searchValue, token])

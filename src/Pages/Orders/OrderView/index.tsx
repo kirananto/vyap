@@ -28,7 +28,7 @@ export default function OrderDetails() {
     const getImage = () => takeScreenshot(ref.current)
 
     useEffect(() => {
-        fetchOrderAPI(token, id!).then((result) => {
+        fetchOrderAPI({ token, id: id! }).then((result) => {
             setOrder(result.data)
         })
     }, [id, token])
@@ -45,6 +45,7 @@ export default function OrderDetails() {
     }
     ///...end Bill Actions
 
+    
     const onShare = () => {
         if (shareAction) {
             share('page')

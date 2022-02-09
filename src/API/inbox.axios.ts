@@ -16,7 +16,7 @@ export function fetchInboxes({ token, offset, limit, search } : { token?: string
 }
 
 
-export const fetchInboxById = (token?: string, id: string) => axiosClient({
+export const fetchInboxById = ({ token, id }: { token?: string; id: string }) => axiosClient({
     url: `/inbox/${id}`,
     method: 'GET',
     headers: {

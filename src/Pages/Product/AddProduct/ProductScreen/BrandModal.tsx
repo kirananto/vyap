@@ -25,7 +25,7 @@ function BrandModal(props: any) {
     }
 
     useEffect(() => {
-        fetchBrands(token, 100, 0, searchValue).then(result => {
+        fetchBrands({ token, limit: 100, offset: 0, search: searchValue }).then(result => {
             setBrands(result.data?.data)
         })
     }, [searchValue, token])

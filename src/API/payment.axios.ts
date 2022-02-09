@@ -1,7 +1,7 @@
 import { axiosClient } from './apiClient'
 import type { paymentMethod, paymentStatus } from './enum'
 
-export const fetchPaymentById = (token?: string, id: string) => axiosClient({
+export const fetchPaymentById = ({ token, id }: { token?: string; id: string }) => axiosClient({
     url: `/payment/${id}`,
     method: 'GET',
     headers: {
@@ -23,14 +23,16 @@ export const fetchAllPayments = ({ token, limit, offset, paymentMethod, ordering
     }
 })
 
-export const createPayment = (token?: string, data: {
-    'amount': number
-    'note': string
-    'status': paymentStatus,
-    'method': paymentMethod,
-    'senderOrgId': string,
-    'senderUserId'?: string,
-    'receiverId': string,
+export const createPayment = ({ token, data }: {
+    token?: string; data: {
+        'amount': number
+        'note': string
+        'status': paymentStatus
+        'method': paymentMethod
+        'senderOrgId': string
+        'senderUserId'?: string
+        'receiverId': string
+    }
 }) => axiosClient({
     url: `/payment`,
     method: 'POST',

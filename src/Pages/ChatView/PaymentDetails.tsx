@@ -15,7 +15,7 @@ export default function PaymentDetails() {
     const { id } = useParams()
 
     useEffect(() => {
-        fetchPaymentById(token, id!).then(result => {
+        fetchPaymentById({ token, id: id! }).then(result => {
             setPayment(result.data)
         })
     }, [id, token])

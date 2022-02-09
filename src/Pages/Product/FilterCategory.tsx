@@ -47,12 +47,7 @@ export default function FilterCategory(props: FilterCategories) {
 
     useEffect(() => {
         fetchOrganizationProductCategories(
-            token,
-            20,
-            0,
-            undefined,
-            user?.organizationId
-        ).then((result: IOrganizationProductCategories) => {
+            { token, limit: 20, offset: 0, search: undefined, orgId: user?.organizationId }        ).then((result: IOrganizationProductCategories) => {
             setItems(result?.data?.data?.filter((item: IDataEntity) => item?.name))
         })
     }, [token, user?.organizationId])

@@ -42,7 +42,7 @@ export default function OrderContainerDetail({
     }, [])
 
     useEffect(() => {
-        fetchOrderItems(token, order.id, 100, 0).then((result: any) => {
+        fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result: any) => {
             setOrderItems(result?.data?.data)
             setLoading(false)
         })

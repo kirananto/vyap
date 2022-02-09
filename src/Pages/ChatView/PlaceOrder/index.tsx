@@ -147,20 +147,22 @@ export default function PlaceOrder() {
 
     async function proceedPlaceOrder() {
         if (placeOrder.cartItems?.length !== 0 && isValidDiscount) {
-            const order = await placeOrderAPI(token, {
-                description: placeOrder.note,
-                flatDiscount: placeOrder.discount,
-                supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
-                buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
-                orderItems: placeOrder.cartItems?.map((mapItem) => {
-                    return {
-                        quantity: mapItem.quantity,
-                        purchasePrice: parseFloat(mapItem.rate),
-                        productId: mapItem.id,
-                        aliasName: mapItem.aliasName ?? '',
-                        mrpPrice: parseFloat(mapItem.mrpPrice),
-                    }
-                }),
+            const order = await placeOrderAPI({
+                token, data: {
+                    description: placeOrder.note,
+                    flatDiscount: placeOrder.discount,
+                    supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
+                    buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
+                    orderItems: placeOrder.cartItems?.map((mapItem) => {
+                        return {
+                            quantity: mapItem.quantity,
+                            purchasePrice: parseFloat(mapItem.rate),
+                            productId: mapItem.id,
+                            aliasName: mapItem.aliasName ?? '',
+                            mrpPrice: parseFloat(mapItem.mrpPrice),
+                        }
+                    }),
+                }
             })
             // .then(() => {
             // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
