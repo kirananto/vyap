@@ -6,27 +6,18 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
 
 export default function ProductSuggestionCard({ 
-    productId, 
+    item, 
     handleAddItem, 
     handleRemoveItemItem,
     selectedItems,
     updateItem
 } : { 
-     productId: string,
+     item: any,
      handleAddItem: any, 
      handleRemoveItemItem: any,
      updateItem: any,
      selectedItems: any
      }) {
-    const [item, setItem] = useState<any>(undefined)
-    const { token } = useSelector(selectCredentials)
-
-    useEffect(() => {
-        fetchProductById({ token: token, id: productId }).then(result => {
-            console.log('da', result.data)
-            setItem(result.data)
-        })
-    }, [productId, token])
 
     return ( <div
         className="grid flex-none w-48 bg-white-200 dark:bg-gray-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"

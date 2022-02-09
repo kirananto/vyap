@@ -6,7 +6,7 @@ import Button from 'src/Components/Style/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { pushItemsToCart, selectPlaceOrderInfo } from '../placeOrderSlice'
 import { useNavigate } from 'react-router'
-import { fetchProducts } from 'src/API/products.axios'
+import { fetchProductById, fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../Product/assets/no_data.svg'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
@@ -17,6 +17,7 @@ import useQueryParam from 'src/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
 import ProductSuggestionCard from './ProductSuggestionCard'
+import axios from 'axios'
 
 export default function AddItem() {
     const [itemList, setItemList] = useState<any[]>([])
@@ -51,8 +52,13 @@ export default function AddItem() {
             supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId!,
             limit: 10,
             offset: 0
-        }).then((result: any) => {
-            setPrevOrdered(result.data?.data)
+        }).then(async (result: any) => {
+            const prev = await Promise.allSettled(result.data?.data?.map((productId: any) => {
+                return fetchProductById({ token: token, id: productId })
+            }))
+            const newPrev = prev.filter((item: any) => item.status === 'fulfilled').map((item: any) => item.value?.data)?.filter(item => item.outOfStock === false)
+            console.log('prev', newPrev)
+            setPrevOrdered(newPrev)
         })
     }, [isSupplier, placeOrder.orgId, token, user?.organizationId])
 
@@ -319,9 +325,9 @@ export default function AddItem() {
                 {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded-lg mb-2">
                     <div className="dark:text-gray-400 mb-1">Choose previously ordered items...</div>
                     <div className="flex gap-2 overflow-x-scroll">
-                        {prevOrdered?.map(productId => <ProductSuggestionCard
-                            key={productId}
-                            productId={productId}
+                        {prevOrdered?.map(item => <ProductSuggestionCard
+                            key={item.id}
+                            item={item}
                             handleAddItem={handleAddItem}
                             handleRemoveItemItem={handleRemoveItemItem}
                             updateItem={updateItem}
