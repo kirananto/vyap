@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './payment.css'
 import { Header, PaymentBottomHeader } from '../../Components/Header'
 import ChatList from './ChatList'
@@ -11,12 +11,16 @@ import { setOrgId, clearAll } from './PlaceOrder/placeOrderSlice'
 import useQueryParam from 'src/useQueryParams'
 import { fetchInboxAction, selectChatList } from './chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
+import ModalViewer from 'src/Components/Style/ModalViewer'
+import OrderOptionsPopup from './Popups/OrderOptionsPopup'
 
 export const Payment = () => {
     const { token } = useSelector(selectCredentials)
     const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<any>(
         'paymentModalVisible'
     )
+    const [currentOrderStatusId, setcurrentOrderStatusId] = useState<string>('')
+    const [orderOptionModalVisible, setorderOptionModalVisible] = useState<boolean>(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -60,7 +64,12 @@ export const Payment = () => {
                 />
             </div>
             {/* body */}
-            <ChatList inboxHash={inbox?.inboxHash} toRefresh={paymentModalVisible} />
+            <ChatList 
+                setorderOptionModalVisible={setorderOptionModalVisible}
+                setcurrentOrderStatusId={setcurrentOrderStatusId}
+                inboxHash={inbox?.inboxHash} 
+                toRefresh={paymentModalVisible} 
+            />
             {/* Footer */}
             <div
                 className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-gray-800"
@@ -95,6 +104,21 @@ export const Payment = () => {
                     receiverId={inbox?.recipient.id}
                 />
             )}
+
+            <ModalViewer
+                body={
+                    <OrderOptionsPopup
+                        onClose={() => {
+                            setorderOptionModalVisible(false)
+                        }}
+                        currentOrderStatusId={currentOrderStatusId}
+                    />
+                }
+                isOpen={orderOptionModalVisible!}
+                onClose={() => {
+                    setorderOptionModalVisible(false)
+                }}
+            />
         </div>
     )
 }
