@@ -7,22 +7,37 @@ import Completed from 'src/Components/Style/Icons/Completed'
 import Processing from 'src/Components/Style/Icons/Processing'
 import Pending from 'src/Components/Style/Icons/Pending'
 
-const OrderOptionsPopup = ({onClose, currentOrderStatusId } : {onClose: any, currentOrderStatusId: string}) => {
+interface iProps {
+    onClose: () => void, 
+    currentOrderStatusId: string
+    setUpdatingOrderId: React.Dispatch<React.SetStateAction<string | undefined>>
+    setNewStatus : React.Dispatch<React.SetStateAction<number | undefined>>
+}
+
+const OrderOptionsPopup = ({onClose, currentOrderStatusId, setUpdatingOrderId, setNewStatus } 
+    : iProps
+) => {
 
     const {token } = useSelector(selectCredentials)
     const handleStatusUpdate = async (statusCode : number) => {
-        const orderId: string = currentOrderStatusId!
-        const body: any = {
-            status: statusCode
+        if(currentOrderStatusId && token){
+            const orderId: string = currentOrderStatusId
+            const body: {status: number} = {
+                status: statusCode
+            }
+            updateOrderStatus({ token: token, id: orderId, data: body })
+                .then((response) => {
+                    //console.log('response', response)
+                    if(response.data.status && response.data.orderId){
+                        setUpdatingOrderId(response.data.orderId)
+                        setNewStatus(response.data.status)
+                    }
+                })
+                .catch((error : any) => {
+                    console.log('Edit product error', error)
+                })
         }
-        updateOrderStatus({ token: token!, id: orderId, data: body })
-            .then((response : any) => {
-                console.log('response', response)
-                //navigate('/my-products')
-            })
-            .catch((error : any) => {
-                console.log('Edit product error', error)
-            })
+        
     }
 
     return (

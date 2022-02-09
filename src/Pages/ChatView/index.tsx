@@ -22,6 +22,9 @@ export const Payment = () => {
     const [currentOrderStatusId, setcurrentOrderStatusId] = useState<string>('')
     const [orderOptionModalVisible, setorderOptionModalVisible] = useState<boolean>(false)
 
+    const [updatingOrderId, setUpdatingOrderId] = useState<string>()
+    const [newStatus, setNewStatus] = useState<number>()
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const chatList = useSelector(selectChatList)
@@ -69,6 +72,8 @@ export const Payment = () => {
                 setcurrentOrderStatusId={setcurrentOrderStatusId}
                 inboxHash={inbox?.inboxHash} 
                 toRefresh={paymentModalVisible} 
+                updatingOrderId={updatingOrderId}
+                newStatus={newStatus}
             />
             {/* Footer */}
             <div
@@ -112,6 +117,9 @@ export const Payment = () => {
                             setorderOptionModalVisible(false)
                         }}
                         currentOrderStatusId={currentOrderStatusId}
+                        setUpdatingOrderId={setUpdatingOrderId}
+                        setNewStatus={setNewStatus}
+
                     />
                 }
                 isOpen={orderOptionModalVisible!}

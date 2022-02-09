@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import PaymentCard from '../../Components/PaymentCard'
 import OrderCard from '../../Components/OrderCard'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import Spinner from 'src/Components/Style/Spinner'
 import { fetchThreadsByInbox, selectChatList, ThreadTypeEnum } from './chatListSlice'
 import { useParams } from 'react-router'
+import { useScrollDirection } from 'react-use-scroll-direction'
 
 //TODO use virtualization over here
 const limit = 1000
@@ -16,30 +17,42 @@ interface iProps {
     toRefresh: boolean,
     setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
     setcurrentOrderStatusId: React.Dispatch<React.SetStateAction<string>>
+    newStatus: number | undefined,
+    updatingOrderId: string | undefined
+
 }
 
 export default function ChatList({ 
     inboxHash, 
     toRefresh , 
     setorderOptionModalVisible, 
-    setcurrentOrderStatusId}
+    setcurrentOrderStatusId,
+    newStatus,
+    updatingOrderId
+}
     : iProps
 ) {
     const { user, token } = useSelector(selectCredentials)
     const [currentPage] = useState(1)
     const chatList = useSelector(selectChatList)
-
     const dispatch = useDispatch()
-
     const { id } = useParams()
     const chats = chatList[`${id}`]
-
-
     const messagesEndRef = useRef<any>(null)
-
+    
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView()
+    }
 
+    //......To avoid long press event while scrolling chat....//
+    const [scrollTargetRef, target] = useCallbackRef()
+    const { isScrolling } = useScrollDirection(target)
+    function useCallbackRef() {
+        const [value, setValue] = React.useState<any>()
+        const ref = useCallback((node: HTMLElement) => {
+            if (node !== null) setValue(node)
+        }, [])
+        return [ref, value]
     }
 
     useEffect(() => {
@@ -50,7 +63,7 @@ export default function ChatList({
 
 
     useEffect(() => {
-        if(inboxHash) {
+        if(inboxHash && token) {
             dispatch(fetchThreadsByInbox({ token: token, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
         }
     }, [toRefresh, token, inboxHash, currentPage, dispatch, id])
@@ -81,14 +94,18 @@ export default function ChatList({
                     setcurrentOrderStatusId={setcurrentOrderStatusId}
                     key={thread.id} 
                     className={layout} 
-                    thread={thread} />
+                    thread={thread}
+                    newStatus={newStatus}
+                    updatingOrderId={updatingOrderId} 
+                    isScrolling={isScrolling}                  
+                />
             }
             return <div key={thread.id}>{thread.msg}</div>
         }).reverse()
     }
 
     return (
-        <div
+        <div ref={scrollTargetRef}
             className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
             {renderChats()}
             <div ref={messagesEndRef} />
