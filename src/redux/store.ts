@@ -1,20 +1,21 @@
 
-import credentialsSlice from '../Pages/Login/credentialsSlice';
-import signupSlice from '../Pages/Signup/signupSlice';
+import credentialsSlice from '../Pages/Login/credentialsSlice'
+import signupSlice from '../Pages/Signup/signupSlice'
 
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { combineReducers } from 'redux'
-import placeOrderSlice from 'src/Pages/ChatView/PlaceOrder/placeOrderSlice';
-import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice';
-import i18nSlice from 'src/i18nSlice';
-import productFiltersSlice from 'src/Pages/Product/productFiltersSlice';
-import paymentFiltersSlice from 'src/Pages/Payments/Filters/paymentFiltersSlice';
-import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice';
-import customersSlice from 'src/Pages/Home/customersSlice';
-import addItemsproductFiltersSlice from 'src/Pages/ChatView/PlaceOrder/AddItem/addProductFiltersSlice';
-import chatListSlice from 'src/Pages/ChatView/chatListSlice';
+import placeOrderSlice from 'src/Pages/ChatView/PlaceOrder/placeOrderSlice'
+import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice'
+import i18nSlice from 'src/i18nSlice'
+import productFiltersSlice from 'src/Pages/Product/productFiltersSlice'
+import paymentFiltersSlice from 'src/Pages/Payments/Filters/paymentFiltersSlice'
+import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice'
+import customersSlice from 'src/Pages/Home/customersSlice'
+import addItemsproductFiltersSlice from 'src/Pages/ChatView/PlaceOrder/AddItem/addProductFiltersSlice'
+import chatListSlice from 'src/Pages/ChatView/chatListSlice'
+import productsSlice from 'src/Pages/Product/productsSlice'
 
 
 const rootReducer = combineReducers({
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     paymentFilters: paymentFiltersSlice,
     orderFilters: orderFiltersSlice,
     customers: customersSlice,
+    products: productsSlice,
     chatList: chatListSlice
 })
 const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 'placeorder', 'paymentFilters', 'orderFilters', 'productFilters', 'addItemsproductFilters'] }

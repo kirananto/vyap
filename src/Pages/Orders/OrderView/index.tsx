@@ -10,6 +10,7 @@ import { format } from 'date-fns'
 import { useScreenshot } from 'use-react-screenshot'
 import OrderBill from './OrderBill'
 import Button from 'src/Components/Style/Button'
+import { isNumber } from 'class-validator'
 
 export default function OrderDetails() {
     const [order, setOrder] = useState<any | undefined>()
@@ -94,9 +95,9 @@ export default function OrderDetails() {
                     <div className="flex flex-col items-center gap-5 py-24">
                         <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
               ₹
-                            {(
+                            {(isNumber(order?.totalAmount) && isNumber(order?.flatDiscount)) ?  (
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
-                            ).toFixed(2)}
+                            ).toFixed(2) : ''}
                         </h1>
                         {/* ---------------- */}
                         <div className="flex items-center justify-center gap-3">

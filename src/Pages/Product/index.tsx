@@ -14,6 +14,7 @@ import ChatImg from './assets/no_data.svg'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import AppliedFilters from './AppliedFilters'
 import { clearAll, selectProductFilters } from './productFiltersSlice'
+import { selectProductsInfo, setProducts } from './productsSlice'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Spinner from 'src/Components/Style/Spinner'
 import useQueryParam from 'src/useQueryParams'
@@ -25,8 +26,8 @@ import { hapticFeedback } from 'src/utils/vibrate'
 export default function Product() {
     const { token, user } = useSelector(selectCredentials)
     const [loading, setLoading] = useState(true)
-    const [products, setProducts] = useState<IProduct[]>([])
     const filters = useSelector(selectProductFilters)
+    const { products } = useSelector(selectProductsInfo)
     const [longPresEnabled, setLongPressEnabled] = useState(true)
 
     const intl = useIntl()
@@ -119,7 +120,7 @@ export default function Product() {
                 : undefined,
         })
             .then((result: IProductList) => {
-                setProducts(result.data?.data ?? [])
+                dispatch(setProducts(result.data?.data ?? []))
             })
             .catch((error) => {
                 console.log('error', error)
@@ -127,7 +128,7 @@ export default function Product() {
             .finally(() => {
                 setLoading(false)
             })
-    }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue, isSearchMoreOpen, reRenderCounter, token, user?.organizationId])
+    }, [filters?.categories, filters?.brands, filters?.sorting, isMoreOpen, searchValue, isSearchMoreOpen, reRenderCounter, token, user?.organizationId, dispatch])
 
     useEffect(() => {
         return () => {
@@ -137,6 +138,25 @@ export default function Product() {
 
 
     function renderProducts() {
+        if (products?.length !== 0) {
+            return products?.map((mapItem) => (
+                <ProductCard
+                    key={mapItem.id}
+                    item={mapItem}
+                    onClicked={CheckboxClicked}
+                    onMore={toggleMore}
+                    isChecked={
+                        !(
+                            selectedProduct?.find(
+                                (findItem) => findItem?.id === mapItem?.id
+                            ) === undefined
+                        )
+                    }
+                    longPresEnabled={longPresEnabled}
+                    setLongPressEnabled={setLongPressEnabled}
+                />
+            ))
+        }
         if (loading) {
             return (
                 <div className="mt-12 grid p-12 text-center dark:text-gray-100">
@@ -144,35 +164,16 @@ export default function Product() {
                 </div>
             )
         }
-        if (products?.length === 0) {
-            return (
-                <div>
-                    <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
-                    <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
-                        {' '}
-                        {searchValue?.trim() === '' ? `You do not have any products added. Please add a product to begin
+        return (
+            <div>
+                <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
+                <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+                    {' '}
+                    {searchValue?.trim() === '' ? `You do not have any products added. Please add a product to begin
             listing it to your shops.` : `Sorry no results found for the search criteria.`}{' '}
-                    </div>
                 </div>
-            )
-        }
-        return products?.map((mapItem) => (
-            <ProductCard
-                key={mapItem.id}
-                item={mapItem}
-                onClicked={CheckboxClicked}
-                onMore={toggleMore}
-                isChecked={
-                    !(
-                        selectedProduct?.find(
-                            (findItem) => findItem?.id === mapItem?.id
-                        ) === undefined
-                    )
-                }
-                longPresEnabled={longPresEnabled}
-                setLongPressEnabled={setLongPressEnabled}
-            />
-        ))
+            </div>
+        )
     }
     return (
         <>
