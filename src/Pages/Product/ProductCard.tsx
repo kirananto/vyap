@@ -10,7 +10,8 @@ export default function ProductCard({
     onMore,
     isChecked,
     longPresEnabled,
-    setLongPressEnabled
+    setLongPressEnabled,
+    isScrolling
 }: {
   item: IProduct;
   onClicked: (item: IProduct) => void;
@@ -18,7 +19,7 @@ export default function ProductCard({
   isChecked: boolean;
   longPresEnabled: boolean;
   setLongPressEnabled: React.Dispatch<React.SetStateAction<boolean>>
-
+  isScrolling: boolean
 }) {
 
     const callback = useCallback(() => {
@@ -27,7 +28,7 @@ export default function ProductCard({
         setLongPressEnabled(false)   
     }, [item, onClicked, setLongPressEnabled])
 
-    const bind = useLongPress(longPresEnabled ? callback : null, {
+    const bind = useLongPress(longPresEnabled && !isScrolling ? callback : null, {
         //onStart: () => console.log('Press started'),
         //onFinish: () => console.log('Long press finished'),
         //onCancel: () => console.log('Press cancelled'),

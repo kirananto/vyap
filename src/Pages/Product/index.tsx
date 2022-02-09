@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Header } from '../../Components/Header'
 import { Footer } from '../../Components/Footer'
 import './assets/Product.css'
@@ -21,6 +21,7 @@ import useQueryParam from 'src/useQueryParams'
 import type { IProduct } from 'src/types/product'
 import type { IProductList } from 'src/types/fetchProducts'
 import { hapticFeedback } from 'src/utils/vibrate'
+import { useScrollDirection } from 'react-use-scroll-direction'
 
 // ! Main Component
 export default function Product() {
@@ -61,6 +62,18 @@ export default function Product() {
         else
             setisMoreEnabled(false)
     }, [longPresEnabled])
+
+
+    //......To avoid long press event while scrolling chat....//
+    const [scrollTargetRef, target] = useCallbackRef()
+    const { isScrolling } = useScrollDirection(target)
+    function useCallbackRef() {
+        const [value, setValue] = React.useState<any>()
+        const ref = useCallback((node: HTMLElement) => {
+            if (node !== null) setValue(node)
+        }, [])
+        return [ref, value]
+    }
 
 
     // ! For second modal using first modal
@@ -154,6 +167,7 @@ export default function Product() {
                     }
                     longPresEnabled={longPresEnabled}
                     setLongPressEnabled={setLongPressEnabled}
+                    isScrolling={isScrolling}
                 />
             ))
         }
@@ -202,6 +216,7 @@ export default function Product() {
             </div>
 
             <div
+                ref={scrollTargetRef}
                 className="custom-height bg-white pb-[13vh] dark:bg-gray-900"
                 style={{
                     height: hasFilters()

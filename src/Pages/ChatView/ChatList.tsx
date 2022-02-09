@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import PaymentCard from '../../Components/PaymentCard'
 import OrderCard from '../../Components/OrderCard'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'
 import Spinner from 'src/Components/Style/Spinner'
 import { fetchThreadsByInbox, selectChatList, ThreadTypeEnum } from './chatListSlice'
 import { useParams } from 'react-router'
+import { useScrollDirection } from 'react-use-scroll-direction'
 
 //TODO use virtualization over here
 const limit = 1000
@@ -34,18 +35,24 @@ export default function ChatList({
     const { user, token } = useSelector(selectCredentials)
     const [currentPage] = useState(1)
     const chatList = useSelector(selectChatList)
-
     const dispatch = useDispatch()
-
     const { id } = useParams()
     const chats = chatList[`${id}`]
-
-
     const messagesEndRef = useRef<any>(null)
-
+    
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView()
+    }
 
+    //......To avoid long press event while scrolling chat....//
+    const [scrollTargetRef, target] = useCallbackRef()
+    const { isScrolling } = useScrollDirection(target)
+    function useCallbackRef() {
+        const [value, setValue] = React.useState<any>()
+        const ref = useCallback((node: HTMLElement) => {
+            if (node !== null) setValue(node)
+        }, [])
+        return [ref, value]
     }
 
     useEffect(() => {
@@ -89,7 +96,8 @@ export default function ChatList({
                     className={layout} 
                     thread={thread}
                     newStatus={newStatus}
-                    updatingOrderId={updatingOrderId}                   
+                    updatingOrderId={updatingOrderId} 
+                    isScrolling={isScrolling}                  
                 />
             }
             return <div key={thread.id}>{thread.msg}</div>
@@ -97,7 +105,7 @@ export default function ChatList({
     }
 
     return (
-        <div
+        <div ref={scrollTargetRef}
             className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
             {renderChats()}
             <div ref={messagesEndRef} />
