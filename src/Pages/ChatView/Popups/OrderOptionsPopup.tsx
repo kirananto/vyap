@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { updateOrderStatus } from 'src/API/order.axios'
+import Completed from 'src/Components/Style/Icons/Completed'
+import Processing from 'src/Components/Style/Icons/Processing'
+import Pending from 'src/Components/Style/Icons/Pending'
 
 const OrderOptionsPopup = ({onClose, currentOrderStatusId } : {onClose: any, currentOrderStatusId: string}) => {
 
@@ -36,9 +39,7 @@ const OrderOptionsPopup = ({onClose, currentOrderStatusId } : {onClose: any, cur
                     onClose()
 
                 }} className="flex items-center py-3 gap-2 text-md font-semibold text-red-500 dark:text-red-300 custom-btn">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <Pending />
                     <span>Pending</span>
                 </button>
                 {/* ---- */}
@@ -47,9 +48,7 @@ const OrderOptionsPopup = ({onClose, currentOrderStatusId } : {onClose: any, cur
                     hapticFeedback()
                     onClose()
                 }} className="flex items-center py-3 gap-2 text-md font-semibold text-orange-500 dark:text-orange-300 custom-btn ">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <Processing />
                     <span>Processing</span>
                 </button>
                 {/* ---- */}
@@ -58,9 +57,7 @@ const OrderOptionsPopup = ({onClose, currentOrderStatusId } : {onClose: any, cur
                     hapticFeedback()
                     onClose()
                 }} className="flex items-center py-3 gap-2 text-md font-semibold text-green-500 dark:text-green-300 custom-btn ">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
+                    <Completed />
                     <span>Completed</span>
                 </button>
             </div>
