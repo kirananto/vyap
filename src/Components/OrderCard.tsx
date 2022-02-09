@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink  } from 'react-router-dom'
 import { format } from 'date-fns'
 import { useDispatch, useSelector,  } from 'react-redux'
@@ -22,7 +22,7 @@ export interface orderInterface {
   flatDiscount: string
   numberOfItems: number
   id: string
-  orderStatus:[{id: string, status: string}]
+  orderStatus:[{id: string, status: string}],
 }
 
 interface iProps { 
@@ -30,41 +30,45 @@ interface iProps {
     thread: ThreadInterface,
     setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>> 
     setcurrentOrderStatusId: React.Dispatch<React.SetStateAction<string>>
+    newStatus: number | undefined,
+    updatingOrderId: string | undefined
 }
 
 export default function OrderCard({ 
     className,
     thread,
     setorderOptionModalVisible,
-    setcurrentOrderStatusId
+    setcurrentOrderStatusId,
+    newStatus,
+    updatingOrderId
 }
     : iProps) {
     const { token } = useSelector(selectCredentials)
-
     const { id } = useParams()
-
     const order = thread.order
     const dispatch = useDispatch()
+
+    const [status, setStatus] = useState<number>(Number(order?.orderStatus[0]?.status))
+
+    useEffect(() => {
+        if(newStatus && updatingOrderId === order?.id)
+            setStatus(newStatus)
+    }, [newStatus, updatingOrderId, order?.id])
     
     const bind = useLongPress(() => {
-        // console.log('Long pressed!')
         setorderOptionModalVisible(true)
-        // console.log('this order id:', order?.orderStatus[0].id)
-        // console.log('this order:', order?.orderStatus[0]?.status)
         if(order?.orderStatus[0].id)
             setcurrentOrderStatusId(order?.orderStatus[0].id)
     })
 
     useEffect(() => {
-        fetchOrderAPI({ token, id: thread.meta }).then(result => {
-            dispatch(setOrderInfo({ inboxId: id!, threadId: thread?.id, order: result.data }))
+        id && fetchOrderAPI({ token, id: thread.meta }).then(result => {
+            dispatch(setOrderInfo({ inboxId: id, threadId: thread?.id, order: result.data }))
         })
     }, [dispatch, id, order?.id, thread?.id, thread.meta, token])
 
 
     const orderStatusTxt = () => {
-        const status = Number(order?.orderStatus[0]?.status)
-
         switch (status) {
             case OrderStatusEnum.PENDING:
                 statusTxt = 'Pending'

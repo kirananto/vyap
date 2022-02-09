@@ -16,13 +16,19 @@ interface iProps {
     toRefresh: boolean,
     setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
     setcurrentOrderStatusId: React.Dispatch<React.SetStateAction<string>>
+    newStatus: number | undefined,
+    updatingOrderId: string | undefined
+
 }
 
 export default function ChatList({ 
     inboxHash, 
     toRefresh , 
     setorderOptionModalVisible, 
-    setcurrentOrderStatusId}
+    setcurrentOrderStatusId,
+    newStatus,
+    updatingOrderId
+}
     : iProps
 ) {
     const { user, token } = useSelector(selectCredentials)
@@ -50,7 +56,7 @@ export default function ChatList({
 
 
     useEffect(() => {
-        if(inboxHash) {
+        if(inboxHash && token) {
             dispatch(fetchThreadsByInbox({ token: token, inboxHash: inboxHash!, id: id!, offset: ((currentPage - 1) * limit), limit }))
         }
     }, [toRefresh, token, inboxHash, currentPage, dispatch, id])
@@ -81,7 +87,10 @@ export default function ChatList({
                     setcurrentOrderStatusId={setcurrentOrderStatusId}
                     key={thread.id} 
                     className={layout} 
-                    thread={thread} />
+                    thread={thread}
+                    newStatus={newStatus}
+                    updatingOrderId={updatingOrderId}                   
+                />
             }
             return <div key={thread.id}>{thread.msg}</div>
         }).reverse()
