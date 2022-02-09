@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef } from 'react'
 import { Header } from '../../../Components/Header'
 import OrderDetail from './OrderDetails'
 import ItemList from './ItemList'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useParams } from 'react-router'
 import { fetchOrderAPI } from 'src/API/order.axios'
@@ -11,14 +11,22 @@ import { useScreenshot } from 'use-react-screenshot'
 import OrderBill from './OrderBill'
 import Button from 'src/Components/Style/Button'
 import { isNumber } from 'class-validator'
+import { selectChatList, setOrderInfo } from 'src/Pages/ChatView/chatListSlice'
 
 export default function OrderDetails() {
-    const [order, setOrder] = useState<any | undefined>()
+    // const [order, setOrder] = useState<any | undefined>()
     const [shareAction, setShareAction] = useState(false)
     const [billActive, setBillActive] = useState(false)
 
     const { user, token } = useSelector(selectCredentials)
-    const { id } = useParams()
+    const { id, chatId } = useParams()
+    const dispatch = useDispatch()
+
+    
+    
+    const chatList = useSelector(selectChatList)
+    const thread = chatList[`${chatId}`]?.threads?.find(findItem => findItem?.order?.id === id)
+    const order = thread?.order
 
     const refBill = createRef<HTMLInputElement>()
     const getBill = () => takeScreenshot(refBill.current)
@@ -30,9 +38,10 @@ export default function OrderDetails() {
 
     useEffect(() => {
         fetchOrderAPI({ token, id: id! }).then((result) => {
-            setOrder(result.data)
+            // setOrder(result.data)
+            dispatch(setOrderInfo({ inboxId: chatId!, threadId: thread?.id!, order: result.data }))
         })
-    }, [id, token])
+    }, [chatId, dispatch, id, thread?.id, token])
 
     // ....Bill Actions....  
     //Show the bill in DOM on Share Click and then Hide after a delay
@@ -95,7 +104,7 @@ export default function OrderDetails() {
                     <div className="flex flex-col items-center gap-5 py-24">
                         <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
               ₹
-                            {(isNumber(order?.totalAmount) && isNumber(order?.flatDiscount)) ?  (
+                            {(order?.totalAmount && isNumber(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount))) ?  (
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
                             ).toFixed(2) : ''}
                         </h1>

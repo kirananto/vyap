@@ -1,24 +1,31 @@
 import { fetchPaymentById } from '../../API/payment.axios'
-import type { paymentObject } from '../../Components/PaymentCard'
+// import type { paymentObject } from '../../Components/PaymentCard'
 import { selectCredentials } from '../Login/credentialsSlice'
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { Header } from '../../Components/Header'
 import { PaymentInfo, PaymentInfoIcon } from '../../Components/PaymentInfo'
 import { format } from 'date-fns'
+import { selectChatList, setPaymentInfo } from './chatListSlice'
 
 export default function PaymentDetails() {
     const textSize = { fontSize: '12px' }
-    const [payment, setPayment] = useState<paymentObject | undefined>()
+    // const [payment, setPayment] = useState<paymentObject | undefined>()
     const { user, token } = useSelector(selectCredentials)
-    const { id } = useParams()
+    const { id, chatId } = useParams()
+    const dispatch = useDispatch()
+    
+    const chatList = useSelector(selectChatList)
+    const thread = chatList[`${chatId}`]?.threads?.find(findItem => findItem?.payment?.id === id)
+    const payment = thread?.payment
 
     useEffect(() => {
         fetchPaymentById({ token, id: id! }).then(result => {
-            setPayment(result.data)
+            // setPayment(result.data)
+            dispatch(setPaymentInfo({ inboxId: chatId!, threadId: thread?.id!, payment: result.data }))
         })
-    }, [id, token])
+    }, [chatId, dispatch, id, thread?.id, token])
 
     function getCompanyName() {
         const company = user?.organizationId === payment?.senderOrgId ? payment?.receiver : payment?.senderOrg

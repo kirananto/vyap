@@ -22,6 +22,11 @@ export interface orderInterface {
   flatDiscount: string
   numberOfItems: number
   id: string
+  updatedAt: Date
+  supplierId: string
+  buyer: any
+  supplier: any
+  orderItems?: any[]
   orderStatus:[{id: string, status: string}]
 }
 
@@ -90,7 +95,7 @@ export default function OrderCard({
 
     return (
         <div  {...bind} className={`flex ${className} w-full`}>
-            <NavLink to={`/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
           Order
                 </div>
