@@ -23,8 +23,7 @@ export default function SignupStep1() {
                 if(res.data?.token) {
                     dispatch(setCredentials(res.data))
                     navigate('/home')
-                }
-                else {
+                } else {
                     dispatch(setPhone(phoneNumberRef.current))
                     navigate('/signup-step-2')
                 }
@@ -33,8 +32,7 @@ export default function SignupStep1() {
             .catch((error) => {
                 if (error?.response?.data) {
                     setError('Please enter a valid OTP')
-                }
-                else {
+                } else {
                     setError('No internet connection, please connect to a network and try again.')
                 }
             })

@@ -67,8 +67,7 @@ export default function Account() {
                         case 'email' : setEmailError(true); break
                     }
                 })
-            }
-            else {
+            } else {
                 handleSave()
             }
         })

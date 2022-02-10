@@ -22,7 +22,11 @@ export const productsSlice = createSlice({
         },
         setSingleProduct: (state, action: PayloadAction<IProduct>) => {
             const productIndex = state.products.findIndex(product => product.id === action.payload.id)
-            state.products[productIndex] = action.payload
+            if(productIndex === -1) {
+                state.products.push(action.payload)
+            } else {
+                state.products[productIndex] = action.payload
+            }
         },
         setProductsTotal: (state, action: PayloadAction<productsInterface['total']>) => {
             state.total = action.payload

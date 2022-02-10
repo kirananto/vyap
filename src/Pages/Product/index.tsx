@@ -99,8 +99,7 @@ export default function Product() {
                 (filterItem) => filterItem?.id !== item?.id
             )
             setselectedProduct(tempSelectedProduct)
-        }
-        else {
+        } else {
             const tempVal = [...tempSelectedProductGlobal, item]
             setselectedProduct(tempVal)
         }

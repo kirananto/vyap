@@ -17,7 +17,6 @@ import useQueryParam from 'src/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
 import ProductSuggestionCard from './ProductSuggestionCard'
-import axios from 'axios'
 
 export default function AddItem() {
     const [itemList, setItemList] = useState<any[]>([])
@@ -110,8 +109,7 @@ export default function AddItem() {
                 .filter((filterItem: any) => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
-        }
-        else {
+        } else {
             const _selectedItems = [
                 ...selectedItems,
                 {
@@ -142,8 +140,7 @@ export default function AddItem() {
                 .filter((filterItem: any) => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
-        }
-        else {
+        } else {
             const _selectedItems = [
                 ...selectedItems,
                 {

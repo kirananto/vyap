@@ -30,8 +30,7 @@ export const InitialRouter = () => {
     useEffect(() => {
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             dispatch(setDarkMode(true))
-        }
-        else {
+        } else {
             dispatch(setDarkMode(false))
         }
     }, [dispatch])

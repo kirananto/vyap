@@ -101,8 +101,7 @@ export default function SignupStepThree() {
                 console.log('error.', error.response)
                 setError(error?.response?.data?.message ?? true)
             })
-        }
-        else {
+        } else {
             setCategoryError(true)
         }
     }

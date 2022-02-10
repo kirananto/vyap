@@ -55,13 +55,11 @@ export default function AddPaymentModal({
                     console.log('validation ignored')
                     setIsValidAmount(true)
                     handle()
-                }
-                else {
+                } else {
                     console.log('validation failed. errors: ', errors)
                     setIsValidAmount(false)
                 }
-            }
-            else {
+            } else {
                 setIsValidAmount(true)
                 console.log('validation succeed')
                 if (action === 'submit') {
@@ -102,8 +100,7 @@ export default function AddPaymentModal({
                 .catch(() => {
                     // TODO feedback for error
                 })
-        }
-        else {
+        } else {
             navigate(`/chat/${localStorage?.getItem('inboxId')}`)
         }
     }
@@ -127,8 +124,7 @@ export default function AddPaymentModal({
                     validateAmount = 0
                     break
             }
-        }
-        else {
+        } else {
             validateAmount = amount!
         }
         onValidate(

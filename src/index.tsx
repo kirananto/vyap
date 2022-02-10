@@ -10,8 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark')
     document.body.classList.add('dark:bg-gray-900')
-}
-else {
+} else {
     document.documentElement.classList.remove('dark')
 }
 

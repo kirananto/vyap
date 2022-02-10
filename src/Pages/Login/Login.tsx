@@ -22,8 +22,7 @@ export default function Login() {
                 if (res.data.token) {
                     dispatch(setCredentials(res.data))
                     navigate('/home')
-                }
-                else {
+                } else {
                     navigate('/signup')
                     // TODO No user, redirect to signup process
                 }
@@ -33,8 +32,7 @@ export default function Login() {
                 console.log('error verifying otp', error.message)
                 if(error?.response?.data) {
                     setError(error?.response?.data?.message)
-                }
-                else {
+                } else {
                     setError('No internet connection, please connect to a network and try again.')
                 }
             })
@@ -49,8 +47,7 @@ export default function Login() {
         }).catch(error => {
             if (error?.response?.data?.message) {
                 setError('Please enter a valid phone number')
-            }
-            else {
+            } else {
                 setError('Please try again later')
             }
         })

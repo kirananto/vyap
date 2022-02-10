@@ -32,8 +32,7 @@ export default function PreviewScreen({
             }).catch(error => {
                 console.log('error', error)
             })
-        }
-        else {
+        } else {
             inviteNew({
                 token, data: {
                     openingBalance: parseFloat(`${openingBalance}`),

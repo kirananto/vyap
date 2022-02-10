@@ -50,8 +50,7 @@ export const Home = () => {
                 setLoading(false)
                 console.log('data', result.data.data)
             })
-        }
-        else {
+        } else {
             navigate('/login')
         }
     }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])

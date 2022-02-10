@@ -61,26 +61,22 @@ export default function InviteExisting({
 
                 if (errorList.includes('biz_name')) {
                     setIsValidBizName(false)
-                }
-                else {
+                } else {
                     setIsValidBizName(true)
                 }
 
                 if (errorList.includes('address')) {
                     setIsValidAdress(false)
-                }
-                else {
+                } else {
                     setIsValidAdress(true)
                 }
 
                 if (errorList.includes('pincode')) {
                     setIsValidPincode(false)
-                }
-                else {
+                } else {
                     setIsValidPincode(true)
                 }
-            }
-            else {
+            } else {
                 setIsValidAdress(true)
                 setIsValidBizName(true)
                 setIsValidPincode(true)

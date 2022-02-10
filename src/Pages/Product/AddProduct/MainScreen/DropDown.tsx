@@ -116,8 +116,7 @@ function DropDown(props: any) {
             if (errors.length > 0) {
                 console.log('validation failed. errors: ', errors)
                 setIsValidProduct(false)
-            }
-            else {
+            } else {
                 setIsValidProduct(true)
                 console.log('validation succeed')
                 navigate('/create-product')

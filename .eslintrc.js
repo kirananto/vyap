@@ -26,7 +26,7 @@ module.exports = {
         'no-console': 0,
         'quotes': [1, 'single', { avoidEscape: true, allowTemplateLiterals: true }],
         'curly': 0,
-        'brace-style': ['error', 'stroustrup'],
+        'brace-style': ['error', '1tbs'],
         'indent': ['error', 4, { SwitchCase: 1 }],
         'eol-last': ['error', 'never'],
         '@typescript-eslint/no-unused-vars': 2

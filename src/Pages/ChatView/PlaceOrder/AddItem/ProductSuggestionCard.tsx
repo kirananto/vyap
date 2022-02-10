@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { fetchProductById } from 'src/API/products.axios'
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import React from 'react'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
 

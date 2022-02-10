@@ -49,8 +49,7 @@ export default function PlaceOrder() {
     useEffect(() => {
         if (placeOrder.cartItems?.length !== 0) {
             setIsValidCart(true)
-        }
-        else {
+        } else {
             setIsValidCart(false)
         }
     }, [placeOrder.cartItems])
@@ -69,8 +68,7 @@ export default function PlaceOrder() {
 
         if (discountPrice > finalPrice) {
             setIsValidDiscount(false)
-        }
-        else {
+        } else {
             setIsValidDiscount(true)
         }
     }, [getTotalPrice, placeOrder.cartItems, placeOrder.discount])
@@ -111,8 +109,7 @@ export default function PlaceOrder() {
     function handleDiscountValue() {
         if (!placeOrder.discount) {
             dispatch(setFlatDiscount(parseFloat('0')))
-        }
-        else {
+        } else {
             dispatch(setFlatDiscount(Math.abs(placeOrder.discount)))
         }
     }
@@ -127,13 +124,11 @@ export default function PlaceOrder() {
                 setTimeout(() => {
                     setIsValidDiscount(true)
                 }, 5000)
-            }
-            else {
+            } else {
                 setIsValidDiscount(true)
                 dispatch(setFlatDiscount(parseFloat(inputValue as any)))
             }
-        }
-        else {
+        } else {
             dispatch(setFlatDiscount(inputValue as any))
         }
     }
@@ -171,8 +166,7 @@ export default function PlaceOrder() {
             if (user?.organization?.isSupplier) {
                 console.log('order2', order)
                 return order?.data
-            }
-            else {
+            } else {
                 navigate(`/chat/${localStorage?.getItem('inboxId')}`)
             }
         }

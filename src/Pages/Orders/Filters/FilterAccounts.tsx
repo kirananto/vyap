@@ -24,8 +24,7 @@ const Account = ({ item, type }: CategoryName) => {
     function tickCheckBox() {
         if (type === 'orderStatus') {
             dispatch(setOrderStatus(item?.id))
-        }
-        else {
+        } else {
             dispatch(
                 setAccount({ id: item?.recipient?.id, name: item?.recipient?.name })
             )
@@ -73,8 +72,7 @@ export default function FilterCategory(props: FilterCategories) {
                     name: 'Complete',
                 },
             ])
-        }
-        else {
+        } else {
             fetchInboxes({ token: token, limit: 100, offset: 0 }).then(
                 (result: any) => {
                     setItems(result?.data?.data?.filter((item: any) => item?.recipient))

@@ -59,8 +59,7 @@ export default function OrderDetails() {
     const onShare = () => {
         if (shareAction) {
             share('page')
-        }
-        else {
+        } else {
             setShareAction(true)
         }
     }

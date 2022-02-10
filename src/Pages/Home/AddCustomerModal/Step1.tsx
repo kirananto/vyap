@@ -43,8 +43,7 @@ export default function AddCustomerStep1({
             if (errors.length > 0) {
                 console.log('validation failed. errors: ', errors)
                 setPhoneError('Enter valid mobile number !')
-            }
-            else {
+            } else {
                 console.log('validation succeed')
 
                 if (action === 'submit') {
@@ -54,8 +53,7 @@ export default function AddCustomerStep1({
                                 setPhoneError(
                                     `The phone number you're trying to add is already associated.`
                                 )
-                            }
-                            else {
+                            } else {
                                 setIsExisting(result.data?.username)
                                 setCurrentPage(currentPageEnum.PREVIEW)
                             }

@@ -68,8 +68,7 @@ function CreateProduct() {
             if (leavePageAlert) {
                 trackBackBtn.current = false
                 history.back()
-            }
-            else {
+            } else {
                 trackBackBtn.current = true
                 history.pushState(null, location.href, location.href)
             }
@@ -113,8 +112,7 @@ function CreateProduct() {
             return () => {
                 setProductImage('') 
             }
-        }
-        else {
+        } else {
             if (addProductInfo?.others?.productImage?.length > 0) {
                 setProductImage(
                     getImageURL(
@@ -175,8 +173,7 @@ function CreateProduct() {
         if (isValidPricing && isValidOthers) {
             if (isEdit) {
                 handleEditProduct()
-            }
-            else {
+            } else {
                 handleAddProduct()
             }
         }
