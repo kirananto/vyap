@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { fetchProductById } from 'src/API/products.axios'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import type { IProduct } from 'src/types/product'
 
 const ProductDetail = () => {
 
     const { id } = useParams()
     const { token } = useSelector(selectCredentials)
-    const [product, setProduct] = useState(null)
+    const [product, setProduct] = useState<IProduct>()
     const navigate = useNavigate()
 
     useEffect(() => {

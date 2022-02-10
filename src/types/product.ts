@@ -14,6 +14,9 @@ export interface IProduct {
     mrpPrice: string;
     rate: string;
     centralCatalogue: ICentralCatalogue;
+    organizationCatalogueCategory?: {
+        name: string
+    }
 }
 export interface ICentralCatalogue {
     id: string;
