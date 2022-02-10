@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { IProduct } from 'src/types/product'
 
 export interface productsInterface {
-    products: any[];
+    products: IProduct[];
     total: number
 }
 
@@ -19,6 +20,10 @@ export const productsSlice = createSlice({
         setProducts: (state, action: PayloadAction<productsInterface['products']>) => {
             state.products = action.payload
         },
+        setSingleProduct: (state, action: PayloadAction<IProduct>) => {
+            const productIndex = state.products.findIndex(product => product.id === action.payload.id)
+            state.products[productIndex] = action.payload
+        },
         setProductsTotal: (state, action: PayloadAction<productsInterface['total']>) => {
             state.total = action.payload
         },
@@ -30,7 +35,7 @@ export const productsSlice = createSlice({
     },
 })
 
-export const { setProducts, setProductsTotal, clearAll } = productsSlice.actions
+export const { setProducts, setProductsTotal, setSingleProduct, clearAll } = productsSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

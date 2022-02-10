@@ -26,7 +26,7 @@ function Header({
             className={
                 isSticky
                     ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0'
-                    : 'flex w-11/12 pt-2 pb-2 m-auto '
+                    : 'flex w-11/12 pt-4 pb-2 m-auto '
             }
         >
             {/* back icon  */}

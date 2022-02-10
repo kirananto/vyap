@@ -1,31 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Header } from 'src/Components/Header'
 import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { fetchProductById } from 'src/API/products.axios'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
-import type { IProduct } from 'src/types/product'
+import { selectProductsInfo, setSingleProduct } from '../productsSlice'
 
 const ProductDetail = () => {
 
     const { id } = useParams()
     const { token } = useSelector(selectCredentials)
-    const [product, setProduct] = useState<IProduct>()
     const navigate = useNavigate()
+    const { products } = useSelector(selectProductsInfo)
+    const dispatch = useDispatch()
+
+    const product = products.find(findItem => findItem.id === id)
 
     useEffect(() => {
         const productId = id
         fetchProductById({ token: token, id: productId })
             .then((res) => {
                 console.log('response product:', res.data)
-                setProduct(res.data)               
-            })
-            .catch((error : any) => {
+                dispatch(setSingleProduct(res.data))          
+            }).catch((error : any) => {
                 console.log('fetch product error', error)
             })
-    }, [id, token])
+    }, [dispatch, id, token])
 
     return <div>
         <div className="w-full bg-white pb-3 dark:bg-gray-800 pb-3 drop-shadow-md z-10">
