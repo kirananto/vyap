@@ -1,3 +1,5 @@
+import type { IFetchCentralCatalogueProduct } from './fetchCentralProduct'
+
 export interface IProduct {
     id: string;
     createdAt: string;
@@ -17,6 +19,7 @@ export interface IProduct {
     organizationCatalogueCategory?: {
         name: string
     }
+    centralData?: IFetchCentralCatalogueProduct
 }
 export interface ICentralCatalogue {
     id: string;

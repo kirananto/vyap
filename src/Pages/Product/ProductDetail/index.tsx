@@ -4,9 +4,9 @@ import { Header } from 'src/Components/Header'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { fetchProductById } from 'src/API/products.axios'
+import { fetchCentralProduct, fetchProductById } from 'src/API/products.axios'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
-import { selectProductsInfo, setSingleProduct } from '../productsSlice'
+import { selectProductsInfo, setSingleCentralData, setSingleProduct } from '../productsSlice'
 
 const ProductDetail = () => {
 
@@ -23,11 +23,18 @@ const ProductDetail = () => {
         fetchProductById({ token: token, id: productId })
             .then((res) => {
                 console.log('response product:', res.data)
-                dispatch(setSingleProduct(res.data))          
+                if(dispatch(setSingleProduct(res.data))){
+                    fetchCentralProduct({ token: token, id: product?.centralCatalogueId }).then((result: any) => {
+                        if (result?.data) {
+                            dispatch(setSingleCentralData(result?.data))
+                        }
+                    })
+                }                     
             }).catch((error : any) => {
                 console.log('fetch product error', error)
             })
-    }, [dispatch, id, token])
+        
+    }, [dispatch, id, token, product?.centralCatalogueId], )
 
     return <div className='bg-white dark:bg-slate-900'>
         <div className="w-full bg-white pb-3 dark:bg-gray-800 pb-3 drop-shadow-md z-10">
@@ -42,60 +49,33 @@ const ProductDetail = () => {
             className={`max-h-[91vh] overflow-y-scroll mt-2 flex flex-col justify-center w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800`}
         >
             <div className="flex flex-nowrap flex-shrink-0 h-[45vh] mt-24 w-full gap-3 overflow-x-scroll">
-                <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center ${product?.thumbnailImage ? '' : 'empty_image_background'}`}>
-                    {product?.thumbnailImage && (
-                        <img
-                            src={getImageURL(
-                                product?.thumbnailImage,
-                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                            )}
-                            alt="Avatar"
-                            className="object-cover w-full h-full"
-                        />
-                    )}
-                    {product?.outOfStock && (
-                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
-                Out of stock
-                        </div>
-                    )}
-                </div>
-                <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center ${product?.thumbnailImage ? '' : 'empty_image_background'}`}>
-                    {product?.thumbnailImage && (
-                        <img
-                            src={getImageURL(
-                                product?.thumbnailImage,
-                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                            )}
-                            alt="Avatar"
-                            className="object-cover w-full h-full"
-                        />
-                    )}
-                    {product?.outOfStock && (
-                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
-                Out of stock
-                        </div>
-                    )}
-                </div>
-                <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center ${product?.thumbnailImage ? '' : 'empty_image_background'}`}>
-                    {product?.thumbnailImage && (
-                        <img
-                            src={getImageURL(
-                                product?.thumbnailImage,
-                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                            )}
-                            alt="Avatar"
-                            className="object-cover w-full h-full"
-                        />
-                    )}
-                    {product?.outOfStock && (
-                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
-                Out of stock
-                        </div>
-                    )}
-                </div>
 
+                {
+                    //x.centralData.images[0].imageName
+                    product?.centralData?.images?.map((img) => {
+                        <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center
+                         ${img?.imageName ? '' : 'empty_image_background'}`}>
+                            {console.log(img.imageName)}
+                            {img?.imageName && (
+                                <img
+                                    src={getImageURL(
+                                        img?.imageName,
+                                        IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                                    )}
+                                    alt="Avatar"
+                                    className="object-cover w-full h-full"
+                                />
+                            )}
+                            {product?.outOfStock && (
+                                <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
+                Out of stock
+                                </div>
+                            )}
+                        </div>
+                    })
+                    
+                }
             </div>
-            
 
             <div className=" w-full self-center px-1 py-5">
                 <div className="font-semibold text-xl dark:text-gray-200 truncate">
@@ -144,7 +124,7 @@ const ProductDetail = () => {
                     
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
                         <div className="basis-1/2 text-gray-400 dark:text-gray-500">Brand:</div>
-                        <div className="basis-1/2 text-gray-700 dark:text-gray-400">....</div>
+                        <div className="basis-1/2 text-gray-700 dark:text-gray-400">{product?.centralData?.brand?.name}</div>
                     </div>
 
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
