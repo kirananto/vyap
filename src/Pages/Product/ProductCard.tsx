@@ -52,8 +52,7 @@ export default function ProductCard({
     return (
         <div 
             {...bind} 
-            className={`flex justify-left w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
-            onClick={onItemClick}
+            className={`flex justify-left w-full bg-white dark:bg-slate-900 px-5 border-b border-gray-100 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
         >
             {/* <div className="text-center place-self-center px-5 pr-6 ">
                 <input
@@ -64,55 +63,59 @@ export default function ProductCard({
                 />
             </div> */}
 
-            <div className="w-20 h-full text-center border border-gray-200 dark:border-gray-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
-                {item?.thumbnailImage && (
-                    <img
-                        src={getImageURL(
-                            item?.thumbnailImage,
-                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                        )}
-                        alt="Avatar"
-                        className="object-cover w-full h-full"
-                    />
-                )}
-                {item.outOfStock && (
-                    <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
-                Out of stock
-                    </div>
-                )}
-            </div>
+            <div className="flex min-w-[80vw]  max-w-[80vw] py-4" onClick={onItemClick}>
 
-            <div className=" max-w-[60%] w-full  self-center px-5">
-                <div className="font-semibold text-md dark:text-gray-200 truncate">
-                    {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name}
+                <div className="w-20 h-full text-center border border-gray-200 dark:border-gray-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+                    {item?.thumbnailImage && (
+                        <img
+                            src={getImageURL(
+                                item?.thumbnailImage,
+                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                            )}
+                            alt="Avatar"
+                            className="object-cover w-full h-full"
+                        />
+                    )}
+                    {item.outOfStock && (
+                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
+                Out of stock
+                        </div>
+                    )}
                 </div>
 
-                <div>
-                    {/* <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">
+                <div className="max-w-[65vw] w-full  self-center px-5">
+                    <div className="font-semibold text-md dark:text-gray-200 truncate">
+                        {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name}
+                    </div>
+
+                    <div>
+                        {/* <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">
               #{item.id?.split("-")[0]}
             </p> */}
-                </div>
-                <div className="grid grid-cols-2">
-                    <div className="text-sm font-semibold text-gray-500  dark:text-gray-400">
-                        <p>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <div className="text-sm font-semibold text-gray-500  dark:text-gray-400">
+                            <p>
                 MRP
-                        </p>
-                        <p className="font-semibold">
+                            </p>
+                            <p className="font-semibold">
                 ₹{item?.mrpPrice}
-                        </p>
-                    </div>
-                    <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-                        <p >
+                            </p>
+                        </div>
+                        <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+                            <p >
                 Cost
-                        </p>
-                        <p className="font-semibold" >
+                            </p>
+                            <p className="font-semibold" >
               ₹{item?.rate}
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-            <div className="flex justify-end basis-3/12 text-center place-self-center">
+            <div className="flex justify-end basis-2/12 text-center place-self-center py-9">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-6 h-6 text-gray-500 dark:text-gray-300"

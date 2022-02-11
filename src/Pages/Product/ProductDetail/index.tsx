@@ -29,7 +29,7 @@ const ProductDetail = () => {
             })
     }, [dispatch, id, token])
 
-    return <div>
+    return <div className='bg-white dark:bg-slate-900'>
         <div className="w-full bg-white pb-3 dark:bg-gray-800 pb-3 drop-shadow-md z-10">
             <Header
                 isSticky={false}
@@ -39,25 +39,63 @@ const ProductDetail = () => {
         </div>
         
         <div 
-            className={`flex flex-col justify-center w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800`}
+            className={`max-h-[91vh] overflow-y-scroll mt-2 flex flex-col justify-center w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800`}
         >
-            <div className="w-50 h-full text-center border border-gray-200 dark:border-gray-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
-                {product?.thumbnailImage && (
-                    <img
-                        src={getImageURL(
-                            product?.thumbnailImage,
-                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                        )}
-                        alt="Avatar"
-                        className="object-cover w-full h-full"
-                    />
-                )}
-                {product?.outOfStock && (
-                    <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
+            <div className="flex flex-nowrap flex-shrink-0 h-[45vh] mt-24 w-full gap-3 overflow-x-scroll">
+                <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center ${product?.thumbnailImage ? '' : 'empty_image_background'}`}>
+                    {product?.thumbnailImage && (
+                        <img
+                            src={getImageURL(
+                                product?.thumbnailImage,
+                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                            )}
+                            alt="Avatar"
+                            className="object-cover w-full h-full"
+                        />
+                    )}
+                    {product?.outOfStock && (
+                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
                 Out of stock
-                    </div>
-                )}
+                        </div>
+                    )}
+                </div>
+                <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center ${product?.thumbnailImage ? '' : 'empty_image_background'}`}>
+                    {product?.thumbnailImage && (
+                        <img
+                            src={getImageURL(
+                                product?.thumbnailImage,
+                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                            )}
+                            alt="Avatar"
+                            className="object-cover w-full h-full"
+                        />
+                    )}
+                    {product?.outOfStock && (
+                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
+                Out of stock
+                        </div>
+                    )}
+                </div>
+                <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center ${product?.thumbnailImage ? '' : 'empty_image_background'}`}>
+                    {product?.thumbnailImage && (
+                        <img
+                            src={getImageURL(
+                                product?.thumbnailImage,
+                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                            )}
+                            alt="Avatar"
+                            className="object-cover w-full h-full"
+                        />
+                    )}
+                    {product?.outOfStock && (
+                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
+                Out of stock
+                        </div>
+                    )}
+                </div>
+
             </div>
+            
 
             <div className=" w-full self-center px-1 py-5">
                 <div className="font-semibold text-xl dark:text-gray-200 truncate">
