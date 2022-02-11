@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { fetchCentralProduct, fetchProductById } from 'src/API/products.axios'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import { getProductImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectProductsInfo, setSingleCentralData, setSingleProduct } from '../productsSlice'
 
 const ProductDetail = () => {
@@ -53,25 +53,27 @@ const ProductDetail = () => {
                 {
                     //x.centralData.images[0].imageName
                     product?.centralData?.images?.map((img) => {
-                        <div className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center
+                        return (
+                            <div key={'key-'+Math.random()} className={`flex-shrink-0 w-[80vw] h-full text-center p-2 border border-gray-200 dark:border-gray-600 relative rounded-lg bg-cover bg-center
                          ${img?.imageName ? '' : 'empty_image_background'}`}>
-                            {console.log(img.imageName)}
-                            {img?.imageName && (
-                                <img
-                                    src={getImageURL(
-                                        img?.imageName,
-                                        IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                                    )}
-                                    alt="Avatar"
-                                    className="object-cover w-full h-full"
-                                />
-                            )}
-                            {product?.outOfStock && (
-                                <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
+                                {console.log('Image',img.imageName)}
+                                {img?.imageName && (
+                                    <img
+                                        src={getProductImageURL(
+                                            img?.imageName,
+                                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                                        )}
+                                        alt="Avatar"
+                                        className="object-cover w-full h-full"
+                                    />
+                                )}
+                                {product?.outOfStock && (
+                                    <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-red-200 text-red-500 font-bold text-xs text-center leading-4">
                 Out of stock
-                                </div>
-                            )}
-                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )
                     })
                     
                 }
