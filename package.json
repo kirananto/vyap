@@ -44,7 +44,7 @@
     "react-to-print": "^2.14.4",
     "react-use-scroll-direction": "^0.1.0",
     "redux-persist": "6.0.0",
-    "tailwindcss": "3.0.19",
+    "tailwindcss": "3.0.21",
     "use-long-press": "^1.1.2",
     "use-react-screenshot": "^3.0.0",
     "webpack": "^5.68.0",
