@@ -2,7 +2,6 @@ import React, { Dispatch, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBrands } from 'src/API/brand.axios'
 import { imageUpload } from 'src/API/image.axios'
-import Spinner from 'src/Components/Style/Spinner'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import {
@@ -39,7 +38,7 @@ interface IImageProps {
     key: string;
     item: {
         fileId: string;
-        imageName:string
+        imageName: string
     };
 }
 
@@ -69,11 +68,11 @@ const ImageContainer = (props: IImageProps) => {
     )
 }
 
-const handleInputChange = (  
+const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     label: string,
     dispatch: Dispatch<any>) => {
-    const tempVal : any = event.target.value
+    const tempVal: any = event.target.value
     switch (label) {
         case 'Your Item Code(SKU)':
             dispatch(setSkuCode(tempVal))
@@ -143,7 +142,7 @@ function OthersTab({ action, saveAttempt }: Props) {
 
     const addProductInfo = useSelector(selectAddProductInfo)
 
-    const fileUploaderRef  = useRef<HTMLInputElement>(null)
+    const fileUploaderRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         fetchBrands({ token, limit: 100, offset: 0 })
@@ -156,7 +155,7 @@ function OthersTab({ action, saveAttempt }: Props) {
     }, [token])
 
     function uploadImage() {
-        if(fileUploaderRef.current?.files){
+        if (fileUploaderRef.current?.files) {
             if (fileUploaderRef.current?.files?.length > 0) {
                 setSpinner(true)
                 new Compressor(fileUploaderRef.current?.files?.[0], {
@@ -182,13 +181,13 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 setSpinner(false)
                             })
                             .catch((error) => {
-                            //TODO Handle Error
+                                //TODO Handle Error
                                 console.log('error', error)
                                 setSpinner(false)
                             })
                     },
                     error(err) {
-                    //TODO Handle Error
+                        //TODO Handle Error
                         console.log(err.message)
                         setSpinner(false)
                     },
@@ -196,7 +195,7 @@ function OthersTab({ action, saveAttempt }: Props) {
 
             }
         }
-        
+
     }
 
     const handleModal = () => {
@@ -249,7 +248,9 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     />
                                 </svg>
                             ) : (
-                                <Spinner />
+                                <div className=" flex justify-center items-center">
+                                    <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-purple-700"></div>
+                                </div>
                             )}
                         </div>
                         <input
