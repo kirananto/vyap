@@ -157,9 +157,6 @@ export default function PlaceOrder() {
                     }),
                 }
             })
-            // .then(() => {
-            // navigate(`/chat/${localStorage?.getItem('inboxId')}`)
-            // })
 
             if (user?.organization?.isSupplier) {
                 console.log('order2', order)
@@ -256,56 +253,6 @@ export default function PlaceOrder() {
                                                     d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                                                 />
                                             </svg>
-                                            {/* <DropList
-                            isOpen={isDropOpen?.isOpen === index && !isDropOpen.isAdd}
-                            list={[
-                              {
-                                appearance: "danger",
-                                label: "Remove 1 Item",
-                                onClick: () => {
-                                  handleRemoveItemItem(item, 1), closeDropList();
-                                },
-                              },
-                              //Hidden 1 case
-                              // {
-                              //   appearance: "danger",
-                              //   label: "Remove 1 Case (10 Pc)",
-                              //   onClick: () => {
-                              //     handleRemoveItemItem(item, 10),
-                              //     closeDropList();
-                              //   }
-                              // }
-                            ]}
-                            trigger={
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 cursor-pointer"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                              </svg>
-                            }
-                            onClick={() => {
-                              if (isDropOpen?.isOpen === index && !isDropOpen.isAdd) {
-                                setIsDropOpen({
-                                  isAdd: false,
-                                  isOpen: undefined,
-                                });
-                              } else {
-                                setIsDropOpen({
-                                  isAdd: false,
-                                  isOpen: index,
-                                });
-                              }
-                            }}
-                          /> */}
                                         </div>
 
                                         <div className=" items-center dark:text-gray-200">
@@ -347,57 +294,6 @@ export default function PlaceOrder() {
                                                     d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                                                 />
                                             </svg>
-                                            {/* <DropList
-                            isOpen={isDropOpen?.isOpen === index && isDropOpen.isAdd}
-                            list={[
-                              {
-                                appearance: "primary",
-                                label: "Add 1 Item",
-                                onClick: () => {
-                                  handleAddItem(item, 1), closeDropList();
-                                },
-                              },
-
-                              //Hidden 1 case
-
-                              // {
-                              //   appearance: "primary",
-                              //   label: "Add 1 Case (10 Pc)",
-                              //   onClick: () => { handleAddItem(item, 10),
-                              //     closeDropList();
-                              //   }
-                              // },
-                            ]}
-                            trigger={
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 cursor-pointer"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                              </svg>
-                            }
-                            onClick={() => {
-                              if (isDropOpen?.isOpen === index && isDropOpen.isAdd) {
-                                setIsDropOpen({
-                                  isAdd: true,
-                                  isOpen: undefined,
-                                });
-                              } else {
-                                setIsDropOpen({
-                                  isAdd: true,
-                                  isOpen: index,
-                                });
-                              }
-                            }}
-                          /> */}
                                         </div>
                                     </div>
 

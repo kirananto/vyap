@@ -81,7 +81,7 @@ export default function SignupStepThree() {
                 email: signup.email,
                 businessName: signup.businessName,
                 address: signup.address,
-                category: signup.category.map(item => ({ id: item })),
+                category: signup.category,
                 pinCode: signup.pinCode,
                 listPrivately: signup.listPrivately,
                 organizationLocation: {
@@ -128,7 +128,7 @@ export default function SignupStepThree() {
                     </ul> : null}
                 </div>}
                 <div className="flex flex-col gap-4 mt-6">
-                    {categories.map(mapItem => <Card isSelected={signup.category?.includes(mapItem.id)} onSelect={() => dispatch(setCategory(mapItem.id))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
+                    {categories.map(mapItem => <Card isSelected={signup.category?.some(someItem => someItem.id === mapItem?.id)} onSelect={() => dispatch(setCategory(mapItem))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
                 </div>
             </div>
             <SimpleFooter btnName="Create account" onClick={handleSubmit} />

@@ -66,10 +66,11 @@ const ImageContainer = (props: IImageProps) => {
     )
 }
 
-const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+function handleInputChange(event: React.ChangeEvent<HTMLInputElement>,
     label: string,
-    dispatch: Dispatch<any>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dispatch: Dispatch<any>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tempVal: any = event.target.value
     switch (label) {
         case 'Your Item Code(SKU)':

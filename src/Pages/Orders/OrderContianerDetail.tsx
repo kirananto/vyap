@@ -6,7 +6,7 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { FormattedMessage } from 'react-intl'
 import ReactToPrint from 'react-to-print'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { IOrderItem, orderInterface } from 'src/Components/OrderCard'
 
 export default function OrderContainerDetail({
     order,
@@ -16,7 +16,7 @@ export default function OrderContainerDetail({
   minimize: () => void;
 }) {
     const { token } = useSelector(selectCredentials)
-    const [orderItems, setOrderItems] = useState<any[]>([])
+    const [orderItems, setOrderItems] = useState<IOrderItem[]>([])
     const [loading, setLoading] = React.useState(true)
     const componentRef = React.useRef<HTMLDivElement>(null)
 

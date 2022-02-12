@@ -3,7 +3,11 @@ import type { RootState } from 'src/redux/store'
 
 interface OrganizationLocationInterface {
     lat: number,
-    lng: number
+    lng: number,
+    address?: string;
+    city?: string;
+    pinCode?: string;
+    state?: string;
 }
 
 export interface SignupInterface {
@@ -13,7 +17,7 @@ export interface SignupInterface {
     pinCode: string;
     organizationLocation: OrganizationLocationInterface
     businessName: string
-    category: string[]
+    category: { id: string }[]
     address: string,
     listPrivately: boolean
 }
@@ -65,9 +69,9 @@ export const signupSlice = createSlice({
             state.organizationLocation.lat = action.payload.lat
             state.organizationLocation.lng = action.payload.lng
         },
-        setCategory: (state, action: PayloadAction<string>) => {
-            if(state.category.includes(action.payload)) {
-                state.category = state.category.filter(filterItem => filterItem !== action.payload)
+        setCategory: (state, action: PayloadAction<{ id: string }>) => {
+            if(state.category.some(someItem => someItem.id === action.payload?.id)) {
+                state.category = state.category.filter(filterItem => filterItem.id !== action.payload.id)
             } else {
                 state.category = [...state.category, action.payload]
             }

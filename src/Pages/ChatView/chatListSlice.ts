@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchInboxById, fetchThreadsById } from 'src/API/inbox.axios'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { IOrderItem, orderInterface } from 'src/Components/OrderCard'
 import type { paymentObject } from 'src/Components/PaymentCard'
 import type { RootState } from 'src/redux/store'
 import type { Organization } from '../Login/credentialsSlice'
@@ -82,7 +82,7 @@ export const chatListInterface = createSlice({
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             state[action.payload.inboxId].threads[threadIndex].order = action.payload.order
         },
-        setOrderItems: (state, action: PayloadAction<{ inboxId: string, threadId?: string, orderItems: any[] }>) => {
+        setOrderItems: (state, action: PayloadAction<{ inboxId: string, threadId?: string, orderItems: IOrderItem[] }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             const order = state[action.payload.inboxId].threads[threadIndex].order
             if (order) {
