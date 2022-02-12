@@ -87,11 +87,11 @@ export default function PaymentDetails() {
                         <PaymentInfo heading="Payment method" info="Cash" />
                         <PaymentInfo
                             heading="Paid by"
-                            info={payment?.senderOrg?.name}
+                            info={payment?.senderOrg?.name ?? ''}
                         />
                         <PaymentInfo
                             heading="Recieved by"
-                            info={payment?.receiver?.name}
+                            info={payment?.receiver?.name ?? ''}
                         />
                         <PaymentInfoIcon heading="Status" info="Payment Completed" />
                     </div>

@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { fetchOrdersAPI } from 'src/API/order.axios'
+import type { orderInterface } from 'src/Components/OrderCard'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { Header } from '../../Components/Header'
 import { selectCredentials } from '../Login/credentialsSlice'
@@ -14,7 +15,7 @@ import { PrintAll } from './Options/PrintAll'
 import OrderContainer from './OrderContainer'
 
 export default function Orders() {
-    const [orders, setOrders] = useState<any[]>([])
+    const [orders, setOrders] = useState<orderInterface[]>([])
     const { token } = useSelector(selectCredentials)
     const [loading, setLoading] = useState(true)
     const [filterPopupOpen, setfilterPopupOpen] = useState(false)

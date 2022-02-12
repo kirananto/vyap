@@ -36,7 +36,7 @@ export interface User {
     lastSeen: Date;
     roleId: string;
     profileImageUrl: string;
-    settingsId?: any;
+    settingsId?: string;
     settings: UserSettings | null
     organizationId: string;
     organization: Organization | null;
