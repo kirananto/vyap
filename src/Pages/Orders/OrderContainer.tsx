@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export default function OrderContainer({ orders, loading }: IProps) {
-    const [isExpanded, setIsExpanded] = useState<any>(undefined)
+    const [isExpanded, setIsExpanded] = useState<string | undefined>(undefined)
 
     if (loading) {
         return (
@@ -41,7 +41,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                     className={`${
                         index === orders.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
                     }`}
-                    key={`${index}`}
+                    key={`${item.id}`}
                 >
                     <div className="flex flex-row mt-2 mb-3">
                         <div>
@@ -63,7 +63,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                             : ''}
                                     </div>
 
-                                    {isExpanded === index ? (
+                                    {isExpanded === item.id ? (
                                         <div
                                             className="col-start-12 text-gray-600 dark:text-gray-300"
                                             onClick={() => setIsExpanded(undefined)}
@@ -86,7 +86,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                     ) : (
                                         <div
                                             className=" text-gray-600 dark:text-gray-300 col-start-12"
-                                            onClick={() => setIsExpanded(index)}
+                                            onClick={() => setIsExpanded(item.id)}
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +134,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                         </div>
                     </div>
 
-                    {isExpanded === index && (
+                    {isExpanded === item.id && (
                         <OrderContainerDetail order={item} minimize={onMinimize} />
                     )}
                 </div>

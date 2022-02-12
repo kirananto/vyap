@@ -16,7 +16,7 @@ import OrderOptionsPopup from './Popups/OrderOptionsPopup'
 
 export const Payment = () => {
     const { token } = useSelector(selectCredentials)
-    const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<any>(
+    const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<boolean>(
         'paymentModalVisible'
     )
     const [currentOrderStatusId, setcurrentOrderStatusId] = useState<string>('')
@@ -71,7 +71,7 @@ export const Payment = () => {
                 setorderOptionModalVisible={setorderOptionModalVisible}
                 setcurrentOrderStatusId={setcurrentOrderStatusId}
                 inboxHash={inbox?.inboxHash} 
-                toRefresh={paymentModalVisible} 
+                toRefresh={paymentModalVisible ?? false} 
                 updatingOrderId={updatingOrderId}
                 newStatus={newStatus}
             />

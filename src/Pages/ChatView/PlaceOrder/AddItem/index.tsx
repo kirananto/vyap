@@ -33,7 +33,7 @@ export default function AddItem() {
     // >(undefined)
 
     const filters = useSelector(selectAddItemsproductFilters)
-    const [searchValue, setSearchValue] = useState<any>(undefined)
+    const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
 
     const { token, user } = useSelector(selectCredentials)
 
@@ -309,7 +309,7 @@ export default function AddItem() {
                 />
                 <AppliedFilters
                     setSearchValue={setSearchValue}
-                    searchValue={searchValue}
+                    searchValue={searchValue ?? ''}
                     onFilterClick={() => setfilterPopupOpen(true)}
                 />
             </div>
