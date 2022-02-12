@@ -21,9 +21,9 @@ export default function PaymentDetails() {
     const payment = thread?.payment
 
     useEffect(() => {
-        fetchPaymentById({ token, id: id! }).then(result => {
+        fetchPaymentById({ token, id: id }).then(result => {
             // setPayment(result.data)
-            dispatch(setPaymentInfo({ inboxId: chatId!, threadId: thread?.id, payment: result.data }))
+            dispatch(setPaymentInfo({ inboxId: chatId, threadId: thread?.id, payment: result.data }))
         })
     }, [chatId, dispatch, id, thread?.id, token])
 

@@ -65,7 +65,7 @@ export default function Payments() {
 
             <ModalViewer
                 body={<FilterPopup />}
-                isOpen={filterPopupOpen!}
+                isOpen={!!filterPopupOpen}
                 onClose={() => setfilterPopupOpen(false)}
                 name={'filter'}
             />

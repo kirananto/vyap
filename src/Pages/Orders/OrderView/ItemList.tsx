@@ -22,7 +22,7 @@ function Items({ order }: { order: any }) {
     useEffect(() => {
         fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result: any) => {
             // setOrderItems(result?.data?.data)
-            dispatch(setOrderItems({ inboxId: chatId!, threadId: thread?.id, orderItems: result?.data?.data }))
+            dispatch(setOrderItems({ inboxId: chatId ?? '', threadId: thread?.id, orderItems: result?.data?.data }))
         }).finally(() => setLoading(false))
     }, [token, order.id, dispatch, chatId, thread?.id])
 

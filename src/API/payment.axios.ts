@@ -1,7 +1,7 @@
 import { axiosClient } from './apiClient'
 import type { paymentMethod, paymentStatus } from './enum'
 
-export function fetchPaymentById({ token, id }: { token?: string; id: string} ) {
+export function fetchPaymentById({ token, id }: { token?: string; id?: string} ) {
     return axiosClient({
         url: `/payment/${id}`,
         method: 'GET',
@@ -33,7 +33,7 @@ export function createPayment({ token, data }: {
         'note': string
         'status': paymentStatus
         'method': paymentMethod
-        'senderOrgId': string
+        'senderOrgId'?: string
         'senderUserId'?: string
         'receiverId'?: string
     }

@@ -34,7 +34,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
     useEffect(() => {
         fetchPaymentById({ token, id: thread.meta }).then(result => {
-            dispatch(setPaymentInfo({ inboxId: id!, threadId: thread?.id, payment: result.data }))
+            dispatch(setPaymentInfo({ inboxId: id, threadId: thread?.id, payment: result.data }))
         })
     }, [dispatch, id, payment?.id, thread?.id, thread.meta, token])
 

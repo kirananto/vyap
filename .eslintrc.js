@@ -21,9 +21,9 @@ module.exports = {
         'semi': [1, 'never'],
         eqeqeq: [1, 'always'],
         '@typescript-eslint/no-explicit-any': 'warn',
-        '@typescript-eslint/no-non-null-assertion': 'warn',
+        '@typescript-eslint/no-non-null-assertion': 'error',
         '@typescript-eslint/ban-ts-comment': 'off', // TODO Will be turned on later
-        '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn', // TODO will be turned on later
+        '@typescript-eslint/no-non-null-asserted-optional-chain': 'error', // TODO will be turned on later
         'react/no-unescaped-entities': 'error',
         'no-console': 0,
         'quotes': [1, 'single', { avoidEscape: true, allowTemplateLiterals: true }],

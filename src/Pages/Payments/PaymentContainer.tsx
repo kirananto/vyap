@@ -194,7 +194,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
 
             <ModalViewer
                 body={itemClicked ? paymentSummary() : null}
-                isOpen={paymentSummaryOpen!}
+                isOpen={!!paymentSummaryOpen}
                 onClose={() => setPaymentSummaryOpen(false)}
             />
         </>

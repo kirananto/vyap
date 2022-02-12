@@ -1,7 +1,7 @@
 import type { OrderStatusType } from 'src/Pages/Orders/enum'
 import { axiosClient } from './apiClient'
 
-export const fetchOrderAPI = ({ token, id }: { token?: string; id: string }) => axiosClient({
+export const fetchOrderAPI = ({ token, id }: { token?: string; id?: string }) => axiosClient({
     url: `/order/${id}`,
     method: 'GET',
     headers: {

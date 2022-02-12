@@ -9,7 +9,7 @@ interface chatListInterface {
 }
 
 interface IndividualChatInterface {
-    inboxHash: string
+    inboxHash?: string
     isLoading: boolean
     id: string
     error: boolean
@@ -36,7 +36,7 @@ export interface ThreadInterface {
     id: string;
     createdAt: string;
     updatedAt: string;
-    inboxHash: string;
+    inboxHash?: string;
     senderId: string;
     msg: string;
     type: ThreadTypeEnum;
@@ -50,8 +50,8 @@ const initialState: chatListInterface = {}
 
 export const fetchThreadsByInbox = createAsyncThunk(
     'chatList/fetchThreadsByInbox',
-    async ({ token, inboxHash, offset, limit, id }: { token?: string; inboxHash: string; offset: number; id: string; limit: number }) => {
-        const response = await fetchThreadsById({ token: token, inboxId: inboxHash!, offset, limit })
+    async ({ token, inboxHash, offset, limit, id }: { token?: string; inboxHash?: string; offset: number; id: string; limit: number }) => {
+        const response = await fetchThreadsById({ token: token, inboxId: inboxHash, offset, limit })
         return {
             inboxHash: inboxHash,
             id: id,
@@ -63,8 +63,8 @@ export const fetchThreadsByInbox = createAsyncThunk(
 )
 export const fetchInboxAction = createAsyncThunk(
     'chatList/fetchInboxAction',
-    async ({ token, id }: { token?: string; id: string }) => {
-        const response = await fetchInboxById({ token, id: id! })
+    async ({ token, id }: { token?: string; id?: string }) => {
+        const response = await fetchInboxById({ token, id: id })
         return response.data
     }
 )
@@ -73,9 +73,9 @@ export const chatListInterface = createSlice({
     name: 'chatList',
     initialState,
     reducers: {
-        setPaymentInfo: (state, action: PayloadAction<{ inboxId: string, threadId?: string, payment: paymentObject }>) => {
-            const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
-            state[action.payload.inboxId].threads[threadIndex].payment = action.payload.payment
+        setPaymentInfo: (state, action: PayloadAction<{ inboxId?: string, threadId?: string, payment: paymentObject }>) => {
+            const threadIndex = state[action.payload.inboxId ?? ''].threads.findIndex(findItem => findItem.id === action.payload.threadId)
+            state[action.payload.inboxId ?? ''].threads[threadIndex].payment = action.payload.payment
         },
         setOrderInfo: (state, action: PayloadAction<{ inboxId: string, threadId?: string, order: orderInterface }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
@@ -83,8 +83,12 @@ export const chatListInterface = createSlice({
         },
         setOrderItems: (state, action: PayloadAction<{ inboxId: string, threadId?: string, orderItems: any[] }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
-            if (state[action.payload.inboxId].threads[threadIndex].order) {
-                state[action.payload.inboxId].threads[threadIndex].order!.orderItems = action.payload.orderItems
+            const order = state[action.payload.inboxId].threads[threadIndex].order
+            if (order) {
+                state[action.payload.inboxId].threads[threadIndex].order = {
+                    ...order,
+                    orderItems: action.payload.orderItems
+                }
             }
         },
         clearAll: () => {

@@ -230,7 +230,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         ))}
                         <div
                             className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border border-gray-400 p-1 shadow-sm dark:text-gray-300"
-                            onClick={() => fileUploaderRef.current!.click()}
+                            onClick={() => fileUploaderRef.current?.click()}
                         >
                             {!spinner ? (
                                 <svg

@@ -34,7 +34,7 @@ export default function AddPaymentModal({
     const { token, user } = useSelector(selectCredentials)
     const navigate = useNavigate()
     const [method, setMethod] = useState<paymentMethod>(paymentMethod.CASH)
-    const [amount, setAmount] = useState<number | undefined>((btnAction === BUTTON_ACTION.PLACE_ORDER) ? orderAmount! : undefined)
+    const [amount, setAmount] = useState<number | undefined>((btnAction === BUTTON_ACTION.PLACE_ORDER) ? orderAmount : undefined)
     const [paymentOption, setPaymentOption] = useState<string>(PAYMENT_OPTIONS.PAY_LATER)
     const [isSuccess, setIsSuccess] = useState(false)
     const [note, setNote] = useState('')
@@ -83,12 +83,12 @@ export default function AddPaymentModal({
             // TODO validations before making API call
             createPayment({
                 token, data: {
-                    amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? parsedcustomAmount! : amount!,
+                    amount: (btnAction === BUTTON_ACTION.PLACE_ORDER && paymentOption !== PAYMENT_OPTIONS.FULL_PAYMENT) ? parsedcustomAmount : (amount ?? 0),
                     note: order ? getNoteText(order) : note,
                     method,
                     status: paymentStatus.SUCCESS,
                     receiverId: user?.organizationId,
-                    senderOrgId: receiverId!,
+                    senderOrgId: receiverId,
                 }
             })
                 .then(() => {
@@ -112,20 +112,20 @@ export default function AddPaymentModal({
         if (btnAction === BUTTON_ACTION.PLACE_ORDER) {
             switch (paymentOption) {
                 case PAYMENT_OPTIONS.FULL_PAYMENT:
-                    validateAmount = amount!
+                    validateAmount = amount ?? 0
                     break
                 case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
-                    validateAmount = parsedcustomAmount!
+                    validateAmount = parsedcustomAmount
                     break
                 case PAYMENT_OPTIONS.PAY_LATER:
-                    validateAmount = parsedcustomAmount!
+                    validateAmount = parsedcustomAmount
                     break
                 default:
                     validateAmount = 0
                     break
             }
         } else {
-            validateAmount = amount!
+            validateAmount = amount ?? 0
         }
         onValidate(
             'submit',

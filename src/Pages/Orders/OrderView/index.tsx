@@ -37,9 +37,9 @@ export default function OrderDetails() {
     const getImage = () => takeScreenshot(ref.current)
 
     useEffect(() => {
-        fetchOrderAPI({ token, id: id! }).then((result) => {
+        fetchOrderAPI({ token, id: id }).then((result) => {
             // setOrder(result.data)
-            dispatch(setOrderInfo({ inboxId: chatId!, threadId: thread?.id, order: result.data }))
+            dispatch(setOrderInfo({ inboxId: chatId ?? '', threadId: thread?.id, order: result.data }))
         })
     }, [chatId, dispatch, id, thread?.id, token])
 
