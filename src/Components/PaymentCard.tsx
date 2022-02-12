@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { format } from 'date-fns'
 import { fetchPaymentById } from '../API/payment.axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCredentials } from '../Pages/Login/credentialsSlice'
+import { Organization, selectCredentials } from '../Pages/Login/credentialsSlice'
 import { NavLink  } from 'react-router-dom'
 import { setPaymentInfo, ThreadInterface } from 'src/Pages/ChatView/chatListSlice'
 import { useParams } from 'react-router'
@@ -20,8 +20,8 @@ export interface paymentObject {
   initiatedByOrgId: string;
   senderOrgId?: string
   receiverId?: string
-  receiver?: any
-  senderOrg?: any
+  receiver?: Organization
+  senderOrg?: Organization
 }
 
 export default function PaymentCard({ className, thread }: { className: string, thread: ThreadInterface }) {

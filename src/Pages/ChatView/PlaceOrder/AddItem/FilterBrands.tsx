@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBrands } from 'src/API/brand.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import type { BrandInterface } from 'src/Pages/Product/AddProduct/ProductScreen/BrandModal'
 import {
     brandsCheckbox,
     selectAddItemsproductFilters,
@@ -9,7 +10,7 @@ import {
 
 interface CategoryName {
   name: string;
-  item: any;
+  item: BrandInterface;
 }
 const Category = (props: CategoryName) => {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ interface FilterBrands {
   type: 'brand' | 'category';
 }
 export default function FilterBrand(props: FilterBrands) {
-    const [items, setItems] = useState<any[]>([])
+    const [items, setItems] = useState<BrandInterface[]>([])
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
