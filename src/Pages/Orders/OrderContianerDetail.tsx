@@ -6,12 +6,13 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { FormattedMessage } from 'react-intl'
 import ReactToPrint from 'react-to-print'
+import type { orderInterface } from 'src/Components/OrderCard'
 
 export default function OrderContainerDetail({
     order,
     minimize,
 }: {
-  order: any;
+  order: orderInterface;
   minimize: () => void;
 }) {
     const { token } = useSelector(selectCredentials)

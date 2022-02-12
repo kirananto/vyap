@@ -15,12 +15,12 @@ export interface BrandInterface {
 function BrandModal(props: any) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
-    const [searchValue, setSearchValue] = useState(undefined)
+    const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
     const [hsnCodes, setBrands] = useState<BrandInterface[]>([])
 
     const dispatch = useDispatch()
 
-    const handleInputChange = (event: any) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target?.value)
     }
 

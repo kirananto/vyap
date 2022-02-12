@@ -75,7 +75,7 @@ function CreateProduct() {
         }
     }
 
-    function handleBeforeUnload(e: any) {
+    function handleBeforeUnload(e: BeforeUnloadEvent) {
         const confirmationMessage = 'o/';
 
         (e || window.event).returnValue = confirmationMessage //Gecko + IE

@@ -137,13 +137,13 @@ export default function OrderDetails() {
                             {/* ------------------ */}
                         </div>
                         {/* Order Detail card */}
-                        <OrderDetail order={order} shareON={shareAction} />
+                        {order ? <OrderDetail order={order} shareON={shareAction} /> : null}
                         {/* Item List */}
-                        <ItemList
+                        {order ? <ItemList
                             order={order}
                             shareON={shareAction}
                             shareProceed={share}
-                        />
+                        /> : null}
                     </div>
                 </span>
                 <div className="flex justify-center">
@@ -175,7 +175,7 @@ export default function OrderDetails() {
 
                 <div className={billActive ? '' : 'hidden'}>
                     <span ref={refBill}>
-                        <OrderBill order={order} />
+                        {order ? <OrderBill order={order} /> : null}
                     </span>
                 </div>
             </div>

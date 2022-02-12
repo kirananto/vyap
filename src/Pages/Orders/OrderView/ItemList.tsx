@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchOrderItems } from 'src/API/order.axios'
+import type { orderInterface } from 'src/Components/OrderCard'
 import Spinner from 'src/Components/Style/Spinner'
 import { selectChatList, setOrderItems } from 'src/Pages/ChatView/chatListSlice'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
-function Items({ order }: { order: any }) {
+function Items({ order }: { order: orderInterface }) {
 
     const { id, chatId } = useParams()
     const { token } = useSelector(selectCredentials)
@@ -86,7 +87,7 @@ export default function ItemList({
     shareON,
     shareProceed,
 }: {
-  order: any;
+  order: orderInterface;
   shareON?: boolean;
   shareProceed?: (arg1: string) => void;
 }) {

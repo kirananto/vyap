@@ -23,11 +23,14 @@ export interface orderInterface {
   numberOfItems: number
   id: string
   updatedAt: Date
+  createdAt: Date
   supplierId: string
   buyer: any
   supplier: any
   orderItems?: any[]
-  orderStatus:[{id: string, status: string}]
+  initiatedBy?: any
+  description?: string
+  orderStatus:[{ id: string, status: OrderStatusEnum, note?: string }]
 }
 
 interface iProps { 

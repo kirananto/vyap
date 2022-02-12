@@ -3,9 +3,10 @@ import OrderContainerDetail from './OrderContianerDetail'
 import format from 'date-fns/format'
 import Spinner from 'src/Components/Style/Spinner'
 import ChatImg from '../Product/assets/no_data.svg'
+import type { orderInterface } from 'src/Components/OrderCard'
 
 interface IProps {
-  orders: any[];
+  orders: orderInterface[];
   loading: boolean;
 }
 

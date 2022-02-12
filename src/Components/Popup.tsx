@@ -2,14 +2,14 @@ import React from 'react'
 import { hapticFeedback } from 'src/utils/vibrate'
 import './Style/Popup.css'
 
-function Popup(props: any) {
-    return props.trigger ? (
+function Popup({ setModalEmployee, children, trigger }: { setModalEmployee: React.Dispatch<React.SetStateAction<boolean>>, children: JSX.Element | string, trigger: boolean }) {
+    return trigger ? (
         <div className="border-t border-gray-200 shadow-2xl main-popup-container dark:bg-gray-700 dark:border-gray-800">
             <div className="main-popup-inner">
                 <button
                     onClick={() => {
                         hapticFeedback()
-                        props.setModalEmployee(false)
+                        setModalEmployee(false)
                     }}
                     className="main-popup-btn"
                 >
@@ -26,7 +26,7 @@ function Popup(props: any) {
                         />
                     </svg>
                 </button>
-                {props.children}
+                {children}
             </div>
         </div>
     ) : null

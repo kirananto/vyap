@@ -9,6 +9,7 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import { BUTTON_ACTION, PAYMENT_OPTIONS } from './PlaceOrder/types'
 import { useNavigate } from 'react-router-dom'
 import './payment.css'
+import type { orderInterface } from 'src/Components/OrderCard'
 
 export class PostAmount {
     @Min(1)
@@ -69,7 +70,7 @@ export default function AddPaymentModal({
         })
     }
 
-    function getNoteText(order: any) {
+    function getNoteText(order: orderInterface) {
         return `Payment recieved for order #${order.id?.split('-')[0]}`
     }
 

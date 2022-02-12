@@ -3,8 +3,9 @@ import { PaymentInfo } from '../../../Components/PaymentInfo'
 import { format } from 'date-fns'
 import { OrderInfoIcon } from 'src/Components/OrderInfo'
 import { hapticFeedback } from 'src/utils/vibrate'
+import type { orderInterface } from 'src/Components/OrderCard'
 
-function OrderDetailed({ order }: { order: any }) {
+function OrderDetailed({ order }: { order: orderInterface }) {
     return (
         <div className="flex flex-col gap-3">
             <PaymentInfo heading="Order id" info={`#${order.id?.split('-')?.[0]}`} />
@@ -37,7 +38,7 @@ function OrderDetailed({ order }: { order: any }) {
             <OrderInfoIcon
                 heading="Status"
                 status={order?.orderStatus?.[0]?.status}
-                info={order?.orderStatus?.[0]?.note}
+                info={order?.orderStatus?.[0]?.note ?? 'No information'}
             />
         </div>
     )
@@ -47,7 +48,7 @@ export default function OrderDetail({
     order,
     shareON,
 }: {
-  order: any;
+  order: orderInterface;
   shareON?: boolean;
 }) {
     const [isExpanded, setIsExpanded] = useState(shareON ? true : false)

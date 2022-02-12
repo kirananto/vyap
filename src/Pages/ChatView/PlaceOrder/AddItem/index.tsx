@@ -336,7 +336,7 @@ export default function AddItem() {
             </div>
             <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
                 <Button onClick={onSubmit}>
-                    Add {selectedItems?.length} items (₹{calculatePriceOfSelected()})
+                    {`Add ${selectedItems?.length} items (₹${calculatePriceOfSelected()})`}
                 </Button>
             </div>
         </div>

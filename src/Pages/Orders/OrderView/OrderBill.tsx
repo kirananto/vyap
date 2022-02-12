@@ -5,13 +5,14 @@ import { selectCredentials } from '../../Login/credentialsSlice'
 import { format } from 'date-fns'
 import vyapLogo from '../../../assets/new_logo.svg'
 import vyapQR from '../../../assets/img/vyap-install-qr.png'
+import type { orderInterface } from 'src/Components/OrderCard'
 
-const OrderBill = ({ order }: { order: any }) => {
+const OrderBill = ({ order }: { order: orderInterface }) => {
     const { token } = useSelector(selectCredentials)
     const [orderItems, setOrderItems] = useState<any[]>([])
 
     useEffect(() => {
-        fetchOrderItems({ token, orderId: order?.id, limit: 100, offset: 0 }).then((result: any) => {
+        fetchOrderItems({ token, orderId: order?.id, limit: 100, offset: 0 }).then((result) => {
             setOrderItems(result?.data?.data)
         })
     }, [token, order?.id])
