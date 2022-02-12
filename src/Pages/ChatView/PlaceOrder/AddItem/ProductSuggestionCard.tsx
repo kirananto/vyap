@@ -1,22 +1,24 @@
 import React from 'react'
+import type { IProduct } from 'src/types/product'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
+import type { AddItemProductInterface } from '.'
 
-export default function ProductSuggestionCard({ 
-    item, 
-    handleAddItem, 
+export default function ProductSuggestionCard({
+    item,
+    handleAddItem,
     handleRemoveItemItem,
     selectedItems,
     updateItem
-} : { 
-     item: any,
-     handleAddItem: any, 
-     handleRemoveItemItem: any,
-     updateItem: any,
-     selectedItems: any
-     }) {
+}: {
+    item: IProduct,
+    handleAddItem: (item: IProduct, caseQuantity: number) => void,
+    handleRemoveItemItem: (item: IProduct, caseQuantity: number) => void,
+    updateItem: (item: IProduct, caseQuantity: number) => void,
+    selectedItems: AddItemProductInterface[]
+}) {
 
-    return ( <div
+    return (<div
         className="grid flex-none w-48 bg-white-200 dark:bg-gray-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"
     >
         <div className="relative self-center -mt-4 -mx-4 w-auto h-24 rounded-tl-l grounded-tr-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
@@ -34,7 +36,7 @@ export default function ProductSuggestionCard({
 
         <div className="flex flex-col ml-0 self-center">
             <div className="text-sm w-32 mt-1 font-bold text-gray-600 dark:text-gray-200 truncate">
-                {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name } 
+                {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name}
             </div>
             <div className="grid grid-cols-2 my-2 mb-3">
                 <div className="text-xs font-semibold text-gray-500  dark:text-gray-400">

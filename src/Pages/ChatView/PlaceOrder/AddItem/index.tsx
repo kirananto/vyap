@@ -19,7 +19,7 @@ import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
 import ProductSuggestionCard from './ProductSuggestionCard'
 import type { IProduct } from 'src/types/product'
 
-interface AddItemProductInterface extends IProduct {
+export interface AddItemProductInterface extends IProduct {
     quantity: number
 }
 export default function AddItem() {
@@ -95,7 +95,7 @@ export default function AddItem() {
         navigate('/place-order')
     }
 
-    function handleAddItem(item: AddItemProductInterface, caseQuantity: number) {
+    function handleAddItem(item: IProduct, caseQuantity: number) {
         const isAlreadyPresent = selectedItems?.some(
             (someItem) => someItem.id === item.id
         )
@@ -126,7 +126,7 @@ export default function AddItem() {
         }
     }
 
-    function updateItem(item: AddItemProductInterface, caseQuantity: number) {
+    function updateItem(item: IProduct, caseQuantity: number) {
         const isAlreadyPresent = selectedItems?.some(
             (someItem) => someItem.id === item.id
         )
@@ -157,7 +157,7 @@ export default function AddItem() {
         }
     }
 
-    function handleRemoveItemItem(item: AddItemProductInterface, caseQuantity: number) {
+    function handleRemoveItemItem(item: IProduct, caseQuantity: number) {
         const _selectedItems = selectedItems
             ?.map((mapItem) => {
                 if (mapItem.id === item.id) {
