@@ -1,41 +1,41 @@
-import { IsBoolean, IsDefined, IsEmail, IsPhoneNumber, IsString, Length, ValidateNested } from "class-validator";
+import { IsBoolean, IsDefined, IsEmail, IsPhoneNumber, IsString, Length } from 'class-validator'
 
 export class SignupRequestDto {
 
     @IsPhoneNumber('IN')
     @IsDefined()
-    phone!: string;
+        phone!: string
 
     @IsString()
     @IsDefined()
-    name!: string
+        name!: string
 
     @IsEmail()
     @IsDefined()
-    email!: string
+        email!: string
 
     @IsString()
     @IsDefined()
-    businessName!: string
+        businessName!: string
 
     @IsString()
     @IsDefined()
-    address!: string
+        address!: string
 
 
     @IsString()
     @Length(6)
     @IsDefined()
-    pinCode!: string;
+        pinCode!: string
 
     @IsBoolean()
     @IsDefined()
-    listPrivately!: boolean;
+        listPrivately!: boolean
 
     @IsDefined()
-    organizationLocation: any
+        organizationLocation: any
 
     @IsDefined()
     @IsString()
-    categoryId!: string
+        categoryId!: string
 }

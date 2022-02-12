@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface ProductFilterInterface {
     categories: any[];
@@ -10,7 +10,7 @@ const initialState: ProductFilterInterface = {
     categories: [],
     brands: [],
     sorting: undefined
-};
+}
 
 
 export const productFiltersSlice = createSlice({
@@ -19,13 +19,13 @@ export const productFiltersSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setCategories: (state, action: PayloadAction<ProductFilterInterface['categories']>) => {
-            state.categories = action.payload;
+            state.categories = action.payload
         },
         setBrands: (state, action: PayloadAction<ProductFilterInterface['brands']>) => {
-            state.brands = action.payload;
+            state.brands = action.payload
         },
         setSorting: (state, action: PayloadAction<ProductFilterInterface['sorting']>) => {
-            state.sorting = action.payload;
+            state.sorting = action.payload
         },
         categoriesCheckbox: (state, action: PayloadAction<any>) => {
             const isPresent = state.categories?.find(item => item.id === action.payload.id)
@@ -44,20 +44,20 @@ export const productFiltersSlice = createSlice({
             }
         },
         clearAll: (state) => {
-            state.categories = [];
-            state.brands = [];
-            state.sorting = undefined;
+            state.categories = []
+            state.brands = []
+            state.sorting = undefined
         },
 
     },
-});
+})
 
-export const { setCategories, setBrands, setSorting, categoriesCheckbox, brandsCheckbox, clearAll } = productFiltersSlice.actions;
+export const { setCategories, setBrands, setSorting, categoriesCheckbox, brandsCheckbox, clearAll } = productFiltersSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectProductFilters = (state: any): ProductFilterInterface => state.productFilters;
+export const selectProductFilters = (state: any): ProductFilterInterface => state.productFilters
 
 
-export default productFiltersSlice.reducer;
+export default productFiltersSlice.reducer

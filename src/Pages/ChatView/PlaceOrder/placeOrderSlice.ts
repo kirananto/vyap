@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface PlaceOrderInterface {
     note: string;
@@ -12,7 +12,7 @@ const initialState: PlaceOrderInterface = {
     discount: 0,
     orgId: '',
     cartItems: [],
-};
+}
 
 
 export const placeOrderSlice = createSlice({
@@ -21,10 +21,10 @@ export const placeOrderSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setNote: (state, action: PayloadAction<string>) => {
-            state.note = action.payload;
+            state.note = action.payload
         },
         setFlatDiscount: (state, action: PayloadAction<number>) => {
-            state.discount = action.payload;
+            state.discount = action.payload
         },
         pushItemsToCart: (state, action: PayloadAction<any>) => {
             const oldCartItemsModified = state.cartItems?.map(mapItem => {
@@ -38,7 +38,7 @@ export const placeOrderSlice = createSlice({
                 const isItAlreadyPresent = oldCartItemsModified?.some(someItem => someItem.id === filterItem.id)
                 return !isItAlreadyPresent
             })
-            state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned];
+            state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned]
         },
         updateItemsOnCart: (state, action: PayloadAction<any>) => {
             const oldCartItemsModified = state.cartItems?.map(mapItem => {
@@ -61,7 +61,7 @@ export const placeOrderSlice = createSlice({
                 const isItAlreadyPresent = oldCartItemsModified?.some(someItem => someItem.id === filterItem.id)
                 return !isItAlreadyPresent
             })
-            state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned];
+            state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned]
 
         },
         removeItemsFromCart: (state, action: PayloadAction<{ id: string, quantity: number }>) => {
@@ -80,20 +80,20 @@ export const placeOrderSlice = createSlice({
             state.orgId = action.payload
         },
         clearAll: (state) => {
-            state.note = '';
-            state.discount = 0;
-            state.cartItems = [];
+            state.note = ''
+            state.discount = 0
+            state.cartItems = []
         },
 
     },
-});
+})
 
-export const { setNote, setFlatDiscount, pushItemsToCart, updateItemsOnCart, removeItemsFromCart, setOrgId, clearAll } = placeOrderSlice.actions;
+export const { setNote, setFlatDiscount, pushItemsToCart, updateItemsOnCart, removeItemsFromCart, setOrgId, clearAll } = placeOrderSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectPlaceOrderInfo = (state: any): PlaceOrderInterface => state.placeorder;
+export const selectPlaceOrderInfo = (state: any): PlaceOrderInterface => state.placeorder
 
 
-export default placeOrderSlice.reducer;
+export default placeOrderSlice.reducer

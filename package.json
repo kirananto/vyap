@@ -12,8 +12,8 @@
     "build": "snowpack build",
     "i18n:extract": "formatjs extract 'src/**/*.{tsx}'",
     "i18n:compile": "formatjs compile",
-    "lint": "eslint . --ext .tsx",
-    "lint:fix": "eslint . --ext .tsx --fix",
+    "lint": "eslint . --ext .tsx,.ts",
+    "lint:fix": "eslint . --ext .tsx,.ts --fix",
     "check:types": "tsc --noEmit",
     "cli:workbox": "workbox",
     "cli:formatjs": "formatjs"

@@ -27,15 +27,13 @@ export const createIfNotExists = async ({ token, data }: { token?: string; data:
                 filter: `hsn||$eq||${data.hsn}` 
             }
         })
-    }
-    catch(e) {
+    } catch(e) {
         apiResponse = undefined
     }
     if(!apiResponse?.data?.data?.[0]?.id) {
         const res = await createHSNAPI({ token, data }) 
         return res.data
-    }
-    else {
+    } else {
         return apiResponse?.data?.data?.[0]
     }
 

@@ -1,4 +1,4 @@
-import { Length, Min } from "class-validator";
+import { Length, Min } from 'class-validator'
 
 
 export enum TABS {
@@ -13,22 +13,22 @@ export enum PAGE_ACTION {
 
 export class PostMRP {
     @Min(1)
-    mrpPrice!: number;
+        mrpPrice!: number
 }
 
 export class PostSale {
     @Min(1)
-    salePrice!: number;
+        salePrice!: number
 }
 
 export class PostHSN {
     @Min(1)
-    hsnNum!: number;
+        hsnNum!: number
 }
 
 export class PostGST {
     @Min(1)
-    gst!: number;
+        gst!: number
 }
 
 
@@ -36,20 +36,20 @@ export class PostGST {
 
 export class PostDescription {
     @Length(0, 80)
-    description!: string;
+        description!: string
 }
 
 export class PostCategory {
     @Length(1, 30)
-    category!: string;
+        category!: string
 }
 
 export class PostTag {
     @Length(1, 30)
-    tag!: string;
+        tag!: string
 }
 
 export class PostBrand {
     @Length(1, 30)
-    brand!: string;
+        brand!: string
 }
