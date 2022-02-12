@@ -12,10 +12,10 @@ interface CatalogueImageInterface {
     description: string;
 }
 
-interface CentralCatalogueInterface {
-    barCode?: string
+export interface CentralCatalogueInterface {
+    barCode?: string | null
     brandId?: string
-    description: string
+    description?: string
     hsnId?: string
     id?: string
     name?: string
@@ -64,7 +64,7 @@ export interface AddProductInterface {
 
 const initialState: AddProductInterface = {
     editProductId: '',
-    centralCatalogue: { description: '' },
+    centralCatalogue: undefined,
     pricing: {
         mrpPrice: undefined,
         salesPrice: undefined,
@@ -119,7 +119,7 @@ export const addProductSlice = createSlice({
                 action.payload
             ]
         },
-        setSkuCode: (state, action: PayloadAction<any>) => {
+        setSkuCode: (state, action: PayloadAction<string>) => {
             state.others.skuCode = action.payload
         },
         setAliasName: (state, action: PayloadAction<string>) => {

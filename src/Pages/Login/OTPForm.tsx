@@ -38,7 +38,7 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
     return (
         <form
             className="mt-6"
-            onSubmit={(event: any) => {
+            onSubmit={(event) => {
                 event.preventDefault()
                 onPressConfirm(code)
             }}

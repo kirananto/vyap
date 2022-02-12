@@ -3,7 +3,7 @@ import { NavLink  } from 'react-router-dom'
 import { format } from 'date-fns'
 import { useDispatch, useSelector,  } from 'react-redux'
 import { useParams } from 'react-router'
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import { Organization, selectCredentials, User } from 'src/Pages/Login/credentialsSlice'
 import { fetchOrderAPI } from 'src/API/order.axios'
 import { setOrderInfo, ThreadInterface } from 'src/Pages/ChatView/chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
@@ -25,10 +25,10 @@ export interface orderInterface {
   updatedAt: Date
   createdAt: Date
   supplierId: string
-  buyer: any
-  supplier: any
+  buyer: Organization
+  supplier: Organization
   orderItems?: any[]
-  initiatedBy?: any
+  initiatedBy?: User
   description?: string
   orderStatus:[{ id: string, status: OrderStatusEnum, note?: string }]
 }

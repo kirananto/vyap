@@ -22,10 +22,9 @@ export default function AddProductMain() {
             <div className="w-11/12 p-3 pt-48 mx-auto dark:bg-gray-900">
                 <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">What is the product?</h1>
                 <DropDown
-                    onSelect={(e: any) =>{
+                    onSelect={(e) =>{
                         dispatch(setCentralCatalogue(e))
-                    }
-                    } 
+                    }} 
                 />
             </div>
         </div>

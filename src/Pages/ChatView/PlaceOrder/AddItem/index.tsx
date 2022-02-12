@@ -17,13 +17,17 @@ import useQueryParam from 'src/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
 import ProductSuggestionCard from './ProductSuggestionCard'
+import type { IProduct } from 'src/types/product'
 
+interface AddItemProductInterface extends IProduct {
+    quantity: number
+}
 export default function AddItem() {
-    const [itemList, setItemList] = useState<any[]>([])
-    const [selectedItems, setSelectedItems] = useState<any[]>([])
+    const [itemList, setItemList] = useState<AddItemProductInterface[]>([])
+    const [selectedItems, setSelectedItems] = useState<AddItemProductInterface[]>([])
     const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>('filterPopupOpen')
 
-    const [prevOrdered, setPrevOrdered] = useState<any[]>([])
+    const [prevOrdered, setPrevOrdered] = useState<IProduct[]>([])
     //   const [isDropOpen, setIsDropOpen] = useState<
     //   | {
     //       isAdd: boolean;
@@ -51,12 +55,12 @@ export default function AddItem() {
             supplierId: isSupplier ? user?.organizationId : placeOrder.orgId,
             limit: 10,
             offset: 0
-        }).then(async (result: any) => {
-            const prev = await Promise.allSettled(result.data?.data?.map((productId: any) => {
+        }).then(async (result) => {
+            const prev = await Promise.allSettled(result.data?.data?.map((productId: string) => {
                 return fetchProductById({ token: token, id: productId })
             }))
-            const newPrev = prev.filter((item: any) => item.status === 'fulfilled').map((item: any) => item.value?.data)?.filter(item => item.outOfStock === false)
-            console.log('prev', newPrev)
+            const newPrev = (prev.filter((item) => item.status === 'fulfilled') as PromiseFulfilledResult<{ data: IProduct }>[]).map((item) => item.value?.data)?.filter(item => item.outOfStock === false)
+            // console.log('prev', newPrev)
             setPrevOrdered(newPrev)
         })
     }, [isSupplier, placeOrder.orgId, token, user?.organizationId])
@@ -80,7 +84,7 @@ export default function AddItem() {
             brandIds: filters?.brands?.length
                 ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}`
                 : undefined,
-        }).then((result: any) => {
+        }).then((result) => {
             setItemList(result.data?.data ?? [])
         })
     }, [token, isSupplier, user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
@@ -91,13 +95,13 @@ export default function AddItem() {
         navigate('/place-order')
     }
 
-    function handleAddItem(item: any, caseQuantity: number) {
+    function handleAddItem(item: AddItemProductInterface, caseQuantity: number) {
         const isAlreadyPresent = selectedItems?.some(
-            (someItem: any) => someItem.id === item.id
+            (someItem) => someItem.id === item.id
         )
         if (isAlreadyPresent) {
             const _selectedItems = selectedItems
-                ?.map((mapItem: any) => {
+                ?.map((mapItem) => {
                     if (mapItem.id === item.id) {
                         return {
                             ...mapItem,
@@ -106,7 +110,7 @@ export default function AddItem() {
                     }
                     return mapItem
                 })
-                .filter((filterItem: any) => filterItem.quantity > 0)
+                .filter((filterItem) => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
         } else {
@@ -122,13 +126,13 @@ export default function AddItem() {
         }
     }
 
-    function updateItem(item: any, caseQuantity: number) {
+    function updateItem(item: AddItemProductInterface, caseQuantity: number) {
         const isAlreadyPresent = selectedItems?.some(
-            (someItem: any) => someItem.id === item.id
+            (someItem) => someItem.id === item.id
         )
         if (isAlreadyPresent) {
             const _selectedItems = selectedItems
-                ?.map((mapItem: any) => {
+                ?.map((mapItem) => {
                     if (mapItem.id === item.id) {
                         return {
                             ...mapItem,
@@ -137,7 +141,7 @@ export default function AddItem() {
                     }
                     return mapItem
                 })
-                .filter((filterItem: any) => filterItem.quantity > 0)
+                .filter((filterItem) => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
         } else {
@@ -153,9 +157,9 @@ export default function AddItem() {
         }
     }
 
-    function handleRemoveItemItem(item: any, caseQuantity: number) {
+    function handleRemoveItemItem(item: AddItemProductInterface, caseQuantity: number) {
         const _selectedItems = selectedItems
-            ?.map((mapItem: any) => {
+            ?.map((mapItem) => {
                 if (mapItem.id === item.id) {
                     return {
                         ...mapItem,
@@ -164,14 +168,14 @@ export default function AddItem() {
                 }
                 return mapItem
             })
-            .filter((filterItem: any) => filterItem.quantity > 0)
+            .filter((filterItem) => filterItem.quantity > 0)
 
         setSelectedItems(_selectedItems)
     }
 
     function calculatePriceOfSelected() {
         const price = selectedItems?.reduce(
-            (a: any, b: any) => a + b.quantity * parseFloat(b?.rate),
+            (a, b) => a + b.quantity * parseFloat(b?.rate),
             0
         )
         return price
@@ -230,7 +234,7 @@ export default function AddItem() {
                                 </div>
                             </div>
                         </div>
-                    
+
 
                         <div className="flex gap-2 col-span-2 sm:col-span-1">
                             <div className="flex text-blue-600 dark:text-blue-400 items-center">
@@ -265,7 +269,7 @@ export default function AddItem() {
                                         }}
                                         value={
                                             selectedItems?.find(
-                                                (findItem: any) => findItem.id === item.id
+                                                (findItem) => findItem.id === item.id
                                             )?.quantity ?? 0
                                         }
                                     />

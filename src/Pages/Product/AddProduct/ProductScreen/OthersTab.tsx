@@ -146,7 +146,7 @@ function OthersTab({ action, saveAttempt }: Props) {
 
     useEffect(() => {
         fetchBrands({ token, limit: 100, offset: 0 })
-            .then((result: any) =>
+            .then((result) =>
                 console.log(
                     result.data.data.map((item: any) => ({ label: 'ssdd', value: item }))
                 )

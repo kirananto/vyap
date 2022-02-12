@@ -16,7 +16,7 @@ export default function Login() {
     const navigate = useNavigate()
     const confirmOTP = (code: string) => {
         setError(null)
-        verifyOtp(phoneNumberRef.current, code).then((res: any) => {
+        verifyOtp(phoneNumberRef.current, code).then((res) => {
             if (res.data) {
                 console.log('res.data', res.data)
                 if (res.data.token) {
@@ -28,7 +28,7 @@ export default function Login() {
                 }
             }
         })
-            .catch((error: any) => {
+            .catch((error) => {
                 console.log('error verifying otp', error.message)
                 if(error?.response?.data) {
                     setError(error?.response?.data?.message)

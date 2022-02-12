@@ -24,7 +24,7 @@ export const Home = () => {
     const customer = useSelector(selectCustomerInfo)
     const dispatch = useDispatch()
     const [addCustomerVisible, setAddCustomerVisible] =
-        useQueryParam<any>('addCustomer')
+        useQueryParam<boolean>('addCustomer')
     const [loading, setLoading] = React.useState(
         customer.customers?.length === 0
     )
@@ -44,7 +44,7 @@ export const Home = () => {
                 limit,
                 search:
                     paginationParams.search.trim() === '' ? undefined : paginationParams.search.trim(),
-            }).then((result: any) => {
+            }).then((result) => {
                 dispatch(setCustomers(result.data.data))
                 dispatch(setCustomerTotal(result.data.total))
                 setLoading(false)
@@ -183,7 +183,7 @@ export const Home = () => {
                 <button
                     onClick={() => {
                         hapticFeedback()
-                        setAddCustomerVisible('true')
+                        setAddCustomerVisible(true)
                     }}
                     className={`add-cutomer-btn text-md rounded-full bg-gradient-to-br from-blue-500
                      to-indigo-700 p-3 text-white shadow-sm transition duration-500 ease-in-out`}
@@ -219,10 +219,10 @@ export const Home = () => {
             )}
             {addCustomerVisible && (
                 <AddCustomerModal
-                    isVisible={addCustomerVisible === 'true'}
+                    isVisible={addCustomerVisible === true}
                     toggleVisibility={() => {
                         setAddCustomerVisible(
-                            addCustomerVisible === 'true' ? 'false' : 'true'
+                            addCustomerVisible === true ? false : true
                         )
                     }}
                 />

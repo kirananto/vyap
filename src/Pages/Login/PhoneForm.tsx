@@ -13,7 +13,7 @@ export default function PhoneForm({ onPressLogin, error, text }: IProps) {
     return (
         <form
             className="mt-6"
-            onSubmit={(event: any) => {
+            onSubmit={(event) => {
                 event.preventDefault()
                 onPressLogin(phoneNumber.replace('+91', ''))
             }}

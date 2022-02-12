@@ -12,7 +12,13 @@ export interface BrandInterface {
   description: string
 }
 
-function BrandModal(props: any) {
+interface BrandModalInterface {
+    setModal: (value: boolean) => void
+    trigger: boolean
+
+}
+
+function BrandModal(props: BrandModalInterface) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
     const [searchValue, setSearchValue] = useState<string | undefined>(undefined)

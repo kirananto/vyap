@@ -7,7 +7,7 @@ import { setAliasName, setCentralCatalogue, setEditProductId, setMrpPrice, setSa
 import { hapticFeedback } from 'src/utils/vibrate'
 
 
-export function MorePopup({ item, onClose }: any) {
+export function MorePopup({ item, onClose }: { item: any, onClose: () => void }) {
 
     const { token } = useSelector(selectCredentials)
 
@@ -23,7 +23,7 @@ export function MorePopup({ item, onClose }: any) {
 
     function editProduct() {
         if (item?.id) {
-            fetchCentralProduct({ token: token, id: item?.centralCatalogueId }).then((result: any) => {
+            fetchCentralProduct({ token: token, id: item?.centralCatalogueId }).then((result) => {
                 if (result?.data) {
                     dispatch(setCentralCatalogue(result?.data))
                 }

@@ -9,8 +9,8 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import './Drop.css'
 import { Length, validate } from 'class-validator'
-import type { ICentralProduct, IFetchCentralProducts } from 'src/types/fetchCentralProducts'
 import type { ICentralImage, IFetchCentralProductImages } from 'src/types/fetchCentralProductImages'
+import type { CentralCatalogueInterface } from '../redux/addProductSlice'
 
 export class Post {
   @Length(3, 50)
@@ -19,8 +19,8 @@ export class Post {
 
 interface IProps {
     key : string
-    opt: ICentralProduct
-    onSelect: (e: any) => void
+    opt: CentralCatalogueInterface
+    onSelect: (e: Partial<CentralCatalogueInterface>) => void
 }
 
 function List(props: IProps) {
@@ -28,7 +28,7 @@ function List(props: IProps) {
     const [productImage, setProductImage] = useState<string>()
 
     useEffect(() => {
-        fetchCentralProductImages({ token, limit: 100, offset: 0, catalogueId: props?.opt?.id }).then(
+        fetchCentralProductImages({ token, limit: 100, offset: 0, catalogueId: props?.opt?.id ?? '' }).then(
             (result: IFetchCentralProductImages) => {
                 const imageName = result.data?.data?.filter((filterItem: ICentralImage) =>
                     filterItem.imageName?.includes('.')
@@ -72,10 +72,13 @@ function List(props: IProps) {
         </div>
     )
 }
+interface DropdDownInterface {
+    onSelect: (e: Partial<CentralCatalogueInterface>) => void
+}
 
-function DropDown(props: any) {
+function DropDown(props: DropdDownInterface) {
     const [value, setValue] = useState('')
-    const [options, setOptions] = useState<ICentralProduct[]>([])
+    const [options, setOptions] = useState<CentralCatalogueInterface[]>([])
 
     // const [isOpen, setIsOpen] = useState(false)
     const [isValidProduct, setIsValidProduct] = useState<boolean>(true)
@@ -95,7 +98,7 @@ function DropDown(props: any) {
     // })
 
     useEffect(() => {
-        fetchCentralProducts({ token, limit: 100, offset: 0, search: value }).then((result: IFetchCentralProducts) => {
+        fetchCentralProducts({ token, limit: 100, offset: 0, search: value }).then((result) => {
             console.log('result', result.data?.data)
             setOptions(result.data?.data ?? [])
         })
@@ -212,8 +215,8 @@ function DropDown(props: any) {
                     </>,
                 ]
                 : []),
-            ...listItems.map((opt: ICentralProduct) => {
-                return <List key={opt.id} opt={opt} onSelect={select} />
+            ...listItems.map((opt: CentralCatalogueInterface) => {
+                return <List key={opt.id ?? ''} opt={opt} onSelect={select} />
             }),
         ]
     }

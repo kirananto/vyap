@@ -114,7 +114,7 @@ export default function PlaceOrder() {
         }
     }
 
-    function updateDiscount(event: any) {
+    function updateDiscount(event: React.ChangeEvent<HTMLInputElement>) {
         const inputValue = event?.target.value
         const finalPrice = getTotalPrice()
         if (inputValue) {

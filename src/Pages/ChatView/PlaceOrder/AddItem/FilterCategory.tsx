@@ -8,8 +8,8 @@ import {
 } from './addProductFiltersSlice'
 
 interface CategoryName {
-  name: string;
-  item: any;
+    name: string;
+    item: any;
 }
 const Category = (props: CategoryName) => {
     const dispatch = useDispatch()
@@ -37,8 +37,8 @@ const Category = (props: CategoryName) => {
 }
 
 interface FilterCategories {
-  heading: string;
-  type: 'brand' | 'category';
+    heading: string;
+    type: 'brand' | 'category';
 }
 export default function FilterCategory(props: FilterCategories) {
     const [items, setItems] = useState<any[]>([])
@@ -46,7 +46,7 @@ export default function FilterCategory(props: FilterCategories) {
 
     useEffect(() => {
         fetchOrganizationProductCategories(
-            { token, limit: 10, offset: 0, search: undefined, orgId: user?.organizationId }        ).then((result: any) => {
+            { token, limit: 10, offset: 0, search: undefined, orgId: user?.organizationId }).then((result) => {
             setItems(result?.data?.data?.filter((item: any) => item?.name))
         })
     }, [token, user?.organizationId])
@@ -56,7 +56,7 @@ export default function FilterCategory(props: FilterCategories) {
             return (
                 <div className="text-xs text-gray-700 dark:text-gray-100">
                     {' '}
-          No {props.type} present{' '}
+                    No {props.type} present{' '}
                 </div>
             )
         }

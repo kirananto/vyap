@@ -45,7 +45,7 @@ export default function FilterBrand(props: FilterBrands) {
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
-        fetchBrands({ token, limit: 10, offset: 0 }).then((result: any) => {
+        fetchBrands({ token, limit: 10, offset: 0 }).then((result) => {
             setItems(result?.data?.data)
         })
     }, [token])

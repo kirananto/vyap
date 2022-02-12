@@ -21,7 +21,7 @@ function Items({ order }: { order: orderInterface }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result: any) => {
+        fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result) => {
             // setOrderItems(result?.data?.data)
             dispatch(setOrderItems({ inboxId: chatId ?? '', threadId: thread?.id, orderItems: result?.data?.data }))
         }).finally(() => setLoading(false))

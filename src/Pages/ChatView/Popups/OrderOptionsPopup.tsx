@@ -33,7 +33,7 @@ const OrderOptionsPopup = ({onClose, currentOrderStatusId, setUpdatingOrderId, s
                         setNewStatus(response.data.status)
                     }
                 })
-                .catch((error : any) => {
+                .catch((error) => {
                     console.log('Edit product error', error)
                 })
         }

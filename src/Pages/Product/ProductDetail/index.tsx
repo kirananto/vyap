@@ -24,7 +24,7 @@ const ProductDetail = () => {
             .then((res) => {
                 console.log('response product:', res.data)
                 if(dispatch(setSingleProduct(res.data))){
-                    fetchCentralProduct({ token: token, id: product?.centralCatalogueId }).then((result: any) => {
+                    fetchCentralProduct({ token: token, id: product?.centralCatalogueId }).then((result) => {
                         if (result?.data) {
                             dispatch(setSingleCentralData(result?.data))
                         }

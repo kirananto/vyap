@@ -74,7 +74,7 @@ export default function FilterCategory(props: FilterCategories) {
             ])
         } else {
             fetchInboxes({ token: token, limit: 100, offset: 0 }).then(
-                (result: any) => {
+                (result) => {
                     setItems(result?.data?.data?.filter((item: any) => item?.recipient))
                 }
             )
