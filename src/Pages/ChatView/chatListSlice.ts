@@ -110,31 +110,34 @@ export const chatListInterface = createSlice({
                 state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
             }
         }),
-        builder.addCase(fetchThreadsByInbox.pending, (state, action: any) => {
-            if (state[action.meta?.args?.id]) {
-                state[action.meta?.args?.id].error = false
-                state[action.meta?.args?.id].isLoading = true
+        builder.addCase(fetchThreadsByInbox.pending, (state, action: PayloadAction<undefined, string, { arg: { id: string }}>) => {
+            if (state[action.meta?.arg?.id]) {
+                state[action.meta?.arg?.id].error = false
+                state[action.meta?.arg?.id].isLoading = true
             }
         }),
-        builder.addCase(fetchThreadsByInbox.rejected, (state, action: any) => {
-            if (state[action.meta?.args?.id]) {
-                state[action.meta?.args?.id].error = true
-                state[action.meta?.args?.id].isLoading = false
+        builder.addCase(fetchThreadsByInbox.rejected, (state, action: PayloadAction<unknown, string, { arg: { id?: string }}>) => {
+            const id = action.meta?.arg?.id
+            if (id && state[id]) {
+                state[id].error = true
+                state[id].isLoading = false
             }
         }),
         builder.addCase(fetchInboxAction.fulfilled, (state, action) => {
             state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
         }),
-        builder.addCase(fetchInboxAction.pending, (state, action: any) => {
-            if (state[action.meta?.args?.id]) {
-                state[action.meta?.args?.id].error = false
-                state[action.meta?.args?.id].isLoading = true
+        builder.addCase(fetchInboxAction.pending, (state, action: PayloadAction<undefined, string, { arg: { id?: string }}>) => {
+            const id = action.meta?.arg?.id
+            if (id && state[id]) {
+                state[id].error = false
+                state[id].isLoading = true
             }
         }),
-        builder.addCase(fetchInboxAction.rejected, (state, action: any) => {
-            if (state[action.meta?.args?.id]) {
-                state[action.meta?.args?.id].error = true
-                state[action.meta?.args?.id].isLoading = false
+        builder.addCase(fetchInboxAction.rejected, (state, action: PayloadAction<unknown, string, { arg: { id?: string }}>) => {
+            const id = action.meta?.arg?.id
+            if (id && state[id]) {
+                state[id].error = true
+                state[id].isLoading = false
             }
         })
     },

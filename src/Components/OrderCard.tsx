@@ -14,10 +14,6 @@ import Pending from './Style/Icons/Pending'
 import Processing from './Style/Icons/Processing'
 import type { IProduct } from 'src/types/product'
 
-
-let statusTxt = '...'
-let statusIcon: JSX.Element = <></>
-
 export interface IOrderItem {
     id: string;
     createdAt: Date;
@@ -97,27 +93,31 @@ export default function OrderCard({
     const orderStatusTxt = () => {
         switch (status) {
             case OrderStatusEnum.PENDING:
-                statusTxt = 'Pending'
-                statusIcon = <span className='text-red-400'><Pending /></span>
-                break
-
+                return {
+                    statusTxt: 'Pending',
+                    statusIcon: <span className='text-red-400'><Pending /></span>
+                }
             case OrderStatusEnum.PROCESSING:
-                statusTxt = 'Processing'
-                statusIcon = <span className='text-orange-400'><Processing /></span>
-                break
+                return {
+                    statusTxt: 'Processing',
+                    statusIcon: <span className='text-orange-400'><Processing /></span>
+                }
 
             case OrderStatusEnum.COMPLETE:
-                statusTxt = 'Completed'
-                statusIcon = <span className='text-green-400'><Completed /></span>
-                break
+                return {
+                    statusTxt: 'Completed',
+                    statusIcon: <span className='text-green-400'><Completed /></span>
+                }
 
             default:
-                break
+                return {
+                    statusTxt: '...',
+                    statusIcon: <></>
+                }
         }
     }
 
-    orderStatusTxt()
-
+    const stats = orderStatusTxt()
     return (
         <div  {...bind} className={`flex ${className} w-full`}>
             <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
@@ -131,10 +131,10 @@ export default function OrderCard({
                     {/* col-1 */}
                     <div className="flex items-center w-24 gap-1">
                         {/* Tick icon */}
-                        {statusIcon}
+                        {stats.statusIcon}
 
                         <p className="text-xs text-gray-500 dark:text-gray-300">
-                            {statusTxt}
+                            {stats.statusTxt}
                         </p>
                     </div>
                     {/* col-2 */}
