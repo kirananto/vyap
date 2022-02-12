@@ -1,4 +1,5 @@
 import { IsBoolean, IsDefined, IsEmail, IsPhoneNumber, IsString, Length } from 'class-validator'
+import type { OrganizationLocationInterface } from '../signupSlice'
 
 export class SignupRequestDto {
 
@@ -33,7 +34,7 @@ export class SignupRequestDto {
         listPrivately!: boolean
 
     @IsDefined()
-        organizationLocation: any
+        organizationLocation: OrganizationLocationInterface | undefined
 
     @IsDefined()
     @IsString()

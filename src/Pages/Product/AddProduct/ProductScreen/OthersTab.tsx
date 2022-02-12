@@ -1,6 +1,5 @@
-import React, { Dispatch, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBrands } from 'src/API/brand.axios'
 import { imageUpload } from 'src/API/image.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
@@ -42,6 +41,7 @@ interface IImageProps {
 
 interface IInputProps {
     label: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>
     value: string | undefined
     placeholder: string
@@ -142,17 +142,6 @@ function OthersTab({ action, saveAttempt }: Props) {
     const addProductInfo = useSelector(selectAddProductInfo)
 
     const fileUploaderRef = useRef<HTMLInputElement>(null)
-
-    useEffect(() => {
-        fetchBrands({ token, limit: 100, offset: 0 })
-            .then((result) =>
-                console.log(
-                    result.data.data.map((item: any) => ({ label: 'ssdd', value: item }))
-                )
-            )
-            .catch(() => console.log('Error loadng data'))
-            //TODO Recheck this
-    }, [token])
 
     function uploadImage() {
         if (fileUploaderRef.current?.files) {

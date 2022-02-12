@@ -1,8 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
+import type { Organization } from '../Login/credentialsSlice'
 
+export interface IInbox  {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt?: Date;
+    ownerId: string;
+    recipientId: string;
+    lastMsg: string;
+    inboxHash: string;
+    isSupplier: boolean;
+    outstandingAmount: string;
+    unseenNumbers: number;
+    recipient: Organization;
+}
 export interface customersInterface {
-    customers: any[];
+    customers: IInbox[];
     total: number
 }
 

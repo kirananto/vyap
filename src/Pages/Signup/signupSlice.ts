@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
 
-interface OrganizationLocationInterface {
+export interface OrganizationLocationInterface {
     lat: number,
     lng: number,
     address?: string;

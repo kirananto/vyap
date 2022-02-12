@@ -4,9 +4,10 @@ import { format, isToday, isYesterday } from 'date-fns'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
+import type { IInbox } from './customersSlice'
 
 interface IProps {
-  item: any;
+  item: IInbox;
 }
 
 export function ItemCard({ item }: IProps) {

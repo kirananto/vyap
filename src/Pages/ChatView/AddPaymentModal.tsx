@@ -251,10 +251,10 @@ export default function AddPaymentModal({
                                             <input
                                                 value={customAmount}
                                                 onChange={(event) => {
-                                                    setCustomAmount(event?.target.value as any)
+                                                    setCustomAmount(event?.target.value as unknown as number)
                                                     onValidate(
                                                         'change',
-                                                        event?.target.value as any, () => console.log('data')
+                                                        event?.target.value as unknown as number, () => console.log('data')
                                                     )
                                                 }}
                                                 className="p-4 m-2 w-auto text-base text-black transition duration-500 ease-in-out transform 
@@ -358,7 +358,7 @@ export default function AddPaymentModal({
                                     </span>
                                     <textarea
                                         value={note}
-                                        onChange={(event) => setNote(event.target.value as any)}
+                                        onChange={(event) => setNote(event.target.value)}
                                         className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                                         id=""
                                     ></textarea>

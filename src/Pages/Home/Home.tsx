@@ -12,6 +12,7 @@ import AddCustomerModal from './AddCustomerModal'
 import Spinner from 'src/Components/Style/Spinner'
 import { FormattedMessage, useIntl } from 'react-intl'
 import {
+    IInbox,
     selectCustomerInfo,
     setCustomers,
     setCustomerTotal,
@@ -55,7 +56,7 @@ export const Home = () => {
         }
     }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
-    function customerFilter(filterItem: any) {
+    function customerFilter(filterItem: IInbox) {
         const search = paginationParams.search?.trim()?.toLowerCase()
         if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
             return true
@@ -108,6 +109,7 @@ export const Home = () => {
         useScrollDirection(target)
 
     function useCallbackRef() {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const [value, setValue] = React.useState<any>()
         const ref = useCallback((node: HTMLElement) => {
             if (node !== null) setValue(node)
