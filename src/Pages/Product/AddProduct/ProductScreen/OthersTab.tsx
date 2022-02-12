@@ -220,7 +220,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         Add product images
                     </h1>
                     <p className="mt-2 text-xs font-bold text-gray-400 dark:text-gray-300">
-                        Add upto 5 images. First image is your product's cover
+                        Add upto 5 images. First image is your product{`'`}s cover
                         <br /> image that will be highlighted everywhere{' '}
                     </p>
                     {/* image-container */}

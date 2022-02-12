@@ -67,7 +67,7 @@ export default function More() {
                         <img src={giftSvg} alt="gift" className="w-20 h-20" />
                         <div className="flex-grow flex flex-col pl-4">
                             <h2 className="title-font font-bold text-gray-800 tracking-wider">Enjoy your 3 months of <br/> free service 🎉</h2>
-                            <p className="text-sm dark:text-gray-600">and then it's only <strong>₹299/month</strong></p>
+                            <p className="text-sm dark:text-gray-600">and then it{`'`}s only <strong>₹299/month</strong></p>
                         </div>
                     </div>
                 </div>

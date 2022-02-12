@@ -229,7 +229,7 @@ export default function Product() {
             {/* Filter Popup */}
             <ModalViewer
                 body={<FilterPopup />}
-                isOpen={filterPopupOpen!}
+                isOpen={!!filterPopupOpen}
                 onClose={() => setfilterPopupOpen(false)}
                 name={'filter'}
             />
@@ -243,7 +243,7 @@ export default function Product() {
                         }}
                     />
                 }
-                isOpen={isSearchMoreOpen!}
+                isOpen={!!isSearchMoreOpen}
                 onClose={() => {
                     setisSearchMoreOpen(false)
                 }}
@@ -258,7 +258,7 @@ export default function Product() {
                         }}
                     />
                 }
-                isOpen={isMoreOpen!}
+                isOpen={!!isMoreOpen}
                 onClose={() => {
                     setIsMoreItem(undefined)
                     setisMoreOpen(false)

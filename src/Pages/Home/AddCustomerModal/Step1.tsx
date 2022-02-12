@@ -107,7 +107,7 @@ export default function AddCustomerStep1({
             </span>
 
             <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        We'll never share your phone number with anyone else.
+        We{`'`}ll never share your phone number with anyone else.
             </div>
 
             <div className="mt-4">

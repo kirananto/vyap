@@ -42,7 +42,7 @@ export default function PhoneForm({ onPressLogin, error, text }: IProps) {
             </div>
 
             <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        We'll never share your phone number <br /> with anyone else.
+        We{`'`}ll never share your phone number <br /> with anyone else.
             </div>
 
             <Button className="mt-6">{text}</Button>
