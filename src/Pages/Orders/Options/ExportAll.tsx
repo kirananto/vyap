@@ -3,13 +3,14 @@ import * as FileSaver from 'file-saver'
 import * as XLSX from 'xlsx'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
+import type { orderInterface } from 'src/Components/OrderCard'
 
 interface IProps {
-  apiData: any[];
+  apiData: orderInterface[];
 }
 
 export const ExportAll = ({ apiData }: IProps) => {
-    const orders: any[] = apiData.map((item) => {
+    const orders = apiData.map((item) => {
         return {
             ORDER_ID: '#' + item?.id?.split('-')[0],
             DATE: item.createdAt

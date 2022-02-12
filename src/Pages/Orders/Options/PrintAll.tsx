@@ -6,9 +6,10 @@ import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 
 import ReactToPrint from 'react-to-print'
+import type { orderInterface } from 'src/Components/OrderCard'
 
 interface IProps {
-  apiData: any[];
+  apiData: orderInterface[];
 }
 
 let txnCount: number
@@ -40,7 +41,7 @@ export const PrintAll = ({ apiData }: IProps) => {
         )
     }, [])
 
-    const orders: any[] = apiData.map((item) => {
+    const orders = apiData.map((item) => {
         txnCount = apiData.length
         return {
             ORDER_ID: '#' + item?.id?.split('-')[0],
@@ -113,7 +114,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                                 <tbody className="text-gray-500">
                                     {orders.map((item, index) => (
                                         <tr key={index} className="text-left ">
-                                            {Object.values(item).map((val: any, i) => (
+                                            {Object.values(item).map((val, i) => (
                                                 <td key={val} className="px-1 py-2 whitespace-nowrap">
                                                     {i === 4 ? '₹' + val : val}
                                                 </td>
