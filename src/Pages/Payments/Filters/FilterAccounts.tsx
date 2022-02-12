@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchInboxes } from 'src/API/inbox.axios'
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import { Organization, selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import {
     selectPaymentFilters,
     setAccount,
     setPaymentMethod,
 } from './paymentFiltersSlice'
 
-interface CategoryName {
-  item: any;
+interface PaymentFitlerAccountInterface {
+  item: Organization | { id: string, name: string};
   type: 'paymentType' | 'account';
 }
-const Account = ({ item, type }: CategoryName) => {
+const Account = ({ item, type }: PaymentFitlerAccountInterface) => {
     const dispatch = useDispatch()
     const filters = useSelector(selectPaymentFilters)
 
     const isChecked =
     type === 'paymentType'
         ? filters?.paymentMethod === item.name
-        : filters?.account?.id === item?.recipient?.id
+        : filters?.account?.id === item?.id
 
     function tickCheckBox() {
         if (type === 'paymentType') {
             dispatch(setPaymentMethod(item?.name))
         } else {
             dispatch(
-                setAccount({ id: item?.recipient?.id, name: item?.recipient?.name })
+                setAccount({ id: item?.id, name: item?.name })
             )
         }
     }
@@ -38,7 +38,7 @@ const Account = ({ item, type }: CategoryName) => {
                 htmlFor=""
                 className="text-sm font-semibold text-gray-500 dark:text-gray-400"
             >
-                {type === 'paymentType' ? item?.name : item?.recipient?.name}
+                {type === 'paymentType' ? item?.name : item?.name}
             </label>
         </div>
     )
@@ -49,7 +49,7 @@ interface FilterCategories {
   type: 'paymentType' | 'account';
 }
 export default function FilterCategory(props: FilterCategories) {
-    const [items, setItems] = useState<any[]>([])
+    const [items, setItems] = useState<Organization[] | { id: string, name: string }[]>([])
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function FilterCategory(props: FilterCategories) {
         } else {
             fetchInboxes({ token: token, limit: 100, offset: 0 }).then(
                 (result) => {
-                    setItems(result?.data?.data?.filter((item: any) => item?.recipient))
+                    setItems(result?.data?.data?.filter((item: { recipient: Organization }) => item?.recipient)?.map((item:  { recipient: Organization }) => item.recipient))
                 }
             )
         }

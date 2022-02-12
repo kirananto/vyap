@@ -189,9 +189,9 @@ function CreateProduct() {
                     name: addProductInfo?.centralCatalogue?.name,
                     description: addProductInfo?.centralCatalogue?.description ?? '',
                     categories: {
-                        name: addProductInfo?.others?.centralCategory?.name,
-                        description: addProductInfo?.others?.centralCategory?.name,
-                        imageName: addProductInfo?.others?.centralCategory?.name,
+                        name: addProductInfo?.others?.centralCategory?.name ?? '',
+                        description: addProductInfo?.others?.centralCategory?.name ?? '',
+                        imageName: addProductInfo?.others?.centralCategory?.name ?? '',
                     },
                     barCode: addProductInfo?.others?.barCode,
                     images: addProductInfo?.others?.productImage,

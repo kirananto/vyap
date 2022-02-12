@@ -10,14 +10,14 @@ export interface Organization {
     description: string;
     listPrivately: boolean;
     officeNumber: string;
-    profileImageUrl?: any;
+    profileImageUrl?: string;
     gstNumber: string;
     officeAddress: string;
     email: string;
     pinCode: string;
     isSupplier: boolean;
-    organizationLocationId?: any;
-    categoryId?: any;
+    organizationLocationId?: string;
+    categoryId?: string;
 }
 export interface UserSettings {
     id: string;

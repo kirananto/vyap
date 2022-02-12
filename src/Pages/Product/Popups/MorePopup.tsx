@@ -5,9 +5,10 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useNavigate } from 'react-router'
 import { setAliasName, setCentralCatalogue, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
+import type { IProduct } from 'src/types/product'
 
 
-export function MorePopup({ item, onClose }: { item: any, onClose: () => void }) {
+export function MorePopup({ item, onClose }: { item: IProduct | undefined, onClose: () => void }) {
 
     const { token } = useSelector(selectCredentials)
 
@@ -29,9 +30,9 @@ export function MorePopup({ item, onClose }: { item: any, onClose: () => void })
                 }
             })
             dispatch(setEditProductId(item?.id))
-            dispatch(setMrpPrice(item?.mrpPrice))
-            dispatch(setSalesPrice(item?.rate))
-            dispatch(setAliasName(item?.aliasName))
+            dispatch(setMrpPrice(parseFloat(item?.mrpPrice ?? 0) ?? 0))
+            dispatch(setSalesPrice(parseFloat(item?.rate ?? 0) ?? 0))
+            dispatch(setAliasName(item?.aliasName ?? ''))
             navigate('/edit-product')
         }
     }

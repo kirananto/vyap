@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchInboxes } from 'src/API/inbox.axios'
-import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import { Organization, selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import { OrderStatusType } from '../enum'
 import {
     selectOrderFilters,
     setAccount,
@@ -9,7 +10,7 @@ import {
 } from './orderFiltersSlice'
 
 interface CategoryName {
-  item: any;
+  item: Organization | { id: OrderStatusType; name: string };
   type: 'orderStatus' | 'account';
 }
 const Account = ({ item, type }: CategoryName) => {
@@ -19,14 +20,14 @@ const Account = ({ item, type }: CategoryName) => {
     const isChecked =
     type === 'orderStatus'
         ? filters?.orderStatus === item.id
-        : filters?.account?.id === item?.recipient?.id
+        : filters?.account?.id === item.id
 
     function tickCheckBox() {
         if (type === 'orderStatus') {
-            dispatch(setOrderStatus(item?.id))
+            dispatch(setOrderStatus(item.id as OrderStatusType))
         } else {
             dispatch(
-                setAccount({ id: item?.recipient?.id, name: item?.recipient?.name })
+                setAccount({ id: item?.id, name: item?.name })
             )
         }
     }
@@ -42,7 +43,7 @@ const Account = ({ item, type }: CategoryName) => {
                 htmlFor=""
                 className="text-sm font-semibold text-gray-500 dark:text-gray-400"
             >
-                {type === 'orderStatus' ? item?.name : item?.recipient?.name}
+                {type === 'orderStatus' ? item?.name : item?.name}
             </label>
         </div>
     )
@@ -53,29 +54,29 @@ interface FilterCategories {
   type: 'orderStatus' | 'account';
 }
 export default function FilterCategory(props: FilterCategories) {
-    const [items, setItems] = useState<any[]>([])
+    const [items, setItems] = useState<Organization[] | { id: OrderStatusType, name: string }[]>([])
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
         if (props.type === 'orderStatus') {
             setItems([
                 {
-                    id: 'PENDING',
+                    id: OrderStatusType.PENDING ,
                     name: 'Pending',
                 },
                 {
-                    id: 'PROCESSING',
+                    id: OrderStatusType.PROCESSING,
                     name: 'Processing',
                 },
                 {
-                    id: 'COMPLETE',
+                    id: OrderStatusType.COMPLETE,
                     name: 'Complete',
                 },
             ])
         } else {
             fetchInboxes({ token: token, limit: 100, offset: 0 }).then(
                 (result) => {
-                    setItems(result?.data?.data?.filter((item: any) => item?.recipient))
+                    setItems(result?.data?.data?.filter((item: { recipient: Organization }) => item?.recipient)?.map((item:  { recipient: Organization }) => item.recipient))
                 }
             )
         }

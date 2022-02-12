@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrganizationProductCategories } from 'src/API/products.axios'
-import type { IDataEntity, IOrganizationProductCategories } from 'src/types/organizationProductCategories'
+import type { IOrganizationProductCategory, IOrganizationProductCategories } from 'src/types/organizationProductCategories'
 import { selectCredentials } from '../Login/credentialsSlice'
 import {
     categoriesCheckbox,
@@ -10,7 +10,7 @@ import {
 
 interface CategoryName {
   name: string;
-  item: IDataEntity;
+  item: IOrganizationProductCategory;
 }
 const Category = (props: CategoryName) => {
     const dispatch = useDispatch()
@@ -42,13 +42,13 @@ interface FilterCategories {
   type: 'brand' | 'category';
 }
 export default function FilterCategory(props: FilterCategories) {
-    const [items, setItems] = useState<IDataEntity[] | undefined>([])
+    const [items, setItems] = useState<IOrganizationProductCategory[] | undefined>([])
     const { user, token } = useSelector(selectCredentials)
 
     useEffect(() => {
         fetchOrganizationProductCategories(
             { token, limit: 20, offset: 0, search: undefined, orgId: user?.organizationId }        ).then((result: IOrganizationProductCategories) => {
-            setItems(result?.data?.data?.filter((item: IDataEntity) => item?.name))
+            setItems(result?.data?.data?.filter((item: IOrganizationProductCategory) => item?.name))
         })
     }, [token, user?.organizationId])
 

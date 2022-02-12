@@ -1,3 +1,5 @@
+import type { ICentralImage } from 'src/types/fetchCentralProductImages'
+import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
 import { axiosClient } from './apiClient'
 
 export interface IAddProduct {
@@ -33,8 +35,8 @@ export interface AddCentralCatalogueInterface {
     hsnId?: string
     barCode?: string
     categoriesId?: string
-    categories: any
-    images: any
+    categories: IOrganizationProductCategory
+    images: ICentralImage[]
     brand?: { 
         name?: string
         description?: string

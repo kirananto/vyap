@@ -5,13 +5,9 @@ import { fetchOrganizationProductCategories } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { IFetchOrganizationProductCategories, IFetchOrganizationProductCategory } from 'src/types/fetchOrganizationProductCategories'
 import { setCategory } from '../redux/addProductSlice'
+import type { BrandInterface } from './BrandModal'
 import './HSNmodal.css'
 
-export interface BrandInterface {
-  id: string
-  name: string
-  description: string
-}
 
 interface IProps {
     trigger: boolean
