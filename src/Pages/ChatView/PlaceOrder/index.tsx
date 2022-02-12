@@ -146,8 +146,8 @@ export default function PlaceOrder() {
                 token, data: {
                     description: placeOrder.note,
                     flatDiscount: placeOrder.discount,
-                    supplierId: isSupplier ? user?.organizationId! : placeOrder.orgId,
-                    buyerId: isSupplier ? placeOrder.orgId : user?.organizationId!,
+                    supplierId: isSupplier ? user?.organizationId : placeOrder.orgId,
+                    buyerId: isSupplier ? placeOrder.orgId : user?.organizationId,
                     orderItems: placeOrder.cartItems?.map((mapItem) => {
                         return {
                             quantity: mapItem.quantity,
@@ -609,7 +609,7 @@ export default function PlaceOrder() {
                 <AddPaymentModal
                     isVisible={paymentModalVisible}
                     toggleVisibility={setPaymentModalVisible}
-                    receiverId={isSupplier ? placeOrder.orgId : user?.organizationId!}
+                    receiverId={isSupplier ? placeOrder.orgId : user?.organizationId}
                     orderAmount={
                         getTotalPrice() - (placeOrder.discount ? placeOrder.discount : 0)
                     }

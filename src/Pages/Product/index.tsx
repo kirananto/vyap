@@ -117,7 +117,7 @@ export default function Product() {
     useEffect(() => {
         fetchProducts({
             token: token,
-            organizationId: user?.organizationId!,
+            organizationId: user?.organizationId,
             limit: 5000,
             offset: 0,
             search: searchValue.trim(),

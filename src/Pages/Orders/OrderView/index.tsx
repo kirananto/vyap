@@ -39,7 +39,7 @@ export default function OrderDetails() {
     useEffect(() => {
         fetchOrderAPI({ token, id: id! }).then((result) => {
             // setOrder(result.data)
-            dispatch(setOrderInfo({ inboxId: chatId!, threadId: thread?.id!, order: result.data }))
+            dispatch(setOrderInfo({ inboxId: chatId!, threadId: thread?.id, order: result.data }))
         })
     }, [chatId, dispatch, id, thread?.id, token])
 

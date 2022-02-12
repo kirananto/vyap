@@ -25,9 +25,9 @@ export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, re
 
 export const placeOrderAPI = ({ token, data }: {
     token?: string; data: {
-        description: string
-        supplierId: string
-        buyerId: string
+        description?: string
+        supplierId?: string
+        buyerId?: string
         flatDiscount: number
         orderItems: {
             quantity: string

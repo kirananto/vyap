@@ -81,9 +81,9 @@ function CreateProduct() {
         (e || window.event).returnValue = confirmationMessage //Gecko + IE
         return confirmationMessage //Webkit, Safari, Chrome
     }
-    
+
     useEffect(() => {
-    /* avoid accidental back button hit - confirm alert */
+        /* avoid accidental back button hit - confirm alert */
         history.pushState(null, location.href, location.href)
         window.addEventListener('popstate', popStateHandler)
 
@@ -99,7 +99,7 @@ function CreateProduct() {
     useEffect(() => {
         if (addProductInfo?.centralCatalogue?.id) {
             fetchCentralProductImages(
-                { token, limit: 100, offset: 0, catalogueId: addProductInfo?.centralCatalogue?.id }            ).then((result: ICentralCatalogue) => {
+                { token, limit: 100, offset: 0, catalogueId: addProductInfo?.centralCatalogue?.id }).then((result: ICentralCatalogue) => {
                 const imageName = result?.data?.data?.filter((filterItem: IDataEntity) =>
                     filterItem?.imageName?.includes('.')
                 )?.[0]?.imageName
@@ -110,7 +110,7 @@ function CreateProduct() {
                 }
             })
             return () => {
-                setProductImage('') 
+                setProductImage('')
             }
         } else {
             if (addProductInfo?.others?.productImage?.length > 0) {
@@ -122,43 +122,43 @@ function CreateProduct() {
                 )
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ addProductInfo?.others?.productImage?.length, addProductInfo?.centralCatalogue?.id, ])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [addProductInfo?.others?.productImage?.length, addProductInfo?.centralCatalogue?.id,])
 
     const validatePricing = () => {
-    //validation for edit
+        //validation for edit
         return (
             isValidMRP(addProductInfo.pricing?.mrpPrice) &&
-      isValidSalePrice(addProductInfo.pricing?.salesPrice) &&
-      isValidGST(
-          addProductInfo.pricing?.taxEnabled,
-          !!addProductInfo?.centralCatalogue?.id,
-          addProductInfo.pricing?.hsn?.gstPercentage ??
-          addProductInfo.pricing?.gstPercentage
-      ) &&
-      isValidHSN(
-          addProductInfo.pricing?.taxEnabled,
-          !!addProductInfo?.centralCatalogue?.id,
-        addProductInfo.pricing?.hsn?.hsn!
-      )
+            isValidSalePrice(addProductInfo.pricing?.salesPrice) &&
+            isValidGST(
+                addProductInfo.pricing?.taxEnabled,
+                !!addProductInfo?.centralCatalogue?.id,
+                addProductInfo.pricing?.hsn?.gstPercentage ??
+                addProductInfo.pricing?.gstPercentage
+            ) &&
+            isValidHSN(
+                addProductInfo.pricing?.taxEnabled,
+                !!addProductInfo?.centralCatalogue?.id,
+                addProductInfo.pricing?.hsn?.hsn
+            )
         )
     }
 
     const validateOthers = () => {
-    // return (isValidDescription(addProductInfo?.centralCatalogue?.description!) &&
+        // return (isValidDescription(addProductInfo?.centralCatalogue?.description!) &&
         return (
             isValidCategory(
                 !!addProductInfo?.centralCatalogue?.id,
-        addProductInfo?.others?.centralCategory?.name!
+                addProductInfo?.others?.centralCategory?.name
             ) &&
-      isValidTag(
-          !!addProductInfo?.centralCatalogue?.id,
-        addProductInfo?.others?.category?.name!
-      ) &&
-      isValidBrand(
-          !!addProductInfo?.centralCatalogue?.id,
-        addProductInfo?.others?.brand?.name!
-      )
+            isValidTag(
+                !!addProductInfo?.centralCatalogue?.id,
+                addProductInfo?.others?.category?.name
+            ) &&
+            isValidBrand(
+                !!addProductInfo?.centralCatalogue?.id,
+                addProductInfo?.others?.brand?.name
+            )
         )
     }
 
@@ -181,12 +181,12 @@ function CreateProduct() {
 
     const handleAddProduct = async () => {
         setIsLoading(true)
-        let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id!
+        let centralCatalogueId: string = addProductInfo?.centralCatalogue?.id ?? ''
 
         if (!addProductInfo?.centralCatalogue?.id) {
             const centralProduct: IAddCentralProductResponse | null = await postAddCentralProduct({
                 token, data: {
-                    name: addProductInfo?.centralCatalogue?.name!,
+                    name: addProductInfo?.centralCatalogue?.name,
                     description: addProductInfo?.centralCatalogue?.description ?? '',
                     categories: {
                         name: addProductInfo?.others?.centralCategory?.name,
@@ -212,7 +212,7 @@ function CreateProduct() {
         }
         const body: IAddProduct = {
             organizationCatalogueCategoryId:
-        addProductInfo?.others?.category?.id ?? undefined,
+                addProductInfo?.others?.category?.id ?? undefined,
             organizationCatalogueCategory: addProductInfo?.others?.category?.id
                 ? undefined
                 : {
@@ -248,7 +248,7 @@ function CreateProduct() {
 
     const handleEditProduct = async () => {
         setIsLoading(true)
-        const organizationCatalogueId: string = addProductInfo?.editProductId!
+        const organizationCatalogueId: string = addProductInfo?.editProductId ?? ''
 
         const body: IEditProduct = {
             aliasName: addProductInfo?.others?.aliasName
@@ -273,14 +273,13 @@ function CreateProduct() {
     return (
         <div className=" create-product-container dark:bg-gray-900">
             <SimpleHeader
-                heading={`${
-                    pageAction === PAGE_ACTION.EDIT ? 'Edit Product ' : 'Create Product'
+                heading={`${pageAction === PAGE_ACTION.EDIT ? 'Edit Product ' : 'Create Product'
                 }`}
             />
 
             <div className="mx-auto w-11/12  px-2 pt-20">
                 <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">
-          What is the product?
+                    What is the product?
                 </h1>
                 {/* ===--===Product card===--=== */}
                 <ItemCard productImage={productImage} />
@@ -288,23 +287,21 @@ function CreateProduct() {
                 <div className="flex justify-between py-4">
                     <button
                         onClick={() => toggleTabs(TABS.PRICING)}
-                        className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${
-                            toggleState === TABS.PRICING
-                                ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 '
-                                : 'text-gray-500 dark:text-gray-300'
+                        className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${toggleState === TABS.PRICING
+                            ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 '
+                            : 'text-gray-500 dark:text-gray-300'
                         }`}
                     >
-            Pricing
+                        Pricing
                     </button>
                     <button
                         onClick={() => toggleTabs(TABS.OTHERS)}
-                        className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${
-                            toggleState === TABS.OTHERS
-                                ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
-                                : 'text-gray-500 dark:text-gray-300'
+                        className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${toggleState === TABS.OTHERS
+                            ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
+                            : 'text-gray-500 dark:text-gray-300'
                         }`}
                     >
-            Others
+                        Others
                     </button>
                 </div>
                 {/* -------- */}

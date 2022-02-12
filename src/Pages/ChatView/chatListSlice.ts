@@ -73,15 +73,15 @@ export const chatListInterface = createSlice({
     name: 'chatList',
     initialState,
     reducers: {
-        setPaymentInfo: (state, action: PayloadAction<{ inboxId: string, threadId: string, payment: paymentObject }>) => {
+        setPaymentInfo: (state, action: PayloadAction<{ inboxId: string, threadId?: string, payment: paymentObject }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             state[action.payload.inboxId].threads[threadIndex].payment = action.payload.payment
         },
-        setOrderInfo: (state, action: PayloadAction<{ inboxId: string, threadId: string, order: orderInterface }>) => {
+        setOrderInfo: (state, action: PayloadAction<{ inboxId: string, threadId?: string, order: orderInterface }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             state[action.payload.inboxId].threads[threadIndex].order = action.payload.order
         },
-        setOrderItems: (state, action: PayloadAction<{ inboxId: string, threadId: string, orderItems: any[] }>) => {
+        setOrderItems: (state, action: PayloadAction<{ inboxId: string, threadId?: string, orderItems: any[] }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             if (state[action.payload.inboxId].threads[threadIndex].order) {
                 state[action.payload.inboxId].threads[threadIndex].order!.orderItems = action.payload.orderItems
@@ -101,8 +101,7 @@ export const chatListInterface = createSlice({
                     const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
                     return { ...existingItem, ...item }
                 })
-            }
-            else {
+            } else {
                 state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
             }
         }),

@@ -97,7 +97,7 @@ function DropDown(props: any) {
     useEffect(() => {
         fetchCentralProducts({ token, limit: 100, offset: 0, search: value }).then((result: IFetchCentralProducts) => {
             console.log('result', result.data?.data)
-            setOptions(result.data?.data!)
+            setOptions(result.data?.data ?? [])
         })
     }, [token, value])
 

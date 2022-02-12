@@ -87,7 +87,7 @@ export default function AddPaymentModal({
                     note: order ? getNoteText(order) : note,
                     method,
                     status: paymentStatus.SUCCESS,
-                    receiverId: user?.organizationId!,
+                    receiverId: user?.organizationId,
                     senderOrgId: receiverId!,
                 }
             })

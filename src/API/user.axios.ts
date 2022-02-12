@@ -9,7 +9,7 @@ export const patchUser = ({
     profileImageUrl
 }: {
     token?: string,
-    id: string,
+    id?: string,
     name?: string,
     phone?: string,
     email?: string,

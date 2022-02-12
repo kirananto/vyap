@@ -36,9 +36,9 @@ function PricingTab({ action, saveAttempt }: Props) {
         }
     }
 
-    const resetSalesToZero = () => dispatch(setSalesPrice(isNumber(parseInt(`${addProductInfo.pricing?.salesPrice}`, 10)) ? addProductInfo.pricing?.salesPrice! : 0))
+    const resetSalesToZero = () => dispatch(setSalesPrice(parseInt(`${addProductInfo.pricing?.salesPrice ?? 0}`, 10) ?? 0))
 
-    const resetMRPToZero = () => dispatch(setMrpPrice(isNumber(parseInt(`${addProductInfo.pricing?.mrpPrice}`, 10)) ? addProductInfo.pricing?.mrpPrice! : 0))
+    const resetMRPToZero = () => dispatch(setMrpPrice(parseInt(`${addProductInfo.pricing?.mrpPrice ?? 0}`, 10) ?? 0 ))
 
     useEffect(() => {
         if (saveAttempt) {
@@ -155,7 +155,7 @@ function PricingTab({ action, saveAttempt }: Props) {
                             <span
                                 className={
                                     'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
-                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn!) ? 'hidden' : '')
+                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn) ? 'hidden' : '')
                                 }
                             >
                   * Enter valid HSN !

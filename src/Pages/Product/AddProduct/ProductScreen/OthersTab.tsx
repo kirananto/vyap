@@ -307,7 +307,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
                                     (isValidBrand(
                                         !!addProductInfo?.centralCatalogue?.id,
-                                        addProductInfo?.others?.brand?.name!
+                                        addProductInfo?.others?.brand?.name
                                     )
                                         ? 'hidden'
                                         : '')
@@ -367,7 +367,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
                                     (isValidCategory(
                                         !!addProductInfo?.centralCatalogue?.id,
-                                        addProductInfo?.others?.centralCategory?.name!
+                                        addProductInfo?.others?.centralCategory?.name
                                     )
                                         ? 'hidden'
                                         : '')
@@ -427,7 +427,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
                                     (isValidTag(
                                         !!addProductInfo?.centralCatalogue?.id,
-                                        addProductInfo?.others?.category?.name!
+                                        addProductInfo?.others?.category?.name
                                     )
                                         ? 'hidden'
                                         : '')

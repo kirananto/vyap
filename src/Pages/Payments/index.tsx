@@ -36,7 +36,7 @@ export default function Payments() {
         }).then((result: IFetchAllPayments) => {
             console.log(result.data)
             setLoading(false)
-            setPayments(result?.data?.data!)
+            setPayments(result?.data?.data ?? [])
             //TODO handle the payments better
         })
     }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id, token])

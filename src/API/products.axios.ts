@@ -27,8 +27,8 @@ export interface IEditProduct {
 }
 
 export interface AddCentralCatalogueInterface {
-    name: string
-    description: string
+    name?: string
+    description?: string
     brandId?: string
     hsnId?: string
     barCode?: string
@@ -42,7 +42,7 @@ export interface AddCentralCatalogueInterface {
     }
 }
 
-export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token?: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token?: string; organizationId?: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
