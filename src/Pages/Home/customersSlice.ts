@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'src/redux/store'
 
 export interface customersInterface {
     customers: any[];
@@ -35,7 +36,7 @@ export const { setCustomers, setCustomerTotal, clearAll } = customersSlice.actio
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectCustomerInfo = (state: any): customersInterface => state.customers
+export const selectCustomerInfo = (state: RootState): customersInterface => state.customers
 
 
 export default customersSlice.reducer

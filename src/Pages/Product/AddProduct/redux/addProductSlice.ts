@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'src/redux/store'
 import type { BrandInterface } from '../ProductScreen/BrandModal'
 
 interface CatalogueImageInterface {
@@ -175,7 +176,7 @@ export const {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectAddProductInfo = (state: any): AddProductInterface => state.addproduct
+export const selectAddProductInfo = (state: RootState): AddProductInterface => state.addproduct
 
 
 export default addProductSlice.reducer

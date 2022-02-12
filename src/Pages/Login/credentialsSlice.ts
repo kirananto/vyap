@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'src/redux/store'
 
 
 export interface Organization {
@@ -98,7 +99,7 @@ export const { setCredentials, setUserName, setUserEmail, setPinCode, setBusines
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectCredentials = (state: any): CredentialsInterface => state.credentials
+export const selectCredentials = (state: RootState): CredentialsInterface => state.credentials
 
 
 export default credentialsSlice.reducer

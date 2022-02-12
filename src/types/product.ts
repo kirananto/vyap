@@ -1,3 +1,4 @@
+import type { CentralCatalogueInterface } from 'src/Pages/Product/AddProduct/redux/addProductSlice'
 import type { IFetchCentralCatalogueProduct } from './fetchCentralProduct'
 
 export interface IProduct {
@@ -15,21 +16,9 @@ export interface IProduct {
     taxEnabled: boolean;
     mrpPrice: string;
     rate: string;
-    centralCatalogue: ICentralCatalogue;
+    centralCatalogue: CentralCatalogueInterface;
     organizationCatalogueCategory?: {
         name: string
     }
     centralData?: IFetchCentralCatalogueProduct
-}
-export interface ICentralCatalogue {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    deletedAt?: string | null;
-    name: string;
-    description: string;
-    brandId?: null;
-    barCode?: string | null;
-    isApproved: boolean;
-    hsnId?: string | null;
 }

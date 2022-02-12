@@ -4,7 +4,7 @@ import Button from 'src/Components/Style/Button'
 interface IProps {
   onPressConfirm: (code: string) => void;
   goBack: () => void;
-  error: any;
+  error: string | null;
 }
 
 export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {

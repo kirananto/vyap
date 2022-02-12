@@ -106,7 +106,7 @@ function DropDown(props: DropdDownInterface) {
 
     const navigate = useNavigate()
 
-    function search(e: any) {
+    function search(e: React.ChangeEvent<HTMLInputElement>) {
         const text = e.target.value
         setValue(text)
     }
@@ -130,9 +130,9 @@ function DropDown(props: DropdDownInterface) {
         })
     }
 
-    function select(e: any) {
+    function select(e: Partial<CentralCatalogueInterface>) {
         // setIsOpen(false)
-        setValue(e.name)
+        setValue(e.name ?? '')
         if (props.onSelect) {
             props.onSelect(e)
             navigate('/create-product')

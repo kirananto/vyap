@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearAll, selectPaymentFilters } from './Filters/paymentFiltersSlice'
 
-export default function AppliedFilters({ openFilters }: { openFilters: any }) {
+export default function AppliedFilters({ openFilters }: { openFilters: () => void }) {
 
     const filters = useSelector(selectPaymentFilters)
     const dispatch = useDispatch()

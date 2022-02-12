@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'src/redux/store'
 
 export interface PaymentFilterInterface {
     paymentMethod: string | undefined;
@@ -41,7 +42,7 @@ export const { setPaymentMethod, setAccount, setSorting, clearAll } = paymentFil
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectPaymentFilters = (state: any): PaymentFilterInterface => state.paymentFilters
+export const selectPaymentFilters = (state: RootState): PaymentFilterInterface => state.paymentFilters
 
 
 export default paymentFiltersSlice.reducer

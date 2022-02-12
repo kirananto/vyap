@@ -15,7 +15,7 @@ export const getHSNsClearTax = ({ search }: { search: string }) => axiosClient({
 
 export const createIfNotExists = async ({ token, data }: { token?: string; data: { hsn: number; chapter: string; description: string; gstPercentage: number}  }) => {
 
-    let apiResponse: any = undefined
+    let apiResponse = undefined
     try {
         apiResponse = await axiosClient({
             url: `/hsn`,

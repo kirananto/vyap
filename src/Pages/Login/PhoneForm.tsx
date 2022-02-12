@@ -3,7 +3,7 @@ import Button from 'src/Components/Style/Button'
 
 interface IProps {
   onPressLogin: (phoneNumber: string) => void;
-  error: any
+  error: string | null
   text: string
 }
 

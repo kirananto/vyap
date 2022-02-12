@@ -8,8 +8,8 @@ export default function AppliedFilters({
     setSearchValue,
     searchValue,
 }: {
-    onFilterClick: any,
-    setSearchValue: any
+    onFilterClick: () => void,
+    setSearchValue: React.Dispatch<React.SetStateAction<string | undefined>>
     searchValue: string,
 }) {
 

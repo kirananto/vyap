@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'src/redux/store'
 
 export interface PlaceOrderInterface {
     note: string;
@@ -93,7 +94,7 @@ export const { setNote, setFlatDiscount, pushItemsToCart, updateItemsOnCart, rem
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectPlaceOrderInfo = (state: any): PlaceOrderInterface => state.placeorder
+export const selectPlaceOrderInfo = (state: RootState): PlaceOrderInterface => state.placeorder
 
 
 export default placeOrderSlice.reducer
