@@ -81,7 +81,7 @@ export default function SignupStepThree() {
                 email: signup.email,
                 businessName: signup.businessName,
                 address: signup.address,
-                category: signup.category,
+                category: signup.category.map(item => ({ id: item?.id })),
                 pinCode: signup.pinCode,
                 listPrivately: signup.listPrivately,
                 organizationLocation: {

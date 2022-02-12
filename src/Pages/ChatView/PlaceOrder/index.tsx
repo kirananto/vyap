@@ -442,7 +442,7 @@ export default function PlaceOrder() {
                     <textarea
                         value={placeOrder.note}
                         placeholder="Enter a description or reason for the order"
-                        onChange={(event) => dispatch(setNote(event.target.value as any))}
+                        onChange={(event) => dispatch(setNote(event.target.value))}
                         className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-4 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                         id=""
                     />
