@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchOrderItems } from 'src/API/order.axios'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { IOrderItem, orderInterface } from 'src/Components/OrderCard'
 import Spinner from 'src/Components/Style/Spinner'
 import { selectChatList, setOrderItems } from 'src/Pages/ChatView/chatListSlice'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
@@ -37,7 +37,7 @@ function Items({ order }: { order: orderInterface }) {
 
     return (
         <div className="divide-y divide-gray-100 dark:divide-gray-700">
-            {orderItems?.map((item: any, index: number) => (
+            {orderItems?.map((item: IOrderItem, index: number) => (
                 <div className="flex justify-between py-2" key={`${index}`}>
                     <div className="flex w-full gap-4">
                         <div className="flex-none mt-2 text-gray-400 text-xs dark:text-gray-400">{item?.quantity} X </div>

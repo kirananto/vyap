@@ -29,6 +29,7 @@ import {
 
 import Compressor from 'compressorjs'
 import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'
+import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 interface Props {
     action: PAGE_ACTION;
     saveAttempt: number;
@@ -36,10 +37,7 @@ interface Props {
 
 interface IImageProps {
     key: string;
-    item: {
-        fileId: string;
-        imageName: string
-    };
+    item: ICentralImage;
 }
 
 interface IInputProps {
@@ -54,7 +52,7 @@ const ImageContainer = (props: IImageProps) => {
     return (
         <div
             className="h-16 w-16 overflow-hidden rounded-lg border border-gray-200 shadow-sm dark:border-gray-500 "
-            key={item?.fileId}
+            key={item?.id}
         >
             <img
                 key={item?.imageName}
@@ -174,6 +172,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 console.log('data', result.data)
                                 dispatch(
                                     setProductImage({
+                                        id: result.data?.name,
                                         imageName: result.data.name,
                                         title: addProductInfo?.centralCatalogue?.name ?? 'name',
                                         description: `${addProductInfo?.centralCatalogue?.name}`,

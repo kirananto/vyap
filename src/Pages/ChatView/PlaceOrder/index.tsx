@@ -13,6 +13,7 @@ import {
     selectPlaceOrderInfo,
     setFlatDiscount,
     setNote,
+    ProductIntermittentState,
 } from './placeOrderSlice'
 import { placeOrderAPI } from 'src/API/order.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
@@ -54,13 +55,10 @@ export default function PlaceOrder() {
         }
     }, [placeOrder.cartItems])
 
-    const getTotalPrice = useCallback(() => {
-        const price = placeOrder.cartItems?.reduce(
-            (a: any, b: any) => a + b.quantity * parseFloat(b?.rate),
-            0
-        )
-        return price
-    }, [placeOrder.cartItems])
+    const getTotalPrice = useCallback(() => placeOrder.cartItems?.reduce(
+        (a, b) => a + b.quantity * parseFloat(b?.rate),
+        0
+    ), [placeOrder.cartItems])
 
     useEffect(() => {
         const discountPrice = placeOrder.discount
@@ -73,7 +71,7 @@ export default function PlaceOrder() {
         }
     }, [getTotalPrice, placeOrder.cartItems, placeOrder.discount])
 
-    function handleAddItem(item: any, caseQuantity: number) {
+    function handleAddItem(item: ProductIntermittentState, caseQuantity: number) {
         dispatch(
             pushItemsToCart([
                 {
@@ -84,7 +82,7 @@ export default function PlaceOrder() {
         )
     }
 
-    function updateItem(item: any, caseQuantity: number) {
+    function updateItem(item: ProductIntermittentState, caseQuantity: number) {
         dispatch(
             updateItemsOnCart([
                 {
@@ -95,7 +93,7 @@ export default function PlaceOrder() {
         )
     }
 
-    function handleRemoveItemItem(item: any, caseQuantity: number) {
+    function handleRemoveItemItem(item: ProductIntermittentState, caseQuantity: number) {
         dispatch(removeItemsFromCart({ id: item.id, quantity: caseQuantity }))
     }
 
@@ -115,21 +113,21 @@ export default function PlaceOrder() {
     }
 
     function updateDiscount(event: React.ChangeEvent<HTMLInputElement>) {
-        const inputValue = event?.target.value
+        const inputValue = parseFloat(event?.target.value)
         const finalPrice = getTotalPrice()
         if (inputValue) {
             if (inputValue > finalPrice) {
                 setIsValidDiscount(false)
-                dispatch(setFlatDiscount(finalPrice as any))
+                dispatch(setFlatDiscount(finalPrice))
                 setTimeout(() => {
                     setIsValidDiscount(true)
                 }, 5000)
             } else {
                 setIsValidDiscount(true)
-                dispatch(setFlatDiscount(parseFloat(inputValue as any)))
+                dispatch(setFlatDiscount(inputValue))
             }
         } else {
-            dispatch(setFlatDiscount(inputValue as any))
+            dispatch(setFlatDiscount(inputValue))
         }
     }
 
@@ -180,8 +178,8 @@ export default function PlaceOrder() {
                     <img className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
                     <div className="m-auto text-sm mb-8 w-2/3  md:px-6 text-center dark:text-gray-300">
                         {' '}
-            You do not have any items in your cart, please add by tapping add
-            more below.{' '}
+                        You do not have any items in your cart, please add by tapping add
+                        more below.{' '}
                     </div>
                 </div>
             )
@@ -227,7 +225,7 @@ export default function PlaceOrder() {
                                             {item.aliasName ? `( ${item.aliasName})` : ''}
                                         </div>
                                         <div className=" text-xs font-bold text-gray-500 dark:text-gray-400">
-                      MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}
+                                            MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}
                                         </div>
 
                                         <div className=" text-xs font-bold text-gray-400 dark:text-gray-500">
@@ -411,12 +409,12 @@ export default function PlaceOrder() {
                                                 handleRemoveItemItem(item, item?.quantity || 0)
                                             }}
                                         >
-                      Delete
+                                            Delete
                                         </button>{' '}
                                     </div>
 
                                     <div className="text-right text-lg font-bold text-gray-600  dark:text-gray-200">
-                    ₹{item?.quantity * parseFloat(item?.rate)}
+                                        ₹{item?.quantity * parseFloat(item?.rate)}
                                     </div>
                                 </div>
                             </div>
@@ -435,7 +433,7 @@ export default function PlaceOrder() {
                 />
             </div>
             <div className={'p-2 pt-20'}>
-                
+
                 <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4 dark:border-gray-700">
                     <div className="flex justify-between">
                         <div className="text-xl font-bold dark:text-gray-300">Items</div>
@@ -509,18 +507,18 @@ export default function PlaceOrder() {
                                     </svg>
                                 </div>
                                 <div className="ml-2 text-lg dark:text-white">
-                  Add more items
+                                    Add more items
                                 </div>
                             </div>
 
-                            
+
                         </div>
                     )}
                 </div>
                 {isSupplier ? (
                     <div className="m-2 rounded-lg border border-gray-200 px-4 pb-8 pt-4  dark:border-gray-700">
                         <span className="float-left mb-2 text-sm text-gray-500">
-              Flat discount amount
+                            Flat discount amount
                         </span>
                         <input
                             value={placeOrder.discount}
@@ -535,10 +533,10 @@ export default function PlaceOrder() {
                         <span
                             className={
                                 'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-green-500 ' +
-                (isValidDiscount ? 'hidden' : '')
+                                (isValidDiscount ? 'hidden' : '')
                             }
                         >
-              * Maximum Discount Applicable: ₹{getTotalPrice()}
+                            * Maximum Discount Applicable: ₹{getTotalPrice()}
                         </span>
                     </div>
                 ) : null}
@@ -557,38 +555,38 @@ export default function PlaceOrder() {
                     <span
                         className={
                             'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
-                  (isSubmit ? (isValidCart ? 'hidden' : '') : 'hidden')
+                            (isSubmit ? (isValidCart ? 'hidden' : '') : 'hidden')
                         }
                     >
-                * Add items to cart to continue order
+                        * Add items to cart to continue order
                     </span>
 
                     <div className="mt-2 grid grid-cols-5 gap-3">
                         <div className="col-span-3 mt-1 ml-4">
                             <div className="text-base text-gray-400 dark:text-gray-300">
-                    Cart Total :
+                                Cart Total :
                             </div>
 
                             <div className="text-base text-gray-400 dark:text-gray-300">
-                    Discount :
+                                Discount :
                             </div>
 
                             <div className="mt-1 text-lg font-extrabold text-gray-600 dark:text-gray-300">
-                    Grand Total :
+                                Grand Total :
                             </div>
                         </div>
 
                         <div className="col-span-2  mt-1 text-right mr-4">
                             <div className="text-base  dark:text-gray-400">
-                    ₹{getTotalPrice()}
+                                ₹{getTotalPrice()}
                             </div>
                             <div className="text-base dark:text-gray-400">
-                    ₹{placeOrder.discount}
+                                ₹{placeOrder.discount}
                             </div>
                             <div className="mt-1 text-lg font-extrabold dark:text-gray-400">
-                    ₹
+                                ₹
                                 {getTotalPrice() -
-                      (placeOrder.discount ? placeOrder.discount : 0)}
+                                    (placeOrder.discount ? placeOrder.discount : 0)}
                             </div>
                         </div>
                     </div>
@@ -599,7 +597,7 @@ export default function PlaceOrder() {
                                 handleSubmit()
                             }}
                         >
-                  Place order
+                            Place order
                         </Button>
                     </div>
                 </div>

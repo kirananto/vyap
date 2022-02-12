@@ -18,11 +18,11 @@ export class PostAmount {
 
 interface IProps {
     isVisible: boolean;
-    toggleVisibility: any;
+    toggleVisibility: (value: boolean) => void;
     receiverId?: string;
     orderAmount?: number;
     btnAction?: string;
-    placeOrder?: () => any
+    placeOrder?: () => Promise<orderInterface>
 }
 export default function AddPaymentModal({
     isVisible,
@@ -323,14 +323,14 @@ export default function AddPaymentModal({
                                         value={amount}
                                         onChange={(event) => {
                                             setAmount(
-                                                parseFloat(event?.target.value as any) > 0
-                                                    ? parseFloat(event?.target.value as any)
+                                                parseFloat(event?.target.value) > 0
+                                                    ? parseFloat(event?.target.value)
                                                     : 0
                                             )
                                             onValidate(
                                                 'change',
-                                                parseFloat(event?.target.value as any) > 0
-                                                    ? parseFloat(event?.target.value as any)
+                                                parseFloat(event?.target.value) > 0
+                                                    ? parseFloat(event?.target.value)
                                                     : 0,
                                                 () => {
                                                     console.log('validate')

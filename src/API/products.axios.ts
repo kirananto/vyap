@@ -12,7 +12,8 @@ export interface IAddProduct {
         createdAt?: string,
         updatedAt?: string
     },
-    thumbnailImage: string
+    outOfStock?: boolean
+    thumbnailImage?: string
     aliasName: string,
     organizationCatalogueCategoryId?: string,
     centralCatalogueId: string,
@@ -78,7 +79,7 @@ export const fetchProductById = ({ token, id }: { token?: string; id?: string })
     }
 })
 
-export const patchProductById = ({ token, id, data }: { token?: string; id?: string, data: any }) => axiosClient({
+export const patchProductById = ({ token, id, data }: { token?: string; id?: string, data: Partial<IAddProduct> }) => axiosClient({
     url: `/organization-catalogue/${id}`,
     method: 'PATCH',
     data,

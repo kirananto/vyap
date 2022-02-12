@@ -7,9 +7,9 @@ import { setBrand } from '../redux/addProductSlice'
 import './HSNmodal.css'
 
 export interface BrandInterface {
-  id: string
+  id?: string
   name: string
-  description: string
+  description?: string
 }
 
 interface BrandModalInterface {

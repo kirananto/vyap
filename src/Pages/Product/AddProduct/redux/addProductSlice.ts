@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
+import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 import type { BrandInterface } from '../ProductScreen/BrandModal'
 
 interface CatalogueImageInterface {
@@ -41,7 +42,7 @@ export interface AddProductInterface {
     },
     centralCatalogue?: CentralCatalogueInterface,
     others: {
-        productImage: any[]
+        productImage: ICentralImage[]
         skuCode: string
         category?: {
             id?: string,
@@ -114,7 +115,7 @@ export const addProductSlice = createSlice({
             state.pricing.gstPercentage = action.payload
             state.pricing.hsn = undefined
         },
-        setProductImage: (state: AddProductInterface, action: PayloadAction<any>) => {
+        setProductImage: (state: AddProductInterface, action: PayloadAction<ICentralImage>) => {
             state.others.productImage = [
                 ...state.others.productImage,
                 action.payload
@@ -137,13 +138,13 @@ export const addProductSlice = createSlice({
         setCentralCategory: (state, action: PayloadAction<AddProductInterface['others']['centralCategory']>) => {
             state.others.centralCategory = action.payload
         },
-        setBarCode: (state, action: PayloadAction<any>) => {
+        setBarCode: (state, action: PayloadAction<AddProductInterface['others']['barCode']>) => {
             state.others.barCode = action.payload
         },
-        setBrand: (state, action: PayloadAction<any>) => {
+        setBrand: (state, action: PayloadAction<AddProductInterface['others']['brand']>) => {
             state.others.brand = action.payload
         },
-        setCaseQuantity: (state, action: PayloadAction<any>) => {
+        setCaseQuantity: (state, action: PayloadAction<AddProductInterface['others']['caseQuantity']>) => {
             state.others.caseQuantity = action.payload
         },
         clearAll: () => {

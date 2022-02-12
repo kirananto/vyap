@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
+import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
+import type { BrandInterface } from './AddProduct/ProductScreen/BrandModal'
 
 export interface ProductFilterInterface {
-    categories: any[];
-    brands: any[];
+    categories: IOrganizationProductCategory[];
+    brands: BrandInterface[];
     sorting: 'latest' | 'price-high-low' | 'price-low-high' | undefined;
 }
 
@@ -28,7 +30,7 @@ export const productFiltersSlice = createSlice({
         setSorting: (state, action: PayloadAction<ProductFilterInterface['sorting']>) => {
             state.sorting = action.payload
         },
-        categoriesCheckbox: (state, action: PayloadAction<any>) => {
+        categoriesCheckbox: (state, action: PayloadAction<IOrganizationProductCategory>) => {
             const isPresent = state.categories?.find(item => item.id === action.payload.id)
             if(isPresent) {
                 state.categories = state.categories?.filter(filterItem => filterItem.id !== action.payload.id)
@@ -36,7 +38,7 @@ export const productFiltersSlice = createSlice({
                 state.categories.push(action.payload)
             }
         },
-        brandsCheckbox: (state, action: PayloadAction<any>) => {
+        brandsCheckbox: (state, action: PayloadAction<BrandInterface>) => {
             const isPresent = state.brands?.find(item => item.id === action.payload.id)
             if(isPresent) {
                 state.brands = state.brands?.filter(filterItem => filterItem.id !== action.payload.id)

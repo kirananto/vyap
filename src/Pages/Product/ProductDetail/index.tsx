@@ -30,7 +30,7 @@ const ProductDetail = () => {
                         }
                     })
                 }                     
-            }).catch((error : any) => {
+            }).catch((error) => {
                 console.log('fetch product error', error)
             })
         

@@ -30,7 +30,7 @@ export const placeOrderAPI = ({ token, data }: {
         buyerId?: string
         flatDiscount: number
         orderItems: {
-            quantity: string
+            quantity: number
             purchasePrice: number
             productId: string
         }[]
@@ -60,7 +60,7 @@ export function fetchOrderItems({ token, orderId, limit, offset }: { token?: str
     })
 }
 
-export const updateOrderStatus = ({ token, id, data }: { token: string; id?: string, data: any }) => axiosClient({
+export const updateOrderStatus = ({ token, id, data }: { token: string; id?: string, data: { status?: number } }) => axiosClient({
     url: `/order-status/${id}`,
     method: 'PATCH',
     data,

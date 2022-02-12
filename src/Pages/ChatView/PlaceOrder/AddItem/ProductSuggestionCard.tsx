@@ -83,7 +83,7 @@ export default function ProductSuggestionCard({
                         }}
                         value={
                             selectedItems?.find(
-                                (findItem: any) => findItem?.id === item?.id
+                                (findItem) => findItem?.id === item?.id
                             )?.quantity ?? 0
                         }
                     />

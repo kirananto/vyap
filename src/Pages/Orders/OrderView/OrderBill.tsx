@@ -5,11 +5,11 @@ import { selectCredentials } from '../../Login/credentialsSlice'
 import { format } from 'date-fns'
 import vyapLogo from '../../../assets/new_logo.svg'
 import vyapQR from '../../../assets/img/vyap-install-qr.png'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { IOrderItem, orderInterface } from 'src/Components/OrderCard'
 
 const OrderBill = ({ order }: { order: orderInterface }) => {
     const { token } = useSelector(selectCredentials)
-    const [orderItems, setOrderItems] = useState<any[]>([])
+    const [orderItems, setOrderItems] = useState<IOrderItem[]>([])
 
     useEffect(() => {
         fetchOrderItems({ token, orderId: order?.id, limit: 100, offset: 0 }).then((result) => {
@@ -73,7 +73,7 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                                 </tr>
                             </thead>
                             <tbody className="text-gray-500 text-sm">
-                                {orderItems?.map((item: any, index: number) => (
+                                {orderItems?.map((item, index: number) => (
                                     <tr
                                         key={index}
                                         className="text-left border-b border-zinc-100"

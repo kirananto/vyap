@@ -124,11 +124,11 @@ export default function Product() {
             ordering: filters?.sorting,
             categoryIds: filters?.categories?.length
                 ? `${filters?.categories
-                    ?.map((item: { id: string }) => item.id)
+                    ?.map(item => item.id)
                     .join(',')}`
                 : undefined,
             brandIds: filters?.brands?.length
-                ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}`
+                ? `${filters?.brands?.map((item) => item.id).join(',')}`
                 : undefined,
         })
             .then((result: IProductList) => {

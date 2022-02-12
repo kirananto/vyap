@@ -1,11 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
+import type { IProduct } from 'src/types/product'
 
+export interface ProductIntermittentState extends IProduct {
+    quantity: number
+}
 export interface PlaceOrderInterface {
     note: string;
     discount: number;
     orgId: string
-    cartItems: any[];
+    cartItems: ProductIntermittentState[];
 }
 
 const initialState: PlaceOrderInterface = {
@@ -27,23 +31,23 @@ export const placeOrderSlice = createSlice({
         setFlatDiscount: (state, action: PayloadAction<number>) => {
             state.discount = action.payload
         },
-        pushItemsToCart: (state, action: PayloadAction<any>) => {
+        pushItemsToCart: (state, action: PayloadAction<ProductIntermittentState[]>) => {
             const oldCartItemsModified = state.cartItems?.map(mapItem => {
-                const payloadQuantity = action.payload?.find((findItem: any) => findItem.id === mapItem.id)?.quantity ?? 0
+                const payloadQuantity = action.payload?.find((findItem) => findItem.id === mapItem.id)?.quantity ?? 0
                 return {
                     ...mapItem,
                     quantity: mapItem.quantity + payloadQuantity
                 }
             })
-            const newCartItemCleaned = action.payload?.filter((filterItem: any) => {
+            const newCartItemCleaned = action.payload?.filter((filterItem) => {
                 const isItAlreadyPresent = oldCartItemsModified?.some(someItem => someItem.id === filterItem.id)
                 return !isItAlreadyPresent
             })
             state.cartItems = [...oldCartItemsModified, ...newCartItemCleaned]
         },
-        updateItemsOnCart: (state, action: PayloadAction<any>) => {
+        updateItemsOnCart: (state, action: PayloadAction<ProductIntermittentState[]>) => {
             const oldCartItemsModified = state.cartItems?.map(mapItem => {
-                const payloadQuantity = action.payload?.find((findItem: any) => findItem.id === mapItem.id)?.quantity ?? 0
+                const payloadQuantity = action.payload?.find((findItem) => findItem.id === mapItem.id)?.quantity ?? 0
 
                 if(payloadQuantity > 0){
                     return {
@@ -58,7 +62,7 @@ export const placeOrderSlice = createSlice({
                 }
                 
             })
-            const newCartItemCleaned = action.payload?.filter((filterItem: any) => {
+            const newCartItemCleaned = action.payload?.filter((filterItem) => {
                 const isItAlreadyPresent = oldCartItemsModified?.some(someItem => someItem.id === filterItem.id)
                 return !isItAlreadyPresent
             })
