@@ -72,7 +72,7 @@ export function MorePopup({ item, onClose }: any) {
                     <span>Delete Products</span>
                 </button>
                 {/* ---- */}
-                <button onClick={() => {
+                {!item?.outOfStock ? <button onClick={() => {
                     hapticFeedback()
                     markStockStatus(true)
                 }} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
@@ -91,9 +91,7 @@ export function MorePopup({ item, onClose }: any) {
                         />
                     </svg>
                     <span>Mark out of stock</span>
-                </button>
-                {/* ---- */}
-                <button onClick={() => {
+                </button> : <button onClick={() => {
                     hapticFeedback()
                     markStockStatus(false)
                 }} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
@@ -112,7 +110,7 @@ export function MorePopup({ item, onClose }: any) {
                         />
                     </svg>
                     <span>Mark in stock</span>
-                </button>
+                </button>}
                 {/* --------- */}
                 <button className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn  ">
                     <svg
