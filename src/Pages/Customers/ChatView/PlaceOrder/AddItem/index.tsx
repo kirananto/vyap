@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router'
 import { fetchProductById, fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../../Product/assets/no_data.svg'
+import transparentImg from 'src/assets/img/transparent.png'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectAddItemsproductFilters } from './addProductFiltersSlice'
 import ModalViewer from 'src/Components/Style/ModalViewer'
@@ -205,17 +206,16 @@ export default function AddItem() {
                 className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-gray-100 dark:border-gray-800 py-4"
                 key={`${index}`}
             >
-                <div className="relative self-center w-1/5 h-20 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
-                    {item?.thumbnailImage && (
-                        <img
-                            src={getImageURL(
-                                item?.thumbnailImage,
-                                IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                            )}
-                            alt="Avatar"
-                            className="object-cover w-full h-full"
-                        />
-                    )}
+                <div className="relative self-center w-1/5 h-20  overflow-hidden">
+                    <img
+                        src={item?.thumbnailImage ? getImageURL(
+                            item?.thumbnailImage,
+                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                        ) : transparentImg}
+                        alt=""
+                        className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                    />
+                    {/* )} */}
                 </div>
                 <div className="w-4/5 pl-4 ">
                     <div className=" text-lg font-bold mb-1 text-gray-600 dark:text-gray-200">
@@ -338,11 +338,11 @@ export default function AddItem() {
                 </div> : null}
                 {renderItems()}
             </div>
-            <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
+            {selectedItems?.length > 0 ? <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
                 <Button onClick={onSubmit}>
                     {`Add ${selectedItems?.length} items (₹${calculatePriceOfSelected()})`}
                 </Button>
-            </div>
+            </div> : null}
         </div>
     )
 }

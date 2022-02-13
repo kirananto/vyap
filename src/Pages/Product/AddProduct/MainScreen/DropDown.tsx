@@ -11,6 +11,7 @@ import './Drop.css'
 import { Length, validate } from 'class-validator'
 import type { ICentralImage, IFetchCentralProductImages } from 'src/types/fetchCentralProductImages'
 import type { CentralCatalogueInterface } from '../redux/addProductSlice'
+import transparentImg from 'src/assets/img/transparent.png'
 
 export class Post {
   @Length(3, 50)
@@ -51,20 +52,18 @@ function List(props: IProps) {
             className="drop-main cursor-pointer flex flex-shrink-0"
             onClick={() => props.onSelect(props.opt)}
         >
-            <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
-                {productImage && (
-                    <img
-                        src={productImage}
-                        alt="Avatar"
-                        className="object-cover w-full h-full"
-                    />
-                )}
+            <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
+                <img
+                    src={productImage ? productImage : transparentImg}
+                    alt="Avatar"
+                    className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                />
             </div>
-            <div className="flex flex-col">
-                <div className="text-xl font-bold text-gray-700 dark:text-gray-200 truncate">
+            <div className="w-full">
+                <div className="text-lg w-full font-bold text-gray-700 dark:text-gray-200 line-clamp-1">
                     {props.opt.name}
                 </div>
-                <div className="text-base text-gray-400 dark:text-gray-300 truncate">
+                <div className="text-xs w-full text-gray-400 dark:text-gray-400 line-clamp-2">
                     {props.opt.description}
                 </div>
                 {/* <div className="text-xs font-bold text-gray-400">{props.opt.price}</div> */}
@@ -231,7 +230,7 @@ function DropDown(props: DropdDownInterface) {
             />
             <div
                 // ref={myRef}
-                className={`dark:bg-gray-700 drop-open h-72`}
+                className={`dark:bg-gray-700 drop-open dark:border-gray-500 rounded-lg overflow-x-hidden h-72`}
             >
                 {renderListItems()}
             </div>
