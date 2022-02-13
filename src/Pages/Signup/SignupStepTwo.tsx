@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ToggleButton from '../../Components/ToggleButton'
 import { SimpleFooter } from '../../Components/Footer'
-import vyapLogo from '../../assets/new_logo.svg'
+import vyapLogo from 'src/assets/new_logo.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSignupInfo, setAddress, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from './signupSlice'
 import { isEmail } from 'class-validator'

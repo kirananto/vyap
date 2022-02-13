@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchOrderItems } from 'src/API/order.axios'
-import { selectCredentials } from '../../Login/credentialsSlice'
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { format } from 'date-fns'
-import vyapLogo from '../../../assets/new_logo.svg'
-import vyapQR from '../../../assets/img/vyap-install-qr.png'
-import type { IOrderItem, orderInterface } from 'src/Components/OrderCard'
+import vyapLogo from 'src/assets/new_logo.svg'
+import vyapQR from 'src/assets/img/vyap-install-qr.png'
+import type { IOrderItem, orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
 
 const OrderBill = ({ order }: { order: orderInterface }) => {
     const { token } = useSelector(selectCredentials)

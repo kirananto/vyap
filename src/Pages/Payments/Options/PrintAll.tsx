@@ -1,7 +1,7 @@
 import React from 'react'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
-import vyapLogo from '../../../assets/new_logo.svg'
+import vyapLogo from 'src/assets/new_logo.svg'
 import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 import ReactToPrint from 'react-to-print'

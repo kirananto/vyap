@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import PaymentCard from '../../Components/PaymentCard'
-import OrderCard from '../../Components/OrderCard'
+import PaymentCard from './Cards/PaymentCard'
+import OrderCard from './Cards/OrderCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from 'src/Pages/ChatView/assets/Chats.svg'

@@ -3,7 +3,7 @@ import OrderContainerDetail from './OrderContianerDetail'
 import format from 'date-fns/format'
 import Spinner from 'src/Components/Style/Spinner'
 import ChatImg from '../Product/assets/no_data.svg'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
 
 interface IProps {
   orders: orderInterface[];

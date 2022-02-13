@@ -3,7 +3,7 @@ import * as FileSaver from 'file-saver'
 import * as XLSX from 'xlsx'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
 
 interface IProps {
   apiData: orderInterface[];

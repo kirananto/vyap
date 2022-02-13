@@ -1,12 +1,12 @@
 import React from 'react'
 import format from 'date-fns/format'
-import vyapLogo from '../../../assets/new_logo.svg'
+import vyapLogo from 'src/assets/new_logo.svg'
 import { FormattedMessage } from 'react-intl'
 import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 
 import ReactToPrint from 'react-to-print'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
 
 interface IProps {
   apiData: orderInterface[];

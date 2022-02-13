@@ -7,7 +7,7 @@ const SignupStepThree = lazily(() => import('src/Pages/Signup/SignupStepThree'))
 const SignupStepFour = lazily(() => import('src/Pages/Signup/SignupStepFour')).default
 
 const Settings = lazily(() => import('src/Pages/Settings/Settings')).default
-const PaymentDetails = lazily(() => import('src/Pages/ChatView/PaymentDetails')).default
+const PaymentDetails = lazily(() => import('src/Pages/ChatView/InfoPages/Payment/PaymentDetails')).default
 const Reports = lazily(() => import('src/Pages/Reports/Reports')).default
 const Employees = lazily(() => import('src/Pages/Employees/Employees')).default
 const StockManagement = lazily(() => import('src/Pages/StockManagement/StockManagement')).default
@@ -23,7 +23,7 @@ const CreateProduct = lazily(() => import('src/Pages/Product/AddProduct/ProductS
 const AddEditPurchase = lazily(() => import('src/Pages/StockManagement/PurchaseOrder/AddEditPurchase')).default
 const PurchaseOrder = lazily(() => import('src/Pages/StockManagement/PurchaseOrder')).default
 const AddProductMain = lazily(() => import('src/Pages/Product/AddProduct/MainScreen/AddProductMain')).default
-const OrderDetails = lazily(() => import('src/Pages/Orders/OrderView')).default
+const OrderDetails = lazily(() => import('src/Pages/ChatView/InfoPages/Order')).default
 const { Payment } = lazily(() => import('src/Pages/ChatView'))
 const ProductDetail = lazily(() => import('src/Pages/Product/ProductDetail')).default
 

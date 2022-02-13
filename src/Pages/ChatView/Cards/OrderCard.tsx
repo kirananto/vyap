@@ -9,9 +9,9 @@ import { setOrderInfo, ThreadInterface } from 'src/Pages/ChatView/chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { useLongPress } from 'use-long-press'
 import { OrderStatusEnum } from 'src/Pages/Orders/enum'
-import Completed from './Style/Icons/Completed'
-import Pending from './Style/Icons/Pending'
-import Processing from './Style/Icons/Processing'
+import Completed from '../../../Components/Style/Icons/Completed'
+import Pending from '../../../Components/Style/Icons/Pending'
+import Processing from '../../../Components/Style/Icons/Processing'
 import type { IProduct } from 'src/types/product'
 
 export interface IOrderItem {

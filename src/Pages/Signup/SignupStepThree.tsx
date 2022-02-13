@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import vyapLogo from '../../assets/new_logo.svg'
+import vyapLogo from 'src/assets/new_logo.svg'
 import './Signup.css'
 import { SimpleFooter } from '../../Components/Footer'
 import { useNavigate } from 'react-router'

@@ -6,7 +6,7 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { FormattedMessage } from 'react-intl'
 import ReactToPrint from 'react-to-print'
-import type { IOrderItem, orderInterface } from 'src/Components/OrderCard'
+import type { IOrderItem, orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
 
 export default function OrderContainerDetail({
     order,

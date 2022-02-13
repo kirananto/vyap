@@ -1,15 +1,15 @@
-import { paymentMethod, paymentStatus } from '../../API/enum'
+import { paymentMethod, paymentStatus } from '../../../API/enum'
 import React, { useState } from 'react'
 import { createPayment } from 'src/API/payment.axios'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import Success from '../Home/AddCustomerModal/Success'
 import { Min, validate } from 'class-validator'
 import { hapticFeedback } from 'src/utils/vibrate'
-import { BUTTON_ACTION, PAYMENT_OPTIONS } from './PlaceOrder/types'
+import { BUTTON_ACTION, PAYMENT_OPTIONS } from '../PlaceOrder/types'
 import { useNavigate } from 'react-router-dom'
-import './payment.css'
-import type { orderInterface } from 'src/Components/OrderCard'
+import '../payment.css'
+import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
+import Success from 'src/Pages/Home/AddCustomerModal/Success'
 
 export class PostAmount {
     @Min(1)

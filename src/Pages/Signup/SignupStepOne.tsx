@@ -4,7 +4,7 @@ import OTPForm from '../Login/OTPForm'
 import { Link, useNavigate } from 'react-router-dom'
 import { generateOtp, verifyPhone } from '../../API/login.axios'
 import { useDispatch } from 'react-redux'
-import vyapLogo from '../../assets/new_logo.svg'
+import vyapLogo from 'src/assets/new_logo.svg'
 import { setPhone } from './signupSlice'
 import { setCredentials } from '../Login/credentialsSlice'
 

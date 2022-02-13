@@ -19,7 +19,7 @@ import { placeOrderAPI } from 'src/API/order.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
-import AddPaymentModal from '../AddPaymentModal'
+import AddPaymentModal from '../Popups/AddPaymentModal'
 import { BUTTON_ACTION } from './types'
 
 export default function PlaceOrder() {

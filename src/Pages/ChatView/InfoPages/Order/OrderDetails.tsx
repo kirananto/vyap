@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { PaymentInfo } from '../../../Components/PaymentInfo'
+import { PaymentInfo } from './PaymentInfo'
 import { format } from 'date-fns'
-import { OrderInfoIcon } from 'src/Components/OrderInfo'
+import { OrderInfoIcon } from 'src/Pages/ChatView/InfoPages/Order/OrderInfo'
 import { hapticFeedback } from 'src/utils/vibrate'
-import type { orderInterface } from 'src/Components/OrderCard'
+import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
 
 function OrderDetailed({ order }: { order: orderInterface }) {
     return (

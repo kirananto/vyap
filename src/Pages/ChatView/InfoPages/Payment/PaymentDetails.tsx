@@ -1,13 +1,13 @@
-import { fetchPaymentById } from '../../API/payment.axios'
+import { fetchPaymentById } from '../../../../API/payment.axios'
 // import type { paymentObject } from '../../Components/PaymentCard'
-import { selectCredentials } from '../Login/credentialsSlice'
+import { selectCredentials } from '../../../Login/credentialsSlice'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
-import { Header } from '../../Components/Header'
-import { PaymentInfo, PaymentInfoIcon } from '../../Components/PaymentInfo'
+import { Header } from '../../../../Components/Header'
+import { PaymentInfo, PaymentInfoIcon } from '../Order/PaymentInfo'
 import { format } from 'date-fns'
-import { selectChatList, setPaymentInfo } from './chatListSlice'
+import { selectChatList, setPaymentInfo } from '../../chatListSlice'
 
 export default function PaymentDetails() {
     const textSize = { fontSize: '12px' }
