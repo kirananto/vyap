@@ -107,7 +107,7 @@ export const chatListInterface = createSlice({
                     return { ...existingItem, ...item }
                 })
             } else {
-                state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
+                state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload, isLoading: false, error: false }
             }
         }),
         builder.addCase(fetchThreadsByInbox.pending, (state, action: PayloadAction<undefined, string, { arg: { id: string }}>) => {
@@ -124,7 +124,7 @@ export const chatListInterface = createSlice({
             }
         }),
         builder.addCase(fetchInboxAction.fulfilled, (state, action) => {
-            state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload }
+            state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload, isLoading: false, error: false }
         }),
         builder.addCase(fetchInboxAction.pending, (state, action: PayloadAction<undefined, string, { arg: { id?: string }}>) => {
             const id = action.meta?.arg?.id

@@ -63,7 +63,7 @@ export const Payment = () => {
                 />
                 <PaymentBottomHeader
                     amount={inbox?.outstandingAmount}
-                    isLoading={inbox?.isLoading === undefined ? true : inbox?.isLoading}
+                    isLoading={inbox?.recipient?.name !== undefined ? false : inbox?.isLoading === true}
                 />
             </div>
             {/* body */}
