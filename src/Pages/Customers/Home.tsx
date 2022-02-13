@@ -146,7 +146,7 @@ export const Home = () => {
                     <div className="flex w-1/5 items-center justify-end ">
                         <Link to="/my-account">
                             <img
-                                className="h-12 rounded-full shadow-lg"
+                                className="h-12 rounded-full shadow-xs bg-gray-200 dark:bg-gray-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
                                 alt=""
                             />

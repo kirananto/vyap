@@ -6,10 +6,11 @@ import { patchUser } from 'src/API/user.axios'
 import { useIntl } from 'react-intl'
 import { patchOrganization } from 'src/API/organization.axios'
 import { IsEmail, IsString, Length, validate, IsOptional } from 'class-validator'
+import profPic from 'src/assets/icons/profile/profile-icon.svg'
 
 
 export class Organization {
-    
+
     @Length(3, 64)
     @IsString()
         name?: string
@@ -58,13 +59,13 @@ export default function Account() {
         console.log(post)
         validate(post).then(errors => {
             console.log('errors', errors)
-            if(errors.length > 0) {
+            if (errors.length > 0) {
                 errors.forEach(errorItem => {
-                    switch(errorItem.property) {
-                        case 'name' : setNameError(true); break
-                        case 'bizName' : setBizNameError(true); break
-                        case 'pinCode' : setPinCodeError(true); break
-                        case 'email' : setEmailError(true); break
+                    switch (errorItem.property) {
+                        case 'name': setNameError(true); break
+                        case 'bizName': setBizNameError(true); break
+                        case 'pinCode': setPinCodeError(true); break
+                        case 'email': setEmailError(true); break
                     }
                 })
             } else {
@@ -95,8 +96,13 @@ export default function Account() {
             {/* Caard Container  */}
             <div className="flex flex-col items-center w-full gap-4 px-8 py-20 pb-64">
                 <div
-                    className="relative w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-indigo-900"
+                    className="relative w-32 h-32 rounded-full"
                 >
+                    <img
+                        src={user?.profileImageUrl ?? profPic}
+                        className="w-32 rounded-full border border-1 dark:border-gray-500 p-6  bg-gray-200 dark:bg-gray-800"
+                        alt="profile-pic"
+                    />
                     {/* <div
                         className="absolute top-0 right-0 object-none p-2 text-gray-600 bg-white rounded-full shadow-md w-min"
                     >
@@ -118,7 +124,7 @@ export default function Account() {
                         placeholder="Your name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                     />
-                    {nameError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
+                    {nameError && <span className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid name
                     </span>}
                 </div>
@@ -134,7 +140,7 @@ export default function Account() {
                         placeholder="Business name"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                     />
-                    {bizNameError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
+                    {bizNameError && <span className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid business name
                     </span>}
                 </div>
@@ -150,7 +156,7 @@ export default function Account() {
                         placeholder="Email"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                     />
-                    {emailError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
+                    {emailError && <span className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid email
                     </span>}
                 </div>
@@ -166,7 +172,7 @@ export default function Account() {
                         placeholder="Pin code"
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                     />
-                    {pinCodeError && <span  className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
+                    {pinCodeError && <span className={'font-medium tracking-wide text-red-500 text-xs mt-1'} >
                         * Enter a valid pin code
                     </span>}
                 </div>
@@ -202,7 +208,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
-                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-bold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success': 'Update'}</button>
+                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-bold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
             </div>
         </div>
     )
