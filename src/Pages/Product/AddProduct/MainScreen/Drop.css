@@ -1,13 +1,6 @@
 .input-field {
   width: 80%;
 }
-.close-dropdown {
-  width: 100vw;
-  margin-left: -20px;
-  height: 100vh;
-  z-index: -5;
-}
-
 .drop-open {
   display: flex;
   flex-direction: column;
@@ -33,28 +26,4 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.hide-create-btn {
-  display: none;
-}
-.show-create-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 18%;
-  border-radius: 8px;
-  border: solid rgba(229, 231, 235) 1px;
-  transition: 0.2s;
-}
-.show-create-btn:active {
-  transform: scale(0.9);
-}
-.hide-create-div {
-  display: none;
-}
-.show-create-div {
-  display: flex;
-
-  justify-content: center;
-  padding-bottom: 5px;
 }

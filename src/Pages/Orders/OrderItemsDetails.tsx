@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl'
 import ReactToPrint from 'react-to-print'
 import type { IOrderItem, orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 
-export default function OrderContainerDetail({
+export default function OrderItemsDetails({
     order,
     minimize,
 }: {

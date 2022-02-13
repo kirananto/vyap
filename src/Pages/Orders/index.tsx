@@ -12,7 +12,7 @@ import { FilterPopup } from './Filters/FilterPopUp'
 import { selectOrderFilters } from './Filters/orderFiltersSlice'
 import { ExportAll } from './Options/ExportAll'
 import { PrintAll } from './Options/PrintAll'
-import OrderContainer from './OrderContainer'
+import OrderContainer from './OrderContainerBox'
 
 export default function Orders() {
     const [orders, setOrders] = useState<orderInterface[]>([])

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import OrderContainerDetail from './OrderContianerDetail'
+import OrderContainerDetail from './OrderItemsDetails'
 import format from 'date-fns/format'
 import Spinner from 'src/Components/Style/Spinner'
 import ChatImg from '../Product/assets/no_data.svg'

@@ -11,7 +11,7 @@ import { selectPaymentFilters } from './Filters/paymentFiltersSlice'
 import { ExportAll } from './Options/ExportAll'
 import { PrintAll } from './Options/PrintAll'
 import { useIntl } from 'react-intl'
-import useQueryParam from 'src/useQueryParams'
+import useQueryParam from 'src/utils/useQueryParams'
 import { useNavigate } from 'react-router'
 import type { IFetchAllPayments, IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 

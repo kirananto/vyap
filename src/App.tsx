@@ -9,7 +9,7 @@ import { IntlProvider } from 'react-intl'
 import { defaultUserInterfaceLanguage, IntlMessages } from './models/languageModel'
 import enMessages from './i18n/en.json'
 import mlMessages from './i18n/ml.json'
-import { selecti18nConfig } from './i18nSlice'
+import { selecti18nConfig } from './i18n/i18nSlice'
 import { setDarkMode } from './Pages/Login/credentialsSlice'
 
 

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import getUserLocale from 'get-user-locale'
-import { Language, userInterfaceLanguages } from './models/languageModel'
-import type { RootState } from './redux/store'
-import { matchLanguage } from './utils/i18n'
+import { Language, userInterfaceLanguages } from '../models/languageModel'
+import type { RootState } from '../redux/store'
+import { matchLanguage } from '../utils/i18n'
 
 interface LanguageInterface { language: Language }
 

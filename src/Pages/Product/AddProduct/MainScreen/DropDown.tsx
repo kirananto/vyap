@@ -231,7 +231,7 @@ function DropDown(props: DropdDownInterface) {
             />
             <div
                 // ref={myRef}
-                className={`dark:bg-gray-700 ${'drop-open h-72'}`}
+                className={`dark:bg-gray-700 drop-open h-72`}
             >
                 {renderListItems()}
             </div>

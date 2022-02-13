@@ -17,7 +17,7 @@ import {
     setCustomers,
     setCustomerTotal,
 } from './customersSlice'
-import useQueryParam from 'src/useQueryParams'
+import useQueryParam from 'src/utils/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { useScrollDirection } from 'react-use-scroll-direction'
 
