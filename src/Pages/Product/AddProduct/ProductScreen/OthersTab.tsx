@@ -148,9 +148,9 @@ function OthersTab({ action, saveAttempt }: Props) {
             if (fileUploaderRef.current?.files?.length > 0) {
                 setSpinner(true)
                 new Compressor(fileUploaderRef.current?.files?.[0], {
-                    quality: 0.6,
-                    maxWidth: 300,
-                    maxHeight: 300,
+                    quality: 0.8,
+                    maxWidth: 500,
+                    maxHeight: 500,
 
                     // The compression process is asynchronous,
                     // which means you have to access the `result` in the `success` hook function.
