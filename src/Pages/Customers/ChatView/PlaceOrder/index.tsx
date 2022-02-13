@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { SimpleHeader } from 'src/Components/Header'
 import Button from 'src/Components/Style/Button'
-import ChatImg from '../../Product/assets/no_data.svg'
+import ChatImg from '../../../Product/assets/no_data.svg'
 // import DropList from 'src/Components/Style/DropList'
 
 import {

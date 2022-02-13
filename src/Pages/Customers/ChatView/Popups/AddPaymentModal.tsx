@@ -1,4 +1,4 @@
-import { paymentMethod, paymentStatus } from '../../../API/enum'
+import { paymentMethod, paymentStatus } from '../../../../API/enum'
 import React, { useState } from 'react'
 import { createPayment } from 'src/API/payment.axios'
 import { useSelector } from 'react-redux'
@@ -8,8 +8,8 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import { BUTTON_ACTION, PAYMENT_OPTIONS } from '../PlaceOrder/types'
 import { useNavigate } from 'react-router-dom'
 import '../payment.css'
-import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
-import Success from 'src/Pages/Home/AddCustomerModal/Success'
+import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
+import Success from 'src/Pages/Customers/AddCustomerModal/Success'
 
 export class PostAmount {
     @Min(1)

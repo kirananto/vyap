@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchInboxById, fetchThreadsById } from 'src/API/inbox.axios'
-import type { IOrderItem, orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
-import type { paymentObject } from 'src/Pages/ChatView/Cards/PaymentCard'
+import type { IOrderItem, orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
+import type { paymentObject } from 'src/Pages/Customers/ChatView/Cards/PaymentCard'
 import type { RootState } from 'src/redux/store'
-import type { Organization } from '../Login/credentialsSlice'
+import type { Organization } from '../../Login/credentialsSlice'
 
 interface chatListInterface {
     [key: string]: IndividualChatInterface

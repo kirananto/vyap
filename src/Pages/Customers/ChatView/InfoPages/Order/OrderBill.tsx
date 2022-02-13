@@ -5,7 +5,7 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { format } from 'date-fns'
 import vyapLogo from 'src/assets/new_logo.svg'
 import vyapQR from 'src/assets/img/vyap-install-qr.png'
-import type { IOrderItem, orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
+import type { IOrderItem, orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 
 const OrderBill = ({ order }: { order: orderInterface }) => {
     const { token } = useSelector(selectCredentials)

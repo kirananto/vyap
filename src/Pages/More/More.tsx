@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
 import { useIntl } from 'react-intl'
 import { logOutAPI } from 'src/API/login.axios'
-import { clearAll } from '../ChatView/chatListSlice'
+import { clearAll } from '../Customers/ChatView/chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 
 export default function More() {

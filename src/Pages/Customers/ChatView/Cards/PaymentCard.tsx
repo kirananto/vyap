@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { format } from 'date-fns'
-import { fetchPaymentById } from '../../../API/payment.axios'
+import { fetchPaymentById } from '../../../../API/payment.axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { Organization, selectCredentials } from '../../Login/credentialsSlice'
+import { Organization, selectCredentials } from '../../../Login/credentialsSlice'
 import { NavLink  } from 'react-router-dom'
-import { setPaymentInfo, ThreadInterface } from 'src/Pages/ChatView/chatListSlice'
+import { setPaymentInfo, ThreadInterface } from 'src/Pages/Customers/ChatView/chatListSlice'
 import { useParams } from 'react-router'
 import { hapticFeedback } from 'src/utils/vibrate'
 

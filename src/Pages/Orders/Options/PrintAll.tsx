@@ -6,7 +6,7 @@ import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 
 import ReactToPrint from 'react-to-print'
-import type { orderInterface } from 'src/Pages/ChatView/Cards/OrderCard'
+import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 
 interface IProps {
   apiData: orderInterface[];

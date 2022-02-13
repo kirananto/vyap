@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from 'react'
-import { Header } from '../../../../Components/Header'
+import { Header } from '../../../../../Components/Header'
 import OrderDetail from './OrderDetails'
 import ItemList from './ItemList'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,7 +11,7 @@ import { useScreenshot } from 'use-react-screenshot'
 import OrderBill from './OrderBill'
 import Button from 'src/Components/Style/Button'
 import { isNumber } from 'class-validator'
-import { selectChatList, setOrderInfo } from 'src/Pages/ChatView/chatListSlice'
+import { selectChatList, setOrderInfo } from 'src/Pages/Customers/ChatView/chatListSlice'
 
 export default function OrderDetails() {
     // const [order, setOrder] = useState<any | undefined>()
