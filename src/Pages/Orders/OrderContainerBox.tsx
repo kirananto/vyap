@@ -4,10 +4,12 @@ import format from 'date-fns/format'
 import Spinner from 'src/Components/Style/Spinner'
 import ChatImg from '../Product/assets/no_data.svg'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
+import { OrderStatusEnum } from './enum'
+import OrderStatusIcon from '../Customers/ChatView/InfoPages/Order/OrderStatusIcon'
 
 interface IProps {
-  orders: orderInterface[];
-  loading: boolean;
+    orders: orderInterface[];
+    loading: boolean;
 }
 
 export default function OrderContainer({ orders, loading }: IProps) {
@@ -21,7 +23,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
         )
     }
 
-    
+
     if (orders?.length === 0) {
         return <div>
             <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
@@ -32,6 +34,20 @@ export default function OrderContainer({ orders, loading }: IProps) {
         </div>
     }
 
+    function returnStatusTile(status: OrderStatusEnum) {
+        let color = 'green'
+        if (status === OrderStatusEnum.PENDING) {
+            color = 'yellow'
+        }
+        if (status === OrderStatusEnum.PROCESSING) {
+            color = 'blue'
+        }
+        return (<span className={`bg-${color}-200 font-bold text-xs text-${color}-800 px-2 py-1 rounded flex`}>
+            <OrderStatusIcon status={status} /> 
+            <span className="pt-[2px] px-1">{OrderStatusEnum[status]}</span>
+        </span>)
+    }
+
     const onMinimize = () => {
         setIsExpanded(undefined)
     }
@@ -39,8 +55,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
         <>
             {orders.map((item, index) => (
                 <div
-                    className={`${
-                        index === orders.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
+                    className={`${index === orders.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
                     }`}
                     key={`${item.id}`}
                 >
@@ -57,7 +72,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                         <div className="w-full">
                             <div className="grid grid-rows-3 content-start">
                                 <div className="grid grid-flow-col  gap-1 row-span-3">
-                                    
+
                                     <div className="text-gray-500 mt-1 text-xs dark:text-gray-300">
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
@@ -113,21 +128,19 @@ export default function OrderContainer({ orders, loading }: IProps) {
 
                                 <div className="grid grid-flow-col">
                                     <div className="col-start-1 w-max  items-center mt-3">
-                                        <span className="bg-green-200 font-bold text-xs text-green-800 px-2 py-1 rounded">
-                                            {item?.orderStatus?.[0]?.note}
-                                        </span>
+                                        {returnStatusTile(item?.orderStatus?.[0]?.status)}
                                     </div>
 
                                     <div className="text-center col-end-12 self-center text-gray-600 dark:text-gray-200 text-lg font-extrabold">
                                         <div className="text-gray-600 text-lg font-extrabold dark:text-gray-200">
-                      ₹{' '}
+                                            ₹{' '}
                                             {(
                                                 parseFloat(item?.totalAmount) -
-                        parseFloat(item?.flatDiscount)
+                                                parseFloat(item?.flatDiscount)
                                             ).toFixed(2)}
                                         </div>
                                         <div className="text-gray-400 text-xs font-extrabold mx-auto dark:text-gray-300">
-                      ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})
+                                            ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})
                                         </div>
                                     </div>
                                 </div>

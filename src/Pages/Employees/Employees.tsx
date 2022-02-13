@@ -27,7 +27,7 @@ export default function Employees() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-gray-800">
                 <button
                     onClick={handlePopup}
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"

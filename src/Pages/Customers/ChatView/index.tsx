@@ -53,7 +53,7 @@ export const Payment = () => {
     return (
         <div className="overflow-y-auto dark:bg-gray-900">
             {/* header */}
-            <div className="fixed w-full z-10 pb-3 bg-white shadow dark:bg-gray-800">
+            <div className="fixed w-full z-10 pb-3 bg-white drop-shadow-md dark:bg-gray-800">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/home')}

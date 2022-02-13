@@ -19,7 +19,7 @@ function Footer() {
     }
 
     return (
-        <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-800 dark:border-gray-800">
+        <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border drop-shadow-md dark:bg-gray-800 dark:border-gray-800">
             {/* Nav-Item-1 */}
             <Link
                 to="/"
@@ -118,7 +118,7 @@ function Footer() {
 function SimpleFooter(props: { btnName: string, onClick?: (e: React.MouseEvent<HTMLInputElement>) => void 
 , isDisabled?: boolean }) {
     return (
-        <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow shadow-2xl dark:bg-gray-800">
+        <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md shadow-2xl dark:bg-gray-800">
             <Button onClick={(event: React.MouseEvent<HTMLInputElement>) => {
                 // if(event.preventDefault) event.preventDefault()
                 hapticFeedback()

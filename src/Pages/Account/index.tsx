@@ -207,7 +207,7 @@ export default function Account() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-gray-800">
                 <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-bold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
             </div>
         </div>

@@ -15,7 +15,7 @@ export default function PurchaseOrder() {
     return (
         <div className="h-screen dark:bg-gray-900">
             {/* header */}
-            <div className="w-full mb-2 bg-white shadow dark:bg-gray-800">
+            <div className="w-full mb-2 bg-white drop-shadow-md dark:bg-gray-800">
                 <SimpleHeader heading=" Purchase Orders " />
             </div>
             {/* body */}
@@ -64,7 +64,7 @@ export default function PurchaseOrder() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-700">
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-gray-700">
                 <button
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                     onClick={() => {
