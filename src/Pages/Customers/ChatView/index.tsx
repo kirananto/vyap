@@ -19,7 +19,7 @@ export const Payment = () => {
     const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<boolean>(
         'paymentModalVisible'
     )
-    const [currentOrderStatusId, setcurrentOrderStatusId] = useState<string>('')
+    const [currentOrderId, setCurrentOrderId] = useState<string>('')
     const [orderOptionModalVisible, setorderOptionModalVisible] = useState<boolean>(false)
 
     const [updatingOrderId, setUpdatingOrderId] = useState<string>()
@@ -69,7 +69,7 @@ export const Payment = () => {
             {/* body */}
             <ChatList 
                 setorderOptionModalVisible={setorderOptionModalVisible}
-                setcurrentOrderStatusId={setcurrentOrderStatusId}
+                setCurrentOrderId={setCurrentOrderId}
                 inboxHash={inbox?.inboxHash} 
                 toRefresh={paymentModalVisible ?? false} 
                 updatingOrderId={updatingOrderId}
@@ -116,7 +116,7 @@ export const Payment = () => {
                         onClose={() => {
                             setorderOptionModalVisible(false)
                         }}
-                        currentOrderStatusId={currentOrderStatusId}
+                        currentOrderId={currentOrderId}
                         setUpdatingOrderId={setUpdatingOrderId}
                         setNewStatus={setNewStatus}
 

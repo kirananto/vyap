@@ -33,12 +33,11 @@ function OrderDetailed({ order }: { order: orderInterface }) {
             />
             <PaymentInfo
                 heading="Note"
-                info={order?.description ?? 'No information'}
+                info={order?.description && order?.description !== '' ? order?.description : 'No information'}
             />
             <OrderInfoIcon
                 heading="Status"
-                status={order?.orderStatus?.[0]?.status}
-                info={order?.orderStatus?.[0]?.note ?? 'No information'}
+                status={order?.orderStatus}
             />
         </div>
     )

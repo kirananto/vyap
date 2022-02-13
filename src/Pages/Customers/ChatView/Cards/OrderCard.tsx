@@ -49,7 +49,7 @@ interface iProps {
     className: string,
     thread: ThreadInterface,
     setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-    setcurrentOrderStatusId: React.Dispatch<React.SetStateAction<string>>
+    setCurrentOrderId: React.Dispatch<React.SetStateAction<string>>
     newStatus: number | undefined,
     updatingOrderId: string | undefined
     isScrolling: boolean
@@ -59,7 +59,7 @@ export default function OrderCard({
     className,
     thread,
     setorderOptionModalVisible,
-    setcurrentOrderStatusId,
+    setCurrentOrderId,
     newStatus,
     updatingOrderId,
     isScrolling
@@ -70,7 +70,7 @@ export default function OrderCard({
     const order = thread.order
     const dispatch = useDispatch()
 
-    const [status, setStatus] = useState<number>(Number(order?.orderStatus[0]?.status))
+    const [status, setStatus] = useState<number>(Number(order?.orderStatus[order?.orderStatus?.length - 1]?.status))
 
     useEffect(() => {
         if (newStatus && updatingOrderId === order?.id)
@@ -80,7 +80,7 @@ export default function OrderCard({
     const bind = useLongPress(() => {
         !isScrolling && setorderOptionModalVisible(true)
         if (order?.orderStatus[0].id)
-            setcurrentOrderStatusId(order?.orderStatus[0].id)
+            setCurrentOrderId(order.id)
     })
 
     useEffect(() => {

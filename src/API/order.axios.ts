@@ -1,4 +1,4 @@
-import type { OrderStatusType } from 'src/Pages/Orders/enum'
+import type { OrderStatusEnum, OrderStatusType } from 'src/Pages/Orders/enum'
 import { axiosClient } from './apiClient'
 
 export const fetchOrderAPI = ({ token, id }: { token?: string; id?: string }) => axiosClient({
@@ -60,10 +60,14 @@ export function fetchOrderItems({ token, orderId, limit, offset }: { token?: str
     })
 }
 
-export const updateOrderStatus = ({ token, id, data }: { token: string; id?: string, data: { status?: number } }) => axiosClient({
-    url: `/order-status/${id}`,
-    method: 'PATCH',
-    data,
+export const createOrderStatus = ({ token, orderId, note, status }: { token: string; orderId?: string, note?: string, status: OrderStatusEnum }) => axiosClient({
+    url: `/order-status`,
+    method: 'POST',
+    data: {
+        orderId,
+        note,
+        status
+    },
     headers: {
         'authorization': `Bearer ${token}`
     }

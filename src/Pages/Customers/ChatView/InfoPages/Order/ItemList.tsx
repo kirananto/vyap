@@ -12,7 +12,6 @@ function Items({ order }: { order: orderInterface }) {
 
     const { id, chatId } = useParams()
     const { token } = useSelector(selectCredentials)
-    const [loading, setLoading] = useState(true)
     const chatList = useSelector(selectChatList)
     const thread = chatList[`${chatId}`]?.threads?.find(findItem => findItem?.order?.id === id)
     // const order = thread?.order
@@ -24,10 +23,10 @@ function Items({ order }: { order: orderInterface }) {
         fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result) => {
             // setOrderItems(result?.data?.data)
             dispatch(setOrderItems({ inboxId: chatId ?? '', threadId: thread?.id, orderItems: result?.data?.data }))
-        }).finally(() => setLoading(false))
+        })
     }, [token, order.id, dispatch, chatId, thread?.id])
 
-    if(loading && orderItems?.length === 0) {
+    if(orderItems?.filter(filterItem => filterItem?.product?.centralCatalogue?.name)?.length === 0) {
         return (
             <div className="mt-12 grid p-12 text-center dark:text-gray-100">
                 <Spinner />
@@ -42,7 +41,7 @@ function Items({ order }: { order: orderInterface }) {
                     <div className="flex w-full gap-4">
                         <div className="flex-none mt-2 text-gray-400 text-xs dark:text-gray-400">{item?.quantity} X </div>
                         <div 
-                            className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6"
+                            className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6 self-center"
                             style={
                                 item?.product?.thumbnailImage
                                     ? {
@@ -56,7 +55,7 @@ function Items({ order }: { order: orderInterface }) {
                             }
                         />
                         <div className="flex w-3/5 flex-col">
-                            <div className="flex  text-sm font-bold text-gray-800 dark:text-gray-200">
+                            <div className="flex  text-sm font-semibold text-gray-800 dark:text-gray-200">
                                 {item?.product?.centralCatalogue?.name}
                                 {item?.product?.aliasName
                                     ? `(${item?.product?.aliasName})`
@@ -65,7 +64,7 @@ function Items({ order }: { order: orderInterface }) {
                             {/* <div className="flex font-bold text-xs text-gray-400">
                                 {item?.product?.centralCatalogue?.description}
                             </div> */}
-                            <div className="flex font-bold text-xs text-gray-600 dark:text-gray-500">
+                            <div className="flex font-normal text-xs text-gray-600 dark:text-gray-500">
                 Rate: ₹{item?.purchasePrice}
                             </div>
                         </div>

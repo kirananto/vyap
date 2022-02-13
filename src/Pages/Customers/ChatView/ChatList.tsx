@@ -16,7 +16,7 @@ interface iProps {
     inboxHash?: string,
     toRefresh: boolean,
     setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-    setcurrentOrderStatusId: React.Dispatch<React.SetStateAction<string>>
+    setCurrentOrderId: React.Dispatch<React.SetStateAction<string>>
     newStatus: number | undefined,
     updatingOrderId: string | undefined
 
@@ -26,7 +26,7 @@ export default function ChatList({
     inboxHash, 
     toRefresh , 
     setorderOptionModalVisible, 
-    setcurrentOrderStatusId,
+    setCurrentOrderId,
     newStatus,
     updatingOrderId
 }
@@ -93,7 +93,7 @@ export default function ChatList({
             if (thread.type === ThreadTypeEnum.ORDER) {
                 return <OrderCard 
                     setorderOptionModalVisible={setorderOptionModalVisible} 
-                    setcurrentOrderStatusId={setcurrentOrderStatusId}
+                    setCurrentOrderId={setCurrentOrderId}
                     key={thread.id} 
                     className={layout} 
                     thread={thread}

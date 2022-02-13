@@ -1,34 +1,31 @@
 import React from 'react'
+import Completed from 'src/Components/Style/Icons/Completed'
+import Pending from 'src/Components/Style/Icons/Pending'
+import Processing from 'src/Components/Style/Icons/Processing'
 import { OrderStatusEnum } from 'src/Pages/Orders/enum'
 
-function OrderInfoIcon(props: { heading: string; info: string, status: OrderStatusEnum }) {
+function OrderInfoIcon(props: { heading: string; status: { status: OrderStatusEnum, note?: string, id: string, createdAt?: string }[] }) {
 
-    function renderIcon() {
-        switch (props.status) {
-            case OrderStatusEnum.COMPLETE: return (<svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-green-300 "
-                viewBox="0 0 20 20"
-                fill="currentColor"
-            >
-                <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                />
-            </svg>)
-            case OrderStatusEnum.PROCESSING: return (<div></div>)
-            case OrderStatusEnum.PENDING: return (<div></div>)
+    function renderIcon(statusItem: OrderStatusEnum) {
+        switch (statusItem) {
+            case OrderStatusEnum.COMPLETE: return (<span className='text-green-400'><Completed /></span>)
+            case OrderStatusEnum.PROCESSING: return (<span className='text-orange-400'><Processing /></span>)
+            case OrderStatusEnum.PENDING: return (<span className='text-red-400'><Pending /></span>)
             default: return (<div></div>)
         }
     }
     return (
         <div>
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-200">{props.heading}</p>
-            <div className="flex items-center gap-1">
-                {renderIcon()}
-                <p className="text-sm font-bold text-gray-700 dark:text-gray-100">{props.info}</p>
-            </div>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{props.heading}</p>
+            {([...(props?.status ?? [])])?.reverse()?.map(mapItem => (
+                <div key={mapItem.id} className="flex items-center gap-1 mt-2">
+                    {renderIcon(mapItem.status)}
+                    <p className="text-sm ml-1 font-normal text-gray-700 dark:text-gray-100">
+                        {mapItem.note}
+                        <div className="text-xs text-gray-500 dark:text-gray-500">{mapItem.createdAt?.split('T')?.[0]}</div>
+                    </p>
+                </div>
+            ))}
         </div>
     )
 }

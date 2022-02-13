@@ -2,33 +2,30 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { updateOrderStatus } from 'src/API/order.axios'
+import { createOrderStatus } from 'src/API/order.axios'
 import Completed from 'src/Components/Style/Icons/Completed'
 import Processing from 'src/Components/Style/Icons/Processing'
 import Pending from 'src/Components/Style/Icons/Pending'
+import { OrderStatusEnum } from 'src/Pages/Orders/enum'
 
 interface iProps {
-    onClose: () => void, 
-    currentOrderStatusId: string
+    onClose: () => void,
+    currentOrderId: string
     setUpdatingOrderId: React.Dispatch<React.SetStateAction<string | undefined>>
-    setNewStatus : React.Dispatch<React.SetStateAction<number | undefined>>
+    setNewStatus: React.Dispatch<React.SetStateAction<number | undefined>>
 }
 
-const OrderOptionsPopup = ({onClose, currentOrderStatusId, setUpdatingOrderId, setNewStatus } 
+const OrderOptionsPopup = ({ onClose, currentOrderId, setUpdatingOrderId, setNewStatus }
     : iProps
 ) => {
 
-    const {token } = useSelector(selectCredentials)
-    const handleStatusUpdate = async (statusCode : number) => {
-        if(currentOrderStatusId && token){
-            const orderId: string = currentOrderStatusId
-            const body: {status: number} = {
-                status: statusCode
-            }
-            updateOrderStatus({ token: token, id: orderId, data: body })
+    const { token } = useSelector(selectCredentials)
+    const handleStatusUpdate = async (statusCode: number) => {
+        if (currentOrderId && token) {
+            createOrderStatus({ token: token, orderId: currentOrderId, status: statusCode, note: `Updating status to ${OrderStatusEnum[statusCode]}` })
                 .then((response) => {
                     //console.log('response', response)
-                    if(response.data.status && response.data.orderId){
+                    if (response.data.status && response.data.orderId) {
                         setUpdatingOrderId(response.data.orderId)
                         setNewStatus(response.data.status)
                     }
@@ -37,14 +34,14 @@ const OrderOptionsPopup = ({onClose, currentOrderStatusId, setUpdatingOrderId, s
                     console.log('Edit product error', error)
                 })
         }
-        
+
     }
 
     return (
         <div className="pb-8 pt-2 px-4">
             {/* Heading */}
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">Update Order Status :</h1>
+                <h1 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">Update Order Status</h1>
             </div>
             {/* row-1 */}
             <div className="flex flex-col mt-6">
@@ -79,5 +76,5 @@ const OrderOptionsPopup = ({onClose, currentOrderStatusId, setUpdatingOrderId, s
         </div>
     )
 }
-    
+
 export default OrderOptionsPopup
