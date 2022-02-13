@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { selectAddProductInfo } from '../redux/addProductSlice'
+import transparentImg from 'src/assets/img/transparent.png'
 
 interface IProps {
     productImage?: string
@@ -16,17 +17,19 @@ function ItemCard({productImage} : IProps) {
     return (
         <div className="flex w-full gap-2">
             {/* image-col */}
-            <div className="w-3/12">
-                <div className="relative w-20 min-h-full h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
-                    {productImage && productImage !== '' && <img src={productImage} alt="Avatar" className="object-cover w-full h-full" />}
-                </div>
+            <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
+                <img
+                    src={productImage ? productImage : transparentImg}
+                    alt="Avatar"
+                    className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                />
             </div>
             {/* detail-col */}
             <div className="w-full ml-2 mt-2">
-                <div className="text-xl font-bold text-gray-700 dark:text-gray-300">
+                <div className="text-lg font-bold text-gray-700 dark:text-gray-300">
                     {productDetails.centralCatalogue?.name}
                 </div>
-                <div className="text-base text-gray-400 dark:text-gray-400">{productDetails?.centralCatalogue?.description}</div>
+                <div className="text-xs text-gray-400 dark:text-gray-400 line-clamp-2">{productDetails?.centralCatalogue?.description}</div>
                 {/* <div className="text-xs font-bold text-gray-400">
           MRP: {productDetails.price} ₹
         </div> */}
