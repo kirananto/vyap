@@ -1,15 +1,15 @@
 import React from 'react'
 import format from 'date-fns/format'
-import vyapLogo from 'src/assets/new_logo.svg'
 import { FormattedMessage } from 'react-intl'
 import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 
 import ReactToPrint from 'react-to-print'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
+import VyapLogo from 'src/Components/VyapLogo'
 
 interface IProps {
-  apiData: orderInterface[];
+    apiData: orderInterface[];
 }
 
 let txnCount: number
@@ -76,20 +76,19 @@ export const PrintAll = ({ apiData }: IProps) => {
                 >
                     <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
                         <div className="col-start-1 col-span-1  -space-y-3 align-middle">
-                            <img height={48} width={48} className="w-12 h-12" alt="vyap logo" src={vyapLogo} />
+                            <VyapLogo />
                             <p className="text-2xl font-bold text-gray-700 "> vyap </p>
                         </div>
 
                         <div className="col-start-2 col-span-3 space-y-3 flex flex-col align-middle">
                             <h2 className="text-2xl font-bold text-gray-600">
                                 {' '}
-                Order Statement
+                                Order Statement
                             </h2>
                             <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
                         </div>
 
                         <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
-                            <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
                             <div className="flex flex-col">
                                 <p className="text-xl font-bold text-gray-600">
                                     {' '}

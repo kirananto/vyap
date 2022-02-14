@@ -1,11 +1,11 @@
 import React from 'react'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
-import vyapLogo from 'src/assets/new_logo.svg'
 import { selectCredentials } from '../../Login/credentialsSlice'
 import { useSelector } from 'react-redux'
 import ReactToPrint from 'react-to-print'
 import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
+import VyapLogo from 'src/Components/VyapLogo'
 
 interface IProps {
   apiData?: IFetchAllPaymentsDataEntity[];
@@ -89,7 +89,8 @@ export const PrintAll = ({ apiData }: IProps) => {
                 >
                     <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
                         <div className="col-start-1 col-span-1  -space-y-3 align-middle">
-                            <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
+                            {/* <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} /> */}
+                            <VyapLogo />
                             <p className="text-2xl font-bold text-gray-700 "> vyap </p>
                         </div>
 
@@ -102,7 +103,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                         </div>
 
                         <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
-                            <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
+                            {/* <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} /> */}
                             <div className="flex flex-col">
                                 <p className="text-xl font-bold text-gray-600">
                                     {' '}
