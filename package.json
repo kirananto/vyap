@@ -59,7 +59,7 @@
     "workbox-strategies": "^6.4.2",
     "workbox-webpack-plugin": "^6.4.2",
     "workbox-window": "^6.4.2",
-    "xlsx": "^0.18.0"
+    "xlsx": "^0.18.1"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.2.0",
