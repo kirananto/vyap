@@ -57,23 +57,23 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                     ref={componentRef}
                     className="m-3 mt-6 rounded border border-gray-300 p-3 dark:border-gray-500"
                 >
-                    <h1 className="dark:text-white"> Payment Summary:</h1>
+                    <h1 className="dark:text-white"> Payment Summary</h1>
                     {item ? (
                         <div className={`mt-2 flex w-full justify-between pb-2`}>
                             <div className="flex gap-2">
                                 <div className="flex flex-col">
-                                    <div className="text-gray-500 dark:text-gray-300">
+                                    <div className="text-xs text-gray-500 dark:text-gray-300">
                                         #{item?.id?.split('-')[0]} •{' '}
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
                                     </div>
-                                    <div className="my-1 text-gray-600 dark:text-gray-200">
+                                    <div className="my-1 font-semibold text-gray-600 dark:text-gray-200">
                                         {user?.organizationId === item?.senderOrgId
                                             ? item.receiver?.name
                                             : item.senderOrg?.name}
                                     </div>
-                                    <div className="flex w-max items-center rounded bg-green-200 px-2 text-sm font-bold text-green-800">
+                                    <div className="flex w-max items-center print:border print:border-1 print:border-green-800 rounded bg-green-200 px-2 text-sm font-bold text-green-800">
                                         {paymentMethod[item.method]}
                                     </div>
                                 </div>
@@ -164,23 +164,23 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                 <div className="row-span-3 grid auto-cols-max grid-flow-col gap-1">
 
                                 </div>
-
+                                <div className="text-gray-500 mt-1 text-xs dark:text-gray-300">
+                                    {item.createdAt
+                                        ? format(new Date(item.createdAt), 'do MMM yyyy')
+                                        : ''}
+                                </div>
                                 <div className="m-auto flex w-full justify-between">
+                                    
                                     <div className="basis-7/12 text-sm md:text-md text-gray-600 font-semibold  dark:text-gray-200">
                                         {user?.organizationId === item?.senderOrgId
                                             ? item.receiver?.name
                                             : item.senderOrg?.name}
-                                        <div className="text-xs mb-1 text-gray-400 dark:text-gray-400">
-                                            {item.createdAt
-                                                ? format(new Date(item.createdAt), 'do MMM yyyy')
-                                                : ''}
-                                        </div>
                                     </div>
                                     <div className="flex basis-5/12 justify-end self-center text-sm md:text-lg font-extrabold text-gray-600 dark:text-gray-200">
                                         ₹ {item.amount}
                                     </div>
                                 </div>
-                                <div className="flex gap-1">
+                                <div className="flex gap-1 mt-2">
                                     <span className=" w-max items-center rounded bg-green-200 px-2 text-xs sm:text-sm font-bold text-green-800">
                                         {paymentMethod[item.method]}
                                     </span>
