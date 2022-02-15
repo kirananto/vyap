@@ -84,7 +84,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                 trigger={reactToPrintTrigger}
             />
             <div
-                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1"
+                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full overflow-scroll top-0"
                 id="divContents"
                 ref={componentRef}
             >

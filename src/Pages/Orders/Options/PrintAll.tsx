@@ -68,80 +68,77 @@ export const PrintAll = ({ apiData }: IProps) => {
                 removeAfterPrint
                 trigger={reactToPrintTrigger}
             />
+            <div
+                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full overflow-scroll top-0"
+                id="divContents"
+                ref={componentRef}
+            >
+                <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
+                    <div className="col-start-1 col-span-1  -space-y-3 align-middle">
+                        <VyapLogo />
+                        <p className="text-2xl font-bold text-gray-700 "> vyap </p>
+                    </div>
 
-            <div className="hidden">
-                <div
-                    className="divide-y divide-gray-200 showinprint  grid grid-cols-1"
-                    id="divContents"
-                    ref={componentRef}
-                >
-                    <div className="grid grid-cols-5 gap-4 m-2 border-b-2 border-grey-200 py-4 px-5">
-                        <div className="col-start-1 col-span-1  -space-y-3 align-middle">
-                            <VyapLogo />
-                            <p className="text-2xl font-bold text-gray-700 "> vyap </p>
-                        </div>
-
-                        <div className="col-start-2 col-span-3 space-y-3 flex flex-col align-middle">
-                            <h2 className="text-2xl font-bold text-gray-600">
-                                {' '}
+                    <div className="col-start-2 col-span-3 space-y-3 flex flex-col align-middle">
+                        <h2 className="text-2xl font-bold text-gray-600">
+                            {' '}
                                 Order Statement
-                            </h2>
-                            <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
-                        </div>
-
-                        <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
-                            <div className="flex flex-col">
-                                <p className="text-xl font-bold text-gray-600">
-                                    {' '}
-                                    {user?.organization?.name}{' '}
-                                </p>
-                                <p className="text-gray-300">{txnCount} Transactions</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
-                            <table className="min-w-full">
-                                <thead className="text-gray-300 font-bold">
-                                    <tr className="p-5">
-                                        <td>Order_ID</td>
-                                        <td>Date</td>
-                                        <td>Supplier</td>
-                                        <td>Buyer</td>
-                                        <td>Amount</td>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-gray-500">
-                                    {orders.map((item, index) => (
-                                        <tr key={index} className="text-left ">
-                                            {Object.values(item).map((val, i) => (
-                                                <td key={val} className="px-1 py-2 whitespace-nowrap">
-                                                    {i === 4 ? '₹' + val : val}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                        </h2>
+                        <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
                     </div>
 
-                    <div className="flex flex-row flex-wrap justify-end pt-1 mt-6 pt-2 px-5 border-t border-zinc-200">
-                        <div className="item w-1/6 place-self-center">
-                            <div className=" -space-y-4 ">
-                                <VyapLogo />
-                                <p className="text-sm font-bold text-gray-700 ml-4"> vyap </p>
-                            </div>
-                        </div>
-                        <div className="item w-4/6  place-self-center flex justify-center">
-                            <p className="text-gray-800 text-sm font-semibold pb-3 pr-3">
+                    <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
+                        <div className="flex flex-col">
+                            <p className="text-xl font-bold text-gray-600">
                                 {' '}
-                                Report generated by Vyap &nbsp; | &nbsp; https://vyap.app
+                                {user?.organization?.name}{' '}
                             </p>
+                            <p className="text-gray-300">{txnCount} Transactions</p>
                         </div>
-                        <div className="item w-1/6 self-center flex justify-end">
-                            <QRCode  size={100} className="mt-2" value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                    </div>
+                </div>
+                <div>
+                    <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
+                        <table className="min-w-full">
+                            <thead className="text-gray-300 font-bold">
+                                <tr className="p-5">
+                                    <td>Order_ID</td>
+                                    <td>Date</td>
+                                    <td>Supplier</td>
+                                    <td>Buyer</td>
+                                    <td>Amount</td>
+                                </tr>
+                            </thead>
+                            <tbody className="text-gray-500">
+                                {orders.map((item, index) => (
+                                    <tr key={index} className="text-left ">
+                                        {Object.values(item).map((val, i) => (
+                                            <td key={val} className="px-1 py-2 whitespace-nowrap">
+                                                {i === 4 ? '₹' + val : val}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div className="flex flex-row flex-wrap justify-end pt-1 mt-6 pt-2 px-5 border-t border-zinc-200">
+                    <div className="item w-1/6 place-self-center">
+                        <div className=" -space-y-4 ">
+                            <VyapLogo />
+                            <p className="text-sm font-bold text-gray-700 ml-4"> vyap </p>
                         </div>
+                    </div>
+                    <div className="item w-4/6  place-self-center flex justify-center">
+                        <p className="text-gray-800 text-sm font-semibold pb-3 pr-3">
+                            {' '}
+                                Report generated by Vyap &nbsp; | &nbsp; https://vyap.app
+                        </p>
+                    </div>
+                    <div className="item w-1/6 self-center flex justify-end">
+                        <QRCode  size={100} className="mt-2" value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
                     </div>
                 </div>
             </div>
