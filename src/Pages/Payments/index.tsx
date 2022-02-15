@@ -43,7 +43,7 @@ export default function Payments() {
     return (
         <div className="">
             {/* header */}
-            <div className="w-full bg-white pb-3 shadow dark:bg-gray-800 ">
+            <div className="w-full bg-white pb-3 shadow dark:bg-gray-800  print:hidden">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/more')}
@@ -54,7 +54,7 @@ export default function Payments() {
                 />
             </div>
             {/* body */}
-            <div className="bg-gray-100 p-4 dark:bg-gray-900">
+            <div className="bg-gray-100 p-4 dark:bg-gray-900 print:hidden">
                 <div
                     className="overflow-y-auto rounded bg-white p-4 dark:bg-gray-800"
                     style={{ height: 'calc(100vh - 15rem)' }}

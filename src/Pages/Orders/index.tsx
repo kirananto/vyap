@@ -41,14 +41,14 @@ export default function Orders() {
     return (
         <div className="dark:bg-gray-900">
             {/* header */}
-            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-gray-800 ">
+            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-gray-800 print:hidden ">
                 <Header isSticky={false} onBackClick={() => navigate('/home')} heading={intl.formatMessage({ id: 'global.allOrders' })} />
                 <AppliedFilters
                     openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
                 />
             </div>
             {/* body */}
-            <div className="bg-gray-100 p-4 dark:bg-gray-900">
+            <div className="bg-gray-100 p-4 dark:bg-gray-900 print:hidden">
                 <div
                     className="overflow-y-auto bg-white pb-24 dark:bg-gray-800 rounded p-4"
                     style={{ height: 'calc(100vh - 15rem)' }}
