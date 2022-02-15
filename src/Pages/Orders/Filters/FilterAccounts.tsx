@@ -33,14 +33,15 @@ const Account = ({ item, type }: CategoryName) => {
     }
 
     return (
-        <div className="ml-4 flex items-center gap-2">
+        <div className="ml-4 flex items-center gap-2 mb-1">
             <input
-                type={type === 'orderStatus' ? 'radio' : 'checkbox'}
+                type={'radio'}
                 checked={isChecked}
+                id={`radioBox${type}${item.name}`}
                 onChange={tickCheckBox}
             />
             <label
-                htmlFor=""
+                htmlFor={`radioBox${type}${item.name}`}
                 className="text-sm font-semibold text-gray-500 dark:text-gray-400"
             >
                 {type === 'orderStatus' ? item?.name : item?.name}
