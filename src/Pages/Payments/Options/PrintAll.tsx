@@ -50,7 +50,7 @@ export const PrintAll = ({ apiData }: IProps) => {
         // Good
         return (
             <button
-                className="flex justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+                className="flex print:hidden justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
             // onClick={onPrint}
             >
                 <svg
@@ -84,7 +84,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                 trigger={reactToPrintTrigger}
             />
             <div
-                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full overflow-scroll top-0"
+                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full top-0"
                 id="divContents"
                 ref={componentRef}
             >
@@ -100,7 +100,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                             {' '}
                             Payment Statement
                         </h2>
-                        <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
+                        <p className="text-gray-500 font-bold">12/02/22 - 01/11/22</p>
                     </div>
 
                     <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
@@ -110,7 +110,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                                 {' '}
                                 {user?.organization?.name}
                             </p>
-                            <p className="text-gray-300">{txnCount} Transactions</p>
+                            <p className="text-gray-500">{txnCount} Transactions</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                 <div>
                     <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
                         <table className="min-w-full">
-                            <thead className="text-gray-300 font-bold">
+                            <thead className="text-gray-500 font-bold">
                                 <tr className="p-5">
                                     <td>Date</td>
                                     <td>Buyer</td>

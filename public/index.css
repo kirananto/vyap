@@ -61,8 +61,8 @@ body {
 }
 
 @media print {
-  .showinprint {
-    display: block !important;
+  * {
+    background-color: #fff;
   }
   thead { display: table-header-group }
 

@@ -71,7 +71,7 @@ export default function Payments() {
             />
             {/* Footer */}
 
-            <div className="fixed bottom-0 grid h-20 w-full bg-white px-8 shadow dark:bg-gray-800">
+            <div className="fixed  print:static bottom-0 grid h-20 w-full bg-white px-8  drop-shadow-xl dark:bg-gray-800">
                 <div className="mt-2 flex w-full max-w-lg items-center justify-center gap-2 justify-self-center">
                     <PrintAll apiData={payments} />
                     <ExportAll apiData={payments} />

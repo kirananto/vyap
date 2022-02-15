@@ -22,7 +22,7 @@ export const PrintAll = ({ apiData }: IProps) => {
 
     const reactToPrintTrigger = React.useCallback(() => {
         return (
-            <button className="flex justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+            <button className="flex print:hidden justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -65,11 +65,11 @@ export const PrintAll = ({ apiData }: IProps) => {
                 // onAfterPrint={handleAfterPrint}
                 // onBeforeGetContent={handleOnBeforeGetContent}
                 // onBeforePrint={handleBeforePrint}
-                removeAfterPrint
+                // removeAfterPrint
                 trigger={reactToPrintTrigger}
             />
             <div
-                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full overflow-scroll top-0"
+                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full top-0"
                 id="divContents"
                 ref={componentRef}
             >
@@ -84,7 +84,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                             {' '}
                                 Order Statement
                         </h2>
-                        <p className="text-gray-300 font-bold">12/02/22 - 01/11/22</p>
+                        <p className="text-gray-500 font-bold">12/02/22 - 01/11/22</p>
                     </div>
 
                     <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
@@ -93,27 +93,27 @@ export const PrintAll = ({ apiData }: IProps) => {
                                 {' '}
                                 {user?.organization?.name}{' '}
                             </p>
-                            <p className="text-gray-300">{txnCount} Transactions</p>
+                            <p className="text-gray-500">{txnCount} Transactions</p>
                         </div>
                     </div>
                 </div>
                 <div>
                     <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
                         <table className="min-w-full">
-                            <thead className="text-gray-300 font-bold">
+                            <thead className="text-gray-700 font-bold">
                                 <tr className="p-5">
                                     <td>Order_ID</td>
                                     <td>Date</td>
                                     <td>Supplier</td>
                                     <td>Buyer</td>
-                                    <td>Amount</td>
+                                    <td className="text-right">Amount</td>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-500">
                                 {orders.map((item, index) => (
                                     <tr key={index} className="text-left ">
                                         {Object.values(item).map((val, i) => (
-                                            <td key={val} className="px-1 py-2 whitespace-nowrap">
+                                            <td key={val} className={`px-1 py-2 whitespace-nowrap ${i===4 ? 'text-right' : ''}`}>
                                                 {i === 4 ? '₹' + val : val}
                                             </td>
                                         ))}
