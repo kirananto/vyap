@@ -80,7 +80,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                 // onAfterPrint={handleAfterPrint}
                 // onBeforeGetContent={handleOnBeforeGetContent}
                 // onBeforePrint={handleBeforePrint}
-                removeAfterPrint
+                // removeAfterPrint
                 trigger={reactToPrintTrigger}
             />
             <div
@@ -100,7 +100,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                             {' '}
                             Payment Statement
                         </h2>
-                        <p className="text-gray-500 font-bold">12/02/22 - 01/11/22</p>
+                        <p className="text-gray-500 font-bold">12/01/22 - 12/04/22</p>
                     </div>
 
                     <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
