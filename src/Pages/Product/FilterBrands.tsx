@@ -22,10 +22,10 @@ const Category = (props: CategoryName) => {
     }
 
     return (
-        <div className="ml-4 flex items-center gap-2">
-            <input type="checkbox" checked={isChecked} onChange={tickCheckBox} />
+        <div className="ml-4 flex items-center gap-2 pb-1">
+            <input type="checkbox" id={`brandsCheckbox${props.name}`} checked={isChecked} onChange={tickCheckBox} />
             <label
-                htmlFor=""
+                htmlFor={`brandsCheckbox${props.name}`}
                 className="text-sm font-semibold text-gray-500 dark:text-gray-400"
             >
                 {props.name}

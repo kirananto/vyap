@@ -54,14 +54,6 @@ export default function ProductCard({
             {...bind} 
             className={`flex justify-left w-full bg-white dark:bg-slate-900 px-5 border-b border-gray-100 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
         >
-            {/* <div className="text-center place-self-center px-5 pr-6 ">
-                <input
-                    type="checkbox"
-                    className="w-5 h-5 bg-red-200 active:bg-red-400"
-                    onChange={() => onClicked(item)}
-                    checked={isChecked}
-                />
-            </div> */}
 
             <div className="flex min-w-[80vw]  max-w-[80vw] py-4" onClick={onItemClick}>
 

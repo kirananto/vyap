@@ -32,10 +32,10 @@ const Account = ({ item, type }: PaymentFitlerAccountInterface) => {
     }
 
     return (
-        <div className="ml-4 flex items-center gap-2">
-            <input type="checkbox" checked={isChecked} onChange={tickCheckBox} />
+        <div className="ml-4 flex items-center gap-2 pb-1">
+            <input type="radio" id={`accountCheckBox${item.name}`} checked={isChecked} onChange={tickCheckBox} />
             <label
-                htmlFor=""
+                htmlFor={`accountCheckBox${item.name}`}
                 className="text-sm font-semibold text-gray-500 dark:text-gray-400"
             >
                 {type === 'paymentType' ? item?.name : item?.name}

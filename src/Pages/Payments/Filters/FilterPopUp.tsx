@@ -25,9 +25,9 @@ const Sorting = (props: SortingProps) => {
 
     return (
         <div className="ml-4 flex items-center gap-2">
-            <input type="radio" checked={isChecked} onChange={onChangeSorting} />
+            <input type="radio" id={`radioBox${props.sortingName}`} checked={isChecked} onChange={onChangeSorting} />
             <label
-                htmlFor=""
+                htmlFor={`radioBox${props.sortingName}`}
                 className="text-sm font-semibold text-gray-500 dark:text-gray-400"
             >
                 {props.sortingName}
