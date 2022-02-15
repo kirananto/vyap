@@ -55,7 +55,7 @@ export function MorePopup({ item, onClose }: { item: IProduct | undefined, onClo
                 <button onClick={() => {
                     hapticFeedback()
                     deleteProduct()
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-red-500 dark:text-red-300 custom-btn">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-rose-500 dark:text-rose-300 custom-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"

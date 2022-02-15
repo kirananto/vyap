@@ -95,7 +95,7 @@ export default function OrderCard({
             case OrderStatusEnum.PENDING:
                 return {
                     statusTxt: 'Pending',
-                    statusIcon: <span className='text-red-400'><Pending /></span>
+                    statusIcon: <span className='text-rose-400'><Pending /></span>
                 }
             case OrderStatusEnum.PROCESSING:
                 return {

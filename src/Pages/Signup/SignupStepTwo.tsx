@@ -89,7 +89,7 @@ export default function SignupStepTwo() {
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setName(event.target.value))}
                             placeholder="Enter your name"
                         />
-                        {nameError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{nameError}</div> : null}
+                        {nameError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{nameError}</div> : null}
                     </div>
                     {/* ---===Shop Name===--- */}
                     <div>
@@ -103,7 +103,7 @@ export default function SignupStepTwo() {
                             value={signup.businessName}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setBusinessName(event.target.value))}
                         />
-                        {businessNameError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{businessNameError}</div> : null}
+                        {businessNameError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{businessNameError}</div> : null}
 
                     </div>
 
@@ -119,7 +119,7 @@ export default function SignupStepTwo() {
                             value={signup.email}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setEmail(event.target.value))}
                         />
-                        {emailError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{emailError}</div> : null}
+                        {emailError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{emailError}</div> : null}
 
                     </div>
 
@@ -135,7 +135,7 @@ export default function SignupStepTwo() {
                             value={signup.pinCode}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setPinCode(event.target.value))}
                         />
-                        {pinCodeError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{pinCodeError}</div> : null}
+                        {pinCodeError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{pinCodeError}</div> : null}
 
                     </div>
                     <div className="mt-2">
@@ -148,7 +148,7 @@ export default function SignupStepTwo() {
                             placeholder="Enter your address."
                             className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
                         />
-                        {addressError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{addressError}</div> : null}
+                        {addressError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{addressError}</div> : null}
 
                     </div>
 

@@ -118,10 +118,7 @@ export default function PlaceOrder() {
         if (inputValue) {
             if (inputValue > finalPrice) {
                 setIsValidDiscount(false)
-                dispatch(setFlatDiscount(finalPrice))
-                setTimeout(() => {
-                    setIsValidDiscount(true)
-                }, 5000)
+                dispatch(setFlatDiscount(inputValue))
             } else {
                 setIsValidDiscount(true)
                 dispatch(setFlatDiscount(inputValue))
@@ -133,9 +130,11 @@ export default function PlaceOrder() {
 
     function handleSubmit() {
         setIsSubmit(true)
-        user?.organization?.isSupplier
-            ? isValidCart && setPaymentModalVisible(true)
-            : proceedPlaceOrder()
+        if(isValidDiscount) {
+            user?.organization?.isSupplier
+                ? isValidCart && setPaymentModalVisible(true)
+                : proceedPlaceOrder()
+        }
     }
 
     async function proceedPlaceOrder() {
@@ -412,7 +411,7 @@ export default function PlaceOrder() {
                     )}
                 </div>
                 {isSupplier ? (
-                    <div className="m-2 rounded-lg border border-gray-200 px-4 pb-8 pt-4  dark:border-gray-700">
+                    <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4  dark:border-gray-700">
                         <span className="float-left mb-2 text-sm text-gray-500">
                             Flat discount amount
                         </span>
@@ -428,7 +427,7 @@ export default function PlaceOrder() {
 
                         <span
                             className={
-                                'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-green-500 ' +
+                                'mt-4 ml-0 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                 (isValidDiscount ? 'hidden' : '')
                             }
                         >
@@ -450,7 +449,7 @@ export default function PlaceOrder() {
                 <div className="">
                     <span
                         className={
-                            'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                            'mt-2 ml-4 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                             (isSubmit ? (isValidCart ? 'hidden' : '') : 'hidden')
                         }
                     >

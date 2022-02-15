@@ -48,7 +48,7 @@ export default function FilterBar({
                 <button onClick={() => {
                     hapticFeedback()
                     deleteProducts()
-                }} className="inline-flex items-center justify-center w-1/4 px-3 py-1 font-bold text-red-400 bg-red-200 dark:bg-gray-800 rounded border dark:border-red-400">
+                }} className="inline-flex items-center justify-center w-1/4 px-3 py-1 font-bold text-rose-400 bg-rose-200 dark:bg-gray-800 rounded border dark:border-rose-400">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 mr-2"

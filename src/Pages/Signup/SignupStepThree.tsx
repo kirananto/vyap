@@ -118,10 +118,10 @@ export default function SignupStepThree() {
           Please specify the <br /> category of business
                 </h1>
 
-                {categoryError && <div className="text-red-500 dark:text-red-400 mt-2 text-xs">
+                {categoryError && <div className="text-rose-500 dark:text-rose-400 mt-2 text-xs">
           * Please select a category to proceed
                 </div>}
-                {error && <div className="text-red-500 dark:text-red-400 mt-2 text-xs">
+                {error && <div className="text-rose-500 dark:text-rose-400 mt-2 text-xs">
                     <span className="pl-1">* {typeof error === 'string' ? error : 'Something went wrong during the signup.'} </span>
                     {Array.isArray(error) ? <ul className="border border-gray-300 dark:border-gray-700 p-4 px-8 rounded bg-gray-200 dark:bg-gray-900 m-2 mx-2 text-xs list-disc">
                         {error?.map((mapItem: string) => <li key={mapItem}>{mapItem} </li>)}

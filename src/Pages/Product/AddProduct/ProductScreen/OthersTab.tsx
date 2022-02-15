@@ -294,7 +294,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             </button>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidBrand(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.brand?.name
@@ -354,7 +354,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             </button>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidCategory(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.centralCategory?.name
@@ -414,7 +414,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             </button>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidTag(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.category?.name
@@ -447,7 +447,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         />
                         {/* <span
               className={
-                "mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 " +
+                "mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 " +
                 (isValidDescription(
                   addProductInfo?.centralCatalogue?.description!
                 )

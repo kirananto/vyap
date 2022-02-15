@@ -72,7 +72,7 @@ function PricingTab({ action, saveAttempt }: Props) {
 
                 <span
                     className={
-                        'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
             (addProductInfo.pricing?.mrpPrice === undefined || isValidMRP(addProductInfo.pricing?.mrpPrice) ? 'hidden' : '')
                     }
                 >
@@ -97,7 +97,7 @@ function PricingTab({ action, saveAttempt }: Props) {
                 />
                 <span
                     className={
-                        'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
             (addProductInfo.pricing?.salesPrice === undefined || isValidSalePrice(addProductInfo.pricing?.salesPrice) ? 'hidden' : '')
                     }
                 >
@@ -154,7 +154,7 @@ function PricingTab({ action, saveAttempt }: Props) {
 
                             <span
                                 className={
-                                    'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
                     (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn) ? 'hidden' : '')
                                 }
                             >
@@ -188,7 +188,7 @@ function PricingTab({ action, saveAttempt }: Props) {
                             </div>
                             <span
                                 className={
-                                    'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
                     (isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
                       addProductInfo.pricing?.gstPercentage) ? 'hidden' : '')
                                 }

@@ -45,7 +45,7 @@ function ItemCard({productImage} : IProps) {
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="text-red-400 w-7 h-7 dark:text-red-300"
+                        className="text-rose-400 w-7 h-7 dark:text-rose-300"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

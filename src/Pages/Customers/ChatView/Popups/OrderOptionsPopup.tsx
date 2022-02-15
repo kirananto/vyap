@@ -50,7 +50,7 @@ const OrderOptionsPopup = ({ onClose, currentOrderId, setUpdatingOrderId, setNew
                     hapticFeedback()
                     onClose()
 
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-red-500 dark:text-red-300 custom-btn">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-rose-500 dark:text-rose-300 custom-btn">
                     <Pending />
                     <span>Pending</span>
                 </button>

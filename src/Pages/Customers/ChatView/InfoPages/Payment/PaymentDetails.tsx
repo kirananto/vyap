@@ -97,7 +97,7 @@ export default function PaymentDetails() {
                     </div>
                 </div>
                 {/* delete payment button */}
-                {/* <button className="w-10/12 h-12 mt-10 text-lg font-semibold text-red-400 bg-red-200 rounded-full">
+                {/* <button className="w-10/12 h-12 mt-10 text-lg font-semibold text-rose-400 bg-rose-200 rounded-full">
           Delete Payment
         </button> */}
                 {/* Bottom info delete */}

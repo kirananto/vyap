@@ -165,7 +165,7 @@ function DropDown(props: DropdDownInterface) {
                     </button>
                     <span
                         className={
-                            'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 ' +
+                            'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 mb-10 ml-1 ' +
               (isValidProduct ? 'hidden' : '')
                         }
                     >
@@ -205,7 +205,7 @@ function DropDown(props: DropdDownInterface) {
                         </button>
                         <span
                             className={
-                                'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 ' +
+                                'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 mb-10 ml-1 ' +
                   (isValidProduct ? 'hidden' : '')
                             }
                         >

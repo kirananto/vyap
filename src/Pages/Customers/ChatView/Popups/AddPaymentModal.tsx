@@ -282,7 +282,7 @@ export default function AddPaymentModal({
 
                                         <span
                                             className={
-                                                `flex items-center font-medium tracking-wide text-red-500 dark:text-red-400 text-xs mt-1 ml-1 pl-2 ${isValidAmount ? 'hidden' : ''}`
+                                                `flex items-center font-medium tracking-wide text-rose-500 dark:text-rose-400 text-xs mt-1 ml-1 pl-2 ${isValidAmount ? 'hidden' : ''}`
                                             }
                                         >
                                             Please enter a valid amount !
@@ -357,7 +357,7 @@ export default function AddPaymentModal({
 
                                     <span
                                         className={
-                                            'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                                            'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
                                             (isValidAmount ? 'hidden' : '')
                                         }
                                     >

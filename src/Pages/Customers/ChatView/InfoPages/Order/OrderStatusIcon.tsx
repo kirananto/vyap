@@ -8,7 +8,7 @@ export default function OrderStatusIcon({ status }: { status: OrderStatusEnum })
     switch (status) {
         case OrderStatusEnum.COMPLETE: return (<span className='text-green-400'><Completed /></span>)
         case OrderStatusEnum.PROCESSING: return (<span className='text-orange-400'><Processing /></span>)
-        case OrderStatusEnum.PENDING: return (<span className='text-red-400'><Pending /></span>)
+        case OrderStatusEnum.PENDING: return (<span className='text-rose-400'><Pending /></span>)
         default: return (<div></div>)
     }
 }
