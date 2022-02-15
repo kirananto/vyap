@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import ReactToPrint from 'react-to-print'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 import VyapLogo from 'src/Components/VyapLogo'
+import vyapQR from 'src/assets/img/vyap-install-qr.png'
 
 interface IProps {
     apiData: orderInterface[];
@@ -122,6 +123,24 @@ export const PrintAll = ({ apiData }: IProps) => {
                                     ))}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-row flex-wrap justify-end pt-1 mt-6 px-5 border-t border-zinc-200">
+                        <div className="item w-1/6 place-self-center">
+                            <div className=" -space-y-4 ">
+                                <VyapLogo />
+                                <p className="text-sm font-bold text-gray-700 ml-4"> vyap </p>
+                            </div>
+                        </div>
+                        <div className="item w-4/6  place-self-center flex justify-end">
+                            <p className="text-gray-800 text-sm font-bold pb-3 pr-3">
+                                {' '}
+                                VYAP &nbsp; | &nbsp; https://vyap.app
+                            </p>
+                        </div>
+                        <div className="item w-1/6 self-center flex justify-end">
+                            <img className="w-14 h-14" src={vyapQR} />
                         </div>
                     </div>
                 </div>

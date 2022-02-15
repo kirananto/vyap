@@ -64,8 +64,14 @@ body {
   .showinprint {
     display: block !important;
   }
-}
+  thead { display: table-header-group }
 
+  tfoot { display: table-row-group }
+  
+  tr { page-break-inside: avoid }
+  
+}
+@page { margin-top: 50px }
 body:focus {
   outline: none;
 }
