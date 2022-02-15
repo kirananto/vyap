@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import PhoneForm from './PhoneForm'
 import OTPForm from './OTPForm'
 import { Link, useNavigate } from 'react-router-dom'
@@ -14,7 +14,7 @@ export default function Login() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const confirmOTP = (code: string) => {
+    const confirmOTP = useCallback((code: string) => {
         setError(null)
         verifyOtp(phoneNumberRef.current, code).then((res) => {
             if (res.data) {
@@ -36,7 +36,7 @@ export default function Login() {
                     setError('No internet connection, please connect to a network and try again.')
                 }
             })
-    }
+    }, [dispatch, navigate])
 
     const onPressLogin = (phoneNumber: string) => {
         setError(null)

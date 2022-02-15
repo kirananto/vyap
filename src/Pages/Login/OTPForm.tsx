@@ -17,7 +17,6 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
             //@ts-ignore
             navigator.credentials.get({ otp: { transport: ['sms'] } })
                 .then(content => {
-                    // alert(content)
                     //@ts-ignore
                     const code = content?.code
                     setCode(code)
