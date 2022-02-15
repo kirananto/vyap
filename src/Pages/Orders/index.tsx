@@ -30,7 +30,7 @@ export default function Orders() {
                 ordering: filters?.sorting,
                 relatedId: filters?.account?.id,
                 offset: 0,
-                limit: 100,
+                limit: 1000,
             }).then((result) => {
                 setLoading(false)
                 setOrders(result?.data?.data ?? [])

@@ -28,7 +28,7 @@ export default function Payments() {
     useEffect(() => {
         fetchAllPayments({
             token: token,
-            limit: 100,
+            limit: 1000,
             offset: 0,
             paymentMethod: filters?.paymentMethod,
             ordering: filters?.sorting ? filters?.sorting : 'latest',
