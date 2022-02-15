@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -21,13 +21,25 @@ export default function Settings() {
         // Whenever the user explicitly chooses light mode
         localStorage.theme = newVal ? 'dark' : 'light'
 
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    }
+
+    
+    useEffect(() => {
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            dispatch(setDarkMode(true))
+        } else {
+            dispatch(setDarkMode(false))
+        }
+    }, [dispatch])
+
+
+    useEffect(() => {
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
         }
-    }
+    }, [user?.settings?.isDarkMode])
 
     return (
         <div className="dark:bg-gray-900">
