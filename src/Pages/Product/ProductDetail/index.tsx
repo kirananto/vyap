@@ -93,7 +93,7 @@ const ProductDetail = () => {
                     </div>
                     <div className="font-semibold text-gray-400 dark:text-gray-400">
                         <p className="text-sm">
-                            Cost
+                            Sales Price
                         </p>
                         <p className="text-md font-semibold text-gray-600 dark:text-gray-300" >
                             ₹{product?.rate}

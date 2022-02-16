@@ -96,7 +96,7 @@ export default function ProductCard({
                         </div>
                         <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
                             <p >
-                Cost
+                Sales Price
                             </p>
                             <p className="font-semibold" >
               ₹{item?.rate}

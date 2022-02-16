@@ -221,7 +221,7 @@ export default function PlaceOrder() {
                                             {item.aliasName ? `( ${item.aliasName})` : ''}
                                         </div>
                                         <div className=" text-xs font-bold text-gray-500 dark:text-gray-400">
-                                            MRP: ₹{item?.mrpPrice} Cost: ₹{item?.rate}
+                                            MRP: ₹{item?.mrpPrice} Sales Price: ₹{item?.rate}
                                         </div>
 
                                         <div className=" text-xs font-bold text-gray-400 dark:text-gray-500">
