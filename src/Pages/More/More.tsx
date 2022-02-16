@@ -24,13 +24,20 @@ import { useIntl } from 'react-intl'
 import { logOutAPI } from 'src/API/login.axios'
 import { clearAll } from '../Customers/ChatView/chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
-
+import Bowser from 'bowser'
+import { differenceInDays } from 'date-fns'
+const browser = Bowser.getParser(window.navigator.userAgent)
 export default function More() {
     const { user, token } = useSelector(selectCredentials)
     const intl = useIntl()
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    // CHeck if it is not ios
+    const isValidBrowser  = browser.getOS()?.name !== 'iOS'
+
+    const expiry = differenceInDays(new Date('2022-05-16T04:30:59.978Z'), new Date())
+    
 
     const handleLogout = () => {
     //TODO Add hooks to other data's that need's to be cleared too.
@@ -62,15 +69,15 @@ export default function More() {
                     </div>
                 </div>
                 {/* Menu */}
-                <div className="m-auto w-full px-3">
+                {isValidBrowser ? <div className="m-auto w-full px-3">
                     <div className="bg-green-200 border border-green-700 m-auto w-full my-4 p-4 inline-flex items-center rounded-lg">
                         <img src={giftSvg} alt="gift" className="w-20 h-20" />
                         <div className="flex-grow flex flex-col pl-4">
-                            <h2 className="title-font font-bold text-gray-800 tracking-wider">Enjoy your 3 months of <br/> free service 🎉</h2>
+                            <h2 className="title-font font-bold text-gray-800 tracking-wider">Enjoy your {expiry} days of <br/> free service 🎉</h2>
                             <p className="text-sm dark:text-gray-600">and then it{`'`}s only <strong>₹299/month</strong></p>
                         </div>
                     </div>
-                </div>
+                </div> : <div className="pt-6"/>}
                 {/* ----- */}
                 <div className="flex flex-col gap-2 pl-6 sm:pl-10 mt-2">
                     <NavLink to="/all-payments" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-gray-300 text-gray-500 ">
