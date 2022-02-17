@@ -48,33 +48,38 @@ const ProductDetail = () => {
         <div
             className={`min-h-screen overflow-y-scroll flex flex-col w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800`}
         >
-            {(product?.centralData?.images?.length ?? 0) > 0 ? <div className="flex flex-nowrap flex-shrink-0 h-[45vh] w-full gap-3 overflow-x-scroll">
+            <div className="flex flex-nowrap flex-shrink-0 h-[45vh] w-full gap-3 overflow-x-scroll empty_image_background">
+                {(product?.centralData?.images?.length ?? 0) > 0 && <>
 
-                {product?.centralData?.images?.map((img) => {
-                    return (
-                        <div key={'key-' + Math.random()} className={`flex-shrink-0 w-full h-full min-h-[250px] text-center border overflow-hidden border-gray-200 dark:border-gray-700 relative rounded-lg bg-cover bg-center
+                    {product?.centralData?.images?.map((img) => {
+                        return (
+                            <div 
+                                key={'key-' + Math.random()} 
+                                className={`flex-shrink-0 w-full h-full min-h-[250px] text-center 
+                            border overflow-hidden border-gray-200 dark:border-gray-700 relative rounded-lg bg-cover bg-center
                          ${img?.imageName ? '' : 'empty_image_background'}`}>
-                            {img?.imageName && (
-                                <img
-                                    src={getProductImageURL(
-                                        img?.imageName,
-                                        IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                                    )}
-                                    alt="Avatar"
-                                    className="object-cover w-full h-full"
-                                />
-                            )}
-                            {product?.outOfStock && (
-                                <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-200 text-rose-500 font-bold text-xs text-center leading-4">
+                                {img?.imageName && (
+                                    <img
+                                        src={getProductImageURL(
+                                            img?.imageName,
+                                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
+                                        )}
+                                        alt="Avatar"
+                                        className="object-cover w-full h-full"
+                                    />
+                                )}
+                                {product?.outOfStock && (
+                                    <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-200 text-rose-500 font-bold text-xs text-center leading-4">
                                     Out of stock
-                                </div>
-                            )}
-                        </div>
-                    )
-                })
+                                    </div>
+                                )}
+                            </div>
+                        )
+                    })
 
-                }
-            </div> : null}
+                    }
+                </>}
+            </div>
 
             <div className=" w-full self-center px-1 py-3">
                 <div className="font-semibold text-lg dark:text-slate-300 truncate">
@@ -109,7 +114,7 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="pt-1 text-sm text-slate-600 dark:text-slate-300">
-                    {product?.centralCatalogue?.description}
+                    {product?.centralCatalogue?.description  ?? '--'}
                 </div>
             </div>
 
@@ -123,7 +128,7 @@ const ProductDetail = () => {
 
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Brand:</div>
-                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.centralData?.brand?.name}</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.centralData?.brand?.name ?? '--'}</div>
                     </div>
 
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
@@ -132,11 +137,11 @@ const ProductDetail = () => {
                     </div>
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Tags:</div>
-                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.organizationCatalogueCategory?.name}</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.organizationCatalogueCategory?.name ?? '--'}</div>
                     </div>
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Item Code (SKU):</div>
-                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.itemSKUCode}</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.itemSKUCode ?? '--'}</div>
                     </div>
                 </div>
             </div>
