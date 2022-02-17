@@ -39,18 +39,18 @@ export default function Orders() {
     }, [filters.orderStatus, filters?.sorting, filters?.account, token])
 
     return (
-        <div className="dark:bg-gray-900 print:bg-white dark:print:bg-white">
+        <div className="dark:bg-slate-900 print:bg-white dark:print:bg-white">
             {/* header */}
-            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-gray-800 print:hidden  ">
+            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800 print:hidden  ">
                 <Header isSticky={false} onBackClick={() => navigate('/home')} heading={intl.formatMessage({ id: 'global.allOrders' })} />
                 <AppliedFilters
                     openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
                 />
             </div>
             {/* body */}
-            <div className="bg-gray-100 p-4 dark:bg-gray-900 print:hidden">
+            <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
                 <div
-                    className="overflow-y-auto bg-white pb-24 dark:bg-gray-800 rounded p-4"
+                    className="overflow-y-auto bg-white pb-24 dark:bg-slate-800 rounded p-4"
                     style={{ height: 'calc(100vh - 15rem)' }}
                 >
                     <OrderContainer loading={loading} orders={orders} />
@@ -65,7 +65,7 @@ export default function Orders() {
                 name={'filter'}
             />
 
-            <div className="fixed print:static bottom-0 w-full h-20 bg-white dark:bg-gray-800 print:bg-white dark:print:bg-white drop-shadow-xl px-8 grid">
+            <div className="fixed print:static bottom-0 w-full h-20 bg-white dark:bg-slate-800 print:bg-white dark:print:bg-white drop-shadow-xl px-8 grid">
                 <div className="flex items-center justify-center gap-2 justify-self-center mt-2 w-full max-w-lg">
                     <PrintAll apiData={orders} />
                     <ExportAll apiData={orders} />

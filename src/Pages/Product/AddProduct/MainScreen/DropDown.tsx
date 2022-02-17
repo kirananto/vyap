@@ -60,13 +60,13 @@ function List(props: IProps) {
                 />
             </div>
             <div className="w-full">
-                <div className="text-lg w-full font-bold text-gray-700 dark:text-gray-200 line-clamp-1">
+                <div className="text-lg w-full font-bold text-slate-700 dark:text-slate-200 line-clamp-1">
                     {props.opt.name}
                 </div>
-                <div className="text-xs w-full text-gray-400 dark:text-gray-400 line-clamp-2">
+                <div className="text-xs w-full text-slate-400 dark:text-slate-400 line-clamp-2">
                     {props.opt.description}
                 </div>
-                {/* <div className="text-xs font-bold text-gray-400">{props.opt.price}</div> */}
+                {/* <div className="text-xs font-bold text-slate-400">{props.opt.price}</div> */}
             </div>
         </div>
     )
@@ -144,7 +144,7 @@ function DropDown(props: DropdDownInterface) {
             return (
                 <div className="p-4">
                     <button
-                        className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+                        className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-gray-500"
                         onClick={add}
                     >
                         <svg
@@ -171,7 +171,7 @@ function DropDown(props: DropdDownInterface) {
                     >
             Invalid product name !
                     </span>
-                    <div className="text-center dark:text-gray-300">
+                    <div className="text-center dark:text-slate-300">
             No existing products found, add this as a new product by Clicking
             Add Button.
                     </div>
@@ -184,7 +184,7 @@ function DropDown(props: DropdDownInterface) {
                     <>
                         {' '}
                         <button
-                            className="border w-full rounded p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+                            className="border w-full rounded p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-gray-500"
                             onClick={add}
                         >
                             <svg
@@ -225,12 +225,12 @@ function DropDown(props: DropdDownInterface) {
                 type="text"
                 onChange={search}
                 value={value}
-                className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
+                className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
                 placeholder="Search or create product..."
             />
             <div
                 // ref={myRef}
-                className={`dark:bg-gray-700 drop-open dark:border-gray-500 rounded-lg overflow-x-hidden h-72`}
+                className={`dark:bg-slate-700 drop-open dark:border-gray-500 rounded-lg overflow-x-hidden h-72`}
             >
                 {renderListItems()}
             </div>

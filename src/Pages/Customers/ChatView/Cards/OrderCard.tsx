@@ -120,11 +120,11 @@ export default function OrderCard({
     const stats = orderStatusTxt()
     return (
         <div  {...bind} className={`flex ${className} w-full`}>
-            <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-gray-50 shadow border border-purple-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-slate-50 shadow border border-purple-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
                     Order
                 </div>
-                <div className={`text-3xl mt-1 text-gray-700 font-bold dark:text-gray-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `₹ ${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(0)}` : null}</div>
+                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `₹ ${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(0)}` : null}</div>
 
                 {/* bottom  */}
                 <div className="flex items-center w-full">
@@ -133,18 +133,18 @@ export default function OrderCard({
                         {/* Tick icon */}
                         {stats.statusIcon}
 
-                        <p className="text-xs text-gray-500 dark:text-gray-300">
+                        <p className="text-xs text-slate-500 dark:text-slate-300">
                             {stats.statusTxt}
                         </p>
                     </div>
                     {/* col-2 */}
                     <div className="flex justify-left w-7/12 gap-2">
-                        <p className="text-xs text-gray-500 dark:text-gray-300">● {
+                        <p className="text-xs text-slate-500 dark:text-slate-300">● {
                             format(
                                 new Date(thread.updatedAt),
                                 'do MMM'
                             )}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-300">  ● {order?.numberOfItems} items</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-300">  ● {order?.numberOfItems} items</p>
                     </div>
                 </div>
             </NavLink>

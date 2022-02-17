@@ -194,7 +194,7 @@ export default function AddItem() {
             return (
                 <div>
                     <img className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
-                    <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-gray-300">
+                    <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-slate-300">
                         {' '}
                         Sorry the seller has no products for sale.{' '}
                     </div>
@@ -218,17 +218,17 @@ export default function AddItem() {
                     {/* )} */}
                 </div>
                 <div className="w-4/5 pl-4 ">
-                    <div className=" text-lg font-bold mb-1 text-gray-600 dark:text-gray-200">
+                    <div className=" text-lg font-bold mb-1 text-slate-600 dark:text-slate-200">
                         {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name}
                     </div>
                     <div className="inline-grid grid-cols-2 w-full gap-3 grid-flow-row-dense">
                         <div className="flex flex-col">
                             <div className="flex gap-2 mt-1">
-                                <div className="text-xs font-semibold text-gray-500  dark:text-gray-400">
+                                <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
                                     <p>MRP:</p>
                                     <p>₹{item?.mrpPrice}</p>
                                 </div>
-                                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                                     <p>SP:</p>
                                     <p>{item?.rate}</p>
                                 </div>
@@ -257,10 +257,10 @@ export default function AddItem() {
                                     />
                                 </svg>
                             </div>
-                            <div className="flex items-center dark:text-gray-200">
+                            <div className="flex items-center dark:text-slate-200">
                                 <form autoComplete="off">
                                     <input
-                                        className="w-16 rounded border-dashed border px-2 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                        className="w-16 rounded border-dashed border px-2 border-indigo-300 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         type="number"
                                         name="qty"
                                         id="qty"
@@ -304,8 +304,8 @@ export default function AddItem() {
     }
 
     return (
-        <div className="bg-white min-h-screen dark:bg-gray-900">
-            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-gray-800">
+        <div className="bg-white min-h-screen dark:bg-slate-900">
+            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/place-order')}
@@ -324,7 +324,7 @@ export default function AddItem() {
             />
             <div className="px-4 pb-24">
                 {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded-lg mb-2">
-                    <div className="dark:text-gray-400 mb-1">Choose previously ordered items...</div>
+                    <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
                     <div className="flex gap-2 overflow-x-scroll">
                         {prevOrdered?.map(item => <ProductSuggestionCard
                             key={item.id}

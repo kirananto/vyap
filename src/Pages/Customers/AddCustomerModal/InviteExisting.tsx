@@ -98,7 +98,7 @@ export default function InviteExisting({
             autoComplete="off"
         >
             <div className="mt-4">
-                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
+                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-600 dark:text-slate-400">
           Business name or shop name
                 </label>
                 <input
@@ -112,7 +112,7 @@ export default function InviteExisting({
                     id="tel"
                     ref={refBizName}
                     placeholder="Name of the shop or business"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
                 <span
                     className={
@@ -124,7 +124,7 @@ export default function InviteExisting({
                 </span>
             </div>
             <div className="mt-4">
-                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
+                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-600 dark:text-slate-400">
           Address
                 </label>
                 <textarea
@@ -137,7 +137,7 @@ export default function InviteExisting({
                     id="address"
                     ref={refAddress}
                     placeholder="Enter the address of the customer."
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
 
                 <span
@@ -150,7 +150,7 @@ export default function InviteExisting({
                 </span>
             </div>
             <div className="mt-4">
-                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
+                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-600 dark:text-slate-400">
           Pin code
                 </label>
                 <input
@@ -164,7 +164,7 @@ export default function InviteExisting({
                     id="tel"
                     ref={refPincode}
                     placeholder="Pin code of the customer"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                 />
                 <span
                     className={

@@ -17,7 +17,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
 
     if (loading) {
         return (
-            <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
+            <div className="p-12 mt-12 text-center dark:text-slate-100 grid">
                 <Spinner />
             </div>
         )
@@ -27,7 +27,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
     if (orders?.length === 0) {
         return <div>
             <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
-            <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+            <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
                 {' '}
                 You don{`'`}t have any transactions. Please do some transactions and visit here later.{' '}
             </div>
@@ -73,7 +73,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                             <div className="grid grid-rows-3 content-start">
                                 <div className="grid grid-flow-col  gap-1 row-span-3">
 
-                                    <div className="text-gray-500 mt-1 text-xs dark:text-gray-300">
+                                    <div className="text-slate-500 mt-1 text-xs dark:text-slate-300">
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
@@ -81,7 +81,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
 
                                     {isExpanded === item.id ? (
                                         <div
-                                            className="col-start-12 text-gray-600 dark:text-gray-300"
+                                            className="col-start-12 text-slate-600 dark:text-slate-300"
                                             onClick={() => setIsExpanded(undefined)}
                                         >
                                             <svg
@@ -101,7 +101,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                         </div>
                                     ) : (
                                         <div
-                                            className=" text-gray-600 dark:text-gray-300 col-start-12"
+                                            className=" text-slate-600 dark:text-slate-300 col-start-12"
                                             onClick={() => setIsExpanded(item.id)}
                                         >
                                             <svg
@@ -122,7 +122,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                     )}
                                 </div>
 
-                                <div className="text-gray-600 font-semibold dark:text-gray-200 -mt-1 mb-1">
+                                <div className="text-slate-600 font-semibold dark:text-slate-200 -mt-1 mb-1">
                                     {item.supplier?.name} {'->'} {item?.buyer?.name}
                                 </div>
 
@@ -131,15 +131,15 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                         {returnStatusTile(item?.orderStatus?.[0]?.status)}
                                     </div>
 
-                                    <div className="text-center col-end-12 self-center text-gray-600 dark:text-gray-200 text-lg font-extrabold">
-                                        <div className="text-gray-600 text-lg font-extrabold dark:text-gray-200">
+                                    <div className="text-center col-end-12 self-center text-slate-600 dark:text-slate-200 text-lg font-extrabold">
+                                        <div className="text-slate-600 text-lg font-extrabold dark:text-slate-200">
                                             ₹{' '}
                                             {(
                                                 parseFloat(item?.totalAmount) -
                                                 parseFloat(item?.flatDiscount)
                                             ).toFixed(0)}
                                         </div>
-                                        <div className="text-gray-400 text-xs font-extrabold mx-auto dark:text-gray-300">
+                                        <div className="text-slate-400 text-xs font-extrabold mx-auto dark:text-slate-300">
                                             ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})
                                         </div>
                                     </div>

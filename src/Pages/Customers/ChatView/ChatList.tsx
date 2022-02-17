@@ -72,17 +72,17 @@ export default function ChatList({
 
     function renderChats() {
         if (chats?.error) {
-            return <div className="p-12 mt-12 text-center dark:text-gray-100"> Error loading chats...</div>
+            return <div className="p-12 mt-12 text-center dark:text-slate-100"> Error loading chats...</div>
         }
         if (chats?.isLoading && chats?.threads?.length < 1) {
-            return <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
+            return <div className="p-12 mt-12 text-center dark:text-slate-100 grid">
                 <Spinner />
             </div>
         }
         if (chats?.threads?.length <= 0) {
             return <div>
                 <img className="p-12 m-auto mt-6 h-72" alt="no Chats" src={ChatImg} />
-                <div className="w-2/3 px-6 m-auto text-center dark:text-gray-200"> You do not have any transactions, Create a transaction to get started. </div>
+                <div className="w-2/3 px-6 m-auto text-center dark:text-slate-200"> You do not have any transactions, Create a transaction to get started. </div>
             </div>
         }
         return chats?.threads?.map((thread) => {

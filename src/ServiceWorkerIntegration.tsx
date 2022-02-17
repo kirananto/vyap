@@ -38,7 +38,7 @@ export default function ServiceWorkerIntegration() {
 
     return updateNotificationOpen ? (
         <div
-            className={`fixed top-1 flex flex-row items-center justify-between w-96 bg-gray-900 px-4 py-6 text-white shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-xl transition-all duration-500 ease-in-out  self-center z-50`}
+            className={`fixed top-1 flex flex-row items-center justify-between w-96 bg-slate-900 px-4 py-6 text-white shadow-2xl hover:shadow-none transform-gpu translate-y-0 hover:translate-y-1 rounded-xl transition-all duration-500 ease-in-out  self-center z-50`}
             style={{ left: `calc(50% - 12rem)` }}
         >
             <div className="text-xl">
@@ -47,8 +47,8 @@ export default function ServiceWorkerIntegration() {
                 </svg>
             </div>
             <div className="flex flex-col items-start justify-center ml-4 cursor-default">
-                <h1 className="text-base text-gray-200 font-semibold leading-none tracking-wider">New version available !</h1>
-                <p className="text-sm text-gray-400 mt-2 leading-relaxed tracking-wider">
+                <h1 className="text-base text-slate-200 font-semibold leading-none tracking-wider">New version available !</h1>
+                <p className="text-sm text-slate-400 mt-2 leading-relaxed tracking-wider">
                     {intl.formatMessage({
                         id: 'action.updateApplication',
                         defaultMessage: 'An improved version of vyap is now available, refresh to update',
@@ -56,7 +56,7 @@ export default function ServiceWorkerIntegration() {
                     })}
                 </p>
 
-                <button onClick={updateApplication(registration)} className="mt-2 text-sm border p-1 px-4 rounded-lg hover:bg-gray-800">
+                <button onClick={updateApplication(registration)} className="mt-2 text-sm border p-1 px-4 rounded-lg hover:bg-slate-800">
                     <FormattedMessage id="action.reload" defaultMessage="Tap to Refresh" description="Action to reload something" />
                 </button>
             </div>

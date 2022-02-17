@@ -23,11 +23,11 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
 
                 <div className=" border-b-[3px] border-blue-400 pt-2">
                     <div className="col-start-2 col-span-3 space-y-1 flex flex-col align-middle">
-                        <h2 className="px-3 text-2xl font-bold text-gray-800">
+                        <h2 className="px-3 text-2xl font-bold text-slate-800">
                             {' '}
               Order Summary
                         </h2>
-                        <p className="px-3 pt-1 pb-2 text-sm text-gray-400">
+                        <p className="px-3 pt-1 pb-2 text-sm text-slate-400">
                             {' '}
               #{order?.id?.split('-')?.[0]} |{' '}
                             {order?.createdAt
@@ -42,12 +42,12 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                 {/* customer details */}
                 <div className="flex flex-row flex-wrap justify-end pt-2 pb-5 px-3">
                     <div className="item w-1/2 ">
-                        <p className="text-gray-500"> Supplier </p>
+                        <p className="text-slate-500"> Supplier </p>
                         <p className="font-bold "> {order?.supplier?.name} </p>
                         <p className="font-bold "> {order?.supplier?.officeNumber} </p>
                     </div>
                     <div className="item w-1/2 ">
-                        <p className="text-gray-500"> Customer </p>
+                        <p className="text-slate-500"> Customer </p>
                         <p className="font-bold "> {order?.buyer?.name} </p>
                         <p className="font-bold "> {order?.buyer?.officeNumber} </p>
                     </div>
@@ -59,7 +59,7 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                     <div className="px-2">
                         <table className="min-w-full">
                             <thead
-                                className="text-gray-600 border-t-[3px] border-violet-300
+                                className="text-slate-600 border-t-[3px] border-violet-300
                     "
                             >
                                 <tr
@@ -72,7 +72,7 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                                     <td className="pr-2 pt-1 pb-3">Total</td>
                                 </tr>
                             </thead>
-                            <tbody className="text-gray-500 text-sm">
+                            <tbody className="text-slate-500 text-sm">
                                 {orderItems?.map((item, index: number) => (
                                     <tr
                                         key={index}
@@ -115,9 +115,9 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                     <div className="item w-2/3 flex-row">
                         <div className="flex justify-end pr-1">
                             <div className="item text-right">
-                                <p className="text-gray-500"> Item Total </p>
-                                <p className="text-gray-500 pb-3"> Discount </p>
-                                <p className="text-gray-500"> Total Amount </p>
+                                <p className="text-slate-500"> Item Total </p>
+                                <p className="text-slate-500 pb-3"> Discount </p>
+                                <p className="text-slate-500"> Total Amount </p>
                             </div>
                             <div className="item  pl-3 text-right">
                                 <p className="font-bold">
@@ -147,11 +147,11 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                                 alt="vyap-logo"
                                 src={vyapLogo}
                             />
-                            <p className="text-sm font-bold text-gray-700 "> vyap </p>
+                            <p className="text-sm font-bold text-slate-700 "> vyap </p>
                         </div>
                     </div>
                     <div className="item w-4/6  place-self-center flex justify-end">
-                        <p className="text-gray-800 text-sm font-bold pb-3 pr-3">
+                        <p className="text-slate-800 text-sm font-bold pb-3 pr-3">
                             {' '}
               VYAP &nbsp; | &nbsp; https://vyap.app
                         </p>

@@ -276,14 +276,14 @@ function CreateProduct() {
     }
 
     return (
-        <div className=" create-product-container dark:bg-gray-900">
+        <div className=" create-product-container dark:bg-slate-900">
             <SimpleHeader
                 heading={`${pageAction === PAGE_ACTION.EDIT ? 'Edit Product ' : 'Create Product'
                 }`}
             />
 
             <div className="mx-auto w-11/12  px-2 pt-20">
-                <h1 className="mb-2 font-bold text-gray-500 dark:text-gray-300">
+                <h1 className="mb-2 font-bold text-slate-500 dark:text-slate-300">
                     What is the product?
                 </h1>
                 {/* ===--===Product card===--=== */}
@@ -294,7 +294,7 @@ function CreateProduct() {
                         onClick={() => toggleTabs(TABS.PRICING)}
                         className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${toggleState === TABS.PRICING
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 '
-                            : 'text-gray-500 dark:text-gray-300'
+                            : 'text-slate-500 dark:text-slate-300'
                         }`}
                     >
                         Pricing
@@ -303,7 +303,7 @@ function CreateProduct() {
                         onClick={() => toggleTabs(TABS.OTHERS)}
                         className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${toggleState === TABS.OTHERS
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
-                            : 'text-gray-500 dark:text-gray-300'
+                            : 'text-slate-500 dark:text-slate-300'
                         }`}
                     >
                         Others

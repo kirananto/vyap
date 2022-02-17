@@ -59,19 +59,19 @@ export default function OrderDetail({
     }, [shareON])
 
     return (
-        <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
+        <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-slate-800">
             <div
                 className={`flex ${
                     isExpanded ? 'mb-4' : ''
                 } items-center justify-between`}
             >
-                <div className="flex flex-col text-xl font-semibold text-gray-800 dark:text-gray-200">
+                <div className="flex flex-col text-xl font-semibold text-slate-800 dark:text-slate-200">
           Order details
                 </div>
                 <div>
                     {isExpanded ? (
                         <div
-                            className="flex text-gray-600 dark:text-gray-200"
+                            className="flex text-slate-600 dark:text-slate-200"
                             onClick={() => { 
                                 hapticFeedback()
                                 setIsExpanded(false)
@@ -94,7 +94,7 @@ export default function OrderDetail({
                         </div>
                     ) : (
                         <div
-                            className="flex text-gray-600 dark:text-gray-200"
+                            className="flex text-slate-600 dark:text-slate-200"
                             onClick={() => {
                                 hapticFeedback()
                                 setIsExpanded(true)

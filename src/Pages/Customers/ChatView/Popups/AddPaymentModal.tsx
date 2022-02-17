@@ -186,13 +186,13 @@ export default function AddPaymentModal({
                     toggleVisibility(false)
                 }}
                 className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'
-                } overflow-auto bg-gray-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
+                } overflow-auto bg-slate-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
             />
             <div
                 className={`popup ${isVisible ? 'show' : ''
                 }
                 
-                 animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-gray-700`}
+                 animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-slate-700`}
             >
                 {isSuccess ? (
                     <Success
@@ -201,7 +201,7 @@ export default function AddPaymentModal({
                     />
                 ) : (
                     <>
-                        <h2 className="text-left p-2 pl-0 text-2xl mt-2 text-gray-700 dark:text-gray-200">
+                        <h2 className="text-left p-2 pl-0 text-2xl mt-2 text-slate-700 dark:text-slate-200">
                             {btnAction === BUTTON_ACTION.PLACE_ORDER
                                 ? 'Payment Details'
                                 : 'Add Payment you recieved.'}
@@ -209,9 +209,9 @@ export default function AddPaymentModal({
 
                         {btnAction === BUTTON_ACTION.PLACE_ORDER ? (
                             <>
-                                <div className='text-left dark:text-gray-200 pl-0 mt-6 mb-4'>
+                                <div className='text-left dark:text-slate-200 pl-0 mt-6 mb-4'>
                                     <span className="font-semibold">
-                                        <span className="text-gray-500 pr-3 text-xl dark:text-gray-200">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
+                                        <span className="text-slate-500 pr-3 text-xl dark:text-slate-200">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
                                     </span>
                                 </div>
 
@@ -227,7 +227,7 @@ export default function AddPaymentModal({
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAY_LATER)}
                                 >
                                     <label className="inline-flex font-bold mt-2 mb-2 ml-4">
-                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.PAY_LATER ? 'text-blue-700 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'}`}> Pay Later</span>
+                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.PAY_LATER ? 'text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`}> Pay Later</span>
                                     </label>
                                 </div>
 
@@ -241,7 +241,7 @@ export default function AddPaymentModal({
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.FULL_PAYMENT)}
                                 >
                                     <label className="inline-flex  font-bold mt-2 mb-2 ml-4">
-                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT ? 'text-blue-700 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'}`}> Full Payment</span>
+                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT ? 'text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`}> Full Payment</span>
                                     </label>
                                 </div>
 
@@ -254,12 +254,12 @@ export default function AddPaymentModal({
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)}
                                 >
                                     <label className="inline-flex mt-2 font-bold ml-4">
-                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT ? 'text-blue-700 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'}`}> Partial Payment</span>
+                                        <span className={` ${paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT ? 'text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`}> Partial Payment</span>
                                     </label>{' '}
                                     <br />
                                     {(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT) && (<>
                                         <label className="mt-5 place-self-center">
-                                            <div className="ml-4 mt-4 text-gray-700 mr-5 self-center dark:text-gray-300"> Amount:</div>
+                                            <div className="ml-4 mt-4 text-slate-700 mr-5 self-center dark:text-slate-300"> Amount:</div>
 
                                             <input
                                                 value={customAmount}
@@ -271,9 +271,9 @@ export default function AddPaymentModal({
                                                     )
                                                 }}
                                                 className="p-4 m-2 w-auto text-base text-black transition duration-500 ease-in-out transform 
-                                                border-transparent rounded-lg bg-gray-200 opacity-75 
+                                                border-transparent rounded-lg bg-slate-200 opacity-75 
                                                 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 
-                                                dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                                dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                                 inputMode="numeric"
                                                 type="number"
                                             />
@@ -298,7 +298,7 @@ export default function AddPaymentModal({
 
 
 
-                                <div className='text-left text-gray-500 italic dark:text-gray-200 pl-2 my-7'>
+                                <div className='text-left text-slate-500 italic dark:text-slate-200 pl-2 my-7'>
                                     {orderConfirmText()}
                                 </div>
                             </>
@@ -306,7 +306,7 @@ export default function AddPaymentModal({
                             <>
                                 {/* <!-- Payment Mode Dropdown --> */}
                                 <div className="p-2 pl-0">
-                                    <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
+                                    <span className="float-left mb-2 text-sm text-slate-500 dark:text-slate-300">
                                         Payment mode
                                     </span>
                                     <select
@@ -319,7 +319,7 @@ export default function AddPaymentModal({
                                                 ) as unknown as paymentMethod
                                             )
                                         }
-                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         name="payment"
                                         id="payment"
                                     >
@@ -329,7 +329,7 @@ export default function AddPaymentModal({
                                 </div>
                                 {/* <!-- Amount --> */}
                                 <div className="p-2 pl-0">
-                                    <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
+                                    <span className="float-left mb-2 text-sm text-slate-500 dark:text-slate-300">
                                         AMOUNT
                                     </span>
                                     <input
@@ -350,7 +350,7 @@ export default function AddPaymentModal({
                                                 }
                                             )
                                         }}
-                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         inputMode="numeric"
                                         type="number"
                                     />
@@ -366,13 +366,13 @@ export default function AddPaymentModal({
                                 </div>
                                 {/* <!-- Remarks Textarea --> */}
                                 <div className="p-2 pl-0">
-                                    <span className="float-left mb-2 text-sm text-gray-500 dark:text-gray-300">
+                                    <span className="float-left mb-2 text-sm text-slate-500 dark:text-slate-300">
                                         REMARKS
                                     </span>
                                     <textarea
                                         value={note}
                                         onChange={(event) => setNote(event.target.value)}
-                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         id=""
                                     ></textarea>
                                 </div>

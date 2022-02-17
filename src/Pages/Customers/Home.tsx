@@ -76,7 +76,7 @@ export const Home = () => {
     function renderChats() {
         if (loading) {
             return (
-                <div className="mt-12 grid p-12 text-center dark:text-gray-100">
+                <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                     <Spinner />
                 </div>
             )
@@ -89,7 +89,7 @@ export const Home = () => {
                         alt="no transactions"
                         src={ChatImg}
                     />
-                    <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+                    <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
                         {' '}
                         {paginationParams.search.trim() === '' ? `You do not have any transactions, Please invite a customer to start
             the transactions` : `Sorry no results found for the search.`}: {' '}
@@ -131,12 +131,12 @@ export const Home = () => {
     // ......  Button resizing onscroll - end.........!
 
     return (
-        <div className="dark:bg-gray-900">
+        <div className="dark:bg-slate-900">
             {/* <!-- * Header --> */}
-            <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-gray-800">
+            <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-slate-800">
                 <div className="flex h-full w-full ">
                     <Link to="/more" className="flex w-4/5 flex-col">
-                        <h1 className="text-lg font-semibold text-gray-600 dark:text-gray-100">
+                        <h1 className="text-lg font-semibold text-slate-600 dark:text-slate-100">
                             <FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />
                         </h1>
                         <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-bold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
@@ -146,7 +146,7 @@ export const Home = () => {
                     <div className="flex w-1/5 items-center justify-end ">
                         <Link to="/my-account">
                             <img
-                                className="h-12 rounded-full shadow-xs bg-gray-200 dark:bg-gray-900 p-2"
+                                className="h-12 rounded-full shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
                                 alt=""
                             />
@@ -162,7 +162,7 @@ export const Home = () => {
                         id="input"
                         autoComplete="off"
                         value={paginationParams.search}
-                        className="h-10 w-full rounded bg-gray-100 pl-4 pr-5 outline-none dark:bg-gray-500 dark:text-gray-100 "
+                        className="h-10 w-full rounded bg-slate-100 pl-4 pr-5 outline-none dark:bg-slate-500 dark:text-slate-100 "
                         placeholder={intl.formatMessage({ id: `action.search` })}
                         onChange={(e) => {
                             setPaginationParams((prevState) => ({

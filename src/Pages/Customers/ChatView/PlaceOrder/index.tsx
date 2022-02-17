@@ -172,7 +172,7 @@ export default function PlaceOrder() {
             return (
                 <div>
                     <img className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
-                    <div className="m-auto text-sm mb-8 w-2/3  md:px-6 text-center dark:text-gray-300">
+                    <div className="m-auto text-sm mb-8 w-2/3  md:px-6 text-center dark:text-slate-300">
                         {' '}
                         You do not have any items in your cart, please add by tapping add
                         more below.{' '}
@@ -187,7 +187,7 @@ export default function PlaceOrder() {
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
                         placeholder={'Search'}
-                        className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-2 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                        className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-slate-200 p-2 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                 </div>
                 {placeOrder.cartItems
@@ -214,17 +214,17 @@ export default function PlaceOrder() {
                                     </div>
 
                                     <div className="ml-4">
-                                        <div className=" text-base font-bold text-gray-600 dark:text-gray-200">
+                                        <div className=" text-base font-bold text-slate-600 dark:text-slate-200">
                                             {`${item.centralCatalogue?.name} `}
                                         </div>
-                                        <div className=" text-sm font-bold text-gray-600 dark:text-gray-300">
+                                        <div className=" text-sm font-bold text-slate-600 dark:text-slate-300">
                                             {item.aliasName ? `( ${item.aliasName})` : ''}
                                         </div>
-                                        <div className=" text-xs font-bold text-gray-500 dark:text-gray-400">
+                                        <div className=" text-xs font-bold text-slate-500 dark:text-slate-400">
                                             MRP: ₹{item?.mrpPrice} Sales Price: ₹{item?.rate}
                                         </div>
 
-                                        <div className=" text-xs font-bold text-gray-400 dark:text-gray-500">
+                                        <div className=" text-xs font-bold text-slate-400 dark:text-slate-500">
                                             {item?.centralCatalogue?.description}
                                         </div>
                                     </div>
@@ -254,10 +254,10 @@ export default function PlaceOrder() {
                                             </svg>
                                         </div>
 
-                                        <div className=" items-center dark:text-gray-200">
+                                        <div className=" items-center dark:text-slate-200">
                                             <form autoComplete="off">
                                                 <input
-                                                    className="w-12 border border-dashed border-indigo-300 px-2 rounded dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                                    className="w-12 border border-dashed border-indigo-300 px-2 rounded dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                                                     type="number"
                                                     name="qty"
                                                     id="qty"
@@ -308,7 +308,7 @@ export default function PlaceOrder() {
                                         </button>{' '}
                                     </div>
 
-                                    <div className="text-right text-lg font-bold text-gray-600  dark:text-gray-200">
+                                    <div className="text-right text-lg font-bold text-slate-600  dark:text-slate-200">
                                         ₹{item?.quantity * parseFloat(item?.rate)}
                                     </div>
                                 </div>
@@ -320,7 +320,7 @@ export default function PlaceOrder() {
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-900">
+        <div className="min-h-screen bg-white dark:bg-slate-900">
             <div className="w-full bg-white shadow ">
                 <SimpleHeader
                     backFn={() => navigate(`/chat/${localStorage?.getItem('inboxId')}`)}
@@ -331,8 +331,8 @@ export default function PlaceOrder() {
 
                 <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4 dark:border-gray-700">
                     <div className="flex justify-between">
-                        <div className="text-xl font-bold dark:text-gray-300">Items</div>
-                        <div className=" dark:text-gray-300">
+                        <div className="text-xl font-bold dark:text-slate-300">Items</div>
+                        <div className=" dark:text-slate-300">
                             {!isOpen ? (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -390,7 +390,7 @@ export default function PlaceOrder() {
                                 <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 text-gray-300 dark:text-gray-100 "
+                                        className="h-5 w-5 text-slate-300 dark:text-slate-100 "
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -412,14 +412,14 @@ export default function PlaceOrder() {
                 </div>
                 {isSupplier ? (
                     <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4  dark:border-gray-700">
-                        <span className="float-left mb-2 text-sm text-gray-500">
+                        <span className="float-left mb-2 text-sm text-slate-500">
                             Flat discount amount
                         </span>
                         <input
                             value={placeOrder.discount}
                             onBlur={handleDiscountValue}
                             onChange={(event) => updateDiscount(event)}
-                            className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-2 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                            className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-slate-200 p-2 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                             inputMode="numeric"
                             type="number"
                             min={0}
@@ -437,12 +437,12 @@ export default function PlaceOrder() {
                 ) : null}
                 {/* <!-- Textarea --> */}
                 <div className="p-2">
-                    <span className="float-left mb-2 text-sm text-gray-500">Note</span>
+                    <span className="float-left mb-2 text-sm text-slate-500">Note</span>
                     <textarea
                         value={placeOrder.note}
                         placeholder="Enter a description or reason for the order"
                         onChange={(event) => dispatch(setNote(event.target.value))}
-                        className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-gray-200 p-4 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                        className="focus:shadow-outline w-full transform rounded-lg border-transparent bg-slate-200 p-4 text-base text-black opacity-75 ring-offset-2 ring-offset-current transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                         id=""
                     />
                 </div>
@@ -458,27 +458,27 @@ export default function PlaceOrder() {
 
                     <div className="mt-2 grid grid-cols-5 gap-3">
                         <div className="col-span-3 mt-1 ml-4">
-                            <div className="text-base text-gray-400 dark:text-gray-300">
+                            <div className="text-base text-slate-400 dark:text-slate-300">
                                 Cart Total :
                             </div>
 
-                            <div className="text-base text-gray-400 dark:text-gray-300">
+                            <div className="text-base text-slate-400 dark:text-slate-300">
                                 Discount :
                             </div>
 
-                            <div className="mt-1 text-lg font-extrabold text-gray-600 dark:text-gray-300">
+                            <div className="mt-1 text-lg font-extrabold text-slate-600 dark:text-slate-300">
                                 Grand Total :
                             </div>
                         </div>
 
                         <div className="col-span-2  mt-1 text-right mr-4">
-                            <div className="text-base  dark:text-gray-400">
+                            <div className="text-base  dark:text-slate-400">
                                 ₹{getTotalPrice()}
                             </div>
-                            <div className="text-base dark:text-gray-400">
+                            <div className="text-base dark:text-slate-400">
                                 ₹{placeOrder.discount}
                             </div>
-                            <div className="mt-1 text-lg font-extrabold dark:text-gray-400">
+                            <div className="mt-1 text-lg font-extrabold dark:text-slate-400">
                                 ₹
                                 {getTotalPrice() -
                                     (placeOrder.discount ? placeOrder.discount : 0)}

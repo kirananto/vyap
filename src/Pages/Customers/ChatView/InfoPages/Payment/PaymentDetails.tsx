@@ -33,15 +33,15 @@ export default function PaymentDetails() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
             {/* Header */}
-            <div className="w-full py-2 bg-white drop-shadow-md dark:bg-gray-800">
+            <div className="w-full py-2 bg-white drop-shadow-md dark:bg-slate-800">
                 {/* Todo :: Share icon have to be added in the place of contact icon */}
                 <Header isSticky={true} heading="Payment details" subHeading={getCompanyName()} phoneNumber="" />
             </div>
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-24">
-                <h1 className="text-3xl sm:text-6xl font-black text-center text-gray-600 dark:text-gray-300">
+                <h1 className="text-3xl sm:text-6xl font-black text-center text-slate-600 dark:text-slate-300">
           ₹{parseInt(`${payment?.amount}`, 10)}
                 </h1>
                 {/* ---------------- */}
@@ -59,8 +59,8 @@ export default function PaymentDetails() {
                             clipRule="evenodd"
                         />
                     </svg>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Completed</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">● {payment?.updatedAt ? format(
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Completed</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">● {payment?.updatedAt ? format(
                         new Date(payment?.updatedAt),
                         'do MMM'
                     ) : null}</p>
@@ -69,8 +69,8 @@ export default function PaymentDetails() {
 
                 {/* Payment detail Card */}
                 {/* ------------------- */}
-                <div className="w-11/12 p-4 md:p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-gray-800">
-                    <h1 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">
+                <div className="w-11/12 p-4 md:p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-slate-800">
+                    <h1 className="mb-4 text-xl font-semibold text-slate-800 dark:text-slate-200">
             Payment details
                     </h1>
 
@@ -101,7 +101,7 @@ export default function PaymentDetails() {
           Delete Payment
         </button> */}
                 {/* Bottom info delete */}
-                <p style={textSize} className="w-9/12 px-4 text-center text-gray-400">
+                <p style={textSize} className="w-9/12 px-4 text-center text-slate-400">
           You will not be able to delete the payment, instead create a payment with negative value.
                 </p>
             </div>

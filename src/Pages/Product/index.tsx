@@ -173,7 +173,7 @@ export default function Product() {
         }
         if (loading) {
             return (
-                <div className="mt-12 grid p-12 text-center dark:text-gray-100">
+                <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                     <Spinner />
                 </div>
             )
@@ -181,7 +181,7 @@ export default function Product() {
         return (
             <div>
                 <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
-                <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+                <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
                     {' '}
                     {searchValue?.trim() === '' ? `You do not have any products added. Please add a product to begin
             listing it to your shops.` : `Sorry no results found for the search criteria.`}{' '}
@@ -191,8 +191,8 @@ export default function Product() {
     }
     return (
         <>
-            <div className="bg-gray-100 dark:bg-gray-900">
-                <div className="w-full bg-white pb-3 drop-shadow-md z-10 dark:bg-gray-800">
+            <div className="bg-slate-100 dark:bg-slate-900">
+                <div className="w-full bg-white pb-3 drop-shadow-md z-10 dark:bg-slate-800">
                     <Header
                         isSticky={false}
                         backDisabled={true}
@@ -217,7 +217,7 @@ export default function Product() {
 
             <div
                 ref={scrollTargetRef}
-                className="custom-height bg-white pb-[13vh] dark:bg-gray-900"
+                className="custom-height bg-white pb-[13vh] dark:bg-slate-900"
                 style={{
                     height: hasFilters()
                         ? 'calc( 100vh - 274px )'

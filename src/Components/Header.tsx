@@ -25,7 +25,7 @@ function Header({
         <div
             className={
                 isSticky
-                    ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0'
+                    ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0'
                     : 'flex w-11/12 pt-4 pb-2 m-auto '
             }
         >
@@ -40,7 +40,7 @@ function Header({
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-8 dark:text-gray-300"
+                        className="w-8 dark:text-slate-300"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -61,7 +61,7 @@ function Header({
                     shareAction ? 'w-9/12' : 'w-3/5 sm:w-4/5'
                 }   ${
                     backDisabled ? 'pl-1' : 'pl-4'
-                } text-gray-600 dark:text-gray-300 `}
+                } text-slate-600 dark:text-slate-300 `}
             >
                 <h1 className="text-lg font-semibold">{heading}</h1>
                 {subHeading && (
@@ -106,7 +106,7 @@ function Header({
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 dark:text-gray-300"
+                        className="h-6 w-6 dark:text-slate-300"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -141,7 +141,7 @@ function PaymentBottomHeader({
         <div className="flex items-center justify-center w-full mt-1">
             {/* card container */}
             <div
-                className={`relative flex w-11/12 h-auto bg-gray-100 dark:bg-gray-700 border ${
+                className={`relative flex w-11/12 h-auto bg-slate-100 dark:bg-slate-700 border ${
                     parsedAmount === 0 && isLoading === false
                         ? 'border-green-400'
                         : 'border-gray-400'
@@ -155,13 +155,13 @@ function PaymentBottomHeader({
                             {parsedAmount !== 0 && (
                                 <h6
                                     style={fontSize}
-                                    className="font-bold text-gray-800 dark:text-gray-300"
+                                    className="font-bold text-slate-800 dark:text-slate-300"
                                 >
                                     {parsedAmount > 0 ? 'You have to pay' : 'You get'}
                                 </h6>
                             )}
                             {parsedAmount !== 0 && (
-                                <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-200 truncate">
+                                <h1 className="text-3xl font-bold text-slate-700 dark:text-slate-200 truncate">
                   ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(0)}
                                 </h1>
                             )}
@@ -170,7 +170,7 @@ function PaymentBottomHeader({
                                     className={`text-md font-semibold ${
                                         parsedAmount === 0
                                             ? 'text-green-800 dark:text-green-400'
-                                            : 'text-gray-700 dark:text-gray-200'
+                                            : 'text-slate-700 dark:text-slate-200'
                                     }`}
                                 >
                   Dues Settled
@@ -214,7 +214,7 @@ function SimpleHeader(props: {
 }) {
     const navigate = useNavigate()
     return (
-        <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-gray-800 dark:text-gray-300 top-0">
+        <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0">
             {/* back icon  */}
             <div
                 onClick={() => {
@@ -243,7 +243,7 @@ function SimpleHeader(props: {
 
             {/* Heading container */}
             <div className="flex flex-col w-4/5 pl-4 ">
-                <h1 className="text-xl font-bold text-gray-600 dark:text-gray-300">
+                <h1 className="text-xl font-bold text-slate-600 dark:text-slate-300">
                     {props.heading}
                 </h1>
             </div>

@@ -28,7 +28,7 @@ function Items({ order }: { order: orderInterface }) {
 
     if(orderItems?.filter(filterItem => filterItem?.product?.centralCatalogue?.name)?.length === 0) {
         return (
-            <div className="mt-12 grid p-12 text-center dark:text-gray-100">
+            <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                 <Spinner />
             </div>
         )
@@ -39,7 +39,7 @@ function Items({ order }: { order: orderInterface }) {
             {orderItems?.map((item: IOrderItem, index: number) => (
                 <div className="flex justify-between py-2" key={`${index}`}>
                     <div className="flex w-full gap-4">
-                        <div className="flex-none mt-2 text-gray-400 text-xs dark:text-gray-400">{item?.quantity} X </div>
+                        <div className="flex-none mt-2 text-slate-400 text-xs dark:text-slate-400">{item?.quantity} X </div>
                         <div 
                             className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6 self-center"
                             style={
@@ -55,24 +55,24 @@ function Items({ order }: { order: orderInterface }) {
                             }
                         />
                         <div className="flex w-3/5 flex-col">
-                            <div className="flex  text-sm font-semibold text-gray-800 dark:text-gray-200">
+                            <div className="flex  text-sm font-semibold text-slate-800 dark:text-slate-200">
                                 {item?.product?.centralCatalogue?.name}
                                 {item?.product?.aliasName
                                     ? `(${item?.product?.aliasName})`
                                     : ''}
                             </div>
-                            {/* <div className="flex font-bold text-xs text-gray-400">
+                            {/* <div className="flex font-bold text-xs text-slate-400">
                                 {item?.product?.centralCatalogue?.description}
                             </div> */}
-                            <div className="flex font-normal text-xs text-gray-600 dark:text-gray-500">
+                            <div className="flex font-normal text-xs text-slate-600 dark:text-slate-500">
                 Rate: ₹{item?.purchasePrice}
                             </div>
                         </div>
-                        {/* <div className="flex-none flex-col h-5 px-2 w-auto font-bold tracking-wide rounded text-xs bg-gray-200 dark:bg-gray-600 dark:text-gray-300 self-center items-center justify-center">
+                        {/* <div className="flex-none flex-col h-5 px-2 w-auto font-bold tracking-wide rounded text-xs bg-slate-200 dark:bg-slate-600 dark:text-slate-300 self-center items-center justify-center">
               X {item?.quantity}
                         </div> */}
                     </div>
-                    <div className="flex-wrap text-lg ml-4 min-w-[20%] font-bold text-gray-600 dark:text-gray-200 text-right">
+                    <div className="flex-wrap text-lg ml-4 min-w-[20%] font-bold text-slate-600 dark:text-slate-200 text-right">
             ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)}
                     </div>
                 </div>
@@ -100,19 +100,19 @@ export default function ItemList({
     }, [shareON, shareProceed])
 
     return (
-        <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-gray-800">
+        <div className="w-11/12 p-4 bg-white rounded-md shadow border border-purple-900 border-opacity-50 dark:bg-slate-800">
             <div
                 className={`flex ${
                     isExpanded ? 'mb-4' : ''
                 } items-center justify-between`}
             >
-                <div className="flex flex-col text-xl font-semibold text-gray-800 dark:text-gray-200">
+                <div className="flex flex-col text-xl font-semibold text-slate-800 dark:text-slate-200">
           Items
                 </div>
                 <div>
                     {isExpanded ? (
                         <div
-                            className="flex text-gray-600 dark:text-gray-200"
+                            className="flex text-slate-600 dark:text-slate-200"
                             onClick={() => setIsExpanded(false)}
                         >
                             <svg
@@ -132,7 +132,7 @@ export default function ItemList({
                         </div>
                     ) : (
                         <div
-                            className="flex text-gray-600 dark:text-gray-200"
+                            className="flex text-slate-600 dark:text-slate-200"
                             onClick={() => setIsExpanded(true)}
                         >
                             <svg

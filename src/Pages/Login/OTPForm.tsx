@@ -43,7 +43,7 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
             }}
         >
             <div>
-                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-gray-300">
+                <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-slate-300">
           Verification code
                 </label>
                 <input
@@ -56,14 +56,14 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
                     onChange={(event) => setCode(event?.target.value)}
                     id="tel"
                     placeholder="Your OTP"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
             </div>
             <div className={`${error ? 'opacity-100' : 'opacity-0'} text-sm mt-2 ml-2 text-rose-600 transition duration-500 ease-in-out`}>
         * {error}
             </div>
             <Button className="mt-6">Verify OTP</Button>
-            <div className="text-sm mt-4 text-center text-gray-600 dark:text-gray-400">
+            <div className="text-sm mt-4 text-center text-slate-600 dark:text-slate-400">
         Didn{`'`}t recieve OTP ? <a className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700" href="#" onClick={goBack}> Resend the OTP</a>
             </div>
         </form>

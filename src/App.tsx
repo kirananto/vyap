@@ -37,7 +37,7 @@ export const InitialRouter = () => {
 
     return (
         <IntlProvider locale={userInterfaceLanguage} messages={messages[userInterfaceLanguage]} defaultLocale={defaultUserInterfaceLanguage}>
-            <div className="app_background dark:bg-gray-800">
+            <div className="app_background dark:bg-slate-800">
                 <ServiceWorkerIntegration />
                 <Router>
                     <RouterComp />

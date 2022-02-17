@@ -62,13 +62,13 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                         <div className={`mt-2 flex w-full justify-between pb-2`}>
                             <div className="flex gap-2">
                                 <div className="flex flex-col">
-                                    <div className="text-xs text-gray-500 dark:text-gray-300">
+                                    <div className="text-xs text-slate-500 dark:text-slate-300">
                                         #{item?.id?.split('-')[0]} •{' '}
                                         {item.createdAt
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
                                     </div>
-                                    <div className="my-1 font-semibold text-gray-600 dark:text-gray-200">
+                                    <div className="my-1 font-semibold text-slate-600 dark:text-slate-200">
                                         {user?.organizationId === item?.senderOrgId
                                             ? item.receiver?.name
                                             : item.senderOrg?.name}
@@ -79,7 +79,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                 </div>
                             </div>
                             <div className="flex items-center">
-                                <div className="text-lg font-extrabold text-gray-600 dark:text-gray-200">
+                                <div className="text-lg font-extrabold text-slate-600 dark:text-slate-200">
                                     ₹ {item.amount}
                                 </div>
                             </div>
@@ -126,7 +126,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
 
     if (loading) {
         return (
-            <div className="mt-12 grid p-12 text-center dark:text-gray-100">
+            <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                 <Spinner />
             </div>
         )
@@ -135,7 +135,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
     if (payments?.length === 0) {
         return <div>
             <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
-            <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+            <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
                 {' '}
                 You don{`'`}t have any transactions. Please do some transactions and visit here later.{' '}
             </div>
@@ -164,19 +164,19 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                 <div className="row-span-3 grid auto-cols-max grid-flow-col gap-1">
 
                                 </div>
-                                <div className="text-gray-500 mt-1 text-xs dark:text-gray-300">
+                                <div className="text-slate-500 mt-1 text-xs dark:text-slate-300">
                                     {item.createdAt
                                         ? format(new Date(item.createdAt), 'do MMM yyyy')
                                         : ''}
                                 </div>
                                 <div className="m-auto flex w-full justify-between">
                                     
-                                    <div className="basis-7/12 text-sm md:text-md text-gray-600 font-semibold  dark:text-gray-200">
+                                    <div className="basis-7/12 text-sm md:text-md text-slate-600 font-semibold  dark:text-slate-200">
                                         {user?.organizationId === item?.senderOrgId
                                             ? item.receiver?.name
                                             : item.senderOrg?.name}
                                     </div>
-                                    <div className="flex basis-5/12 justify-end self-center text-sm md:text-lg font-extrabold text-gray-600 dark:text-gray-200">
+                                    <div className="flex basis-5/12 justify-end self-center text-sm md:text-lg font-extrabold text-slate-600 dark:text-slate-200">
                                         ₹ {item.amount}
                                     </div>
                                 </div>

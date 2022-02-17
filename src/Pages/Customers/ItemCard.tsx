@@ -56,12 +56,12 @@ export function ItemCard({ item }: IProps) {
                     {user?.organization?.isSupplier && <div>
                         {item.isSupplier ? <div className="text-green-700 border bg-green-100 tracking-wider w-min rounded px-1 -mt-2 text-xs dark:bg-green-800 dark:border-green-900 dark:text-green-300"> Retailer </div> : <div className="text-blue-700 bg-blue-100 tracking-wider w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
                     </div>}
-                    <h2 className="font-extrabold text-gray-600 dark:text-gray-200 truncate">{item.recipient?.name}</h2>
-                    <h5 className="text-xs text-gray-500 dark:text-gray-400 leading truncate">{item.lastMsg}</h5>
+                    <h2 className="font-extrabold text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
+                    <h5 className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{item.lastMsg}</h5>
                 </div>
                 <div className="w-1/5 lg:w-auto mt-5 text-right">
 
-                    <h6 className="text-xs text-gray-500 dark:text-gray-400"> {renderTime(new Date(item.updatedAt))}</h6>
+                    <h6 className="text-xs text-slate-500 dark:text-slate-400"> {renderTime(new Date(item.updatedAt))}</h6>
                     {item.unseenNumbers ? <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-600 bg-green-100 rounded-full">
                         {item.unseenNumbers}
                     </div> : null}

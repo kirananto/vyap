@@ -26,11 +26,11 @@ function ItemCard({productImage} : IProps) {
             </div>
             {/* detail-col */}
             <div className="w-full ml-2 mt-2">
-                <div className="text-lg font-bold text-gray-700 dark:text-gray-300">
+                <div className="text-lg font-bold text-slate-700 dark:text-slate-300">
                     {productDetails.centralCatalogue?.name}
                 </div>
-                <div className="text-xs text-gray-400 dark:text-gray-400 line-clamp-2">{productDetails?.centralCatalogue?.description}</div>
-                {/* <div className="text-xs font-bold text-gray-400">
+                <div className="text-xs text-slate-400 dark:text-slate-400 line-clamp-2">{productDetails?.centralCatalogue?.description}</div>
+                {/* <div className="text-xs font-bold text-slate-400">
           MRP: {productDetails.price} ₹
         </div> */}
             </div>

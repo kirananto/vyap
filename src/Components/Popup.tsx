@@ -4,7 +4,7 @@ import './Style/Popup.css'
 
 function Popup({ setModalEmployee, children, trigger }: { setModalEmployee: React.Dispatch<React.SetStateAction<boolean>>, children: JSX.Element | string, trigger: boolean }) {
     return trigger ? (
-        <div className="border-t border-gray-200 shadow-2xl main-popup-container dark:bg-gray-700 dark:border-gray-800">
+        <div className="border-t border-gray-200 shadow-2xl main-popup-container dark:bg-slate-700 dark:border-gray-800">
             <div className="main-popup-inner">
                 <button
                     onClick={() => {

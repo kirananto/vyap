@@ -19,7 +19,7 @@ export default function ProductSuggestionCard({
 }) {
 
     return (<div
-        className="grid flex-none w-48 bg-white-200 dark:bg-gray-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"
+        className="grid flex-none w-48 bg-white-200 dark:bg-slate-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"
     >
         <div className="relative self-center -mt-4 -mx-4 w-auto h-24 rounded-tl-l grounded-tr-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
             {item?.thumbnailImage && (
@@ -35,15 +35,15 @@ export default function ProductSuggestionCard({
         </div>
 
         <div className="flex flex-col ml-0 self-center">
-            <div className="text-sm w-32 mt-1 font-bold text-gray-600 dark:text-gray-200 truncate">
+            <div className="text-sm w-32 mt-1 font-bold text-slate-600 dark:text-slate-200 truncate">
                 {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name}
             </div>
             <div className="grid grid-cols-2 my-2 mb-3">
-                <div className="text-xs font-semibold text-gray-500  dark:text-gray-400">
+                <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
                     <p>MRP:</p>
                     <p>₹{item?.mrpPrice}</p>
                 </div>
-                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     <p>Sales Price:</p>
                     <p>{item?.rate}</p>
                 </div>
@@ -71,10 +71,10 @@ export default function ProductSuggestionCard({
                     />
                 </svg>
             </div>
-            <div className="flex items-center dark:text-gray-200">
+            <div className="flex items-center dark:text-slate-200">
                 <form autoComplete="off">
                     <input
-                        className="w-16 border-dashed border px-1 border-indigo-300 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 rounded px-2 "
+                        className="w-16 border-dashed border px-1 border-indigo-300 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 rounded px-2 "
                         type="number"
                         name="qty"
                         id="qty"

@@ -42,7 +42,7 @@ const Account = ({ item, type }: CategoryName) => {
             />
             <label
                 htmlFor={`radioBox${type}${item.name}`}
-                className="text-sm font-semibold text-gray-500 dark:text-gray-400"
+                className="text-sm font-semibold text-slate-500 dark:text-slate-400"
             >
                 {type === 'orderStatus' ? item?.name : item?.name}
             </label>
@@ -85,7 +85,7 @@ export default function FilterCategory(props: FilterCategories) {
 
     return (
         <div>
-            <h1 className="mb-1 text-base font-semibold text-gray-500 dark:text-gray-300">
+            <h1 className="mb-1 text-base font-semibold text-slate-500 dark:text-slate-300">
                 {props.heading}
             </h1>
             <div

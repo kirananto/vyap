@@ -40,12 +40,12 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
     return (
         <div className={`flex ${className} w-full `}>
-            <NavLink to={`/chat/${id}/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-gray-50 border border-yellow-900 border-opacity-50 dark:bg-gray-800 dark:hover:bg-gray-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/chat/${id}/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-slate-50 border border-yellow-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
           Payment
                 </div>
-                <div className={`text-3xl mt-1 text-gray-700 font-bold dark:text-gray-200 truncate ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${parseInt(payment?.amount, 10)}` : null}</div>
-                {payment?.note && payment.note?.length > 1 ? <div className="border border-1 border-gray-300 dark:border-gray-600 p-1 px-4 pl-3 mt-2 mb-4 bg-gray-100 dark:bg-gray-700 w-fit text-xs text-gray-700 dark:text-gray-300 rounded break-all line-clamp-2 ">{payment?.note}</div> : ''}
+                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${payment?.amount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${parseInt(payment?.amount, 10)}` : null}</div>
+                {payment?.note && payment.note?.length > 1 ? <div className="border border-1 border-gray-300 dark:border-gray-600 p-1 px-4 pl-3 mt-2 mb-4 bg-slate-100 dark:bg-slate-700 w-fit text-xs text-slate-700 dark:text-slate-300 rounded break-all line-clamp-2 ">{payment?.note}</div> : ''}
                 {/* bottom  */}
                 <div className="flex items-center w-full">
                     {/* col-1 */}
@@ -63,11 +63,11 @@ export default function PaymentCard({ className, thread }: { className: string, 
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <p className="text-xs text-gray-500 dark:text-gray-300">Completed</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-300">Completed</p>
                     </div>
                     {/* col-2 */}
                     <div className="flex justify-left w-7/12 gap-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-300">● {format(
+                        <p className="text-xs text-slate-500 dark:text-slate-300">● {format(
                             new Date(thread.updatedAt),
                             'do MMM'
                         )}</p>

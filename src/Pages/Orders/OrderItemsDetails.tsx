@@ -52,7 +52,7 @@ export default function OrderItemsDetails({
     if (loading) {
         return (
             <div className="p-4 m-4 border border-gray-300 dark:border-gray-500 rounded">
-                <div className="p-12 mt-12 text-center dark:text-gray-100 grid">
+                <div className="p-12 mt-12 text-center dark:text-slate-100 grid">
                     <Spinner />
                 </div>
             </div>
@@ -65,7 +65,7 @@ export default function OrderItemsDetails({
                 id="print"
                 ref={componentRef}
             >
-                <h2 className="dark:text-gray-300 font-bold"> Order items </h2>
+                <h2 className="dark:text-slate-300 font-bold"> Order items </h2>
 
                 <div className={`flex w-full justify-between mt-1 pb-2 `}>
                     {/* TODO: Remove this console.log */}
@@ -73,10 +73,10 @@ export default function OrderItemsDetails({
                     {/* <div className="flex gap-2">
                         <div className="flex flex-col">
                             
-                            <div className="text-gray-600 font-semibold dark:text-gray-200 my-1">
+                            <div className="text-slate-600 font-semibold dark:text-slate-200 my-1">
                                 {order.supplier?.name} {'->'} {order?.buyer?.name}
                             </div>
-                            <div className="text-gray-400 text-xs  dark:text-gray-300">
+                            <div className="text-slate-400 text-xs  dark:text-slate-300">
                                 {order.createdAt
                                     ? format(new Date(order.createdAt), 'do MMM yyyy')
                                     : ''}
@@ -88,14 +88,14 @@ export default function OrderItemsDetails({
                     </div> */}
                     {/* <div className="flex">
                         <div className="flex flex-col">
-                            <div className="text-gray-600 text-lg font-extrabold dark:text-gray-200">
+                            <div className="text-slate-600 text-lg font-extrabold dark:text-slate-200">
                 ₹{' '}
                                 {(
                                     parseFloat(order?.totalAmount) -
                   parseFloat(order?.flatDiscount)
                                 ).toFixed(2)}
                             </div>
-                            <div className="text-gray-400 text-xs font-extrabold mx-auto dark:text-gray-300">
+                            <div className="text-slate-400 text-xs font-extrabold mx-auto dark:text-slate-300">
                 ({order?.numberOfItems} items)
                             </div>
                         </div>
@@ -112,7 +112,7 @@ export default function OrderItemsDetails({
                         key={`${index}`}
                     >
                         <div className="flex gap-2">
-                            <div className="flex-none mt-2 text-gray-400 text-xs dark:text-gray-400">{item?.quantity} X </div>
+                            <div className="flex-none mt-2 text-slate-400 text-xs dark:text-slate-400">{item?.quantity} X </div>
                             <div
                                 className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6"
                                 style={
@@ -129,49 +129,49 @@ export default function OrderItemsDetails({
                             />
                             {/* <div className="flex flex-col"> */}
                             {/* <div className="flex gap-4"> */}
-                            <div className="text-gray-600 pr-4 self-center text-xs font-semibold md:text-md dark:text-gray-200">
+                            <div className="text-slate-600 pr-4 self-center text-xs font-semibold md:text-md dark:text-slate-200">
                                 {item?.product?.centralCatalogue?.name}
                                 {item?.product?.aliasName
                                     ? `(${item?.product?.aliasName})`
                                     : ''}
                             </div>
-                            {/* <div className="text-gray-600 dark:text-gray-300  ">
+                            {/* <div className="text-slate-600 dark:text-slate-300  ">
                     x 
                                     </div> */}
                             {/* </div> */}
                             {/* <div className="flex gap-4 text-xs font-bold"> */}
-                            {/* <div className="text-gray-400 text-xs dark:text-gray-400">
+                            {/* <div className="text-slate-400 text-xs dark:text-slate-400">
                                     {item?.quantity} quantity
                                 </div> */}
-                            {/* <div className="text-gray-400 dark:text-gray-400">
+                            {/* <div className="text-slate-400 dark:text-slate-400">
                     MRP: ₹{item?.product?.mrpPrice}
                                     </div> */}
                             {/* </div> */}
                             {/* </div> */}
                         </div>
-                        <div className="flex text-gray-400 text-xs font-extrabold dark:text-gray-300 self-center">
+                        <div className="flex text-slate-400 text-xs font-extrabold dark:text-slate-300 self-center">
                             {/* ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)} */}
               ₹{item?.purchasePrice}
                         </div>
                     </div>
                 ))}
                 {orderItems?.length === 0 && (
-                    <div className="mt-2 text-center text-gray-600 dark:text-gray-200 mb-4">
+                    <div className="mt-2 text-center text-slate-600 dark:text-slate-200 mb-4">
                         {' '}
             Order items are not available{' '}
                     </div>
                 )}
                 <div className="flex justify-end">
                     <div>
-                        <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold text-right">
+                        <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Total:</span> ₹
                             {parseFloat(order?.totalAmount).toFixed(0)}
                         </div>
-                        <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold text-right">
+                        <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Discount:</span> ₹
                             {parseFloat(order?.flatDiscount).toFixed(0)}
                         </div>
-                        <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold text-right">
+                        <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Final Amount:</span> ₹
                             {(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)

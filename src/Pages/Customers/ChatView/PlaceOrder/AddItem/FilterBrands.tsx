@@ -29,7 +29,7 @@ const Category = (props: CategoryName) => {
             <input type="checkbox" id={`cbrandCheckBox${props.name}`} checked={isChecked} onChange={tickCheckBox} />
             <label
                 htmlFor={`cbrandCheckBox${props.name}`}
-                className="text-sm font-semibold text-gray-500 dark:text-gray-400"
+                className="text-sm font-semibold text-slate-500 dark:text-slate-400"
             >
                 {props.name}
             </label>
@@ -54,7 +54,7 @@ export default function FilterBrand(props: FilterBrands) {
     function renderItems() {
         if (items?.length === 0) {
             return (
-                <div className="text-xs text-gray-700 dark:text-gray-100">
+                <div className="text-xs text-slate-700 dark:text-slate-100">
                     {' '}
           No {props.type} present{' '}
                 </div>
@@ -67,7 +67,7 @@ export default function FilterBrand(props: FilterBrands) {
 
     return (
         <div>
-            <h1 className="mb-1 text-base font-semibold text-gray-500 dark:text-gray-300">
+            <h1 className="mb-1 text-base font-semibold text-slate-500 dark:text-slate-300">
                 {props.heading}
             </h1>
             <div className="mt-2 flex max-h-[25vh] flex-col gap-1  overflow-y-scroll">

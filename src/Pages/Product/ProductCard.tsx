@@ -76,17 +76,17 @@ export default function ProductCard({
                 </div>
 
                 <div className="max-w-[65vw] w-full  self-center px-5">
-                    <div className="font-semibold text-md dark:text-gray-200 truncate">
+                    <div className="font-semibold text-md dark:text-slate-200 truncate">
                         {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name}
                     </div>
 
                     <div>
-                        {/* <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 ">
+                        {/* <p className="text-sm font-semibold text-slate-400 dark:text-slate-300 ">
               #{item.id?.split("-")[0]}
             </p> */}
                     </div>
                     <div className="grid grid-cols-2">
-                        <div className="text-sm font-semibold text-gray-500  dark:text-gray-400">
+                        <div className="text-sm font-semibold text-slate-500  dark:text-slate-400">
                             <p>
                 MRP
                             </p>
@@ -94,7 +94,7 @@ export default function ProductCard({
                 ₹{item?.mrpPrice}
                             </p>
                         </div>
-                        <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+                        <div className="text-sm font-semibold text-slate-500 dark:text-slate-400">
                             <p >
                 Sales Price
                             </p>
@@ -110,7 +110,7 @@ export default function ProductCard({
             <div className="flex justify-end basis-2/12 text-center place-self-center py-9">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-gray-500 dark:text-gray-300"
+                    className="w-6 h-6 text-slate-500 dark:text-slate-300"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

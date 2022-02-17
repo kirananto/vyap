@@ -51,9 +51,9 @@ export const Payment = () => {
         localStorage.setItem('isSupplier', `${inbox?.isSupplier}`)
     }, [inbox?.isSupplier])
     return (
-        <div className="overflow-y-auto dark:bg-gray-900">
+        <div className="overflow-y-auto dark:bg-slate-900">
             {/* header */}
-            <div className="fixed w-full z-10 pb-3 bg-white drop-shadow-md dark:bg-gray-800">
+            <div className="fixed w-full z-10 pb-3 bg-white drop-shadow-md dark:bg-slate-800">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/home')}
@@ -77,7 +77,7 @@ export const Payment = () => {
             />
             {/* Footer */}
             <div
-                className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-gray-800"
+                className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-slate-800"
                 style={{ boxShadow: '0px -6px 28px #0000002e' }}
             >
                 {inbox?.isSupplier ? (

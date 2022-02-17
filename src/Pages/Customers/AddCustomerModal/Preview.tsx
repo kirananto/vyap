@@ -59,9 +59,9 @@ export default function PreviewScreen({
                 // onPressLogin(phoneNumber.replace('+91', ''));
             }}
         >
-            <div className="mt-4 dark:text-gray-400">
+            <div className="mt-4 dark:text-slate-400">
         Please confirm the below information
-                <div className="my-6 bg-gray-200 p-4 rounded-lg dark:bg-gray-600 dark:text-gray-200">
+                <div className="my-6 bg-slate-200 p-4 rounded-lg dark:bg-slate-600 dark:text-slate-200">
           You are inviting {returnName(phoneNumber, isExisting, businessName)}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(0)} </span>
 
                 </div>

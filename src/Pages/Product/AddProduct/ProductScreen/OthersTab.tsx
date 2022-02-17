@@ -113,7 +113,7 @@ function handleInputChange(event: React.ChangeEvent<HTMLInputElement>,
 const Input = (props: IInputProps) => {
     return (
         <div className=" mt-2  ">
-            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+            <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                 {props.label}
             </p>
             <input
@@ -123,7 +123,7 @@ const Input = (props: IInputProps) => {
                 type="text"
                 value={props.value}
                 placeholder={props.placeholder}
-                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
             />
         </div>
     )
@@ -206,10 +206,10 @@ function OthersTab({ action, saveAttempt }: Props) {
         >
             {!addProductInfo?.centralCatalogue?.id && (
                 <>
-                    <h1 className="font-bold text-gray-500 dark:text-gray-400 ">
+                    <h1 className="font-bold text-slate-500 dark:text-slate-400 ">
                         Add product images
                     </h1>
-                    <p className="mt-2 text-xs font-bold text-gray-400 dark:text-gray-300">
+                    <p className="mt-2 text-xs font-bold text-slate-400 dark:text-slate-300">
                         Add upto 5 images. First image is your product{`'`}s cover
                         <br /> image that will be highlighted everywhere{' '}
                     </p>
@@ -219,7 +219,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             <ImageContainer key={item.imageName} item={item} />
                         ))}
                         <div
-                            className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border border-gray-400 p-1 shadow-sm dark:text-gray-300"
+                            className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border border-gray-400 p-1 shadow-sm dark:text-slate-300"
                             onClick={() => fileUploaderRef.current?.click()}
                         >
                             {!spinner ? (
@@ -259,7 +259,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {/* brand input */}
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Brand
                         </p>
                         <div className="des-modal-btn">
@@ -272,11 +272,11 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 value={addProductInfo?.others?.brand?.name}
                                 type="text"
                                 placeholder="Enter brand"
-                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300"
+                                className="modal-btn dark:text-slate-300"
                                 onClick={handleModal}
                             >
                                 <svg
@@ -316,7 +316,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {/* Category-Input */}
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Category
                         </p>
                         <div className="des-modal-btn">
@@ -332,11 +332,11 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 value={addProductInfo?.others?.centralCategory?.name}
                                 type="text"
                                 placeholder="Enter category"
-                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300"
+                                className="modal-btn dark:text-slate-300"
                                 onClick={handleCategoryModal}
                             >
                                 <svg
@@ -379,7 +379,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {/* Tag-Input */}
                 {action === PAGE_ACTION.ADD && (
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Tag
                         </p>
                         <div className="des-modal-btn">
@@ -392,11 +392,11 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 value={addProductInfo?.others?.category?.name}
                                 type="text"
                                 placeholder="Enter Tags"
-                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300"
+                                className="modal-btn dark:text-slate-300"
                                 onClick={handleTagsModal}
                             >
                                 <svg
@@ -468,7 +468,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             dispatch={dispatch}
                             value={addProductInfo?.others?.barCode}
                         />
-                        <div className="barcode-icon dark:text-gray-300">
+                        <div className="barcode-icon dark:text-slate-300">
                             <button>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

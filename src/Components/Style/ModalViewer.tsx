@@ -14,7 +14,7 @@ export default function ModalViewer({
         <div className="fixed top-0 left-0 z-10">
             <div className="relative left-0 bg-black bg-opacity-50 h-screen w-screen">
                 <div onClick={onClose} className="h-screen w-screen" />
-                <div className="absolute bottom-0 rounded-t-2xl flex flex-col w-full gap-3 bg-white text-left dark:bg-gray-700 px-4 pt-4 animate__animated animate__fadeInUpBig animate__faster">
+                <div className="absolute bottom-0 rounded-t-2xl flex flex-col w-full gap-3 bg-white text-left dark:bg-slate-700 px-4 pt-4 animate__animated animate__fadeInUpBig animate__faster">
                     {body}
                     {name ? (name === 'filter' &&
                         <div className="w-full mb-5">

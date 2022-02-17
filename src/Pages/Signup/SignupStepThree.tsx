@@ -23,9 +23,9 @@ const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
         <div onClick={() => {
             hapticFeedback()
             onSelect ? onSelect() : undefined
-        }} className="flex cursor-pointer items-center gap-3 bg-white custom dark:bg-gray-700">
+        }} className="flex cursor-pointer items-center gap-3 bg-white custom dark:bg-slate-700">
             {/* ===tick-div=== */}
-            <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-gray-200 dark:bg-gray-500'}`}>
+            <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-slate-200 dark:bg-slate-500'}`}>
                 {isSelected && <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-6 h-6 text-green-800"
@@ -41,8 +41,8 @@ const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
             </div>
             {/* === */}
             <div className="flex flex-col custom-width-para-text ml-2">
-                <h1 className="text-lg font-bold text-gray-600 dark:text-gray-200">{title}</h1>
-                <p className="text-xs text-gray-500 dark:text-gray-300 w-32 break-words	">
+                <h1 className="text-lg font-bold text-slate-600 dark:text-slate-200">{title}</h1>
+                <p className="text-xs text-slate-500 dark:text-slate-300 w-32 break-words	">
                     {description}
                 </p>
                 {/* <img src="" alt="" /> */}
@@ -107,14 +107,14 @@ export default function SignupStepThree() {
     }
 
     return (
-        <div className="flex flex-col items-start w-full min-h-screen bg-gray-100 dark:bg-gray-900 pb-48">
+        <div className="flex flex-col items-start w-full min-h-screen bg-slate-100 dark:bg-slate-900 pb-48">
             <div className="w-11/12 mx-auto ">
                 <div className="flex items-center justify-start mt-32 mb-5">
                     <img style={logoStyle} className="w-24 m--5" src={vyapLogo} alt="" />
-                    <h1 className="text-4xl font-bold text-gray-600 dark:text-gray-300">VYAP</h1>
+                    <h1 className="text-4xl font-bold text-slate-600 dark:text-slate-300">VYAP</h1>
                 </div>
 
-                <h1 className="text-lg font-bold text-gray-600 dark:text-gray-300">
+                <h1 className="text-lg font-bold text-slate-600 dark:text-slate-300">
           Please specify the <br /> category of business
                 </h1>
 
@@ -123,7 +123,7 @@ export default function SignupStepThree() {
                 </div>}
                 {error && <div className="text-rose-500 dark:text-rose-400 mt-2 text-xs">
                     <span className="pl-1">* {typeof error === 'string' ? error : 'Something went wrong during the signup.'} </span>
-                    {Array.isArray(error) ? <ul className="border border-gray-300 dark:border-gray-700 p-4 px-8 rounded bg-gray-200 dark:bg-gray-900 m-2 mx-2 text-xs list-disc">
+                    {Array.isArray(error) ? <ul className="border border-gray-300 dark:border-gray-700 p-4 px-8 rounded bg-slate-200 dark:bg-slate-900 m-2 mx-2 text-xs list-disc">
                         {error?.map((mapItem: string) => <li key={mapItem}>{mapItem} </li>)}
                     </ul> : null}
                 </div>}

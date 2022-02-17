@@ -43,7 +43,7 @@ export default function Payments() {
     return (
         <div className="">
             {/* header */}
-            <div className="w-full bg-white pb-3 shadow dark:bg-gray-800  print:hidden">
+            <div className="w-full bg-white pb-3 shadow dark:bg-slate-800  print:hidden">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/more')}
@@ -54,9 +54,9 @@ export default function Payments() {
                 />
             </div>
             {/* body */}
-            <div className="bg-gray-100 p-4 dark:bg-gray-900 print:hidden">
+            <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
                 <div
-                    className="overflow-y-auto rounded bg-white p-4 dark:bg-gray-800"
+                    className="overflow-y-auto rounded bg-white p-4 dark:bg-slate-800"
                     style={{ height: 'calc(100vh - 15rem)' }}
                 >
                     <PaymentContainer payments={payments} loading={loading} />
@@ -71,7 +71,7 @@ export default function Payments() {
             />
             {/* Footer */}
 
-            <div className="fixed  print:static bottom-0 grid h-20 w-full bg-white px-8  drop-shadow-xl dark:bg-gray-800">
+            <div className="fixed  print:static bottom-0 grid h-20 w-full bg-white px-8  drop-shadow-xl dark:bg-slate-800">
                 <div className="mt-2 flex w-full max-w-lg items-center justify-center gap-2 justify-self-center">
                     <PrintAll apiData={payments} />
                     <ExportAll apiData={payments} />

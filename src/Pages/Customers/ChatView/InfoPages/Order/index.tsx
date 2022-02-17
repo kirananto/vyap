@@ -87,9 +87,9 @@ export default function OrderDetails() {
 
     return (
         <>
-            <div className="min-h-screen bg-gray-100 overflow-auto dark:bg-gray-900">
+            <div className="min-h-screen bg-slate-100 overflow-auto dark:bg-slate-900">
                 {/* Header */}
-                <div className="w-full py-2 bg-white drop-shadow-md dark:bg-gray-800">
+                <div className="w-full py-2 bg-white drop-shadow-md dark:bg-slate-800">
                     {/* Todo :: Share icon have to be added in the place of contact icon */}
                     <Header
                         isSticky={true}
@@ -101,7 +101,7 @@ export default function OrderDetails() {
                 <span ref={ref}>
                     {/* Body */}
                     <div className="flex flex-col items-center gap-5 py-24">
-                        <h1 className="text-6xl font-black text-center text-gray-600 dark:text-gray-300">
+                        <h1 className="text-6xl font-black text-center text-slate-600 dark:text-slate-300">
               ₹
                             {(order?.totalAmount && isNumber(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount))) ?  (
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
@@ -122,16 +122,16 @@ export default function OrderDetails() {
                                     clipRule="evenodd"
                                 />
                             </svg>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
                 Order completed
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
                 ●{' '}
                                 {order?.updatedAt
                                     ? format(new Date(order?.updatedAt), 'do MMM')
                                     : null}
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
                 ● {order?.numberOfItems} Items
                             </p>
                             {/* ------------------ */}
@@ -156,7 +156,7 @@ export default function OrderDetails() {
                         <div className="flex w-full items-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 dark:text-gray-300"
+                                className="h-6 w-6 dark:text-slate-300"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"

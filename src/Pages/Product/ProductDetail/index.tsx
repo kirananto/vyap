@@ -37,7 +37,7 @@ const ProductDetail = () => {
     }, [dispatch, id, token, product?.centralCatalogueId])
 
     return <div className='min-h-screen'>
-        <div className="w-full bg-white pb-3 drop-shadow-md dark:bg-gray-800">
+        <div className="w-full bg-white pb-3 drop-shadow-md dark:bg-slate-800">
             <Header
                 isSticky={false}
                 onBackClick={() => navigate('/my-products')}
@@ -77,25 +77,25 @@ const ProductDetail = () => {
             </div> : null}
 
             <div className=" w-full self-center px-1 py-3">
-                <div className="font-semibold text-lg dark:text-gray-300 truncate">
+                <div className="font-semibold text-lg dark:text-slate-300 truncate">
                     {/* {product?.aliasName ? `${product?.aliasName}` : ''} {product?.aliasName ? `(${product?.centralCatalogue?.name})` : product?.centralCatalogue?.name} */}
                     {product?.aliasName ? `${product?.aliasName}` : ''} {product?.aliasName ? `(${product?.centralCatalogue?.name})` : product?.centralCatalogue?.name}
                 </div>
 
                 <div className="grid grid-cols-2 py-3">
-                    <div className="font-semibold text-gray-400  dark:text-gray-400">
+                    <div className="font-semibold text-slate-400  dark:text-slate-400">
                         <p className="text-sm ">
                             MRP
                         </p>
-                        <p className=" text-md font-semibold text-gray-600 dark:text-gray-300">
+                        <p className=" text-md font-semibold text-slate-600 dark:text-slate-300">
                             ₹{product?.mrpPrice}
                         </p>
                     </div>
-                    <div className="font-semibold text-gray-400 dark:text-gray-400">
+                    <div className="font-semibold text-slate-400 dark:text-slate-400">
                         <p className="text-sm">
                             Sales Price
                         </p>
-                        <p className="text-md font-semibold text-gray-600 dark:text-gray-300" >
+                        <p className="text-md font-semibold text-slate-600 dark:text-slate-300" >
                             ₹{product?.rate}
                         </p>
                     </div>
@@ -104,39 +104,39 @@ const ProductDetail = () => {
 
 
             <div className="flex flex-col mb-8 px-1">
-                <div className="text-sm text-gray-400 dark:text-gray-400">
+                <div className="text-sm text-slate-400 dark:text-slate-400">
                     Description
                 </div>
 
-                <div className="pt-1 text-sm text-gray-600 dark:text-gray-300">
+                <div className="pt-1 text-sm text-slate-600 dark:text-slate-300">
                     {product?.centralCatalogue?.description}
                 </div>
             </div>
 
 
-            <div className="flex flex-col text-gray-500   mb-5 px-1">
-                <div className="text-sm text-gray-500 font-bold dark:text-gray-400">
+            <div className="flex flex-col text-slate-500   mb-5 px-1">
+                <div className="text-sm text-slate-500 font-bold dark:text-slate-400">
                     Other Details
                 </div>
 
-                <div className="flex flex-col pt-2 text-sm text-gray-400">
+                <div className="flex flex-col pt-2 text-sm text-slate-400">
 
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
-                        <div className="basis-1/2 text-gray-400 dark:text-gray-500">Brand:</div>
-                        <div className="basis-1/2 text-gray-700 dark:text-gray-300">{product?.centralData?.brand?.name}</div>
+                        <div className="basis-1/2 text-slate-400 dark:text-slate-500">Brand:</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.centralData?.brand?.name}</div>
                     </div>
 
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
-                        <div className="basis-1/2 text-gray-400 dark:text-gray-500">Category:</div>
-                        <div className="basis-1/2 text-gray-700 dark:text-gray-300">{product?.centralData?.categories?.[0]?.name ?? '--'}</div>
+                        <div className="basis-1/2 text-slate-400 dark:text-slate-500">Category:</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.centralData?.categories?.[0]?.name ?? '--'}</div>
                     </div>
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
-                        <div className="basis-1/2 text-gray-400 dark:text-gray-500">Tags:</div>
-                        <div className="basis-1/2 text-gray-700 dark:text-gray-300">{product?.organizationCatalogueCategory?.name}</div>
+                        <div className="basis-1/2 text-slate-400 dark:text-slate-500">Tags:</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.organizationCatalogueCategory?.name}</div>
                     </div>
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
-                        <div className="basis-1/2 text-gray-400 dark:text-gray-500">Item Code (SKU):</div>
-                        <div className="basis-1/2 text-gray-700 dark:text-gray-300">{product?.itemSKUCode}</div>
+                        <div className="basis-1/2 text-slate-400 dark:text-slate-500">Item Code (SKU):</div>
+                        <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.itemSKUCode}</div>
                     </div>
                 </div>
             </div>

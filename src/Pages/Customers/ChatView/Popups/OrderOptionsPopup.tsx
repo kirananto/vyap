@@ -41,7 +41,7 @@ const OrderOptionsPopup = ({ onClose, currentOrderId, setUpdatingOrderId, setNew
         <div className="pb-8 pt-2 px-4">
             {/* Heading */}
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">Update Order Status</h1>
+                <h1 className="text-lg w-full font-bold text-slate-500 dark:text-slate-200">Update Order Status</h1>
             </div>
             {/* row-1 */}
             <div className="flex flex-col mt-6">
