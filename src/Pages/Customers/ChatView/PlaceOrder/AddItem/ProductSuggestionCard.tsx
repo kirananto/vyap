@@ -44,7 +44,7 @@ export default function ProductSuggestionCard({
                     <p>₹{item?.mrpPrice}</p>
                 </div>
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                    <p>Cost:</p>
+                    <p>Sales Price:</p>
                     <p>{item?.rate}</p>
                 </div>
             </div>

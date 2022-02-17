@@ -83,7 +83,7 @@ function PricingTab({ action, saveAttempt }: Props) {
             {/* Sale Price */}
 
             <div>
-                <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sale Price</p>
+                <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sales Price</p>
                 <input
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         dispatch(setSalesPrice(Number(event.target.value)))
@@ -101,7 +101,7 @@ function PricingTab({ action, saveAttempt }: Props) {
             (addProductInfo.pricing?.salesPrice === undefined || isValidSalePrice(addProductInfo.pricing?.salesPrice) ? 'hidden' : '')
                     }
                 >
-          * Enter valid Sale price !
+          * Enter valid Sales price !
                 </span>
             </div>
 
