@@ -1,3 +1,5 @@
+import type { IOrganizationProductCategory } from './organizationProductCategories'
+
 export interface IFetchCentralCatalogueProduct {
     id: string;
     createdAt: string;
@@ -9,7 +11,7 @@ export interface IFetchCentralCatalogueProduct {
     barCode: string;
     isApproved: boolean;
     hsnId?: null;
-    categories?: (null)[] | null;
+    categories?: IOrganizationProductCategory[];
     brand: Brand;
     images?: (ImagesEntity)[] | null;
 }

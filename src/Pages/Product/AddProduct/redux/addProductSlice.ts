@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
 import type { ICentralImage } from 'src/types/fetchCentralProductImages'
+import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
 import type { BrandInterface } from '../ProductScreen/BrandModal'
 
 interface CatalogueImageInterface {
@@ -44,12 +45,7 @@ export interface AddProductInterface {
     others: {
         productImage: ICentralImage[]
         skuCode: string
-        category?: {
-            id?: string,
-            name: string,
-            description?: string,
-            imageName?: string
-        },
+        category?: IOrganizationProductCategory,
         centralCategory?: {
             id?: string,
             name: string,

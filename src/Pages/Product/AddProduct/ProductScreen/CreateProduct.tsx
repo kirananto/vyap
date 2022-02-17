@@ -188,11 +188,16 @@ function CreateProduct() {
                 token, data: {
                     name: addProductInfo?.centralCatalogue?.name,
                     description: addProductInfo?.centralCatalogue?.description ?? '',
-                    categories: {
+                    categories: addProductInfo?.others?.centralCategory?.id ? [{
+                        id: addProductInfo?.others?.centralCategory?.id,
+                        name: addProductInfo?.others?.centralCategory?.name ?? '',
+                        description: addProductInfo?.others?.centralCategory?.description ?? '',
+                        imageName: addProductInfo?.others?.centralCategory?.imageName ?? '',
+                    }] : [{
                         name: addProductInfo?.others?.centralCategory?.name ?? '',
                         description: addProductInfo?.others?.centralCategory?.name ?? '',
                         imageName: addProductInfo?.others?.centralCategory?.name ?? '',
-                    },
+                    }],
                     barCode: addProductInfo?.others?.barCode,
                     images: addProductInfo?.others?.productImage,
                     hsnId: addProductInfo?.pricing?.taxEnabled

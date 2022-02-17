@@ -36,7 +36,7 @@ export interface AddCentralCatalogueInterface {
     hsnId?: string
     barCode?: string
     categoriesId?: string
-    categories: IOrganizationProductCategory
+    categories: IOrganizationProductCategory[]
     images: ICentralImage[]
     brand?: { 
         name?: string

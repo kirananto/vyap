@@ -128,7 +128,7 @@ const ProductDetail = () => {
 
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
                         <div className="basis-1/2 text-gray-400 dark:text-gray-500">Category:</div>
-                        <div className="basis-1/2 text-gray-700 dark:text-gray-300">....</div>
+                        <div className="basis-1/2 text-gray-700 dark:text-gray-300">{product?.centralData?.categories?.[0]?.name ?? '--'}</div>
                     </div>
                     <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
                         <div className="basis-1/2 text-gray-400 dark:text-gray-500">Tags:</div>

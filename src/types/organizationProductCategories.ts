@@ -15,7 +15,7 @@ export interface IOrganizationProductCategory {
     updatedAt?: string;
     deletedAt?: string | null;
     name: string;
-    description: string;
-    imageName: string;
+    description?: string;
+    imageName?: string;
     organizationId?: string;
 }
