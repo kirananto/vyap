@@ -145,24 +145,24 @@ export default function OrderCard({
                     </div>
                 </div>
 
-                <ModalViewer
-                    body={
-                        <OrderOptionsPopup
-                            onClose={() => {
-                                setorderOptionModalVisible(false)
-                            }}
-                            orderId={order?.id}
-                            threadId={thread?.id}
-                            inboxId={id}
-
-                        />
-                    }
-                    isOpen={!!orderOptionModalVisible}
-                    onClose={() => {
-                        setorderOptionModalVisible(false)
-                    }}
-                />
             </NavLink>
+            <ModalViewer
+                body={
+                    <OrderOptionsPopup
+                        onClose={() => {
+                            setorderOptionModalVisible(false)
+                        }}
+                        orderId={order?.id}
+                        threadId={thread?.id}
+                        inboxId={id}
+
+                    />
+                }
+                isOpen={!!orderOptionModalVisible}
+                onClose={() => {
+                    setorderOptionModalVisible(false)
+                }}
+            />
         </div>
     )
 }
