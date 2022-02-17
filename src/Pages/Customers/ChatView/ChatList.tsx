@@ -15,6 +15,7 @@ const limit = 1000
 interface iProps { 
     inboxHash?: string,
     toRefresh: boolean,
+    isLoading: boolean,
     setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
     setCurrentOrderId: React.Dispatch<React.SetStateAction<string>>
     newStatus: number | undefined,
@@ -24,7 +25,8 @@ interface iProps {
 
 export default function ChatList({ 
     inboxHash, 
-    toRefresh , 
+    toRefresh,
+    isLoading, 
     setorderOptionModalVisible, 
     setCurrentOrderId,
     newStatus,
@@ -74,7 +76,7 @@ export default function ChatList({
         if (chats?.error) {
             return <div className="p-12 mt-12 text-center dark:text-slate-100"> Error loading chats...</div>
         }
-        if (chats?.isLoading && chats?.threads?.length < 1) {
+        if (isLoading || (chats?.isLoading && chats?.threads?.length < 1)) {
             return <div className="p-12 mt-12 text-center dark:text-slate-100 grid">
                 <Spinner />
             </div>

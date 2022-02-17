@@ -149,7 +149,9 @@ function PaymentBottomHeader({
             >
                 <div className="flex flex-col w-4/5 p-2 pl-3">
                     {isLoading ? (
-                        <div />
+                        <div className="ml-2 my-4 text-xs dark:text-slate-300">
+                            Loading...
+                        </div>
                     ) : (
                         <>
                             {parsedAmount !== 0 && (

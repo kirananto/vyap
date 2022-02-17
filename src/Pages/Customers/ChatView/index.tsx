@@ -50,6 +50,7 @@ export const Payment = () => {
     useEffect(() => {
         localStorage.setItem('isSupplier', `${inbox?.isSupplier}`)
     }, [inbox?.isSupplier])
+
     return (
         <div className="overflow-y-auto dark:bg-slate-900">
             {/* header */}
@@ -63,7 +64,7 @@ export const Payment = () => {
                 />
                 <PaymentBottomHeader
                     amount={inbox?.outstandingAmount}
-                    isLoading={inbox?.recipient?.name !== undefined ? false : inbox?.isLoading === true}
+                    isLoading={inbox?.outstandingAmount === undefined}
                 />
             </div>
             {/* body */}
@@ -71,6 +72,7 @@ export const Payment = () => {
                 setorderOptionModalVisible={setorderOptionModalVisible}
                 setCurrentOrderId={setCurrentOrderId}
                 inboxHash={inbox?.inboxHash} 
+                isLoading={inbox?.outstandingAmount === undefined}
                 toRefresh={paymentModalVisible ?? false} 
                 updatingOrderId={updatingOrderId}
                 newStatus={newStatus}
