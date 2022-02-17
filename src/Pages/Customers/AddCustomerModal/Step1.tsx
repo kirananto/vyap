@@ -3,22 +3,26 @@ import { useSelector } from 'react-redux'
 import { checkIfUserExists } from 'src/API/invite.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { currentPageEnum } from '.'
-import { Length, validate } from 'class-validator'
+import { IsNumber, Length, validate } from 'class-validator'
 import { useState } from 'react'
 
 interface IProps {
-  phoneNumber: string;
-  openingBalance: number;
-  setOpeningBalance: React.Dispatch<React.SetStateAction<number>>;
-  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-  toggleVisibility: () => void;
-  setCurrentPage: React.Dispatch<React.SetStateAction<currentPageEnum>>;
-  setIsExisting: React.Dispatch<React.SetStateAction<string | undefined>>;
+    phoneNumber: string;
+    openingBalance: number;
+    setOpeningBalance: React.Dispatch<React.SetStateAction<number>>;
+    setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+    toggleVisibility: () => void;
+    setCurrentPage: React.Dispatch<React.SetStateAction<currentPageEnum>>;
+    setIsExisting: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export class Post {
-  @Length(10, 12)
-      phoneNumber!: string | null
+    @Length(10, 12)
+        phoneNumber!: string | null
+
+    @IsNumber()
+        openingBalance!: number
+
 }
 
 export default function AddCustomerStep1({
@@ -33,14 +37,29 @@ export default function AddCustomerStep1({
     const { token } = useSelector(selectCredentials)
     const phoneRef = useRef<HTMLInputElement>(null)
     const [phoneError, setPhoneError] = useState<string | undefined>(undefined)
+    const [openingBalanceError, setOpeningBalanceError] = useState<string | undefined>(undefined)
 
     const handleValidation = (action: string) => {
         setPhoneError(undefined)
         const post = new Post()
+        post.openingBalance = parseInt(openingBalance.toString())
         post.phoneNumber = phoneRef.current && phoneRef.current.value
 
         validate(post).then((errors) => {
             if (errors.length > 0) {
+                errors?.forEach(val =>  {
+                    if(val.property === 'phoneNumber') {
+                        setPhoneError('Enter valid mobile number !')
+                    } else {
+                        setPhoneError(undefined)
+                    }
+                    if(val.property === 'openingBalance') {
+                        setOpeningBalanceError('Enter valid opening balance !')
+                    } else {
+                        setOpeningBalanceError(undefined)
+                    }
+                })
+                console.log('errors', errors)
                 console.log('validation failed. errors: ', errors)
                 setPhoneError('Enter valid mobile number !')
             } else {
@@ -78,7 +97,7 @@ export default function AddCustomerStep1({
         >
             <div>
                 <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
-          Phone number
+                    Phone number
                 </label>
                 <input
                     type="number"
@@ -100,19 +119,19 @@ export default function AddCustomerStep1({
             <span
                 className={
                     'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
-          (!phoneError ? 'hidden' : '')
+                    (!phoneError ? 'hidden' : '')
                 }
             >
-        * {phoneError}
+                * {phoneError}
             </span>
 
             <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        We{`'`}ll never share the phone number with anyone else.
+                We{`'`}ll never share the phone number with anyone else.
             </div>
 
             <div className="mt-4">
                 <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
-          Opening balance
+                    Opening balance
                 </label>
                 <input
                     type="number"
@@ -120,12 +139,21 @@ export default function AddCustomerStep1({
                     value={openingBalance}
                     min={0}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setOpeningBalance(Number(Number(event?.target.value) < 0 ? 0 : event?.target.value))
+                        setOpeningBalance(event?.target.value as unknown as number)
                     }
                     id="openingBalance"
                     placeholder="Opening balance of the customer"
                     className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
                 />
+                
+                <span
+                    className={
+                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
+                    (!openingBalanceError ? 'hidden' : '')
+                    }
+                >
+                * {openingBalanceError}
+                </span>
             </div>
             {/* <!-- btn popup --> */}
             <div className="flex my-8 p-2 gap-2">
@@ -133,13 +161,13 @@ export default function AddCustomerStep1({
                     onClick={() => toggleVisibility()}
                     className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200"
                 >
-          Cancel
+                    Cancel
                 </button>
                 <button
                     onClick={() => handleValidation('submit')}
                     className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                 >
-          Next
+                    Next
                 </button>
             </div>
         </form>
