@@ -124,7 +124,7 @@ export default function OrderCard({
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
                     Order
                 </div>
-                <div className={`text-4xl mt-1 text-gray-700 font-bold dark:text-gray-200 ${order?.totalAmount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `₹ ${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}` : null}</div>
+                <div className={`text-4xl mt-1 text-gray-700 font-bold dark:text-gray-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `₹ ${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(2)}` : null}</div>
 
                 {/* bottom  */}
                 <div className="flex items-center w-full">
