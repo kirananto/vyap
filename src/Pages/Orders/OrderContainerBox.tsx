@@ -137,7 +137,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                             {(
                                                 parseFloat(item?.totalAmount) -
                                                 parseFloat(item?.flatDiscount)
-                                            ).toFixed(2)}
+                                            ).toFixed(0)}
                                         </div>
                                         <div className="text-gray-400 text-xs font-extrabold mx-auto dark:text-gray-300">
                                             ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})

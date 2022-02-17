@@ -165,17 +165,17 @@ export default function OrderItemsDetails({
                     <div>
                         <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Total:</span> ₹
-                            {parseFloat(order?.totalAmount).toFixed(2)}
+                            {parseFloat(order?.totalAmount).toFixed(0)}
                         </div>
                         <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Discount:</span> ₹
-                            {parseFloat(order?.flatDiscount).toFixed(2)}
+                            {parseFloat(order?.flatDiscount).toFixed(0)}
                         </div>
                         <div className="text-gray-600 dark:text-gray-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Final Amount:</span> ₹
                             {(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
-                            ).toFixed(2)}
+                            ).toFixed(0)}
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,7 @@ export const PrintAll = ({ apiData }: IProps) => {
             BUYER: item?.buyer?.name,
             AMOUNT: (
                 parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)
-            ).toFixed(2),
+            ).toFixed(0),
         }
     })
 

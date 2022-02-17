@@ -41,8 +41,8 @@ export default function PaymentDetails() {
             </div>
             {/* Body */}
             <div className="flex flex-col items-center gap-5 py-24">
-                <h1 className="text-4xl sm:text-6xl font-black text-center text-gray-600 dark:text-gray-300">
-          ₹{payment?.amount}
+                <h1 className="text-3xl sm:text-6xl font-black text-center text-gray-600 dark:text-gray-300">
+          ₹{parseInt(`${payment?.amount}`, 10)}
                 </h1>
                 {/* ---------------- */}
                 <div className="flex items-center justify-center gap-3">

@@ -44,7 +44,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
                 <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
           Payment
                 </div>
-                <div className={`text-4xl mt-1 text-gray-700 font-bold dark:text-gray-200 truncate ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${payment?.amount}` : null}</div>
+                <div className={`text-3xl mt-1 text-gray-700 font-bold dark:text-gray-200 truncate ${payment?.amount === undefined ? 'h-12 bg-gray-200 dark:bg-gray-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${parseInt(payment?.amount, 10)}` : null}</div>
                 {payment?.note && payment.note?.length > 1 ? <div className="border border-1 border-gray-300 dark:border-gray-600 p-1 px-4 pl-3 mt-2 mb-4 bg-gray-100 dark:bg-gray-700 w-fit text-xs text-gray-700 dark:text-gray-300 rounded break-all line-clamp-2 ">{payment?.note}</div> : ''}
                 {/* bottom  */}
                 <div className="flex items-center w-full">

@@ -105,7 +105,7 @@ export default function OrderDetails() {
               ₹
                             {(order?.totalAmount && isNumber(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount))) ?  (
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
-                            ).toFixed(2) : ''}
+                            ).toFixed(0) : ''}
                         </h1>
                         {/* ---------------- */}
                         <div className="flex items-center justify-center gap-3">
