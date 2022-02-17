@@ -82,6 +82,13 @@ export const chatListInterface = createSlice({
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             state[action.payload.inboxId].threads[threadIndex].order = action.payload.order
         },
+        setOrderStatus: (state, action: PayloadAction<{ inboxId: string, threadId?: string, orderStatus: orderInterface['orderStatus'] }>) => {
+            const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
+            if(state[action.payload.inboxId].threads[threadIndex].order !== undefined) {
+                //@ts-ignore
+                state[action.payload.inboxId].threads[threadIndex].order.orderStatus = action.payload.orderStatus
+            } 
+        },
         setOrderItems: (state, action: PayloadAction<{ inboxId: string, threadId?: string, orderItems: IOrderItem[] }>) => {
             const threadIndex = state[action.payload.inboxId].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             const order = state[action.payload.inboxId].threads[threadIndex].order
@@ -145,6 +152,7 @@ export const chatListInterface = createSlice({
 
 export const {
     setOrderInfo,
+    setOrderStatus,
     setPaymentInfo,
     setOrderItems,
     clearAll

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { createOrderStatus } from 'src/API/order.axios'
@@ -7,27 +7,28 @@ import Completed from 'src/Components/Style/Icons/Completed'
 import Processing from 'src/Components/Style/Icons/Processing'
 import Pending from 'src/Components/Style/Icons/Pending'
 import { OrderStatusEnum } from 'src/Pages/Orders/enum'
+import { setOrderStatus } from '../chatListSlice'
 
 interface iProps {
     onClose: () => void,
-    currentOrderId: string
-    setUpdatingOrderId: React.Dispatch<React.SetStateAction<string | undefined>>
-    setNewStatus: React.Dispatch<React.SetStateAction<number | undefined>>
+    orderId?: string
+    threadId?: string
+    inboxId?: string
 }
 
-const OrderOptionsPopup = ({ onClose, currentOrderId, setUpdatingOrderId, setNewStatus }
+const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
     : iProps
 ) => {
 
+    const dispatch = useDispatch()
     const { token } = useSelector(selectCredentials)
     const handleStatusUpdate = async (statusCode: number) => {
-        if (currentOrderId && token) {
-            createOrderStatus({ token: token, orderId: currentOrderId, status: statusCode, note: `Updating status to ${OrderStatusEnum[statusCode]}` })
+        if (orderId && token) {
+            createOrderStatus({ token: token, orderId: orderId, status: statusCode, note: `Updating status to ${OrderStatusEnum[statusCode]}` })
                 .then((response) => {
                     //console.log('response', response)
                     if (response.data.status && response.data.orderId) {
-                        setUpdatingOrderId(response.data.orderId)
-                        setNewStatus(response.data.status)
+                        dispatch(setOrderStatus({ inboxId: inboxId ?? '', threadId: threadId, orderStatus: [response.data]}))
                     }
                 })
                 .catch((error) => {

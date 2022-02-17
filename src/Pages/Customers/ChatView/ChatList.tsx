@@ -15,22 +15,14 @@ const limit = 1000
 interface iProps { 
     inboxHash?: string,
     toRefresh: boolean,
-    isLoading: boolean,
-    setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-    setCurrentOrderId: React.Dispatch<React.SetStateAction<string>>
-    newStatus: number | undefined,
-    updatingOrderId: string | undefined
+    isLoading: boolean
 
 }
 
 export default function ChatList({ 
     inboxHash, 
     toRefresh,
-    isLoading, 
-    setorderOptionModalVisible, 
-    setCurrentOrderId,
-    newStatus,
-    updatingOrderId
+    isLoading
 }
     : iProps
 ) {
@@ -93,14 +85,10 @@ export default function ChatList({
                 return <PaymentCard key={thread.id} className={layout} thread={thread} />
             }
             if (thread.type === ThreadTypeEnum.ORDER) {
-                return <OrderCard 
-                    setorderOptionModalVisible={setorderOptionModalVisible} 
-                    setCurrentOrderId={setCurrentOrderId}
+                return <OrderCard
                     key={thread.id} 
                     className={layout} 
                     thread={thread}
-                    newStatus={newStatus}
-                    updatingOrderId={updatingOrderId} 
                     isScrolling={isScrolling}                  
                 />
             }

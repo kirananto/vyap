@@ -13,6 +13,8 @@ import Completed from '../../../../Components/Style/Icons/Completed'
 import Pending from '../../../../Components/Style/Icons/Pending'
 import Processing from '../../../../Components/Style/Icons/Processing'
 import type { IProduct } from 'src/types/product'
+import ModalViewer from 'src/Components/Style/ModalViewer'
+import OrderOptionsPopup from '../Popups/OrderOptionsPopup'
 
 export interface IOrderItem {
     id: string;
@@ -48,20 +50,12 @@ export interface orderInterface {
 interface iProps {
     className: string,
     thread: ThreadInterface,
-    setorderOptionModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-    setCurrentOrderId: React.Dispatch<React.SetStateAction<string>>
-    newStatus: number | undefined,
-    updatingOrderId: string | undefined
     isScrolling: boolean
 }
 
 export default function OrderCard({
     className,
     thread,
-    setorderOptionModalVisible,
-    setCurrentOrderId,
-    newStatus,
-    updatingOrderId,
     isScrolling
 }
     : iProps) {
@@ -70,23 +64,26 @@ export default function OrderCard({
     const order = thread.order
     const dispatch = useDispatch()
 
-    const [status, setStatus] = useState<number>(Number(order?.orderStatus[order?.orderStatus?.length - 1]?.status))
 
-    useEffect(() => {
-        if (newStatus && updatingOrderId === order?.id)
-            setStatus(newStatus)
-    }, [newStatus, updatingOrderId, order?.id])
+    const status = Number(order?.orderStatus[order?.orderStatus?.length - 1]?.status)
+
+    const [orderOptionModalVisible, setorderOptionModalVisible] = useState<boolean>(false)
+
+    // useEffect(() => {
+    //     if (newStatus && updatingOrderId === order?.id)
+    //         setStatus(newStatus)
+    // }, [newStatus, updatingOrderId, order?.id])
 
     const bind = useLongPress(() => {
         !isScrolling && setorderOptionModalVisible(true)
-        if (order?.orderStatus[0].id)
-            setCurrentOrderId(order.id)
     })
 
     useEffect(() => {
-        id && fetchOrderAPI({ token, id: thread.meta }).then(result => {
-            dispatch(setOrderInfo({ inboxId: id, threadId: thread?.id, order: result.data }))
-        })
+        if (!order?.id) {
+            id && fetchOrderAPI({ token, id: thread.meta }).then(result => {
+                dispatch(setOrderInfo({ inboxId: id, threadId: thread?.id, order: result.data }))
+            })
+        }
     }, [dispatch, id, order?.id, thread?.id, thread.meta, token])
 
 
@@ -147,6 +144,24 @@ export default function OrderCard({
                         <p className="text-xs text-slate-500 dark:text-slate-300">  ● {order?.numberOfItems} items</p>
                     </div>
                 </div>
+
+                <ModalViewer
+                    body={
+                        <OrderOptionsPopup
+                            onClose={() => {
+                                setorderOptionModalVisible(false)
+                            }}
+                            orderId={order?.id}
+                            threadId={thread?.id}
+                            inboxId={id}
+
+                        />
+                    }
+                    isOpen={!!orderOptionModalVisible}
+                    onClose={() => {
+                        setorderOptionModalVisible(false)
+                    }}
+                />
             </NavLink>
         </div>
     )

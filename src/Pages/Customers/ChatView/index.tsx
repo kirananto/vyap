@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './payment.css'
 import { Header, PaymentBottomHeader } from '../../../Components/Header'
 import ChatList from './ChatList'
@@ -11,19 +11,11 @@ import { setOrgId, clearAll } from './PlaceOrder/placeOrderSlice'
 import useQueryParam from 'src/utils/useQueryParams'
 import { fetchInboxAction, selectChatList } from './chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
-import ModalViewer from 'src/Components/Style/ModalViewer'
-import OrderOptionsPopup from './Popups/OrderOptionsPopup'
-
 export const Payment = () => {
     const { token } = useSelector(selectCredentials)
     const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<boolean>(
         'paymentModalVisible'
     )
-    const [currentOrderId, setCurrentOrderId] = useState<string>('')
-    const [orderOptionModalVisible, setorderOptionModalVisible] = useState<boolean>(false)
-
-    const [updatingOrderId, setUpdatingOrderId] = useState<string>()
-    const [newStatus, setNewStatus] = useState<number>()
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -69,13 +61,9 @@ export const Payment = () => {
             </div>
             {/* body */}
             <ChatList 
-                setorderOptionModalVisible={setorderOptionModalVisible}
-                setCurrentOrderId={setCurrentOrderId}
                 inboxHash={inbox?.inboxHash} 
                 isLoading={inbox?.outstandingAmount === undefined}
-                toRefresh={paymentModalVisible ?? false} 
-                updatingOrderId={updatingOrderId}
-                newStatus={newStatus}
+                toRefresh={paymentModalVisible ?? false}
             />
             {/* Footer */}
             <div
@@ -111,24 +99,6 @@ export const Payment = () => {
                     receiverId={inbox?.recipient.id}
                 />
             )}
-
-            <ModalViewer
-                body={
-                    <OrderOptionsPopup
-                        onClose={() => {
-                            setorderOptionModalVisible(false)
-                        }}
-                        currentOrderId={currentOrderId}
-                        setUpdatingOrderId={setUpdatingOrderId}
-                        setNewStatus={setNewStatus}
-
-                    />
-                }
-                isOpen={!!orderOptionModalVisible}
-                onClose={() => {
-                    setorderOptionModalVisible(false)
-                }}
-            />
         </div>
     )
 }
