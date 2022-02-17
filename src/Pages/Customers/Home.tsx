@@ -146,7 +146,7 @@ export const Home = () => {
                     <div className="flex w-1/5 items-center justify-end ">
                         <Link to="/my-account">
                             <img
-                                className="h-12 rounded-full shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
+                                className="h-12 rounded-full aspect-square shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
                                 alt=""
                             />
@@ -162,7 +162,7 @@ export const Home = () => {
                         id="input"
                         autoComplete="off"
                         value={paginationParams.search}
-                        className="h-10 w-full rounded bg-slate-100 pl-4 pr-5 outline-none dark:bg-slate-500 dark:text-slate-100 "
+                        className="h-10 w-full rounded bg-slate-100 pl-4 pr-5 outline-none dark:bg-slate-500 dark:text-slate-100 dark:placeholder-slate-200"
                         placeholder={intl.formatMessage({ id: `action.search` })}
                         onChange={(e) => {
                             setPaginationParams((prevState) => ({
