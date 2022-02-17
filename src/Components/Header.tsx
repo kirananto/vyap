@@ -77,7 +77,7 @@ function Header({
             {phoneNumber && (
                 <a
                     href={`tel:${phoneNumber}`}
-                    className="flex items-center justify-center rounded-full w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-900"
+                    className="flex items-center justify-center aspect-square rounded-full w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-900"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -161,8 +161,8 @@ function PaymentBottomHeader({
                                 </h6>
                             )}
                             {parsedAmount !== 0 && (
-                                <h1 className="text-4xl font-bold text-gray-700 dark:text-gray-200">
-                  ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(2)}
+                                <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-200 truncate">
+                  ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(0)}
                                 </h1>
                             )}
                             {parsedAmount === 0 && (
