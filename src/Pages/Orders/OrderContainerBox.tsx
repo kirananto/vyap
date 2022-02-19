@@ -4,8 +4,6 @@ import format from 'date-fns/format'
 import Spinner from 'src/Components/Style/Spinner'
 import ChatImg from '../Product/assets/no_data.svg'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
-import { OrderStatusEnum } from './enum'
-import OrderStatusIcon from '../Customers/ChatView/InfoPages/Order/OrderStatusIcon'
 import ReturnStatusTile from './OrderStatusTag'
 
 interface IProps {
@@ -114,7 +112,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                 </div>
 
                                 <div className="grid grid-flow-col">
-                                    <div className="col-start-1 w-max  items-center mt-3">
+                                    <div className="col-start-1 w-max  items-center mt-1">
                                         <ReturnStatusTile status={item?.orderStatus?.[0]?.status} />
                                     </div>
 
