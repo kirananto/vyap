@@ -6,6 +6,7 @@ import ChatImg from '../Product/assets/no_data.svg'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 import { OrderStatusEnum } from './enum'
 import OrderStatusIcon from '../Customers/ChatView/InfoPages/Order/OrderStatusIcon'
+import ReturnStatusTile from './OrderStatusTag'
 
 interface IProps {
     orders: orderInterface[];
@@ -32,20 +33,6 @@ export default function OrderContainer({ orders, loading }: IProps) {
                 You don{`'`}t have any transactions. Please do some transactions and visit here later.{' '}
             </div>
         </div>
-    }
-
-    function returnStatusTile(status: OrderStatusEnum) {
-        let color = 'green'
-        if (status === OrderStatusEnum.PENDING) {
-            color = 'yellow'
-        }
-        if (status === OrderStatusEnum.PROCESSING) {
-            color = 'blue'
-        }
-        return (<span className={`bg-${color}-200 font-bold text-xs text-${color}-800 px-2 py-1 rounded flex`}>
-            <OrderStatusIcon status={status} /> 
-            <span className="pt-[2px] px-1">{OrderStatusEnum[status]}</span>
-        </span>)
     }
 
     const onMinimize = () => {
@@ -128,7 +115,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
 
                                 <div className="grid grid-flow-col">
                                     <div className="col-start-1 w-max  items-center mt-3">
-                                        {returnStatusTile(item?.orderStatus?.[0]?.status)}
+                                        <ReturnStatusTile status={item?.orderStatus?.[0]?.status} />
                                     </div>
 
                                     <div className="text-center col-end-12 self-center text-slate-600 dark:text-slate-200 text-lg font-extrabold">

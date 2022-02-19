@@ -36,10 +36,10 @@ export default function AppliedFilters({ openFilters }: { openFilters: () => voi
                     </div>}
                 </div>
                 {hasFilters() ? <div className="flex flex-wrap gap-2 mt-2">
-                    {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.account?.name}</div>}
-                    {filters?.paymentMethod && <div className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{filters?.paymentMethod}</div>}
+                    {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center dark:bg-blue-900 dark:text-blue-100 dark:bg-opacity-80">{filters?.account?.name}</div>}
+                    {filters?.paymentMethod && <div className="flex bg-green-200 font-bold text-xs text-green-800 px-2 rounded items-center dark:bg-green-900 dark:text-green-100 dark:bg-opacity-80">{filters?.paymentMethod}</div>}
                     {filters?.sorting && (
-                        <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
+                        <div className="flex bg-purple-200 font-bold text-sm text-purple-800 px-2 rounded items-center dark:bg-purple-900 dark:text-purple-100 dark:bg-opacity-80">
                             {filterText(filters?.sorting)}
                         </div>)}
                 </div> : <div className="flex gap-2 mt-2 text-sm text-slate-400 dark:text-slate-300"> No filters applied</div>}
