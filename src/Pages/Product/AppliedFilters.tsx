@@ -84,10 +84,10 @@ export default function AppliedFilters({
                         </div>}
                     </div>
                     <div className="flex flex-wrap gap-2 mt-2">
-                        {filters?.categories?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
-                        {filters?.brands?.map(mapItem => <div key={mapItem.id} className="flex bg-green-200 font-bold text-sm text-blue-800 px-2 rounded items-center">{mapItem.name}</div>)}
+                        {filters?.categories?.map(mapItem => <div key={mapItem.id} className="flex bg-blue-200 font-bold text-xs text-blue-800 px-2 rounded items-center dark:bg-blue-900 dark:text-blue-100 dark:bg-opacity-80 dark:border dark:border-blue-400">{mapItem.name}</div>)}
+                        {filters?.brands?.map(mapItem => <div key={mapItem.id} className="flex bg-green-200 font-bold text-xs text-green-800 px-2 rounded items-center dark:bg-green-900 dark:text-green-100 dark:bg-opacity-80 dark:border dark:border-green-400">{mapItem.name}</div>)}
                         {filters?.sorting && (
-                            <div className="flex bg-purple-200 font-bold text-sm text-blue-800 px-2 rounded items-center">
+                            <div className="flex bg-purple-200 font-bold text-xs text-purple-800 px-2 rounded items-center dark:bg-purple-900 dark:text-purple-100 dark:bg-opacity-80 dark:border dark:border-purple-400">
                                 {filterText(filters?.sorting)}
                             </div>)}
                     </div>

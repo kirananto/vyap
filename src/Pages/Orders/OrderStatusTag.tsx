@@ -5,12 +5,12 @@ import { OrderStatusEnum } from './enum'
 export default function ReturnStatusTile({status}: { status :OrderStatusEnum}) {
     let color = 'green'
     if (status === OrderStatusEnum.PENDING) {
-        color = 'rose'
+        color = 'blue'
     }
     if (status === OrderStatusEnum.PROCESSING) {
         color = 'yellow'
     }
-    return (<span className={`bg-${color}-200 font-bold text-xs text-${color}-800 px-2 py-1 rounded flex`}>
+    return (<span className={`bg-${color}-200 font-bold text-xs text-${color}-800 px-2 py-1 rounded flex dark:bg-${color}-900 dark:text-${color}-100 dark:bg-opacity-80 dark:border dark:border-${color}-400`}>
         <OrderStatusIcon status={status} /> 
         <span className="pt-[2px] px-1">{OrderStatusEnum[status]}</span>
     </span>)
