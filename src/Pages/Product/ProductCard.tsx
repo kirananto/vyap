@@ -70,7 +70,7 @@ export default function ProductCard({
                         />
                     )}
                     {item.outOfStock && (
-                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-200 text-rose-500 font-bold text-xs text-center leading-4">
+                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-100 text-rose-700 font-bold text-xs text-center leading-4">
                 Out of stock
                         </div>
                     )}

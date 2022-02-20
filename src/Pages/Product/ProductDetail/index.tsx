@@ -48,7 +48,7 @@ const ProductDetail = () => {
         <div
             className={`min-h-screen overflow-y-scroll flex flex-col w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-slate-100 dark:border-slate-800`}
         >
-            <div className="flex flex-nowrap flex-shrink-0 h-[45vh] w-full gap-3 overflow-x-scroll empty_image_background">
+            <div className="relative flex h-[45vh] w-full gap-3 overflow-x-scroll empty_image_background">
                 {(product?.centralData?.images?.length ?? 0) > 0 && <>
 
                     {product?.centralData?.images?.map((img) => {
@@ -69,17 +69,23 @@ const ProductDetail = () => {
                                         className="object-cover w-full h-full"
                                     />
                                 )}
+                                
                                 {product?.outOfStock && (
-                                    <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-200 text-rose-500 font-bold text-xs text-center leading-4">
+                                    <div className="absolute py-6 bottom-0 inset-x-0 bg-rose-100 bg-opacity-90 text-rose-700 font-bold text-md text-center leading-4">
                                     Out of stock
                                     </div>
                                 )}
                             </div>
                         )
-                    })
-
-                    }
+                    })}
+                    
                 </>}
+                
+                {product?.outOfStock && (
+                    <div className="absolute py-6 bottom-0 inset-x-0 bg-rose-100 bg-opacity-90 text-rose-700 font-bold text-md text-center leading-4">
+                                    Out of stock
+                    </div>
+                )}
             </div>
 
             <div className=" w-full self-center px-1 py-3">
