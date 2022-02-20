@@ -25,7 +25,7 @@ function Header({
         <div
             className={
                 isSticky
-                    ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0'
+                    ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto  drop-shadow-md fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0'
                     : 'flex w-11/12 pt-4 pb-2 m-auto '
             }
         >
@@ -216,7 +216,7 @@ function SimpleHeader(props: {
 }) {
     const navigate = useNavigate()
     return (
-        <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0">
+        <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto  drop-shadow-md fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0">
             {/* back icon  */}
             <div
                 onClick={() => {

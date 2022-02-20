@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
+import Lozenge from 'src/Components/Lozenge'
 import { OrderStatusEnum } from './enum'
 import { clearAll, selectOrderFilters } from './Filters/orderFiltersSlice'
 import ReturnStatusTile from './OrderStatusTag'
@@ -38,12 +39,9 @@ export default function AppliedFilters({ openFilters }: { openFilters: () => voi
                     </div>}
                 </div>
                 {hasFilters() ? <div className="flex flex-wrap gap-2 mt-2">
-                    {filters?.account && <div className="flex bg-blue-200 font-bold text-sm text-blue-800 px-2 rounded items-center dark:bg-blue-900 dark:text-blue-100 dark:bg-opacity-80 dark:border dark:border-blue-400">{filters?.account?.name}</div>}
+                    {filters?.account && <Lozenge color="blue" content={filters?.account?.name} square={true} />}
                     {filters?.orderStatus && <ReturnStatusTile status={OrderStatusEnum[filters?.orderStatus]} />}
-                    {filters?.sorting && (
-                        <div className="flex bg-purple-200 font-bold text-sm text-purple-800 px-2 rounded items-center dark:bg-purple-900 dark:text-purple-100 dark:bg-opacity-80 dark:border dark:border-purple-400">
-                            {filterText(filters?.sorting)}
-                        </div>)}
+                    {filters?.sorting && (<Lozenge color="purple" content={filterText(filters?.sorting) ?? ''} square={true} />)}
                 </div> : <div className="flex gap-2 mt-2 text-sm text-slate-400 dark:text-slate-300"> No filters applied</div>}
             </div>
             <div className="flex " onClick={openFilters}>

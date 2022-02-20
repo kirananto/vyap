@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import Lozenge from 'src/Components/Lozenge'
 import { selecti18nConfig, setLanguage } from 'src/i18n/i18nSlice'
 import { SimpleHeader } from '../../Components/Header'
 import ToggleButton from '../../Components/ToggleButton'
@@ -48,9 +49,7 @@ export default function Settings() {
                 {/* ------ */}
                 <div className="flex gap-3 mb-2">
                     <h1 className="font-bold text-slate-700 text-md dark:text-slate-300">Team members</h1>
-                    <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min bg-green-200 text-green-700 dark:bg-green-900 dark:text-green-400">
-            Coming soon
-                    </div>
+                    <Lozenge content="Coming soon" />
                 </div>
                 {/* -------- */}
                 <NavLink to="/employees" className="text-blue-500 underline ">10 Members</NavLink>
@@ -68,9 +67,7 @@ export default function Settings() {
                 {/* --------- */}
                 <div className="flex gap-3 mb-2 mt-9">
                     <h1 className="font-semibold text-slate-500 text-md dark:text-slate-300">Import Customer CSV</h1>
-                    <div className="flex items-center justify-center px-4 text-xs font-bold text-center rounded-lg min-w-min bg-green-200 text-green-700 dark:bg-green-900 dark:text-green-400">
-            Coming soon
-                    </div>
+                    <Lozenge content="Coming soon" />
                 </div>
                 <button className="w-2/4 h-8 mt-3 font-bold text-blue-500 border-2 border-blue-500 rounded-md text-md">Upload CSV</button>
             </div>

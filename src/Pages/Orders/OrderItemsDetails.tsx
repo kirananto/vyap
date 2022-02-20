@@ -68,38 +68,6 @@ export default function OrderItemsDetails({
                 <h2 className="dark:text-slate-300 font-bold"> Order items </h2>
 
                 <div className={`flex w-full justify-between mt-1 pb-2 `}>
-                    {/* TODO: Remove this console.log */}
-                    {/* {console.log('order', order)} */}
-                    {/* <div className="flex gap-2">
-                        <div className="flex flex-col">
-                            
-                            <div className="text-slate-600 font-semibold dark:text-slate-200 my-1">
-                                {order.supplier?.name} {'->'} {order?.buyer?.name}
-                            </div>
-                            <div className="text-slate-400 text-xs  dark:text-slate-300">
-                                {order.createdAt
-                                    ? format(new Date(order.createdAt), 'do MMM yyyy')
-                                    : ''}
-                            </div>
-                            <div className="flex mt-4 w-max bg-green-200 font-bold text-sm text-green-800 px-2 rounded items-center">
-                                {order?.orderStatus?.[0]?.note}
-                            </div>
-                        </div>
-                    </div> */}
-                    {/* <div className="flex">
-                        <div className="flex flex-col">
-                            <div className="text-slate-600 text-lg font-extrabold dark:text-slate-200">
-                ₹{' '}
-                                {(
-                                    parseFloat(order?.totalAmount) -
-                  parseFloat(order?.flatDiscount)
-                                ).toFixed(2)}
-                            </div>
-                            <div className="text-slate-400 text-xs font-extrabold mx-auto dark:text-slate-300">
-                ({order?.numberOfItems} items)
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
 
                 {orderItems.map((item, index) => (

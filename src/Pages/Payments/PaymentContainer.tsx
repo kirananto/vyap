@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 import ChatImg from '../Product/assets/no_data.svg'
+import Lozenge from 'src/Components/Lozenge'
 
 interface IProps {
     payments?: IFetchAllPaymentsDataEntity[];
@@ -181,9 +182,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                     </div>
                                 </div>
                                 <div className="flex gap-1 mt-2">
-                                    <span className=" w-max items-center rounded bg-green-200 px-2 text-xs font-bold text-green-800  dark:bg-green-900 dark:text-green-100 dark:bg-opacity-80 dark:border dark:border-green-400">
-                                        {paymentMethod[item.method]}
-                                    </span>
+                                    <Lozenge content={paymentMethod[item.method]} square={true} />
                                 </div>
 
                             </div>

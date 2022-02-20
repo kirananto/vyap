@@ -200,7 +200,7 @@ export default function PlaceOrder() {
                         <div key={item.id} className="my-5 border-b border-slate-300 dark:border-slate-700">
                             <div className="grid grid-rows-2">
                                 <div className="flex ">
-                                    <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center shadow-xl">
+                                    <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center">
                                         {item?.thumbnailImage && (
                                             <img
                                                 src={getImageURL(
@@ -321,7 +321,7 @@ export default function PlaceOrder() {
 
     return (
         <div className="min-h-screen bg-white dark:bg-slate-900">
-            <div className="w-full bg-white shadow ">
+            <div className="w-full bg-white">
                 <SimpleHeader
                     backFn={() => navigate(`/chat/${localStorage?.getItem('inboxId')}`)}
                     heading={'Place Order'}

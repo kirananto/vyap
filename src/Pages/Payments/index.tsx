@@ -43,7 +43,7 @@ export default function Payments() {
     return (
         <div className="">
             {/* header */}
-            <div className="w-full bg-white pb-3 shadow dark:bg-slate-800  print:hidden">
+            <div className="w-full bg-white pb-3 drop-shadow-md dark:bg-slate-800  print:hidden">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/more')}

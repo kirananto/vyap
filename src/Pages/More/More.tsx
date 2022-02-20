@@ -13,7 +13,7 @@ import {
     SwitchIcon,
 } from './Icons/MoreIcons'
 import Links from './Links'
-import Tag from './Tag'
+import Tag from '../../Components/Lozenge'
 import { Footer } from '../../Components/Footer'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -95,14 +95,14 @@ export default function More() {
                     <NavLink to="/reports" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <ReportsIcon className="text-indigo-500 dark:text-indigo-300"/>
                         <Links linkName={intl.formatMessage({ id: 'global.reports' })} />
-                        <Tag tagName={intl.formatMessage({ id: 'global.comingSoon' })} />
+                        <Tag content={intl.formatMessage({ id: 'global.comingSoon' })} />
                     </NavLink>
                     {/* ----- */}
                     {/* ----- */}
                     {user?.organization?.isSupplier && <NavLink to="#" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <StockManagementIcon className="text-indigo-500 dark:text-indigo-300" />
                         <Links linkName={intl.formatMessage({ id: 'global.stockManagement' })} />
-                        <Tag tagName={intl.formatMessage({ id: 'global.comingSoon' })} />
+                        <Tag content={intl.formatMessage({ id: 'global.comingSoon' })} />
                     </NavLink>}
                     {/* ----- */}
                     {/* ----- */}
@@ -132,7 +132,7 @@ export default function More() {
                     {user?.organization?.isSupplier && <div className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <OffersManagementIcon className="text-indigo-500 dark:text-indigo-300" />
                         <Links linkName={intl.formatMessage({ id: 'global.offer' })} />
-                        <Tag tagName={intl.formatMessage({ id: 'global.comingSoon' })} />
+                        <Tag content={intl.formatMessage({ id: 'global.comingSoon' })} />
                     </div>}
                     {/* ----- */}
                     {/* ----- */}
