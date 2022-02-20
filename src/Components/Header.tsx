@@ -143,8 +143,8 @@ function PaymentBottomHeader({
             <div
                 className={`relative flex w-11/12 h-auto bg-slate-100 dark:bg-slate-700 border ${
                     parsedAmount === 0 && isLoading === false
-                        ? 'border-green-400'
-                        : 'border-slate-400'
+                        ? 'border-green-400 dark:border-green-700'
+                        : 'border-slate-400 dark:border-slate-600'
                 } rounded-md`}
             >
                 <div className="flex flex-col w-4/5 p-2 pl-3">
@@ -171,7 +171,7 @@ function PaymentBottomHeader({
                                 <h1
                                     className={`text-md font-semibold ${
                                         parsedAmount === 0
-                                            ? 'text-green-800 dark:text-green-400'
+                                            ? 'text-green-800 dark:text-green-500'
                                             : 'text-slate-700 dark:text-slate-200'
                                     }`}
                                 >
@@ -189,7 +189,7 @@ function PaymentBottomHeader({
                     ) : (
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="mt-1 text-green-400 h-8 w-8"
+                            className="mt-1 text-green-400 dark:text-green-600 h-8 w-8"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
