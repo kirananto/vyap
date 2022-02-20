@@ -1,0 +1,110 @@
+import { fetchPaymentById } from '../../../../../API/payment.axios'
+// import type { paymentObject } from '../../Components/PaymentCard'
+import { selectCredentials } from '../../../../Login/credentialsSlice'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router'
+import { Header } from '../../../../../Components/Header'
+import { PaymentInfo, PaymentInfoIcon } from '../Order/PaymentInfo'
+import { format } from 'date-fns'
+import { selectChatList, setPaymentInfo } from '../../chatListSlice'
+
+export default function PaymentDetails() {
+    const textSize = { fontSize: '12px' }
+    // const [payment, setPayment] = useState<paymentObject | undefined>()
+    const { user, token } = useSelector(selectCredentials)
+    const { id, chatId } = useParams()
+    const dispatch = useDispatch()
+    
+    const chatList = useSelector(selectChatList)
+    const thread = chatList[`${chatId}`]?.threads?.find(findItem => findItem?.payment?.id === id)
+    const payment = thread?.payment
+
+    useEffect(() => {
+        fetchPaymentById({ token, id: id }).then(result => {
+            // setPayment(result.data)
+            dispatch(setPaymentInfo({ inboxId: chatId, threadId: thread?.id, payment: result.data }))
+        })
+    }, [chatId, dispatch, id, thread?.id, token])
+
+    function getCompanyName() {
+        const company = user?.organizationId === payment?.senderOrgId ? payment?.receiver : payment?.senderOrg
+        return company?.name
+    }
+
+    return (
+        <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
+            {/* Header */}
+            <div className="w-full py-2 bg-white drop-shadow-md dark:bg-slate-800">
+                {/* Todo :: Share icon have to be added in the place of contact icon */}
+                <Header isSticky={true} heading="Payment details" subHeading={getCompanyName()} phoneNumber="" />
+            </div>
+            {/* Body */}
+            <div className="flex flex-col items-center gap-5 py-24">
+                <h1 className="text-3xl sm:text-6xl font-black text-center text-slate-600 dark:text-slate-300">
+          ₹{parseInt(`${payment?.amount}`, 10)}
+                </h1>
+                {/* ---------------- */}
+                <div className="flex items-center justify-center gap-3">
+                    {/* Tick icon */}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-5 h-5 text-green-300 "
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clipRule="evenodd"
+                        />
+                    </svg>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Completed</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">● {payment?.updatedAt ? format(
+                        new Date(payment?.updatedAt),
+                        'do MMM'
+                    ) : null}</p>
+                    {/* ------------------ */}
+                </div>
+
+                {/* Payment detail Card */}
+                {/* ------------------- */}
+                <div className="w-11/12 p-4 md:p-8 bg-white rounded-md shadow  border border-yellow-900 border-opacity-50 dark:bg-slate-800">
+                    <h1 className="mb-4 text-xl font-semibold text-slate-800 dark:text-slate-200">
+            Payment details
+                    </h1>
+
+                    <div className="flex flex-col gap-3">
+                        <PaymentInfo heading="Payment id" info={`#${id}`} />
+                        <PaymentInfo
+                            heading="Note"
+                            info={payment?.note ? payment.note : '--'}
+                        />
+                        <PaymentInfo
+                            heading="Date of transaction"
+                            info={payment?.updatedAt ? format(new Date(payment?.updatedAt), `yyyy-MM-dd hh:mm aa`) : 'Missing information'}
+                        />
+                        <PaymentInfo heading="Payment method" info="Cash" />
+                        <PaymentInfo
+                            heading="Paid by"
+                            info={payment?.senderOrg?.name ?? ''}
+                        />
+                        <PaymentInfo
+                            heading="Recieved by"
+                            info={payment?.receiver?.name ?? ''}
+                        />
+                        <PaymentInfoIcon heading="Status" info="Payment Completed" />
+                    </div>
+                </div>
+                {/* delete payment button */}
+                {/* <button className="w-10/12 h-12 mt-10 text-lg font-semibold text-rose-400 bg-rose-200 rounded-full">
+          Delete Payment
+        </button> */}
+                {/* Bottom info delete */}
+                <p style={textSize} className="w-9/12 px-4 text-center text-slate-400">
+          You will not be able to delete the payment, instead create a payment with negative value.
+                </p>
+            </div>
+        </div>
+    )
+}

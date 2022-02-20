@@ -61,11 +61,17 @@ body {
 }
 
 @media print {
-  .showinprint {
-    display: block !important;
+  * {
+    background-color: #fff;
   }
-}
+  thead { display: table-header-group }
 
+  tfoot { display: table-row-group }
+  
+  tr { page-break-inside: avoid }
+  
+}
+@page { margin-top: 50px }
 body:focus {
   outline: none;
 }
@@ -95,7 +101,7 @@ body:focus {
 }
 
 .dark .empty_image_background {
-  background-color: #373464;
+  background-color: #585486;
 }
 
 :root {

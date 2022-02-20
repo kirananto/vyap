@@ -5,29 +5,6 @@
     scroll-behavior: smooth;
 }
 
-.custom-filter {
-    position: fixed;
-    bottom: -500px;
-    left: 0px;
-    width: 100%;
-    padding: 20px;
-    z-index: 10;
-    animation: filterAnimation forwards 400ms;
-}
-@keyframes filterAnimation {
-    to {
-        bottom: 0px;
-    }
-}
-.custom-add-product-btn {
-    position: absolute;
-    bottom: 70px;
-    right: 10px;
-    transition: 0.2s;
-}
-.custom-add-product-btn:active {
-    transform: scale(0.95);
-}
 .custom-btn:active {
     color: rgb(253, 106, 106);
 }

@@ -16,13 +16,15 @@ module.exports = {
     ],
     rules: {
         'react-hooks/rules-of-hooks': 'error',
-        'react-hooks/exhaustive-deps': 'error', // TODO Will be moved to error soon
+        'react-hooks/exhaustive-deps': 'error',
         'react/prop-types': 'off',
         'semi': [1, 'never'],
         eqeqeq: [1, 'always'],
+        '@typescript-eslint/no-explicit-any': 'error',
+        '@typescript-eslint/no-non-null-assertion': 'error',
         '@typescript-eslint/ban-ts-comment': 'off', // TODO Will be turned on later
-        '@typescript-eslint/no-non-null-asserted-optional-chain': 'off', // TODO will be turned on later
-        'react/no-unescaped-entities': 'warn', // TODO Will be turned on later
+        '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
+        'react/no-unescaped-entities': 'error',
         'no-console': 0,
         'quotes': [1, 'single', { avoidEscape: true, allowTemplateLiterals: true }],
         'curly': 0,

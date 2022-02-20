@@ -45,7 +45,7 @@ function HSNmodal({ setModal, trigger } : IProps) {
 
 
     return trigger ? (
-        <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-gray-700 dark:border-gray-800">
+        <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-gray-800">
             <div className="popup-inner">
                 <button className="popup-btn" onClick={() => setModal(false)}>
                     <svg
@@ -61,16 +61,16 @@ function HSNmodal({ setModal, trigger } : IProps) {
                         />
                     </svg>
                 </button>
-                <h3 className="font-bold text-gray-500 dark:text-gray-200">HSN Number</h3>
-                <div className="text-gray-400 dark:text-gray-300 mt-2 text-xs font-light">
-                    <strong className="font-bold text-gray-600 dark:text-gray-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information.
+                <h3 className="font-bold text-slate-500 dark:text-slate-200">HSN Number</h3>
+                <div className="text-slate-400 dark:text-slate-300 mt-2 text-xs font-light">
+                    <strong className="font-bold text-slate-600 dark:text-slate-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information.
                 </div>
                 <div className="relative flex w-full mt-8">
                     <input
                         type="text"
                         id="input"
                         value={searchValue}
-                        className="w-full h-10 pl-4 pr-5 bg-gray-100 dark:bg-gray-500 dark:text-gray-100 rounded outline-none "
+                        className="w-full h-10 pl-4 pr-5 bg-slate-100 dark:bg-slate-500 dark:text-slate-100 rounded outline-none "
                         placeholder={intl.formatMessage({ id: `action.search` })}
                         onChange={handleInputChange}
                     />
@@ -78,9 +78,9 @@ function HSNmodal({ setModal, trigger } : IProps) {
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
                     {hsnCodes.map((mapItem) => (
                         <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
-                            <div className="text-gray-700 dark:text-gray-300">{mapItem.chapter} </div>
-                            <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>
-                            <div className="mt-2 grid grid-cols-2 text-gray-700 dark:text-gray-300">
+                            <div className="text-slate-700 dark:text-slate-300">{mapItem.chapter} </div>
+                            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
+                            <div className="mt-2 grid grid-cols-2 text-slate-700 dark:text-slate-300">
                                 <div>HSN: {mapItem.hsn} </div>
                                 <div>Rate: {mapItem.gstPercentage}% </div>
                             </div>

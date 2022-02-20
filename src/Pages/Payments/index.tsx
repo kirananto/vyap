@@ -11,7 +11,7 @@ import { selectPaymentFilters } from './Filters/paymentFiltersSlice'
 import { ExportAll } from './Options/ExportAll'
 import { PrintAll } from './Options/PrintAll'
 import { useIntl } from 'react-intl'
-import useQueryParam from 'src/useQueryParams'
+import useQueryParam from 'src/utils/useQueryParams'
 import { useNavigate } from 'react-router'
 import type { IFetchAllPayments, IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 
@@ -28,7 +28,7 @@ export default function Payments() {
     useEffect(() => {
         fetchAllPayments({
             token: token,
-            limit: 100,
+            limit: 1000,
             offset: 0,
             paymentMethod: filters?.paymentMethod,
             ordering: filters?.sorting ? filters?.sorting : 'latest',
@@ -36,14 +36,14 @@ export default function Payments() {
         }).then((result: IFetchAllPayments) => {
             console.log(result.data)
             setLoading(false)
-            setPayments(result?.data?.data!)
+            setPayments(result?.data?.data ?? [])
             //TODO handle the payments better
         })
     }, [filters?.paymentMethod, filters?.sorting, filters?.account?.id, token])
     return (
         <div className="">
             {/* header */}
-            <div className="w-full bg-white pb-3 shadow dark:bg-gray-800 ">
+            <div className="w-full bg-white pb-3 shadow dark:bg-slate-800  print:hidden">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/more')}
@@ -54,9 +54,9 @@ export default function Payments() {
                 />
             </div>
             {/* body */}
-            <div className="bg-gray-100 p-4 dark:bg-gray-900">
+            <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
                 <div
-                    className="overflow-y-auto rounded bg-white p-4 dark:bg-gray-800"
+                    className="overflow-y-auto rounded bg-white p-4 dark:bg-slate-800"
                     style={{ height: 'calc(100vh - 15rem)' }}
                 >
                     <PaymentContainer payments={payments} loading={loading} />
@@ -65,13 +65,13 @@ export default function Payments() {
 
             <ModalViewer
                 body={<FilterPopup />}
-                isOpen={filterPopupOpen!}
+                isOpen={!!filterPopupOpen}
                 onClose={() => setfilterPopupOpen(false)}
                 name={'filter'}
             />
             {/* Footer */}
 
-            <div className="fixed bottom-0 grid h-20 w-full bg-white px-8 shadow dark:bg-gray-800">
+            <div className="fixed  print:static bottom-0 grid h-20 w-full bg-white px-8  drop-shadow-xl dark:bg-slate-800">
                 <div className="mt-2 flex w-full max-w-lg items-center justify-center gap-2 justify-self-center">
                     <PrintAll apiData={payments} />
                     <ExportAll apiData={payments} />

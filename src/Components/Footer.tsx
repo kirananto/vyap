@@ -19,12 +19,12 @@ function Footer() {
     }
 
     return (
-        <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border shadow-md dark:bg-gray-800 dark:border-gray-800">
+        <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border drop-shadow-md dark:bg-slate-800 dark:border-gray-800">
             {/* Nav-Item-1 */}
             <Link
                 to="/"
                 onClick={hapticFeedback}
-                className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/home', '/']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400'} `}
+                className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/home', '/']) ? 'text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400'} `}
             >
                 <figure className="grid justify-items-center">
                     <svg
@@ -55,7 +55,7 @@ function Footer() {
             {user?.organization?.isSupplier && <Link
                 to="/my-products"
                 onClick={hapticFeedback}
-                className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/my-products']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400'} `}      >
+                className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/my-products']) ? 'text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400'} `}      >
                 <figure className="grid justify-items-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ function Footer() {
             <Link
                 to="/more"
                 onClick={hapticFeedback}
-                className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/more']) ? 'text-gray-800 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400'} `}      >
+                className={`flex items-center justify-center w-1/2 pt-3 pb-2 text-center cursor-pointer ripple_effect ${isActive(['/more']) ? 'text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400'} `}      >
                 <figure className="grid justify-items-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,7 @@ function Footer() {
 function SimpleFooter(props: { btnName: string, onClick?: (e: React.MouseEvent<HTMLInputElement>) => void 
 , isDisabled?: boolean }) {
     return (
-        <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow shadow-2xl dark:bg-gray-800">
+        <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md shadow-2xl dark:bg-slate-800">
             <Button onClick={(event: React.MouseEvent<HTMLInputElement>) => {
                 // if(event.preventDefault) event.preventDefault()
                 hapticFeedback()

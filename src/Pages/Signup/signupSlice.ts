@@ -1,8 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'src/redux/store'
 
-interface OrganizationLocationInterface {
+export interface OrganizationLocationInterface {
     lat: number,
-    lng: number
+    lng: number,
+    address?: string;
+    city?: string;
+    pinCode?: string;
+    state?: string;
 }
 
 export interface SignupInterface {
@@ -12,7 +17,7 @@ export interface SignupInterface {
     pinCode: string;
     organizationLocation: OrganizationLocationInterface
     businessName: string
-    category: string[]
+    category: { id: string }[]
     address: string,
     listPrivately: boolean
 }
@@ -31,7 +36,7 @@ const initialState: SignupInterface = {
     category: [],
     listPrivately: false
 
-};
+}
 
 
 export const signupSlice = createSlice({
@@ -40,59 +45,59 @@ export const signupSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setName: (state, action: PayloadAction<string>) => {
-            state.name = action.payload;
+            state.name = action.payload
         },
         setPhone: (state, action: PayloadAction<string>) => {
-            state.phone = action.payload;
+            state.phone = action.payload
         },
         setEmail: (state, action: PayloadAction<string>) => {
-            state.email = action.payload;
+            state.email = action.payload
         },
         setPinCode: (state, action: PayloadAction<string>) => {
-            state.pinCode = action.payload;
+            state.pinCode = action.payload
         },
         setBusinessName: (state, action: PayloadAction<string>) => {
-            state.businessName = action.payload;
+            state.businessName = action.payload
         },
         setAddress: (state, action: PayloadAction<string>) => {
-            state.address = action.payload;
+            state.address = action.payload
         },
         setListPrivately: (state, action: PayloadAction<boolean>) => {
-            state.listPrivately = action.payload;
+            state.listPrivately = action.payload
         },
         setOrganizationLocation: (state, action: PayloadAction<OrganizationLocationInterface>) => {
-            state.organizationLocation.lat = action.payload.lat;
-            state.organizationLocation.lng = action.payload.lng;
+            state.organizationLocation.lat = action.payload.lat
+            state.organizationLocation.lng = action.payload.lng
         },
-        setCategory: (state, action: PayloadAction<string>) => {
-            if(state.category.includes(action.payload)) {
-                state.category = state.category.filter(filterItem => filterItem !== action.payload)
+        setCategory: (state, action: PayloadAction<{ id: string }>) => {
+            if(state.category.some(someItem => someItem.id === action.payload?.id)) {
+                state.category = state.category.filter(filterItem => filterItem.id !== action.payload.id)
             } else {
                 state.category = [...state.category, action.payload]
             }
         },
         clearAll: (state) => {
-            state.name = '';
-            state.phone = '';
-            state.email = '';
-            state.pinCode = '';
-            state.organizationLocation.lat = 41;
-            state.organizationLocation.lng = 41;
-            state.address = '';
-            state.businessName = '';
-            state.category = [];
+            state.name = ''
+            state.phone = ''
+            state.email = ''
+            state.pinCode = ''
+            state.organizationLocation.lat = 41
+            state.organizationLocation.lng = 41
+            state.address = ''
+            state.businessName = ''
+            state.category = []
             state.listPrivately = false
         },
 
     },
-});
+})
 
-export const { setName, setPhone, setBusinessName, setEmail, setListPrivately, setOrganizationLocation, setPinCode, setCategory, setAddress, clearAll } = signupSlice.actions;
+export const { setName, setPhone, setBusinessName, setEmail, setListPrivately, setOrganizationLocation, setPinCode, setCategory, setAddress, clearAll } = signupSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.credentials.value)`
-export const selectSignupInfo = (state: any): SignupInterface => state.signup;
+export const selectSignupInfo = (state: RootState): SignupInterface => state.signup
 
 
-export default signupSlice.reducer;
+export default signupSlice.reducer

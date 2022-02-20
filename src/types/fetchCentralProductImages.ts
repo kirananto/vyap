@@ -5,11 +5,11 @@ export interface IData {
     data?: (ICentralImage)[] | null;
 }
 export interface ICentralImage {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
+    id?: string;
+    createdAt?: string;
+    updatedAt?: string;
     deletedAt?: null;
-    productId: string;
+    productId?: string;
     imageName: string;
     title: string;
     description: string;

@@ -9,8 +9,9 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import './Drop.css'
 import { Length, validate } from 'class-validator'
-import type { ICentralProduct, IFetchCentralProducts } from 'src/types/fetchCentralProducts'
 import type { ICentralImage, IFetchCentralProductImages } from 'src/types/fetchCentralProductImages'
+import type { CentralCatalogueInterface } from '../redux/addProductSlice'
+import transparentImg from 'src/assets/img/transparent.png'
 
 export class Post {
   @Length(3, 50)
@@ -19,8 +20,8 @@ export class Post {
 
 interface IProps {
     key : string
-    opt: ICentralProduct
-    onSelect: (e: any) => void
+    opt: CentralCatalogueInterface
+    onSelect: (e: Partial<CentralCatalogueInterface>) => void
 }
 
 function List(props: IProps) {
@@ -28,7 +29,7 @@ function List(props: IProps) {
     const [productImage, setProductImage] = useState<string>()
 
     useEffect(() => {
-        fetchCentralProductImages({ token, limit: 100, offset: 0, catalogueId: props?.opt?.id }).then(
+        fetchCentralProductImages({ token, limit: 100, offset: 0, catalogueId: props?.opt?.id ?? '' }).then(
             (result: IFetchCentralProductImages) => {
                 const imageName = result.data?.data?.filter((filterItem: ICentralImage) =>
                     filterItem.imageName?.includes('.')
@@ -48,34 +49,35 @@ function List(props: IProps) {
 
     return (
         <div
-            className="drop-main cursor-pointer grid grid-cols-12 gap-2"
+            className="drop-main cursor-pointer flex flex-shrink-0"
             onClick={() => props.onSelect(props.opt)}
         >
-            <div className="col-span-3 sm:col-span-4 md:col-span-1 w-16 h-16 rounded-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
-                {productImage && (
-                    <img
-                        src={productImage}
-                        alt="Avatar"
-                        className="object-cover w-full h-full"
-                    />
-                )}
+            <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
+                <img
+                    src={productImage ? productImage : transparentImg}
+                    alt="Avatar"
+                    className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                />
             </div>
-            <div className="col-span-9 sm:col-span-8 md:col-span-11 ml-2">
-                <div className="text-xl font-bold text-gray-700 dark:text-gray-200">
+            <div className="w-full">
+                <div className="text-lg w-full font-bold text-slate-700 dark:text-slate-200 line-clamp-1">
                     {props.opt.name}
                 </div>
-                <div className="text-base text-gray-400 dark:text-gray-300">
+                <div className="text-xs w-full text-slate-400 dark:text-slate-400 line-clamp-2">
                     {props.opt.description}
                 </div>
-                {/* <div className="text-xs font-bold text-gray-400">{props.opt.price}</div> */}
+                {/* <div className="text-xs font-bold text-slate-400">{props.opt.price}</div> */}
             </div>
         </div>
     )
 }
+interface DropdDownInterface {
+    onSelect: (e: Partial<CentralCatalogueInterface>) => void
+}
 
-function DropDown(props: any) {
+function DropDown(props: DropdDownInterface) {
     const [value, setValue] = useState('')
-    const [options, setOptions] = useState<ICentralProduct[]>([])
+    const [options, setOptions] = useState<CentralCatalogueInterface[]>([])
 
     // const [isOpen, setIsOpen] = useState(false)
     const [isValidProduct, setIsValidProduct] = useState<boolean>(true)
@@ -95,15 +97,15 @@ function DropDown(props: any) {
     // })
 
     useEffect(() => {
-        fetchCentralProducts({ token, limit: 100, offset: 0, search: value }).then((result: IFetchCentralProducts) => {
+        fetchCentralProducts({ token, limit: 100, offset: 0, search: value }).then((result) => {
             console.log('result', result.data?.data)
-            setOptions(result.data?.data!)
+            setOptions(result.data?.data ?? [])
         })
     }, [token, value])
 
     const navigate = useNavigate()
 
-    function search(e: any) {
+    function search(e: React.ChangeEvent<HTMLInputElement>) {
         const text = e.target.value
         setValue(text)
     }
@@ -127,9 +129,9 @@ function DropDown(props: any) {
         })
     }
 
-    function select(e: any) {
+    function select(e: Partial<CentralCatalogueInterface>) {
         // setIsOpen(false)
-        setValue(e.name)
+        setValue(e.name ?? '')
         if (props.onSelect) {
             props.onSelect(e)
             navigate('/create-product')
@@ -142,7 +144,7 @@ function DropDown(props: any) {
             return (
                 <div className="p-4">
                     <button
-                        className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+                        className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-gray-500"
                         onClick={add}
                     >
                         <svg
@@ -163,13 +165,13 @@ function DropDown(props: any) {
                     </button>
                     <span
                         className={
-                            'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 ' +
+                            'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 mb-10 ml-1 ' +
               (isValidProduct ? 'hidden' : '')
                         }
                     >
             Invalid product name !
                     </span>
-                    <div className="text-center dark:text-gray-300">
+                    <div className="text-center dark:text-slate-300">
             No existing products found, add this as a new product by Clicking
             Add Button.
                     </div>
@@ -182,7 +184,7 @@ function DropDown(props: any) {
                     <>
                         {' '}
                         <button
-                            className="border w-full rounded p-6 flex bg-white dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+                            className="border w-full rounded p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-gray-500"
                             onClick={add}
                         >
                             <svg
@@ -203,7 +205,7 @@ function DropDown(props: any) {
                         </button>
                         <span
                             className={
-                                'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 mb-10 ml-1 ' +
+                                'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 mb-10 ml-1 ' +
                   (isValidProduct ? 'hidden' : '')
                             }
                         >
@@ -212,8 +214,8 @@ function DropDown(props: any) {
                     </>,
                 ]
                 : []),
-            ...listItems.map((opt: ICentralProduct) => {
-                return <List key={opt.id} opt={opt} onSelect={select} />
+            ...listItems.map((opt: CentralCatalogueInterface) => {
+                return <List key={opt.id ?? ''} opt={opt} onSelect={select} />
             }),
         ]
     }
@@ -223,12 +225,12 @@ function DropDown(props: any) {
                 type="text"
                 onChange={search}
                 value={value}
-                className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 dark:focus:bg-gray-600"
+                className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
                 placeholder="Search or create product..."
             />
             <div
                 // ref={myRef}
-                className={`dark:bg-gray-700 ${'drop-open h-72'}`}
+                className={`dark:bg-slate-700 drop-open dark:border-gray-500 rounded-lg overflow-x-hidden h-72`}
             >
                 {renderListItems()}
             </div>

@@ -1,6 +1,5 @@
-import React, { Dispatch, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBrands } from 'src/API/brand.axios'
 import { imageUpload } from 'src/API/image.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
@@ -29,6 +28,7 @@ import {
 
 import Compressor from 'compressorjs'
 import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'
+import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 interface Props {
     action: PAGE_ACTION;
     saveAttempt: number;
@@ -36,14 +36,12 @@ interface Props {
 
 interface IImageProps {
     key: string;
-    item: {
-        fileId: string;
-        imageName: string
-    };
+    item: ICentralImage;
 }
 
 interface IInputProps {
     label: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>
     value: string | undefined
     placeholder: string
@@ -54,7 +52,7 @@ const ImageContainer = (props: IImageProps) => {
     return (
         <div
             className="h-16 w-16 overflow-hidden rounded-lg border border-gray-200 shadow-sm dark:border-gray-500 "
-            key={item?.fileId}
+            key={item?.id}
         >
             <img
                 key={item?.imageName}
@@ -68,10 +66,11 @@ const ImageContainer = (props: IImageProps) => {
     )
 }
 
-const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+function handleInputChange(event: React.ChangeEvent<HTMLInputElement>,
     label: string,
-    dispatch: Dispatch<any>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dispatch: Dispatch<any>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tempVal: any = event.target.value
     switch (label) {
         case 'Your Item Code(SKU)':
@@ -114,7 +113,7 @@ const handleInputChange = (
 const Input = (props: IInputProps) => {
     return (
         <div className=" mt-2  ">
-            <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+            <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                 {props.label}
             </p>
             <input
@@ -124,7 +123,7 @@ const Input = (props: IInputProps) => {
                 type="text"
                 value={props.value}
                 placeholder={props.placeholder}
-                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
             />
         </div>
     )
@@ -144,24 +143,14 @@ function OthersTab({ action, saveAttempt }: Props) {
 
     const fileUploaderRef = useRef<HTMLInputElement>(null)
 
-    useEffect(() => {
-        fetchBrands({ token, limit: 100, offset: 0 })
-            .then((result: any) =>
-                console.log(
-                    result.data.data.map((item: any) => ({ label: 'ssdd', value: item }))
-                )
-            )
-            .catch(() => console.log('Error loadng data'))
-    }, [token])
-
     function uploadImage() {
         if (fileUploaderRef.current?.files) {
             if (fileUploaderRef.current?.files?.length > 0) {
                 setSpinner(true)
                 new Compressor(fileUploaderRef.current?.files?.[0], {
-                    quality: 0.6,
-                    maxWidth: 300,
-                    maxHeight: 300,
+                    quality: 0.8,
+                    maxWidth: 500,
+                    maxHeight: 500,
 
                     // The compression process is asynchronous,
                     // which means you have to access the `result` in the `success` hook function.
@@ -173,6 +162,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 console.log('data', result.data)
                                 dispatch(
                                     setProductImage({
+                                        id: result.data?.name,
                                         imageName: result.data.name,
                                         title: addProductInfo?.centralCatalogue?.name ?? 'name',
                                         description: `${addProductInfo?.centralCatalogue?.name}`,
@@ -216,11 +206,11 @@ function OthersTab({ action, saveAttempt }: Props) {
         >
             {!addProductInfo?.centralCatalogue?.id && (
                 <>
-                    <h1 className="font-bold text-gray-500 dark:text-gray-400 ">
+                    <h1 className="font-bold text-slate-500 dark:text-slate-400 ">
                         Add product images
                     </h1>
-                    <p className="mt-2 text-xs font-bold text-gray-400 dark:text-gray-300">
-                        Add upto 5 images. First image is your product's cover
+                    <p className="mt-2 text-xs font-bold text-slate-400 dark:text-slate-300">
+                        Add upto 5 images. First image is your product{`'`}s cover
                         <br /> image that will be highlighted everywhere{' '}
                     </p>
                     {/* image-container */}
@@ -229,8 +219,8 @@ function OthersTab({ action, saveAttempt }: Props) {
                             <ImageContainer key={item.imageName} item={item} />
                         ))}
                         <div
-                            className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border border-gray-400 p-1 shadow-sm dark:text-gray-300"
-                            onClick={() => fileUploaderRef.current!.click()}
+                            className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border border-gray-400 p-1 shadow-sm dark:text-slate-300"
+                            onClick={() => fileUploaderRef.current?.click()}
                         >
                             {!spinner ? (
                                 <svg
@@ -269,7 +259,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {/* brand input */}
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Brand
                         </p>
                         <div className="des-modal-btn">
@@ -282,11 +272,11 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 value={addProductInfo?.others?.brand?.name}
                                 type="text"
                                 placeholder="Enter brand"
-                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300"
+                                className="modal-btn dark:text-slate-300"
                                 onClick={handleModal}
                             >
                                 <svg
@@ -304,10 +294,10 @@ function OthersTab({ action, saveAttempt }: Props) {
                             </button>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidBrand(
                                         !!addProductInfo?.centralCatalogue?.id,
-                                        addProductInfo?.others?.brand?.name!
+                                        addProductInfo?.others?.brand?.name
                                     )
                                         ? 'hidden'
                                         : '')
@@ -326,7 +316,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {/* Category-Input */}
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Category
                         </p>
                         <div className="des-modal-btn">
@@ -342,11 +332,11 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 value={addProductInfo?.others?.centralCategory?.name}
                                 type="text"
                                 placeholder="Enter category"
-                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300"
+                                className="modal-btn dark:text-slate-300"
                                 onClick={handleCategoryModal}
                             >
                                 <svg
@@ -364,10 +354,10 @@ function OthersTab({ action, saveAttempt }: Props) {
                             </button>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidCategory(
                                         !!addProductInfo?.centralCatalogue?.id,
-                                        addProductInfo?.others?.centralCategory?.name!
+                                        addProductInfo?.others?.centralCategory?.name
                                     )
                                         ? 'hidden'
                                         : '')
@@ -389,7 +379,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                 {/* Tag-Input */}
                 {action === PAGE_ACTION.ADD && (
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Tag
                         </p>
                         <div className="des-modal-btn">
@@ -402,11 +392,11 @@ function OthersTab({ action, saveAttempt }: Props) {
                                 value={addProductInfo?.others?.category?.name}
                                 type="text"
                                 placeholder="Enter Tags"
-                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-gray-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="focus:shadow-outline mt-2 w-full transform rounded-lg border border-transparent border-gray-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300"
+                                className="modal-btn dark:text-slate-300"
                                 onClick={handleTagsModal}
                             >
                                 <svg
@@ -424,10 +414,10 @@ function OthersTab({ action, saveAttempt }: Props) {
                             </button>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 ' +
+                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidTag(
                                         !!addProductInfo?.centralCatalogue?.id,
-                                        addProductInfo?.others?.category?.name!
+                                        addProductInfo?.others?.category?.name
                                     )
                                         ? 'hidden'
                                         : '')
@@ -457,7 +447,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                         />
                         {/* <span
               className={
-                "mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-red-500 " +
+                "mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 " +
                 (isValidDescription(
                   addProductInfo?.centralCatalogue?.description!
                 )
@@ -478,7 +468,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                             dispatch={dispatch}
                             value={addProductInfo?.others?.barCode}
                         />
-                        <div className="barcode-icon dark:text-gray-300">
+                        <div className="barcode-icon dark:text-slate-300">
                             <button>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,5 @@
 import { lazily } from 'react-lazily'
-const { Home } = lazily(() => import('src/Pages/Home/Home'))
+const { Home } = lazily(() => import('src/Pages/Customers/Home'))
 const Login = lazily(() => import('src/Pages/Login/Login')).default
 const SignupStepOne = lazily(() => import('src/Pages/Signup/SignupStepOne')).default
 const SignupStepTwo = lazily(() => import('src/Pages/Signup/SignupStepTwo')).default
@@ -7,7 +7,7 @@ const SignupStepThree = lazily(() => import('src/Pages/Signup/SignupStepThree'))
 const SignupStepFour = lazily(() => import('src/Pages/Signup/SignupStepFour')).default
 
 const Settings = lazily(() => import('src/Pages/Settings/Settings')).default
-const PaymentDetails = lazily(() => import('src/Pages/ChatView/PaymentDetails')).default
+const PaymentDetails = lazily(() => import('src/Pages/Customers/ChatView/InfoPages/Payment/PaymentDetails')).default
 const Reports = lazily(() => import('src/Pages/Reports/Reports')).default
 const Employees = lazily(() => import('src/Pages/Employees/Employees')).default
 const StockManagement = lazily(() => import('src/Pages/StockManagement/StockManagement')).default
@@ -17,14 +17,14 @@ const Product = lazily(() => import('src/Pages/Product')).default
 const Account = lazily(() => import('src/Pages/Account')).default
 const AllPayments = lazily(() => import('src/Pages/Payments')).default
 
-const AddItem = lazily(() => import('src/Pages/ChatView/PlaceOrder/AddItem')).default
-const PlaceOrder = lazily(() => import('src/Pages/ChatView/PlaceOrder')).default
+const AddItem = lazily(() => import('src/Pages/Customers/ChatView/PlaceOrder/AddItem')).default
+const PlaceOrder = lazily(() => import('src/Pages/Customers/ChatView/PlaceOrder')).default
 const CreateProduct = lazily(() => import('src/Pages/Product/AddProduct/ProductScreen/CreateProduct')).default
 const AddEditPurchase = lazily(() => import('src/Pages/StockManagement/PurchaseOrder/AddEditPurchase')).default
 const PurchaseOrder = lazily(() => import('src/Pages/StockManagement/PurchaseOrder')).default
 const AddProductMain = lazily(() => import('src/Pages/Product/AddProduct/MainScreen/AddProductMain')).default
-const OrderDetails = lazily(() => import('src/Pages/Orders/OrderView')).default
-const { Payment } = lazily(() => import('src/Pages/ChatView'))
+const OrderDetails = lazily(() => import('src/Pages/Customers/ChatView/InfoPages/Order')).default
+const { Payment } = lazily(() => import('src/Pages/Customers/ChatView'))
 const ProductDetail = lazily(() => import('src/Pages/Product/ProductDetail')).default
 
 

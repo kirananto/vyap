@@ -7,9 +7,9 @@ import { useIntl } from 'react-intl'
 export default function Reports() {
     const intl = useIntl()
     return (
-        <div className="bg-white dark:bg-gray-900 h-screen">
+        <div className="bg-white dark:bg-slate-900 h-screen">
             {/* Header */}
-            <div className="bg-white dark:bg-gray-900 shadow">
+            <div className="bg-white dark:bg-slate-900 shadow">
                 <SimpleHeader heading={intl.formatMessage({ id: 'global.reports'})} />
             </div>
 

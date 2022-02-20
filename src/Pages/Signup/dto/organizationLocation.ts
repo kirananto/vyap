@@ -1,25 +1,25 @@
-import { IsDefined, IsLatitude, IsLongitude } from "class-validator"
+import { IsDefined, IsLatitude, IsLongitude } from 'class-validator'
 
 export class OrganizationLocation {
   
     @IsLatitude()
     @IsDefined()
-    lat!: number
+        lat!: number
   
     @IsLongitude()
     @IsDefined()
-    lng!: number
+        lng!: number
   
     @IsDefined()
-    address!: string
+        address!: string
   
     @IsDefined()
-    city!: string
+        city!: string
   
     @IsDefined()
-    state!: string
+        state!: string
     
     @IsDefined()
-    pinCode!: string
+        pinCode!: string
   
-  }
+}

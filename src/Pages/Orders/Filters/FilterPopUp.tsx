@@ -20,11 +20,11 @@ const Sorting = (props: SortingProps) => {
     }
 
     return (
-        <div className="ml-4 flex items-center gap-2">
-            <input type="radio" checked={isChecked} onChange={onChangeSorting} />
+        <div className="ml-4 flex items-center gap-2 pb-1">
+            <input type="radio" id={`radioBox${props.sortingName}`} checked={isChecked} onChange={onChangeSorting} />
             <label
-                htmlFor=""
-                className="text-sm font-semibold text-gray-500 dark:text-gray-400"
+                htmlFor={`radioBox${props.sortingName}`}
+                className="text-sm font-semibold text-slate-500 dark:text-slate-400"
             >
                 {props.sortingName}
             </label>
@@ -39,7 +39,7 @@ export function FilterPopup() {
         <div className="max-h-[80vh] overflow-y-scroll px-4 pt-2 pb-10">
             <div className="mb-4 flex items-center justify-between">
                 {/* col-1 */}
-                <div className="flex gap-2 text-gray-500 dark:text-gray-200">
+                <div className="flex gap-2 text-slate-500 dark:text-slate-200">
                     {/* icon */}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ export function FilterPopup() {
                 <FilterAccounts heading="Based On Order status" type="orderStatus" />
             </div>
             {/* Sorting */}
-            <div className="mt-4 flex gap-2 text-gray-500 dark:text-gray-300">
+            <div className="mt-4 flex gap-2 text-slate-500 dark:text-slate-300">
                 {/* col-1 for icon */}
                 <div>
                     <svg

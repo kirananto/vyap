@@ -36,9 +36,9 @@ function PricingTab({ action, saveAttempt }: Props) {
         }
     }
 
-    const resetSalesToZero = () => dispatch(setSalesPrice(isNumber(parseInt(`${addProductInfo.pricing?.salesPrice}`, 10)) ? addProductInfo.pricing?.salesPrice! : 0))
+    const resetSalesToZero = () => dispatch(setSalesPrice(parseInt(`${addProductInfo.pricing?.salesPrice ?? 0}`, 10) ?? 0))
 
-    const resetMRPToZero = () => dispatch(setMrpPrice(isNumber(parseInt(`${addProductInfo.pricing?.mrpPrice}`, 10)) ? addProductInfo.pricing?.mrpPrice! : 0))
+    const resetMRPToZero = () => dispatch(setMrpPrice(parseInt(`${addProductInfo.pricing?.mrpPrice ?? 0}`, 10) ?? 0 ))
 
     useEffect(() => {
         if (saveAttempt) {
@@ -57,7 +57,7 @@ function PricingTab({ action, saveAttempt }: Props) {
             {/* MRP Price */}
 
             <div>
-                <p className="text-sm font-bold text-gray-500 dark:text-gray-300">MRP</p>
+                <p className="text-sm font-bold text-slate-500 dark:text-slate-300">MRP</p>
                 <input
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         dispatch(setMrpPrice(Number(event.target.value)))
@@ -67,12 +67,12 @@ function PricingTab({ action, saveAttempt }: Props) {
                     type="number"
                     min="0"
                     placeholder="Enter price"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
 
                 <span
                     className={
-                        'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
             (addProductInfo.pricing?.mrpPrice === undefined || isValidMRP(addProductInfo.pricing?.mrpPrice) ? 'hidden' : '')
                     }
                 >
@@ -83,7 +83,7 @@ function PricingTab({ action, saveAttempt }: Props) {
             {/* Sale Price */}
 
             <div>
-                <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Sale Price</p>
+                <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Sales Price</p>
                 <input
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         dispatch(setSalesPrice(Number(event.target.value)))
@@ -93,15 +93,15 @@ function PricingTab({ action, saveAttempt }: Props) {
                     type="number"
                     min="0"
                     placeholder="Enter price"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
                 <span
                     className={
-                        'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
             (addProductInfo.pricing?.salesPrice === undefined || isValidSalePrice(addProductInfo.pricing?.salesPrice) ? 'hidden' : '')
                     }
                 >
-          * Enter valid Sale price !
+          * Enter valid Sales price !
                 </span>
             </div>
 
@@ -109,7 +109,7 @@ function PricingTab({ action, saveAttempt }: Props) {
 
             {action === PAGE_ACTION.ADD &&
         <div className="mt-2">
-            <div className="text-sm font-bold text-gray-500 dark:text-gray-300">Tax Info</div>
+            <div className="text-sm font-bold text-slate-500 dark:text-slate-300">Tax Info</div>
             <ToggleButton
                 className="mt-4"
                 onChange={() => {
@@ -126,15 +126,15 @@ function PricingTab({ action, saveAttempt }: Props) {
                 <div>
                     {/* HSN section */}
                     <div>
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">HSN Number</p>
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">HSN Number</p>
                         <div className="des-modal-btn">
-                            <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600">
+                            <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600">
                                 {addProductInfo.pricing?.hsn?.hsn}
                             </div>
 
                             {/* Modal handle btn */}
                             <button
-                                className="modal-btn dark:text-gray-300 -mt-2"
+                                className="modal-btn dark:text-slate-300 -mt-2"
                                 onClick={handleModal}
                             >
                                 <svg
@@ -154,8 +154,8 @@ function PricingTab({ action, saveAttempt }: Props) {
 
                             <span
                                 className={
-                                    'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
-                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn!) ? 'hidden' : '')
+                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
+                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn) ? 'hidden' : '')
                                 }
                             >
                   * Enter valid HSN !
@@ -167,7 +167,7 @@ function PricingTab({ action, saveAttempt }: Props) {
                     </div>
                     {/* GST section */}
                     <div>
-                        <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-300">GST Percentage</p>
+                        <p className="mt-4 text-sm font-bold text-slate-500 dark:text-slate-300">GST Percentage</p>
                         <div className="flex">
                             <input
                                 onChange={handleGstPercentage}
@@ -181,14 +181,14 @@ function PricingTab({ action, saveAttempt }: Props) {
                                 type="number"
                                 max={100}
                                 min={0}
-                                className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                                className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             />
                             <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded-lg rounded-tl-none rounded-bl-none">
                   %
                             </div>
                             <span
                                 className={
-                                    'flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 ' +
+                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
                     (isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
                       addProductInfo.pricing?.gstPercentage) ? 'hidden' : '')
                                 }

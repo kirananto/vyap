@@ -3,13 +3,14 @@ import * as FileSaver from 'file-saver'
 import * as XLSX from 'xlsx'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
+import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 
 interface IProps {
-  apiData: any[];
+  apiData: orderInterface[];
 }
 
 export const ExportAll = ({ apiData }: IProps) => {
-    const orders: any[] = apiData.map((item) => {
+    const orders = apiData.map((item) => {
         return {
             ORDER_ID: '#' + item?.id?.split('-')[0],
             DATE: item.createdAt
@@ -19,7 +20,7 @@ export const ExportAll = ({ apiData }: IProps) => {
             BUYER: item?.buyer?.name,
             AMOUNT: (
                 parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)
-            ).toFixed(2),
+            ).toFixed(0),
         }
     })
 
@@ -39,7 +40,7 @@ export const ExportAll = ({ apiData }: IProps) => {
 
     return (
         <button
-            className="flex justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+            className="flex print:hidden justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
             onClick={() => exportToCSV()}
         >
             <svg

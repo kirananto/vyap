@@ -2,9 +2,9 @@ import React from 'react'
 import { hapticFeedback } from 'src/utils/vibrate'
 interface ButtonInterface {
     id?: string
-    children: any
+    children: JSX.Element | string
     className?: string
-    onClick?: any
+    onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLInputElement>
     isDisabled?: boolean
 }
 export default function Button({ id, children, onClick, className, isDisabled }: ButtonInterface) {

@@ -1,7 +1,7 @@
-import type { OrderStatusType } from 'src/Pages/Orders/enum'
+import type { OrderStatusEnum, OrderStatusType } from 'src/Pages/Orders/enum'
 import { axiosClient } from './apiClient'
 
-export const fetchOrderAPI = ({ token, id }: { token?: string; id: string }) => axiosClient({
+export const fetchOrderAPI = ({ token, id }: { token?: string; id?: string }) => axiosClient({
     url: `/order/${id}`,
     method: 'GET',
     headers: {
@@ -25,12 +25,12 @@ export const fetchOrdersAPI = ({ token, orderStatus, offset, limit, ordering, re
 
 export const placeOrderAPI = ({ token, data }: {
     token?: string; data: {
-        description: string
-        supplierId: string
-        buyerId: string
+        description?: string
+        supplierId?: string
+        buyerId?: string
         flatDiscount: number
         orderItems: {
-            quantity: string
+            quantity: number
             purchasePrice: number
             productId: string
         }[]
@@ -60,10 +60,14 @@ export function fetchOrderItems({ token, orderId, limit, offset }: { token?: str
     })
 }
 
-export const updateOrderStatus = ({ token, id, data }: { token: string; id?: string, data: any }) => axiosClient({
-    url: `/order-status/${id}`,
-    method: 'PATCH',
-    data,
+export const createOrderStatus = ({ token, orderId, note, status }: { token: string; orderId?: string, note?: string, status: OrderStatusEnum }) => axiosClient({
+    url: `/order-status`,
+    method: 'POST',
+    data: {
+        orderId,
+        note,
+        status
+    },
     headers: {
         'authorization': `Bearer ${token}`
     }

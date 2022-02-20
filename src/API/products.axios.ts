@@ -1,3 +1,5 @@
+import type { ICentralImage } from 'src/types/fetchCentralProductImages'
+import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
 import { axiosClient } from './apiClient'
 
 export interface IAddProduct {
@@ -10,7 +12,8 @@ export interface IAddProduct {
         createdAt?: string,
         updatedAt?: string
     },
-    thumbnailImage: string
+    outOfStock?: boolean
+    thumbnailImage?: string
     aliasName: string,
     organizationCatalogueCategoryId?: string,
     centralCatalogueId: string,
@@ -27,14 +30,14 @@ export interface IEditProduct {
 }
 
 export interface AddCentralCatalogueInterface {
-    name: string
-    description: string
+    name?: string
+    description?: string
     brandId?: string
     hsnId?: string
     barCode?: string
     categoriesId?: string
-    categories: any
-    images: any
+    categories: IOrganizationProductCategory[]
+    images: ICentralImage[]
     brand?: { 
         name?: string
         description?: string
@@ -42,7 +45,7 @@ export interface AddCentralCatalogueInterface {
     }
 }
 
-export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token?: string; organizationId: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token?: string; organizationId?: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
@@ -76,7 +79,7 @@ export const fetchProductById = ({ token, id }: { token?: string; id?: string })
     }
 })
 
-export const patchProductById = ({ token, id, data }: { token?: string; id?: string, data: any }) => axiosClient({
+export const patchProductById = ({ token, id, data }: { token?: string; id?: string, data: Partial<IAddProduct> }) => axiosClient({
     url: `/organization-catalogue/${id}`,
     method: 'PATCH',
     data,

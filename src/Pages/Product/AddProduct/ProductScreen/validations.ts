@@ -1,9 +1,9 @@
-import { validateSync } from "class-validator";
-import { PostBrand, PostCategory, PostDescription, PostGST, PostHSN, PostMRP, PostSale, PostTag } from "./types";
+import { validateSync } from 'class-validator'
+import { PostBrand, PostCategory, PostDescription, PostGST, PostHSN, PostMRP, PostSale, PostTag } from './types'
 
 export function isValidMRP(value?: number) {
-    let postMrp = new PostMRP();
-    postMrp.mrpPrice = Number(value);
+    const postMrp = new PostMRP()
+    postMrp.mrpPrice = Number(value)
 
     const errors = validateSync(postMrp)
     if (errors.length > 0) {
@@ -13,8 +13,8 @@ export function isValidMRP(value?: number) {
 }
 
 export function isValidSalePrice(value?: number) {
-    let postSale = new PostSale();
-    postSale.salePrice = Number(value);
+    const postSale = new PostSale()
+    postSale.salePrice = Number(value)
 
     const errors = validateSync(postSale)
     if (errors.length > 0) {
@@ -24,11 +24,15 @@ export function isValidSalePrice(value?: number) {
 }
 
 export function isValidHSN(taxEnabled: boolean, hasCatalogueId?: boolean, value?: number) {
-    if (!taxEnabled) { return true }
-    if (hasCatalogueId) { return true }
+    if (!taxEnabled) {
+        return true 
+    }
+    if (hasCatalogueId) {
+        return true 
+    }
 
-    let postHSN = new PostHSN();
-    postHSN.hsnNum = Number(value);
+    const postHSN = new PostHSN()
+    postHSN.hsnNum = Number(value)
 
     const errors = validateSync(postHSN)
     if (errors.length > 0) {
@@ -37,12 +41,16 @@ export function isValidHSN(taxEnabled: boolean, hasCatalogueId?: boolean, value?
     return !(errors.length > 0)
 }
 export function isValidGST(taxEnabled: boolean, hasCatalogueId?: boolean, value?: number) {
-    if (!taxEnabled) { return true }
-    if (hasCatalogueId) { return true }
+    if (!taxEnabled) {
+        return true 
+    }
+    if (hasCatalogueId) {
+        return true 
+    }
 
 
-    let postGST = new PostGST();
-    postGST.gst = Number(value);
+    const postGST = new PostGST()
+    postGST.gst = Number(value)
 
     const errors = validateSync(postGST)
     if (errors.length > 0) {
@@ -51,9 +59,9 @@ export function isValidGST(taxEnabled: boolean, hasCatalogueId?: boolean, value?
     return !(errors.length > 0)
 }
 
-export function isValidDescription(value: string) {
-    let postDesc = new PostDescription();
-    postDesc.description = value;
+export function isValidDescription(value?: string) {
+    const postDesc = new PostDescription()
+    postDesc.description = value ?? ''
 
     const errors = validateSync(postDesc)
     if (errors.length > 0) {
@@ -63,10 +71,12 @@ export function isValidDescription(value: string) {
     return !(errors.length > 0)
 }
 
-export function isValidCategory(hasCatalogueId: boolean, value: string) {
-    if (hasCatalogueId) { return true }
-    let postCat = new PostCategory();
-    postCat.category = value;
+export function isValidCategory(hasCatalogueId: boolean, value?: string) {
+    if (hasCatalogueId) {
+        return true 
+    }
+    const postCat = new PostCategory()
+    postCat.category = value ?? ''
 
     const errors = validateSync(postCat)
     if (errors.length > 0) {
@@ -75,10 +85,10 @@ export function isValidCategory(hasCatalogueId: boolean, value: string) {
     return !(errors.length > 0)
 }
 
-export function isValidTag(hasCatalogueId: boolean, value: string) {
+export function isValidTag(hasCatalogueId: boolean, value?: string) {
     //if (hasCatalogueId) { return true }
-    let postTag = new PostTag();
-    postTag.tag = value;
+    const postTag = new PostTag()
+    postTag.tag = value ?? ''
 
     const errors = validateSync(postTag)
     if (errors.length > 0) {
@@ -87,10 +97,12 @@ export function isValidTag(hasCatalogueId: boolean, value: string) {
     return !(errors.length > 0)
 }
 
-export function isValidBrand(hasCatalogueId: boolean, value: string) {
-    if (hasCatalogueId) { return true }
-    let postBrand = new PostBrand();
-    postBrand.brand = value;
+export function isValidBrand(hasCatalogueId: boolean, value?: string) {
+    if (hasCatalogueId) {
+        return true 
+    }
+    const postBrand = new PostBrand()
+    postBrand.brand = value ?? ''
 
     const errors = validateSync(postBrand)
     if (errors.length > 0) {
@@ -98,5 +110,3 @@ export function isValidBrand(hasCatalogueId: boolean, value: string) {
     }
     return !(errors.length > 0)
 }
-
-

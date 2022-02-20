@@ -30,12 +30,12 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
         <div className="pb-8 pt-2 px-4 w-full">
             {/* Heading */}
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-lg font-bold text-gray-500 dark:text-gray-200">More Options</h1>
-                <p className="text-xs font-semibold text-gray-300">{selectedProduct?.length ?? 0} item selected</p>
+                <h1 className="text-lg font-bold text-slate-500 dark:text-slate-200">More Options</h1>
+                <p className="text-xs font-semibold text-slate-300">{selectedProduct?.length ?? 0} item selected</p>
             </div>
             {/* row-1 */}
             <div className="flex flex-col mt-4">
-                <button onClick={deleteProducts} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+                <button onClick={deleteProducts} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -53,7 +53,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
                     <span>Delete Products(s)</span>
                 </button>
                 {/* ---- */}
-                <button onClick={() => markStockStatus(true)} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+                <button onClick={() => markStockStatus(true)} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -71,7 +71,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
                     <span>Mark out of stock</span>
                 </button>
                 {/* ---- */}
-                <button onClick={() => markStockStatus(false)} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn">
+                <button onClick={() => markStockStatus(false)} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"

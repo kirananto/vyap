@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBrands } from 'src/API/brand.axios'
 import { selectCredentials } from '../Login/credentialsSlice'
+import type { BrandInterface } from './AddProduct/ProductScreen/BrandModal'
 import { brandsCheckbox, selectProductFilters } from './productFiltersSlice'
 
 interface CategoryName {
   name: string;
-  item: any;
+  item: BrandInterface;
 }
 const Category = (props: CategoryName) => {
     const dispatch = useDispatch()
@@ -21,11 +22,11 @@ const Category = (props: CategoryName) => {
     }
 
     return (
-        <div className="ml-4 flex items-center gap-2">
-            <input type="checkbox" checked={isChecked} onChange={tickCheckBox} />
+        <div className="ml-4 flex items-center gap-2 pb-1">
+            <input type="checkbox" id={`brandsCheckbox${props.name}`} checked={isChecked} onChange={tickCheckBox} />
             <label
-                htmlFor=""
-                className="text-sm font-semibold text-gray-500 dark:text-gray-400"
+                htmlFor={`brandsCheckbox${props.name}`}
+                className="text-sm font-semibold text-slate-500 dark:text-slate-400"
             >
                 {props.name}
             </label>
@@ -38,11 +39,11 @@ interface FilterBrands {
   type: 'brand' | 'category';
 }
 export default function FilterBrand(props: FilterBrands) {
-    const [items, setItems] = useState<any[]>([])
+    const [items, setItems] = useState<BrandInterface[]>([])
     const { token } = useSelector(selectCredentials)
 
     useEffect(() => {
-        fetchBrands({ token, limit: 10, offset: 0 }).then((result: any) => {
+        fetchBrands({ token, limit: 10, offset: 0 }).then((result) => {
             setItems(result?.data?.data)
         })
     }, [token])
@@ -50,7 +51,7 @@ export default function FilterBrand(props: FilterBrands) {
     function renderItems() {
         if (items?.length < 1) {
             return (
-                <div className="text-xs text-gray-700 dark:text-gray-100">
+                <div className="text-xs text-slate-700 dark:text-slate-100">
                     {' '}
           No {props.type} present{' '}
                 </div>
@@ -63,7 +64,7 @@ export default function FilterBrand(props: FilterBrands) {
 
     return (
         <div>
-            <h1 className="mb-1 text-base font-semibold text-gray-500 dark:text-gray-300">
+            <h1 className="mb-1 text-base font-semibold text-slate-500 dark:text-slate-300">
                 {props.heading}
             </h1>
             <div className="mt-2 flex max-h-[25vh] flex-col gap-1  overflow-y-scroll">

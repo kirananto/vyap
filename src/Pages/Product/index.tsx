@@ -17,7 +17,7 @@ import { clearAll, selectProductFilters } from './productFiltersSlice'
 import { selectProductsInfo, setProducts } from './productsSlice'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Spinner from 'src/Components/Style/Spinner'
-import useQueryParam from 'src/useQueryParams'
+import useQueryParam from 'src/utils/useQueryParams'
 import type { IProduct } from 'src/types/product'
 import type { IProductList } from 'src/types/fetchProducts'
 import { hapticFeedback } from 'src/utils/vibrate'
@@ -68,6 +68,7 @@ export default function Product() {
     const [scrollTargetRef, target] = useCallbackRef()
     const { isScrolling } = useScrollDirection(target)
     function useCallbackRef() {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const [value, setValue] = React.useState<any>()
         const ref = useCallback((node: HTMLElement) => {
             if (node !== null) setValue(node)
@@ -117,18 +118,18 @@ export default function Product() {
     useEffect(() => {
         fetchProducts({
             token: token,
-            organizationId: user?.organizationId!,
+            organizationId: user?.organizationId,
             limit: 5000,
             offset: 0,
             search: searchValue.trim(),
             ordering: filters?.sorting,
             categoryIds: filters?.categories?.length
                 ? `${filters?.categories
-                    ?.map((item: { id: string }) => item.id)
+                    ?.map(item => item.id)
                     .join(',')}`
                 : undefined,
             brandIds: filters?.brands?.length
-                ? `${filters?.brands?.map((item: { id: string }) => item.id).join(',')}`
+                ? `${filters?.brands?.map((item) => item.id).join(',')}`
                 : undefined,
         })
             .then((result: IProductList) => {
@@ -172,7 +173,7 @@ export default function Product() {
         }
         if (loading) {
             return (
-                <div className="mt-12 grid p-12 text-center dark:text-gray-100">
+                <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                     <Spinner />
                 </div>
             )
@@ -180,7 +181,7 @@ export default function Product() {
         return (
             <div>
                 <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
-                <div className="m-auto w-2/3 px-6 text-center dark:text-gray-200">
+                <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
                     {' '}
                     {searchValue?.trim() === '' ? `You do not have any products added. Please add a product to begin
             listing it to your shops.` : `Sorry no results found for the search criteria.`}{' '}
@@ -190,8 +191,8 @@ export default function Product() {
     }
     return (
         <>
-            <div className="bg-gray-100 dark:bg-gray-900">
-                <div className="w-full bg-white pb-3 drop-shadow-md z-10 dark:bg-gray-800">
+            <div className="bg-slate-100 dark:bg-slate-900">
+                <div className="w-full bg-white pb-3 drop-shadow-md z-10 dark:bg-slate-800">
                     <Header
                         isSticky={false}
                         backDisabled={true}
@@ -216,7 +217,7 @@ export default function Product() {
 
             <div
                 ref={scrollTargetRef}
-                className="custom-height bg-white pb-[13vh] dark:bg-gray-900"
+                className="custom-height bg-white pb-[13vh] dark:bg-slate-900"
                 style={{
                     height: hasFilters()
                         ? 'calc( 100vh - 274px )'
@@ -229,7 +230,7 @@ export default function Product() {
             {/* Filter Popup */}
             <ModalViewer
                 body={<FilterPopup />}
-                isOpen={filterPopupOpen!}
+                isOpen={!!filterPopupOpen}
                 onClose={() => setfilterPopupOpen(false)}
                 name={'filter'}
             />
@@ -243,7 +244,7 @@ export default function Product() {
                         }}
                     />
                 }
-                isOpen={isSearchMoreOpen!}
+                isOpen={!!isSearchMoreOpen}
                 onClose={() => {
                     setisSearchMoreOpen(false)
                 }}
@@ -258,7 +259,7 @@ export default function Product() {
                         }}
                     />
                 }
-                isOpen={isMoreOpen!}
+                isOpen={!!isMoreOpen}
                 onClose={() => {
                     setIsMoreItem(undefined)
                     setisMoreOpen(false)

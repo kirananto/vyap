@@ -5,13 +5,9 @@ import { fetchOrganizationProductCategories } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { IFetchOrganizationProductCategories, IFetchOrganizationProductCategory } from 'src/types/fetchOrganizationProductCategories'
 import { setCategory } from '../redux/addProductSlice'
+import type { BrandInterface } from './BrandModal'
 import './HSNmodal.css'
 
-export interface BrandInterface {
-  id: string
-  name: string
-  description: string
-}
 
 interface IProps {
     trigger: boolean
@@ -45,7 +41,7 @@ function OrganizationCategoryModal(props: IProps) {
 
 
     return props.trigger ? (
-        <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-gray-700 dark:border-gray-800">
+        <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-gray-800">
             <div className="popup-inner">
                 <button className="popup-btn" onClick={() => props.setModal(false)}>
                     <svg
@@ -61,15 +57,15 @@ function OrganizationCategoryModal(props: IProps) {
                         />
                     </svg>
                 </button>
-                <h3 className="font-bold text-gray-500 dark:text-gray-200">Tag</h3>
-                <div className="text-gray-400 dark:text-gray-300 mt-2 text-xs font-light">
+                <h3 className="font-bold text-slate-500 dark:text-slate-200">Tag</h3>
+                <div className="text-slate-400 dark:text-slate-300 mt-2 text-xs font-light">
                 </div>
                 <div className="relative flex w-full mt-8">
                     <input
                         type="text"
                         id="input"
                         value={searchValue}
-                        className="w-full h-10 pl-4 pr-5 bg-gray-100 dark:bg-gray-500 dark:text-gray-100 rounded outline-none "
+                        className="w-full h-10 pl-4 pr-5 bg-slate-100 dark:bg-slate-500 dark:text-slate-100 rounded outline-none "
                         placeholder={intl.formatMessage({ id: `action.search` })}
                         onChange={handleInputChange}
                     />
@@ -77,8 +73,8 @@ function OrganizationCategoryModal(props: IProps) {
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
                     {items?.map((mapItem) => (
                         <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
-                            <div className="text-gray-700 dark:text-gray-300">{mapItem.name} </div>
-                            <div className="mt-1 text-gray-500 dark:text-gray-400 text-xs"> {mapItem.description} </div>
+                            <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>
+                            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
                         </div>
                     ))}
                 </div>

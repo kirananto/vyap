@@ -7,15 +7,15 @@ export interface Data {
     limit: string;
     offset: string;
     total: number;
-    data?: (IDataEntity)[] | null;
+    data?: (IOrganizationProductCategory)[] | null;
 }
-export interface IDataEntity {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
+export interface IOrganizationProductCategory {
+    id?: string;
+    createdAt?: string;
+    updatedAt?: string;
     deletedAt?: string | null;
     name: string;
-    description: string;
-    imageName: string;
-    organizationId: string;
+    description?: string;
+    imageName?: string;
+    organizationId?: string;
 }

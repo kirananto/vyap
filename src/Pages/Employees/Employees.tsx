@@ -11,7 +11,7 @@ export default function Employees() {
     }
 
     return (
-        <div className="w-full h-screen overflow-y-auto bg-gray-100 dark:bg-gray-900">
+        <div className="w-full h-screen overflow-y-auto bg-slate-100 dark:bg-slate-900">
             <div className="w-full mb-2 bg-white shadow">
                 <SimpleHeader heading=" Employees" />
             </div>
@@ -27,55 +27,57 @@ export default function Employees() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white shadow dark:bg-gray-800">
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-800">
                 <button
                     onClick={handlePopup}
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                 >
-          Invite a new employee
+                    Invite a new employee
                 </button>
             </div>
             <Popup trigger={modalEmployee} setModalEmployee={setModalEmployee}>
-                <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-300">Invite Employee</h1>
-                <div className="pt-5">
-                    <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Phone number</p>
-                    <input
-                        type="text"
-                        placeholder="Enter your phone number... "
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-                    />
-                    <p className="pt-2 text-xs font-bold text-gray-300">
-            We'll never share your phone number
-                        <br />
-            with anyone else
-                    </p>
-
+                <>
+                    <h1 className="text-2xl font-bold text-slate-500 dark:text-slate-300">Invite Employee</h1>
                     <div className="pt-5">
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">Role</p>
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Phone number</p>
                         <input
                             type="text"
-                            placeholder="Order Taker/ Delivery Person"
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                            placeholder="Enter your phone number... "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                         />
-                    </div>
-                    {/* todo:: make this multiselect inpupt */}
-                    <div className="pt-5">
-                        <p className="text-sm font-bold text-gray-500 dark:text-gray-300">
-              Assigned Customers
+                        <p className="pt-2 text-xs font-bold text-slate-300">
+                            We{`'`}ll never share your phone number
+                            <br />
+                            with anyone else
                         </p>
-                        <input
-                            type="text"
-                            placeholder="Order Taker/ Delivery Person"
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
-                        />
-                    </div>
 
-                    <div className="pt-12"> 
-                        <button className="w-full h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
-              Invite Employee
-                        </button>
+                        <div className="pt-5">
+                            <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Role</p>
+                            <input
+                                type="text"
+                                placeholder="Order Taker/ Delivery Person"
+                                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                            />
+                        </div>
+                        {/* todo:: make this multiselect inpupt */}
+                        <div className="pt-5">
+                            <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
+                                Assigned Customers
+                            </p>
+                            <input
+                                type="text"
+                                placeholder="Order Taker/ Delivery Person"
+                                className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-gray-200 rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                            />
+                        </div>
+
+                        <div className="pt-12">
+                            <button className="w-full h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+                                Invite Employee
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </>
             </Popup>
         </div>
     )

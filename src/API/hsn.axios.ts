@@ -15,7 +15,7 @@ export const getHSNsClearTax = ({ search }: { search: string }) => axiosClient({
 
 export const createIfNotExists = async ({ token, data }: { token?: string; data: { hsn: number; chapter: string; description: string; gstPercentage: number}  }) => {
 
-    let apiResponse: any = undefined
+    let apiResponse = undefined
     try {
         apiResponse = await axiosClient({
             url: `/hsn`,
@@ -27,15 +27,13 @@ export const createIfNotExists = async ({ token, data }: { token?: string; data:
                 filter: `hsn||$eq||${data.hsn}` 
             }
         })
-    }
-    catch(e) {
+    } catch(e) {
         apiResponse = undefined
     }
     if(!apiResponse?.data?.data?.[0]?.id) {
         const res = await createHSNAPI({ token, data }) 
         return res.data
-    }
-    else {
+    } else {
         return apiResponse?.data?.data?.[0]
     }
 

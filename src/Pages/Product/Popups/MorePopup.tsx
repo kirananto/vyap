@@ -5,9 +5,10 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useNavigate } from 'react-router'
 import { setAliasName, setCentralCatalogue, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
+import type { IProduct } from 'src/types/product'
 
 
-export function MorePopup({ item, onClose }: any) {
+export function MorePopup({ item, onClose }: { item: IProduct | undefined, onClose: () => void }) {
 
     const { token } = useSelector(selectCredentials)
 
@@ -23,15 +24,15 @@ export function MorePopup({ item, onClose }: any) {
 
     function editProduct() {
         if (item?.id) {
-            fetchCentralProduct({ token: token, id: item?.centralCatalogueId }).then((result: any) => {
+            fetchCentralProduct({ token: token, id: item?.centralCatalogueId }).then((result) => {
                 if (result?.data) {
                     dispatch(setCentralCatalogue(result?.data))
                 }
             })
             dispatch(setEditProductId(item?.id))
-            dispatch(setMrpPrice(item?.mrpPrice))
-            dispatch(setSalesPrice(item?.rate))
-            dispatch(setAliasName(item?.aliasName))
+            dispatch(setMrpPrice(parseFloat(item?.mrpPrice ?? 0) ?? 0))
+            dispatch(setSalesPrice(parseFloat(item?.rate ?? 0) ?? 0))
+            dispatch(setAliasName(item?.aliasName ?? ''))
             navigate('/edit-product')
         }
     }
@@ -47,14 +48,14 @@ export function MorePopup({ item, onClose }: any) {
         <div className="pb-8 pt-2 px-4">
             {/* Heading */}
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">More options for {item?.centralCatalogue?.name} {item?.aliasName ? `(${item?.aliasName})` : ''}</h1>
+                <h1 className="text-lg w-full font-bold text-slate-500 dark:text-slate-200">More options for {item?.centralCatalogue?.name} {item?.aliasName ? `(${item?.aliasName})` : ''}</h1>
             </div>
             {/* row-1 */}
             <div className="flex flex-col mt-6">
                 <button onClick={() => {
                     hapticFeedback()
                     deleteProduct()
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-red-500 dark:text-red-300 custom-btn">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-rose-500 dark:text-rose-300 custom-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -72,10 +73,10 @@ export function MorePopup({ item, onClose }: any) {
                     <span>Delete Products</span>
                 </button>
                 {/* ---- */}
-                <button onClick={() => {
+                {!item?.outOfStock ? <button onClick={() => {
                     hapticFeedback()
                     markStockStatus(true)
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -91,12 +92,10 @@ export function MorePopup({ item, onClose }: any) {
                         />
                     </svg>
                     <span>Mark out of stock</span>
-                </button>
-                {/* ---- */}
-                <button onClick={() => {
+                </button> : <button onClick={() => {
                     hapticFeedback()
                     markStockStatus(false)
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn ">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -112,9 +111,9 @@ export function MorePopup({ item, onClose }: any) {
                         />
                     </svg>
                     <span>Mark in stock</span>
-                </button>
+                </button>}
                 {/* --------- */}
-                <button className="flex items-center py-3 gap-2 text-md font-semibold text-gray-500 dark:text-gray-300 custom-btn  ">
+                <button className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn  ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"

@@ -6,15 +6,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { combineReducers } from 'redux'
-import placeOrderSlice from 'src/Pages/ChatView/PlaceOrder/placeOrderSlice'
+import placeOrderSlice from 'src/Pages/Customers/ChatView/PlaceOrder/placeOrderSlice'
 import addProductSlice from 'src/Pages/Product/AddProduct/redux/addProductSlice'
-import i18nSlice from 'src/i18nSlice'
+import i18nSlice from 'src/i18n/i18nSlice'
 import productFiltersSlice from 'src/Pages/Product/productFiltersSlice'
 import paymentFiltersSlice from 'src/Pages/Payments/Filters/paymentFiltersSlice'
 import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice'
-import customersSlice from 'src/Pages/Home/customersSlice'
-import addItemsproductFiltersSlice from 'src/Pages/ChatView/PlaceOrder/AddItem/addProductFiltersSlice'
-import chatListSlice from 'src/Pages/ChatView/chatListSlice'
+import customersSlice from 'src/Pages/Customers/customersSlice'
+import addItemsproductFiltersSlice from 'src/Pages/Customers/ChatView/PlaceOrder/AddItem/addProductFiltersSlice'
+import chatListSlice from 'src/Pages/Customers/ChatView/chatListSlice'
 import productsSlice from 'src/Pages/Product/productsSlice'
 
 
@@ -36,3 +36,5 @@ const persistConfig = { key: 'root', version: 1, storage, blacklist: ['signup', 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({ reducer: persistedReducer, middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }), })
 export const persistor = persistStore(store)
+
+export type RootState = ReturnType<typeof rootReducer>;

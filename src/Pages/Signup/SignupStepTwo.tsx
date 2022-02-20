@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ToggleButton from '../../Components/ToggleButton'
 import { SimpleFooter } from '../../Components/Footer'
-import vyapLogo from '../../assets/new_logo.svg'
+import vyapLogo from 'src/assets/new_logo.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSignupInfo, setAddress, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from './signupSlice'
 import { isEmail } from 'class-validator'
@@ -60,7 +60,7 @@ export default function SignupStepTwo() {
         return true
     }
     return (
-        <div className="flex flex-col items-start w-full pb-48 dark:bg-gray-900 ">
+        <div className="flex flex-col items-start w-full pb-48 dark:bg-slate-900 ">
             <div className="flex items-center justify-start px-8 mt-24 mb-5">
                 <img
                     style={logoStyle}
@@ -68,10 +68,10 @@ export default function SignupStepTwo() {
                     src={vyapLogo}
                     alt="vyap-logo"
                 />
-                <h1 className="text-4xl font-bold text-gray-600 dark:text-gray-300">VYAP</h1>
+                <h1 className="text-4xl font-bold text-slate-600 dark:text-slate-300">VYAP</h1>
             </div>
             {/* Form */}
-            <h1 className="px-8 mb-5 text-xl font-bold text-gray-500 dark:text-gray-300">
+            <h1 className="px-8 mb-5 text-xl font-bold text-slate-500 dark:text-slate-300">
         Little bit more information to <br /> get started
             </h1>
 
@@ -79,91 +79,91 @@ export default function SignupStepTwo() {
                 <div className="flex flex-col gap-4 px-8">
                     {/* ---===NAME===--- */}
                     <div>
-                        <label className="block text-sm font-semibold text-gray-500">
+                        <label className="block text-sm font-semibold text-slate-500">
               Your Name
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             type="text"
                             value={signup.name}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setName(event.target.value))}
                             placeholder="Enter your name"
                         />
-                        {nameError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{nameError}</div> : null}
+                        {nameError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{nameError}</div> : null}
                     </div>
                     {/* ---===Shop Name===--- */}
                     <div>
-                        <label className="block text-sm font-semibold text-gray-500">
+                        <label className="block text-sm font-semibold text-slate-500">
               Business or shop name
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                             type="text"
                             placeholder="Name of the shop or business"
                             value={signup.businessName}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setBusinessName(event.target.value))}
                         />
-                        {businessNameError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{businessNameError}</div> : null}
+                        {businessNameError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{businessNameError}</div> : null}
 
                     </div>
 
                     {/* ---===Email===--- */}
                     <div>
-                        <label className="block text-sm font-semibold text-gray-500">
+                        <label className="block text-sm font-semibold text-slate-500">
               Email
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                             type="text"
                             placeholder="Your email"
                             value={signup.email}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setEmail(event.target.value))}
                         />
-                        {emailError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{emailError}</div> : null}
+                        {emailError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{emailError}</div> : null}
 
                     </div>
 
                     {/* ---===Pin Code===--- */}
                     <div>
-                        <label className="block text-sm font-semibold text-gray-500">
+                        <label className="block text-sm font-semibold text-slate-500">
               Pin Code
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600"
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             type="text"
                             placeholder="Enter the pincode of your location"
                             value={signup.pinCode}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setPinCode(event.target.value))}
                         />
-                        {pinCodeError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{pinCodeError}</div> : null}
+                        {pinCodeError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{pinCodeError}</div> : null}
 
                     </div>
                     <div className="mt-2">
-                        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-gray-600 dark:text-gray-400">
+                        <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-600 dark:text-slate-400">
               Address
                         </label>
                         <textarea
                             value={signup.address}
                             onChange={(event) => dispatch(setAddress(event?.target.value))}
                             placeholder="Enter your address."
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-gray-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-gray-500 dark:text-gray-200 dark:focus:bg-gray-600 "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                         />
-                        {addressError ? <div className="text-xs text-red-500 opacity-80 font-semibold mt-4">{addressError}</div> : null}
+                        {addressError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{addressError}</div> : null}
 
                     </div>
 
                     {/* ---===Location===--- */}
                     <div className="my-4 ">
-                        <p className="block text-sm font-semibold text-gray-500">
+                        <p className="block text-sm font-semibold text-slate-500">
               Location
                         </p>
                         <div className="flex items-center gap-2">
-                            <p className="block text-sm font-semibold text-gray-400">
+                            <p className="block text-sm font-semibold text-slate-400">
                 Ihsudbfuig North P.O
                             </p>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="w-4 h-4 text-gray-400"
+                                className="w-4 h-4 text-slate-400"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -173,7 +173,7 @@ export default function SignupStepTwo() {
                     </div>
                     {/* ---===Location===--- */}
                     <div>
-                        <p className="block mb-2 text-sm font-semibold text-gray-500">
+                        <p className="block mb-2 text-sm font-semibold text-slate-500">
               List Items Privately
                         </p>
                         <ToggleButton

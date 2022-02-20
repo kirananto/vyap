@@ -1,0 +1,79 @@
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchOrganizationProductCategories } from 'src/API/products.axios'
+import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
+import type { IFetchOrganizationProductCategory } from 'src/types/fetchOrganizationProductCategories'
+import {
+    selectAddItemsproductFilters,
+    categoriesCheckbox,
+} from './addProductFiltersSlice'
+
+interface CategoryName {
+    name: string;
+    item: IFetchOrganizationProductCategory;
+}
+const Category = (props: CategoryName) => {
+    const dispatch = useDispatch()
+    const filters = useSelector(selectAddItemsproductFilters)
+
+    const isChecked = !!filters?.categories?.find(
+        (findItem) => findItem.id === props?.item?.id
+    )
+
+    function tickCheckBox() {
+        dispatch(categoriesCheckbox(props.item))
+    }
+
+    return (
+        <div className="ml-4 flex items-center gap-2 pb-1">
+            <input type="checkbox" id={`categoryCheckBox${props.name}`} checked={isChecked} onChange={tickCheckBox} />
+            <label
+                htmlFor={`categoryCheckBox${props.name}`}
+                className="text-sm font-semibold text-slate-500 dark:text-slate-400"
+            >
+                {props.name}
+            </label>
+        </div>
+    )
+}
+
+interface FilterCategories {
+    heading: string;
+    type: 'brand' | 'category';
+}
+export default function FilterCategory(props: FilterCategories) {
+    const [items, setItems] = useState<IFetchOrganizationProductCategory[]>([])
+    const { user, token } = useSelector(selectCredentials)
+
+    useEffect(() => {
+        fetchOrganizationProductCategories(
+            { token, limit: 10, offset: 0, search: undefined, orgId: user?.organizationId }).then((result) => {
+            setItems(result?.data?.data?.filter((item: IFetchOrganizationProductCategory) => item?.name))
+        })
+    }, [token, user?.organizationId])
+
+    function renderItems() {
+        if (items?.length === 0) {
+            return (
+                <div className="text-xs text-slate-700 dark:text-slate-100">
+                    {' '}
+                    No {props.type} present{' '}
+                </div>
+            )
+        }
+        return items?.map((item) => (
+            <Category key={item.id} item={item} name={item.name} />
+        ))
+    }
+
+    return (
+        <div>
+            <h1 className="mb-1 text-base font-semibold text-slate-500 dark:text-slate-300">
+                {props.heading}
+            </h1>
+            <div className="mt-2 flex max-h-[25vh] flex-col gap-1  overflow-y-scroll">
+                {renderItems()}
+            </div>
+        </div>
+    )
+}
