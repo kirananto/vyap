@@ -61,6 +61,8 @@ export default function More() {
                             src={user?.profileImageUrl ?? profPic}
                             className="w-16 rounded-full border border-1 dark:border-slate-900 p-3  bg-slate-200 dark:bg-slate-900"
                             alt="profile-pic"
+                            height={64}
+                            width={64}
                         />
                         <div className="flex-grow flex flex-col pl-6">
                             <h1 className="text-xl font-bold text-slate-500 dark:text-slate-200">Welcome, <br/> {user?.organization?.name} 🎉</h1>

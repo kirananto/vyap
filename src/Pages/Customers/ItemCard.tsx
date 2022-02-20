@@ -58,7 +58,7 @@ export function ItemCard({ item }: IProps) {
                 </div>
                 <div className="w-2/5 sm:w-3/5 mt-4">
                     <h2 className="font-semibold text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
-                    <h5 className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{item.lastMsg}</h5>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{item.lastMsg}</p>
                 </div>
                 <div className="flex-grow mt-5 text-right">
 

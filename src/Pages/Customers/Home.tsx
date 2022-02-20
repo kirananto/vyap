@@ -144,10 +144,12 @@ export const Home = () => {
                         </h1>
                     </div>
                     <div className="flex w-1/5 items-center justify-end ">
-                        <Link to="/my-account">
+                        <Link to="/my-account" aria-label="my account">
                             <img
                                 className="h-12 rounded-full aspect-square shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
+                                height={48}
+                                width={48}
                                 alt=""
                             />
                         </Link>

@@ -103,6 +103,8 @@ export default function Account() {
                         src={user?.profileImageUrl ?? profPic}
                         className="w-32 rounded-full border border-1 dark:border-slate-800 p-6  bg-slate-200 dark:bg-slate-900"
                         alt="profile-pic"
+                        height={128}
+                        width={128}
                     />
                     {/* <div
                         className="absolute top-0 right-0 object-none p-2 text-slate-600 bg-white rounded-full shadow-md w-min"
