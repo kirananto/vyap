@@ -377,34 +377,33 @@ export default function PlaceOrder() {
                     {isOpen && (
                         <div>
                             {renderCartItems()}
-                            <div
-                                className="m-auto w-fit px-4 my-4 flex flex-wrap 
-                  transform cursor-pointer items-center justify-center rounded-full border 
-                    border-indigo-600 bg-gradient-to-br from-blue-50 to-blue-100 py-2
-                    text-indigo-700 transition  duration-500 ease-in-out dark:bg-gradient-to-br dark:from-blue-500 dark:to-indigo-700"
+                            <Button
+                                className="m-auto w-fit px-4 my-4 flex flex-wrap items-center py-2"
                                 onClick={() => {
                                     hapticFeedback()
                                     navigate('/place-order/add-item')
                                 }}
                             >
-                                <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 text-slate-300 dark:text-slate-100 "
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </div>
-                                <div className="ml-2 text-lg dark:text-white">
+                                <>
+                                    <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-5 w-5 text-slate-300 dark:text-slate-100 "
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-2 text-lg dark:text-white">
                                     Add more items
-                                </div>
-                            </div>
+                                    </div>
+                                </>
+                            </Button>
 
 
                         </div>

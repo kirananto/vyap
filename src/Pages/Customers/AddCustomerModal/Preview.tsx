@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { inviteExisting, inviteNew } from 'src/API/invite.axios'
+import Button from 'src/Components/Style/Button'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { currentPageEnum } from '.'
 
@@ -23,14 +24,18 @@ export default function PreviewScreen({
     setCurrentPage
 }: IProps) {
     const { token } = useSelector(selectCredentials)
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = () => {
+        setLoading(true)
         if (isExisting) {
             inviteExisting({ token, phone: phoneNumber, openingBalance: parseFloat(`${openingBalance}`) }).then(result => {
                 console.log('Success', result.data)
                 setCurrentPage(currentPageEnum.SUCCESS)
             }).catch(error => {
                 console.log('error', error)
+            }).finally(() => {
+                setLoading(false)
             })
         } else {
             inviteNew({
@@ -47,6 +52,8 @@ export default function PreviewScreen({
                 console.log('result', result)
             }).catch(error => {
                 console.log('error', error)
+            }).finally(() => {
+                setLoading(false)
             })
         }
     }
@@ -69,12 +76,12 @@ export default function PreviewScreen({
             {/* <!-- btn popup --> */}
             <div className="flex my-8 p-2 gap-2">
 
-                <button onClick={() => setCurrentPage(isExisting ? currentPageEnum.STEP_1 : currentPageEnum.NEW_CUSTOMER_STEP)} className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200">
+                <button onClick={() => setCurrentPage(isExisting ? currentPageEnum.STEP_1 : currentPageEnum.NEW_CUSTOMER_STEP)} className="active:scale-95 p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200">
           Back
                 </button>
-                <button onClick={handleSubmit} className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+                <Button onClick={handleSubmit} isDisabled={loading} className="p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
           Add customer
-                </button>
+                </Button>
             </div>
         </form>)
 }

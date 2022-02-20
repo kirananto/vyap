@@ -69,7 +69,7 @@ export default function Settings() {
                     <h1 className="font-semibold text-slate-500 text-md dark:text-slate-300">Import Customer CSV</h1>
                     <Lozenge content="Coming soon" />
                 </div>
-                <button className="w-2/4 h-8 mt-3 font-bold text-blue-500 border-2 border-blue-500 rounded-md text-md">Upload CSV</button>
+                <button className="w-2/4 h-8 mt-3 font-bold text-blue-500 border-2 border-blue-500 rounded-full text-md">Upload CSV</button>
             </div>
         </div>
     )

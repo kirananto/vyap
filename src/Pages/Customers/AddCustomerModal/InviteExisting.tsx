@@ -179,13 +179,13 @@ export default function InviteExisting({
             <div className="flex my-8 p-2 gap-2">
                 <button
                     onClick={() => setCurrentPage(currentPageEnum.STEP_1)}
-                    className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200"
+                    className="active:scale-95 p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200"
                 >
           Back
                 </button>
                 <button
                     onClick={() => handleSubmit('submit')}
-                    className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+                    className="active:scale-95 p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                 >
           Next
                 </button>

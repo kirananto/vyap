@@ -1,5 +1,4 @@
 import React from 'react'
-import './payment.css'
 import { Header, PaymentBottomHeader } from '../../../Components/Header'
 import ChatList from './ChatList'
 import { useEffect } from 'react'
@@ -11,6 +10,7 @@ import { setOrgId, clearAll } from './PlaceOrder/placeOrderSlice'
 import useQueryParam from 'src/utils/useQueryParams'
 import { fetchInboxAction, selectChatList } from './chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
+import Button from 'src/Components/Style/Button'
 export const Payment = () => {
     const { token } = useSelector(selectCredentials)
     const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<boolean>(
@@ -71,26 +71,26 @@ export const Payment = () => {
                 style={{ boxShadow: '0px -6px 28px #0000002e' }}
             >
                 {inbox?.isSupplier ? (
-                    <button
+                    <Button
                         onClick={() => {
                             hapticFeedback()
                             setPaymentModalVisible(true)
                         }}
-                        className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 "
+                        className="w-2/5 h-12 "
                     >
             Add Payment
-                    </button>
+                    </Button>
                 ) : null}
-                <button
+                <Button
                     onClick={() => {
                         hapticFeedback()
                         dispatch(setOrgId(inbox?.recipient?.id))
                         navigate('/place-order/add-item')
                     }}
-                    className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 "
+                    className="w-2/5 h-12"
                 >
           Place Order
-                </button>
+                </Button>
             </div>
             {paymentModalVisible && (
                 <AddPaymentModal

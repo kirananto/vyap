@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 import { patchOrganization } from 'src/API/organization.axios'
 import { IsEmail, IsString, Length, validate, IsOptional } from 'class-validator'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
+import Button from 'src/Components/Style/Button'
 
 
 export class Organization {
@@ -208,7 +209,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-800">
-                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-slate-500 to-slate-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
+                <Button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-slate-500 to-slate-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</Button>
             </div>
         </div>
     )
