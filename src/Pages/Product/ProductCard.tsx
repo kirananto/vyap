@@ -86,7 +86,7 @@ export default function ProductCard({
             </p> */}
                     </div>
                     <div className="grid grid-cols-2">
-                        <div className="text-sm font-semibold text-slate-500  dark:text-slate-400">
+                        <div className="text-sm text-slate-500  dark:text-slate-400">
                             <p>
                 MRP
                             </p>
@@ -94,7 +94,7 @@ export default function ProductCard({
                 ₹{item?.mrpPrice}
                             </p>
                         </div>
-                        <div className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+                        <div className="text-sm text-slate-500 dark:text-slate-400">
                             <p >
                 Sales Price
                             </p>

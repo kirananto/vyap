@@ -7,11 +7,11 @@ import {
 } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
-import './Drop.css'
 import { Length, validate } from 'class-validator'
 import type { ICentralImage, IFetchCentralProductImages } from 'src/types/fetchCentralProductImages'
 import type { CentralCatalogueInterface } from '../redux/addProductSlice'
 import transparentImg from 'src/assets/img/transparent.png'
+import useDebounce from 'src/hooks/useDebounce'
 
 export class Post {
   @Length(3, 50)
@@ -49,7 +49,7 @@ function List(props: IProps) {
 
     return (
         <div
-            className="drop-main cursor-pointer flex flex-shrink-0"
+            className="flex gap-4 items-center cursor-pointer flex flex-shrink-0"
             onClick={() => props.onSelect(props.opt)}
         >
             <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
@@ -79,6 +79,7 @@ function DropDown(props: DropdDownInterface) {
     const [value, setValue] = useState('')
     const [options, setOptions] = useState<CentralCatalogueInterface[]>([])
 
+    const [loading, setLoading] = useState(true)
     // const [isOpen, setIsOpen] = useState(false)
     const [isValidProduct, setIsValidProduct] = useState<boolean>(true)
     const { token } = useSelector(selectCredentials)
@@ -96,12 +97,20 @@ function DropDown(props: DropdDownInterface) {
     //     return () => document.removeEventListener('mousedown', handleClickOutside)
     // })
 
+    const debouncedSearchTerm = useDebounce(value, 500)
+
     useEffect(() => {
-        fetchCentralProducts({ token, limit: 100, offset: 0, search: value }).then((result) => {
+        setLoading(true)
+        fetchCentralProducts({ token, limit: 100, offset: 0, search: debouncedSearchTerm }).then((result) => {
             console.log('result', result.data?.data)
             setOptions(result.data?.data ?? [])
+            setLoading(false)
+        }).catch(() => {
+            setLoading(false)
         })
-    }, [token, value])
+    }, [token, debouncedSearchTerm])
+
+    
 
     const navigate = useNavigate()
 
@@ -140,6 +149,11 @@ function DropDown(props: DropdDownInterface) {
 
     function renderListItems() {
         const listItems = options
+        if(loading) {
+            return <div className="text-slate-700 dark:text-slate-200 m-auto">
+                Loading items...
+            </div>
+        }
         if (listItems?.length === 0) {
             return (
                 <div className="p-4">
@@ -173,8 +187,7 @@ function DropDown(props: DropdDownInterface) {
                     </span>
                     <div className="text-center dark:text-slate-300">
             No existing products found, add this as a new product by Clicking
-            Add Button.
-                    </div>
+            Add Button.                    </div>
                 </div>
             )
         }
@@ -225,12 +238,12 @@ function DropDown(props: DropdDownInterface) {
                 type="text"
                 onChange={search}
                 value={value}
-                className="p-2 pl-4 w-full border border-slate-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-slate-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
+                className="p-2 pl-4 w-full border border-slate-200 rounded-lg focus:ring-2 focus:outline-none dark:border-slate-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
                 placeholder="Search or create product..."
             />
             <div
                 // ref={myRef}
-                className={`dark:bg-slate-700 drop-open dark:border-slate-500 rounded-lg overflow-x-hidden h-72`}
+                className={`flex flex-col bg-white mt-2 gap-3 p-4 border boder-slate-200 rounded-log overflow-scroll dark:bg-slate-700  dark:border-slate-500 rounded-lg overflow-x-hidden h-72`}
             >
                 {renderListItems()}
             </div>
