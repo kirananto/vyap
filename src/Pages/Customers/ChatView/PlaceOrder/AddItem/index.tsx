@@ -203,7 +203,7 @@ export default function AddItem() {
         }
         return itemList.map((item, index) => (
             <div
-                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-gray-100 dark:border-gray-800 py-4"
+                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4"
                 key={`${index}`}
             >
                 <div className="relative self-center w-1/5 h-20  overflow-hidden">

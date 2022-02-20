@@ -19,7 +19,7 @@ export default function ProductSuggestionCard({
 }) {
 
     return (<div
-        className="grid flex-none w-48 bg-white-200 dark:bg-slate-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"
+        className="grid flex-none w-48 bg-white-200 dark:bg-slate-800 mt-2 px-4 border rounded dark:border-slate-600 py-4 overflow-hidden"
     >
         <div className="relative self-center -mt-4 -mx-4 w-auto h-24 rounded-tl-l grounded-tr-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
             {item?.thumbnailImage && (

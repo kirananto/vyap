@@ -46,7 +46,7 @@ const ProductDetail = () => {
         </div>
 
         <div
-            className={`min-h-screen overflow-y-scroll flex flex-col w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-gray-100 dark:border-gray-800`}
+            className={`min-h-screen overflow-y-scroll flex flex-col w-full bg-white dark:bg-slate-900 px-5 py-4 border-b border-slate-100 dark:border-slate-800`}
         >
             <div className="flex flex-nowrap flex-shrink-0 h-[45vh] w-full gap-3 overflow-x-scroll empty_image_background">
                 {(product?.centralData?.images?.length ?? 0) > 0 && <>
@@ -56,7 +56,7 @@ const ProductDetail = () => {
                             <div 
                                 key={'key-' + Math.random()} 
                                 className={`flex-shrink-0 w-full h-full min-h-[250px] text-center 
-                            border overflow-hidden border-gray-200 dark:border-gray-700 relative rounded-lg bg-cover bg-center
+                            border overflow-hidden border-slate-200 dark:border-slate-700 relative rounded-lg bg-cover bg-center
                          ${img?.imageName ? '' : 'empty_image_background'}`}>
                                 {img?.imageName && (
                                     <img
@@ -126,20 +126,20 @@ const ProductDetail = () => {
 
                 <div className="flex flex-col pt-2 text-sm text-slate-400">
 
-                    <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
+                    <div className="flex border-b border-slate-100 dark:border-slate-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Brand:</div>
                         <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.centralData?.brand?.name ?? '--'}</div>
                     </div>
 
-                    <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
+                    <div className="flex border-b border-slate-100 dark:border-slate-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Category:</div>
                         <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.centralData?.categories?.[0]?.name ?? '--'}</div>
                     </div>
-                    <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
+                    <div className="flex border-b border-slate-100 dark:border-slate-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Tags:</div>
                         <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.organizationCatalogueCategory?.name ?? '--'}</div>
                     </div>
-                    <div className="flex border-b border-gray-100 dark:border-gray-800 py-2">
+                    <div className="flex border-b border-slate-100 dark:border-slate-800 py-2">
                         <div className="basis-1/2 text-slate-400 dark:text-slate-500">Item Code (SKU):</div>
                         <div className="basis-1/2 text-slate-700 dark:text-slate-300">{product?.itemSKUCode ?? '--'}</div>
                     </div>

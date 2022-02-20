@@ -197,7 +197,7 @@ export default function PlaceOrder() {
                         )
                     )
                     ?.map((item) => (
-                        <div key={item.id} className="my-5 border-b border-gray-300 dark:border-gray-700">
+                        <div key={item.id} className="my-5 border-b border-slate-300 dark:border-slate-700">
                             <div className="grid grid-rows-2">
                                 <div className="flex ">
                                     <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center shadow-xl">
@@ -329,7 +329,7 @@ export default function PlaceOrder() {
             </div>
             <div className={'p-2 pt-20'}>
 
-                <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4 dark:border-gray-700">
+                <div className="m-2 rounded-lg border border-slate-200 px-4 pb-4 pt-4 dark:border-slate-700">
                     <div className="flex justify-between">
                         <div className="text-xl font-bold dark:text-slate-300">Items</div>
                         <div className=" dark:text-slate-300">
@@ -387,7 +387,7 @@ export default function PlaceOrder() {
                                     navigate('/place-order/add-item')
                                 }}
                             >
-                                <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
+                                <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="h-5 w-5 text-slate-300 dark:text-slate-100 "
@@ -411,7 +411,7 @@ export default function PlaceOrder() {
                     )}
                 </div>
                 {isSupplier ? (
-                    <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4  dark:border-gray-700">
+                    <div className="m-2 rounded-lg border border-slate-200 px-4 pb-4 pt-4  dark:border-slate-700">
                         <span className="float-left mb-2 text-sm text-slate-500">
                             Flat discount amount
                         </span>

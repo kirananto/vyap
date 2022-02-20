@@ -79,7 +79,7 @@ export default function Login() {
 To your phone number` : 'Log in to vyap'}
                     </h1>
                     {renderForm()}
-                    <hr className="w-full my-6 border-indigo-100 dark:border-gray-600" />
+                    <hr className="w-full my-6 border-indigo-100 dark:border-slate-600" />
                     <p className="mt-8 text-center dark:text-slate-400">
             Need an account?{' '}
                         <Link

@@ -144,7 +144,7 @@ function PaymentBottomHeader({
                 className={`relative flex w-11/12 h-auto bg-slate-100 dark:bg-slate-700 border ${
                     parsedAmount === 0 && isLoading === false
                         ? 'border-green-400'
-                        : 'border-gray-400'
+                        : 'border-slate-400'
                 } rounded-md`}
             >
                 <div className="flex flex-col w-4/5 p-2 pl-3">

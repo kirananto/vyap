@@ -74,7 +74,7 @@ export default function SignupStep1() {
 To your phone number` : 'Signup with vyap to succeed'}
                     </h1>
                     {renderForm()}
-                    <hr className="w-full my-6 border-indigo-100 dark:border-gray-700" />
+                    <hr className="w-full my-6 border-indigo-100 dark:border-slate-700" />
                     <p className="mt-8 text-center dark:text-slate-400">
             Already have an account?{' '}
                         <Link

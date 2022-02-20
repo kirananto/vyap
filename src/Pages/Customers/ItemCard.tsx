@@ -30,7 +30,7 @@ export function ItemCard({ item }: IProps) {
                 <div className="w-1/5 sm:w-12">
                     {item.isSupplier && user?.organization?.isSupplier ? <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-10 h-10 p-1 mt-4 text-green-200 text-opacity-60 rounded-full bg-gradient-to-br from-green-300 to-green-600 dark:from-green-600 dark:to-green-900"
+                        className="w-10 h-10 p-1 mt-4 text-opacity-100 dark:text-green-200 text-white dark:text-opacity-60 rounded-full bg-gradient-to-br from-green-300 to-green-600 dark:from-green-600 dark:to-green-900"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -38,7 +38,7 @@ export function ItemCard({ item }: IProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg> : <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-10 h-10 p-1 mt-4 text-white text-opacity-60 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 dark:from-blue-600 dark:to-indigo-600"
+                        className="w-10 h-10 p-1 mt-4 text-white text-opacity-60 dark:text-opacity-100 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 dark:from-blue-600 dark:to-indigo-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

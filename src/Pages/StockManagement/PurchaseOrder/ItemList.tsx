@@ -18,7 +18,7 @@ export default function ItemList({
         <div className="p-4">
             <div className="flex justify-end">
                 <div
-                    className="flex w-max border border-gray-300 rounded items-center pr-2 cursor-pointer dark:border-gray-400"
+                    className="flex w-max border border-slate-300 rounded items-center pr-2 cursor-pointer dark:border-slate-400"
                     onClick={() => {
                         hapticFeedback()
                         navigate(`/purchase-order/${id}`)
@@ -34,7 +34,7 @@ export default function ItemList({
                     </div>
                 </div>
             </div>
-            <div className="p-4 border border-gray-300 rounded mt-2 dark:border-gray-500">
+            <div className="p-4 border border-slate-300 rounded mt-2 dark:border-slate-500">
                 <div>
                     <div className="text-slate-600 text-sm dark:text-slate-200">
                         GST Number
@@ -43,12 +43,12 @@ export default function ItemList({
                         12312312312312
                     </div>
                 </div>
-                <div className="text-slate-600 text-sm pt-2 my-2 border-t-2 border-dashed border-gray-300 dark:border-gray-500 dark:text-slate-300">
+                <div className="text-slate-600 text-sm pt-2 my-2 border-t-2 border-dashed border-slate-300 dark:border-slate-500 dark:text-slate-300">
                     Items list
                 </div>
                 {a.map((item, index) => (
                     <div key={`${index}`}>
-                        <div className={`flex justify-between pb-2 ${index === a.length - 1 ? 'border-b-2 border-dashed border-grey-300 mb-2 pb-2 dark:border-gray-500' : ''}`}>
+                        <div className={`flex justify-between pb-2 ${index === a.length - 1 ? 'border-b-2 border-dashed border-grey-300 mb-2 pb-2 dark:border-slate-500' : ''}`}>
                             {/* TODO: Remove this console.log */}
                             {console.log('item', item)}
                             <div className="flex gap-2">

@@ -123,7 +123,7 @@ export default function SignupStepThree() {
                 </div>}
                 {error && <div className="text-rose-500 dark:text-rose-400 mt-2 text-xs">
                     <span className="pl-1">* {typeof error === 'string' ? error : 'Something went wrong during the signup.'} </span>
-                    {Array.isArray(error) ? <ul className="border border-gray-300 dark:border-gray-700 p-4 px-8 rounded bg-slate-200 dark:bg-slate-900 m-2 mx-2 text-xs list-disc">
+                    {Array.isArray(error) ? <ul className="border border-slate-300 dark:border-slate-700 p-4 px-8 rounded bg-slate-200 dark:bg-slate-900 m-2 mx-2 text-xs list-disc">
                         {error?.map((mapItem: string) => <li key={mapItem}>{mapItem} </li>)}
                     </ul> : null}
                 </div>}

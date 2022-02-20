@@ -55,7 +55,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
             <>
                 <div
                     ref={componentRef}
-                    className="m-3 mt-6 rounded border border-gray-300 p-3 dark:border-gray-500"
+                    className="m-3 mt-6 rounded border border-slate-300 p-3 dark:border-slate-500"
                 >
                     <h1 className="dark:text-white"> Payment Summary</h1>
                     {item ? (
@@ -146,14 +146,14 @@ export default function PaymentContainer({ payments, loading }: IProps) {
         <>
             {payments?.map((item, index) => (
                 <div
-                    className={`${index === payments.length - 1 ? '' : 'border-b border-gray-200 dark:border-gray-700'}`}
+                    className={`${index === payments.length - 1 ? '' : 'border-b border-slate-200 dark:border-slate-700'}`}
                     key={`${index}`}
                 >
                     <div className="mt-2 mb-3 flex flex-row">
                         <div className="">
                             <div className="item mr-2  w-4 flex-grow-0">
                                 <input
-                                    className="cursor-pointer rounded border-gray-300 text-blue-800"
+                                    className="cursor-pointer rounded border-slate-300 text-blue-800"
                                     type="checkbox"
                                 />
                             </div>

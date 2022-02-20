@@ -51,7 +51,7 @@ export default function OrderItemsDetails({
 
     if (loading) {
         return (
-            <div className="p-4 m-4 border border-gray-300 dark:border-gray-500 rounded">
+            <div className="p-4 m-4 border border-slate-300 dark:border-slate-500 rounded">
                 <div className="p-12 mt-12 text-center dark:text-slate-100 grid">
                     <Spinner />
                 </div>
@@ -61,7 +61,7 @@ export default function OrderItemsDetails({
     return (
         <div>
             <div
-                className="p-4 m-4 mt-2 border border-gray-300 dark:border-gray-500 rounded"
+                className="p-4 m-4 mt-2 border border-slate-300 dark:border-slate-500 rounded"
                 id="print"
                 ref={componentRef}
             >
@@ -106,7 +106,7 @@ export default function OrderItemsDetails({
                     <div
                         className={`flex justify-between pb-2 ${
                             index === orderItems.length - 1
-                                ? 'border-b-2 border-dashed border-gray-300 dark:border-gray-600 mb-2 pb-4'
+                                ? 'border-b-2 border-dashed border-slate-300 dark:border-slate-600 mb-2 pb-4'
                                 : ''
                         }`}
                         key={`${index}`}

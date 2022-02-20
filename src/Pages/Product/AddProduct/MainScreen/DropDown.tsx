@@ -144,7 +144,7 @@ function DropDown(props: DropdDownInterface) {
             return (
                 <div className="p-4">
                     <button
-                        className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-gray-500"
+                        className="border w-full rounded mb-6 p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-slate-500"
                         onClick={add}
                     >
                         <svg
@@ -184,7 +184,7 @@ function DropDown(props: DropdDownInterface) {
                     <>
                         {' '}
                         <button
-                            className="border w-full rounded p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-gray-500"
+                            className="border w-full rounded p-6 flex bg-white dark:bg-slate-600 dark:text-slate-200 dark:border-slate-500"
                             onClick={add}
                         >
                             <svg
@@ -225,12 +225,12 @@ function DropDown(props: DropdDownInterface) {
                 type="text"
                 onChange={search}
                 value={value}
-                className="p-2 pl-4 w-full border border-gray-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
+                className="p-2 pl-4 w-full border border-slate-200 rounded-lg input-field focus:ring-2 focus:outline-none dark:border-slate-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
                 placeholder="Search or create product..."
             />
             <div
                 // ref={myRef}
-                className={`dark:bg-slate-700 drop-open dark:border-gray-500 rounded-lg overflow-x-hidden h-72`}
+                className={`dark:bg-slate-700 drop-open dark:border-slate-500 rounded-lg overflow-x-hidden h-72`}
             >
                 {renderListItems()}
             </div>

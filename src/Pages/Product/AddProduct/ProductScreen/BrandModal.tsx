@@ -43,7 +43,7 @@ function BrandModal(props: BrandModalInterface) {
 
 
     return props.trigger ? (
-        <div className="border-t border-gray-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-gray-800">
+        <div className="border-t border-slate-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-slate-800">
             <div className="popup-inner">
                 <button className="popup-btn" onClick={() => props.setModal(false)}>
                     <svg
@@ -74,7 +74,7 @@ function BrandModal(props: BrandModalInterface) {
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
                     {hsnCodes.map((mapItem) => (
-                        <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-gray-300 dark:border-gray-600 rounded p-4 my-2">
+                        <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
                             <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>
                             <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
                         </div>

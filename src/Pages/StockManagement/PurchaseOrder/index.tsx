@@ -22,7 +22,7 @@ export default function PurchaseOrder() {
             <div className="p-2 pt-14">
                 <div className="overflow-y-auto bg-white rounded p-4 dark:bg-slate-800" style={{ height: 'calc(100vh - 10rem)' }}>
                     {payments.map((item, index) => (
-                        <div className={'border-b border-gray-300 dark:border-gray-600'} key={`${index}`}>
+                        <div className={'border-b border-slate-300 dark:border-slate-600'} key={`${index}`}>
                             <div className={`flex w-full justify-between mt-2 pb-2`}>
                                 {/* TODO: Remove this console.log */}
                                 {console.log('item', item)}

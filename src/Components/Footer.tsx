@@ -19,7 +19,7 @@ function Footer() {
     }
 
     return (
-        <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border drop-shadow-md dark:bg-slate-800 dark:border-gray-800">
+        <div className="fixed bottom-0 flex w-full overflow-x-auto bg-white border drop-shadow-md dark:bg-slate-800 dark:border-slate-800">
             {/* Nav-Item-1 */}
             <Link
                 to="/"

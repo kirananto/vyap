@@ -221,7 +221,7 @@ export default function AddPaymentModal({
                                     className={
                                         `p-2 mt-4 text-left ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
                                             ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
+                                            : 'border-2 rounded-lg border-slate-200 dark:border-slate-600'}
             
     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAY_LATER)}
@@ -235,7 +235,7 @@ export default function AddPaymentModal({
                                     className={
                                         `p-2 mt-4 text-left ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
                                             ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
+                                            : 'border-2 rounded-lg border-slate-200 dark:border-slate-600'}
                                             
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.FULL_PAYMENT)}
@@ -248,7 +248,7 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 pb-4 mt-4 text-left ${!(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
-                                            ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-600'
+                                            ? ' border-2 rounded-lg  border-slate-300  dark:border-slate-600'
                                             : 'border-2 rounded-lg border-blue-600  dark:border-blue-400'}
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)}

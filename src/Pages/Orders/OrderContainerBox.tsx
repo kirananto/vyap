@@ -40,7 +40,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
         <>
             {orders.map((item, index) => (
                 <div
-                    className={`${index === orders.length - 1 ? '' : 'border-b border-gray-300 dark:border-gray-700'
+                    className={`${index === orders.length - 1 ? '' : 'border-b border-slate-300 dark:border-slate-700'
                     }`}
                     key={`${item.id}`}
                 >
@@ -48,7 +48,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                         <div>
                             <div className="item w-4  flex-grow-0 mr-2">
                                 <input
-                                    className="cursor-pointer rounded border-gray-300 text-blue-800"
+                                    className="cursor-pointer rounded border-slate-300 text-blue-800"
                                     type="checkbox"
                                 />
                             </div>

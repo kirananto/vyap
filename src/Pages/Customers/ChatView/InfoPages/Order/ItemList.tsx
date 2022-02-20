@@ -35,7 +35,7 @@ function Items({ order }: { order: orderInterface }) {
     }
 
     return (
-        <div className="divide-y divide-gray-100 dark:divide-gray-700">
+        <div className="divide-y divide-slate-100 dark:divide-slate-700">
             {orderItems?.map((item: IOrderItem, index: number) => (
                 <div className="flex justify-between py-2" key={`${index}`}>
                     <div className="flex w-full gap-4">

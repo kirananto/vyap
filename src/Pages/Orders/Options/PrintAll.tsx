@@ -69,7 +69,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                 trigger={reactToPrintTrigger}
             />
             <div
-                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full top-0"
+                className="divide-y divide-slate-200 hidden print:block grid grid-cols-1 print:absolute w-full top-0"
                 id="divContents"
                 ref={componentRef}
             >
@@ -87,7 +87,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                         <p className="text-slate-500 font-bold">12/01/22 - 12/04/22</p>
                     </div>
 
-                    <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
+                    <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-slate-200 p-3">
                         <div className="flex flex-col">
                             <p className="text-xl font-bold text-slate-600">
                                 {' '}
@@ -98,7 +98,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                     </div>
                 </div>
                 <div>
-                    <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
+                    <div className="m-5 mx-10 p-5 border border-slate-200 rounded-md">
                         <table className="min-w-full">
                             <thead className="text-slate-700 font-bold">
                                 <tr className="p-5">

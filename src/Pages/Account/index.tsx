@@ -100,7 +100,7 @@ export default function Account() {
                 >
                     <img
                         src={user?.profileImageUrl ?? profPic}
-                        className="w-32 rounded-full border border-1 dark:border-gray-500 p-6  bg-slate-200 dark:bg-slate-800"
+                        className="w-32 rounded-full border border-1 dark:border-slate-500 p-6  bg-slate-200 dark:bg-slate-800"
                         alt="profile-pic"
                     />
                     {/* <div
@@ -208,7 +208,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-800">
-                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
+                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-slate-500 to-slate-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
             </div>
         </div>
     )
