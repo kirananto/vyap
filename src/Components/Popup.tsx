@@ -1,6 +1,5 @@
 import React from 'react'
 import { hapticFeedback } from 'src/utils/vibrate'
-import './Style/Popup.css'
 
 function Popup({ setModalEmployee, children, trigger }: { setModalEmployee: React.Dispatch<React.SetStateAction<boolean>>, children: JSX.Element | string, trigger: boolean }) {
     return trigger ? (

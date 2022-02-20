@@ -25,10 +25,6 @@ body {
   height: 70px;
   margin-top: 5px;
 }
-.card-container {
-  display: flex;
-  width: 100%;
-}
 /* Customer Card Field Ends */
 
 /* Add Customer Button */
@@ -40,10 +36,7 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
-  padding:1rem
-}
-.add-cutomer-btn:active {
-  transform: scale(0.95);
+  padding: 1rem;
 }
 
 /* Old css end */
@@ -64,14 +57,21 @@ body {
   * {
     background-color: #fff;
   }
-  thead { display: table-header-group }
+  thead {
+    display: table-header-group;
+  }
 
-  tfoot { display: table-row-group }
-  
-  tr { page-break-inside: avoid }
-  
+  tfoot {
+    display: table-row-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
 }
-@page { margin-top: 50px }
+@page {
+  margin-top: 50px;
+}
 body:focus {
   outline: none;
 }
@@ -122,12 +122,6 @@ body:focus {
   bottom: 0;
   padding: 20px;
 }
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.show {
-  display: block;
-}
-
 /* // Animations */
 
 @keyframes fadeInUpBig {
@@ -161,4 +155,119 @@ body:focus {
 .animate__fadeInUpBig {
   -webkit-animation-name: fadeInUpBig;
   animation-name: fadeInUpBig;
+}
+
+.popup-container {
+  position: fixed;
+  bottom: -500px;
+  width: 100vw;
+  margin-left: -20px;
+  background-color: #fff;
+  z-index: 10;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  animation: popupAnimation forwards 400ms;
+}
+@keyframes popupAnimation {
+  to {
+    bottom: 0px;
+  }
+}
+.popup-inner {
+  position: relative;
+  padding: 30px 20px 30px 20px;
+}
+.popup-btn {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}
+
+/* /// Product.css */
+.custom-height {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 274px);
+  scroll-behavior: smooth;
+}
+/* Create Product.css */
+.create-product-container {
+  /* height: 85vh; */
+  overflow-y: auto;
+  min-height: calc(100vh - 2rem);
+  padding-bottom: 20px;
+}
+
+/* ! ===Modal DESIGNING=== */
+.des-modal-btn {
+  position: relative;
+}
+.modal-btn {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+/* ! ===Modal DESIGNING=== */
+
+.barcode-input {
+  position: relative;
+}
+.barcode-icon {
+  position: absolute;
+  top: 42px;
+  right: 15px;
+}
+
+/* Signup.css */
+.custom-card {
+  height: 111px;
+  position: relative;
+  border-radius: 10px;
+  padding-left: 10px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.background-graphics {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border-top-left-radius: 120px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 90px;
+  height: 91px;
+  opacity: 0.77;
+  background-image: linear-gradient(to bottom, #4338ca, #3b82f6);
+}
+
+.custom-width-para-text {
+  width: 240px;
+}
+
+/* Popup.css */
+.main-popup-container {
+  position: fixed;
+  bottom: -500px;
+  width: 100vw;
+  background-color: #fff;
+  z-index: 10;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  animation: popupAnimation forwards 400ms;
+}
+@keyframes popupAnimation {
+  to {
+    bottom: 0px;
+  }
+}
+
+.main-popup-inner {
+  position: relative;
+  padding: 30px 20px 30px 20px;
+}
+.main-popup-btn {
+  position: absolute;
+  top: 25px;
+  right: 20px;
 }

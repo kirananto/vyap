@@ -6,7 +6,6 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { IFetchOrganizationProductCategories, IFetchOrganizationProductCategory } from 'src/types/fetchOrganizationProductCategories'
 import { setCategory } from '../redux/addProductSlice'
 import type { BrandInterface } from './BrandModal'
-import './HSNmodal.css'
 
 
 interface IProps {

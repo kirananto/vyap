@@ -5,7 +5,6 @@ import { createIfNotExists, getHSNsClearTax } from 'src/API/hsn.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { HitsEntity } from 'src/types/getHSNsClearTax'
 import { HSNInterface, setHsnNumber } from '../redux/addProductSlice'
-import './HSNmodal.css'
 
 
 interface IProps {

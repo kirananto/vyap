@@ -51,7 +51,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     hapticFeedback()
                     onClose()
 
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-yellow-500 dark:text-yellow-300 custom-btn">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-yellow-500 dark:text-yellow-300">
                     <Pending />
                     <span>Pending</span>
                 </button>
@@ -60,7 +60,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     handleStatusUpdate(300)
                     hapticFeedback()
                     onClose()
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-blue-500 dark:text-blue-300 custom-btn ">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-blue-500 dark:text-blue-300 ">
                     <Processing />
                     <span>Processing</span>
                 </button>
@@ -69,7 +69,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     handleStatusUpdate(400)
                     hapticFeedback()
                     onClose()
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-green-500 dark:text-green-300 custom-btn ">
+                }} className="flex items-center py-3 gap-2 text-md font-semibold text-green-500 dark:text-green-300">
                     <Completed />
                     <span>Completed</span>
                 </button>

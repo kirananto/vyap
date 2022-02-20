@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchBrands } from 'src/API/brand.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { setBrand } from '../redux/addProductSlice'
-import './HSNmodal.css'
 
 export interface BrandInterface {
   id?: string

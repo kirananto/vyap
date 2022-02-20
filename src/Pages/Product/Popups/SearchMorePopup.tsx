@@ -35,7 +35,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
             </div>
             {/* row-1 */}
             <div className="flex flex-col mt-4">
-                <button onClick={deleteProducts} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn">
+                <button onClick={deleteProducts} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -53,7 +53,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
                     <span>Delete Products(s)</span>
                 </button>
                 {/* ---- */}
-                <button onClick={() => markStockStatus(true)} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn">
+                <button onClick={() => markStockStatus(true)} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"
@@ -71,7 +71,7 @@ export function SearchMorePopup({ selectedProduct, onClose }: { selectedProduct:
                     <span>Mark out of stock</span>
                 </button>
                 {/* ---- */}
-                <button onClick={() => markStockStatus(false)} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300 custom-btn">
+                <button onClick={() => markStockStatus(false)} className="flex items-center py-3 gap-2 text-md font-semibold text-slate-500 dark:text-slate-300">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"

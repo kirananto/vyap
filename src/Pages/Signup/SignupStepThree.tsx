@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import vyapLogo from 'src/assets/new_logo.svg'
-import './Signup.css'
 import { SimpleFooter } from '../../Components/Footer'
 import { useNavigate } from 'react-router'
 import { fetchCategories } from 'src/API/category.axios'
@@ -23,7 +22,7 @@ const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
         <div onClick={() => {
             hapticFeedback()
             onSelect ? onSelect() : undefined
-        }} className="flex cursor-pointer items-center gap-3 bg-white custom dark:bg-slate-700">
+        }} className="flex cursor-pointer items-center gap-3 bg-white custom-card dark:bg-slate-700">
             {/* ===tick-div=== */}
             <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-slate-200 dark:bg-slate-500'}`}>
                 {isSelected && <svg

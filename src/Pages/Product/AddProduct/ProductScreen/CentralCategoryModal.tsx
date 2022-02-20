@@ -6,7 +6,6 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { ICategories } from 'src/types/categories'
 import { setCentralCategory } from '../redux/addProductSlice'
 import type { BrandInterface } from './BrandModal'
-import './HSNmodal.css'
 
 interface IProps {
     trigger: boolean

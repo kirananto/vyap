@@ -191,7 +191,7 @@ export const Home = () => {
                         hapticFeedback()
                         setAddCustomerVisible(true)
                     }}
-                    className={`add-cutomer-btn text-md rounded-full bg-gradient-to-br from-blue-500
+                    className={`add-cutomer-btn active:scale-95 text-md rounded-full bg-gradient-to-br from-blue-500
                      to-indigo-700 p-3 text-white shadow-sm transition duration-500 ease-in-out`}
                 >
                     <svg
