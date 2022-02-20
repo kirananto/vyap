@@ -55,6 +55,7 @@ const ImageContainer = (props: IImageProps) => {
             key={item?.id}
         >
             <img
+                loading="lazy"
                 key={item?.imageName}
                 alt="Placeholder"
                 src={getImageURL(

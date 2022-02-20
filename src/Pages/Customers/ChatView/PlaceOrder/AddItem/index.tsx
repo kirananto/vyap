@@ -193,7 +193,7 @@ export default function AddItem() {
         if (itemList?.length === 0) {
             return (
                 <div>
-                    <img className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
+                    <img loading="lazy" className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
                     <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-slate-300">
                         {' '}
                         Sorry the seller has no products for sale.{' '}
@@ -208,6 +208,7 @@ export default function AddItem() {
             >
                 <div className="relative self-center w-1/5 h-20  overflow-hidden">
                     <img
+                        loading="lazy"
                         src={item?.thumbnailImage ? getImageURL(
                             item?.thumbnailImage,
                             IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE

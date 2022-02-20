@@ -85,6 +85,7 @@ export const Home = () => {
             return (
                 <div>
                     <img
+                        loading="lazy"
                         className="m-auto mt-12 h-96 p-12"
                         alt="no transactions"
                         src={ChatImg}
@@ -146,6 +147,7 @@ export const Home = () => {
                     <div className="flex w-1/5 items-center justify-end ">
                         <Link to="/my-account" aria-label="my account">
                             <img
+                                loading="lazy"
                                 className="h-12 rounded-full aspect-square shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
                                 height={48}

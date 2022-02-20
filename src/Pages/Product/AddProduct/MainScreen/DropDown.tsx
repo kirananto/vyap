@@ -54,6 +54,7 @@ function List(props: IProps) {
         >
             <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
                 <img
+                    loading="lazy"
                     src={productImage ? productImage : transparentImg}
                     alt="Avatar"
                     className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"

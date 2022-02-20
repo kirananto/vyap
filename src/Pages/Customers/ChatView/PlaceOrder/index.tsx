@@ -171,7 +171,7 @@ export default function PlaceOrder() {
         if (placeOrder.cartItems?.length === 0) {
             return (
                 <div>
-                    <img className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
+                    <img  loading="lazy" className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
                     <div className="m-auto text-sm mb-8 w-2/3  md:px-6 text-center dark:text-slate-300">
                         {' '}
                         You do not have any items in your cart, please add by tapping add
@@ -203,6 +203,7 @@ export default function PlaceOrder() {
                                     <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center">
                                         {item?.thumbnailImage && (
                                             <img
+                                                loading="lazy"
                                                 src={getImageURL(
                                                     item?.thumbnailImage,
                                                     IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE

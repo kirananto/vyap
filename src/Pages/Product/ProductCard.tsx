@@ -60,6 +60,7 @@ export default function ProductCard({
                 <div className="w-20 h-full text-center border border-slate-200 dark:border-slate-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
                     {item?.thumbnailImage && (
                         <img
+                            loading="lazy"
                             src={getImageURL(
                                 item?.thumbnailImage,
                                 IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE

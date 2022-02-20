@@ -184,7 +184,7 @@ function PaymentBottomHeader({
                     {isLoading ? (
                         <div />
                     ) : parsedAmount !== 0 ? (
-                        <img className="self-end w-20 " src={walletSvg} alt="Wallet" />
+                        <img className="self-end w-20" loading="lazy" src={walletSvg} alt="Wallet" />
                     ) : (
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

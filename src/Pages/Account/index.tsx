@@ -100,6 +100,7 @@ export default function Account() {
                     className="relative w-32 h-32 rounded-full"
                 >
                     <img
+                        loading="lazy"
                         src={user?.profileImageUrl ?? profPic}
                         className="w-32 rounded-full border border-1 dark:border-slate-800 p-6  bg-slate-200 dark:bg-slate-900"
                         alt="profile-pic"

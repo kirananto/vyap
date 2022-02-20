@@ -24,6 +24,7 @@ export default function ProductSuggestionCard({
         <div className="relative self-center -mt-4 -mx-4 w-auto h-24 rounded-tl-l grounded-tr-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
             {item?.thumbnailImage && (
                 <img
+                    loading="lazy"
                     src={getImageURL(
                         item?.thumbnailImage,
                         IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE

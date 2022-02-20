@@ -60,6 +60,7 @@ const ProductDetail = () => {
                          ${img?.imageName ? '' : 'empty_image_background'}`}>
                                 {img?.imageName && (
                                     <img
+                                        loading="lazy"
                                         src={getProductImageURL(
                                             img?.imageName,
                                             IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
