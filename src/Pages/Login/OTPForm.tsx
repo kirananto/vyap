@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Button from 'src/Components/Style/Button'
 
 interface IProps {
-  onPressConfirm: (code: string) => void;
-  goBack: () => void;
-  error: string | null;
+    loading: boolean;
+    onPressConfirm: (code: string) => void;
+    goBack: () => void;
+    error: string | null;
 }
 
-export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
+export default function OTPForm({ onPressConfirm, error, goBack, loading }: IProps) {
     const [code, setCode] = useState('')
 
     useEffect(() => {
-    // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 2min
+        // used AbortController with setTimeout so that WebOTP API (Autoread sms) will get disabled after 2min
         const signal = new AbortController()
         if ('OTPCredential' in window && navigator.credentials) {
             //@ts-ignore
@@ -39,19 +40,19 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
             className="mt-6"
             onSubmit={(event) => {
                 event.preventDefault()
-                onPressConfirm(code)
+                if (!loading) {
+                    onPressConfirm(code)
+                }
             }}
         >
             <div>
                 <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-grey-700 dark:text-slate-300">
-          Verification code
+                    Verification code
                 </label>
                 <input
                     type="text"
                     inputMode="numeric"
                     autoComplete="one-time-code"
-                    pattern="\d{4}"
-                    required={true}
                     value={code}
                     onChange={(event) => setCode(event?.target.value)}
                     id="tel"
@@ -60,11 +61,11 @@ export default function OTPForm({ onPressConfirm, error, goBack }: IProps) {
                 />
             </div>
             <div className={`${error ? 'opacity-100' : 'opacity-0'} text-sm mt-2 ml-2 text-rose-600 transition duration-500 ease-in-out`}>
-        * {error}
+                * {error}
             </div>
-            <Button className="mt-6">Verify OTP</Button>
+            <Button isDisabled={loading} className="mt-6">Verify OTP</Button>
             <div className="text-sm mt-4 text-center text-slate-600 dark:text-slate-400">
-        Didn{`'`}t recieve OTP ? <a className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700" href="#" onClick={goBack}> Resend the OTP</a>
+                Didn{`'`}t recieve OTP ? <a className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700" href="#" onClick={goBack}> Resend the OTP</a>
             </div>
         </form>
     )

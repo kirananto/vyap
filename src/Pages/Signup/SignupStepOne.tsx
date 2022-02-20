@@ -13,14 +13,15 @@ export default function SignupStep1() {
     const [currentPage, setCurrentPage] = useState(0)
     const phoneNumberRef = useRef<string>('')
     const [error, setError] = useState<string | null>(null)
-
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const confirmOTP = useCallback((code: string) => {
         setError(null)
+        setLoading(true)
         verifyPhone(phoneNumberRef.current, code).then(res => {
             if (res.data) {
-                if(res.data?.token) {
+                if (res.data?.token) {
                     dispatch(setCredentials(res.data))
                     navigate('/home')
                 } else {
@@ -28,33 +29,37 @@ export default function SignupStep1() {
                     navigate('/signup-step-2')
                 }
             }
+        }).catch((error) => {
+            if (error?.response?.data) {
+                setError('Please enter a valid OTP')
+            } else {
+                setError('No internet connection, please connect to a network and try again.')
+            }
+        }).finally(() => {
+            setLoading(false)
         })
-            .catch((error) => {
-                if (error?.response?.data) {
-                    setError('Please enter a valid OTP')
-                } else {
-                    setError('No internet connection, please connect to a network and try again.')
-                }
-            })
     }, [dispatch, navigate])
 
     const onPressLogin = (phoneNumber: string) => {
         setError(null)
+        setLoading(true)
         generateOtp(phoneNumber).then(() => {
             setCurrentPage(1)
             phoneNumberRef.current = phoneNumber
         }).catch(error => {
             setError(error.message)
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
     function renderForm() {
         switch (currentPage) {
-            case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => {
+            case 1: return <OTPForm onPressConfirm={confirmOTP} loading={loading} goBack={() => {
                 setError('')
                 setCurrentPage(0)
             }} error={error} />
-            default: return <PhoneForm text={'Sign up'} onPressLogin={onPressLogin} error={error} />
+            default: return <PhoneForm text={'Sign up'} loading={loading} onPressLogin={onPressLogin} error={error} />
         }
     }
 
@@ -66,7 +71,7 @@ export default function SignupStep1() {
                         <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
                         <h2 className="text-2xl font-bold text-slate-700 uppercase duration-500 ease-in-out transform transition hover:text-lightBlue-500 dark:text-indigo-100">
                             {' '}
-              Vyap {' '}
+                            Vyap {' '}
                         </h2>
                     </div>
                     <h1 className="mt-8 text-lg font-semibold text-slate-700 tracking-ringtighter title-font dark:text-slate-200">
@@ -76,12 +81,12 @@ To your phone number` : 'Signup with vyap to succeed'}
                     {renderForm()}
                     <hr className="w-full my-6 border-indigo-100 dark:border-slate-700" />
                     <p className="mt-8 text-center dark:text-slate-400">
-            Already have an account?{' '}
+                        Already have an account?{' '}
                         <Link
                             to="/login"
                             className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700"
                         >
-              Log in
+                            Log in
                         </Link>
                     </p>
                 </div>
