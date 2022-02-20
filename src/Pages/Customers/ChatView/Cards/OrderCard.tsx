@@ -145,7 +145,7 @@ export default function OrderCard({
                                 new Date(thread.updatedAt),
                                 'do MMM'
                             )}</p>
-                        <p className="text-xs text-slate-500 dark:text-slate-300">  ● {order?.numberOfItems} items</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-300">  ● {order?.numberOfItems} item{(order?.numberOfItems ?? 0) > 1 ? 's' : ''}</p>
                     </div>
                 </div>
 

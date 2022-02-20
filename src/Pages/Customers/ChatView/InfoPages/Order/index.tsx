@@ -101,7 +101,7 @@ export default function OrderDetails() {
                 <span ref={ref}>
                     {/* Body */}
                     <div className="flex flex-col items-center gap-5 py-24">
-                        <h1 className="text-6xl font-black text-center text-slate-600 dark:text-slate-300">
+                        <h1 className="text-3xl sm:text-5xl font-black text-center text-slate-600 dark:text-slate-300">
               ₹
                             {(order?.totalAmount && isNumber(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount))) ?  `${(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
@@ -132,7 +132,7 @@ export default function OrderDetails() {
                                     : null}
                             </p>
                             <p className="text-xs text-slate-500 dark:text-slate-400">
-                ● {order?.numberOfItems} Items
+                ● {order?.numberOfItems} Item{(order?.numberOfItems ?? 0) > 1 ? 's' : ''}
                             </p>
                             {/* ------------------ */}
                         </div>

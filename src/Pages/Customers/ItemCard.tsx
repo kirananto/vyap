@@ -35,7 +35,7 @@ export function ItemCard({ item }: IProps) {
         }
         if(item.lastMsg?.includes('Order')) {
             const amount = parseInt(item.lastMsg.replace('Order of ', '').replace(' items placed.', ''), 10)
-            return <>Order of {amount.toLocaleString('en-IN')}.00 items placed.</>
+            return <>Order of {amount.toLocaleString('en-IN')} item{amount > 1 ? 's' : ''} placed.</>
         }
         return item.lastMsg
     }
