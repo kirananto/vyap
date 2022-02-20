@@ -12,10 +12,10 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import type { ICategories, IFetchCategories } from 'src/types/categories'
 
 interface CardInterface {
-  title: string
-  description: string
-  isSelected?: boolean
-  onSelect?: () => void
+    title: string
+    description: string
+    isSelected?: boolean
+    onSelect?: () => void
 }
 
 const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
@@ -61,6 +61,7 @@ export default function SignupStepThree() {
     const dispatch = useDispatch()
     const { token } = useSelector(selectCredentials)
     const signup = useSelector(selectSignupInfo)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         fetchCategories(token).then((result: IFetchCategories) => {
@@ -71,8 +72,9 @@ export default function SignupStepThree() {
     }, [token])
 
     function handleSubmit() {
-    //TODO Fix this
+        //TODO Fix this
         if (signup.category) {
+            setLoading(true)
             setError(undefined)
             setCategoryError(false)
             signupAPI({
@@ -100,6 +102,8 @@ export default function SignupStepThree() {
             }).catch(error => {
                 console.log('error.', error.response)
                 setError(error?.response?.data?.message ?? true)
+            }).finally(() => {
+                setLoading(false)
             })
         } else {
             setCategoryError(true)
@@ -115,11 +119,11 @@ export default function SignupStepThree() {
                 </div>
 
                 <h1 className="text-lg font-bold text-slate-600 dark:text-slate-300">
-          Please specify the <br /> category of business
+                    Please specify the <br /> category of business
                 </h1>
 
                 {categoryError && <div className="text-rose-500 dark:text-rose-400 mt-2 text-xs">
-          * Please select a category to proceed
+                    * Please select a category to proceed
                 </div>}
                 {error && <div className="text-rose-500 dark:text-rose-400 mt-2 text-xs">
                     <span className="pl-1">* {typeof error === 'string' ? error : 'Something went wrong during the signup.'} </span>
@@ -131,7 +135,7 @@ export default function SignupStepThree() {
                     {categories.map(mapItem => <Card isSelected={signup.category?.some(someItem => someItem.id === mapItem?.id)} onSelect={() => dispatch(setCategory(mapItem))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
                 </div>
             </div>
-            <SimpleFooter btnName="Create account" onClick={handleSubmit} />
+            <SimpleFooter isDisabled={loading} btnName="Create account" onClick={handleSubmit} />
         </div>
     )
 }
