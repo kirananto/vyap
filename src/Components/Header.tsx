@@ -63,11 +63,10 @@ function Header({
                     backDisabled ? 'pl-1' : 'pl-4'
                 } text-slate-600 dark:text-slate-300 `}
             >
-                <h1 className="text-lg font-semibold">{heading}</h1>
+                <h1 className="text-md font-semibold">{heading}</h1>
                 {subHeading && (
                     <h1
-                        className={`text-md w-full sm:text-lg text-transparent font-bold tracking-wide truncate
-           bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200`}
+                        className={`text-md w-full font-black sm:text-lg text-transparent  tracking-wide truncate bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200`}
                     >
                         {subHeading}
                     </h1>

@@ -43,7 +43,7 @@ export default function AppliedFilters({
     }
     return (
         <div className="px-4">
-            {selectedProduct?.length === 0 ? (<div className={'flex my-2 gap-4'}>
+            {selectedProduct?.length === 0 ? (<div className={'flex my-2 mt-1 gap-4'}>
                 <div className="w-10/12">
                     <input 
                         value={searchValue} 

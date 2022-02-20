@@ -68,7 +68,7 @@ export const Payment = () => {
             {/* Footer */}
             <div
                 className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-slate-800"
-                style={{ boxShadow: '0px -6px 28px #0000002e' }}
+                style={{ boxShadow: '0px -2px 8px #0000002e' }}
             >
                 {inbox?.isSupplier ? (
                     <Button

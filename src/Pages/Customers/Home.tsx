@@ -135,14 +135,14 @@ export const Home = () => {
             {/* <!-- * Header --> */}
             <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-slate-800">
                 <div className="flex h-full w-full ">
-                    <Link to="/more" className="flex w-4/5 flex-col">
-                        <h1 className="text-lg font-semibold text-slate-600 dark:text-slate-100">
+                    <div className="flex w-4/5 flex-col">
+                        <h1 className="text-md font-semibold text-slate-600 dark:text-slate-100">
                             <FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />
                         </h1>
                         <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-semibold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
                             {user?.organization?.name}
                         </h1>
-                    </Link>
+                    </div>
                     <div className="flex w-1/5 items-center justify-end ">
                         <Link to="/my-account">
                             <img

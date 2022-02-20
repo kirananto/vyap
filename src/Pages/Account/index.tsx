@@ -90,7 +90,7 @@ export default function Account() {
     }
 
     return (
-        <div className="w-full h-screen overflow-y-auto bg-slate-100 dark:bg-slate-900">
+        <div className="w-full h-screen overflow-y-auto bg-white dark:bg-slate-900">
             <div className="w-full mb-2 bg-white shadow">
                 <SimpleHeader heading={intl.formatMessage({ id: 'global.myAccount' })} />
             </div>
@@ -101,7 +101,7 @@ export default function Account() {
                 >
                     <img
                         src={user?.profileImageUrl ?? profPic}
-                        className="w-32 rounded-full border border-1 dark:border-slate-500 p-6  bg-slate-200 dark:bg-slate-800"
+                        className="w-32 rounded-full border border-1 dark:border-slate-800 p-6  bg-slate-200 dark:bg-slate-900"
                         alt="profile-pic"
                     />
                     {/* <div
@@ -208,7 +208,7 @@ export default function Account() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-800">
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-slate-100 drop-shadow-md dark:bg-slate-800">
                 <Button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-slate-500 to-slate-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</Button>
             </div>
         </div>

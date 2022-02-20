@@ -59,7 +59,7 @@ export default function More() {
                     <div className="mb-2 dark:bg-slate-800 shadow-md dark:border-slate-800 p-4 inline-flex items-center w-full">
                         <img
                             src={user?.profileImageUrl ?? profPic}
-                            className="w-16 rounded-full border border-1 dark:border-slate-500 p-3  bg-slate-200 dark:bg-slate-800"
+                            className="w-16 rounded-full border border-1 dark:border-slate-900 p-3  bg-slate-200 dark:bg-slate-900"
                             alt="profile-pic"
                         />
                         <div className="flex-grow flex flex-col pl-6">
