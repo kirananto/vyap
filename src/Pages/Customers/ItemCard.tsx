@@ -6,6 +6,7 @@ import { selectCredentials } from '../Login/credentialsSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import type { IInbox } from './customersSlice'
 import { FormattedMessage } from 'react-intl'
+import Lozenge from 'src/Components/Lozenge'
 
 interface IProps {
   item: IInbox;
@@ -41,12 +42,12 @@ export function ItemCard({ item }: IProps) {
     }
     return (
 
-        <div className="card-main">
+        <div className="flex h-20 mt-2">
             <Link to={`/chat/${item.id}`} onClick={hapticFeedback} className="flex gap-2 px-4 w-full">
                 <div className="w-1/5 sm:w-12">
                     {item.isSupplier && user?.organization?.isSupplier ? <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-10 h-10 p-1 mt-4 text-opacity-100 dark:text-green-200 text-white dark:text-opacity-60 rounded-full bg-gradient-to-br from-green-300 to-green-600 dark:from-green-600 dark:to-green-900"
+                        className="w-10 h-10 p-1 mt-6 text-opacity-100 dark:text-green-200 text-white dark:text-opacity-60 rounded-full bg-gradient-to-br from-green-300 to-green-600 dark:from-green-600 dark:to-green-900"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -54,7 +55,7 @@ export function ItemCard({ item }: IProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg> : <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-10 h-10 p-1 mt-4 text-white text-opacity-60 dark:text-opacity-100 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 dark:from-blue-600 dark:to-indigo-600"
+                        className="w-10 h-10 p-1 mt-6 text-white text-opacity-60 dark:text-opacity-100 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 dark:from-blue-600 dark:to-indigo-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -72,16 +73,21 @@ export function ItemCard({ item }: IProps) {
                         {item.isSupplier ? <div className="text-green-700 border bg-green-100 tracking-wider w-min rounded px-1 -mt-2 -ml-1 text-xs dark:bg-green-800 dark:border-green-800 drop-shadow-md dark:text-green-300"> Retailer </div> : <div className="text-blue-700 bg-blue-100 tracking-wider w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
                     </div>} */}
                 </div>
-                <div className="w-2/5 sm:w-3/5 mt-4">
-                    <h2 className="font-semibold text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
+                <div className="w-2/5 sm:w-3/5 mt-3">
+                    <h6 className="text-xs text-slate-500 dark:text-slate-400"> {renderTime(new Date(item.updatedAt))}</h6>
+
+                    <h2 className="font-bold mb-1 text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{getLastMsg()}</p>
                 </div>
-                <div className="flex-grow mt-5 text-right">
+                <div className="flex-grow mt-3 text-right">
 
-                    <h6 className="text-xs text-slate-500 dark:text-slate-400"> {renderTime(new Date(item.updatedAt))}</h6>
                     {item.unseenNumbers ? <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-semibold leading-none text-green-600 bg-green-100 rounded-full">
                         {item.unseenNumbers}
-                    </div> : null}
+                    </div> : <div className="w-full h-12 grid mt-2 justify-end ">
+                        <div className={`text-sm mt-2 text-${item.outstandingAmount?.includes('-') ? 'green' : parseFloat(item.outstandingAmount) === 0 ? 'blue' : 'rose'}-500`}>
+                            {parseFloat(item.outstandingAmount) === 0 ? 'Settled' : item.outstandingAmount.includes('-') ? <> You get <br/> ₹${parseFloat(item.outstandingAmount?.replace('-', '')).toLocaleString('en-IN')}.00</> : <>You owe <br /> ₹{parseFloat(item.outstandingAmount).toLocaleString('en-IN')}.00</>} 
+                        </div>
+                    </div>}
                 </div>
             </Link>
         </div>
