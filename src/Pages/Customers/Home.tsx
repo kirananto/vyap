@@ -139,7 +139,7 @@ export const Home = () => {
                         <h1 className="text-lg font-semibold text-slate-600 dark:text-slate-100">
                             <FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />
                         </h1>
-                        <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-bold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
+                        <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-semibold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
                             {user?.organization?.name}
                         </h1>
                     </Link>

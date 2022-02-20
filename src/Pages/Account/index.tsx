@@ -113,7 +113,7 @@ export default function Account() {
                 </div>
                 <div className="pb-8 text-2xl font-bold text-slate-500 dark:text-slate-200">{user?.organization?.name}</div>
                 <div className="w-full">
-                    <label className="block text-sm font-bold leading-relaxed tracking-tighter text-slate-500 dark:text-slate-300">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-500 dark:text-slate-300">
                         Your name
                     </label>
                     <input
@@ -208,7 +208,7 @@ export default function Account() {
             {/* Footer */}
 
             <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-800">
-                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-bold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
+                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
             </div>
         </div>
     )
