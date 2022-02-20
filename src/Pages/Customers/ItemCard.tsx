@@ -85,7 +85,7 @@ export function ItemCard({ item }: IProps) {
                         {item.unseenNumbers}
                     </div> : <div className="w-full h-12 grid mt-2 justify-end ">
                         <div className={`text-sm mt-2 text-${item.outstandingAmount?.includes('-') ? 'green' : parseFloat(item.outstandingAmount) === 0 ? 'blue' : 'rose'}-500`}>
-                            {parseFloat(item.outstandingAmount) === 0 ? 'Settled' : item.outstandingAmount.includes('-') ? <> You get <br/> ₹${parseFloat(item.outstandingAmount?.replace('-', '')).toLocaleString('en-IN')}.00</> : <>You owe <br /> ₹{parseFloat(item.outstandingAmount).toLocaleString('en-IN')}.00</>} 
+                            {parseFloat(item.outstandingAmount) === 0 ? 'Settled' : item.outstandingAmount.includes('-') ? <> You get <br/> ₹{parseFloat(item.outstandingAmount?.replace('-', '')).toLocaleString('en-IN')}.00</> : <>You owe <br /> ₹{parseFloat(item.outstandingAmount).toLocaleString('en-IN')}.00</>} 
                         </div>
                     </div>}
                 </div>
