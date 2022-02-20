@@ -7,6 +7,7 @@ import { NavLink  } from 'react-router-dom'
 import { setPaymentInfo, ThreadInterface } from 'src/Pages/Customers/ChatView/chatListSlice'
 import { useParams } from 'react-router'
 import { hapticFeedback } from 'src/utils/vibrate'
+import { FormattedMessage } from 'react-intl'
 
 export interface paymentObject {
   id: string;
@@ -42,9 +43,12 @@ export default function PaymentCard({ className, thread }: { className: string, 
         <div className={`flex ${className} w-full `}>
             <NavLink to={`/chat/${id}/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-slate-50 border border-yellow-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
-          Payment
+                    <FormattedMessage
+                        id="global.payment"
+                        defaultMessage="Payment"
+                    />
                 </div>
-                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${payment?.amount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${parseInt(payment?.amount, 10)}` : null}</div>
+                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${payment?.amount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{payment?.amount !== undefined ? `₹${parseInt(payment?.amount, 10).toLocaleString('en-IN')}.00` : null}</div>
                 {payment?.note && payment.note?.length > 1 ? <div className="border border-1 border-slate-300 dark:border-slate-600 p-1 px-4 pl-3 mt-2 mb-4 bg-slate-100 dark:bg-slate-700 w-fit text-xs text-slate-700 dark:text-slate-300 rounded break-all line-clamp-2 ">{payment?.note}</div> : ''}
                 {/* bottom  */}
                 <div className="flex items-center w-full">

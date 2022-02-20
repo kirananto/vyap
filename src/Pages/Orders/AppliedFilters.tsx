@@ -42,7 +42,12 @@ export default function AppliedFilters({ openFilters }: { openFilters: () => voi
                     {filters?.account && <Lozenge color="blue" content={filters?.account?.name} square={true} />}
                     {filters?.orderStatus && <ReturnStatusTile status={OrderStatusEnum[filters?.orderStatus]} />}
                     {filters?.sorting && (<Lozenge color="purple" content={filterText(filters?.sorting) ?? ''} square={true} />)}
-                </div> : <div className="flex gap-2 mt-2 text-sm text-slate-400 dark:text-slate-300"> No filters applied</div>}
+                </div> : <div className="flex gap-2 mt-2 text-xs text-slate-400 dark:text-slate-300"> 
+                    <FormattedMessage
+                        id="global.noFilters"
+                        defaultMessage="No Filters applied"
+                    />
+                </div>}
             </div>
             <div className="flex " onClick={openFilters}>
                 <div className={'flex border border-slate-200 rounded place-items-center px-2 py-1 text-slate-600 cursor-pointer text-base font-semibold dark:border-slate-300 dark:text-slate-300'}>
@@ -51,7 +56,12 @@ export default function AppliedFilters({ openFilters }: { openFilters: () => voi
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                         </svg>
                     </div>
-                    <div>Filters</div>
+                    <div>
+                        <FormattedMessage
+                            id="global.filters"
+                            defaultMessage="Filters"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

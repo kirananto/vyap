@@ -163,7 +163,7 @@ function PaymentBottomHeader({
                             )}
                             {parsedAmount !== 0 && (
                                 <h1 className="text-3xl font-bold text-slate-700 dark:text-slate-200 truncate">
-                  ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(0)}
+                  ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toLocaleString('en-IN')}.00
                                 </h1>
                             )}
                             {parsedAmount === 0 && (

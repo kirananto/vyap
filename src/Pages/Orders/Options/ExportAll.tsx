@@ -21,7 +21,7 @@ export const ExportAll = ({ apiData }: IProps) => {
             BUYER: item?.buyer?.name,
             AMOUNT: (
                 parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)
-            ).toFixed(0),
+            ).toLocaleString('en-IN'),
         }
     })
 

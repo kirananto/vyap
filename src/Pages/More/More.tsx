@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials, setCredentials } from '../Login/credentialsSlice'
 import { useNavigate } from 'react-router-dom'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { logOutAPI } from 'src/API/login.axios'
 import { clearAll } from '../Customers/ChatView/chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
@@ -65,7 +65,7 @@ export default function More() {
                             width={64}
                         />
                         <div className="flex-grow flex flex-col pl-6">
-                            <h1 className="text-xl font-bold text-slate-500 dark:text-slate-200">Welcome, <br/> {user?.organization?.name} 🎉</h1>
+                            <h1 className="text-xl font-bold text-slate-500 dark:text-slate-200"><FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />, <br/> {user?.organization?.name} 🎉</h1>
                             <p className="dark:text-slate-400 text-sm tracking-wider">+91{user?.organization?.officeNumber}</p>
                         </div>
                     </div>

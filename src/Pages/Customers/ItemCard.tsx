@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import type { IInbox } from './customersSlice'
+import { FormattedMessage } from 'react-intl'
 
 interface IProps {
   item: IInbox;
@@ -22,6 +23,21 @@ export function ItemCard({ item }: IProps) {
         }
         return format(date, 'dd/MM/yyyy')
 
+    }
+
+    function getLastMsg() {
+        if(item.lastMsg === 'Start your first transaction.') {
+            return <FormattedMessage id="chat.firstTransaction" defaultMessage="Start your first transaction." />
+        }
+        if(item.lastMsg?.includes('Payment')) {
+            const amount = parseInt(item.lastMsg.replace('Payment of ', '').replace(' done.', ''), 10)
+            return <>Payment of ₹{amount.toLocaleString('en-IN')}.00 done.</>
+        }
+        if(item.lastMsg?.includes('Order')) {
+            const amount = parseInt(item.lastMsg.replace('Order of ', '').replace(' items placed.', ''), 10)
+            return <>Order of {amount.toLocaleString('en-IN')}.00 items placed.</>
+        }
+        return item.lastMsg
     }
     return (
 
@@ -58,7 +74,7 @@ export function ItemCard({ item }: IProps) {
                 </div>
                 <div className="w-2/5 sm:w-3/5 mt-4">
                     <h2 className="font-semibold text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{item.lastMsg}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{getLastMsg()}</p>
                 </div>
                 <div className="flex-grow mt-5 text-right">
 

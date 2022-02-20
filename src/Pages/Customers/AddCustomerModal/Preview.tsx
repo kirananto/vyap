@@ -69,7 +69,7 @@ export default function PreviewScreen({
             <div className="mt-4 dark:text-slate-400">
         Please confirm the below information
                 <div className="my-6 bg-slate-200 p-4 rounded-lg dark:bg-slate-600 dark:text-slate-200">
-          You are inviting {returnName(phoneNumber, isExisting, businessName)}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toFixed(0)} </span>
+          You are inviting {returnName(phoneNumber, isExisting, businessName)}, and they owes you <span className="text-2xl ml-2"> ₹{parseFloat(`${openingBalance}`).toLocaleString('en-IN')}.00 </span>
 
                 </div>
             </div>

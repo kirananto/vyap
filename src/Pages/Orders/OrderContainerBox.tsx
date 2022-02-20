@@ -122,7 +122,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                             {(
                                                 parseFloat(item?.totalAmount) -
                                                 parseFloat(item?.flatDiscount)
-                                            ).toFixed(0)}
+                                            ).toLocaleString('en-IN')}.00
                                         </div>
                                         <div className="text-slate-400 text-xs font-extrabold mx-auto dark:text-slate-300">
                                             ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})

@@ -133,17 +133,17 @@ export default function OrderItemsDetails({
                     <div>
                         <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Total:</span> ₹
-                            {parseFloat(order?.totalAmount).toFixed(0)}
+                            {parseFloat(order?.totalAmount).toLocaleString('en-IN')}.00
                         </div>
                         <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Discount:</span> ₹
-                            {parseFloat(order?.flatDiscount).toFixed(0)}
+                            {parseFloat(order?.flatDiscount).toLocaleString('en-IN')}.00
                         </div>
                         <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                             <span className="text-sm font-normal">Final Amount:</span> ₹
                             {(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
-                            ).toFixed(0)}
+                            ).toLocaleString('en-IN')}.00
                         </div>
                     </div>
                 </div>

@@ -178,7 +178,7 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                                             : item.senderOrg?.name}
                                     </div>
                                     <div className="flex basis-5/12 justify-end self-center text-sm md:text-lg font-extrabold text-slate-600 dark:text-slate-200">
-                                        ₹ {item.amount}
+                                        ₹ {parseFloat(item.amount)?.toLocaleString('en-IN')}.00
                                     </div>
                                 </div>
                                 <div className="flex gap-1 mt-2">

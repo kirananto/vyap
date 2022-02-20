@@ -121,18 +121,18 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
                             </div>
                             <div className="item  pl-3 text-right">
                                 <p className="font-bold">
-                                    {parseFloat(order?.totalAmount).toFixed(0)}{' '}
+                                    {parseFloat(order?.totalAmount).toLocaleString('en-IN')}.00{' '}
                                 </p>
                                 <p className="font-bold pb-2">
                                     {' '}
-                                    {parseFloat(order?.flatDiscount).toFixed(0)}{' '}
+                                    {parseFloat(order?.flatDiscount).toLocaleString('en-IN')}.00{' '}
                                 </p>
                                 <p className="font-bold border-t-[3px] border-blue-200">
                                     {' '}
                                     {(
                                         parseFloat(order?.totalAmount) -
                     parseFloat(order?.flatDiscount)
-                                    ).toFixed(0)}{' '}
+                                    ).toLocaleString('en-IN')}.00{' '}
                                 </p>
                             </div>
                         </div>
