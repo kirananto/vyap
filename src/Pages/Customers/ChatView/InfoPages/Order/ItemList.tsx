@@ -73,7 +73,7 @@ function Items({ order }: { order: orderInterface }) {
                         </div> */}
                     </div>
                     <div className="flex-wrap text-lg ml-4 min-w-[20%] font-bold text-slate-600 dark:text-slate-200 text-right">
-            ₹{(item?.quantity * parseFloat(`${item?.purchasePrice}`)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                        {(item?.quantity * parseFloat(`${item?.purchasePrice}`)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                     </div>
                 </div>
             ))}
