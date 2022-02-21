@@ -119,7 +119,7 @@ export default function OrderItemsDetails({
                         </div>
                         <div className="flex text-slate-400 text-xs font-extrabold dark:text-slate-300 self-center">
                             {/* ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)} */}
-              ₹{item?.purchasePrice}
+                            {parseFloat(item?.purchasePrice).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                         </div>
                     </div>
                 ))}
