@@ -65,7 +65,7 @@ function Items({ order }: { order: orderInterface }) {
                                 {item?.product?.centralCatalogue?.description}
                             </div> */}
                             <div className="flex font-normal text-xs text-slate-600 dark:text-slate-500">
-                Rate: ₹{item?.purchasePrice}
+                Rate: {parseFloat(item?.purchasePrice).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                         </div>
                         {/* <div className="flex-none flex-col h-5 px-2 w-auto font-bold tracking-wide rounded text-xs bg-slate-200 dark:bg-slate-600 dark:text-slate-300 self-center items-center justify-center">
