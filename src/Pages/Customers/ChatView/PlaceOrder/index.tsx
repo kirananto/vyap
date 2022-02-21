@@ -222,7 +222,7 @@ export default function PlaceOrder() {
                                             {item.aliasName ? `( ${item.aliasName})` : ''}
                                         </div>
                                         <div className=" text-xs font-bold text-slate-500 dark:text-slate-400">
-                                            MRP: ₹{item?.mrpPrice} Sales Price: ₹{item?.rate}
+                                            MRP: {parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })} Sales Price: {parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                         </div>
 
                                         <div className=" text-xs font-bold text-slate-400 dark:text-slate-500">
@@ -310,7 +310,7 @@ export default function PlaceOrder() {
                                     </div>
 
                                     <div className="text-right text-lg font-bold text-slate-600  dark:text-slate-200">
-                                        ₹{item?.quantity * parseFloat(item?.rate)}
+                                        {(item?.quantity * parseFloat(item?.rate)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                     </div>
                                 </div>
                             </div>
@@ -473,15 +473,14 @@ export default function PlaceOrder() {
 
                         <div className="col-span-2  mt-1 text-right mr-4">
                             <div className="text-base  dark:text-slate-400">
-                                ₹{getTotalPrice()}
+                                {getTotalPrice().toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                             <div className="text-base dark:text-slate-400">
-                                ₹{placeOrder.discount}
+                                {placeOrder.discount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                             <div className="mt-1 text-lg font-extrabold dark:text-slate-400">
-                                ₹
-                                {getTotalPrice() -
-                                    (placeOrder.discount ? placeOrder.discount : 0)}
+                                {(getTotalPrice() -
+                                    (placeOrder.discount ? placeOrder.discount : 0)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                         </div>
                     </div>

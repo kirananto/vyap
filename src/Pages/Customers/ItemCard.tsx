@@ -32,7 +32,7 @@ export function ItemCard({ item }: IProps) {
         }
         if(item.lastMsg?.includes('Payment')) {
             const amount = parseInt(item.lastMsg.replace('Payment of ', '').replace(' done.', ''), 10)
-            return <>Payment of ₹{amount.toLocaleString('en-IN')}.00 done.</>
+            return <>Payment of {amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })} done.</>
         }
         if(item.lastMsg?.includes('Order')) {
             const amount = parseInt(item.lastMsg.replace('Order of ', '').replace(' items placed.', ''), 10)
@@ -85,7 +85,7 @@ export function ItemCard({ item }: IProps) {
                         {item.unseenNumbers}
                     </div> : <div className="w-full h-12 grid mt-2 justify-end ">
                         <div className={`text-sm mt-2 text-${item.outstandingAmount?.includes('-') ? 'green' : parseFloat(item.outstandingAmount) === 0 ? 'blue' : 'rose'}-500`}>
-                            {parseFloat(item.outstandingAmount) === 0 ? 'Settled' : item.outstandingAmount.includes('-') ? <> You get <br/> ₹{parseFloat(item.outstandingAmount?.replace('-', '')).toLocaleString('en-IN')}.00</> : <>You owe <br /> ₹{parseFloat(item.outstandingAmount).toLocaleString('en-IN')}.00</>} 
+                            {parseFloat(item.outstandingAmount) === 0 ? 'Settled' : item.outstandingAmount.includes('-') ? <> You get <br/> {parseFloat(item.outstandingAmount?.replace('-', '')).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</> : <>You owe <br /> {parseFloat(item.outstandingAmount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</>} 
                         </div>
                     </div>}
                 </div>

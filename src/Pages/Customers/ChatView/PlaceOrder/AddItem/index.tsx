@@ -179,7 +179,7 @@ export default function AddItem() {
             (a, b) => a + b.quantity * parseFloat(b?.rate),
             0
         )
-        return price
+        return price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })
     }
 
     // function closeDropList() {
@@ -227,11 +227,11 @@ export default function AddItem() {
                             <div className="flex gap-2 mt-1">
                                 <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
                                     <p>MRP:</p>
-                                    <p>₹{item?.mrpPrice}</p>
+                                    <p>{parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                                 </div>
                                 <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                                     <p>SP:</p>
-                                    <p>{item?.rate}</p>
+                                    <p>{parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                                 </div>
                             </div>
                         </div>
@@ -341,7 +341,7 @@ export default function AddItem() {
             </div>
             {selectedItems?.length > 0 ? <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
                 <Button onClick={onSubmit}>
-                    {`Add ${selectedItems?.length} items (₹${calculatePriceOfSelected()})`}
+                    {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
                 </Button>
             </div> : null}
         </div>

@@ -39,7 +39,7 @@ function Items({ order }: { order: orderInterface }) {
             {orderItems?.map((item: IOrderItem, index: number) => (
                 <div className="flex justify-between py-2" key={`${index}`}>
                     <div className="flex w-full gap-4">
-                        <div className="flex-none mt-2 text-slate-400 text-xs dark:text-slate-400">{item?.quantity} X </div>
+                        <div className="flex-none flex-wrap mt-2 text-slate-400 text-xs dark:text-slate-400">{item?.quantity} X </div>
                         <div 
                             className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6 self-center"
                             style={
@@ -73,7 +73,7 @@ function Items({ order }: { order: orderInterface }) {
                         </div> */}
                     </div>
                     <div className="flex-wrap text-lg ml-4 min-w-[20%] font-bold text-slate-600 dark:text-slate-200 text-right">
-            ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)}
+            ₹{(item?.quantity * parseFloat(`${item?.purchasePrice}`)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                     </div>
                 </div>
             ))}

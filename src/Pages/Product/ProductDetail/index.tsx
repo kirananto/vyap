@@ -100,7 +100,7 @@ const ProductDetail = () => {
                             MRP
                         </p>
                         <p className=" text-md font-semibold text-slate-600 dark:text-slate-300">
-                            ₹{product?.mrpPrice}
+                            {product?.mrpPrice ? `${parseFloat(product.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : '--'}
                         </p>
                     </div>
                     <div className="font-semibold text-slate-400 dark:text-slate-400">
@@ -108,7 +108,7 @@ const ProductDetail = () => {
                             Sales Price
                         </p>
                         <p className="text-md font-semibold text-slate-600 dark:text-slate-300" >
-                            ₹{product?.rate}
+                            {product?.mrpPrice ? `${parseFloat(product.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : '--'}
                         </p>
                     </div>
                 </div>

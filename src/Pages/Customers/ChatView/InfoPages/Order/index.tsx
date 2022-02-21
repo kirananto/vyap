@@ -102,10 +102,9 @@ export default function OrderDetails() {
                     {/* Body */}
                     <div className="flex flex-col items-center gap-5 py-24">
                         <h1 className="text-3xl sm:text-5xl font-black text-center text-slate-600 dark:text-slate-300">
-              ₹
                             {(order?.totalAmount && isNumber(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount))) ?  `${(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
-                            ).toLocaleString('en-IN')}.00` : ''}
+                            ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : ''}
                         </h1>
                         {/* ---------------- */}
                         <div className="flex items-center justify-center gap-3">

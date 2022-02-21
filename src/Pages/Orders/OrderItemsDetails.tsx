@@ -132,18 +132,18 @@ export default function OrderItemsDetails({
                 <div className="flex justify-end">
                     <div>
                         <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
-                            <span className="text-sm font-normal">Total:</span> ₹
-                            {parseFloat(order?.totalAmount).toLocaleString('en-IN')}.00
+                            <span className="text-sm font-normal">Total:</span> 
+                            {parseFloat(order?.totalAmount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                         </div>
                         <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
-                            <span className="text-sm font-normal">Discount:</span> ₹
-                            {parseFloat(order?.flatDiscount).toLocaleString('en-IN')}.00
+                            <span className="text-sm font-normal">Discount:</span>
+                            {parseFloat(order?.flatDiscount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                         </div>
                         <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
-                            <span className="text-sm font-normal">Final Amount:</span> ₹
+                            <span className="text-sm font-normal">Final Amount:</span> 
                             {(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
-                            ).toLocaleString('en-IN')}.00
+                            ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                         </div>
                     </div>
                 </div>

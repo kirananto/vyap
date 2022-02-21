@@ -42,11 +42,11 @@ export default function ProductSuggestionCard({
             <div className="grid grid-cols-2 my-2 mb-3">
                 <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
                     <p>MRP:</p>
-                    <p>₹{item?.mrpPrice}</p>
+                    <p>{parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                 </div>
                 <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     <p>Sales Price:</p>
-                    <p>{item?.rate}</p>
+                    <p>{parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                 </div>
             </div>
         </div>

@@ -125,7 +125,7 @@ export default function OrderCard({
                         defaultMessage="Order"
                     />
                 </div>
-                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `₹ ${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toLocaleString('en-IN')}.00` : null}</div>
+                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : null}</div>
 
                 {/* bottom  */}
                 <div className="flex items-center w-full">

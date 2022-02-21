@@ -156,12 +156,12 @@ export default function AddPaymentModal({
         if (btnAction === BUTTON_ACTION.PLACE_ORDER) {
             switch (paymentOption) {
                 case PAYMENT_OPTIONS.FULL_PAYMENT:
-                    orderTextMid = ' by receiving the full payment of ₹'
-                    orderTextEnd = '' + orderAmount
+                    orderTextMid = ' by receiving the full payment of '
+                    orderTextEnd = '' + orderAmount?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })
                     break
                 case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
-                    orderTextMid = ' by receiving a partial payment of ₹'
-                    orderTextEnd = '' + parsedcustomAmount
+                    orderTextMid = ' by receiving a partial payment of '
+                    orderTextEnd = '' + parsedcustomAmount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })
                     break
                 case PAYMENT_OPTIONS.PAY_LATER:
                     orderTextMid = 'by PAYING LATER'
@@ -210,7 +210,8 @@ export default function AddPaymentModal({
                             <>
                                 <div className='text-left dark:text-slate-200 pl-0 mt-6 mb-4'>
                                     <span className="font-semibold">
-                                        <span className="text-slate-500 pr-3 text-xl dark:text-slate-200">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
+                                        <span className="text-slate-500 pr-3 text-xl dark:text-slate-200">Order Total:</span> 
+                                        <span className="font-bold">{orderAmount?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</span>
                                     </span>
                                 </div>
 
