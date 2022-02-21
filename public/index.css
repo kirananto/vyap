@@ -18,7 +18,9 @@ body {
 .scrollDes::-webkit-scrollbar {
   width: 0px;
 }
-
+img {
+  pointer-events: none;
+}
 /* Customer Card Field Ends */
 
 /* Add Customer Button */
