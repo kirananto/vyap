@@ -22,10 +22,12 @@ import { useNavigate } from 'react-router-dom'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { logOutAPI } from 'src/API/login.axios'
-import { clearAll } from '../Customers/ChatView/chatListSlice'
+import { clearAll as clearAllChats } from '../Customers/ChatView/chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import Bowser from 'bowser'
 import { differenceInDays } from 'date-fns'
+import { clearAll as clearAllProducts } from '../Product/productsSlice'
+import { clearAll as clearAllCustomers } from '../Customers/customersSlice'
 const browser = Bowser.getParser(window.navigator.userAgent)
 export default function More() {
     const { user, token } = useSelector(selectCredentials)
@@ -41,14 +43,13 @@ export default function More() {
 
     const handleLogout = () => {
     //TODO Add hooks to other data's that need's to be cleared too.
-        logOutAPI(token).then(() => {
+        logOutAPI(token).finally(() => {
             dispatch(setCredentials({ user: undefined, token: undefined }))
-            navigate('/login')
-        }).catch(() => {
-            dispatch(setCredentials({ user: undefined, token: undefined }))
-            navigate('/login')
-        }).finally(() => {
-            dispatch(clearAll())
+            dispatch(clearAllProducts())
+            dispatch(clearAllCustomers())
+            dispatch(clearAllChats())
+            localStorage.clear()
+            navigate('/login', { replace: true })
         })
     }
 
