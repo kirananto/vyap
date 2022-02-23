@@ -77,7 +77,17 @@ export const chatListSlice = createSlice({
         setCustomers: (state, action: PayloadAction<chatListInterface>) => {
             // Return array as key value object
             const newState = Object.values(action.payload).reduce((acc: chatListInterface, curr) => {
-                acc[curr.id] = curr
+                let threads:ThreadInterface[] = []
+                if(state[curr?.id]?.threads) {
+                    const existingItems = state[curr.id].threads
+                    const newItems = curr.threads
+                    threads = newItems.map(item => {
+                        const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
+                        return { ...existingItem, ...item }
+                    })
+                }
+                
+                acc[curr.id] = { ...(state[curr.id] ?? {}), ...curr, threads: threads }
                 return acc
             }, {})
             return newState
