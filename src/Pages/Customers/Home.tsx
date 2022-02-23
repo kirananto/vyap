@@ -11,24 +11,22 @@ import profileImg from 'src/assets/icons/profile/profile-icon.svg'
 import AddCustomerModal from './AddCustomerModal'
 import Spinner from 'src/Components/Style/Spinner'
 import { FormattedMessage, useIntl } from 'react-intl'
-import {
-    IInbox,
-    selectCustomerInfo,
-    setCustomers,
-    setCustomerTotal,
-} from './customersSlice'
 import useQueryParam from 'src/utils/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { useScrollDirection } from 'react-use-scroll-direction'
+import { IndividualChatInterface, selectChatList, setCustomers } from './ChatView/chatListSlice'
 
 export const Home = () => {
-    const customer = useSelector(selectCustomerInfo)
     const dispatch = useDispatch()
     const [addCustomerVisible, setAddCustomerVisible] =
         useQueryParam<boolean>('addCustomer')
+    const chatList = useSelector(selectChatList)
+
+    const customer = Object.values(chatList)
     const [loading, setLoading] = React.useState(
-        customer.customers?.length === 0
+        customer?.length === 0
     )
+    console.log('cus', customer)
     const [paginationParams, setPaginationParams] = React.useState({
         page: 1,
         search: '',
@@ -47,7 +45,6 @@ export const Home = () => {
                     paginationParams.search.trim() === '' ? undefined : paginationParams.search.trim(),
             }).then((result) => {
                 dispatch(setCustomers(result.data.data))
-                dispatch(setCustomerTotal(result.data.total))
                 setLoading(false)
                 console.log('data', result.data.data)
             })
@@ -56,7 +53,7 @@ export const Home = () => {
         }
     }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
-    function customerFilter(filterItem: IInbox) {
+    function customerFilter(filterItem: IndividualChatInterface) {
         const search = paginationParams.search?.trim()?.toLowerCase()
         if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
             return true
@@ -81,7 +78,7 @@ export const Home = () => {
                 </div>
             )
         }
-        if (customer?.customers?.filter(customerFilter)?.length === 0) {
+        if (customer?.filter(customerFilter)?.length === 0) {
             return (
                 <div>
                     <img
@@ -98,7 +95,7 @@ export const Home = () => {
                 </div>
             )
         }
-        return customer?.customers?.filter(customerFilter).map((item, index) => (
+        return customer?.filter(customerFilter).map((item, index) => (
             <ItemCard item={item} key={index} />
         ))
     }

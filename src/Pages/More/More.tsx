@@ -27,7 +27,6 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import Bowser from 'bowser'
 import { differenceInDays } from 'date-fns'
 import { clearAll as clearAllProducts } from '../Product/productsSlice'
-import { clearAll as clearAllCustomers } from '../Customers/customersSlice'
 const browser = Bowser.getParser(window.navigator.userAgent)
 export default function More() {
     const { user, token } = useSelector(selectCredentials)
@@ -46,7 +45,6 @@ export default function More() {
         logOutAPI(token).finally(() => {
             dispatch(setCredentials({ user: undefined, token: undefined }))
             dispatch(clearAllProducts())
-            dispatch(clearAllCustomers())
             dispatch(clearAllChats())
             localStorage.clear()
             navigate('/login', { replace: true })

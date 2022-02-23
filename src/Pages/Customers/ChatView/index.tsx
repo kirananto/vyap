@@ -30,10 +30,10 @@ export const Payment = () => {
 
     useEffect(() => {
         console.log('------------------------changed-----------')
-        if (token) {
+        if (token && !inbox.id) {
             dispatch(fetchInboxAction({ token: token, id: id }))
         }
-    }, [paymentModalVisible, id, token, dispatch])
+    }, [paymentModalVisible, id, token, dispatch, inbox.id])
 
     useEffect(() => {
         localStorage?.setItem('inboxId', inbox?.id)

@@ -12,7 +12,6 @@ import i18nSlice from 'src/i18n/i18nSlice'
 import productFiltersSlice from 'src/Pages/Product/productFiltersSlice'
 import paymentFiltersSlice from 'src/Pages/Payments/Filters/paymentFiltersSlice'
 import orderFiltersSlice from 'src/Pages/Orders/Filters/orderFiltersSlice'
-import customersSlice from 'src/Pages/Customers/customersSlice'
 import addItemsproductFiltersSlice from 'src/Pages/Customers/ChatView/PlaceOrder/AddItem/addProductFiltersSlice'
 import chatListSlice from 'src/Pages/Customers/ChatView/chatListSlice'
 import productsSlice from 'src/Pages/Product/productsSlice'
@@ -28,7 +27,6 @@ const rootReducer = combineReducers({
     addItemsproductFilters: addItemsproductFiltersSlice,
     paymentFilters: paymentFiltersSlice,
     orderFilters: orderFiltersSlice,
-    customers: customersSlice,
     products: productsSlice,
     chatList: chatListSlice
 })
