@@ -75,7 +75,7 @@ export const PrintOne = ({ item }: IProps) => {
                             <p className="text-2xl font-bold text-slate-700 "> vyap </p>
                         </div>
 
-                        <div className="col-start-2 col-span-2 align-middle">
+                        <div className="col-start-2 col-span-2 self-center">
                             <h2 className="text-2xl font-bold text-slate-600">
                                 Payment Summary
                             </h2>

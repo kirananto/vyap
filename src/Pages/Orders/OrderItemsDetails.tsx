@@ -5,8 +5,8 @@ import Spinner from 'src/Components/Style/Spinner'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { FormattedMessage } from 'react-intl'
-import ReactToPrint from 'react-to-print'
 import type { IOrderItem, orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
+import { PrintOne } from './Options/PrintOne'
 
 export default function OrderItemsDetails({
     order,
@@ -18,29 +18,6 @@ export default function OrderItemsDetails({
     const { token } = useSelector(selectCredentials)
     const [orderItems, setOrderItems] = useState<IOrderItem[]>([])
     const [loading, setLoading] = React.useState(true)
-    const componentRef = React.useRef<HTMLDivElement>(null)
-
-    const reactToPrintTrigger = React.useCallback(() => {
-        return (
-            <button className="flex justify-center gap-1 items-center w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-                    />
-                </svg>
-                <FormattedMessage id="action.print" defaultMessage="Print" />
-            </button>
-        )
-    }, [])
 
     useEffect(() => {
         fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 }).then((result) => {
@@ -63,7 +40,6 @@ export default function OrderItemsDetails({
             <div
                 className="p-4 m-4 mt-2 border border-slate-300 dark:border-slate-500 rounded"
                 id="print"
-                ref={componentRef}
             >
                 <h2 className="dark:text-slate-300 font-bold"> Order items </h2>
 
@@ -149,15 +125,9 @@ export default function OrderItemsDetails({
                 </div>
             </div>
             <div className="flex flex-row mt-2 mb-10 ml-4 mr-4 gap-2 justify-end">
-                <ReactToPrint
-                    content={() => componentRef.current}
-                    documentTitle={`Vyap All Orders`}
-                    // onAfterPrint={handleAfterPrint}
-                    // onBeforeGetContent={handleOnBeforeGetContent}
-                    // onBeforePrint={handleBeforePrint}
-                    removeAfterPrint
-                    trigger={reactToPrintTrigger}
-                />
+
+                <PrintOne order={order} orderItems={orderItems} />
+
                 <button
                     onClick={minimize}
                     className="flex justify-center gap-1 items-center w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
