@@ -77,17 +77,7 @@ export const chatListSlice = createSlice({
         setCustomers: (state, action: PayloadAction<chatListInterface>) => {
             // Return array as key value object
             const newState = Object.values(action.payload).reduce((acc: chatListInterface, curr) => {
-                let threads:ThreadInterface[] = []
-                if(state[curr?.id]?.threads) {
-                    const existingItems = state[curr.id].threads
-                    const newItems = curr.threads
-                    threads = newItems.map(item => {
-                        const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
-                        return { ...existingItem, ...item }
-                    })
-                }
-                
-                acc[curr.id] = { ...(state[curr.id] ?? {}), ...curr, threads: threads }
+                acc[curr.id] = { ...(state[curr.id] ?? {}), ...curr, threads: state[curr.id]?.threads ?? [] }
                 return acc
             }, {})
             return newState
@@ -131,6 +121,7 @@ export const chatListSlice = createSlice({
                     const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
                     return { ...existingItem, ...item }
                 })
+                state[action.payload.id].isLoading = false
             } else {
                 state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload, isLoading: false, error: false }
             }

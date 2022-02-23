@@ -26,7 +26,6 @@ export const Home = () => {
     const [loading, setLoading] = React.useState(
         customer?.length === 0
     )
-    console.log('cus', customer)
     const [paginationParams, setPaginationParams] = React.useState({
         page: 1,
         search: '',
@@ -46,13 +45,13 @@ export const Home = () => {
             }).then((result) => {
                 dispatch(setCustomers(result.data.data))
                 setLoading(false)
-                console.log('data', result.data.data)
             })
         } else {
             navigate('/login')
         }
     }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
+    console.log('customer', customer)
     function customerFilter(filterItem: IndividualChatInterface) {
         const search = paginationParams.search?.trim()?.toLowerCase()
         if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
