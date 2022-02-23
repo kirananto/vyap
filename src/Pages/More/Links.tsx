@@ -4,7 +4,7 @@ export default function Links(props: { linkName: string }) {
     return (
         <>
             {/* Link */}
-            <h1 className="text-md md:text-lg font-bold text-slate-500 dark:text-slate-300">{props.linkName}</h1>
+            <h1 className="text-md md:text-lg font-semibold text-slate-500 dark:text-slate-300">{props.linkName}</h1>
         </>
     )
 }

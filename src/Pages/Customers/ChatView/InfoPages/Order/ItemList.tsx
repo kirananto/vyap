@@ -35,13 +35,15 @@ function Items({ order }: { order: orderInterface }) {
     }
 
     return (
-        <div className="divide-y divide-gray-100 dark:divide-gray-700">
+        <div className="divide-y divide-slate-100 dark:divide-slate-700">
             {orderItems?.map((item: IOrderItem, index: number) => (
                 <div className="flex justify-between py-2" key={`${index}`}>
-                    <div className="flex w-full gap-4">
-                        <div className="flex-none mt-2 text-slate-400 text-xs dark:text-slate-400">{item?.quantity} X </div>
+                   
+                    <div className="flex basis-7/12 w-full gap-1 self-center">
+                        <div className="self-center basis-2/12 flex-wrap mt-2 text-slate-400 text-xs dark:text-slate-400">{item?.quantity}</div>
+                        <div className="self-center basis-1/12 flex-wrap mt-2 text-slate-400 text-xs dark:text-slate-400"> X </div>
                         <div 
-                            className="flex-none bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6 self-center"
+                            className="self-center basis-3/12 bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-6 w-6 "
                             style={
                                 item?.product?.thumbnailImage
                                     ? {
@@ -54,7 +56,8 @@ function Items({ order }: { order: orderInterface }) {
                                     : {}
                             }
                         />
-                        <div className="flex w-3/5 flex-col">
+    
+                        <div className="flex w-3/5 flex-col self-center ">
                             <div className="flex  text-sm font-semibold text-slate-800 dark:text-slate-200">
                                 {item?.product?.centralCatalogue?.name}
                                 {item?.product?.aliasName
@@ -65,15 +68,17 @@ function Items({ order }: { order: orderInterface }) {
                                 {item?.product?.centralCatalogue?.description}
                             </div> */}
                             <div className="flex font-normal text-xs text-slate-600 dark:text-slate-500">
-                Rate: ₹{item?.purchasePrice}
+                Rate: {parseFloat(item?.purchasePrice).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                         </div>
+                        
                         {/* <div className="flex-none flex-col h-5 px-2 w-auto font-bold tracking-wide rounded text-xs bg-slate-200 dark:bg-slate-600 dark:text-slate-300 self-center items-center justify-center">
               X {item?.quantity}
                         </div> */}
                     </div>
-                    <div className="flex-wrap text-lg ml-4 min-w-[20%] font-bold text-slate-600 dark:text-slate-200 text-right">
-            ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)}
+
+                    <div className="flex-wrap basis-5/12 self-center text-lg ml-4 font-bold text-slate-600 dark:text-slate-200 text-right">
+                        {(item?.quantity * parseFloat(`${item?.purchasePrice}`)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                     </div>
                 </div>
             ))}

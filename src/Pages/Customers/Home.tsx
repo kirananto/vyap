@@ -85,6 +85,7 @@ export const Home = () => {
             return (
                 <div>
                     <img
+                        loading="lazy"
                         className="m-auto mt-12 h-96 p-12"
                         alt="no transactions"
                         src={ChatImg}
@@ -135,19 +136,22 @@ export const Home = () => {
             {/* <!-- * Header --> */}
             <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-slate-800">
                 <div className="flex h-full w-full ">
-                    <Link to="/more" className="flex w-4/5 flex-col">
-                        <h1 className="text-lg font-semibold text-slate-600 dark:text-slate-100">
+                    <div className="flex w-4/5 flex-col">
+                        <h1 className="text-md font-semibold text-slate-600 dark:text-slate-100">
                             <FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />
                         </h1>
-                        <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-bold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
+                        <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-semibold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
                             {user?.organization?.name}
                         </h1>
-                    </Link>
+                    </div>
                     <div className="flex w-1/5 items-center justify-end ">
-                        <Link to="/my-account">
+                        <Link to="/my-account" aria-label="my account">
                             <img
+                                loading="lazy"
                                 className="h-12 rounded-full aspect-square shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
+                                height={48}
+                                width={48}
                                 alt=""
                             />
                         </Link>
@@ -175,7 +179,7 @@ export const Home = () => {
             </header>
             <div
                 ref={scrollTargetRef}
-                className="card-main-container scrollDes relative divide-y pb-20 divide-gray-100 dark:divide-gray-800"
+                className="card-main-container scrollDes relative divide-y pb-20 divide-slate-200 dark:divide-slate-800"
             >
                 {renderChats()}
             </div>
@@ -187,7 +191,7 @@ export const Home = () => {
                         hapticFeedback()
                         setAddCustomerVisible(true)
                     }}
-                    className={`add-cutomer-btn text-md rounded-full bg-gradient-to-br from-blue-500
+                    className={`add-cutomer-btn active:scale-95 text-md rounded-full bg-gradient-to-br from-blue-500
                      to-indigo-700 p-3 text-white shadow-sm transition duration-500 ease-in-out`}
                 >
                     <svg

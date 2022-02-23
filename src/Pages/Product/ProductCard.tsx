@@ -14,20 +14,20 @@ export default function ProductCard({
     setLongPressEnabled,
     isScrolling
 }: {
-  item: IProduct;
-  onClicked: (item: IProduct) => void;
-  onMore: (item?: IProduct | undefined) => void;
-  isChecked: boolean;
-  longPresEnabled: boolean;
-  setLongPressEnabled: React.Dispatch<React.SetStateAction<boolean>>
-  isScrolling: boolean
+    item: IProduct;
+    onClicked: (item: IProduct) => void;
+    onMore: (item?: IProduct | undefined) => void;
+    isChecked: boolean;
+    longPresEnabled: boolean;
+    setLongPressEnabled: React.Dispatch<React.SetStateAction<boolean>>
+    isScrolling: boolean
 }) {
 
     const navigate = useNavigate()
     const callback = useCallback(() => {
         //alert('Long pressed!')
-        onClicked(item)     
-        setLongPressEnabled(false)   
+        onClicked(item)
+        setLongPressEnabled(false)
     }, [item, onClicked, setLongPressEnabled])
 
     const bind = useLongPress(longPresEnabled && !isScrolling ? callback : null, {
@@ -42,24 +42,25 @@ export default function ProductCard({
     })
 
     const onItemClick = () => {
-        if(!longPresEnabled)
+        if (!longPresEnabled)
             onClicked(item)
-        else{
+        else {
             navigate(`/product/${item.id}`)
         }
     }
 
     return (
-        <div 
-            {...bind} 
-            className={`flex justify-left w-full bg-white dark:bg-slate-900 px-5 border-b border-gray-100 dark:border-gray-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
+        <div
+            {...bind}
+            className={`flex justify-left w-full bg-white dark:bg-slate-900 px-5 border-b border-slate-100 dark:border-slate-800 ${isChecked && 'bg-blue-100 dark:bg-slate-700'}`}
         >
 
             <div className="flex min-w-[80vw]  max-w-[80vw] py-4" onClick={onItemClick}>
 
-                <div className="w-20 h-full text-center border border-gray-200 dark:border-gray-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+                <div className="w-20 h-full text-center border border-slate-200 dark:border-slate-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
                     {item?.thumbnailImage && (
                         <img
+                            loading="lazy"
                             src={getImageURL(
                                 item?.thumbnailImage,
                                 IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
@@ -69,8 +70,8 @@ export default function ProductCard({
                         />
                     )}
                     {item.outOfStock && (
-                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-200 text-rose-500 font-bold text-xs text-center leading-4">
-                Out of stock
+                        <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-100 text-rose-700 font-bold text-xs text-center leading-4">
+                            Out of stock
                         </div>
                     )}
                 </div>
@@ -86,20 +87,20 @@ export default function ProductCard({
             </p> */}
                     </div>
                     <div className="grid grid-cols-2">
-                        <div className="text-sm font-semibold text-slate-500  dark:text-slate-400">
+                        <div className="text-sm text-slate-500  dark:text-slate-400">
                             <p>
-                MRP
+                                MRP
                             </p>
                             <p className="font-semibold">
-                ₹{item?.mrpPrice}
+                                {parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </p>
                         </div>
-                        <div className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+                        <div className="text-sm text-slate-500 dark:text-slate-400">
                             <p >
-                Sales Price
+                                Sales Price
                             </p>
                             <p className="font-semibold" >
-              ₹{item?.rate}
+                                {parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </p>
                         </div>
                     </div>
@@ -126,7 +127,7 @@ export default function ProductCard({
                         d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
                     />
                 </svg>
-        
+
             </div>
         </div>
     )

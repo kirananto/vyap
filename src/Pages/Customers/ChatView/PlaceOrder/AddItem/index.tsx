@@ -179,7 +179,7 @@ export default function AddItem() {
             (a, b) => a + b.quantity * parseFloat(b?.rate),
             0
         )
-        return price
+        return price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })
     }
 
     // function closeDropList() {
@@ -193,7 +193,7 @@ export default function AddItem() {
         if (itemList?.length === 0) {
             return (
                 <div>
-                    <img className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
+                    <img loading="lazy" className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
                     <div className="text-center px-6 w-2/3 m-auto mb-8 dark:text-slate-300">
                         {' '}
                         Sorry the seller has no products for sale.{' '}
@@ -203,11 +203,12 @@ export default function AddItem() {
         }
         return itemList.map((item, index) => (
             <div
-                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-gray-100 dark:border-gray-800 py-4"
+                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4"
                 key={`${index}`}
             >
                 <div className="relative self-center w-1/5 h-20  overflow-hidden">
                     <img
+                        loading="lazy"
                         src={item?.thumbnailImage ? getImageURL(
                             item?.thumbnailImage,
                             IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
@@ -226,11 +227,11 @@ export default function AddItem() {
                             <div className="flex gap-2 mt-1">
                                 <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
                                     <p>MRP:</p>
-                                    <p>₹{item?.mrpPrice}</p>
+                                    <p>{parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                                 </div>
                                 <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                                     <p>SP:</p>
-                                    <p>{item?.rate}</p>
+                                    <p>{parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                                 </div>
                             </div>
                         </div>
@@ -340,7 +341,7 @@ export default function AddItem() {
             </div>
             {selectedItems?.length > 0 ? <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
                 <Button onClick={onSubmit}>
-                    {`Add ${selectedItems?.length} items (₹${calculatePriceOfSelected()})`}
+                    {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
                 </Button>
             </div> : null}
         </div>

@@ -96,10 +96,6 @@ export default function PaymentDetails() {
                         <PaymentInfoIcon heading="Status" info="Payment Completed" />
                     </div>
                 </div>
-                {/* delete payment button */}
-                {/* <button className="w-10/12 h-12 mt-10 text-lg font-semibold text-rose-400 bg-rose-200 rounded-full">
-          Delete Payment
-        </button> */}
                 {/* Bottom info delete */}
                 <p style={textSize} className="w-9/12 px-4 text-center text-slate-400">
           You will not be able to delete the payment, instead create a payment with negative value.

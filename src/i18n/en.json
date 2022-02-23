@@ -3,6 +3,10 @@
         "type": 0,
         "value": "Welcome 👋"
     }],
+    "chat.firstTransaction": [{
+        "type": 0,
+        "value": "Start your first transaction."
+    }],
     "global.my_products": [{
         "type": 0,
         "value": "My Products"
@@ -23,6 +27,14 @@
         "type": 0,
         "value": "Applied Filters"
     }],
+    "global.filters": [{
+        "type": 0,
+        "value": "Filters"
+    }],
+    "global.noFilters": [{
+        "type": 0,
+        "value": "No filters applied"
+    }],
     "global.clearAll": [{
         "type": 0,
         "value": "Clear All"
@@ -34,6 +46,14 @@
     "global.allOrders": [{
         "type": 0,
         "value": "All Orders"
+    }],
+    "global.order": [{
+        "type": 0,
+        "value": "Order"
+    }],
+    "global.payment": [{
+        "type": 0,
+        "value": "Payment"
     }],
     "global.reports": [{
         "type": 0,

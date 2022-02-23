@@ -22,7 +22,7 @@ export default function PurchaseOrder() {
             <div className="p-2 pt-14">
                 <div className="overflow-y-auto bg-white rounded p-4 dark:bg-slate-800" style={{ height: 'calc(100vh - 10rem)' }}>
                     {payments.map((item, index) => (
-                        <div className={'border-b border-gray-300 dark:border-gray-600'} key={`${index}`}>
+                        <div className={'border-b border-slate-300 dark:border-slate-600'} key={`${index}`}>
                             <div className={`flex w-full justify-between mt-2 pb-2`}>
                                 {/* TODO: Remove this console.log */}
                                 {console.log('item', item)}
@@ -64,7 +64,9 @@ export default function PurchaseOrder() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-700">
+            <div 
+                style={{ boxShadow: '0px -2px 8px #0000002e' }}
+                className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-700">
                 <button
                     className="w-2/4 h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                     onClick={() => {

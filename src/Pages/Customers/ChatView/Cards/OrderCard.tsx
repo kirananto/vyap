@@ -15,6 +15,7 @@ import Processing from '../../../../Components/Style/Icons/Processing'
 import type { IProduct } from 'src/types/product'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import OrderOptionsPopup from '../Popups/OrderOptionsPopup'
+import { FormattedMessage } from 'react-intl'
 
 export interface IOrderItem {
     id: string;
@@ -92,18 +93,18 @@ export default function OrderCard({
             case OrderStatusEnum.PENDING:
                 return {
                     statusTxt: 'Pending',
-                    statusIcon: <span className='text-yellow-400'><Pending /></span>
+                    statusIcon: <span className='text-yellow-500'><Pending /></span>
                 }
             case OrderStatusEnum.PROCESSING:
                 return {
                     statusTxt: 'Processing',
-                    statusIcon: <span className='text-blue-800'><Processing /></span>
+                    statusIcon: <span className='text-blue-500'><Processing /></span>
                 }
 
             case OrderStatusEnum.COMPLETE:
                 return {
                     statusTxt: 'Completed',
-                    statusIcon: <span className='text-green-400'><Completed /></span>
+                    statusIcon: <span className='text-green-500'><Completed /></span>
                 }
 
             default:
@@ -119,9 +120,12 @@ export default function OrderCard({
         <div  {...bind} className={`flex ${className} w-full`}>
             <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-slate-50 shadow border border-purple-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
-                    Order
+                    <FormattedMessage
+                        id="global.order"
+                        defaultMessage="Order"
+                    />
                 </div>
-                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `₹ ${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toFixed(0)}` : null}</div>
+                <div className={`text-3xl mt-1 text-slate-700 font-bold dark:text-slate-200 truncate ${order?.totalAmount === undefined ? 'h-12 bg-slate-200 dark:bg-slate-700 rounded' : ''}`}>{order?.totalAmount !== undefined ? `${(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : null}</div>
 
                 {/* bottom  */}
                 <div className="flex items-center w-full">
@@ -141,7 +145,7 @@ export default function OrderCard({
                                 new Date(thread.updatedAt),
                                 'do MMM'
                             )}</p>
-                        <p className="text-xs text-slate-500 dark:text-slate-300">  ● {order?.numberOfItems} items</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-300">  ● {order?.numberOfItems} item{(order?.numberOfItems ?? 0) > 1 ? 's' : ''}</p>
                     </div>
                 </div>
 

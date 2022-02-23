@@ -7,6 +7,10 @@
         "type": 0,
         "value": "ഉൽപ്പന്നങ്ങൾ"
     }],
+    "chat.firstTransaction": [{
+        "type": 0,
+        "value": "നിങ്ങളുടെ ആദ്യ ഇടപാട് ആരംഭിക്കുക."
+    }],
     "global.customers": [{
         "type": 0,
         "value": "ഉപഭോക്താക്കൾ"
@@ -22,6 +26,22 @@
     "global.appliedFilters": [{
         "type": 0,
         "value": "ഫിൽട്ടറുകൾ"
+    }],
+    "global.filters": [{
+        "type": 0,
+        "value": "ഫിൽട്ടറുകൾ"
+    }],
+    "global.order": [{
+        "type": 0,
+        "value": "ഓർഡർ"
+    }],
+    "global.payment": [{
+        "type": 0,
+        "value": "പേയ്മെന്റ്"
+    }],
+    "global.noFilters": [{
+        "type": 0,
+        "value": "ഫിൽട്ടറുകൾ പ്രയോഗിച്ചിട്ടില്ല"
     }],
     "global.clearAll": [{
         "type": 0,

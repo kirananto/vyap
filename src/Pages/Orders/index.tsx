@@ -65,7 +65,9 @@ export default function Orders() {
                 name={'filter'}
             />
 
-            <div className="fixed print:static bottom-0 w-full h-20 bg-white dark:bg-slate-800 print:bg-white dark:print:bg-white drop-shadow-xl px-8 grid">
+            <div 
+                style={{ boxShadow: '0px -2px 8px #0000002e' }}
+                className="fixed print:static bottom-0 w-full h-20 bg-white dark:bg-slate-800 print:bg-white dark:print:bg-white drop-shadow-xl px-8 grid">
                 <div className="flex items-center justify-center gap-2 justify-self-center mt-2 w-full max-w-lg">
                     <PrintAll apiData={orders} />
                     <ExportAll apiData={orders} />

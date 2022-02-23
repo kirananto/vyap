@@ -22,7 +22,7 @@ function ReportCard(props: { bgIllus: string, heading: string }) {
 function EmptyReportCard(props: { heading: string }){
 
     return(
-        <div className="flex items-center justify-center h-auto p-4 bg-white border-4 border-gray-100 border-dashed rounded-lg dark:bg-slate-800 dark:border-gray-300">
+        <div className="flex items-center justify-center h-auto p-4 bg-white border-4 border-slate-100 border-dashed rounded-lg dark:bg-slate-800 dark:border-slate-300">
             <h1 className="text-xl font-black text-center text-slate-100 ">
                 {props.heading}
             </h1>
