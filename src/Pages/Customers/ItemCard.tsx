@@ -4,12 +4,11 @@ import { format, isToday, isYesterday } from 'date-fns'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
-import type { IInbox } from './customersSlice'
 import { FormattedMessage } from 'react-intl'
-import Lozenge from 'src/Components/Lozenge'
+import type { IndividualChatInterface } from './ChatView/chatListSlice'
 
 interface IProps {
-  item: IInbox;
+  item: IndividualChatInterface;
 }
 
 export function ItemCard({ item }: IProps) {

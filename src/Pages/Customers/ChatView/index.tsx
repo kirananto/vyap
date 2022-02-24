@@ -11,6 +11,8 @@ import useQueryParam from 'src/utils/useQueryParams'
 import { fetchInboxAction, selectChatList } from './chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import Button from 'src/Components/Style/Button'
+import { differenceInMilliseconds } from 'date-fns'
+
 export const Payment = () => {
     const { token } = useSelector(selectCredentials)
     const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<boolean>(
@@ -23,17 +25,21 @@ export const Payment = () => {
 
     const { id } = useParams()
     const inbox = chatList[`${id}`]
+    
+    const latestThreadUpdatedAt = inbox?.threads[0]?.updatedAt
+
 
     useEffect(() => {
         dispatch(clearAll())
     }, [dispatch])
 
     useEffect(() => {
-        console.log('------------------------changed-----------')
-        if (token) {
+        const diffInSec = differenceInMilliseconds(new Date(), new Date(latestThreadUpdatedAt)) / 1000
+        // CHeck if difference between two dates is less than 10 seconds
+        if (token && (inbox.id ? diffInSec < 15 : true)) {
             dispatch(fetchInboxAction({ token: token, id: id }))
         }
-    }, [paymentModalVisible, id, token, dispatch])
+    }, [paymentModalVisible, id, token, dispatch, inbox.id, inbox.updatedAt, latestThreadUpdatedAt])
 
     useEffect(() => {
         localStorage?.setItem('inboxId', inbox?.id)

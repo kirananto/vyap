@@ -160,7 +160,6 @@ function OthersTab({ action, saveAttempt }: Props) {
                         data.append('file', result)
                         imageUpload({ token, data })
                             .then((result: IProductImageUploadResult) => {
-                                console.log('data', result.data)
                                 dispatch(
                                     setProductImage({
                                         id: result.data?.name,
