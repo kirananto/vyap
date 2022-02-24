@@ -16,6 +16,7 @@ import type { IProduct } from 'src/types/product'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import OrderOptionsPopup from '../Popups/OrderOptionsPopup'
 import { FormattedMessage } from 'react-intl'
+import { useInView } from 'react-intersection-observer'
 
 export interface IOrderItem {
     id: string;
@@ -64,6 +65,7 @@ export default function OrderCard({
     const { id } = useParams()
     const order = thread.order
     const dispatch = useDispatch()
+    const { ref, inView } = useInView({ threshold: 0.5})
 
 
     const status = Number(order?.orderStatus[order?.orderStatus?.length - 1]?.status)
@@ -80,12 +82,12 @@ export default function OrderCard({
     })
 
     useEffect(() => {
-        if (!order?.id) {
+        if (inView && !order?.id) {
             id && fetchOrderAPI({ token, id: thread.meta }).then(result => {
                 dispatch(setOrderInfo({ inboxId: id, threadId: thread?.id, order: result.data }))
             })
         }
-    }, [dispatch, id, order?.id, thread?.id, thread.meta, token])
+    }, [dispatch, id, order?.id, thread?.id, thread.meta, token, inView])
 
 
     const orderStatusTxt = () => {
@@ -117,7 +119,7 @@ export default function OrderCard({
 
     const stats = orderStatusTxt()
     return (
-        <div  {...bind} className={`flex ${className} w-full`}>
+        <div  {...bind}  ref={ref} className={`flex ${className} w-full`}>
             <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-slate-50 shadow border border-purple-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
                     <FormattedMessage
