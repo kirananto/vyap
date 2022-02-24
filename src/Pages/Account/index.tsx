@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 import { patchOrganization } from 'src/API/organization.axios'
 import { IsEmail, IsString, Length, validate, IsOptional } from 'class-validator'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
+import Button from 'src/Components/Style/Button'
 
 
 export class Organization {
@@ -89,7 +90,7 @@ export default function Account() {
     }
 
     return (
-        <div className="w-full h-screen overflow-y-auto bg-slate-100 dark:bg-slate-900">
+        <div className="w-full h-screen overflow-y-auto bg-white dark:bg-slate-900">
             <div className="w-full mb-2 bg-white shadow">
                 <SimpleHeader heading={intl.formatMessage({ id: 'global.myAccount' })} />
             </div>
@@ -99,9 +100,12 @@ export default function Account() {
                     className="relative w-32 h-32 rounded-full"
                 >
                     <img
+                        loading="lazy"
                         src={user?.profileImageUrl ?? profPic}
-                        className="w-32 rounded-full border border-1 dark:border-gray-500 p-6  bg-slate-200 dark:bg-slate-800"
+                        className="w-32 rounded-full border border-1 dark:border-slate-800 p-6  bg-slate-200 dark:bg-slate-900"
                         alt="profile-pic"
+                        height={128}
+                        width={128}
                     />
                     {/* <div
                         className="absolute top-0 right-0 object-none p-2 text-slate-600 bg-white rounded-full shadow-md w-min"
@@ -113,7 +117,7 @@ export default function Account() {
                 </div>
                 <div className="pb-8 text-2xl font-bold text-slate-500 dark:text-slate-200">{user?.organization?.name}</div>
                 <div className="w-full">
-                    <label className="block text-sm font-bold leading-relaxed tracking-tighter text-slate-500 dark:text-slate-300">
+                    <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-500 dark:text-slate-300">
                         Your name
                     </label>
                     <input
@@ -207,8 +211,8 @@ export default function Account() {
 
             {/* Footer */}
 
-            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-white drop-shadow-md dark:bg-slate-800">
-                <button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-bold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-gray-500 to-gray-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</button>
+            <div className="fixed bottom-0 flex items-center justify-center w-full h-20 bg-slate-100 drop-shadow-md dark:bg-slate-800">
+                <Button onClick={loading || success ? undefined : handleValidation} className={`w-2/4 h-10 font-semibold text-white rounded-full  ${success ? 'bg-gradient-to-br from-green-500 to-green-700' : loading ? 'bg-gradient-to-br from-slate-500 to-slate-700' : 'bg-gradient-to-br from-blue-500 to-indigo-700'}`}>{loading ? 'Saving...' : success ? 'Success' : 'Update'}</Button>
             </div>
         </div>
     )

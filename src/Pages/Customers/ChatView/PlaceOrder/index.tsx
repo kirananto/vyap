@@ -171,7 +171,7 @@ export default function PlaceOrder() {
         if (placeOrder.cartItems?.length === 0) {
             return (
                 <div>
-                    <img className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
+                    <img  loading="lazy" className="m-auto mt-4 h-32 md:h-48 p-6" alt="no items" src={ChatImg} />
                     <div className="m-auto text-sm mb-8 w-2/3  md:px-6 text-center dark:text-slate-300">
                         {' '}
                         You do not have any items in your cart, please add by tapping add
@@ -197,12 +197,13 @@ export default function PlaceOrder() {
                         )
                     )
                     ?.map((item) => (
-                        <div key={item.id} className="my-5 border-b border-gray-300 dark:border-gray-700">
+                        <div key={item.id} className="my-5 border-b border-slate-300 dark:border-slate-700">
                             <div className="grid grid-rows-2">
                                 <div className="flex ">
-                                    <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center shadow-xl">
+                                    <div className="h-16 w-16 self-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 bg-cover bg-center">
                                         {item?.thumbnailImage && (
                                             <img
+                                                loading="lazy"
                                                 src={getImageURL(
                                                     item?.thumbnailImage,
                                                     IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
@@ -221,7 +222,7 @@ export default function PlaceOrder() {
                                             {item.aliasName ? `( ${item.aliasName})` : ''}
                                         </div>
                                         <div className=" text-xs font-bold text-slate-500 dark:text-slate-400">
-                                            MRP: ₹{item?.mrpPrice} Sales Price: ₹{item?.rate}
+                                            MRP: {parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })} Sales Price: {parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                         </div>
 
                                         <div className=" text-xs font-bold text-slate-400 dark:text-slate-500">
@@ -309,7 +310,7 @@ export default function PlaceOrder() {
                                     </div>
 
                                     <div className="text-right text-lg font-bold text-slate-600  dark:text-slate-200">
-                                        ₹{item?.quantity * parseFloat(item?.rate)}
+                                        {(item?.quantity * parseFloat(item?.rate)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                     </div>
                                 </div>
                             </div>
@@ -321,7 +322,7 @@ export default function PlaceOrder() {
 
     return (
         <div className="min-h-screen bg-white dark:bg-slate-900">
-            <div className="w-full bg-white shadow ">
+            <div className="w-full bg-white">
                 <SimpleHeader
                     backFn={() => navigate(`/chat/${localStorage?.getItem('inboxId')}`)}
                     heading={'Place Order'}
@@ -329,7 +330,7 @@ export default function PlaceOrder() {
             </div>
             <div className={'p-2 pt-20'}>
 
-                <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4 dark:border-gray-700">
+                <div className="m-2 rounded-lg border border-slate-200 px-4 pb-4 pt-4 dark:border-slate-700">
                     <div className="flex justify-between">
                         <div className="text-xl font-bold dark:text-slate-300">Items</div>
                         <div className=" dark:text-slate-300">
@@ -377,41 +378,40 @@ export default function PlaceOrder() {
                     {isOpen && (
                         <div>
                             {renderCartItems()}
-                            <div
-                                className="m-auto w-fit px-4 my-4 flex flex-wrap 
-                  transform cursor-pointer items-center justify-center rounded-full border 
-                    border-indigo-600 bg-gradient-to-br from-blue-50 to-blue-100 py-2
-                    text-indigo-700 transition  duration-500 ease-in-out dark:bg-gradient-to-br dark:from-blue-500 dark:to-indigo-700"
+                            <Button
+                                className="m-auto w-fit px-4 my-4 flex flex-wrap items-center py-2"
                                 onClick={() => {
                                     hapticFeedback()
                                     navigate('/place-order/add-item')
                                 }}
                             >
-                                <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 text-slate-300 dark:text-slate-100 "
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </div>
-                                <div className="ml-2 text-lg dark:text-white">
+                                <>
+                                    <div className=" rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-5 w-5 text-slate-300 dark:text-slate-100 "
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-2 text-lg dark:text-white">
                                     Add more items
-                                </div>
-                            </div>
+                                    </div>
+                                </>
+                            </Button>
 
 
                         </div>
                     )}
                 </div>
                 {isSupplier ? (
-                    <div className="m-2 rounded-lg border border-gray-200 px-4 pb-4 pt-4  dark:border-gray-700">
+                    <div className="m-2 rounded-lg border border-slate-200 px-4 pb-4 pt-4  dark:border-slate-700">
                         <span className="float-left mb-2 text-sm text-slate-500">
                             Flat discount amount
                         </span>
@@ -473,15 +473,14 @@ export default function PlaceOrder() {
 
                         <div className="col-span-2  mt-1 text-right mr-4">
                             <div className="text-base  dark:text-slate-400">
-                                ₹{getTotalPrice()}
+                                {getTotalPrice().toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                             <div className="text-base dark:text-slate-400">
-                                ₹{placeOrder.discount}
+                                {placeOrder.discount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                             <div className="mt-1 text-lg font-extrabold dark:text-slate-400">
-                                ₹
-                                {getTotalPrice() -
-                                    (placeOrder.discount ? placeOrder.discount : 0)}
+                                {(getTotalPrice() -
+                                    (placeOrder.discount ? placeOrder.discount : 0)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                         </div>
                     </div>

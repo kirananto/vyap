@@ -65,9 +65,6 @@ export default function ChatList({
     }, [toRefresh, token, inboxHash, currentPage, dispatch, id])
 
     function renderChats() {
-        if (chats?.error) {
-            return <div className="p-12 mt-12 text-center dark:text-slate-100"> Error loading chats...</div>
-        }
         if (isLoading || (chats?.isLoading && chats?.threads?.length < 1)) {
             return <div className="p-12 mt-12 text-center dark:text-slate-100 grid">
                 <Spinner />
@@ -75,25 +72,31 @@ export default function ChatList({
         }
         if (chats?.threads?.length <= 0) {
             return <div>
-                <img className="p-12 m-auto mt-6 h-72" alt="no Chats" src={ChatImg} />
+                <img  loading="lazy" className="p-12 m-auto mt-6 h-72" alt="no Chats" src={ChatImg} />
                 <div className="w-2/3 px-6 m-auto text-center dark:text-slate-200"> You do not have any transactions, Create a transaction to get started. </div>
             </div>
         }
-        return chats?.threads?.map((thread) => {
-            const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
-            if (thread.type === ThreadTypeEnum.PAYMENT) {
-                return <PaymentCard key={thread.id} className={layout} thread={thread} />
-            }
-            if (thread.type === ThreadTypeEnum.ORDER) {
-                return <OrderCard
-                    key={thread.id} 
-                    className={layout} 
-                    thread={thread}
-                    isScrolling={isScrolling}                  
-                />
-            }
-            return <div key={thread.id}>{thread.msg}</div>
-        }).reverse()
+        if(chats?.threads?.length > 0) {
+            return chats?.threads?.map((thread) => {
+                const layout = thread.senderId === user?.organization?.id ? 'justify-end' : 'justify-start'
+                if (thread.type === ThreadTypeEnum.PAYMENT) {
+                    return <PaymentCard key={thread.id} className={layout} thread={thread} />
+                }
+                if (thread.type === ThreadTypeEnum.ORDER) {
+                    return <OrderCard
+                        key={thread.id} 
+                        className={layout} 
+                        thread={thread}
+                        isScrolling={isScrolling}                  
+                    />
+                }
+                return <div key={thread.id}>{thread.msg}</div>
+            }).reverse()
+        }
+    
+        if (chats?.error) {
+            return <div className="p-12 mt-12 text-center dark:text-slate-100"> Error loading chats...</div>
+        }
     }
 
     return (

@@ -25,7 +25,7 @@ function Header({
         <div
             className={
                 isSticky
-                    ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0'
+                    ? 'flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto  drop-shadow-md fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0'
                     : 'flex w-11/12 pt-4 pb-2 m-auto '
             }
         >
@@ -63,11 +63,10 @@ function Header({
                     backDisabled ? 'pl-1' : 'pl-4'
                 } text-slate-600 dark:text-slate-300 `}
             >
-                <h1 className="text-lg font-semibold">{heading}</h1>
+                <h1 className="text-md font-semibold">{heading}</h1>
                 {subHeading && (
                     <h1
-                        className={`text-md w-full sm:text-lg text-transparent font-bold tracking-wide truncate
-           bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200`}
+                        className={`text-md w-full font-black sm:text-lg text-transparent  tracking-wide truncate bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-900 dark:from-blue-200 dark:to-indigo-200`}
                     >
                         {subHeading}
                     </h1>
@@ -143,8 +142,8 @@ function PaymentBottomHeader({
             <div
                 className={`relative flex w-11/12 h-auto bg-slate-100 dark:bg-slate-700 border ${
                     parsedAmount === 0 && isLoading === false
-                        ? 'border-green-400'
-                        : 'border-gray-400'
+                        ? 'border-green-400 dark:border-green-700'
+                        : 'border-slate-400 dark:border-slate-600'
                 } rounded-md`}
             >
                 <div className="flex flex-col w-4/5 p-2 pl-3">
@@ -164,14 +163,14 @@ function PaymentBottomHeader({
                             )}
                             {parsedAmount !== 0 && (
                                 <h1 className="text-3xl font-bold text-slate-700 dark:text-slate-200 truncate">
-                  ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toFixed(0)}
+                  ₹{Math.abs(parseFloat(`${amount ?? 0}`)).toLocaleString('en-IN')}.00
                                 </h1>
                             )}
                             {parsedAmount === 0 && (
                                 <h1
                                     className={`text-md font-semibold ${
                                         parsedAmount === 0
-                                            ? 'text-green-800 dark:text-green-400'
+                                            ? 'text-green-800 dark:text-green-500'
                                             : 'text-slate-700 dark:text-slate-200'
                                     }`}
                                 >
@@ -185,11 +184,11 @@ function PaymentBottomHeader({
                     {isLoading ? (
                         <div />
                     ) : parsedAmount !== 0 ? (
-                        <img className="self-end w-20 " src={walletSvg} alt="Wallet" />
+                        <img className="self-end w-20" loading="lazy" src={walletSvg} alt="Wallet" />
                     ) : (
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="mt-1 text-green-400 h-8 w-8"
+                            className="mt-1 text-green-400 dark:text-green-600 h-8 w-8"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -216,7 +215,7 @@ function SimpleHeader(props: {
 }) {
     const navigate = useNavigate()
     return (
-        <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto shadow fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0">
+        <div className="flex items-center w-full h-16 pt-2 pb-2 z-20 m-auto  drop-shadow-md fixed bg-white dark:bg-slate-800 dark:text-slate-300 top-0">
             {/* back icon  */}
             <div
                 onClick={() => {

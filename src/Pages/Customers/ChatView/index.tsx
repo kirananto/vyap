@@ -1,5 +1,4 @@
 import React from 'react'
-import './payment.css'
 import { Header, PaymentBottomHeader } from '../../../Components/Header'
 import ChatList from './ChatList'
 import { useEffect } from 'react'
@@ -11,6 +10,9 @@ import { setOrgId, clearAll } from './PlaceOrder/placeOrderSlice'
 import useQueryParam from 'src/utils/useQueryParams'
 import { fetchInboxAction, selectChatList } from './chatListSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
+import Button from 'src/Components/Style/Button'
+import { differenceInMilliseconds } from 'date-fns'
+
 export const Payment = () => {
     const { token } = useSelector(selectCredentials)
     const [paymentModalVisible, setPaymentModalVisible] = useQueryParam<boolean>(
@@ -23,17 +25,21 @@ export const Payment = () => {
 
     const { id } = useParams()
     const inbox = chatList[`${id}`]
+    
+    const latestThreadUpdatedAt = inbox?.threads[0]?.updatedAt
+
 
     useEffect(() => {
         dispatch(clearAll())
     }, [dispatch])
 
     useEffect(() => {
-        console.log('------------------------changed-----------')
-        if (token) {
+        const diffInSec = differenceInMilliseconds(new Date(), new Date(latestThreadUpdatedAt)) / 1000
+        // CHeck if difference between two dates is less than 10 seconds
+        if (token && (inbox.id ? diffInSec < 15 : true)) {
             dispatch(fetchInboxAction({ token: token, id: id }))
         }
-    }, [paymentModalVisible, id, token, dispatch])
+    }, [paymentModalVisible, id, token, dispatch, inbox.id, inbox.updatedAt, latestThreadUpdatedAt])
 
     useEffect(() => {
         localStorage?.setItem('inboxId', inbox?.id)
@@ -68,29 +74,29 @@ export const Payment = () => {
             {/* Footer */}
             <div
                 className="fixed bottom-0 flex items-center justify-center w-full h-20 gap-4 bg-white dark:bg-slate-800"
-                style={{ boxShadow: '0px -6px 28px #0000002e' }}
+                style={{ boxShadow: '0px -2px 8px #0000002e' }}
             >
                 {inbox?.isSupplier ? (
-                    <button
+                    <Button
                         onClick={() => {
                             hapticFeedback()
                             setPaymentModalVisible(true)
                         }}
-                        className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 "
+                        className="w-2/5 h-12 "
                     >
             Add Payment
-                    </button>
+                    </Button>
                 ) : null}
-                <button
+                <Button
                     onClick={() => {
                         hapticFeedback()
                         dispatch(setOrgId(inbox?.recipient?.id))
                         navigate('/place-order/add-item')
                     }}
-                    className="w-2/5 text-white rounded-full h-12 bg-gradient-to-br from-blue-500 to-indigo-700 "
+                    className="w-2/5 h-12"
                 >
           Place Order
-                </button>
+                </Button>
             </div>
             {paymentModalVisible && (
                 <AddPaymentModal

@@ -7,7 +7,6 @@ import { Min, validate } from 'class-validator'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { BUTTON_ACTION, PAYMENT_OPTIONS } from '../PlaceOrder/types'
 import { useNavigate } from 'react-router-dom'
-import '../payment.css'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 import Success from 'src/Pages/Customers/AddCustomerModal/Success'
 
@@ -157,12 +156,12 @@ export default function AddPaymentModal({
         if (btnAction === BUTTON_ACTION.PLACE_ORDER) {
             switch (paymentOption) {
                 case PAYMENT_OPTIONS.FULL_PAYMENT:
-                    orderTextMid = ' by receiving the full payment of ₹'
-                    orderTextEnd = '' + orderAmount
+                    orderTextMid = ' by receiving the full payment of '
+                    orderTextEnd = '' + orderAmount?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })
                     break
                 case PAYMENT_OPTIONS.PARTIAL_PAYMENT:
-                    orderTextMid = ' by receiving a partial payment of ₹'
-                    orderTextEnd = '' + parsedcustomAmount
+                    orderTextMid = ' by receiving a partial payment of '
+                    orderTextEnd = '' + parsedcustomAmount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })
                     break
                 case PAYMENT_OPTIONS.PAY_LATER:
                     orderTextMid = 'by PAYING LATER'
@@ -185,11 +184,11 @@ export default function AddPaymentModal({
                     hapticFeedback()
                     toggleVisibility(false)
                 }}
-                className={`fixed pin top-0 z-10 ${isVisible ? 'show' : 'hidden'
+                className={`fixed pin top-0 z-10 ${isVisible ? 'block' : 'hidden'
                 } overflow-auto bg-slate-900 h-screen w-screen opacity-50 flex transition animate__animated animate__faster`}
             />
             <div
-                className={`popup ${isVisible ? 'show' : ''
+                className={`popup ${isVisible ? 'block' : ''
                 }
                 
                  animate__animated animate__fadeInUpBig animate__faster bg-white dark:bg-slate-700`}
@@ -211,7 +210,8 @@ export default function AddPaymentModal({
                             <>
                                 <div className='text-left dark:text-slate-200 pl-0 mt-6 mb-4'>
                                     <span className="font-semibold">
-                                        <span className="text-slate-500 pr-3 text-xl dark:text-slate-200">Order Total:</span>  <span className="font-bold">₹{orderAmount}</span>
+                                        <span className="text-slate-500 pr-3 text-xl dark:text-slate-200">Order Total:</span> 
+                                        <span className="font-bold">{orderAmount?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</span>
                                     </span>
                                 </div>
 
@@ -221,7 +221,7 @@ export default function AddPaymentModal({
                                     className={
                                         `p-2 mt-4 text-left ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
                                             ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
+                                            : 'border-2 rounded-lg border-slate-200 dark:border-slate-600'}
             
     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAY_LATER)}
@@ -235,7 +235,7 @@ export default function AddPaymentModal({
                                     className={
                                         `p-2 mt-4 text-left ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
                                             ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
-                                            : 'border-2 rounded-lg border-gray-200 dark:border-gray-600'}
+                                            : 'border-2 rounded-lg border-slate-200 dark:border-slate-600'}
                                             
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.FULL_PAYMENT)}
@@ -248,7 +248,7 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 pb-4 mt-4 text-left ${!(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
-                                            ? ' border-2 rounded-lg  border-gray-300  dark:border-gray-600'
+                                            ? ' border-2 rounded-lg  border-slate-300  dark:border-slate-600'
                                             : 'border-2 rounded-lg border-blue-600  dark:border-blue-400'}
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)}
@@ -386,7 +386,7 @@ export default function AddPaymentModal({
                                     hapticFeedback()
                                     toggleVisibility(false)
                                 }}
-                                className="save-btn p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200"
+                                className="active:scale-95 p-3 w-full text-indigo-700 rounded-full border border-indigo-700 dark:border-indigo-200 dark:text-indigo-200"
                             >
                                 Cancel
                             </button>
@@ -396,7 +396,7 @@ export default function AddPaymentModal({
                                         onConfirmOrder()
                                     }
                                 }}
-                                className="save-btn p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+                                className="active:scale-95 p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
                             >
                                 {loading ? <svg role="status" className="inline mr-3 w-4 h-4 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB" />

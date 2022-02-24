@@ -1,10 +1,10 @@
 import React from 'react'
 
-function PaymentIcon() {
+function PaymentIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -19,11 +19,11 @@ function PaymentIcon() {
     )
 }
 
-function AllOrdersIcon() {
+function AllOrdersIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -38,11 +38,11 @@ function AllOrdersIcon() {
     )
 }
 
-function ReportsIcon() {
+function ReportsIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -57,11 +57,11 @@ function ReportsIcon() {
     )
 }
 
-function StockManagementIcon() {
+function StockManagementIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -76,11 +76,11 @@ function StockManagementIcon() {
     )
 }
 
-function MyAccountIcon() {
+function MyAccountIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -95,11 +95,11 @@ function MyAccountIcon() {
     )
 }
 
-function SettingsIcon() {
+function SettingsIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -119,11 +119,11 @@ function SettingsIcon() {
         </svg>
     )
 }
-function HelpIcon() {
+function HelpIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -138,16 +138,17 @@ function HelpIcon() {
     )
 }
 
-function SwitchIcon(){
-    return (<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+function SwitchIcon({ className }: { className?: string | undefined }) {
+    return (<svg xmlns="http://www.w3.org/2000/svg"
+        className={`w-6 h-6 ${className}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
     </svg>)
 }
-function OffersManagementIcon() {
+function OffersManagementIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -167,11 +168,11 @@ function OffersManagementIcon() {
         </svg>
     )
 }
-function LogoutIcon() {
+function LogoutIcon({ className }: { className?: string | undefined }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
+            className={`w-6 h-6 ${className}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

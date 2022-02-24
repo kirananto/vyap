@@ -6,16 +6,28 @@ import { generateOtp, verifyOtp } from '../../API/login.axios'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './credentialsSlice'
 import vyapLogo from 'src/assets/new_logo.svg'
+import { isNumberString } from 'class-validator'
 
 export default function Login() {
     const [currentPage, setCurrentPage] = useState(0)
     const phoneNumberRef = useRef<string>('')
     const [error, setError] = useState<string | null>(null)
-
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const confirmOTP = useCallback((code: string) => {
         setError(null)
+        setLoading(true)
+        if(code.trim().length !== 4) {
+            setError('Enter a valid 4 digit OTP')
+            setTimeout(() => setLoading(false), 500)
+            return undefined
+        }
+        if(!isNumberString(code.trim())) {
+            setError('OTP Should contain only numbers')
+            setTimeout(() => setLoading(false), 500)
+            return undefined
+        }
         verifyOtp(phoneNumberRef.current, code).then((res) => {
             if (res.data) {
                 console.log('res.data', res.data)
@@ -27,19 +39,21 @@ export default function Login() {
                     // TODO No user, redirect to signup process
                 }
             }
+        }).catch((error) => {
+            console.log('error verifying otp', error.message)
+            if(error?.response?.data) {
+                setError(error?.response?.data?.message)
+            } else {
+                setError('No internet connection, please connect to a network and try again.')
+            }
+        }).finally(() => {
+            setLoading(false)
         })
-            .catch((error) => {
-                console.log('error verifying otp', error.message)
-                if(error?.response?.data) {
-                    setError(error?.response?.data?.message)
-                } else {
-                    setError('No internet connection, please connect to a network and try again.')
-                }
-            })
     }, [dispatch, navigate])
 
     const onPressLogin = (phoneNumber: string) => {
         setError(null)
+        setLoading(true)
         generateOtp(phoneNumber).then(result => {
             console.log('result', result)
             setCurrentPage(1)
@@ -50,16 +64,18 @@ export default function Login() {
             } else {
                 setError('Please try again later')
             }
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
     function renderForm() {
         switch (currentPage) {
-            case 1: return <OTPForm onPressConfirm={confirmOTP} goBack={() => {
+            case 1: return <OTPForm onPressConfirm={confirmOTP}  loading={loading}  goBack={() => {
                 setError('')
                 setCurrentPage(0)
             }} error={error} />
-            default: return <PhoneForm text="Log in" onPressLogin={onPressLogin} error={error} />
+            default: return <PhoneForm text="Log in" onPressLogin={onPressLogin} loading={loading} error={error} />
         }
     }
 
@@ -79,7 +95,7 @@ export default function Login() {
 To your phone number` : 'Log in to vyap'}
                     </h1>
                     {renderForm()}
-                    <hr className="w-full my-6 border-indigo-100 dark:border-gray-600" />
+                    <hr className="w-full my-6 border-indigo-100 dark:border-slate-600" />
                     <p className="mt-8 text-center dark:text-slate-400">
             Need an account?{' '}
                         <Link

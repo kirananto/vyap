@@ -8,6 +8,7 @@ import ReactToPrint from 'react-to-print'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
 import VyapLogo from 'src/Components/VyapLogo'
 import QRCode from 'qrcode.react'
+import Button from 'src/Components/Style/Button'
 
 interface IProps {
     apiData: orderInterface[];
@@ -22,23 +23,25 @@ export const PrintAll = ({ apiData }: IProps) => {
 
     const reactToPrintTrigger = React.useCallback(() => {
         return (
-            <button className="flex print:hidden justify-center gap-1 items-center w-2/4 h-10 text-sm font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-                    />
-                </svg>
-                <FormattedMessage id="action.printAll" defaultMessage="Print All" />
-            </button>
+            <Button className="flex print:hidden justify-center gap-1 items-center w-2/4 h-10 text-sm">
+                <>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+                        />
+                    </svg>
+                    <FormattedMessage id="action.printAll" defaultMessage="Print All" />
+                </>
+            </Button>
         )
     }, [])
 
@@ -53,7 +56,7 @@ export const PrintAll = ({ apiData }: IProps) => {
             BUYER: item?.buyer?.name,
             AMOUNT: (
                 parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)
-            ).toFixed(0),
+            ).toLocaleString('en-IN'),
         }
     })
 
@@ -69,7 +72,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                 trigger={reactToPrintTrigger}
             />
             <div
-                className="divide-y divide-gray-200 hidden print:block grid grid-cols-1 print:absolute w-full top-0"
+                className="divide-y divide-slate-200 hidden print:block grid grid-cols-1 print:absolute w-full top-0"
                 id="divContents"
                 ref={componentRef}
             >
@@ -87,7 +90,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                         <p className="text-slate-500 font-bold">12/01/22 - 12/04/22</p>
                     </div>
 
-                    <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-gray-200 p-3">
+                    <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-slate-200 p-3">
                         <div className="flex flex-col">
                             <p className="text-xl font-bold text-slate-600">
                                 {' '}
@@ -98,7 +101,7 @@ export const PrintAll = ({ apiData }: IProps) => {
                     </div>
                 </div>
                 <div>
-                    <div className="m-5 mx-10 p-5 border border-gray-200 rounded-md">
+                    <div className="m-5 mx-10 p-5 border border-slate-200 rounded-md">
                         <table className="min-w-full">
                             <thead className="text-slate-700 font-bold">
                                 <tr className="p-5">

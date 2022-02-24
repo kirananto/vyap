@@ -9,7 +9,7 @@ interface chatListInterface {
     [key: string]: IndividualChatInterface
 }
 
-interface IndividualChatInterface {
+export interface IndividualChatInterface {
     inboxHash?: string
     isLoading: boolean
     id: string
@@ -70,10 +70,18 @@ export const fetchInboxAction = createAsyncThunk(
     }
 )
 
-export const chatListInterface = createSlice({
+export const chatListSlice = createSlice({
     name: 'chatList',
     initialState,
     reducers: {
+        setCustomers: (state, action: PayloadAction<chatListInterface>) => {
+            // Return array as key value object
+            const newState = Object.values(action.payload).reduce((acc: chatListInterface, curr) => {
+                acc[curr.id] = { ...(state[curr.id] ?? {}), ...curr, threads: state[curr.id]?.threads ?? [] }
+                return acc
+            }, {})
+            return newState
+        },
         setPaymentInfo: (state, action: PayloadAction<{ inboxId?: string, threadId?: string, payment: paymentObject }>) => {
             const threadIndex = state[action.payload.inboxId ?? ''].threads.findIndex(findItem => findItem.id === action.payload.threadId)
             state[action.payload.inboxId ?? ''].threads[threadIndex].payment = action.payload.payment
@@ -113,6 +121,7 @@ export const chatListInterface = createSlice({
                     const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
                     return { ...existingItem, ...item }
                 })
+                state[action.payload.id].isLoading = false
             } else {
                 state[action.payload.id] = { ...(state[action.payload.id] ?? {}), ...action.payload, isLoading: false, error: false }
             }
@@ -155,8 +164,9 @@ export const {
     setOrderStatus,
     setPaymentInfo,
     setOrderItems,
+    setCustomers,
     clearAll
-} = chatListInterface.actions
+} = chatListSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -164,4 +174,4 @@ export const {
 export const selectChatList = (state: RootState): chatListInterface => state.chatList
 
 
-export default chatListInterface.reducer
+export default chatListSlice.reducer

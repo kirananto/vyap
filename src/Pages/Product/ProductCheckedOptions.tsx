@@ -69,7 +69,7 @@ export default function FilterBar({
                 <button onClick={() => {
                     hapticFeedback()
                     markStockStatus(true)
-                }} className="inline-flex flex-none items-center justify-center w-2/4 px-3 py-1 font-bold text-slate-500 bg-slate-300 rounded dark:bg-slate-800 dark:text-slate-300 dark:border dark:border-gray-300 ">
+                }} className="inline-flex flex-none items-center justify-center w-2/4 px-3 py-1 font-bold text-slate-500 bg-slate-300 rounded dark:bg-slate-800 dark:text-slate-300 dark:border dark:border-slate-300 ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 mr-1"
@@ -90,7 +90,7 @@ export default function FilterBar({
                 <button onClick={() => {
                     hapticFeedback()
                     onMoreClick()
-                }} className="inline-flex items-center justify-center w-1/4 px-3 py-1 font-bold text-slate-500 bg-slate-300 rounded dark:bg-slate-800 dark:text-slate-300 dark:border dark:border-gray-300 ">
+                }} className="inline-flex items-center justify-center w-1/4 px-3 py-1 font-bold text-slate-500 bg-slate-300 rounded dark:bg-slate-800 dark:text-slate-300 dark:border dark:border-slate-300 ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 mr-1"

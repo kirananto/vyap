@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Header } from '../../Components/Header'
 import { Footer } from '../../Components/Footer'
-import './assets/Product.css'
 import ProductCard from './ProductCard'
 import { fetchProducts } from 'src/API/products.axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -267,7 +266,7 @@ export default function Product() {
             />
             <Link
                 to="/add-product"
-                className="text-md add-cutomer-btn h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 text-white"
+                className="text-md add-cutomer-btn active:scale-95 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 text-white"
             >
                 <FormattedMessage id="action.addProduct" defaultMessage="Add Product" />
             </Link>

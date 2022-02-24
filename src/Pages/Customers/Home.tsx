@@ -11,23 +11,20 @@ import profileImg from 'src/assets/icons/profile/profile-icon.svg'
 import AddCustomerModal from './AddCustomerModal'
 import Spinner from 'src/Components/Style/Spinner'
 import { FormattedMessage, useIntl } from 'react-intl'
-import {
-    IInbox,
-    selectCustomerInfo,
-    setCustomers,
-    setCustomerTotal,
-} from './customersSlice'
 import useQueryParam from 'src/utils/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { useScrollDirection } from 'react-use-scroll-direction'
+import { IndividualChatInterface, selectChatList, setCustomers } from './ChatView/chatListSlice'
 
 export const Home = () => {
-    const customer = useSelector(selectCustomerInfo)
     const dispatch = useDispatch()
     const [addCustomerVisible, setAddCustomerVisible] =
         useQueryParam<boolean>('addCustomer')
+    const chatList = useSelector(selectChatList)
+
+    const customer = Object.values(chatList)
     const [loading, setLoading] = React.useState(
-        customer.customers?.length === 0
+        customer?.length === 0
     )
     const [paginationParams, setPaginationParams] = React.useState({
         page: 1,
@@ -47,16 +44,15 @@ export const Home = () => {
                     paginationParams.search.trim() === '' ? undefined : paginationParams.search.trim(),
             }).then((result) => {
                 dispatch(setCustomers(result.data.data))
-                dispatch(setCustomerTotal(result.data.total))
                 setLoading(false)
-                console.log('data', result.data.data)
             })
         } else {
             navigate('/login')
         }
     }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
-    function customerFilter(filterItem: IInbox) {
+    console.log('customer', customer)
+    function customerFilter(filterItem: IndividualChatInterface) {
         const search = paginationParams.search?.trim()?.toLowerCase()
         if (filterItem.recipient?.name?.toLowerCase()?.includes(search)) {
             return true
@@ -81,10 +77,11 @@ export const Home = () => {
                 </div>
             )
         }
-        if (customer?.customers?.filter(customerFilter)?.length === 0) {
+        if (customer?.filter(customerFilter)?.length === 0) {
             return (
                 <div>
                     <img
+                        loading="lazy"
                         className="m-auto mt-12 h-96 p-12"
                         alt="no transactions"
                         src={ChatImg}
@@ -97,7 +94,7 @@ export const Home = () => {
                 </div>
             )
         }
-        return customer?.customers?.filter(customerFilter).map((item, index) => (
+        return customer?.filter(customerFilter).map((item, index) => (
             <ItemCard item={item} key={index} />
         ))
     }
@@ -135,19 +132,22 @@ export const Home = () => {
             {/* <!-- * Header --> */}
             <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-slate-800">
                 <div className="flex h-full w-full ">
-                    <Link to="/more" className="flex w-4/5 flex-col">
-                        <h1 className="text-lg font-semibold text-slate-600 dark:text-slate-100">
+                    <div className="flex w-4/5 flex-col">
+                        <h1 className="text-md font-semibold text-slate-600 dark:text-slate-100">
                             <FormattedMessage id="home.welcome" defaultMessage="Welcome 👋" />
                         </h1>
-                        <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-bold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
+                        <h1 className="w-40 truncate bg-gradient-to-br from-blue-500 to-indigo-900 bg-clip-text text-lg font-black  font-semibold tracking-wide text-transparent dark:from-blue-200 dark:to-indigo-200">
                             {user?.organization?.name}
                         </h1>
-                    </Link>
+                    </div>
                     <div className="flex w-1/5 items-center justify-end ">
-                        <Link to="/my-account">
+                        <Link to="/my-account" aria-label="my account">
                             <img
+                                loading="lazy"
                                 className="h-12 rounded-full aspect-square shadow-xs bg-slate-200 dark:bg-slate-900 p-2"
                                 src={user?.profileImageUrl ?? profileImg}
+                                height={48}
+                                width={48}
                                 alt=""
                             />
                         </Link>
@@ -175,7 +175,7 @@ export const Home = () => {
             </header>
             <div
                 ref={scrollTargetRef}
-                className="card-main-container scrollDes relative divide-y pb-20 divide-gray-100 dark:divide-gray-800"
+                className="card-main-container scrollDes relative divide-y pb-20 divide-slate-200 dark:divide-slate-800"
             >
                 {renderChats()}
             </div>
@@ -187,7 +187,7 @@ export const Home = () => {
                         hapticFeedback()
                         setAddCustomerVisible(true)
                     }}
-                    className={`add-cutomer-btn text-md rounded-full bg-gradient-to-br from-blue-500
+                    className={`add-cutomer-btn active:scale-95 text-md rounded-full bg-gradient-to-br from-blue-500
                      to-indigo-700 p-3 text-white shadow-sm transition duration-500 ease-in-out`}
                 >
                     <svg

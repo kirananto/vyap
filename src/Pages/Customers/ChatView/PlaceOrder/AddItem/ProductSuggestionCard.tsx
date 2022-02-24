@@ -19,11 +19,12 @@ export default function ProductSuggestionCard({
 }) {
 
     return (<div
-        className="grid flex-none w-48 bg-white-200 dark:bg-slate-800 mt-2 px-4 border rounded dark:border-gray-600 py-4 overflow-hidden"
+        className="grid flex-none w-48 bg-white-200 dark:bg-slate-800 mt-2 px-4 border rounded dark:border-slate-600 py-4 overflow-hidden"
     >
         <div className="relative self-center -mt-4 -mx-4 w-auto h-24 rounded-tl-l grounded-tr-lg overflow-hidden bg-cover bg-center bg-gradient-to-br from-blue-100 to-indigo-100">
             {item?.thumbnailImage && (
                 <img
+                    loading="lazy"
                     src={getImageURL(
                         item?.thumbnailImage,
                         IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
@@ -41,11 +42,11 @@ export default function ProductSuggestionCard({
             <div className="grid grid-cols-2 my-2 mb-3">
                 <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
                     <p>MRP:</p>
-                    <p>₹{item?.mrpPrice}</p>
+                    <p>{parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                 </div>
                 <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     <p>Sales Price:</p>
-                    <p>{item?.rate}</p>
+                    <p>{parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                 </div>
             </div>
         </div>
