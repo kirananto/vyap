@@ -53,8 +53,7 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                 />
                             </div>
                         </div>
-
-                        <div className="w-full">
+                        <div className="w-full" onClick={() => isExpanded ?  setIsExpanded(undefined) : setIsExpanded(item.id)}>
                             <div className="grid grid-rows-3 content-start">
                                 <div className="grid grid-flow-col  gap-1 row-span-3">
 
@@ -63,67 +62,25 @@ export default function OrderContainer({ orders, loading }: IProps) {
                                             ? format(new Date(item.createdAt), 'do MMM yyyy')
                                             : ''}
                                     </div>
-
-                                    {isExpanded === item.id ? (
-                                        <div
-                                            className="col-start-12 text-slate-600 dark:text-slate-300"
-                                            onClick={() => setIsExpanded(undefined)}
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6 cursor-pointer"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M5 15l7-7 7 7"
-                                                />
-                                            </svg>
-                                        </div>
-                                    ) : (
-                                        <div
-                                            className=" text-slate-600 dark:text-slate-300 col-start-12"
-                                            onClick={() => setIsExpanded(item.id)}
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6 cursor-pointer"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M19 9l-7 7-7-7"
-                                                />
-                                            </svg>
-                                        </div>
-                                    )}
                                 </div>
+                                <div className="flex justify-between text-slate-600 text-sm md:text-md font-semibold dark:text-slate-200  mb-1">
+                                    {item?.buyer?.name}
 
-                                <div className="text-slate-600 font-semibold dark:text-slate-200 -mt-1 mb-1">
-                                    {item.supplier?.name} {'->'} {item?.buyer?.name}
+                                    <div className="text-slate-600  text-sm md:text-lg font-extrabold dark:text-slate-200">
+                                        {' '}
+                                        {(
+                                            parseFloat(item?.totalAmount) -
+                                                parseFloat(item?.flatDiscount)
+                                        ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                                    </div>
                                 </div>
-
                                 <div className="grid grid-flow-col">
                                     <div className="col-start-1 w-max  items-center mt-1">
                                         <ReturnStatusTile status={item?.orderStatus?.[0]?.status} />
                                     </div>
 
                                     <div className="text-center col-end-12 self-center text-slate-600 dark:text-slate-200 text-lg font-extrabold">
-                                        <div className="text-slate-600 text-lg font-extrabold dark:text-slate-200">
-                                            {' '}
-                                            {(
-                                                parseFloat(item?.totalAmount) -
-                                                parseFloat(item?.flatDiscount)
-                                            ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
-                                        </div>
+                                        
                                         <div className="text-slate-400 text-xs font-extrabold mx-auto dark:text-slate-300">
                                             ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})
                                         </div>
