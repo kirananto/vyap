@@ -73,7 +73,7 @@ export function ItemCard({ item }: IProps) {
                     </div>} */}
                 </div>
                 <div className="w-2/5 sm:w-6/12 mt-3 ml-2 break-normal">
-                    <h6 className="text-xs text-slate-500 dark:text-slate-400"> {renderTime(new Date(item.updatedAt))}</h6>
+                    <h6 className="text-xs text-slate-400 dark:text-slate-500"> {renderTime(new Date(item.updatedAt))}</h6>
 
                     <h2 className="font-bold mb-1 text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 leading">{getLastMsg()}</p>
