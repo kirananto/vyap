@@ -115,7 +115,7 @@ export const Home = () => {
     }
 
     useEffect(() => {
-        if (scrollDirection) {
+        if (scrollDirection && customer.length > 0) {
             if (isScrollingUp) {
                 setFloatBtnLarge(true)
             }
@@ -123,7 +123,7 @@ export const Home = () => {
                 setFloatBtnLarge(false)
             }
         }
-    }, [isScrollingDown, isScrollingUp, scrollDirection])
+    }, [isScrollingDown, isScrollingUp, scrollDirection, customer])
 
     // ......  Button resizing onscroll - end.........!
 
