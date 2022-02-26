@@ -18,16 +18,16 @@ interface CardInterface {
 }
 
 const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
-    return (
+    return (<div className="w-full md:w-1/2 lg:w-1/3 xl:1/4">
         <div onClick={() => {
             hapticFeedback()
             onSelect ? onSelect() : undefined
-        }} className="flex cursor-pointer items-center gap-3 bg-white custom-card dark:bg-slate-700">
+        }} className={`flex cursor-pointer items-center bg-white m-2 custom-card dark:bg-slate-700 ${isSelected ? 'border border-2 border-indigo-200 dark:border-indigo-300 shadow-lg shadow-indigo-300/20 dark:shadow-indigo-900/50': 'shadow'}`}>
             {/* ===tick-div=== */}
-            <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-green-200' : 'bg-slate-200 dark:bg-slate-500'}`}>
+            <div className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${isSelected ? 'bg-indigo-200 dark:bg-indigo-700 dark:border dark:border-indigo-500' : 'bg-slate-200 dark:bg-slate-500'}`}>
                 {isSelected && <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-green-800"
+                    className="w-6 h-6 text-indigo-800 dark:text-indigo-100"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                 >
@@ -39,15 +39,15 @@ const Card = ({ title, description, isSelected, onSelect }: CardInterface) => {
                 </svg>}
             </div>
             {/* === */}
-            <div className="flex flex-col custom-width-para-text ml-2">
+            <div className="flex flex-col mr-2 ml-2 my-4">
                 <h1 className="text-lg font-bold text-slate-600 dark:text-slate-200">{title}</h1>
-                <p className="text-xs text-slate-500 dark:text-slate-300 w-32 break-words	">
+                <p className="text-xs mt-1 text-slate-500 dark:text-slate-300 break-words	">
                     {description}
                 </p>
                 {/* <img src="" alt="" /> */}
             </div>
-            <div className="background-graphics"></div>
         </div>
+    </div>
     )
 }
 
@@ -117,7 +117,7 @@ export default function SignupStepThree() {
                     <h1 className="text-4xl font-bold text-slate-600 dark:text-slate-300">VYAP</h1>
                 </div>
 
-                <h1 className="text-lg font-bold text-slate-600 dark:text-slate-300">
+                <h1 className="text-lg ml-3 font-bold text-slate-600 dark:text-slate-300">
                     Please specify the <br /> category of business
                 </h1>
 
@@ -130,7 +130,7 @@ export default function SignupStepThree() {
                         {error?.map((mapItem: string) => <li key={mapItem}>{mapItem} </li>)}
                     </ul> : null}
                 </div>}
-                <div className="flex flex-col gap-4 mt-6">
+                <div className="flex flex-wrap mt-6">
                     {categories.map(mapItem => <Card isSelected={signup.category?.some(someItem => someItem.id === mapItem?.id)} onSelect={() => dispatch(setCategory(mapItem))} title={mapItem.name} key={mapItem.id} description={mapItem?.description} />)}
                 </div>
             </div>
