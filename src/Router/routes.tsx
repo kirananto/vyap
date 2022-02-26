@@ -9,6 +9,9 @@ const SignupStepFour = lazily(() => import('src/Pages/Signup/SignupStepFour')).d
 const Settings = lazily(() => import('src/Pages/Settings/Settings')).default
 const PaymentDetails = lazily(() => import('src/Pages/Customers/ChatView/InfoPages/Payment/PaymentDetails')).default
 const Reports = lazily(() => import('src/Pages/Reports/Reports')).default
+const ShopReports = lazily(() => import('src/Pages/Reports/ShopReports/ShopReports')).default
+const ProductReports = lazily(() => import('src/Pages/Reports/ProductReports/ProductReports')).default
+
 const Employees = lazily(() => import('src/Pages/Employees/Employees')).default
 const StockManagement = lazily(() => import('src/Pages/StockManagement/StockManagement')).default
 const More = lazily(() => import('src/Pages/More/More')).default
@@ -76,6 +79,16 @@ export const routes: {
     {
         path: '/reports',
         Component: Reports,
+        requireAuth: true
+    },
+    {
+        path: '/shopwise-reports',
+        Component: ShopReports,
+        requireAuth: true
+    },
+    {
+        path: '/productwise-reports',
+        Component: ProductReports,
         requireAuth: true
     },
     {

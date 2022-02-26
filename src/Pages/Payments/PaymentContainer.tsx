@@ -4,12 +4,12 @@ import { paymentMethod } from 'src/API/enum'
 import Spinner from 'src/Components/Style/Spinner'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FormattedMessage } from 'react-intl'
-import ReactToPrint from 'react-to-print'
 import { useSelector } from 'react-redux'
 import { selectCredentials } from '../Login/credentialsSlice'
 import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 import ChatImg from '../Product/assets/no_data.svg'
 import Lozenge from 'src/Components/Lozenge'
+import { PrintOne } from './Options/PrintOne'
 
 interface IProps {
     payments?: IFetchAllPaymentsDataEntity[];
@@ -20,30 +20,6 @@ export default function PaymentContainer({ payments, loading }: IProps) {
     const { user } = useSelector(selectCredentials)
     const [paymentSummaryOpen, setPaymentSummaryOpen] = useState<boolean>(false)
     const [itemClicked, setItemClicked] = useState<IFetchAllPaymentsDataEntity>()
-    const componentRef = React.useRef<HTMLDivElement>(null)
-
-
-    const reactToPrintTrigger = React.useCallback(() => {
-        return (
-            <button className="flex h-10 w-2/4 items-center justify-center gap-1 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 font-bold text-white">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-                    />
-                </svg>
-                <FormattedMessage id="action.print" defaultMessage="Print" />
-            </button>
-        )
-    }, [])
 
     const openPaymentSummary = (item: IFetchAllPaymentsDataEntity) => {
         setPaymentSummaryOpen(true)
@@ -55,7 +31,6 @@ export default function PaymentContainer({ payments, loading }: IProps) {
         return (
             <>
                 <div
-                    ref={componentRef}
                     className="m-3 mt-6 rounded border border-slate-300 p-3 dark:border-slate-500"
                 >
                     <h1 className="dark:text-white"> Payment Summary</h1>
@@ -90,16 +65,8 @@ export default function PaymentContainer({ payments, loading }: IProps) {
                     )}
                 </div>
 
-                <div className="mx-3 mt-2 mb-8 flex justify-between space-x-3">
-                    <ReactToPrint
-                        content={() => componentRef.current}
-                        documentTitle={`Vyap All Orders`}
-                        // onAfterPrint={handleAfterPrint}
-                        // onBeforeGetContent={handleOnBeforeGetContent}
-                        // onBeforePrint={handleBeforePrint}
-                        removeAfterPrint
-                        trigger={reactToPrintTrigger}
-                    />
+                <div className="mx-3 mt-2 mb-16 flex justify-between space-x-3">
+                    <PrintOne item={item}/>
                     <button
                         onClick={() => setPaymentSummaryOpen(false)}
                         className="flex h-10 w-2/4 items-center justify-center gap-1 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 font-bold text-white"

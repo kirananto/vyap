@@ -1,96 +1,154 @@
 {
-    "home.welcome": [{
-        "type": 0,
-        "value": "Welcome 👋"
-    }],
-    "chat.firstTransaction": [{
-        "type": 0,
-        "value": "Start your first transaction."
-    }],
-    "global.my_products": [{
-        "type": 0,
-        "value": "My Products"
-    }],
-    "global.customers": [{
-        "type": 0,
-        "value": "Customers"
-    }],
-    "global.more": [{
-        "type": 0,
-        "value": "More"
-    }],
-    "global.items": [{
-        "type": 0,
-        "value": "Items"
-    }],
-    "global.appliedFilters": [{
-        "type": 0,
-        "value": "Applied Filters"
-    }],
-    "global.filters": [{
-        "type": 0,
-        "value": "Filters"
-    }],
-    "global.noFilters": [{
-        "type": 0,
-        "value": "No filters applied"
-    }],
-    "global.clearAll": [{
-        "type": 0,
-        "value": "Clear All"
-    }],
-    "global.allPayments": [{
-        "type": 0,
-        "value": "All Payments"
-    }],
-    "global.allOrders": [{
-        "type": 0,
-        "value": "All Orders"
-    }],
-    "global.order": [{
-        "type": 0,
-        "value": "Order"
-    }],
-    "global.payment": [{
-        "type": 0,
-        "value": "Payment"
-    }],
-    "global.reports": [{
-        "type": 0,
-        "value": "Reports"
-    }],
-    "global.stockManagement": [{
-        "type": 0,
-        "value": "Stock Management"
-    }],
-    "global.myAccount": [{
-        "type": 0,
-        "value": "My Account"
-    }],
-    "global.settings": [{
-        "type": 0,
-        "value": "Settings"
-    }],
-    "global.help": [{
-        "type": 0,
-        "value": "Help and Support"
-    }],
-    "global.switch": [{
-        "type": 0,
-        "value": "Switch to Wholesaler Account"
-    }],
-    "global.offer": [{
-        "type": 0,
-        "value": "Offer Management"
-    }],
-    "global.logout": [{
-        "type": 0,
-        "value": "Logout"
-    }],
-    "global.comingSoon": [{
-        "type": 0,
-        "value": "Coming soon"
-    }],
+    "home.welcome": [
+        {
+            "type": 0,
+            "value": "Welcome 👋"
+        }
+    ],
+    "chat.firstTransaction": [
+        {
+            "type": 0,
+            "value": "Start your first transaction."
+        }
+    ],
+    "global.my_products": [
+        {
+            "type": 0,
+            "value": "My Products"
+        }
+    ],
+    "global.customers": [
+        {
+            "type": 0,
+            "value": "Customers"
+        }
+    ],
+    "global.more": [
+        {
+            "type": 0,
+            "value": "More"
+        }
+    ],
+    "global.items": [
+        {
+            "type": 0,
+            "value": "Items"
+        }
+    ],
+    "global.appliedFilters": [
+        {
+            "type": 0,
+            "value": "Applied Filters"
+        }
+    ],
+    "global.filters": [
+        {
+            "type": 0,
+            "value": "Filters"
+        }
+    ],
+    "global.noFilters": [
+        {
+            "type": 0,
+            "value": "No filters applied"
+        }
+    ],
+    "global.clearAll": [
+        {
+            "type": 0,
+            "value": "Clear All"
+        }
+    ],
+    "global.allPayments": [
+        {
+            "type": 0,
+            "value": "All Payments"
+        }
+    ],
+    "global.allOrders": [
+        {
+            "type": 0,
+            "value": "All Orders"
+        }
+    ],
+    "global.order": [
+        {
+            "type": 0,
+            "value": "Order"
+        }
+    ],
+    "global.payment": [
+        {
+            "type": 0,
+            "value": "Payment"
+        }
+    ],
+    "global.reports": [
+        {
+            "type": 0,
+            "value": "Reports"
+        }
+    ],
+    "global.shopwiseReports": [
+        {
+            "type": 0,
+            "value": "Shopwise Reports"
+        }
+    ],
+    "global.productwiseReports": [
+        {
+            "type": 0,
+            "value": "Productwise Reports"
+        }
+    ],
+    "global.stockManagement": [
+        {
+            "type": 0,
+            "value": "Stock Management"
+        }
+    ],
+    "global.myAccount": [
+        {
+            "type": 0,
+            "value": "My Account"
+        }
+    ],
+    "global.settings": [
+        {
+            "type": 0,
+            "value": "Settings"
+        }
+    ],
+    "global.help": [
+        {
+            "type": 0,
+            "value": "Help and Support"
+        }
+    ],
+    "global.switch": [
+        {
+            "type": 0,
+            "value": "Switch to Wholesaler Account"
+        }
+    ],
+    "global.offer": [
+        {
+            "type": 0,
+            "value": "Offer Management"
+        }
+    ],
+    "global.logout": [
+        {
+            "type": 0,
+            "value": "Logout"
+        }
+    ],
+    "global.comingSoon": [
+        {
+            "type": 0,
+            "value": "Coming soon"
+        }
+    ],
     "action.updateApplication": [
         {
             "type": 0,
