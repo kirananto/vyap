@@ -74,7 +74,7 @@ export default function PaymentDetails() {
             Payment details
                     </h1>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 break-all">
                         <PaymentInfo heading="Payment id" info={`#${id}`} />
                         <PaymentInfo
                             heading="Note"

@@ -41,7 +41,7 @@ export function ItemCard({ item }: IProps) {
     }
     return (
 
-        <div className="flex h-20 mt-2">
+        <div className="flex h-20 mt-2 sm:mb-3">
             <Link to={`/chat/${item.id}`} onClick={hapticFeedback} className="flex gap-2 px-4 w-full">
                 <div className="w-1/5 sm:w-12">
                     {item.isSupplier && user?.organization?.isSupplier ? <svg
@@ -72,13 +72,13 @@ export function ItemCard({ item }: IProps) {
                         {item.isSupplier ? <div className="text-green-700 border bg-green-100 tracking-wider w-min rounded px-1 -mt-2 -ml-1 text-xs dark:bg-green-800 dark:border-green-800 drop-shadow-md dark:text-green-300"> Retailer </div> : <div className="text-blue-700 bg-blue-100 tracking-wider w-min rounded px-2 text-xs dark:bg-blue-900 dark:text-blue-100"> Supplier </div>}
                     </div>} */}
                 </div>
-                <div className="w-2/5 sm:w-3/5 mt-3">
+                <div className="w-2/5 sm:w-6/12 mt-3 ml-2 break-normal">
                     <h6 className="text-xs text-slate-500 dark:text-slate-400"> {renderTime(new Date(item.updatedAt))}</h6>
 
                     <h2 className="font-bold mb-1 text-slate-600 dark:text-slate-200 truncate">{item.recipient?.name}</h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading truncate">{getLastMsg()}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading">{getLastMsg()}</p>
                 </div>
-                <div className="flex-grow mt-3 text-right">
+                <div className="w-2/5 sm:w-6/12 mt-3 text-right ">
 
                     {item.unseenNumbers ? <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-semibold leading-none text-green-600 bg-green-100 rounded-full">
                         {item.unseenNumbers}
