@@ -1,92 +1,148 @@
 {
-    "home.welcome": [{
-        "type": 0,
-        "value": "സ്വാഗതം 👋"
-    }],
-    "global.my_products": [{
-        "type": 0,
-        "value": "ഉൽപ്പന്നങ്ങൾ"
-    }],
-    "chat.firstTransaction": [{
-        "type": 0,
-        "value": "നിങ്ങളുടെ ആദ്യ ഇടപാട് ആരംഭിക്കുക."
-    }],
-    "global.customers": [{
-        "type": 0,
-        "value": "ഉപഭോക്താക്കൾ"
-    }],
-    "global.more": [{
-        "type": 0,
-        "value": "കൂടുതൽ"
-    }],
-    "global.items": [{
-        "type": 0,
-        "value": "ഇനങ്ങൾ"
-    }],
-    "global.appliedFilters": [{
-        "type": 0,
-        "value": "ഫിൽട്ടറുകൾ"
-    }],
-    "global.filters": [{
-        "type": 0,
-        "value": "ഫിൽട്ടറുകൾ"
-    }],
-    "global.order": [{
-        "type": 0,
-        "value": "ഓർഡർ"
-    }],
-    "global.payment": [{
-        "type": 0,
-        "value": "പേയ്മെന്റ്"
-    }],
-    "global.noFilters": [{
-        "type": 0,
-        "value": "ഫിൽട്ടറുകൾ പ്രയോഗിച്ചിട്ടില്ല"
-    }],
-    "global.clearAll": [{
-        "type": 0,
-        "value": "എല്ലാം മായ്ക്കുക"
-    }],
-    "global.allPayments": [{
-        "type": 0,
-        "value": "എല്ലാ പേയ്‌മെന്റുകളും"
-    }],
-    "global.allOrders": [{
-        "type": 0,
-        "value": "എല്ലാ ഓർഡറുകളും"
-    }],
-    "global.reports": [{
-        "type": 0,
-        "value": "റിപ്പോർട്ടുകൾ"
-    }],
-    "global.stockManagement": [{
-        "type": 0,
-        "value": "സ്റ്റോക്ക് മാനേജ്മെന്റ്"
-    }],
-    "global.myAccount": [{
-        "type": 0,
-        "value": "എന്റെ അക്കൗണ്ട്"
-    }],
-    "global.settings": [{
-        "type": 0,
-        "value": "ക്രമീകരണങ്ങൾ"
-    }],
-    "global.help": [{
-        "type": 0,
-        "value": "സഹായസഹകരണങ്ങൾ"
-    }],
-    "global.offer": [{
-        "type": 0,
-        "value": "ഓഫർ മാനേജ്മെന്റ്"
-    }],
-    "global.logout": [{
-        "type": 0,
-        "value": "പുറത്തുകടക്കുക"
-    }],
-    "global.comingSoon": [{
-        "type": 0,
-        "value": "ഉടൻ വരുന്നു"
-    }],
+    "home.welcome": [
+        {
+            "type": 0,
+            "value": "സ്വാഗതം 👋"
+        }
+    ],
+    "global.my_products": [
+        {
+            "type": 0,
+            "value": "ഉൽപ്പന്നങ്ങൾ"
+        }
+    ],
+    "chat.firstTransaction": [
+        {
+            "type": 0,
+            "value": "നിങ്ങളുടെ ആദ്യ ഇടപാട് ആരംഭിക്കുക."
+        }
+    ],
+    "global.customers": [
+        {
+            "type": 0,
+            "value": "ഉപഭോക്താക്കൾ"
+        }
+    ],
+    "global.more": [
+        {
+            "type": 0,
+            "value": "കൂടുതൽ"
+        }
+    ],
+    "global.items": [
+        {
+            "type": 0,
+            "value": "ഇനങ്ങൾ"
+        }
+    ],
+    "global.appliedFilters": [
+        {
+            "type": 0,
+            "value": "ഫിൽട്ടറുകൾ"
+        }
+    ],
+    "global.filters": [
+        {
+            "type": 0,
+            "value": "ഫിൽട്ടറുകൾ"
+        }
+    ],
+    "global.order": [
+        {
+            "type": 0,
+            "value": "ഓർഡർ"
+        }
+    ],
+    "global.payment": [
+        {
+            "type": 0,
+            "value": "പേയ്മെന്റ്"
+        }
+    ],
+    "global.noFilters": [
+        {
+            "type": 0,
+            "value": "ഫിൽട്ടറുകൾ പ്രയോഗിച്ചിട്ടില്ല"
+        }
+    ],
+    "global.clearAll": [
+        {
+            "type": 0,
+            "value": "എല്ലാം മായ്ക്കുക"
+        }
+    ],
+    "global.allPayments": [
+        {
+            "type": 0,
+            "value": "എല്ലാ പേയ്‌മെന്റുകളും"
+        }
+    ],
+    "global.allOrders": [
+        {
+            "type": 0,
+            "value": "എല്ലാ ഓർഡറുകളും"
+        }
+    ],
+    "global.reports": [
+        {
+            "type": 0,
+            "value": "റിപ്പോർട്ടുകൾ"
+        }
+    ],
+    "global.shopwiseReports": [
+        {
+            "type": 0,
+            "value": "കട_തല  റിപ്പോർട്ട് "
+        }
+    ],
+    "global.productwiseReports": [
+        {
+            "type": 0,
+            "value": "ഉത്പന്നതല റിപ്പോർട്ട്"
+        }
+    ],
+    "global.stockManagement": [
+        {
+            "type": 0,
+            "value": "സ്റ്റോക്ക് മാനേജ്മെന്റ്"
+        }
+    ],
+    "global.myAccount": [
+        {
+            "type": 0,
+            "value": "എന്റെ അക്കൗണ്ട്"
+        }
+    ],
+    "global.settings": [
+        {
+            "type": 0,
+            "value": "ക്രമീകരണങ്ങൾ"
+        }
+    ],
+    "global.help": [
+        {
+            "type": 0,
+            "value": "സഹായസഹകരണങ്ങൾ"
+        }
+    ],
+    "global.offer": [
+        {
+            "type": 0,
+            "value": "ഓഫർ മാനേജ്മെന്റ്"
+        }
+    ],
+    "global.logout": [
+        {
+            "type": 0,
+            "value": "പുറത്തുകടക്കുക"
+        }
+    ],
+    "global.comingSoon": [
+        {
+            "type": 0,
+            "value": "ഉടൻ വരുന്നു"
+        }
+    ],
     "action.updateApplication": [
         {
             "type": 0,
@@ -123,7 +179,6 @@
             "value": "പ്രിന്റ്"
         }
     ],
-    
     "action.printOne": [
         {
             "type": 0,
