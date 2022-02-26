@@ -96,7 +96,7 @@ export default function More() {
                     <NavLink to="/reports" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <ReportsIcon className="text-indigo-500 dark:text-indigo-300"/>
                         <Links linkName={intl.formatMessage({ id: 'global.reports' })} />
-                        <Tag content={intl.formatMessage({ id: 'global.comingSoon' })} />
+                        <Tag content={'🎉 New'} />
                     </NavLink>
                     {/* ----- */}
                     {/* ----- */}
