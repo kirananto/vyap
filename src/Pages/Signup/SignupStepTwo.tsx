@@ -4,7 +4,7 @@ import { SimpleFooter } from '../../Components/Footer'
 import vyapLogo from 'src/assets/new_logo.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSignupInfo, setAddress, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from './signupSlice'
-// import { isEmail } from 'class-validator'
+import { isEmail } from 'class-validator'
 import { useNavigate } from 'react-router'
 
 
@@ -37,27 +37,28 @@ export default function SignupStepTwo() {
     }
     function handleValidations() {
         clearAllError()
+        let isValid = true
         if (signup.name?.length < 3) {
             setNameError('Enter a valid name.')
-            return false
+            isValid = false
         }
         if (signup.businessName?.length < 3) {
             setBusinessNameError('Enter a valid business name.')
-            return false
+            isValid = false
         }
         if (signup.address?.length < 3) {
             setAddressError('Enter a valid address .')
-            return false
+            isValid = false
         }
-        // if (!isEmail(signup.email)) {
-        //     setEmailError('Enter a valid email.')
-        //     return false
-        // }
+        if (signup.email ? !isEmail(signup.email) : false) {
+            setEmailError('Enter a valid email.')
+            isValid = false
+        }
         if (signup.pinCode?.length !== 6) {
             setPinCodeError('Enter a valid pinCode.')
-            return false
+            isValid = false
         }
-        return true
+        return isValid
     }
     return (
         <div className="flex flex-col items-start w-full pb-48 dark:bg-slate-900 ">
