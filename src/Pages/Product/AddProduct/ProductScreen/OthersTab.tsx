@@ -298,12 +298,12 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     (isValidBrand(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.brand?.name
-                                    )
+                                    ) || saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
                             >
-                                * Enter valid brand !
+                                Enter valid brand !
                             </span>
                             {/* Modal */}
                             <div>
@@ -358,12 +358,12 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     (isValidCategory(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.centralCategory?.name
-                                    )
+                                    )|| saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
                             >
-                                * Enter valid Category !
+                                Enter valid Category !
                             </span>
                             {/* Modal */}
                             <div>
@@ -418,12 +418,12 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     (isValidTag(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.category?.name
-                                    )
+                                    )|| saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
                             >
-                                * Enter valid Tag !
+                                Enter valid Tag !
                             </span>
                             {/* Modal */}
                             <div>
@@ -455,7 +455,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                   : "")
               }
             >
-              * Enter valid description !
+              Enter valid description !
             </span> */}
                     </>
                 )}
