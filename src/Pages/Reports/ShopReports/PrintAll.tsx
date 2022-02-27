@@ -9,12 +9,16 @@ import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCar
 import VyapLogo from 'src/Components/VyapLogo'
 import QRCode from 'qrcode.react'
 import Button from 'src/Components/Style/Button'
+import OrderContainerDetail from './OrderItemsDetails'
+import ReturnStatusTile from 'src/Pages/Orders/OrderStatusTag'
+
 
 interface IProps {
     apiData: orderInterface[];
 }
 
 let txnCount: number
+let today : string
 
 export const PrintAll = ({ apiData }: IProps) => {
     const { user } = useSelector(selectCredentials)
@@ -47,6 +51,8 @@ export const PrintAll = ({ apiData }: IProps) => {
 
     const orders = apiData.map((item) => {
         txnCount = apiData.length
+        today = item.createdAt  ? format(new Date(item.createdAt), 'dd/MM/yyyy')
+            : ''
         return {
             ORDER_ID: '#' + item?.id?.split('-')[0],
             DATE: item.createdAt
@@ -64,7 +70,7 @@ export const PrintAll = ({ apiData }: IProps) => {
         <>
             <ReactToPrint
                 content={() => componentRef.current}
-                documentTitle={`Vyap All Orders`}
+                documentTitle={`Vyap - Orders Today`}
                 // onAfterPrint={handleAfterPrint}
                 // onBeforeGetContent={handleOnBeforeGetContent}
                 // onBeforePrint={handleBeforePrint}
@@ -85,9 +91,9 @@ export const PrintAll = ({ apiData }: IProps) => {
                     <div className="col-start-2 col-span-3 space-y-3 flex flex-col align-middle">
                         <h2 className="text-2xl font-bold text-slate-600">
                             {' '}
-                                Order Statement
+                                Shopwise Order Report (Today)
                         </h2>
-                        <p className="text-slate-500 font-bold">12/01/22 - 12/04/22</p>
+                        <p className="text-slate-500 font-bold">{today}</p>
                     </div>
 
                     <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-slate-200 p-3">
@@ -96,35 +102,71 @@ export const PrintAll = ({ apiData }: IProps) => {
                                 {' '}
                                 {user?.organization?.name}{' '}
                             </p>
-                            <p className="text-slate-500">{txnCount} Transactions</p>
+                            <p className="text-slate-500">{txnCount} Orders</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div className="m-5 mx-10 p-5 border border-slate-200 rounded-md">
-                        <table className="min-w-full">
-                            <thead className="text-slate-700 font-bold">
-                                <tr className="p-5">
-                                    <td>Order_ID</td>
-                                    <td>Date</td>
-                                    <td>Supplier</td>
-                                    <td>Buyer</td>
-                                    <td className="text-right">Amount</td>
-                                </tr>
-                            </thead>
-                            <tbody className="text-slate-500">
-                                {orders.map((item, index) => (
-                                    <tr key={index} className="text-left ">
-                                        {Object.values(item).map((val, i) => (
-                                            <td key={val} className={`px-1 py-2 whitespace-nowrap ${i===4 ? 'text-right' : ''}`}>
-                                                {i === 4 ? '₹' + val : val}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+
+
+                <div
+                    className="bg-white pb-24 dark:bg-slate-800 rounded p-4 max-h-[80vh] overflow-y-scroll"
+                >
+                    {apiData.map((item, index) => (
+                        <div
+                            className={`${index === orders.length - 1 ? '' : 'border-b border-slate-300 dark:border-slate-700'
+                            }`}
+                            key={`${item.id}`}
+                        >
+                            <div className="flex flex-row mt-2 mb-3">
+                                <div>
+                                    <div className="item w-4  flex-grow-0 mr-2">
+                                        <input
+                                            className="cursor-pointer rounded border-slate-300 text-blue-800"
+                                            type="checkbox"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="w-full">
+                                    <div className="grid grid-rows-3 content-start">
+                                        <div className="grid grid-flow-col  gap-1 row-span-3">
+
+                                            <div className="text-slate-500 mt-1 text-xs dark:text-slate-300">
+                                                {item.createdAt
+                                                    ? format(new Date(item.createdAt), 'do MMM yyyy')
+                                                    : ''}
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between text-slate-600 text-sm md:text-md font-semibold dark:text-slate-200  mb-1">
+                                            {item?.buyer?.name}
+
+                                            <div className="text-slate-600  text-sm md:text-lg font-extrabold dark:text-slate-200">
+                                                {' '}
+                                                {(
+                                                    parseFloat(item?.totalAmount) -
+                                                    parseFloat(item?.flatDiscount)
+                                                ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-flow-col">
+                                            <div className="col-start-1 w-max  items-center mt-1">
+                                                <ReturnStatusTile status={item?.orderStatus?.[0]?.status} />
+                                            </div>
+
+                                            <div className="text-center col-end-12 self-center text-slate-600 dark:text-slate-200 text-lg font-extrabold">
+                                            
+                                                <div className="text-slate-400 text-xs font-extrabold mx-auto dark:text-slate-300">
+                                                ({item?.numberOfItems} {item?.numberOfItems > 1 ? 'items' : 'item'})
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <OrderContainerDetail order={item} />
+
+                        </div>
+                    ))}
                 </div>
 
                 <div className="flex flex-row flex-wrap justify-end pt-1 mt-6 pt-2 px-5 border-t border-zinc-200">
