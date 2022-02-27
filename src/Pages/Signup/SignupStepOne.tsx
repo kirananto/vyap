@@ -66,29 +66,32 @@ export default function SignupStep1() {
     return (
         <section className="flex flex-col items-center h-screen md:flex-row  dark:bg-slate-800">
             <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
-                <div className="w-80 h-100">
-                    <div className="flex -ml-2 items-center w-64 font-medium text-indigo-900 title-font md:mb-0">
-                        <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} />
-                        <h2 className="text-2xl font-bold text-slate-700 uppercase duration-500 ease-in-out transform transition hover:text-lightBlue-500 dark:text-indigo-100">
-                            {' '}
-                            Vyap {' '}
-                        </h2>
-                    </div>
-                    <h1 className="mt-8 text-lg font-semibold text-slate-700 tracking-ringtighter title-font dark:text-slate-200">
-                        {currentPage === 1 ? `We've send you an verification code
+                <div className="w-96 h-100">
+                    <div className="border p-6 rounded-lg border-slate-200 border-2 dark:border-slate-700 mt-4 shadow bg-slate-700 shadow-lg">
+
+                        <div className="grid items-center justify-center font-medium text-indigo-900 title-font md:mb-0">
+                            <img height={48} width={48} className="w-14 h-14" alt="vyap Logo" src={vyapLogo} />
+                            <h2 className="text-2xl w-12 font-bold text-slate-700 duration-500 ease-in-out transform transition hover:text-lightBlue-500 dark:text-indigo-200 ">
+                                {' '}
+              Vyap {' '}
+                            </h2>
+                        </div>
+                        <h1 className="mt-8 text-xl font-semibold text-slate-700 tracking-ringtighter title-font dark:text-slate-200">
+                            {currentPage === 1 ? `We've send you an verification code
 To your phone number` : 'Signup with vyap to succeed'}
-                    </h1>
-                    {renderForm()}
-                    <hr className="w-full my-6 border-indigo-100 dark:border-slate-700" />
-                    <p className="mt-8 text-center dark:text-slate-400">
+                        </h1>
+                        {renderForm()}
+                        <hr className="w-full my-6 border-indigo-100 dark:border-slate-700" />
+                        <p className="mt-8 text-sm text-center dark:text-slate-400">
                         Already have an account?{' '}
-                        <Link
-                            to="/login"
-                            className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700"
-                        >
+                            <Link
+                                to="/login"
+                                className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700"
+                            >
                             Log in
-                        </Link>
-                    </p>
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>

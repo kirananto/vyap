@@ -40,9 +40,8 @@ export function ItemCard({ item }: IProps) {
         return item.lastMsg
     }
     return (
-
-        <div className="flex h-20 mt-2 sm:mb-3">
-            <Link to={`/chat/${item.id}`} onClick={hapticFeedback} className="flex gap-2 px-4 w-full">
+        <div className="flex h-20 mt-2 sm:mb-3  lg:w-1/3 lg:h-32 lg:my-0 ">
+            <Link to={`/chat/${item.id}`} onClick={hapticFeedback} className="flex gap-2 px-4 w-full lg:bg-slate-200 lg:dark:bg-slate-800 lg:m-2 lg:rounded-lg ">
                 <div className="w-1/5 sm:w-12">
                     {item.isSupplier && user?.organization?.isSupplier ? <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -90,6 +89,5 @@ export function ItemCard({ item }: IProps) {
                 </div>
             </Link>
         </div>
-
     )
 }
