@@ -64,7 +64,7 @@ export default function SignupStep1() {
     }
 
     return (
-        <section className="flex flex-col items-center pb-24 h-screen md:flex-row  login_bg">
+        <section className="flex flex-col items-center pb-24 h-screen md:flex-row   bg-gradient-to-br from-blue-500 to-indigo-800">
             <div className="flex items-end  md:items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
                 <div className="w-96 h-100">
                     <div className="rounded p-6 mt-4 shadow bg-white dark:bg-slate-700 shadow-lg dark:bg-opacity-70 bg-clip-padding backdrop-filter backdrop-blur-xl">
