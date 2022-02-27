@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ToggleButton from '../../Components/ToggleButton'
 import { SimpleFooter } from '../../Components/Footer'
 import vyapLogo from 'src/assets/new_logo.svg'
@@ -19,9 +19,13 @@ export default function SignupStepTwo() {
     const [emailError, setEmailError] = useState('')
     const [pinCodeError, setPinCodeError] = useState('')
 
+    const nextPressed = useRef(false)
+
 
     function handleProceed(e: React.MouseEvent<HTMLInputElement>) {
         e.preventDefault()
+        nextPressed.current = true
+
         const result = handleValidations()
         if (result) {
             navigate('/signup-step-3')
@@ -35,6 +39,48 @@ export default function SignupStepTwo() {
         setPinCodeError('')
 
     }
+
+    // Validations 
+    useEffect(() => {
+        if (nextPressed.current && signup.name?.length < 3) {
+            setNameError('Enter a valid name.')
+        } else {
+            setNameError('')
+        }
+    }, [signup.name])
+    
+    useEffect(() => {
+        if (nextPressed.current && signup.businessName?.length < 3) {
+            setBusinessNameError('Enter a valid business name.')
+        } else {
+            setBusinessNameError('')
+        }
+    }, [signup.businessName])
+    
+    useEffect(() => {
+        if (nextPressed.current && signup.address?.length < 3) {
+            setAddressError('Enter a valid address.')
+        } else {
+            setAddressError('')
+        }
+    }, [signup.address])
+    
+    useEffect(() => {
+        if (nextPressed.current && signup.pinCode?.length < 3) {
+            setPinCodeError('Enter a valid pin code.')
+        } else {
+            setPinCodeError('')
+        }
+    }, [signup.pinCode])
+    
+    useEffect(() => {
+        if (nextPressed.current && !isEmail(signup.email)) {
+            setEmailError('Enter a valid email.')
+        } else {
+            setEmailError('')
+        }
+    }, [signup.email])
+    
     function handleValidations() {
         clearAllError()
         let isValid = true
@@ -55,7 +101,7 @@ export default function SignupStepTwo() {
             isValid = false
         }
         if (signup.pinCode?.length !== 6) {
-            setPinCodeError('Enter a valid pinCode.')
+            setPinCodeError('Enter a valid pin code.')
             isValid = false
         }
         return isValid
