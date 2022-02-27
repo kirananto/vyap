@@ -84,7 +84,7 @@ export default function Login() {
             <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
                 <div className="w-96 h-100">
                     
-                    <div className="border p-6 rounded-lg border-slate-200 border-2 dark:border-slate-700 mt-4 shadow bg-slate-700 shadow-lg">
+                    <div className="border p-6 rounded-lg border-slate-200 border-2 dark:border-slate-700 mt-4 shadow bg-slate-100 dark:bg-slate-700 shadow-lg">
                         <div className="grid items-center justify-center font-medium text-indigo-900 title-font md:mb-0">
                             <img height={48} width={48} className="w-14 h-14" alt="vyap Logo" src={vyapLogo} />
                             <h2 className="text-2xl w-12 font-bold text-slate-700 duration-500 ease-in-out transform transition hover:text-lightBlue-500 dark:text-indigo-200 ">
