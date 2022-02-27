@@ -80,7 +80,7 @@ export default function Login() {
     }
 
     return (
-        <section className="flex flex-col items-center h-screen pb-24 md:flex-row login_bg">
+        <section className="flex flex-col items-center h-screen pb-24 md:flex-row bg-gradient-to-br from-blue-500 to-indigo-800">
             <div className="flex items-end md:items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
                 <div className="w-96 h-100">
 
