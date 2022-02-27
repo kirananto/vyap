@@ -18,12 +18,12 @@ export default function Login() {
     const confirmOTP = useCallback((code: string) => {
         setError(null)
         setLoading(true)
-        if(code.trim().length !== 4) {
+        if (code.trim().length !== 4) {
             setError('Enter a valid 4 digit OTP')
             setTimeout(() => setLoading(false), 500)
             return undefined
         }
-        if(!isNumberString(code.trim())) {
+        if (!isNumberString(code.trim())) {
             setError('OTP Should contain only numbers')
             setTimeout(() => setLoading(false), 500)
             return undefined
@@ -41,7 +41,7 @@ export default function Login() {
             }
         }).catch((error) => {
             console.log('error verifying otp', error.message)
-            if(error?.response?.data) {
+            if (error?.response?.data) {
                 setError(error?.response?.data?.message)
             } else {
                 setError('No internet connection, please connect to a network and try again.')
@@ -71,7 +71,7 @@ export default function Login() {
 
     function renderForm() {
         switch (currentPage) {
-            case 1: return <OTPForm onPressConfirm={confirmOTP}  loading={loading}  goBack={() => {
+            case 1: return <OTPForm onPressConfirm={confirmOTP} loading={loading} goBack={() => {
                 setError('')
                 setCurrentPage(0)
             }} error={error} />
@@ -80,31 +80,26 @@ export default function Login() {
     }
 
     return (
-        <section className="flex flex-col items-center h-screen md:flex-row dark:bg-slate-800">
-            <div className="flex items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
+        <section className="flex flex-col items-center h-screen pb-24 md:flex-row login_bg">
+            <div className="flex items-end md:items-center justify-center w-full h-screen px-6 md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
                 <div className="w-96 h-100">
-                    
-                    <div className="border p-6 rounded-lg border-slate-200 border-2 dark:border-slate-700 mt-4 shadow bg-slate-100 dark:bg-slate-700 shadow-lg">
-                        <div className="grid items-center justify-center font-medium text-indigo-900 title-font md:mb-0">
-                            <img height={48} width={48} className="w-14 h-14" alt="vyap Logo" src={vyapLogo} />
-                            <h2 className="text-2xl w-12 font-bold text-slate-700 duration-500 ease-in-out transform transition hover:text-lightBlue-500 dark:text-indigo-200 ">
-                                {' '}
-              Vyap {' '}
-                            </h2>
+
+                    <div className="rounded p-6 mt-4 shadow bg-white dark:bg-slate-700 shadow-lg dark:bg-opacity-70 bg-clip-padding backdrop-filter backdrop-blur-xl">
+                        <div className="grid items-center -mt-20 justify-center justify-center font-medium text-indigo-900 title-font md:mb-0">
+                            <img height={48} width={48} className="w-24 h-24 rounded-full bg-slate-200 dark:bg-slate-300 " alt="vyap Logo" src={vyapLogo} />
                         </div>
-                        <h1 className="mt-8 text-xl font-semibold text-slate-700 tracking-ringtighter title-font dark:text-slate-200">
+                        <h1 className="mt-6 text-xl font-semibold text-slate-700 tracking-ringtighter title-font dark:text-slate-200">
                             {currentPage === 1 ? `We've send you an verification code
-To your phone number` : 'Log in'}
+To your phone number` : 'Log in to your account'}
                         </h1>
                         {renderForm()}
-                        <hr className="w-full my-6 border-indigo-100 dark:border-slate-600" />
-                        <p className="mt-8  text-sm text-center dark:text-slate-400">
-            Need an account?{' '}
+                        {/* <hr className="w-full my-6 border-indigo-100 dark:border-slate-600" /> */}
+                        <p className="mt-8 text-sm text-center font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700">
                             <Link
                                 to="/signup"
-                                className="font-semibold text-blue-500 dark:text-blue-300 hover:text-blue-700"
+                                className=""
                             >
-              Sign Up
+                                Create an account
                             </Link>
                         </p>
                     </div>

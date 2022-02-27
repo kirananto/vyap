@@ -56,7 +56,7 @@ const ProductDetail = () => {
                             <div 
                                 key={'key-' + Math.random()} 
                                 className={`flex-shrink-0 w-full h-full min-h-[250px] text-center 
-                            border overflow-hidden border-slate-200 dark:border-slate-700 relative rounded-lg bg-cover bg-center
+                            border overflow-hidden border-slate-200 dark:border-slate-700 relative rounded bg-cover bg-center
                          ${img?.imageName ? '' : 'empty_image_background'}`}>
                                 {img?.imageName && (
                                     <img

@@ -52,12 +52,12 @@ function List(props: IProps) {
             className="flex gap-4 items-center cursor-pointer flex flex-shrink-0"
             onClick={() => props.onSelect(props.opt)}
         >
-            <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
+            <div className="flex flex-shrink-0 w-16 h-16 rounded overflow-hidden">
                 <img
                     loading="lazy"
                     src={productImage ? productImage : transparentImg}
                     alt="Avatar"
-                    className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                    className="object-cover aspect-square rounded overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
                 />
             </div>
             <div className="w-full">
@@ -239,12 +239,12 @@ function DropDown(props: DropdDownInterface) {
                 type="text"
                 onChange={search}
                 value={value}
-                className="p-2 pl-4 w-full border border-slate-200 rounded-lg focus:ring-2 focus:outline-none dark:border-slate-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
+                className="p-2 pl-4 w-full border border-slate-200 rounded focus:ring-2 focus:outline-none dark:border-slate-600 dark:bg-slate-600 dark:text-slate-200 dark:focus:bg-slate-600"
                 placeholder="Search or create product..."
             />
             <div
                 // ref={myRef}
-                className={`flex flex-col bg-white mt-2 gap-3 p-4 border boder-slate-200 rounded-log overflow-scroll dark:bg-slate-700  dark:border-slate-500 rounded-lg overflow-x-hidden h-72`}
+                className={`flex flex-col bg-white mt-2 gap-3 p-4 border boder-slate-200 rounded-log overflow-scroll dark:bg-slate-700  dark:border-slate-500 rounded overflow-x-hidden h-72`}
             >
                 {renderListItems()}
             </div>

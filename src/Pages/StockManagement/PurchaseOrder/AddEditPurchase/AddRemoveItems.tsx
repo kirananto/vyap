@@ -7,7 +7,7 @@ export default function AddRemoveItems() {
     const items = [1, 1, 1, 1, 1]
 
     return (
-        <div className="bg-white rounded-lg p-4 mt-4 w-full dark:bg-slate-700">
+        <div className="bg-white rounded p-4 mt-4 w-full dark:bg-slate-700">
             <div className="flex w-full items-center justify-between">
                 <div className="flex text-xl dark:text-slate-300">
                     Items
@@ -32,13 +32,13 @@ export default function AddRemoveItems() {
                     onChange={(event) => console.log(event?.target.value)}
                     id="tel"
                     placeholder="Search"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                 />
                 {items.map((item, index) => (<div className="flex justify-between" key={`${index}`}>
                     {/* TODO: Remove this console.log */}
                     {console.log(item)}
                     <div className="flex pt-4 gap-2">
-                        <div className="relative w-20 h-auto mt-1 rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+                        <div className="relative w-20 h-auto mt-1 rounded overflow-hidden bg-cover bg-center empty_image_background">
                             {DairySmall && <img src={DairySmall} alt="Avatar" className="object-cover w-full h-full" />}
                         </div>
                         <div className="flex flex-col">
