@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ToggleButton from '../../Components/ToggleButton'
 import { SimpleFooter } from '../../Components/Footer'
 import vyapLogo from 'src/assets/new_logo.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSignupInfo, setAddress, setBusinessName, setEmail, setListPrivately, setName, setPinCode } from './signupSlice'
-// import { isEmail } from 'class-validator'
+import { isEmail } from 'class-validator'
 import { useNavigate } from 'react-router'
 
 
@@ -19,9 +19,13 @@ export default function SignupStepTwo() {
     const [emailError, setEmailError] = useState('')
     const [pinCodeError, setPinCodeError] = useState('')
 
+    const nextPressed = useRef(false)
+
 
     function handleProceed(e: React.MouseEvent<HTMLInputElement>) {
         e.preventDefault()
+        nextPressed.current = true
+
         const result = handleValidations()
         if (result) {
             navigate('/signup-step-3')
@@ -35,29 +39,72 @@ export default function SignupStepTwo() {
         setPinCodeError('')
 
     }
+
+    // Validations 
+    useEffect(() => {
+        if (nextPressed.current && signup.name?.length < 3) {
+            setNameError('Enter a valid name.')
+        } else {
+            setNameError('')
+        }
+    }, [signup.name])
+    
+    useEffect(() => {
+        if (nextPressed.current && signup.businessName?.length < 3) {
+            setBusinessNameError('Enter a valid business name.')
+        } else {
+            setBusinessNameError('')
+        }
+    }, [signup.businessName])
+    
+    useEffect(() => {
+        if (nextPressed.current && signup.address?.length < 3) {
+            setAddressError('Enter a valid address.')
+        } else {
+            setAddressError('')
+        }
+    }, [signup.address])
+    
+    useEffect(() => {
+        if (nextPressed.current && signup.pinCode?.length < 3) {
+            setPinCodeError('Enter a valid pin code.')
+        } else {
+            setPinCodeError('')
+        }
+    }, [signup.pinCode])
+    
+    useEffect(() => {
+        if (nextPressed.current && !isEmail(signup.email)) {
+            setEmailError('Enter a valid email.')
+        } else {
+            setEmailError('')
+        }
+    }, [signup.email])
+    
     function handleValidations() {
         clearAllError()
+        let isValid = true
         if (signup.name?.length < 3) {
             setNameError('Enter a valid name.')
-            return false
+            isValid = false
         }
         if (signup.businessName?.length < 3) {
             setBusinessNameError('Enter a valid business name.')
-            return false
+            isValid = false
         }
         if (signup.address?.length < 3) {
             setAddressError('Enter a valid address .')
-            return false
+            isValid = false
         }
-        // if (!isEmail(signup.email)) {
-        //     setEmailError('Enter a valid email.')
-        //     return false
-        // }
+        if (signup.email ? !isEmail(signup.email) : false) {
+            setEmailError('Enter a valid email.')
+            isValid = false
+        }
         if (signup.pinCode?.length !== 6) {
-            setPinCodeError('Enter a valid pinCode.')
-            return false
+            setPinCodeError('Enter a valid pin code.')
+            isValid = false
         }
-        return true
+        return isValid
     }
     return (
         <div className="flex flex-col items-start w-full pb-48 dark:bg-slate-900 ">
@@ -83,7 +130,7 @@ export default function SignupStepTwo() {
               Your Name
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             type="text"
                             value={signup.name}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => dispatch(setName(event.target.value))}
@@ -97,7 +144,7 @@ export default function SignupStepTwo() {
               Business or shop name
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                             type="text"
                             placeholder="Name of the shop or business"
                             value={signup.businessName}
@@ -113,7 +160,7 @@ export default function SignupStepTwo() {
               Email
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                             type="text"
                             placeholder="Your email"
                             value={signup.email}
@@ -129,7 +176,7 @@ export default function SignupStepTwo() {
               Pin Code
                         </label>
                         <input
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                             type="text"
                             placeholder="Enter the pincode of your location"
                             value={signup.pinCode}
@@ -146,7 +193,7 @@ export default function SignupStepTwo() {
                             value={signup.address}
                             onChange={(event) => dispatch(setAddress(event?.target.value))}
                             placeholder="Enter your address."
-                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                         />
                         {addressError ? <div className="text-xs text-rose-500 opacity-80 font-semibold mt-4">{addressError}</div> : null}
 

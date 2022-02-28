@@ -120,7 +120,7 @@ export default function OrderCard({
     const stats = orderStatusTxt()
     return (
         <div  {...bind}  ref={ref} className={`flex ${className} w-full`}>
-            <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg hover:bg-slate-50 shadow border border-purple-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/chat/${id}/order/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col  w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded hover:bg-slate-50 shadow border border-purple-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600  ${order?.totalAmount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-purple-200 text-purple-900 rounded-full max-w-max">
                     <FormattedMessage
                         id="global.order"

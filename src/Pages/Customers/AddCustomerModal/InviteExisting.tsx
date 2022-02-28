@@ -112,7 +112,7 @@ export default function InviteExisting({
                     id="tel"
                     ref={refBizName}
                     placeholder="Name of the shop or business"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
                 <span
                     className={
@@ -120,7 +120,7 @@ export default function InviteExisting({
             (isValidBizName ? 'hidden' : '')
                     }
                 >
-          * Enter valid business/shop name
+          Enter valid business/shop name
                 </span>
             </div>
             <div className="mt-4">
@@ -137,7 +137,7 @@ export default function InviteExisting({
                     id="address"
                     ref={refAddress}
                     placeholder="Enter the address of the customer."
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                 />
 
                 <span
@@ -146,7 +146,7 @@ export default function InviteExisting({
             (isValidAdress ? 'hidden' : '')
                     }
                 >
-          * Enter valid address
+          Enter valid address
                 </span>
             </div>
             <div className="mt-4">
@@ -164,7 +164,7 @@ export default function InviteExisting({
                     id="tel"
                     ref={refPincode}
                     placeholder="Pin code of the customer"
-                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                    className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                 />
                 <span
                     className={
@@ -172,7 +172,7 @@ export default function InviteExisting({
             (isValidPincode ? 'hidden' : '')
                     }
                 >
-          * Enter valid pin code
+          Enter valid pin code
                 </span>
             </div>
             {/* <!-- btn popup --> */}

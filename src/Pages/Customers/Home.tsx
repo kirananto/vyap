@@ -115,7 +115,7 @@ export const Home = () => {
     }
 
     useEffect(() => {
-        if (scrollDirection) {
+        if (scrollDirection && customer.length > 0) {
             if (isScrollingUp) {
                 setFloatBtnLarge(true)
             }
@@ -123,7 +123,7 @@ export const Home = () => {
                 setFloatBtnLarge(false)
             }
         }
-    }, [isScrollingDown, isScrollingUp, scrollDirection])
+    }, [isScrollingDown, isScrollingUp, scrollDirection, customer])
 
     // ......  Button resizing onscroll - end.........!
 
@@ -175,7 +175,7 @@ export const Home = () => {
             </header>
             <div
                 ref={scrollTargetRef}
-                className="card-main-container scrollDes relative divide-y pb-20 divide-slate-200 dark:divide-slate-800"
+                className="card-main-container scrollDes relative divide-y lg:divide-none pb-20 divide-slate-200 dark:divide-slate-800 lg:flex lg:mt-2 lg:flex-wrap lg:gap-0 lg:h-auto lg:px-2"
             >
                 {renderChats()}
             </div>
@@ -187,7 +187,7 @@ export const Home = () => {
                         hapticFeedback()
                         setAddCustomerVisible(true)
                     }}
-                    className={`add-cutomer-btn active:scale-95 text-md rounded-full bg-gradient-to-br from-blue-500
+                    className={`add-cutomer-btn px-6 active:scale-95 text-md rounded-full bg-gradient-to-br from-blue-500
                      to-indigo-700 p-3 text-white shadow-sm transition duration-500 ease-in-out`}
                 >
                     <svg

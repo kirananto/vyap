@@ -266,7 +266,7 @@ export default function Product() {
             />
             <Link
                 to="/add-product"
-                className="text-md add-cutomer-btn active:scale-95 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 text-white"
+                className="text-md add-cutomer-btn active:scale-95 h-12 px-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 text-white"
             >
                 <FormattedMessage id="action.addProduct" defaultMessage="Add Product" />
             </Link>

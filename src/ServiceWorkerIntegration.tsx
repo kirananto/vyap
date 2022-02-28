@@ -56,7 +56,7 @@ export default function ServiceWorkerIntegration() {
                     })}
                 </p>
 
-                <button onClick={updateApplication(registration)} className="mt-2 text-sm border p-1 px-4 rounded-lg hover:bg-slate-800">
+                <button onClick={updateApplication(registration)} className="mt-2 text-sm border p-1 px-4 rounded hover:bg-slate-800">
                     <FormattedMessage id="action.reload" defaultMessage="Tap to Refresh" description="Action to reload something" />
                 </button>
             </div>
