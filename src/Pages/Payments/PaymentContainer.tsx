@@ -10,6 +10,7 @@ import type { IFetchAllPaymentsDataEntity } from 'src/types/fetchAllPayments'
 import ChatImg from '../Product/assets/no_data.svg'
 import Lozenge from 'src/Components/Lozenge'
 import { PrintOne } from './Options/PrintOne'
+import Button from 'src/Components/Style/Button'
 
 interface IProps {
     payments?: IFetchAllPaymentsDataEntity[];
@@ -67,26 +68,28 @@ export default function PaymentContainer({ payments, loading }: IProps) {
 
                 <div className="mx-3 mt-2 mb-16 flex justify-between space-x-3">
                     <PrintOne item={item}/>
-                    <button
+                    <Button
                         onClick={() => setPaymentSummaryOpen(false)}
-                        className="flex h-10 w-2/4 items-center justify-center gap-1 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 font-bold text-white"
+                        className="flex w-2/4 items-center justify-center gap-1"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                        <FormattedMessage id="action.close" defaultMessage="Close" />
-                    </button>
+                        <>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                            <FormattedMessage id="action.close" defaultMessage="Close" />
+                        </>
+                    </Button>
                 </div>
             </>
         )

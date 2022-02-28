@@ -9,7 +9,7 @@ export default function SelectCustomerType({
     return (
         <div className="w-1/2">
             <div
-                className={`w-11/12 bg-white rounded-lg shadow-md p-4 cursor-pointer mb-4 hover:bg-green-lightest focus:outline-none focus:shadow-outline-green ${
+                className={`w-11/12 bg-white rounded shadow-md p-4 cursor-pointer mb-4 hover:bg-green-lightest focus:outline-none focus:shadow-outline-green ${
                     isSelected ? 'bg-green-lightest shadow-outline-green' : ''
                 }`}
                 tabIndex={0}

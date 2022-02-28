@@ -83,7 +83,7 @@ export default function SignupStepThree() {
                 email: signup.email,
                 businessName: signup.businessName,
                 address: signup.address,
-                category: signup.category.map(item => ({ id: item?.id })),
+                category: signup.category?.filter((signupCategory) => categories.some(category => category.id === signupCategory.id)).map(item => ({ id: item?.id })),
                 pinCode: signup.pinCode,
                 listPrivately: signup.listPrivately,
                 organizationLocation: {

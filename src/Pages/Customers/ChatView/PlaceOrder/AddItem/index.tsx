@@ -214,7 +214,7 @@ export default function AddItem() {
                             IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
                         ) : transparentImg}
                         alt=""
-                        className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                        className="object-cover aspect-square rounded overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
                     />
                     {/* )} */}
                 </div>
@@ -324,7 +324,7 @@ export default function AddItem() {
                 onClose={() => setfilterPopupOpen(false)}
             />
             <div className="px-4 pb-24">
-                {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded-lg mb-2">
+                {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
                     <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
                     <div className="flex gap-2 overflow-x-scroll">
                         {prevOrdered?.map(item => <ProductSuggestionCard

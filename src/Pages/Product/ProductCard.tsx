@@ -57,7 +57,7 @@ export default function ProductCard({
 
             <div className="flex min-w-[80vw]  max-w-[80vw] py-4" onClick={onItemClick}>
 
-                <div className="w-20 h-full text-center border border-slate-200 dark:border-slate-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+                <div className="w-20 h-full text-center border border-slate-200 dark:border-slate-600 relative aspect-square rounded overflow-hidden bg-cover bg-center empty_image_background">
                     {item?.thumbnailImage && (
                         <img
                             loading="lazy"

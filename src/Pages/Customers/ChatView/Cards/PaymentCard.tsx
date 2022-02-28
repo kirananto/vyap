@@ -45,7 +45,7 @@ export default function PaymentCard({ className, thread }: { className: string, 
 
     return (
         <div ref={ref} className={`flex ${className} w-full `}>
-            <NavLink to={`/chat/${id}/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded-lg shadow hover:bg-slate-50 border border-yellow-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
+            <NavLink to={`/chat/${id}/payment/${thread.meta}`} onClick={hapticFeedback} className={`flex flex-col w-11/12  sm:w-10/12 max-w-md gap-1 p-4 bg-white rounded shadow hover:bg-slate-50 border border-yellow-900 border-opacity-50 dark:bg-slate-800 dark:hover:bg-slate-600 ${payment?.amount === undefined ? 'animate-pulse' : ''}`}>
                 <div className="p-1 px-4 text-xs bg-yellow-100 text-yellow-900 rounded-full max-w-max">
                     <FormattedMessage
                         id="global.payment"
