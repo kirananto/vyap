@@ -129,7 +129,7 @@ export default function Account() {
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                     />
                     {nameError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid name
+                        Enter a valid name
                     </span>}
                 </div>
                 <div className="w-full">
@@ -145,7 +145,7 @@ export default function Account() {
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                     />
                     {bizNameError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid business name
+                        Enter a valid business name
                     </span>}
                 </div>
                 <div className="w-full">
@@ -161,7 +161,7 @@ export default function Account() {
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                     {emailError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid email
+                        Enter a valid email
                     </span>}
                 </div>
                 <div className="w-full">
@@ -177,7 +177,7 @@ export default function Account() {
                         className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                     {pinCodeError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid pin code
+                        Enter a valid pin code
                     </span>}
                 </div>
                 {/* TODO: Update this */}

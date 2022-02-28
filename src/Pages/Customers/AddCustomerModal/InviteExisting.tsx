@@ -120,7 +120,7 @@ export default function InviteExisting({
             (isValidBizName ? 'hidden' : '')
                     }
                 >
-          * Enter valid business/shop name
+          Enter valid business/shop name
                 </span>
             </div>
             <div className="mt-4">
@@ -146,7 +146,7 @@ export default function InviteExisting({
             (isValidAdress ? 'hidden' : '')
                     }
                 >
-          * Enter valid address
+          Enter valid address
                 </span>
             </div>
             <div className="mt-4">
@@ -172,7 +172,7 @@ export default function InviteExisting({
             (isValidPincode ? 'hidden' : '')
                     }
                 >
-          * Enter valid pin code
+          Enter valid pin code
                 </span>
             </div>
             {/* <!-- btn popup --> */}
