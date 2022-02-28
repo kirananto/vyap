@@ -4,8 +4,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
-    - name: Run ESLint
-      run: yarn lint
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run ESLint
+        run: yarn lint
+      - name: Run Build
+        run: yarn build
+  bundlecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: carlesnunez/check-my-bundlephobia@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          strict: true
+          threshold: 500
+          ignore-dev-dependencies: true
