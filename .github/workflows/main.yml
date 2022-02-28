@@ -14,10 +14,8 @@ jobs:
   bundlecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: carlesnunez/check-my-bundlephobia@v1.8.0
+      - uses: actions/checkout@v2
+      - uses: preactjs/compressed-size-action@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          strict: true
-          threshold: 500
-          ignore-dev-dependencies: true
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          clean-script: "clean"
