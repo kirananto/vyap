@@ -16,7 +16,8 @@
     "lint:fix": "eslint . --ext .tsx,.ts --fix",
     "check:types": "tsc --noEmit",
     "cli:workbox": "workbox",
-    "cli:formatjs": "formatjs"
+    "cli:formatjs": "formatjs",
+    "clean": "echo Hello"
   },
   "dependencies": {
     "@emotion/react": "^11.8.1",
