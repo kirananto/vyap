@@ -126,10 +126,10 @@ export default function Account() {
                         onChange={(event) => dispatch(setUserName(event?.target.value))}
                         id="tel"
                         placeholder="Your name"
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                     />
                     {nameError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid name
+                        Enter a valid name
                     </span>}
                 </div>
                 <div className="w-full">
@@ -142,10 +142,10 @@ export default function Account() {
                         onChange={(event) => dispatch(setBusinessName(event?.target.value))}
                         id="text"
                         placeholder="Business name"
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
                     />
                     {bizNameError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid business name
+                        Enter a valid business name
                     </span>}
                 </div>
                 <div className="w-full">
@@ -158,10 +158,10 @@ export default function Account() {
                         onChange={(event) => dispatch(setUserEmail(event?.target.value))}
                         id="email"
                         placeholder="Email"
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                     {emailError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid email
+                        Enter a valid email
                     </span>}
                 </div>
                 <div className="w-full">
@@ -174,10 +174,10 @@ export default function Account() {
                         onChange={(event) => dispatch(setPinCode(event?.target.value))}
                         id="pin"
                         placeholder="Pin code"
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                     {pinCodeError && <span className={'font-medium tracking-wide text-rose-500 text-xs mt-1'} >
-                        * Enter a valid pin code
+                        Enter a valid pin code
                     </span>}
                 </div>
                 {/* TODO: Update this */}
@@ -191,7 +191,7 @@ export default function Account() {
                         onChange={(event) => console.log(event?.target.value)}
                         id="tel"
                         placeholder="Location"
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                 </div>
                 <div className="w-full">
@@ -204,7 +204,7 @@ export default function Account() {
                         onChange={(event) => console.log(event?.target.value)}
                         id="tel"
                         placeholder="Category"
-                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded-lg opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                        className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-200 border-transparent rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                     />
                 </div> */}
             </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 interface IModalViewerProps {
     body: JSX.Element | string | null;
@@ -18,12 +19,11 @@ export default function ModalViewer({
                     {body}
                     {name ? (name === 'filter' &&
                         <div className="w-full mb-5">
-                            <button
-                                className="flex justify-center gap-1 items-center w-full h-10 font-bold text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700"
+                            <Button
                                 onClick={onClose}
                             >
                                 OK
-                            </button>
+                            </Button>
                         </div>
                     ) : (
                         ''

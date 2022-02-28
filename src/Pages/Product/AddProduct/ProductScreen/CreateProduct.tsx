@@ -291,7 +291,7 @@ function CreateProduct() {
                 <div className="flex justify-between py-4">
                     <button
                         onClick={() => toggleTabs(TABS.PRICING)}
-                        className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${toggleState === TABS.PRICING
+                        className={`w-1/2 rounded px-6 py-2 font-semibold ${toggleState === TABS.PRICING
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 '
                             : 'text-slate-500 dark:text-slate-300'
                         }`}
@@ -300,7 +300,7 @@ function CreateProduct() {
                     </button>
                     <button
                         onClick={() => toggleTabs(TABS.OTHERS)}
-                        className={`w-1/2 rounded-lg px-6 py-2 font-semibold ${toggleState === TABS.OTHERS
+                        className={`w-1/2 rounded px-6 py-2 font-semibold ${toggleState === TABS.OTHERS
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
                             : 'text-slate-500 dark:text-slate-300'
                         }`}

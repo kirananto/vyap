@@ -220,8 +220,8 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 mt-4 text-left ${(paymentOption === PAYMENT_OPTIONS.PAY_LATER)
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
-                                            : 'border-2 rounded-lg border-slate-200 dark:border-slate-600'}
+                                            ? 'border-2 rounded border-blue-600  dark:border-blue-400'
+                                            : 'border-2 rounded border-slate-200 dark:border-slate-600'}
             
     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAY_LATER)}
@@ -234,8 +234,8 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 mt-4 text-left ${paymentOption === PAYMENT_OPTIONS.FULL_PAYMENT
-                                            ? 'border-2 rounded-lg border-blue-600  dark:border-blue-400'
-                                            : 'border-2 rounded-lg border-slate-200 dark:border-slate-600'}
+                                            ? 'border-2 rounded border-blue-600  dark:border-blue-400'
+                                            : 'border-2 rounded border-slate-200 dark:border-slate-600'}
                                             
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.FULL_PAYMENT)}
@@ -248,8 +248,8 @@ export default function AddPaymentModal({
                                 <div
                                     className={
                                         `p-2 pb-4 mt-4 text-left ${!(paymentOption === PAYMENT_OPTIONS.PARTIAL_PAYMENT)
-                                            ? ' border-2 rounded-lg  border-slate-300  dark:border-slate-600'
-                                            : 'border-2 rounded-lg border-blue-600  dark:border-blue-400'}
+                                            ? ' border-2 rounded  border-slate-300  dark:border-slate-600'
+                                            : 'border-2 rounded border-blue-600  dark:border-blue-400'}
                                     `}
                                     onClick={() => setPaymentOption(PAYMENT_OPTIONS.PARTIAL_PAYMENT)}
                                 >
@@ -271,7 +271,7 @@ export default function AddPaymentModal({
                                                     )
                                                 }}
                                                 className="p-4 m-2 w-auto text-base text-black transition duration-500 ease-in-out transform 
-                                                border-transparent rounded-lg bg-slate-200 opacity-75 
+                                                border-transparent rounded bg-slate-200 opacity-75 
                                                 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 
                                                 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                                 inputMode="numeric"
@@ -319,7 +319,7 @@ export default function AddPaymentModal({
                                                 ) as unknown as paymentMethod
                                             )
                                         }
-                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         name="payment"
                                         id="payment"
                                     >
@@ -350,7 +350,7 @@ export default function AddPaymentModal({
                                                 }
                                             )
                                         }}
-                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         inputMode="numeric"
                                         type="number"
                                     />
@@ -372,7 +372,7 @@ export default function AddPaymentModal({
                                     <textarea
                                         value={note}
                                         onChange={(event) => setNote(event.target.value)}
-                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                                        className="p-4 w-full text-base text-black transition duration-500 ease-in-out transform border-transparent rounded bg-slate-200 opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
                                         id=""
                                     ></textarea>
                                 </div>

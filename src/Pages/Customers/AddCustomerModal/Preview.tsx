@@ -68,7 +68,7 @@ export default function PreviewScreen({
         >
             <div className="mt-4 dark:text-slate-400">
         Please confirm the below information
-                <div className="my-6 bg-slate-200 p-4 rounded-lg dark:bg-slate-600 dark:text-slate-200">
+                <div className="my-6 bg-slate-200 p-4 rounded dark:bg-slate-600 dark:text-slate-200">
           You are inviting {returnName(phoneNumber, isExisting, businessName)}, and they owes you <span className="text-2xl ml-2"> {parseFloat(`${openingBalance}`).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })} </span>
 
                 </div>
@@ -79,7 +79,7 @@ export default function PreviewScreen({
                 <button onClick={() => setCurrentPage(isExisting ? currentPageEnum.STEP_1 : currentPageEnum.NEW_CUSTOMER_STEP)} className="active:scale-95 p-3 w-full text-indigo-700 rounded-full border border-indigo-700  dark:border-indigo-200 dark:text-indigo-200">
           Back
                 </button>
-                <Button onClick={handleSubmit} isDisabled={loading} className="p-3 w-full text-white rounded-full bg-gradient-to-br from-blue-500 to-indigo-700">
+                <Button onClick={handleSubmit} isDisabled={loading} className="p-3 w-full">
           Add customer
                 </Button>
             </div>

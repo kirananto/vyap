@@ -32,7 +32,6 @@ img {
   justify-content: center;
   align-items: center;
   display: flex;
-  padding: 1rem;
 }
 
 /* Old css end */
@@ -113,7 +112,7 @@ body:focus {
   cursor: pointer;
   width: 100%;
   text-align: center;
-  border-radius: 20px 20px 0 0;
+  border-radius: 5px 5px 0 0;
   position: fixed;
   z-index: 100;
   bottom: 0;

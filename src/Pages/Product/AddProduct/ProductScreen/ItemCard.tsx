@@ -17,12 +17,12 @@ function ItemCard({productImage} : IProps) {
     return (
         <div className="flex w-full gap-2">
             {/* image-col */}
-            <div className="flex flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
+            <div className="flex flex-shrink-0 w-16 h-16 rounded overflow-hidden">
                 <img
                     loading="lazy"
                     src={productImage ? productImage : transparentImg}
                     alt="Avatar"
-                    className="object-cover aspect-square rounded-lg overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
+                    className="object-cover aspect-square rounded overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
                 />
             </div>
             {/* detail-col */}
