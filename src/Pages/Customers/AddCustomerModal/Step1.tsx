@@ -6,7 +6,6 @@ import { currentPageEnum } from '.'
 import { IsNumber, Length, validate } from 'class-validator'
 import { useState } from 'react'
 import Button from 'src/Components/Style/Button'
-import Spinner from 'src/Components/Style/Spinner'
 
 interface IProps {
     phoneNumber: string;
