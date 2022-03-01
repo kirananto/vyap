@@ -46,7 +46,7 @@
     "react-intl": "^5.24.6",
     "react-lazily": "^0.9.1",
     "react-redux": "7.2.6",
-    "react-router-dom": "6.2.1",
+    "react-router-dom": "6.2.2",
     "react-to-print": "^2.14.4",
     "react-use-scroll-direction": "^0.1.0",
     "redux-persist": "6.0.0",
