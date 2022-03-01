@@ -358,7 +358,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     (isValidCategory(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.centralCategory?.name
-                                    )|| saveAttempt === 0
+                                    ) || saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
@@ -418,7 +418,7 @@ function OthersTab({ action, saveAttempt }: Props) {
                                     (isValidTag(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.category?.name
-                                    )|| saveAttempt === 0
+                                    ) || saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
@@ -438,26 +438,12 @@ function OthersTab({ action, saveAttempt }: Props) {
 
                 {/* Description-Input */}
                 {!addProductInfo?.centralCatalogue?.id && (
-                    <>
-                        <Input
-                            label="Description"
-                            placeholder="Enter Description"
-                            dispatch={dispatch}
-                            value={addProductInfo?.centralCatalogue?.description}
-                        />
-                        {/* <span
-              className={
-                "mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 " +
-                (isValidDescription(
-                  addProductInfo?.centralCatalogue?.description!
-                )
-                  ? "hidden"
-                  : "")
-              }
-            >
-              Enter valid description !
-            </span> */}
-                    </>
+                    <Input
+                        label="Description"
+                        placeholder="Enter Description"
+                        dispatch={dispatch}
+                        value={addProductInfo?.centralCatalogue?.description}
+                    />
                 )}
 
                 {!addProductInfo?.centralCatalogue?.id && (
@@ -516,7 +502,6 @@ function OthersTab({ action, saveAttempt }: Props) {
                     />
                 )}
 
-                {/* <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} /> */}
             </div>
         </div>
     )

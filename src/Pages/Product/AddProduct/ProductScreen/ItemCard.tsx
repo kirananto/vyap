@@ -31,9 +31,7 @@ function ItemCard({productImage} : IProps) {
                     {productDetails.centralCatalogue?.name}
                 </div>
                 <div className="text-xs text-slate-400 dark:text-slate-400 line-clamp-2">{productDetails?.centralCatalogue?.description}</div>
-                {/* <div className="text-xs font-bold text-slate-400">
-          MRP: {productDetails.price} ₹
-        </div> */}
+                
             </div>
             {/* product handle-col */}
             <div className="flex items-center justify-center w-1/4 ">
