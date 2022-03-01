@@ -27,7 +27,7 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import Bowser from 'bowser'
 import { differenceInDays } from 'date-fns'
 import { clearAll as clearAllProducts } from '../Product/productsSlice'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 const browser = Bowser.getParser(window.navigator.userAgent)
 export default function More() {
     const { user, token } = useSelector(selectCredentials)
@@ -58,8 +58,8 @@ export default function More() {
                 <div className="m-auto w-full ">
                     <div className="mb-2 dark:bg-slate-800 shadow-md dark:border-slate-800 p-4 inline-flex items-center w-full">
                         <img
-                            src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
-                            className={`w-16 rounded-full p-3 border border-1 dark:border-slate-900 bg-[#373465]`}
+                            src={user?.organization?.profileImageUrl ? getDpImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
+                            className={`w-16 rounded-full border border-1 dark:border-slate-900 bg-[#373465]`}
                             alt="profile-pic"
                             height={64}
                             width={64}
