@@ -19,4 +19,5 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           clean-script: "clean"
+          pattern: "**/build/**/*.js"
           strip-hash: "\\b\\w{20}\\."

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SimpleHeader } from '../../Components/Header'
+import SimpleHeader from '../../Components/Header/SimpleHeader'
 import ToggleButton from '../../Components/ToggleButton'
 import { SimpleFooter } from '../../Components/Footer'
 import { Link } from 'react-router-dom'

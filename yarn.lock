@@ -3385,9 +3385,9 @@ ejs@^3.1.6:
     jake "^10.6.1"
 
 electron-to-chromium@^1.4.71:
-  version "1.4.73"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.73.tgz#422f6f514315bcace9615903e4a9b6b9fa283137"
-  integrity sha512-RlCffXkE/LliqfA5m29+dVDPB2r72y2D2egMMfIy3Le8ODrxjuZNVo4NIC2yPL01N4xb4nZQLwzi6Z5tGIGLnA==
+  version "1.4.75"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.75.tgz#d1ad9bb46f2f1bf432118c2be21d27ffeae82fdd"
+  integrity sha512-LxgUNeu3BVU7sXaKjUDD9xivocQLxFtq6wgERrutdY/yIOps3ODOZExK1jg8DTEg4U8TUCb5MLGeWFOYuxjF3Q==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4285,6 +4285,11 @@ html-minifier@^4.0.0:
     param-case "^2.1.1"
     relateurl "^0.2.7"
     uglify-js "^3.5.1"
+
+html-to-image@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.9.0.tgz#cb49bf9f4b37376771c85cfdd65863ae9420b268"
+  integrity sha512-9gaDCIYg62Ek07F2pBk76AHgYZ2gxq2YALU7rK3gNCqXuhu6cWzsOQqM7qGbjZiOzxGzrU1deDqZpAod2NEwbA==
 
 html2canvas@*:
   version "1.4.1"
@@ -7447,11 +7452,6 @@ use-long-press@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/use-long-press/-/use-long-press-1.1.2.tgz#59135295c14b0a8899e4baf84cf1a36c2f64e18c"
   integrity sha512-fbIcG9ozS7gP8Nh2focxdPMpLIs/fXpq1TqD9SmxPmdd5FBwl+g4OqQICE4ULwJvb0t/ProkpGeUaq1x42enFg==
-
-use-react-screenshot@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/use-react-screenshot/-/use-react-screenshot-3.0.0.tgz#fa4f3bc94b17719041273699d9e04f53987194de"
-  integrity sha512-82+zsJgNWEUsUR7lslLIXMw9BW+xic+epn5Dl2ziedgsP9bz0HM0hfx3E71Kkv1U7F6Hyi4E/jMxuxJPLdpHcg==
 
 utf-8-validate@^5.0.3:
   version "5.0.8"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from 'src/Components/Header'
+import Header from 'src/Components/Header/Header'
 import { useIntl } from 'react-intl'
 // import { useState } from 'react'
 // import { useSelector } from 'react-redux'

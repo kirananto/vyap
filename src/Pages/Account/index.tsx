@@ -1,4 +1,4 @@
-import { SimpleHeader } from '../../Components/Header'
+import SimpleHeader from '../../Components/Header/SimpleHeader'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'

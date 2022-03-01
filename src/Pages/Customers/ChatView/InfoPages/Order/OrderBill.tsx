@@ -17,7 +17,7 @@ const OrderBill = ({ order }: { order: orderInterface }) => {
         })
     }, [token, order?.id])
     return (
-        <div className="bg-white pb-2">
+        <div className="bg-white pb-2" id="order-bill" >
             <div className=" grid grid-cols-1" id="divContents">
                 {/* header section */}
 

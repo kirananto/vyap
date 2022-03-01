@@ -1,4 +1,4 @@
-import { Header } from '../../Components/Header'
+import Header from '../../Components/Header/Header'
 import React, { useState, useEffect } from 'react'
 import AppliedFilters from './AppliedFilters'
 import PaymentContainer from './PaymentContainer'
