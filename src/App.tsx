@@ -19,20 +19,10 @@ const messages: IntlMessages = {
 }
 
 export const InitialRouter = () => {
-
     const userInterfaceLanguage = useSelector(selecti18nConfig).language
-
     const dispatch = useDispatch()
-
-
-    console.log('userInterfaceLanguage', userInterfaceLanguage)
-
     useEffect(() => {
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            dispatch(setDarkMode(true))
-        } else {
-            dispatch(setDarkMode(false))
-        }
+        dispatch(setDarkMode(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)))
     }, [dispatch])
 
     return (

@@ -7,11 +7,11 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useParams } from 'react-router'
 import { fetchOrderAPI } from 'src/API/order.axios'
 import { format } from 'date-fns'
-import { useScreenshot } from 'use-react-screenshot'
 import OrderBill from './OrderBill'
 import Button from 'src/Components/Style/Button'
 import { isNumber } from 'class-validator'
 import { selectChatList, setOrderInfo } from 'src/Pages/Customers/ChatView/chatListSlice'
+import { toBlob } from 'html-to-image'
 
 export default function OrderDetails() {
     // const [order, setOrder] = useState<any | undefined>()
@@ -29,12 +29,17 @@ export default function OrderDetails() {
     const order = thread?.order
 
     const refBill = createRef<HTMLInputElement>()
-    const getBill = () => takeScreenshot(refBill.current)
-
     const ref = createRef<HTMLInputElement>()
-    // TODO
-    const [, takeScreenshot] = useScreenshot()
-    const getImage = () => takeScreenshot(ref.current)
+
+    const getImage = async (nodeId: string) => {
+        const node = document.getElementById(nodeId)
+        if(!node) {
+            return false
+        }
+        console.log('node', node)
+        const data = await toBlob(node)
+        return data
+    }
 
     useEffect(() => {
         fetchOrderAPI({ token, id: id }).then((result) => {
@@ -67,12 +72,13 @@ export default function OrderDetails() {
     const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
     async function share(type: string) {
-        await delay(200)
-        const getImg = type === 'page' ? await getImage() : await getBill()
-        const images = await fetch(getImg)
-        const blob = await images.blob()
-        const file = new File([blob], 'order_summary.png', { type: 'image/png' })
-        navigator.share({ text: 'Order Summary', files: [file] } as ShareData)
+        const blob = await getImage(type === 'page' ? 'order-data' : 'order-bill')
+        if(blob) {
+            const file = new File([blob], 'order_summary.png', { type: 'image/png' })
+            navigator.share({ text: 'Order Summary', files: [file] } as ShareData).catch(error => {
+                console.log('share', error)
+            })
+        }
         await delay(2000)
         setBillActive(false)
     }
@@ -98,9 +104,9 @@ export default function OrderDetails() {
                         shareAction={onShare}
                     />
                 </div>
-                <span ref={ref}>
+                <span ref={ref} >
                     {/* Body */}
-                    <div className="flex flex-col items-center gap-5 py-24">
+                    <div className="flex flex-col items-center gap-5 py-24" id="order-data">
                         <h1 className="text-3xl sm:text-5xl font-black text-center text-slate-600 dark:text-slate-300">
                             {(order?.totalAmount && isNumber(parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount))) ?  `${(
                                 parseFloat(order?.totalAmount) - parseFloat(order?.flatDiscount)
