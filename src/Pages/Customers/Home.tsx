@@ -15,7 +15,7 @@ import useQueryParam from 'src/utils/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { useScrollDirection } from 'react-use-scroll-direction'
 import { IndividualChatInterface, selectChatList, setCustomers } from './ChatView/chatListSlice'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -145,8 +145,8 @@ export const Home = () => {
                         <Link to="/my-account" aria-label="my account">
                             <img
                                 loading="lazy"
-                                className="h-12 rounded-full aspect-square shadow-xs bg-[#373465] p-2"
-                                src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profileImg}
+                                className="h-12 rounded-full aspect-square shadow-xs bg-[#373465]"
+                                src={user?.organization?.profileImageUrl ? getDpImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profileImg}
                                 height={48}
                                 width={48}
                                 alt=""

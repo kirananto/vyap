@@ -8,7 +8,7 @@ import { patchOrganization } from 'src/API/organization.axios'
 import { IsEmail, IsString, Length, validate, IsOptional } from 'class-validator'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
 import Button from 'src/Components/Style/Button'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { imageUpload } from 'src/API/image.axios'
 import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'
 import Compressor from 'compressorjs'
@@ -155,8 +155,8 @@ export default function Account() {
                             <>
                                 <img
                                     loading="lazy"
-                                    src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
-                                    className={`w-32 rounded-full border border-2 p-6 dark:border-slate-800 bg-[#373465]`}
+                                    src={user?.organization?.profileImageUrl ? getDpImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
+                                    className={`w-32 rounded-full border border-2 dark:border-slate-800 bg-[#373465]`}
                                     alt="profile-pic"
                                     height={128}
                                     width={128}
