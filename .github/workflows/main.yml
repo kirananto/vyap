@@ -19,3 +19,4 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           clean-script: "clean"
+          strip-hash: "\\b\\w{20}\\."
