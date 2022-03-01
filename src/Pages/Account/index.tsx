@@ -149,18 +149,24 @@ export default function Account() {
                     className="relative w-32 h-32 rounded-full"
                 >
                     <div 
-                        className="mt-4 mb-8"
+                        className="mt-4 mb-8 relative"
                         onClick={() => fileUploaderRef.current?.click()}>
                         {!spinner ? (
-
-                            <img
-                                loading="lazy"
-                                src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
-                                className={`w-32 rounded-full border border-2 p-6 dark:border-slate-800 bg-[#373465]`}
-                                alt="profile-pic"
-                                height={128}
-                                width={128}
-                            />
+                            <>
+                                <img
+                                    loading="lazy"
+                                    src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
+                                    className={`w-32 rounded-full border border-2 p-6 dark:border-slate-800 bg-[#373465]`}
+                                    alt="profile-pic"
+                                    height={128}
+                                    width={128}
+                                />
+                                <div className="w-8 h-8 absolute rounded-full bottom-0 right-0 p-2 bg-slate-300 dark:bg-slate-700 dark:text-slate-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                </div>
+                            </>
                         ) : (
                             <div className="w-32 h-32 rounded-full flex justify-center items-center border dark:border-slate-700">
                                 <svg className="animate-spin m-auto h-8 w-8 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
