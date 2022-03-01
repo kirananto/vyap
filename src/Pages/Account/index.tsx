@@ -1,13 +1,17 @@
 import SimpleHeader from '../../Components/Header/SimpleHeader'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'
+import { profileImageUrl, selectCredentials, setBusinessName, setPinCode, setUserEmail, setUserName } from '../Login/credentialsSlice'
 import { patchUser } from 'src/API/user.axios'
 import { useIntl } from 'react-intl'
 import { patchOrganization } from 'src/API/organization.axios'
 import { IsEmail, IsString, Length, validate, IsOptional } from 'class-validator'
 import profPic from 'src/assets/icons/profile/profile-icon.svg'
 import Button from 'src/Components/Style/Button'
+import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import { imageUpload } from 'src/API/image.axios'
+import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'
+import Compressor from 'compressorjs'
 
 
 export class Organization {
@@ -40,6 +44,8 @@ export default function Account() {
     const [pinCodeError, setPinCodeError] = useState(false)
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
+    const fileUploaderRef = useRef<HTMLInputElement>(null)
+    const [spinner, setSpinner] = useState(false)
 
     const dispatch = useDispatch()
     const intl = useIntl()
@@ -89,6 +95,49 @@ export default function Account() {
         })
     }
 
+
+    function uploadImage() {
+        if (fileUploaderRef.current?.files) {
+            if (fileUploaderRef.current?.files?.length > 0) {
+                setSpinner(true)
+                new Compressor(fileUploaderRef.current?.files?.[0], {
+                    quality: 0.8,
+                    maxWidth: 500,
+                    maxHeight: 500,
+
+                    // The compression process is asynchronous,
+                    // which means you have to access the `result` in the `success` hook function.
+                    success(result) {
+                        const data = new FormData()
+                        data.append('file', result)
+                        imageUpload({ token, data, folder: IMAGEKIT_FOLDERS.USER_PIC })
+                            .then((result: IProductImageUploadResult) => {
+                                console.log('result.data', result.data)
+                                patchOrganization({ token: token, id: user?.organizationId, profileImageUrl: result.data?.name })
+                                    .then(() => {
+                                        // TODO Patch org object
+                                        dispatch(profileImageUrl(result.data?.name))
+                                        setSpinner(false)
+                                    })
+                            })
+                            .catch((error) => {
+                                //TODO Handle Error
+                                console.log('error', error)
+                                setSpinner(false)
+                            })
+                    },
+                    error(err) {
+                        //TODO Handle Error
+                        console.log(err.message)
+                        setSpinner(false)
+                    },
+                })
+
+            }
+        }
+
+    }
+
     return (
         <div className="w-full h-screen overflow-y-auto bg-white dark:bg-slate-900">
             <div className="w-full mb-2 bg-white shadow">
@@ -99,14 +148,35 @@ export default function Account() {
                 <div
                     className="relative w-32 h-32 rounded-full"
                 >
-                    <img
-                        loading="lazy"
-                        src={user?.profileImageUrl ?? profPic}
-                        className="w-32 rounded-full border border-1 dark:border-slate-800 p-6  bg-slate-200 dark:bg-slate-900"
-                        alt="profile-pic"
-                        height={128}
-                        width={128}
-                    />
+                    <div className="mt-4 mb-8 flex flex-wrap gap-4">
+                        <div
+                            className="w-32 rounded-full border border-1 dark:border-slate-800 p-6 bg-slate-200 dark:bg-slate-900"
+                            onClick={() => fileUploaderRef.current?.click()}
+                        >
+                            {!spinner ? (
+
+                                <img
+                                    loading="lazy"
+                                    src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
+                                    className=" "
+                                    alt="profile-pic"
+                                    height={128}
+                                    width={128}
+                                />
+                            ) : (
+                                <div className=" flex justify-center items-center">
+                                    <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-purple-700"></div>
+                                </div>
+                            )}
+                        </div>
+                        <input
+                            type="file"
+                            style={{ display: 'none' }}
+                            ref={fileUploaderRef}
+                            accept={'image/*'}
+                            onChange={uploadImage}
+                        />
+                    </div>
                     {/* <div
                         className="absolute top-0 right-0 object-none p-2 text-slate-600 bg-white rounded-full shadow-md w-min"
                     >
@@ -115,7 +185,7 @@ export default function Account() {
                         </svg>
                     </div> */}
                 </div>
-                <div className="pb-8 text-2xl font-bold text-slate-500 dark:text-slate-200">{user?.organization?.name}</div>
+                <div className="pb-8 mt-2 text-2xl font-bold text-slate-500 dark:text-slate-200">{user?.organization?.name}</div>
                 <div className="w-full">
                     <label className="block text-sm font-semibold leading-relaxed tracking-tighter text-slate-500 dark:text-slate-300">
                         Your name
