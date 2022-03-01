@@ -72,7 +72,7 @@ export default function More() {
                 {/* Menu */}
                 {isValidBrowser ? <div className="m-auto w-full px-3">
                     <div className="bg-green-200 dark:bg-green-400 dark:bg-opacity-20 border border-green-700 m-auto w-full my-4 p-4 inline-flex items-center rounded">
-                        <img src={giftSvg} alt="gift" className="w-20 h-20 opacity-80" />
+                        <img src={giftSvg} alt="gift" className="w-auto h-20 opacity-80" />
                         <div className="flex-grow flex flex-col pl-4">
                             <h2 className="title-font font-bold text-slate-700 dark:text-slate-200 tracking-wider">Enjoy your {expiry} days of <br/> free service 🎉</h2>
                             <p className="text-xs text-slate-600 dark:text-slate-300">and then it{`'`}s only <strong>₹299/month</strong></p>
