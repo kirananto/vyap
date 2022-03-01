@@ -103,7 +103,7 @@ export default function AddCustomerStep1({
             className="mt-4 text-left"
             onSubmit={(event: React.FormEvent) => {
                 event.preventDefault()
-                // onPressLogin(phoneNumber.replace('+91', ''));
+                handleValidation('submit')
             }}
         >
             <div>
@@ -177,7 +177,6 @@ export default function AddCustomerStep1({
                 </button>
                 <Button
                     isDisabled={loading}
-                    onClick={() => handleValidation('submit')}
                     className="active:scale-95 "
                 >
                     {loading ? (
