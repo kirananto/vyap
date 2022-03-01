@@ -1,4 +1,4 @@
-import { SimpleHeader } from '../../../Components/Header'
+import SimpleHeader from '../../../Components/Header/SimpleHeader'
 import React, { useState } from 'react'
 import ItemList from './ItemList'
 import { useNavigate } from 'react-router-dom'

@@ -14,7 +14,7 @@ import type { IAddCentralProductResponse } from 'src/types/addCentralProductResp
 import type { ICentralCatalogue, IDataEntity } from 'src/types/centralCatalogue'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { SimpleFooter } from '../../../../Components/Footer'
-import { SimpleHeader } from '../../../../Components/Header'
+import SimpleHeader from '../../../../Components/Header/SimpleHeader'
 import { clearAll, selectAddProductInfo } from '../redux/addProductSlice'
 import ItemCard from './ItemCard'
 import OthersTab from './OthersTab'
@@ -144,7 +144,6 @@ function CreateProduct() {
     }
 
     const validateOthers = () => {
-        // return (isValidDescription(addProductInfo?.centralCatalogue?.description!) &&
         return (
             isValidCategory(
                 !!addProductInfo?.centralCatalogue?.id,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SimpleHeader } from '../../Components/Header'
+import SimpleHeader from '../../Components/Header/SimpleHeader'
 import EmployeesCard from './EmployeesCard'
 import Popup from '../../Components/Popup'
 
