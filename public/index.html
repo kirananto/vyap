@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="/new_logo.svg" />
   <meta name="theme-color" content="#1f2937" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link media="print" onload="this.media='all'; this.onload = null" rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="stylesheet" type="text/css" media="print" onload="this.media='all'; this.onload = null"
     href="/index.css" />
   <title>Vyap | Helping wholesales reach all their retailers in one place.</title>
@@ -19,7 +19,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-N1N6NWTRX0');
   </script>
 </head>
@@ -28,14 +27,6 @@
   <div id="root" class="dark:bg-slate-900"></div>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <script type="module" src="/dist/index.js"></script>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
 </body>
 
 </html>

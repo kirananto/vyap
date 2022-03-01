@@ -90,7 +90,6 @@ const ProductDetail = () => {
 
             <div className=" w-full self-center px-1 py-3">
                 <div className="font-semibold text-lg dark:text-slate-300 truncate">
-                    {/* {product?.aliasName ? `${product?.aliasName}` : ''} {product?.aliasName ? `(${product?.centralCatalogue?.name})` : product?.centralCatalogue?.name} */}
                     {product?.aliasName ? `${product?.aliasName}` : ''} {product?.aliasName ? `(${product?.centralCatalogue?.name})` : product?.centralCatalogue?.name}
                 </div>
 
