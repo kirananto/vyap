@@ -1,9 +1,10 @@
-import { IsBoolean, IsDefined, IsEmail, IsPhoneNumber, IsString, Length } from 'class-validator'
+import { IsBoolean, IsDefined, IsEmail, IsNumber, IsString, Length } from 'class-validator'
 import type { OrganizationLocationInterface } from '../signupSlice'
 
 export class SignupRequestDto {
 
-    @IsPhoneNumber('IN')
+    @IsNumber()
+    @Length(10, 10)
     @IsDefined()
         phone!: string
 
