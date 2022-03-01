@@ -7,7 +7,7 @@ console.log('process.env.SNOWPACK_PUBLIC_PACKAGE_VERSION', process.env.SNOWPACK_
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
     mount: {
-        public: { url: '/', static: true },
+        public: { url: '/' },
         src: { url: '/dist' },
     },
     plugins: [
