@@ -1,5 +1,5 @@
 import React from 'react'
-import walletSvg from '../assets/illustrations/wallet.svg'
+import walletSvg from '../../assets/illustrations/wallet.svg'
 
 export default function PaymentBottomHeader({
     amount,
