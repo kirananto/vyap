@@ -59,7 +59,7 @@ export default function More() {
                     <div className="mb-2 dark:bg-slate-800 shadow-md dark:border-slate-800 p-4 inline-flex items-center w-full">
                         <img
                             src={user?.organization?.profileImageUrl ? getImageURL(user?.organization?.profileImageUrl, IMAGEKIT_FOLDERS.USER_PIC) : profPic}
-                            className="w-16 rounded-full border border-1 dark:border-slate-900 p-3  bg-slate-200 dark:bg-slate-900"
+                            className={`w-16 rounded-full p-3 border border-1 dark:border-slate-900 bg-[#373465]`}
                             alt="profile-pic"
                             height={64}
                             width={64}
