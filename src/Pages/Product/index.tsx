@@ -216,7 +216,7 @@ export default function Product() {
 
             <div
                 ref={scrollTargetRef}
-                className="custom-height bg-white pb-[13vh] dark:bg-slate-900"
+                className="custom-height bg-white pb-[13vh] dark:bg-slate-900 md:flex md:flex-wrap  md:flex-col md:pt-2 md:w-full lg:gap-0 lg:h-auto "
                 style={{
                     height: hasFilters()
                         ? 'calc( 100vh - 274px )'
