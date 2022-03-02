@@ -197,7 +197,11 @@ function CreateProduct() {
                         imageName: addProductInfo?.others?.centralCategory?.name ?? '',
                     }],
                     barCode: addProductInfo?.others?.barCode,
-                    images: addProductInfo?.others?.productImage,
+                    images: addProductInfo?.others?.productImage?.map((image) => ({ 
+                        title: image.title,
+                        description: image.description,
+                        imageName: image.imageName
+                    })),
                     hsnId: addProductInfo?.pricing?.taxEnabled
                         ? addProductInfo?.pricing.hsn?.id
                         : undefined,
