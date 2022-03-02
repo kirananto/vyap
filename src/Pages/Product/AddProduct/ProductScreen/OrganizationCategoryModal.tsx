@@ -38,6 +38,22 @@ function OrganizationCategoryModal(props: IProps) {
         props.setModal(false)
     }
 
+    function showCreationBox() {
+        const search = searchValue?.toLowerCase()?.trim()
+        if(!search) {
+            return null
+        }
+        if(items?.some(tag => tag.name.toLowerCase() === search)) {
+            return null
+        }
+        return <div key='New' onClick={() => selectHSN({
+            name: searchValue ?? ''
+        })} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
+            <div className="text-slate-700 dark:text-slate-300">{searchValue} </div>
+            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> Create this new tag. </div>
+        </div>
+    }
+
 
     return props.trigger ? (
         <div className="border-t border-slate-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-slate-800">
@@ -70,6 +86,7 @@ function OrganizationCategoryModal(props: IProps) {
                     />
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
+                    {showCreationBox()}
                     {items?.map((mapItem) => (
                         <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
                             <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>

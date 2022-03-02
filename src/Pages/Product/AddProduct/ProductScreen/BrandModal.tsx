@@ -21,7 +21,7 @@ function BrandModal(props: BrandModalInterface) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
     const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
-    const [hsnCodes, setBrands] = useState<BrandInterface[]>([])
+    const [brands, setBrands] = useState<BrandInterface[]>([])
 
     const dispatch = useDispatch()
 
@@ -30,16 +30,31 @@ function BrandModal(props: BrandModalInterface) {
     }
 
     useEffect(() => {
-        fetchBrands({ token, limit: 100, offset: 0, search: searchValue }).then(result => {
+        fetchBrands({ token, limit: 100, offset: 0, search: searchValue?.toLowerCase() }).then(result => {
             setBrands(result.data?.data)
         })
     }, [searchValue, token])
 
-    function selectHSN(value: BrandInterface) {
+    function selectBrand(value: BrandInterface) {
         dispatch(setBrand(value))
         props.setModal(false)
     }
 
+    function showCreationBox() {
+        const search = searchValue?.toLowerCase()?.trim()
+        if(!search) {
+            return null
+        }
+        if(brands?.some(brand => brand.name.toLowerCase() === search)) {
+            return null
+        }
+        return <div key='New' onClick={() => selectBrand({
+            name: searchValue ?? ''
+        })} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
+            <div className="text-slate-700 dark:text-slate-300">{searchValue} </div>
+            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> Create this new brand. </div>
+        </div>
+    }
 
     return props.trigger ? (
         <div className="border-t border-slate-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-slate-800">
@@ -72,8 +87,9 @@ function BrandModal(props: BrandModalInterface) {
                     />
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
-                    {hsnCodes.map((mapItem) => (
-                        <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
+                    {showCreationBox()}
+                    {brands.map((mapItem) => (
+                        <div key={mapItem.id} onClick={() => selectBrand(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
                             <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>
                             <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
                         </div>
