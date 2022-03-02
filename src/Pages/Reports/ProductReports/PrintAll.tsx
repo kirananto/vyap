@@ -16,6 +16,7 @@ interface IProduct {
     productName?: string;
     productImage?: string | null;
     productQty?: number;
+    aliasName?: string;
 }
 
 interface IProps {
@@ -78,7 +79,7 @@ export const PrintAll = ({ productData }: IProps) => {
                         <h2 className="text-2xl font-bold text-slate-600">
                                 Productwise Report
                         </h2>
-                        <p className="text-slate-500 font-bold">{ format(new Date(), 'do MMM yyyy') }</p>
+                        <p className="text-slate-400 font-bold">{ format(new Date(), 'do MMM yyyy') }</p>
                     </div>
 
                     <div className="col-end-7 col-span-1 justify-end flex flex-row align-middle border border-slate-200 p-3">

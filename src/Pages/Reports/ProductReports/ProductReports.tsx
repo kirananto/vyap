@@ -17,6 +17,7 @@ interface IProduct {
     productName?: string;
     productImage?: string | null;
     productQty?: number;
+    aliasName?: string;
 }
 
 const ProductReports = () => {
@@ -71,7 +72,8 @@ const ProductReports = () => {
                 'productID': item?.product?.id,
                 'productName': item?.product?.centralCatalogue?.name,
                 'productImage': item?.product?.thumbnailImage,
-                'productQty': item?.quantity
+                'productQty': item?.quantity,
+                'aliasName': item?.aliasName
             }
 
             if(productData){
@@ -126,10 +128,10 @@ const ProductReports = () => {
                 :            <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
                     <div
                         className="overflow-y-auto bg-white pb-24 dark:bg-slate-800 rounded p-4"
-                        style={{ height: 'calc(100vh - 15rem)' }}
+                        style={{ height: 'calc(100vh - 12rem)' }}
                     > 
                         <div className='flex justify-between mb-1 pb-2 dark:text-slate-200'>
-                            <div className="flex basis-10/12 text-lg border-b-[3px] border-blue-400 pt-2 px-3">Items Sold</div>
+                            <div className="flex basis-10/12 text-lg border-b-[3px] border-blue-400 pt-2 px-2 mr-3">Items Sold (Today)</div>
                             <div className="flex text-lg border-b-[3px] border-blue-400 pt-2 px-2">Units</div>         
                         </div>
 

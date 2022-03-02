@@ -6,6 +6,7 @@ interface IProduct {
     productName?: string;
     productImage?: string | null;
     productQty?: number;
+    aliasName?: string;
 }
 
 const ProductCard = ({item} : {item: IProduct}) => {
@@ -32,9 +33,9 @@ const ProductCard = ({item} : {item: IProduct}) => {
                 </div>
 
                 <div className="basis-8/12 max-w-[48vw] self-center px-3">
-                    <div className="font-semibold text-md dark:text-slate-200 truncate">
-                        {/* {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name} */}
-                        {item?.productName}
+                    <div className="font-semibold text-md dark:text-slate-200 break-words	">
+                        {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.productName})` : item?.productName}
+                        {/* {item?.productName} */}
                     </div>
                 </div>
 
