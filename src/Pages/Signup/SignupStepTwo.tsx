@@ -74,11 +74,16 @@ export default function SignupStepTwo() {
     }, [signup.pinCode])
     
     useEffect(() => {
-        if (nextPressed.current && !isEmail(signup.email)) {
-            setEmailError('Enter a valid email.')
-        } else {
+        if(signup.email?.length){
+            if (nextPressed.current && !isEmail(signup.email)) {
+                setEmailError('Enter a valid email.')
+            } else {
+                setEmailError('')
+            }
+        }else {
             setEmailError('')
         }
+
     }, [signup.email])
     
     function handleValidations() {
