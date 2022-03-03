@@ -28,6 +28,7 @@ const ProductReports = () => {
     const [orders, setOrders] = useState<orderInterface[]>([])
     const [orderItems, setOrderItems] = useState<IOrderItem[]>([])
     const [productData, setProductData] = useState<IProduct[]>([])
+    const [isEmptyList, setIsEmptyList] = useState(false)
 
     useEffect(() => {
         if (token) {
@@ -40,6 +41,10 @@ const ProductReports = () => {
                 limit: 1000,
             }).then((result) => {
                 setOrders(result?.data?.data ?? [])
+                if(result?.data?.total === 0){
+                    setLoading(false)
+                    setIsEmptyList(true)
+                }
             })
         }
     }, [token])
@@ -66,6 +71,7 @@ const ProductReports = () => {
     }
 
     const getProductWiseData = () => {
+        orderItems.length &&  setIsEmptyList(false)
         orderItems?.map?.((item)=> {
             const product : IProduct  = {
                 'orderID': item?.orderId,
@@ -124,37 +130,47 @@ const ProductReports = () => {
                 ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
                     <Spinner />
                 </div>
+                :             
+                <>  
+                    {isEmptyList
+                        ?
+                        <div className="text-center dark:text-slate-200"> <p className="pt-60"> No Products <br/> Sold Today</p> </div>
+                        :
+                        <>                           
+                            <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
+                                <div
+                                    className="overflow-y-auto bg-white pb-24 dark:bg-slate-800 rounded p-4"
+                                    style={{ height: 'calc(100vh - 12rem)' }}
+                                > 
+                                    <div className='flex justify-between mb-1 pb-2 dark:text-slate-200'>
+                                        <div className="flex basis-10/12 text-lg border-b-[3px] border-blue-400 pt-2 px-2 mr-3">Items Sold (Today)</div>
+                                        <div className="flex text-lg border-b-[3px] border-blue-400 pt-2 px-2">Units</div>         
+                                    </div>
 
-                :            <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
-                    <div
-                        className="overflow-y-auto bg-white pb-24 dark:bg-slate-800 rounded p-4"
-                        style={{ height: 'calc(100vh - 12rem)' }}
-                    > 
-                        <div className='flex justify-between mb-1 pb-2 dark:text-slate-200'>
-                            <div className="flex basis-10/12 text-lg border-b-[3px] border-blue-400 pt-2 px-2 mr-3">Items Sold (Today)</div>
-                            <div className="flex text-lg border-b-[3px] border-blue-400 pt-2 px-2">Units</div>         
-                        </div>
+                                    {
+                                        productData?.map?.((item) => {
+                                            return <ProductCard
+                                                key={`${item.productID} ${item.orderID}`}
+                                                item={item}
+                                            />
+                                        })
 
-                        {
-                            productData?.map?.((item) => {
-                                return <ProductCard
-                                    key={`${item.productID} ${item.orderID}`}
-                                    item={item}
-                                />
-                            })
+                                    }
+                   
+                                </div>
+                            </div>
+                            <div 
+                                style={{ boxShadow: '0px -2px 8px #0000002e' }}
+                                className="fixed print:static bottom-0 w-full h-20 bg-white dark:bg-slate-800 print:bg-white dark:print:bg-white drop-shadow-xl px-8 grid">
+                                <div className="flex items-center justify-center gap-2 justify-self-center mt-2 w-full max-w-lg">
+                                    <PrintAll productData={productData} />
+                                </div>
+                            </div> </>              
+                    }              
 
-                        }
-                    
-                    </div>
-                </div>
+                </>
             }
-            <div 
-                style={{ boxShadow: '0px -2px 8px #0000002e' }}
-                className="fixed print:static bottom-0 w-full h-20 bg-white dark:bg-slate-800 print:bg-white dark:print:bg-white drop-shadow-xl px-8 grid">
-                <div className="flex items-center justify-center gap-2 justify-self-center mt-2 w-full max-w-lg">
-                    <PrintAll productData={productData} />
-                </div>
-            </div>
+
         </div>
     )
 }
