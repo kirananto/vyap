@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Header } from '../../Components/Header'
+import Header from '../../Components/Header/Header'
 import { Footer } from '../../Components/Footer'
 import ProductCard from './ProductCard'
 import { fetchProducts } from 'src/API/products.axios'
@@ -170,7 +170,7 @@ export default function Product() {
                 />
             ))
         }
-        if (loading) {
+        if (!loading) {
             return (
                 <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                     <Spinner />

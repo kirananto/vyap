@@ -8,7 +8,7 @@ import { selectChatList, setOrderItems } from 'src/Pages/Customers/ChatView/chat
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
-function Items({ order }: { order: orderInterface }) {
+function Items({ order, isExpanded }: { order: orderInterface, isExpanded: boolean }) {
 
     const { id, chatId } = useParams()
     const { token } = useSelector(selectCredentials)
@@ -32,6 +32,10 @@ function Items({ order }: { order: orderInterface }) {
                 <Spinner />
             </div>
         )
+    }
+
+    if(!isExpanded) {
+        return null
     }
 
     return (
@@ -158,7 +162,7 @@ export default function ItemList({
                     )}
                 </div>
             </div>
-            {isExpanded && <Items order={order} />}
+            <Items order={order} isExpanded={isExpanded} />
         </div>
     )
 }

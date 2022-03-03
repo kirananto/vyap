@@ -1,4 +1,4 @@
-import { SimpleHeader } from '../../../../Components/Header'
+import SimpleHeader from '../../../../Components/Header/SimpleHeader'
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import AddRemoveItems from './AddRemoveItems'

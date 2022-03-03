@@ -1,5 +1,6 @@
 import React from 'react'
-import { Header, PaymentBottomHeader } from '../../../Components/Header'
+import Header from '../../../Components/Header/Header'
+import  PaymentBottomHeader from '../../../Components/Header/PaymentBottomHeader'
 import ChatList from './ChatList'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'

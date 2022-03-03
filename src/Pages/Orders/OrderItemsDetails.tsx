@@ -72,30 +72,14 @@ export default function OrderItemsDetails({
                                         : {}
                                 }
                             />
-                            {/* <div className="flex flex-col"> */}
-                            {/* <div className="flex gap-4"> */}
                             <div className="text-slate-600 pr-4 self-center text-xs font-semibold md:text-md dark:text-slate-200">
                                 {item?.product?.centralCatalogue?.name}
                                 {item?.product?.aliasName
                                     ? `(${item?.product?.aliasName})`
                                     : ''}
                             </div>
-                            {/* <div className="text-slate-600 dark:text-slate-300  ">
-                    x 
-                                    </div> */}
-                            {/* </div> */}
-                            {/* <div className="flex gap-4 text-xs font-bold"> */}
-                            {/* <div className="text-slate-400 text-xs dark:text-slate-400">
-                                    {item?.quantity} quantity
-                                </div> */}
-                            {/* <div className="text-slate-400 dark:text-slate-400">
-                    MRP: ₹{item?.product?.mrpPrice}
-                                    </div> */}
-                            {/* </div> */}
-                            {/* </div> */}
                         </div>
                         <div className="flex text-slate-400 text-xs font-extrabold dark:text-slate-300 self-center">
-                            {/* ₹{item?.quantity * parseFloat(`${item?.purchasePrice}`)} */}
                             {parseFloat(item?.purchasePrice).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import type { ICentralImage, IFetchCentralProductImages } from 'src/types/fetchC
 import type { CentralCatalogueInterface } from '../redux/addProductSlice'
 import transparentImg from 'src/assets/img/transparent.png'
 import useDebounce from 'src/hooks/useDebounce'
+import Spinner from 'src/Components/Style/Spinner'
 
 export class Post {
   @Length(3, 50)
@@ -152,7 +153,7 @@ function DropDown(props: DropdDownInterface) {
         const listItems = options
         if(loading) {
             return <div className="text-slate-700 dark:text-slate-200 m-auto">
-                Loading items...
+                <Spinner />
             </div>
         }
         if (listItems?.length === 0) {

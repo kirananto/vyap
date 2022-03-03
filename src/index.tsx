@@ -1,23 +1,25 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import React, { StrictMode } from 'react'
+import { render } from 'react-dom'
 import './tailwind.css'
 import { Provider } from 'react-redux'
 import { InitialRouter } from './App'
 import { persistor, store } from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import * as Sentry from '@sentry/react'
+import { init } from '@sentry/react'
 import { BrowserTracing } from '@sentry/tracing'
 
-Sentry.init({
-    dsn: 'https://ccaf8e0e8a37441a8aae84226c909553@o1147462.ingest.sentry.io/6217762',
-    integrations: [new BrowserTracing()],
+if(import.meta.env.MODE !== 'development') {
+    init({
+        dsn: 'https://ccaf8e0e8a37441a8aae84226c909553@o1147462.ingest.sentry.io/6217762',
+        integrations: [new BrowserTracing()],
 
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 1.0,
-})
+        // Set tracesSampleRate to 1.0 to capture 100%
+        // of transactions for performance monitoring.
+        // We recommend adjusting this value in production
+        tracesSampleRate: 1.0,
+    })
+}
 
 if(!localStorage.theme) {
     localStorage.setItem('theme', 'dark')
@@ -31,14 +33,14 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
     document.documentElement.classList.remove('dark')
 }
 
-ReactDOM.render(
-    <React.StrictMode>
+render(
+    <StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <InitialRouter />
             </PersistGate>
         </Provider>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root')
 )
 
