@@ -1,6 +1,6 @@
 import React from 'react'
 import SimpleHeader from '../../Components/Header/SimpleHeader'
-import {ReportCard, EmptyReportCard} from './ReportCard'
+import {ReportCard } from './ReportCard'
 import shopImg from '../../assets/illustrations/Shop.svg'
 import { useIntl } from 'react-intl'
 import { NavLink, useNavigate } from 'react-router-dom'
