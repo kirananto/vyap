@@ -170,7 +170,7 @@ export default function Product() {
                 />
             ))
         }
-        if (!loading) {
+        if (loading) {
             return (
                 <div className="mt-12 grid p-12 text-center dark:text-slate-100">
                     <Spinner />
