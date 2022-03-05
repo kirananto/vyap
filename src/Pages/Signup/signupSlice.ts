@@ -13,7 +13,7 @@ export interface OrganizationLocationInterface {
 export interface SignupInterface {
     name: string;
     phone: string;
-    email: string;
+    email: string | undefined;
     pinCode: string;
     organizationLocation: OrganizationLocationInterface
     businessName: string
@@ -70,7 +70,7 @@ export const signupSlice = createSlice({
             state.organizationLocation.lng = action.payload.lng
         },
         setCategory: (state, action: PayloadAction<{ id: string }>) => {
-            if(state.category.some(someItem => someItem.id === action.payload?.id)) {
+            if (state.category.some(someItem => someItem.id === action.payload?.id)) {
                 state.category = state.category.filter(filterItem => filterItem.id !== action.payload.id)
             } else {
                 state.category = [...state.category, action.payload]

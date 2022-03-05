@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { SimpleHeader } from '../../../../Components/Header'
+import SimpleHeader from '../../../../Components/Header/SimpleHeader'
 import { clearAll, setCentralCatalogue } from '../redux/addProductSlice'
 import DropDown from './DropDown'
 

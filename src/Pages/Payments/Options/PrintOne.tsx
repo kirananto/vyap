@@ -68,74 +68,74 @@ export const PrintOne = ({ item }: IProps) => {
                 id="divContents"
                 ref={componentRef}
             >
-                    <div className="grid grid-cols-5 gap-1 m-2 border-b-2 border-grey-200 py-4 px-5">
-                        <div className="col-start-1 col-span-1  -space-y-3 align-middle">
-                            {/* <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} /> */}
-                            <VyapLogo />
-                            <p className="text-2xl font-bold text-slate-700 "> vyap </p>
-                        </div>
-
-                        <div className="col-start-2 col-span-2 self-center">
-                            <h2 className="text-2xl font-bold text-slate-600">
-                                Payment Summary
-                            </h2>
-                        </div>
-
+                <div className="grid grid-cols-5 gap-1 m-2 border-b-2 border-grey-200 py-4 px-5">
+                    <div className="col-start-1 col-span-1  -space-y-3 align-middle">
+                        {/* <img height={48} width={48} className="w-12 h-12" alt="vyap-logo" src={vyapLogo} /> */}
+                        <VyapLogo />
+                        <p className="text-2xl font-bold text-slate-700 "> vyap </p>
                     </div>
 
+                    <div className="col-start-2 col-span-2 self-center">
+                        <h2 className="text-2xl font-bold text-slate-600">
+                                Payment Summary
+                        </h2>
+                    </div>
 
-                    <div>
+                </div>
+
+
+                <div>
                     <div className="m-5 mx-10 p-5 border border-slate-200 rounded-md">
-                            <h1 className="dark:text-white mb-10"> Payment Details</h1>
-                            {item ? (
-                                <div className={`mt-2 flex w-full justify-between pb-2`}>
-                                    <div className="flex gap-2">
-                                        <div className="flex flex-col">
-                                            <div className="text-xs text-slate-500 dark:text-slate-300">
+                        <h1 className="dark:text-white mb-10"> Payment Details</h1>
+                        {item ? (
+                            <div className={`mt-2 flex w-full justify-between pb-2`}>
+                                <div className="flex gap-2">
+                                    <div className="flex flex-col">
+                                        <div className="text-xs text-slate-500 dark:text-slate-300">
                                                 #{item?.id?.split('-')[0]} •{' '}
-                                                {item.createdAt
-                                                    ? format(new Date(item.createdAt), 'do MMM yyyy')
-                                                    : ''}
-                                            </div>
-                                            <div className="my-2 font-semibold text-slate-600 dark:text-slate-200">
-                                                {user?.organizationId === item?.senderOrgId
-                                                    ? item.receiver?.name
-                                                    : item.senderOrg?.name}
-                                            </div>
-                                            <div className="flex w-max items-center print:border print:border-1 print:border-green-800 rounded bg-green-200 px-2 text-sm font-bold text-green-800">
-                                                {paymentMethod[item.method]}
-                                            </div>
+                                            {item.createdAt
+                                                ? format(new Date(item.createdAt), 'do MMM yyyy')
+                                                : ''}
                                         </div>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <div className="text-lg font-extrabold text-slate-600 dark:text-slate-200">
-                                            ₹ {item.amount}
+                                        <div className="my-2 font-semibold text-slate-600 dark:text-slate-200">
+                                            {user?.organizationId === item?.senderOrgId
+                                                ? item.receiver?.name
+                                                : item.senderOrg?.name}
+                                        </div>
+                                        <div className="flex w-max items-center print:border print:border-1 print:border-green-800 rounded bg-green-200 px-2 text-sm font-bold text-green-800">
+                                            {paymentMethod[item.method]}
                                         </div>
                                     </div>
                                 </div>
-                            ) : (
-                                ' Something went wrong..!'
-                            )}
-                        </div>
-                    </div>        
-
-                    <div className="flex flex-row flex-wrap justify-end mt-20 pt-2 px-5 border-t border-zinc-200">
-                        <div className="item w-1/6 place-self-center">
-                            <div className=" -space-y-4 ">
-                                <VyapLogo />
-                                <p className="text-sm font-bold text-slate-700 ml-4"> vyap </p>
+                                <div className="flex items-center">
+                                    <div className="text-lg font-extrabold text-slate-600 dark:text-slate-200">
+                                            ₹ {item.amount}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="item w-4/6  place-self-center flex justify-center">
-                            <p className="text-slate-800 text-sm font-semibold pb-3 pr-3">
-                                {' '}
-                                Report generated by Vyap &nbsp; | &nbsp; https://vyap.app
-                            </p>
-                        </div>
-                        <div className="item w-1/6 self-center flex justify-end">
-                            <QRCode size={100} className="mt-2" value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                        ) : (
+                            ' Something went wrong..!'
+                        )}
+                    </div>
+                </div>        
+
+                <div className="flex flex-row flex-wrap justify-end mt-20 pt-2 px-5 border-t border-zinc-200">
+                    <div className="item w-1/6 place-self-center">
+                        <div className=" -space-y-4 ">
+                            <VyapLogo />
+                            <p className="text-sm font-bold text-slate-700 ml-4"> vyap </p>
                         </div>
                     </div>
+                    <div className="item w-4/6  place-self-center flex justify-center">
+                        <p className="text-slate-800 text-sm font-semibold pb-3 pr-3">
+                            {' '}
+                                Report generated by Vyap &nbsp; | &nbsp; https://vyap.app
+                        </p>
+                    </div>
+                    <div className="item w-1/6 self-center flex justify-end">
+                        <QRCode size={100} className="mt-2" value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                    </div>
+                </div>
             </div>
             
         </>

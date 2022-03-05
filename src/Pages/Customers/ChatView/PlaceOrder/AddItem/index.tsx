@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Header } from 'src/Components/Header'
+import Header from 'src/Components/Header/Header'
 import AppliedFilters from './AppliedFilters'
 import Button from 'src/Components/Style/Button'
 // import DropList from 'src/Components/Style/DropList'

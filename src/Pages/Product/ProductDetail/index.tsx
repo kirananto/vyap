@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Header } from 'src/Components/Header'
+import Header from 'src/Components/Header/Header'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
@@ -90,7 +90,6 @@ const ProductDetail = () => {
 
             <div className=" w-full self-center px-1 py-3">
                 <div className="font-semibold text-lg dark:text-slate-300 truncate">
-                    {/* {product?.aliasName ? `${product?.aliasName}` : ''} {product?.aliasName ? `(${product?.centralCatalogue?.name})` : product?.centralCatalogue?.name} */}
                     {product?.aliasName ? `${product?.aliasName}` : ''} {product?.aliasName ? `(${product?.centralCatalogue?.name})` : product?.centralCatalogue?.name}
                 </div>
 

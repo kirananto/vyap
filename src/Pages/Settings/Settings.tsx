@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import Lozenge from 'src/Components/Lozenge'
 import { selecti18nConfig, setLanguage } from 'src/i18n/i18nSlice'
-import { SimpleHeader } from '../../Components/Header'
+import SimpleHeader from '../../Components/Header/SimpleHeader'
 import ToggleButton from '../../Components/ToggleButton'
 import { selectCredentials, setDarkMode } from '../Login/credentialsSlice'
 

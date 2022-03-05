@@ -1,6 +1,6 @@
 import React from 'react'
-import * as FileSaver from 'file-saver'
-import * as XLSX from 'xlsx'
+import { saveAs } from 'file-saver'
+import { utils } from 'xlsx'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
 import type { orderInterface } from 'src/Pages/Customers/ChatView/Cards/OrderCard'
@@ -27,11 +27,11 @@ export const ExportAll = ({ apiData }: IProps) => {
 
     const exportToCSV = () => {
     /* making worksheet */
-        const ws = XLSX.utils.json_to_sheet(orders)
+        const ws = utils.json_to_sheet(orders)
 
         /* writing workbook (use type 'binary') */
-        const csv = XLSX.utils.sheet_to_csv(ws)
-        FileSaver.saveAs(
+        const csv = utils.sheet_to_csv(ws)
+        saveAs(
             new Blob([csv], { type: 'application/octet-stream' }),
             'Order_list.csv'
         )

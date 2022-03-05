@@ -77,6 +77,11 @@ export const credentialsSlice = createSlice({
                 state.user.organization.pinCode = action.payload
             }
         },
+        profileImageUrl: (state, action: PayloadAction<string>) => {
+            if(state.user?.organization) {
+                state.user.organization.profileImageUrl = action.payload
+            }
+        },
         setBusinessName: (state, action: PayloadAction<string>) => {
             if(state.user?.organization) {
                 state.user.organization.name = action.payload
@@ -94,7 +99,7 @@ export const credentialsSlice = createSlice({
     },
 })
 
-export const { setCredentials, setUserName, setUserEmail, setPinCode, setBusinessName, setDarkMode } = credentialsSlice.actions
+export const { setCredentials, setUserName, setUserEmail,profileImageUrl, setPinCode, setBusinessName, setDarkMode } = credentialsSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

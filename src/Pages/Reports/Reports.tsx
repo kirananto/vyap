@@ -1,5 +1,5 @@
 import React from 'react'
-import { SimpleHeader } from '../../Components/Header'
+import SimpleHeader from '../../Components/Header/SimpleHeader'
 import {ReportCard, EmptyReportCard} from './ReportCard'
 import shopImg from '../../assets/illustrations/Shop.svg'
 import { useIntl } from 'react-intl'

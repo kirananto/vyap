@@ -262,39 +262,25 @@ function OthersTab({ action, saveAttempt }: Props) {
                         <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Brand
                         </p>
-                        <div className="des-modal-btn">
-                            <input
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                    dispatch(
-                                        setBrand({ id: undefined, name: event.target.value })
-                                    )
-                                }}
-                                value={addProductInfo?.others?.brand?.name}
-                                type="text"
-                                placeholder="Enter brand"
-                                className="focus:shadow-outline mt-2 w-full transform rounded border border-transparent border-slate-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
-                            />
-                            {/* Modal handle btn */}
-                            <button
-                                className="modal-btn dark:text-slate-300"
-                                onClick={handleModal}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
+                        <div className="mb-2">
+                            
+                            <div className="flex text-sm pt-3 pb-1 text-slate-700 dark:text-slate-300"
+                                onClick={handleModal}>
+                                {addProductInfo?.others?.brand?.name ?? 'Tap to add a brand'}
+
+                                <button
+                                    className="w-4 ml-4 mt-1 dark:text-slate-300"
                                 >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                            </button>
+                                    {addProductInfo?.others?.brand?.name ? <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>}
+                                </button>
+                            </div>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
+                                    'mt-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidBrand(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.brand?.name
@@ -319,46 +305,28 @@ function OthersTab({ action, saveAttempt }: Props) {
                         <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Category
                         </p>
-                        <div className="des-modal-btn">
-                            <input
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                    dispatch(
-                                        setCentralCategory({
-                                            id: undefined,
-                                            name: event.target.value,
-                                        })
-                                    )
-                                }}
-                                value={addProductInfo?.others?.centralCategory?.name}
-                                type="text"
-                                placeholder="Enter category"
-                                className="focus:shadow-outline mt-2 w-full transform rounded border border-transparent border-slate-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
-                            />
-                            {/* Modal handle btn */}
-                            <button
-                                className="modal-btn dark:text-slate-300"
-                                onClick={handleCategoryModal}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
+                        <div className="mb-2">
+                            <div className="flex text-sm pt-3 pb-1 text-slate-700 dark:text-slate-300"
+                                onClick={handleCategoryModal}>
+                                {addProductInfo?.others?.centralCategory?.name ?? 'Tap to add a category'}
+
+                                <button
+                                    className="w-4 ml-4 mt-1 dark:text-slate-300"
                                 >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                            </button>
+                                    {addProductInfo?.others?.centralCategory?.name ? <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>}
+                                </button>
+                            </div>
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
+                                    'mt-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidCategory(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.centralCategory?.name
-                                    )|| saveAttempt === 0
+                                    ) || saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
@@ -382,43 +350,29 @@ function OthersTab({ action, saveAttempt }: Props) {
                         <p className="text-sm font-bold text-slate-500 dark:text-slate-300">
                             Tag
                         </p>
-                        <div className="des-modal-btn">
-                            <input
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                    dispatch(
-                                        setCategory({ id: undefined, name: event.target.value })
-                                    )
-                                }}
-                                value={addProductInfo?.others?.category?.name}
-                                type="text"
-                                placeholder="Enter Tags"
-                                className="focus:shadow-outline mt-2 w-full transform rounded border border-transparent border-slate-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
-                            />
-                            {/* Modal handle btn */}
-                            <button
-                                className="modal-btn dark:text-slate-300"
-                                onClick={handleTagsModal}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
+                        <div className="mb-2">
+                            <div className="flex text-sm pt-3 pb-1 text-slate-700 dark:text-slate-300"
+                                onClick={handleTagsModal}>
+                                {addProductInfo?.others?.category?.name ?? 'Tap to add a tag'}
+
+                                <button
+                                    className="w-4 ml-4 mt-1 dark:text-slate-300"
                                 >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                            </button>
+                                    {addProductInfo?.others?.category?.name ? <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>}
+                                </button>
+                            </div>
+                            {/* Modal handle btn */}
                             <span
                                 className={
-                                    'mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
+                                    'mt-1 flex items-center text-xs font-medium tracking-wide text-rose-500 ' +
                                     (isValidTag(
                                         !!addProductInfo?.centralCatalogue?.id,
                                         addProductInfo?.others?.category?.name
-                                    )|| saveAttempt === 0
+                                    ) || saveAttempt === 0
                                         ? 'hidden'
                                         : '')
                                 }
@@ -438,26 +392,12 @@ function OthersTab({ action, saveAttempt }: Props) {
 
                 {/* Description-Input */}
                 {!addProductInfo?.centralCatalogue?.id && (
-                    <>
-                        <Input
-                            label="Description"
-                            placeholder="Enter Description"
-                            dispatch={dispatch}
-                            value={addProductInfo?.centralCatalogue?.description}
-                        />
-                        {/* <span
-              className={
-                "mt-1 ml-1 flex items-center text-xs font-medium tracking-wide text-rose-500 " +
-                (isValidDescription(
-                  addProductInfo?.centralCatalogue?.description!
-                )
-                  ? "hidden"
-                  : "")
-              }
-            >
-              Enter valid description !
-            </span> */}
-                    </>
+                    <Input
+                        label="Description"
+                        placeholder="Enter Description"
+                        dispatch={dispatch}
+                        value={addProductInfo?.centralCatalogue?.description}
+                    />
                 )}
 
                 {!addProductInfo?.centralCatalogue?.id && (
@@ -516,7 +456,6 @@ function OthersTab({ action, saveAttempt }: Props) {
                     />
                 )}
 
-                {/* <Input label="Case Quantity" placeholder="Enter quantity..." dispatch={dispatch} value={addProductInfo?.others?.caseQuantity} /> */}
             </div>
         </div>
     )

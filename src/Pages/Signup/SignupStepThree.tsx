@@ -80,7 +80,7 @@ export default function SignupStepThree() {
             signupAPI({
                 phone: signup.phone,
                 name: signup.name,
-                email: signup.email,
+                email: signup.email ? signup.email : undefined,
                 businessName: signup.businessName,
                 address: signup.address,
                 category: signup.category?.filter((signupCategory) => categories.some(category => category.id === signupCategory.id)).map(item => ({ id: item?.id })),
