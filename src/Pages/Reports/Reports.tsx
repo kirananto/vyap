@@ -33,14 +33,9 @@ export default function Reports() {
                         bgIllus={shopImg}
                     />
                 </NavLink>
-
-                <EmptyReportCard 
-                    heading="coming soon...!!"
-                />
-                <EmptyReportCard 
-                    heading="coming soon...!!"
-                />
-        
+                <div className="text-center dark:text-slate-300 col-span-2 text-sm mt-2">
+                    More reports coming soon...
+                </div>
             </div>
         </div>
     )

@@ -4,12 +4,12 @@ import React from 'react'
 function ReportCard(props: { bgIllus: string, heading: string }) {
     return (
         <div className="flex flex-col h-auto p-4 bg-white rounded shadow-md dark:bg-slate-800">
-            <h1 className="pr-10 text-2xl font-black text-slate-500 dark:text-slate-200">
+            <h1 className="pr-10 text-lg tracking-wide leading-tighter font-semibold text-slate-500 dark:text-slate-200">
                 {props.heading}
             </h1>
             <div className="flex justify-end w-full ">
                 <img
-                    className="justify-end w-8/12"
+                    className="justify-end w-8/12 opacity-60"
                     src={props.bgIllus}
                     alt="vyap"
                 />
