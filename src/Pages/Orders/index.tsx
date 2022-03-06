@@ -42,7 +42,7 @@ export default function Orders() {
         <div className="dark:bg-slate-900 print:bg-white dark:print:bg-white">
             {/* header */}
             <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800 print:hidden  ">
-                <Header isSticky={false} onBackClick={() => navigate('/home')} heading={intl.formatMessage({ id: 'global.allOrders' })} />
+                <Header isSticky={false} onBackClick={() => navigate('/more')} heading={intl.formatMessage({ id: 'global.allOrders' })} />
                 <AppliedFilters
                     openFilters={() => setfilterPopupOpen(!filterPopupOpen)}
                 />

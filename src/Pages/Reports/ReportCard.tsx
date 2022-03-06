@@ -9,7 +9,7 @@ function ReportCard(props: { bgIllus: string, heading: string }) {
             </h1>
             <div className="flex justify-end w-full ">
                 <img
-                    className="justify-end w-8/12 opacity-60"
+                    className="justify-end w-8/12 mt-3 opacity-60"
                     src={props.bgIllus}
                     alt="vyap"
                 />

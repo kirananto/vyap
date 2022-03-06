@@ -2,6 +2,8 @@ import React from 'react'
 import SimpleHeader from '../../Components/Header/SimpleHeader'
 import {ReportCard } from './ReportCard'
 import shopImg from '../../assets/illustrations/Shop.svg'
+import productSoldImg from '../../assets/illustrations/Products_Sold.svg'
+
 import { useIntl } from 'react-intl'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { hapticFeedback } from 'src/utils/vibrate'
@@ -30,7 +32,7 @@ export default function Reports() {
                 <NavLink to="/productwise-reports" onClick={hapticFeedback} >
                     <ReportCard
                         heading="Productwise Reports"
-                        bgIllus={shopImg}
+                        bgIllus={productSoldImg}
                     />
                 </NavLink>
                 <div className="text-center dark:text-slate-300 col-span-2 text-sm mt-2">
