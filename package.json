@@ -53,7 +53,7 @@
     "tailwindcss-filters": "^3.0.0",
     "use-long-press": "^1.1.2",
     "webpack": "^5.70.0",
-    "workbox-cacheable-response": "^6.5.0",
+    "workbox-cacheable-response": "^6.5.1",
     "workbox-core": "^6.5.0",
     "workbox-expiration": "^6.5.1",
     "workbox-precaching": "^6.5.1",
