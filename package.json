@@ -55,7 +55,7 @@
     "webpack": "^5.69.1",
     "workbox-cacheable-response": "^6.5.0",
     "workbox-core": "^6.5.0",
-    "workbox-expiration": "^6.5.0",
+    "workbox-expiration": "^6.5.1",
     "workbox-precaching": "^6.5.1",
     "workbox-routing": "^6.5.0",
     "workbox-strategies": "^6.5.0",
