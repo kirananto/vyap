@@ -148,7 +148,7 @@ export const Home = () => {
     // ......  Button resizing onscroll - end.........!
 
     return (
-        <div className="dark:bg-slate-900"  >
+        <div className="dark:bg-slate-900"  onContextMenu={(e)=> e.preventDefault()} >
             {/* <!-- * Header --> */}
             <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-slate-800">
                 <div className="flex h-full w-full ">
