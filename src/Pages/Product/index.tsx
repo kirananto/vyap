@@ -215,6 +215,7 @@ export default function Product() {
             </div>
 
             <div
+                onContextMenu={(e)=> e.preventDefault()}
                 ref={scrollTargetRef}
                 className="custom-height bg-white pb-[13vh] dark:bg-slate-900 md:flex md:flex-wrap  md:flex-col md:pt-2 md:w-full lg:gap-0 lg:h-auto "
                 style={{
