@@ -22,8 +22,8 @@ export default function OrderContainer({ orders, loading, expanded }: IProps) {
             </div>
         )
     }
-
-
+    
+    
     if (orders?.length === 0) {
         return <div>
             <img className="m-auto mt-12 h-64 p-12" src={ChatImg} />
@@ -54,7 +54,7 @@ export default function OrderContainer({ orders, loading, expanded }: IProps) {
                                 />
                             </div>
                         </div>
-                        <div className="w-full" onClick={() => isExpanded ?  setIsExpanded(undefined) : setIsExpanded(item.id)}>
+                        <div className="w-full" onClick={() => isExpanded === item.id ?  setIsExpanded(undefined) : setIsExpanded(item.id)}>
                             <div className="grid grid-rows-3 content-start">
                                 <div className="grid grid-flow-col  gap-1 row-span-3">
 
@@ -91,7 +91,7 @@ export default function OrderContainer({ orders, loading, expanded }: IProps) {
                         </div>
                     </div>
 
-                    {isExpanded === item.id || expanded && (
+                    {(isExpanded === item.id || expanded) && (
                         <OrderContainerDetail order={item} minimize={onMinimize} closeHidden={expanded} />
                     )}
                 </div>
