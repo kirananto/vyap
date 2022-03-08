@@ -9,9 +9,10 @@ import ReturnStatusTile from './OrderStatusTag'
 interface IProps {
     orders: orderInterface[];
     loading: boolean;
+    expanded?: boolean
 }
 
-export default function OrderContainer({ orders, loading }: IProps) {
+export default function OrderContainer({ orders, loading, expanded }: IProps) {
     const [isExpanded, setIsExpanded] = useState<string | undefined>(undefined)
 
     if (loading) {
@@ -90,8 +91,8 @@ export default function OrderContainer({ orders, loading }: IProps) {
                         </div>
                     </div>
 
-                    {isExpanded === item.id && (
-                        <OrderContainerDetail order={item} minimize={onMinimize} />
+                    {isExpanded === item.id || expanded && (
+                        <OrderContainerDetail order={item} minimize={onMinimize} closeHidden={expanded} />
                     )}
                 </div>
             ))}
