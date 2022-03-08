@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { fetchInboxes } from 'src/API/inbox.axios'
+import { deleteInboxById, fetchInboxes } from 'src/API/inbox.axios'
 import ChatImg from 'src/Pages/Customers/ChatView/assets/Chats.svg'
 import profileImg from 'src/assets/icons/profile/profile-icon.svg'
 import AddCustomerModal from './AddCustomerModal'
@@ -16,6 +16,8 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import { useScrollDirection } from 'react-use-scroll-direction'
 import { IndividualChatInterface, selectChatList, setCustomers } from './ChatView/chatListSlice'
 import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import ModalViewer from 'src/Components/Style/ModalViewer'
+import CustomerOptionsPopup from './Popups/CustomerOptionsPopup'
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -32,6 +34,10 @@ export const Home = () => {
         search: '',
     })
     const { user, token } = useSelector(selectCredentials)
+
+    const [customerOptionModalVisible, setCustomerOptionsModalVisible] = useState<boolean>(false)
+    const [selectedInboxId, setSelectedInboxId] = useState<string | undefined>(undefined)
+
     const navigate = useNavigate()
     const intl = useIntl()
     useEffect(() => {
@@ -50,7 +56,14 @@ export const Home = () => {
         } else {
             navigate('/login')
         }
-    }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
+    }, [paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate, customerOptionModalVisible])
+
+    const deleteInbox = (id: string) => {
+        deleteInboxById({ token, id: id })
+            .then((result) => {
+                console.log(result)
+            })
+    }
 
     console.log('customer', customer)
     function customerFilter(filterItem: IndividualChatInterface) {
@@ -96,14 +109,20 @@ export const Home = () => {
             )
         }
         return customer?.filter(customerFilter).map((item, index) => (
-            <ItemCard item={item} key={index} />
+            <ItemCard 
+                item={item} 
+                isScrolling={isScrolling} 
+                key={index}
+                setCustomerOptionsModalVisible={setCustomerOptionsModalVisible}
+                setSelectedInboxId={setSelectedInboxId} 
+            />
         ))
     }
 
     // ....  Button resizing onscroll - start !
     const [floatBtnLarge, setFloatBtnLarge] = useState(true)
     const [scrollTargetRef, target] = useCallbackRef()
-    const { scrollDirection, isScrollingUp, isScrollingDown } =
+    const { isScrolling, scrollDirection, isScrollingUp, isScrollingDown } =
         useScrollDirection(target)
 
     function useCallbackRef() {
@@ -129,7 +148,7 @@ export const Home = () => {
     // ......  Button resizing onscroll - end.........!
 
     return (
-        <div className="dark:bg-slate-900">
+        <div className="dark:bg-slate-900"  onContextMenu={(e)=> e.preventDefault()} >
             {/* <!-- * Header --> */}
             <header className="flex flex-col gap-2 bg-white p-4 shadow-md dark:bg-slate-800">
                 <div className="flex h-full w-full ">
@@ -230,6 +249,22 @@ export const Home = () => {
                     }}
                 />
             )}
+
+            <ModalViewer
+                body={
+                    <CustomerOptionsPopup
+                        onClose={() => {
+                            setCustomerOptionsModalVisible(false)
+                        }}
+                        inboxId={selectedInboxId}
+                        deleteInbox={deleteInbox}
+                    />
+                }
+                isOpen={!!customerOptionModalVisible}
+                onClose={() => {
+                    setCustomerOptionsModalVisible(false)
+                }}
+            />
             <Footer />
         </div>
     )
