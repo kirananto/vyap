@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import React from 'react'
 import type { OrderStatusEnum } from 'src/Pages/Orders/enum'
 import OrderStatusIcon from './OrderStatusIcon'
@@ -12,7 +13,9 @@ function OrderInfoIcon(props: { heading: string; status: { status: OrderStatusEn
                     <OrderStatusIcon status={mapItem.status} />
                     <p className="text-sm ml-1 font-normal text-slate-700 dark:text-slate-100">
                         {mapItem.note}
-                        <div className="text-xs text-slate-500 dark:text-slate-500">{mapItem.createdAt?.split('T')?.[0]}</div>
+                        <div className="text-xs text-slate-500 dark:text-slate-500">{mapItem?.createdAt
+                            ? format(new Date(mapItem?.createdAt), `yyyy-MM-dd hh:mm aa`)
+                            : '--'}</div>
                     </p>
                 </div>
             ))}
