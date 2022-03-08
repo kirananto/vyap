@@ -101,6 +101,7 @@ export default function ChatList({
 
     return (
         <div ref={scrollTargetRef}
+            onContextMenu={(e)=> e.preventDefault()}
             className="flex flex-col gap-5 pl-2 pr-2 pt-48 h-screen overflow-y-scroll pb-48">
             {renderChats()}
             <div ref={messagesEndRef} />
