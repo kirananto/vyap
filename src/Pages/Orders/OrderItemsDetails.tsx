@@ -12,9 +12,11 @@ import Button from 'src/Components/Style/Button'
 export default function OrderItemsDetails({
     order,
     minimize,
+    closeHidden
 }: {
   order: orderInterface;
   minimize: () => void;
+  closeHidden?: boolean
 }) {
     const { token } = useSelector(selectCredentials)
     const [orderItems, setOrderItems] = useState<IOrderItem[]>([])
@@ -109,7 +111,7 @@ export default function OrderItemsDetails({
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row mt-2 mb-10 ml-4 mr-4 gap-2 justify-end">
+            {!closeHidden ? <div className="flex flex-row mt-2 mb-10 ml-4 mr-4 gap-2 justify-end">
 
                 <PrintOne order={order} orderItems={orderItems} />
 
@@ -135,7 +137,7 @@ export default function OrderItemsDetails({
                         <FormattedMessage id="action.close" defaultMessage="Close" />
                     </>
                 </Button>
-            </div>
+            </div> : null }
         </div>
     )
 }
