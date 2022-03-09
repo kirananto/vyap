@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Header from 'src/Components/Header/Header'
 import { useIntl } from 'react-intl'
 import { useState } from 'react'
@@ -12,6 +12,7 @@ import ReturnStatusTile from 'src/Pages/Orders/OrderStatusTag'
 import OrderContainerDetail from './OrderItemsDetails'
 import { PrintAll } from './PrintAll'
 import Spinner from 'src/Components/Style/Spinner'
+import NoDataImg from '../assets/no_data.svg'
 
 const ShopReports = () => {
     const { token } = useSelector(selectCredentials)
@@ -20,6 +21,18 @@ const ShopReports = () => {
     const navigate = useNavigate()
     const [orders, setOrders] = useState<orderInterface[]>([])
     const [orderCount, setOrderCount] = useState(0)
+    const [totalSaleAmount, setTotalSaleAmount] = useState(0)
+
+    const getTotalAmount = useCallback((orders) => {
+        let _orderTotal = 0
+        orders?.forEach?.((item : orderInterface) => {
+            const finalAmount = (
+                parseFloat(item?.totalAmount) - parseFloat(item?.flatDiscount)
+            )
+            _orderTotal = _orderTotal + finalAmount
+        })
+        setTotalSaleAmount(_orderTotal)
+    }, [])
 
     useEffect(() => {
         if (token) {
@@ -31,12 +44,14 @@ const ShopReports = () => {
                 offset: 0,
                 limit: 1000,
             }).then((result) => {
-                setLoading(false)
                 setOrders(result?.data?.data ?? [])
                 setOrderCount(result?.data?.total)
+                getTotalAmount(result.data?.data ?? [])
+            }).finally(() => {
+                setLoading(false)
             })
         }
-    }, [token])
+    }, [token, getTotalAmount])
     
 
     return (
@@ -53,12 +68,16 @@ const ShopReports = () => {
                     <Spinner />
                 </div>
 
-                :<>
+                : orderCount ? (<>
                     <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden pt-24">
 
                         <div className='flex justify-center bold text-center mb-5 font-semibold dark:text-slate-200'>
-                            <p>Today:</p>
-                            <p className='pl-5'>{orderCount} Orders</p>
+                            <p className='text-right basis-1/2'>Today :</p>
+                            <p className='text-left pl-5 basis-1/2'>{orderCount} Orders</p>
+                        </div>
+                        <div className='flex justify-center bold text-center mb-5 font-semibold dark:text-slate-200'>
+                            <p className='text-right basis-1/2'>Total Amount :</p>
+                            <p className='text-left pl-5 basis-1/2'>{totalSaleAmount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
                         </div>
                         <div
                             className="bg-white pb-24 dark:bg-slate-800 rounded p-4 max-h-[80vh] overflow-y-scroll"
@@ -130,7 +149,12 @@ const ShopReports = () => {
                             <PrintAll apiData={orders} />
                         </div>
                     </div>
-                </>
+                </>) : <div className="p-12 pt-[20vh] text-center dark:text-slate-100 grid">
+                    <img className="m-auto mt-12 h-64 p-12" src={NoDataImg} />
+                    <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
+                        No Orders Today
+                    </div>
+                </div>
 
             }
         </div>

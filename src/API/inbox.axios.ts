@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export function fetchInboxes({ token, offset, limit, search } : { token?: string, offset?: number, limit?: number, search?: string }) {
+export function fetchInboxes({ token, offset, limit, search }: { token?: string, offset?: number, limit?: number, search?: string }) {
     return axiosClient({
         url: '/inbox',
         method: 'GET',
@@ -38,3 +38,11 @@ export function fetchThreadsById({ token, inboxId, offset, limit }: { token?: st
         }
     })
 }
+
+export const deleteInboxById = ({ token, id }: { token?: string; id?: string }) => axiosClient({
+    url: `/inbox/${id}`,
+    method: 'DELETE',
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})

@@ -11,6 +11,7 @@ import { fetchOrderItems } from 'src/API/order.axios'
 import ProductCard from './ProductCard'
 import Spinner from 'src/Components/Style/Spinner'
 import { PrintAll } from './PrintAll'
+import NoDataImg from '../assets/no_data.svg'
 interface IProduct {
     orderID: string,
     productID: string;
@@ -95,7 +96,12 @@ const ProductReports = () => {
                 <>
                     {isEmptyList
                         ?
-                        <div className="text-center dark:text-slate-200"> <p className="pt-60"> No Products <br /> Sold Today</p> </div>
+                        <div className="p-12 pt-[10vh] text-center dark:text-slate-100 grid">
+                            <img className="m-auto mt-12 h-64 p-12" src={NoDataImg} />
+                            <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
+                                  No Items Sold Today
+                            </div>
+                        </div>
                         :
                         <>
                             <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden">
