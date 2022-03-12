@@ -72,3 +72,19 @@ export const createOrderStatus = ({ token, orderId, note, status }: { token: str
         'authorization': `Bearer ${token}`
     }
 })
+
+export const createOrderShare = ({ token, orderId }: { token: string; orderId?: string }) => axiosClient({
+    url: `/order-share`,
+    method: 'POST',
+    data: {
+        orderId
+    },
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})
+
+export const fetchOrderShare = ({ id }: { id?: string }) => axiosClient({
+    url: `/order-share/${id}`,
+    method: 'GET',
+})
