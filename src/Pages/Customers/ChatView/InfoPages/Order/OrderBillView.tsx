@@ -135,15 +135,15 @@ const OrderBillView = () => {
                             </div>
                             <div className="item  pl-3 text-right">
                                 <p className="font-bold">
-                                    {parseFloat(order?.totalAmount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}{' '}
+                                    {order?.totalAmount && parseFloat(order?.totalAmount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}{' '}
                                 </p>
                                 <p className="font-bold pb-2">
                                     {' '}
-                                    {parseFloat(order?.flatDiscount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}{' '}
+                                    {order?.flatDiscount && parseFloat(order?.flatDiscount).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}{' '}
                                 </p>
                                 <p className="font-bold border-t-[3px] border-blue-200">
                                     {' '}
-                                    {(
+                                    { (order?.totalAmount && order?.flatDiscount) && (
                                         parseFloat(order?.totalAmount) -
                     parseFloat(order?.flatDiscount)
                                     ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}{' '}
