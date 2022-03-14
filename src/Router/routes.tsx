@@ -16,6 +16,7 @@ const Employees = lazily(() => import('src/Pages/Employees/Employees')).default
 const StockManagement = lazily(() => import('src/Pages/StockManagement/StockManagement')).default
 const More = lazily(() => import('src/Pages/More/More')).default
 const Orders = lazily(() => import('src/Pages/Orders')).default
+const OrderBillView = lazily(() => import('src/Pages/Customers/ChatView/InfoPages/Order/OrderBillView')).default
 const Product = lazily(() => import('src/Pages/Product')).default
 const Account = lazily(() => import('src/Pages/Account')).default
 const AllPayments = lazily(() => import('src/Pages/Payments')).default
@@ -120,6 +121,11 @@ export const routes: {
         path: '/orders',
         Component: Orders,
         requireAuth: true
+    },
+    {
+        path: '/bill/:id',
+        Component: OrderBillView,
+        requireAuth: false
     },
     {
         path: '/my-account',

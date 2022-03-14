@@ -5,24 +5,25 @@ import ItemList from './ItemList'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useParams } from 'react-router'
-import { fetchOrderAPI } from 'src/API/order.axios'
+import { createOrderShare, fetchOrderAPI } from 'src/API/order.axios'
 import { format } from 'date-fns'
 import OrderBill from './OrderBill'
 import Button from 'src/Components/Style/Button'
 import { isNumber } from 'class-validator'
 import { selectChatList, setOrderInfo } from 'src/Pages/Customers/ChatView/chatListSlice'
 import { toBlob } from 'html-to-image'
+import WhatsApp from 'src/Components/Style/Icons/WhatsApp'
 
 export default function OrderDetails() {
     // const [order, setOrder] = useState<any | undefined>()
     const [shareAction, setShareAction] = useState(false)
     const [billActive, setBillActive] = useState(false)
+    
+    const [urlSlug, setUrlSlug] = useState<string | undefined>(undefined)
 
     const { user, token } = useSelector(selectCredentials)
     const { id, chatId } = useParams()
     const dispatch = useDispatch()
-
-    
     
     const chatList = useSelector(selectChatList)
     const thread = chatList[`${chatId}`]?.threads?.find(findItem => findItem?.order?.id === id)
@@ -45,6 +46,8 @@ export default function OrderDetails() {
         fetchOrderAPI({ token, id: id }).then((result) => {
             // setOrder(result.data)
             dispatch(setOrderInfo({ inboxId: chatId ?? '', threadId: thread?.id, order: result.data }))
+            if(result?.data?.orderShare?.id)
+                setUrlSlug(result?.data?.orderShare?.id)
         })
     }, [chatId, dispatch, id, thread?.id, token])
 
@@ -66,6 +69,30 @@ export default function OrderDetails() {
             share('page')
         } else {
             setShareAction(true)
+        }
+    }
+
+    const shareBillLink = () => {
+        if(urlSlug){
+            console.log('https://app.vyap.app/bill/'+urlSlug)           
+            const url='https://app.vyap.app/bill/'+urlSlug
+            const shareText = `whatsapp://send?text= *VYAP Order Invoice:* %0a ${url}`
+            window.open(shareText)
+        }else{
+            if (order?.id && token) {
+                createOrderShare({ token: token, orderId: order?.id })
+                    .then((response) => {
+                        console.log('https://app.vyap.app/bill/'+response.data.id)
+                        setUrlSlug(response.data.id)
+
+                        const url='https://app.vyap.app/bill/'+response.data.id
+                        const shareText = `whatsapp://send?text= *VYAP Order Invoice:* %0a ${url}`
+                        window.open(shareText)
+                    })
+                    .catch((error) => {
+                        console.log('Failed generating url slug', error)
+                    })
+            }
         }
     }
 
@@ -174,6 +201,17 @@ export default function OrderDetails() {
                                 />
                             </svg>
                             <span className="pl-6">Share Bill</span>
+                        </div>
+                    </Button>
+
+                    <Button
+                        className="w-16 ml-5 px-4 mb-64"
+                        onClick={() => {
+                            shareBillLink()
+                        }}
+                    >
+                        <div className="flex items-center">
+                            <WhatsApp />
                         </div>
                     </Button>
                 </div>
