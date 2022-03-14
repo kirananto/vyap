@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { createOrderStatus, fetchOrderStatusesByUser } from 'src/API/order.axios'
+import { createOrderStatus, fetchOrderStatusCodeNoteHistory } from 'src/API/order.axios'
 import Completed from 'src/Components/Style/Icons/Completed'
 import Processing from 'src/Components/Style/Icons/Processing'
 import Pending from 'src/Components/Style/Icons/Pending'
@@ -24,15 +24,15 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
 ) => {
 
     const dispatch = useDispatch()
-    const { user, token } = useSelector(selectCredentials)
+    const { token } = useSelector(selectCredentials)
     const [statusOption, setStatusOption] = useState<STATUS_OPTIONS | undefined>(undefined)
     const [statusNote, setStatusNote] = useState('')
     const [statusCode, setStatusCode] = useState(0)
     const [statusHistory, setStatusHistory] = useState<string[]>([])
 
     useEffect(() => {
-        if (token && user?.id) {
-            fetchOrderStatusesByUser({ token: token, userId: user?.id})
+        if (token && statusCode) {
+            fetchOrderStatusCodeNoteHistory({ token: token, statusCode: statusCode.toString()})
                 .then((response) => {
                     const statusList: string[] = response?.data?.map((item : {note : string})  => item.note)
                     setStatusHistory([...new Set(statusList)])
@@ -41,7 +41,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     console.log('Failed getting order data', error)
                 })
         }
-    }, [token, user?.id])
+    }, [token, statusCode])
 
     const handleStatusUpdate = async () => {
         let note = ''
