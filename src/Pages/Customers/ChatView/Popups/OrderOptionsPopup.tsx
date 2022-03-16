@@ -87,7 +87,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                 >
 
                     <div className='flex items-center gap-2'>
-                        <span className='text-yellow-500 dark:text-yellow-300'> <Pending /> </span>
+                        <span className='text-blue-500 dark:text-blue-300'> <Pending /> </span>
                         <span className={` ${statusOption === STATUS_OPTIONS.PENDING ? 'font-semibold text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`}>Pending</span>
                     </div>
 
@@ -112,7 +112,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     }}
                 >
                     <div className='flex items-center gap-2'>
-                        <span className='text-blue-500 dark:text-blue-300'> <Processing /> </span>
+                        <span className='text-yellow-500 dark:text-yellow-300'> <Processing /> </span>
                         <span className={` ${statusOption === STATUS_OPTIONS.PROCESSING ? 'font-semibold text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`} >Processing</span>
                     </div>
 
