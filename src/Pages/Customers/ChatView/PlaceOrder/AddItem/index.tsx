@@ -17,7 +17,7 @@ import { FilterPopup } from './FilterPopup'
 import useQueryParam from 'src/utils/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
-import ProductSuggestionCard from './ProductSuggestionCard'
+//import ProductSuggestionCard from './ProductSuggestionCard'
 import type { IProduct } from 'src/types/product'
 
 export interface AddItemProductInterface extends IProduct {
@@ -44,6 +44,8 @@ export default function AddItem() {
 
     const placeOrder = useSelector(selectPlaceOrderInfo)
     const isSupplier = localStorage.getItem('isSupplier') === 'true'
+
+    const [isAllProducts, setIsAllProducts] = useState(true)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -189,8 +191,8 @@ export default function AddItem() {
     //     })
     // }
 
-    function renderItems() {
-        if (itemList?.length === 0) {
+    function renderItems(items) {
+        if (items?.length === 0) {
             return (
                 <div>
                     <img loading="lazy" className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
@@ -201,7 +203,7 @@ export default function AddItem() {
                 </div>
             )
         }
-        return itemList.map((item, index) => (
+        return items.map((item, index) => (
             <div
                 className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4"
                 key={`${index}`}
@@ -306,16 +308,11 @@ export default function AddItem() {
 
     return (
         <div className="bg-white min-h-screen dark:bg-slate-900">
-            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800">
+            <div className="w-full pb-2 bg-white dark:bg-slate-800">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/place-order')}
                     heading="Add Item"
-                />
-                <AppliedFilters
-                    setSearchValue={setSearchValue}
-                    searchValue={searchValue ?? ''}
-                    onFilterClick={() => setfilterPopupOpen(true)}
                 />
             </div>
             <ModalViewer
@@ -323,27 +320,77 @@ export default function AddItem() {
                 isOpen={!!filterPopupOpen}
                 onClose={() => setfilterPopupOpen(false)}
             />
-            <div className="px-4 pb-24">
-                {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
-                    <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
-                    <div className="flex gap-2 overflow-x-scroll">
-                        {prevOrdered?.map(item => <ProductSuggestionCard
-                            key={item.id}
-                            item={item}
-                            handleAddItem={handleAddItem}
-                            handleRemoveItemItem={handleRemoveItemItem}
-                            updateItem={updateItem}
-                            selectedItems={selectedItems}
-                        />)}
-                    </div>
-                </div> : null}
-                {renderItems()}
+
+            <div className="flex text-lg pt-4 mb-2 px-4 justify-between shadow-md shadow-slate-200">
+                <div className={`flex flex-grow pb-2 justify-center ${isAllProducts && 'border-b-4 border-indigo-500' } `}
+                    onClick={() => setIsAllProducts(true)}>
+                    <p className="px-0"> All Products</p>
+                </div>
+                <div className={`flex flex-grow pb-2 justify-center ${!isAllProducts && 'border-b-4 border-indigo-500' }`}
+                    onClick={() => setIsAllProducts(false)}>
+                    <p className="px-0"> Previously Ordered</p>
+                </div>
             </div>
-            {selectedItems?.length > 0 ? <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
-                <Button onClick={onSubmit}>
-                    {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
-                </Button>
-            </div> : null}
+
+            <div>
+                <div className="pb-24">
+                    {
+                        !isAllProducts && 
+                        <div className="h-[70vh] overflow-scroll">
+                            <div className="px-4">
+                                {/* {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
+                            <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
+                            <div className="flex gap-2 overflow-x-scroll">
+                                {prevOrdered?.map(item => <ProductSuggestionCard
+                                    key={item.id}
+                                    item={item}
+                                    handleAddItem={handleAddItem}
+                                    handleRemoveItemItem={handleRemoveItemItem}
+                                    updateItem={updateItem}
+                                    selectedItems={selectedItems}
+                                />)}
+                            </div>
+                        </div> : null} */}
+
+                                {renderItems(prevOrdered)}
+
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        isAllProducts && 
+                    <div className='py-1'>
+
+                        <div className="border-b border-slate-200 dark:border-slate-800 pb-1">
+                            <AppliedFilters
+                                setSearchValue={setSearchValue}
+                                searchValue={searchValue ?? ''}
+                                onFilterClick={() => setfilterPopupOpen(true)}
+                            />
+
+                        </div>
+                        
+
+                        <div className="h-[70vh] overflow-scroll mt-1">
+                            <div className="px-4">
+                                {renderItems(itemList)}
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    }         
+
+                </div>
+
+                {selectedItems?.length > 0 ? <div className="fixed bg-white bottom-0 m-auto left-0 right-0 px-4 p-4 pb-10">
+                    <Button onClick={onSubmit}>
+                        {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
+                    </Button>
+                </div> : null}
+            </div>
+           
         </div>
     )
 }
