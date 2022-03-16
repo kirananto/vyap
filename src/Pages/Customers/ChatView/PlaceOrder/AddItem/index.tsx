@@ -19,6 +19,7 @@ import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
 //import ProductSuggestionCard from './ProductSuggestionCard'
 import type { IProduct } from 'src/types/product'
+import { ADD_ITEM_TABS } from './types'
 
 export interface AddItemProductInterface extends IProduct {
     quantity: number
@@ -45,7 +46,8 @@ export default function AddItem() {
     const placeOrder = useSelector(selectPlaceOrderInfo)
     const isSupplier = localStorage.getItem('isSupplier') === 'true'
 
-    const [isAllProducts, setIsAllProducts] = useState(true)
+    const [activeTab, setActiveTab] = useState(ADD_ITEM_TABS.ALL_PRODUCTS)
+    const [tagList, setTagList] = useState<string[]>([])
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -191,6 +193,60 @@ export default function AddItem() {
     //     })
     // }
 
+
+    // function handleTagList(){
+    //     if(itemList){
+    //         console.log(itemList)
+    //     }
+    // }
+
+    // const handleTagList = useCallback(
+    //     () => {
+    //         console.log('bbb',itemList)
+
+    //         // itemList.some(item => (
+    //         //     setTagList(['kk'])
+    //         // ))
+
+    //         itemList.forEach(item => {
+    //             setTagList([item?.organizationCatalogueCategory?.name])
+    //         })
+
+    //         //console.log(item?.organizationCatalogueCategory?.name
+
+
+    //     },
+    //     [itemList],
+    // )
+    // handleTagList()
+
+
+    useEffect(() => {
+
+        itemList?.forEach(item => setTagList(prevState => [...prevState, item?.organizationCatalogueCategory?.name] ) )
+
+    }, [itemList])
+
+
+    
+    useEffect(() => {
+
+        console.log(tagList)
+
+    }, [tagList])
+
+
+    function renderTagItems(){
+        console.log('bb',tagList)
+        return(
+            tagList?.map((item, key) => <div key={key} className='dark:text-slate-300'>
+                {item}
+            </div>)
+        )
+
+    }
+
+
     function renderItems(items) {
         if (items?.length === 0) {
             return (
@@ -321,21 +377,26 @@ export default function AddItem() {
                 onClose={() => setfilterPopupOpen(false)}
             />
 
-            <div className="flex text-lg pt-4 mb-2 px-4 justify-between shadow-md shadow-slate-200">
-                <div className={`flex flex-grow pb-2 justify-center ${isAllProducts && 'border-b-4 border-indigo-500' } `}
-                    onClick={() => setIsAllProducts(true)}>
-                    <p className="px-0"> All Products</p>
+            <div className="flex text-lg pt-4 mb-2 px-4 justify-between dark:text-slate-300 shadow-md shadow-slate-200 dark:shadow-slate-800">
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.ALL_PRODUCTS  && 'border-b-4 border-indigo-500' } `}
+                    onClick={() => setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS)}>
+                    <p className="px-0"> {ADD_ITEM_TABS.ALL_PRODUCTS} </p>
                 </div>
-                <div className={`flex flex-grow pb-2 justify-center ${!isAllProducts && 'border-b-4 border-indigo-500' }`}
-                    onClick={() => setIsAllProducts(false)}>
-                    <p className="px-0"> Previously Ordered</p>
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED  && 'border-b-4 border-indigo-500' }`}
+                    onClick={() => setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED)}>
+                    <p className="px-0"> {ADD_ITEM_TABS.PREVIOUSLY_ORDERED} </p>
+                </div>
+
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.TAG_LIST  && 'border-b-4 border-indigo-500' }`}
+                    onClick={() => setActiveTab(ADD_ITEM_TABS.TAG_LIST)}>
+                    <p className="px-0"> {ADD_ITEM_TABS.TAG_LIST} </p>
                 </div>
             </div>
 
             <div>
                 <div className="pb-24">
                     {
-                        !isAllProducts && 
+                        activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED && 
                         <div className="h-[70vh] overflow-scroll">
                             <div className="px-4">
                                 {/* {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
@@ -359,7 +420,7 @@ export default function AddItem() {
                     }
 
                     {
-                        isAllProducts && 
+                        activeTab === ADD_ITEM_TABS.ALL_PRODUCTS && 
                     <div className='py-1'>
 
                         <div className="border-b border-slate-200 dark:border-slate-800 pb-1">
@@ -380,7 +441,17 @@ export default function AddItem() {
                         </div>
 
                     </div>
-                    }         
+                    }   
+
+                    {
+                        activeTab === ADD_ITEM_TABS.TAG_LIST && 
+                        <div className="h-[70vh] overflow-scroll">
+                            <div className="px-4">
+                                {renderTagItems()}
+
+                            </div>
+                        </div>
+                    }      
 
                 </div>
 
