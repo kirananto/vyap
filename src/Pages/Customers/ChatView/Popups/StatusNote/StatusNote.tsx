@@ -17,9 +17,11 @@ export const StatusNote = ({ statusNote, setStatusNote, statusHistory }: statusN
             <div className="flex justify-between">
                 <input
                     key={'note'}
-                    onChange={(e) => setStatusNote(e.target.value)}
+                    onChange={(e) => {
+                        setisSuggestionsEnabled(true)
+                        setStatusNote(e.target.value)
+                    }}
                     value={statusNote}
-
                     className="flex flex-grow text-sm p-2 pr-10  text-black transition duration-500 ease-in-out transform 
                                                     border-transparent rounded bg-slate-200 opacity-75 
                                                     focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 
