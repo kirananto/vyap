@@ -288,7 +288,12 @@ export default function AddItem() {
         }
         return items.map((item, index) => (
             <div
-                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4"
+                className={`flex flex-wrap  
+                ${selectedItems?.find(
+                (findItem) => findItem.id === item.id
+            ) ? 'bg-blue-100 dark:bg-blue-900'  : 'bg-white-200'
+            } 
+                mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4`}
                 key={`${index}`}
             >
                 <div className="relative self-center w-1/5 h-20  overflow-hidden">
