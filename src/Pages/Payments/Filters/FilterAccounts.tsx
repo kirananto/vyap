@@ -63,6 +63,10 @@ export default function FilterCategory(props: FilterCategories) {
                     id: 'cheque',
                     name: 'CHEQUE',
                 },
+                {
+                    id: 'online',
+                    name: 'ONLINE',
+                }               
             ])
         } else {
             fetchInboxes({ token: token, limit: 100, offset: 0 }).then(

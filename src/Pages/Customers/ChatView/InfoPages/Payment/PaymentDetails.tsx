@@ -32,6 +32,16 @@ export default function PaymentDetails() {
         return company?.name
     }
 
+    const paymentModeText = (value: number) => {
+        switch (value) {
+            case 100: return `CASH`
+            case 200: return `CHEQUE`
+            case 300: return `ONLINE`
+            case 500: return ` `
+            default: return ` `
+        }
+    }
+
     return (
         <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
             {/* Header */}
@@ -84,7 +94,7 @@ export default function PaymentDetails() {
                             heading="Date of transaction"
                             info={payment?.updatedAt ? format(new Date(payment?.updatedAt), `yyyy-MM-dd hh:mm aa`) : 'Missing information'}
                         />
-                        <PaymentInfo heading="Payment method" info="Cash" />
+                        <PaymentInfo heading="Payment method" info={paymentModeText(payment?.method ?? 500)} />
                         <PaymentInfo
                             heading="Paid by"
                             info={payment?.senderOrg?.name ?? ''}

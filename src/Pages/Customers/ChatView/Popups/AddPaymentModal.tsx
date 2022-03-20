@@ -325,6 +325,7 @@ export default function AddPaymentModal({
                                     >
                                         <option value={paymentMethod.CASH}>CASH</option>
                                         <option value={paymentMethod.CHEQUE}>CHEQUE</option>
+                                        <option value={paymentMethod.ONLINE}>ONLINE</option>
                                     </select>
                                 </div>
                                 {/* <!-- Amount --> */}
