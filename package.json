@@ -62,7 +62,7 @@
     "workbox-strategies": "^6.5.1",
     "workbox-webpack-plugin": "^6.5.1",
     "workbox-window": "^6.5.1",
-    "xlsx": "^0.18.3"
+    "xlsx": "^0.18.4"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.2.0",
@@ -84,7 +84,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "postcss": "8.4.8",
+    "postcss": "8.4.12",
     "postcss-cli": "9.1.0",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.8",
