@@ -87,11 +87,14 @@ export default function AddItem() {
 
     function onSwipeMove(position: SwipePosition) {
 
-        ((activeTab === ADD_ITEM_TABS.ALL_PRODUCTS) && (position.x  < 0)) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
-        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && (position.x  < 0)) && setActiveTab(ADD_ITEM_TABS.TAG_LIST );
+        // console.log(`Moved ${position.x} pixels horizontally`, event)
+        // console.log(`Moved ${position.y} pixels vertically----`, event);
 
-        ((activeTab === ADD_ITEM_TABS.TAG_LIST) && (position.x  > 0)) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
-        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && (position.x  > 0)) && setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS )
+        ((activeTab === ADD_ITEM_TABS.ALL_PRODUCTS) && ((position.x  < -100) && (Math.abs(position.y)  < 50) )) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
+        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && ((position.x  < -80) && (Math.abs(position.y)  < 50) )) && setActiveTab(ADD_ITEM_TABS.TAG_LIST );
+
+        ((activeTab === ADD_ITEM_TABS.TAG_LIST) && ((position.x  > 100) && (Math.abs(position.y)  < 70) )) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
+        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && ((position.x  > 100) && (Math.abs(position.y)  < 70) )) && setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS )
 
     }
 
