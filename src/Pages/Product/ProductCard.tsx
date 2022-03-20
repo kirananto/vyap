@@ -26,18 +26,19 @@ export default function ProductCard({
     const navigate = useNavigate()
     const callback = useCallback(() => {
         //alert('Long pressed!')
-        onClicked(item)
+        if(longPresEnabled)
+            onClicked(item)
         setLongPressEnabled(false)
-    }, [item, onClicked, setLongPressEnabled])
+    }, [item, onClicked, setLongPressEnabled, longPresEnabled])
 
-    const bind = useLongPress(longPresEnabled && !isScrolling ? callback : null, {
-        //onStart: () => console.log('Press started'),
-        //onFinish: () => console.log('Long press finished'),
-        //onCancel: () => console.log('Press cancelled'),
-        //onMove: () => console.log("Detected mouse or touch movement"),
-        threshold: 200,
+    const bind = useLongPress(!isScrolling ? callback : null, {
+        // onStart: () => console.log('Press started'),
+        // onFinish: () => console.log('Long press finished'),
+        // onCancel: () => console.log('Press cancelled'),
+        // onMove: () => console.log('Detected mouse or touch movement'),
+        threshold: 300,
         captureEvent: true,
-        cancelOnMovement: false,
+        cancelOnMovement: true,
         detect: LongPressDetectEvents.BOTH
     })
 

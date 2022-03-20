@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { createOrderStatus, fetchOrderStatusesByUser } from 'src/API/order.axios'
+import { createOrderStatus, fetchOrderStatusCodeNoteHistory } from 'src/API/order.axios'
 import Completed from 'src/Components/Style/Icons/Completed'
 import Processing from 'src/Components/Style/Icons/Processing'
 import Pending from 'src/Components/Style/Icons/Pending'
 import { OrderStatusEnum } from 'src/Pages/Orders/enum'
 import { setOrderStatus } from '../chatListSlice'
 import { STATUS_OPTIONS } from './types'
-import DropDown from './DropDown'
-import ListIcon from 'src/Components/Style/Icons/List'
+import { StatusNote } from './StatusNote/StatusNote'
 
 interface iProps {
     onClose: () => void,
@@ -24,15 +23,15 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
 ) => {
 
     const dispatch = useDispatch()
-    const { user, token } = useSelector(selectCredentials)
+    const { token } = useSelector(selectCredentials)
     const [statusOption, setStatusOption] = useState<STATUS_OPTIONS | undefined>(undefined)
     const [statusNote, setStatusNote] = useState('')
     const [statusCode, setStatusCode] = useState(0)
     const [statusHistory, setStatusHistory] = useState<string[]>([])
 
     useEffect(() => {
-        if (token && user?.id) {
-            fetchOrderStatusesByUser({ token: token, userId: user?.id})
+        if (token && statusCode) {
+            fetchOrderStatusCodeNoteHistory({ token: token, statusCode: statusCode.toString()})
                 .then((response) => {
                     const statusList: string[] = response?.data?.map((item : {note : string})  => item.note)
                     setStatusHistory([...new Set(statusList)])
@@ -41,7 +40,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     console.log('Failed getting order data', error)
                 })
         }
-    }, [token, user?.id])
+    }, [token, statusCode])
 
     const handleStatusUpdate = async () => {
         let note = ''
@@ -88,7 +87,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                 >
 
                     <div className='flex items-center gap-2'>
-                        <span className='text-yellow-500 dark:text-yellow-300'> <Pending /> </span>
+                        <span className='text-blue-500 dark:text-blue-300'> <Pending /> </span>
                         <span className={` ${statusOption === STATUS_OPTIONS.PENDING ? 'font-semibold text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`}>Pending</span>
                     </div>
 
@@ -113,7 +112,7 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
                     }}
                 >
                     <div className='flex items-center gap-2'>
-                        <span className='text-blue-500 dark:text-blue-300'> <Processing /> </span>
+                        <span className='text-yellow-500 dark:text-yellow-300'> <Processing /> </span>
                         <span className={` ${statusOption === STATUS_OPTIONS.PROCESSING ? 'font-semibold text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300'}`} >Processing</span>
                     </div>
 
@@ -179,42 +178,5 @@ const OrderOptionsPopup = ({ onClose, orderId, threadId, inboxId }
     )
 }
 
-
-interface statusNoteProps {
-    statusNote: string
-    setStatusNote: React.Dispatch<React.SetStateAction<string>>
-    statusHistory: string[]
-}
-
-const StatusNote = ({statusNote, setStatusNote, statusHistory} : statusNoteProps) => {
-
-    const [isSuggestionsEnabled, setisSuggestionsEnabled] = useState(false)
-
-    return <>
-        <div className="flex flex-col gap-2 mt-4 mb-2 ">
-            <label className=" text-slate-700  dark:text-slate-300"> Note:</label>
-            <div className="flex justify-between">
-                <input
-                    key={'note'}
-                    onChange={(e) => setStatusNote(e.target.value) }
-                    value={statusNote}
-
-                    className="flex flex-grow text-sm p-2 pr-10  text-black transition duration-500 ease-in-out transform 
-                                                    border-transparent rounded bg-slate-200 opacity-75 
-                                                    focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 
-                                                    dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
-                    type="text"
-                />
-
-                <span className='dark:text-blue-300 text-blue-500 self-center  absolute right-10' onClick={() => setisSuggestionsEnabled(prevState => !prevState)}> <ListIcon/> </span>
-        
-            </div>
-        
-        </div>
-
-        { isSuggestionsEnabled && <DropDown statusList={statusHistory} setStatusNote={setStatusNote} /> }
-    </>
-
-}
 
 export default OrderOptionsPopup

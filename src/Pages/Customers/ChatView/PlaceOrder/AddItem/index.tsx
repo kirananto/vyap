@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Header from 'src/Components/Header/Header'
 import AppliedFilters from './AppliedFilters'
 import Button from 'src/Components/Style/Button'
@@ -17,12 +17,27 @@ import { FilterPopup } from './FilterPopup'
 import useQueryParam from 'src/utils/useQueryParams'
 import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
-import ProductSuggestionCard from './ProductSuggestionCard'
+//import ProductSuggestionCard from './ProductSuggestionCard'
 import type { IProduct } from 'src/types/product'
+import { ADD_ITEM_TABS } from './types'
+import _ from 'lodash'
+import ArrowUpIcon from 'src/Components/Style/Icons/ArrowUpIcon'
+import ArrowDownIcon from 'src/Components/Style/Icons/ArrowDownIcon'
+import Swipe from 'react-easy-swipe'
+
 
 export interface AddItemProductInterface extends IProduct {
     quantity: number
 }
+export interface SwipePosition {
+  x: number;
+  y: number;
+}
+
+type TagListProps = {
+  [key: string]: IProduct[]
+}
+
 export default function AddItem() {
     const [itemList, setItemList] = useState<AddItemProductInterface[]>([])
     const [selectedItems, setSelectedItems] = useState<AddItemProductInterface[]>([])
@@ -45,6 +60,10 @@ export default function AddItem() {
     const placeOrder = useSelector(selectPlaceOrderInfo)
     const isSupplier = localStorage.getItem('isSupplier') === 'true'
 
+    const [activeTab, setActiveTab] = useState(ADD_ITEM_TABS.ALL_PRODUCTS)
+    const [tagList, setTagList] = useState<TagListProps>({})
+    const [isExpanded, setIsExpanded] = useState<string | undefined>(undefined)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -65,6 +84,33 @@ export default function AddItem() {
             setPrevOrdered(newPrev)
         })
     }, [isSupplier, placeOrder.orgId, token, user?.organizationId])
+
+    function onSwipeMove(position: SwipePosition) {
+
+        ((activeTab === ADD_ITEM_TABS.ALL_PRODUCTS) && (position.x  < 0)) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
+        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && (position.x  < 0)) && setActiveTab(ADD_ITEM_TABS.TAG_LIST );
+
+        ((activeTab === ADD_ITEM_TABS.TAG_LIST) && (position.x  > 0)) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
+        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && (position.x  > 0)) && setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS )
+
+    }
+
+    const handleFetchTagItems = useCallback((productList) => {
+        const tagSorted : TagListProps  = {}
+        productList?.forEach((item : IProduct ) => {
+            const tag = item?.organizationCatalogueCategory?.name
+            if(tag){
+                if(tag in tagSorted){
+                    const prev = tagSorted[tag]
+                    const updated = [...prev, item]
+                    tagSorted[tag] = updated
+                }else{
+                    _.set(tagSorted, tag, [item])
+                }
+            }
+        })
+        setTagList(tagSorted)
+    }, [])
 
 
     useEffect(() => {
@@ -87,8 +133,9 @@ export default function AddItem() {
                 : undefined,
         }).then((result) => {
             setItemList(result.data?.data ?? [])
+            handleFetchTagItems(result.data?.data)
         })
-    }, [token, isSupplier, user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
+    }, [token, isSupplier, handleFetchTagItems,  user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
 
     function onSubmit() {
         //TODO Add to dispatch
@@ -188,9 +235,47 @@ export default function AddItem() {
     //         isOpen: undefined,
     //     })
     // }
+    
+    function renderTagItems(){
+        return <div className='dark:text-slate-300'>
 
-    function renderItems() {
-        if (itemList?.length === 0) {
+            {Object.keys(tagList)?.map((keyName, i) => {
+                return (<div key={i} className="mb-2">
+                    <div 
+                        className={`flex p-4 items-center justify-between dark:bg-slate-700 bg-slate-200 mt-2 `}
+                        onClick={() => isExpanded === keyName ?  setIsExpanded(undefined) : setIsExpanded(keyName)}
+                    >
+                        <div className="flex text-xl font-semibold text-slate-800 dark:text-slate-200 ">
+                            {keyName} <span className="text-sm self-center"> &nbsp; {` ( ${tagList[keyName].length}  ) `}</span>
+                        </div>
+
+                        <div>
+                            {isExpanded === keyName ? (
+                                <div
+                                    className="flex text-slate-600 dark:text-slate-200"
+                                >
+                                    <ArrowUpIcon />
+                                </div>
+                            ) : (
+                                <div
+                                    className="flex text-slate-600 dark:text-slate-200"
+                                >
+                                    <ArrowDownIcon />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="">
+                        {(isExpanded === keyName ) &&  renderItems(tagList[keyName]) }
+                    </div> 
+                </div>
+                )
+            })}
+        </div>
+    }
+
+    function renderItems(items : IProduct[]) {
+        if (items?.length === 0) {
             return (
                 <div>
                     <img loading="lazy" className="mt-12 h-48 p-6 m-auto" alt="no chats" src={ChatImg} />
@@ -201,9 +286,14 @@ export default function AddItem() {
                 </div>
             )
         }
-        return itemList.map((item, index) => (
+        return items.map((item, index) => (
             <div
-                className="flex flex-wrap bg-white-200 mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4"
+                className={`flex flex-wrap  
+                ${selectedItems?.find(
+                (findItem) => findItem.id === item.id
+            ) ? 'bg-blue-100 dark:bg-blue-900'  : 'bg-white-200'
+            } 
+                mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4`}
                 key={`${index}`}
             >
                 <div className="relative self-center w-1/5 h-20  overflow-hidden">
@@ -306,16 +396,11 @@ export default function AddItem() {
 
     return (
         <div className="bg-white min-h-screen dark:bg-slate-900">
-            <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800">
+            <div className="w-full pb-2 bg-white dark:bg-slate-800">
                 <Header
                     isSticky={false}
                     onBackClick={() => navigate('/place-order')}
                     heading="Add Item"
-                />
-                <AppliedFilters
-                    setSearchValue={setSearchValue}
-                    searchValue={searchValue ?? ''}
-                    onFilterClick={() => setfilterPopupOpen(true)}
                 />
             </div>
             <ModalViewer
@@ -323,27 +408,95 @@ export default function AddItem() {
                 isOpen={!!filterPopupOpen}
                 onClose={() => setfilterPopupOpen(false)}
             />
-            <div className="px-4 pb-24">
-                {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
-                    <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
-                    <div className="flex gap-2 overflow-x-scroll">
-                        {prevOrdered?.map(item => <ProductSuggestionCard
-                            key={item.id}
-                            item={item}
-                            handleAddItem={handleAddItem}
-                            handleRemoveItemItem={handleRemoveItemItem}
-                            updateItem={updateItem}
-                            selectedItems={selectedItems}
-                        />)}
-                    </div>
-                </div> : null}
-                {renderItems()}
+
+            <div className="flex text-lg pt-4 mb-2 px-4 justify-between dark:text-slate-300 shadow-md shadow-slate-200 dark:shadow-slate-800">
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.ALL_PRODUCTS  && 'border-b-4 border-indigo-500' } `}
+                    onClick={() => setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS)}>
+                    <p className="px-0"> {ADD_ITEM_TABS.ALL_PRODUCTS} </p>
+                </div>
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED  && 'border-b-4 border-indigo-500' }`}
+                    onClick={() => setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED)}>
+                    <p className="px-0"> {ADD_ITEM_TABS.PREVIOUSLY_ORDERED} </p>
+                </div>
+
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.TAG_LIST  && 'border-b-4 border-indigo-500' }`}
+                    onClick={() => setActiveTab(ADD_ITEM_TABS.TAG_LIST)}>
+                    <p className="px-0"> {ADD_ITEM_TABS.TAG_LIST} </p>
+                </div>
             </div>
-            {selectedItems?.length > 0 ? <div className="fixed bottom-10 m-auto left-0 right-0 px-4">
-                <Button onClick={onSubmit}>
-                    {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
-                </Button>
-            </div> : null}
+
+            <div>
+
+                <Swipe
+                    onSwipeMove={onSwipeMove}>
+                    <div className="pb-24">
+                        {
+                            activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED && 
+                        <div className="h-[70vh] overflow-scroll">
+                            <div className="px-4">
+                                {/* {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
+                            <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
+                            <div className="flex gap-2 overflow-x-scroll">
+                                {prevOrdered?.map(item => <ProductSuggestionCard
+                                    key={item.id}
+                                    item={item}
+                                    handleAddItem={handleAddItem}
+                                    handleRemoveItemItem={handleRemoveItemItem}
+                                    updateItem={updateItem}
+                                    selectedItems={selectedItems}
+                                />)}
+                            </div>
+                        </div> : null} */}
+                                {renderItems(prevOrdered)}
+                            </div>
+                        </div>
+                        }
+
+                        {
+                            activeTab === ADD_ITEM_TABS.ALL_PRODUCTS && 
+                    <div className='py-1'>
+
+                        <div className="border-b border-slate-200 dark:border-slate-800 pb-1">
+                            <AppliedFilters
+                                setSearchValue={setSearchValue}
+                                searchValue={searchValue ?? ''}
+                                onFilterClick={() => setfilterPopupOpen(true)}
+                            />
+
+                        </div>
+                        
+
+                        <div className="h-[70vh] overflow-scroll mt-1">
+                            <div className="px-4">
+                                {renderItems(itemList)}
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                        }   
+
+                        {
+                            activeTab === ADD_ITEM_TABS.TAG_LIST && 
+                        <div className="h-[70vh] overflow-scroll">
+                            <div className="px-4">
+                                {renderTagItems()}
+
+                            </div>
+                        </div>
+                        }      
+
+                    </div>
+
+                </Swipe>
+
+                {selectedItems?.length > 0 ? <div className="fixed bg-white dark:bg-slate-800 bottom-0 m-auto left-0 right-0 px-4 p-4 pb-10">
+                    <Button onClick={onSubmit}>
+                        {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
+                    </Button>
+                </div> : null}
+            </div>
+           
         </div>
     )
 }

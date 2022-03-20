@@ -214,7 +214,7 @@ export default function PlaceOrder() {
                                         )}
                                     </div>
 
-                                    <div className="ml-4">
+                                    <div className="ml-4 max-w-[60vw]">
                                         <div className=" text-base font-bold text-slate-600 dark:text-slate-200">
                                             {`${item.centralCatalogue?.name} `}
                                         </div>
@@ -225,7 +225,7 @@ export default function PlaceOrder() {
                                             MRP: {parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })} Sales Price: {parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                         </div>
 
-                                        <div className=" text-xs font-bold text-slate-400 dark:text-slate-500">
+                                        <div className="text-xs font-bold text-slate-400 dark:text-slate-500 truncate">
                                             {item?.centralCatalogue?.description}
                                         </div>
                                     </div>
@@ -322,7 +322,7 @@ export default function PlaceOrder() {
 
     return (
         <div className="min-h-screen bg-white dark:bg-slate-900">
-            <div className="w-full bg-white">
+            <div className="w-full bg-white ">
                 <SimpleHeader
                     backFn={() => navigate(`/chat/${localStorage?.getItem('inboxId')}`)}
                     heading={'Place Order'}
