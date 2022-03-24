@@ -26,7 +26,7 @@
     "@reduxjs/toolkit": "1.8.0",
     "@rehooks/online-status": "^1.1.2",
     "@sentry/react": "^6.18.1",
-    "@sentry/tracing": "^6.18.1",
+    "@sentry/tracing": "^6.19.2",
     "@snowpack/plugin-webpack": "^3.0.0",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@types/lodash": "^4.14.180",
