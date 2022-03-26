@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import Header from 'src/Components/Header/Header'
 import { useIntl } from 'react-intl'
 import { useState } from 'react'
@@ -11,6 +11,8 @@ import { PrintAll } from './PrintAll'
 import Spinner from 'src/Components/Style/Spinner'
 import NoDataImg from '../assets/no_data.svg'
 import OrderContainer from 'src/Pages/Orders/OrderContainerBox'
+import { FILTERS, FILTERS_VALUES } from '../types'
+import ArrowDownIcon from 'src/Components/Style/Icons/ArrowDownIcon'
 
 const ShopReports = () => {
     const { token } = useSelector(selectCredentials)
@@ -20,6 +22,11 @@ const ShopReports = () => {
     const [orders, setOrders] = useState<orderInterface[]>([])
     const [orderCount, setOrderCount] = useState(0)
     const [totalSaleAmount, setTotalSaleAmount] = useState(0)
+
+    const [enableDropDown, setEnableDropDown] = useState(false)
+    const [filter, setFilter] = useState(FILTERS.TODAY)
+    const [filterValue, setFilterValue] = useState(FILTERS_VALUES.TODAY)
+    const wrapperRef = useRef(null)
 
     const getTotalAmount = useCallback((orders) => {
         let _orderTotal = 0
@@ -34,10 +41,11 @@ const ShopReports = () => {
 
     useEffect(() => {
         if (token) {
+            setLoading(true)
             fetchOrdersAPI({
                 token: token,
                 orderStatus: undefined,
-                ordering: 'today',
+                ordering: filterValue,
                 relatedId: undefined,
                 offset: 0,
                 limit: 1000,
@@ -49,16 +57,127 @@ const ShopReports = () => {
                 setLoading(false)
             })
         }
-    }, [token, getTotalAmount])
-    
+    }, [token, getTotalAmount, filterValue])
+
+
+    const handleClickOutside = (event) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+            setEnableDropDown(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true)
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true)
+        }
+    }, [])
+
 
     return (
-        <div className="dark:bg-slate-900 print:bg-white dark:print:bg-white">
+        <div className="dark:bg-slate-900 print:bg-white dark:print:bg-white ">
             {/* header */}
             <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800 print:hidden  fixed">
                 <Header isSticky={false} onBackClick={() => navigate('/reports')} heading={intl.formatMessage({ id: 'global.shopwiseReports' })} />
+
+                <div className="flex justify-center h-10 mt-1 mx-20 font-semibold bg-white dark:bg-slate-700
+                dark:text-slate-200 relative border border-slate-300 dark:border-slate-700"                           
+                ref={wrapperRef}
+                >
+                    {enableDropDown ? 
+                        <div className="flex absolute p-2 bg-white dark:bg-slate-700 w-[50vw]">
+                            <ul className="">
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.TODAY)
+                                        setFilterValue(FILTERS_VALUES.TODAY)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.TODAY}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.YESTERDAY)
+                                        setFilterValue(FILTERS_VALUES.YESTERDAY)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.YESTERDAY}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.THIS_MONTH)
+                                        setFilterValue(FILTERS_VALUES.THIS_MONTH)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.THIS_MONTH}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.THIS_YEAR)
+                                        setFilterValue(FILTERS_VALUES.THIS_YEAR)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.THIS_YEAR}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.LAST_7_DAYS)
+                                        setFilterValue(FILTERS_VALUES.LAST_7_DAYS)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.LAST_7_DAYS}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.LAST_30_DAYS)
+                                        setFilterValue(FILTERS_VALUES.LAST_30_DAYS)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.LAST_30_DAYS}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.LAST_90_DAYS)
+                                        setFilterValue(FILTERS_VALUES.LAST_90_DAYS)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.LAST_90_DAYS}   
+                                </li>
+                                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                                    onClick={() => {
+                                        setFilter(FILTERS.CUSTOM_DATE)
+                                        setFilterValue(FILTERS_VALUES.CUSTOM_DATE)
+                                        setEnableDropDown(false)
+                                    }}
+                                > 
+                                    {FILTERS.CUSTOM_DATE}   
+                                </li>
+                            </ul>
+                        </div>
+                            
+                        :
+
+                        <div className="flex justify-between  p-2 bg-white dark:bg-slate-700 w-[50vw]"
+                            onClick={() => setEnableDropDown(true)}
+                        >
+                            <span>{filter}</span>
+
+                            <span className="right"> <ArrowDownIcon /></span>   
+                        </div>
+
+                    }
+
+                            
+                </div>
             </div>
-            {/* body */}
+            {/* body */}           
 
             { loading
 
@@ -67,10 +186,9 @@ const ShopReports = () => {
                 </div>
 
                 : orderCount ? (<>
-                    <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden pt-24">
-
+                    <div className="bg-slate-100 p-4 dark:bg-slate-900 print:hidden pt-[130px]">
                         <div className='flex justify-center bold text-center mb-5 font-semibold dark:text-slate-200'>
-                            <p className='text-right basis-1/2'>Today :</p>
+                            <p className='text-right basis-1/2'>No. of Orders :</p>
                             <p className='text-left pl-5 basis-1/2'>{orderCount} Orders</p>
                         </div>
                         <div className='flex justify-center bold text-center mb-5 font-semibold dark:text-slate-200'>
@@ -95,7 +213,7 @@ const ShopReports = () => {
                 </>) : <div className="p-12 pt-[20vh] text-center dark:text-slate-100 grid">
                     <img className="m-auto mt-12 h-64 p-12" src={NoDataImg} />
                     <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
-                        No Orders Today
+                        No Orders
                     </div>
                 </div>
 
