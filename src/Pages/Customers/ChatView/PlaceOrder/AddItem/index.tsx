@@ -24,6 +24,7 @@ import _ from 'lodash'
 import ArrowUpIcon from 'src/Components/Style/Icons/ArrowUpIcon'
 import ArrowDownIcon from 'src/Components/Style/Icons/ArrowDownIcon'
 import Swipe from 'react-easy-swipe'
+import Spinner from 'src/Components/Style/Spinner'
 
 
 export interface AddItemProductInterface extends IProduct {
@@ -39,6 +40,9 @@ type TagListProps = {
 }
 
 export default function AddItem() {
+    const [loading, setLoading] = useState(true)
+    const [loadingRecent, setLoadingRecent] = useState(true)
+
     const [itemList, setItemList] = useState<AddItemProductInterface[]>([])
     const [selectedItems, setSelectedItems] = useState<AddItemProductInterface[]>([])
     const [filterPopupOpen, setfilterPopupOpen] = useQueryParam<boolean>('filterPopupOpen')
@@ -82,6 +86,8 @@ export default function AddItem() {
             const newPrev = (prev.filter((item) => item.status === 'fulfilled') as PromiseFulfilledResult<{ data: IProduct }>[]).map((item) => item.value?.data)?.filter(item => item.outOfStock === false)
             // console.log('prev', newPrev)
             setPrevOrdered(newPrev)
+        }).finally(() => {
+            setLoadingRecent(false)
         })
     }, [isSupplier, placeOrder.orgId, token, user?.organizationId])
 
@@ -137,6 +143,8 @@ export default function AddItem() {
         }).then((result) => {
             setItemList(result.data?.data ?? [])
             handleFetchTagItems(result.data?.data)
+        }).finally(() => {
+            setLoading(false)
         })
     }, [token, isSupplier, handleFetchTagItems,  user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
 
@@ -450,7 +458,16 @@ export default function AddItem() {
                                 />)}
                             </div>
                         </div> : null} */}
-                                {renderItems(prevOrdered)}
+
+                                {loadingRecent
+
+                                    ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
+                                        <Spinner />
+                                    </div>
+                                    :
+                                    <> {renderItems(prevOrdered)} </>
+
+                                }
                             </div>
                         </div>
                         }
@@ -471,8 +488,15 @@ export default function AddItem() {
 
                         <div className="h-[70vh] overflow-scroll mt-1">
                             <div className="px-4">
-                                {renderItems(itemList)}
-                                
+                                {loading
+
+                                    ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
+                                        <Spinner />
+                                    </div>
+                                    :
+                                    <> {renderItems(itemList)} </>
+
+                                }
                             </div>
                         </div>
 
@@ -483,7 +507,15 @@ export default function AddItem() {
                             activeTab === ADD_ITEM_TABS.TAG_LIST && 
                         <div className="h-[70vh] overflow-scroll">
                             <div className="px-4">
-                                {renderTagItems()}
+                                {loading
+
+                                    ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
+                                        <Spinner />
+                                    </div>
+                                    :
+                                    <> {renderTagItems()}</>
+
+                                }
 
                             </div>
                         </div>
