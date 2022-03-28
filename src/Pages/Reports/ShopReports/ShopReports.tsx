@@ -60,18 +60,18 @@ const ShopReports = () => {
     }, [token, getTotalAmount, filterValue])
 
 
-    const handleClickOutside = (event) => {
-        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-            setEnableDropDown(false)
-        }
-    }
+    // const handleClickOutside = (event) => {
+    //     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    //         setEnableDropDown(false)
+    //     }
+    // }
 
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside, true)
-        return () => {
-            document.removeEventListener('click', handleClickOutside, true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     document.addEventListener('click', handleClickOutside, true)
+    //     return () => {
+    //         document.removeEventListener('click', handleClickOutside, true)
+    //     }
+    // }, [])
 
 
     return (
