@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import Header from 'src/Components/Header/Header'
 import { useIntl } from 'react-intl'
 import { useState } from 'react'
@@ -12,6 +12,11 @@ import ProductCard from './ProductCard'
 import Spinner from 'src/Components/Style/Spinner'
 import { PrintAll } from './PrintAll'
 import NoDataImg from '../assets/no_data.svg'
+import { FILTERS, FILTERS_VALUES } from '../types'
+import ArrowDownIcon from 'src/Components/Style/Icons/ArrowDownIcon'
+import Button from 'src/Components/Style/Button'
+import { FormattedMessage } from 'react-intl'
+
 interface IProduct {
     orderID: string,
     productID: string;
@@ -28,6 +33,14 @@ const ProductReports = () => {
     const navigate = useNavigate()
     const [productData, setProductData] = useState<IProduct[]>([])
     const [isEmptyList, setIsEmptyList] = useState(false)
+
+    const [enableDropDown, setEnableDropDown] = useState(false)
+    const [enableCustomDate, setEnableCustomDate] = useState(false)
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+    const [filter, setFilter] = useState(FILTERS.TODAY)
+    const [filterValue, setFilterValue] = useState(FILTERS_VALUES.TODAY)
+    const wrapperRef = useRef<HTMLDivElement>(null)
 
     const handleFetchOrderItems = useCallback(async (orders) => {
         try {
@@ -61,30 +74,214 @@ const ProductReports = () => {
 
     useEffect(() => {
         if (token) {
+            setLoading(true)
             fetchOrdersAPI({
                 token: token,
                 orderStatus: undefined,
-                ordering: 'today',
+                ordering: filterValue,
                 relatedId: undefined,
+                startDate,
+                endDate,
                 offset: 0,
                 limit: 1000,
             }).then((result) => {
                 if (result?.data?.total === 0) {
                     setIsEmptyList(true)
                 }
+                console.log(result.data?.data)
                 handleFetchOrderItems(result.data?.data ?? [])
             }).finally(() => {
                 setLoading(false)
             })
         }
-    }, [handleFetchOrderItems, token])
+    }, [handleFetchOrderItems, token, startDate, endDate, filterValue])
 
+    const handleClickOutside = (event: MouseEvent ) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(event?.target as Node)) {
+            setEnableDropDown(false)
+            setEnableCustomDate(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true)
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true)
+        }
+    }, [])
+
+    function filterOptions() {
+        return <div className="flex flex-col absolute p-2 bg-white dark:bg-slate-700 w-[50vw]">
+            <ul className="">
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.TODAY)
+                        setFilterValue(FILTERS_VALUES.TODAY)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.TODAY}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.YESTERDAY)
+                        setFilterValue(FILTERS_VALUES.YESTERDAY)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.YESTERDAY}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.THIS_MONTH)
+                        setFilterValue(FILTERS_VALUES.THIS_MONTH)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.THIS_MONTH}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.THIS_YEAR)
+                        setFilterValue(FILTERS_VALUES.THIS_YEAR)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.THIS_YEAR}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.LAST_7_DAYS)
+                        setFilterValue(FILTERS_VALUES.LAST_7_DAYS)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.LAST_7_DAYS}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.LAST_30_DAYS)
+                        setFilterValue(FILTERS_VALUES.LAST_30_DAYS)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.LAST_30_DAYS}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        setFilter(FILTERS.LAST_90_DAYS)
+                        setFilterValue(FILTERS_VALUES.LAST_90_DAYS)
+                        setEnableDropDown(false)
+                    }}
+                > 
+                    {FILTERS.LAST_90_DAYS}   
+                </li>
+                <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
+                    onClick={() => {
+                        //setFilter(FILTERS.CUSTOM_DATE)
+                        //setFilterValue(FILTERS_VALUES.CUSTOM_DATE)
+                        setEnableDropDown(false)
+                        setEnableCustomDate(true)
+                    }}
+                > 
+                    {FILTERS.CUSTOM_DATE}   
+                </li>
+            </ul>
+
+        </div>
+                         
+    }
+
+    function onApplyDateRange(){
+        console.log('Start:', startDate)
+        console.log('End:', endDate)
+
+        if(startDate && endDate){
+            setFilter(FILTERS.CUSTOM_DATE)
+            setFilterValue(FILTERS_VALUES.CUSTOM_DATE)
+            setEnableCustomDate(false)
+        }
+
+    }
+
+    function maxDate(){
+        return new Date().toISOString().split('T')[0]
+    }
+
+    function formatDate(date : string){
+        const inpDate = new Date(date)
+        const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(inpDate)
+        const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(inpDate)
+        const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(inpDate)
+        console.log(`${day}-${month}-${year}`)
+        return (`${day}-${month}-${year}`)
+    }
 
     return (
         <div className="dark:bg-slate-900 min-h-screen print:bg-white dark:print:bg-white">
             {/* header */}
             <div className="w-full pb-3 bg-white drop-shadow-md dark:bg-slate-800 print:hidden  ">
                 <Header isSticky={false} onBackClick={() => navigate('/reports')} heading={intl.formatMessage({ id: 'global.productwiseReports' })} />
+                <div className="flex justify-center h-10 mt-1 mx-20 font-semibold bg-white dark:bg-slate-700
+                dark:text-slate-200 relative border border-slate-300 dark:border-slate-700 z-auto"                           
+                ref={wrapperRef}
+                >
+                    {enableDropDown || enableCustomDate ? 
+
+                        (enableDropDown ?  filterOptions() :
+                            
+                            <div className="flex flex-col absolute p-2 bg-white dark:bg-slate-700 w-[56vw] z-40">
+                                        Custom Date Range
+                                <div className="flex flex-col bg-blue-100 dark:bg-slate-700 gap-5 py-2 mt-2 px-1 text-md">
+                                    <div>
+                                        <span className="font-normal">Start Date:</span>
+                                        <br/>
+                                        <input className='dark:bg-slate-600 px-2 py-1' type="date" max={maxDate()} id="startDate" name="start" value={startDate} onChange={(e) => setStartDate(e.target.value)}></input>
+                                    </div>
+                                    
+                                    <div>
+                                        <span className="font-normal">End Date:</span>
+                                        <input className='dark:bg-slate-600 px-2 py-1'  type="date" max={maxDate()} id="endDate" name="end" value={endDate} onChange={(e) => setEndDate(e.target.value)}></input>
+                                    </div>
+                                    
+                                    <div className="flex gap-2">
+                                        <Button className="flex print:hidden justify-center gap-1 items-center w-2/8 h-8 text-sm"
+                                            onClick={() => setEnableCustomDate(false)}>
+                                            <>
+                                                <FormattedMessage id="action.close" defaultMessage="Close" />
+                                            </>
+                                        </Button>
+
+                                        <Button className="flex print:hidden justify-center gap-1 items-center w-2/8 h-8 text-sm"
+                                            onClick={onApplyDateRange}>
+                                            <>
+                                                <FormattedMessage id="action.apply" defaultMessage="Apply" />
+                                            </>
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div> 
+                        )
+                        :
+                        <div className="flex flex-col p-2 bg-white dark:bg-slate-700 w-[50vw]"
+                            onClick={() => setEnableDropDown(true)}
+                        >
+                            <div className="flex justify-between ">
+                                <span>{filter}</span>
+                                <span className="right"> <ArrowDownIcon /></span> 
+                            </div>
+                            
+                        </div>
+                    }                  
+                </div>
+
+                {(filterValue ===  FILTERS_VALUES.CUSTOM_DATE  && startDate && endDate) &&
+                    <div className='flex justify-center py-3 px-2 w-full 
+                    dark:text-slate-200 bg-blue-100 mt-0 -mb-3 dark:bg-slate-600'>
+                        {formatDate(startDate)}  <span className="px-4">to</span>  {formatDate(endDate)}
+                    </div>
+                            
+                }  
             </div>
 
             {loading
@@ -99,7 +296,7 @@ const ProductReports = () => {
                         <div className="p-12 pt-[10vh] text-center dark:text-slate-100 grid">
                             <img className="m-auto mt-12 h-64 p-12" src={NoDataImg} />
                             <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
-                                  No Items Sold Today
+                                  No Items found
                             </div>
                         </div>
                         :
@@ -110,10 +307,9 @@ const ProductReports = () => {
                                     style={{ height: 'calc(100vh - 12rem)' }}
                                 >
                                     <div className='flex justify-between mb-1 pb-2 dark:text-slate-200'>
-                                        <div className="flex basis-10/12 text-lg border-b-[3px] border-blue-400 pt-2 px-2 mr-3">Items Sold (Today)</div>
+                                        <div className="flex basis-10/12 text-lg border-b-[3px] border-blue-400 pt-2 px-2 mr-3">Items Sold </div>
                                         <div className="flex text-lg border-b-[3px] border-blue-400 pt-2 px-2">Units</div>
                                     </div>
-
                                     {
                                         productData?.map?.((item) => {
                                             return <ProductCard
@@ -121,9 +317,7 @@ const ProductReports = () => {
                                                 item={item}
                                             />
                                         })
-
                                     }
-
                                 </div>
                             </div>
                             <div
