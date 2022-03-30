@@ -20,6 +20,8 @@ const OrderBillView = lazily(() => import('src/Pages/Customers/ChatView/InfoPage
 const Product = lazily(() => import('src/Pages/Product')).default
 const Account = lazily(() => import('src/Pages/Account')).default
 const AllPayments = lazily(() => import('src/Pages/Payments')).default
+const ArchivedInboxes = lazily(() => import('src/Pages/Customers/ArchivedCustomers')).default
+
 
 const AddItem = lazily(() => import('src/Pages/Customers/ChatView/PlaceOrder/AddItem')).default
 const PlaceOrder = lazily(() => import('src/Pages/Customers/ChatView/PlaceOrder')).default
@@ -140,6 +142,11 @@ export const routes: {
     {
         path: '/chat/:id',
         Component: Payment,
+        requireAuth: true
+    },
+    {
+        path: '/archived_inboxes',
+        Component: ArchivedInboxes,
         requireAuth: true
     },
     {

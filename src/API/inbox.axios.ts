@@ -1,6 +1,6 @@
 import { axiosClient } from './apiClient'
 
-export function fetchInboxes({ token, offset, limit, search }: { token?: string, offset?: number, limit?: number, search?: string }) {
+export function fetchInboxes({ token, offset, limit, search, isArchive }: { token?: string, offset?: number, limit?: number, search?: string, isArchive?: boolean }) {
     return axiosClient({
         url: '/inbox',
         method: 'GET',
@@ -10,7 +10,8 @@ export function fetchInboxes({ token, offset, limit, search }: { token?: string,
         params: {
             offset,
             search: search?.trim(),
-            limit
+            limit,
+            isArchive
         }
     })
 }
