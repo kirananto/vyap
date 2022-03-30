@@ -47,3 +47,11 @@ export const deleteInboxById = ({ token, id }: { token?: string; id?: string }) 
         'authorization': `Bearer ${token}`
     }
 })
+
+export const restoreInboxById = ({ token, id }: { token?: string; id?: string }) => axiosClient({
+    url: `/inbox/${id}`,
+    method: 'PATCH',
+    headers: {
+        'authorization': `Bearer ${token}`
+    }
+})

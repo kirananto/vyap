@@ -6,18 +6,20 @@ import ChatImg from 'src/Pages/Customers/ChatView/assets/Chats.svg'
 import { ItemCard } from './ItemCard'
 import { useScrollDirection } from 'react-use-scroll-direction'
 
-
 interface iProps {
     loading: boolean,
-    isScrolling: boolean
     setSelectedInboxId: React.Dispatch<React.SetStateAction<string | undefined>>
     setCustomerOptionsModalVisible : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RenderChats = ({loading, setSelectedInboxId, setCustomerOptionsModalVisible} : iProps) => {
+const RenderChats = ({setSelectedInboxId, setCustomerOptionsModalVisible} : iProps) => {
 
     const chatList = useSelector(selectChatList)
     const customer = Object.values(chatList)
+
+    const [loading, setLoading] = React.useState(
+        customer?.length === 0
+    )
 
     const [scrollTargetRef, target] = useCallbackRef()
     const { isScrolling } =   useScrollDirection(target)
