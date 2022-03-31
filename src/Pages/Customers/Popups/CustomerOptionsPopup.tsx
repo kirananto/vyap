@@ -36,9 +36,9 @@ const CustomerOptionsPopup = ({ onClose, inboxId, deleteInbox, restoreInbox }
                     deleteInbox ? handleDelete() : handleRestore()
                     hapticFeedback()
                     onClose()
-                }} className={`flex items-center py-3 gap-2 text-md font-semibold ${ deleteInbox ? 'text-red-500' : 'text-green-500'} dark:text-red-300`}>
+                }} className={`flex items-center py-3 gap-2 text-md font-semibold ${ deleteInbox ? 'text-red-500 dark:text-red-300' : 'text-green-600 dark:text-green-300'} `}>
                     <Archive />
-                    <span> { deleteInbox ? `Hide Customer` : `Unhide Customer`}</span>
+                    <span> { deleteInbox ? `Hide Customer` : `Un-hide Customer`}</span>
                 </button>
             </div>
         </div>

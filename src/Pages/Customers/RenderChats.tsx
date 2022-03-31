@@ -8,18 +8,15 @@ import { useScrollDirection } from 'react-use-scroll-direction'
 
 interface iProps {
     loading: boolean,
+    origin?: string,
     setSelectedInboxId: React.Dispatch<React.SetStateAction<string | undefined>>
     setCustomerOptionsModalVisible : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RenderChats = ({setSelectedInboxId, setCustomerOptionsModalVisible} : iProps) => {
+const RenderChats = ({setSelectedInboxId, setCustomerOptionsModalVisible, loading, origin} : iProps) => {
 
     const chatList = useSelector(selectChatList)
     const customer = Object.values(chatList)
-
-    const [loading, setLoading] = React.useState(
-        customer?.length === 0
-    )
 
     const [scrollTargetRef, target] = useCallbackRef()
     const { isScrolling } =   useScrollDirection(target)
@@ -50,7 +47,7 @@ const RenderChats = ({setSelectedInboxId, setCustomerOptionsModalVisible} : iPro
                     src={ChatImg}
                 />
                 <div className="m-auto w-2/3 px-6 text-center dark:text-slate-200">
-                    No customers
+                    {origin === 'archived' ? ' No Archived customers' : ' No customers'}
                 </div>
             </div>
         )

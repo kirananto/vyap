@@ -9,17 +9,13 @@ import { setCustomers } from './ChatView/chatListSlice'
 import RenderChats from './RenderChats'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import CustomerOptionsPopup from './Popups/CustomerOptionsPopup'
-//import { IndividualChatInterface, selectChatList, setCustomers } from './ChatView/chatListSlice'
 
 const ArchivedCustomers = () => {
     const intl = useIntl()
     const navigate = useNavigate()
     const { token } = useSelector(selectCredentials)
     const dispatch = useDispatch()
-
-    const [paginationParams, setPaginationParams] = React.useState({
-        page: 1,
-    })
+    const [loading, setLoading] = React.useState(true)
 
     const [customerOptionModalVisible, setCustomerOptionsModalVisible] = useState<boolean>(false)
     const [selectedInboxId, setSelectedInboxId] = useState<string | undefined>(undefined)
@@ -29,27 +25,27 @@ const ArchivedCustomers = () => {
         if (token) {
             fetchInboxes({
                 token,
-                offset: (paginationParams.page - 1) * limit,
                 limit,
                 isArchive: true,
             }).then((result) => {
                 dispatch(setCustomers(result.data.data))
-                // setLoading(false)
+                setLoading(false)
             })
         } else {
             navigate('/login')
         }
-    }, [token, paginationParams.page, dispatch, navigate, customerOptionModalVisible])
+    }, [token, dispatch, navigate, customerOptionModalVisible])
 
     const restoreInbox = (id: string) => {
         restoreInboxById({ token, id: id })
             .then((result) => {
                 console.log(result)
+                setCustomerOptionsModalVisible(false)
             })
     }
 
     return (
-        <div className=''>
+        <div className='bg-white dark:bg-slate-800 h-[100vh]'>
             <div className="bg-white dark:bg-slate-900 shadow">
                 <SimpleHeader heading={intl.formatMessage({ id: 'global.archivedCustomers'})}  backFn={() => navigate('/home')}/>
             </div>
@@ -57,10 +53,10 @@ const ArchivedCustomers = () => {
             <div className="mt-16">
                 <RenderChats 
                 //key={index}
+                    origin={'archived'}
                     setCustomerOptionsModalVisible={setCustomerOptionsModalVisible}
                     setSelectedInboxId={setSelectedInboxId}  
-                    //loading={loading}
-                
+                    loading={loading}
                 />
             </div>
 
