@@ -44,7 +44,7 @@
     "react-dom": "17.0.2",
     "react-easy-swipe": "^0.0.22",
     "react-intersection-observer": "^8.33.1",
-    "react-intl": "^5.24.6",
+    "react-intl": "^5.24.8",
     "react-lazily": "^0.9.1",
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.2",
