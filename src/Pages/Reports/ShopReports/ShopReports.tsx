@@ -17,7 +17,6 @@ import Button from 'src/Components/Style/Button'
 import { FormattedMessage } from 'react-intl'
 
 
-
 const ShopReports = () => {
     const { token } = useSelector(selectCredentials)
     const [loading, setLoading] = useState(true)
@@ -32,8 +31,11 @@ const ShopReports = () => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
 
-    const [filter, setFilter] = useState(FILTERS.TODAY)
-    const [filterValue, setFilterValue] = useState(FILTERS_VALUES.TODAY)
+    const [filter, setFilter] = useState({
+        name : FILTERS.TODAY,
+        value : FILTERS_VALUES.TODAY
+    })
+
     const wrapperRef = useRef<HTMLDivElement>(null)
 
     const getTotalAmount = useCallback((orders) => {
@@ -53,7 +55,7 @@ const ShopReports = () => {
             fetchOrdersAPI({
                 token: token,
                 orderStatus: undefined,
-                ordering: filterValue,
+                ordering: filter.value,
                 relatedId: undefined,
                 startDate,
                 endDate,
@@ -67,7 +69,7 @@ const ShopReports = () => {
                 setLoading(false)
             })
         }
-    }, [token, getTotalAmount, startDate, endDate, filterValue])
+    }, [token, getTotalAmount, startDate, endDate, filter])
 
 
     const handleClickOutside = (event: MouseEvent ) => {
@@ -90,8 +92,10 @@ const ShopReports = () => {
             <ul className="">
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.TODAY)
-                        setFilterValue(FILTERS_VALUES.TODAY)
+                        setFilter({
+                            name : FILTERS.TODAY,
+                            value : FILTERS_VALUES.TODAY
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -99,8 +103,10 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.YESTERDAY)
-                        setFilterValue(FILTERS_VALUES.YESTERDAY)
+                        setFilter({
+                            name : FILTERS.YESTERDAY,
+                            value : FILTERS_VALUES.YESTERDAY
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -108,8 +114,10 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.THIS_MONTH)
-                        setFilterValue(FILTERS_VALUES.THIS_MONTH)
+                        setFilter({
+                            name : FILTERS.THIS_MONTH,
+                            value : FILTERS_VALUES.THIS_MONTH
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -117,8 +125,10 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.THIS_YEAR)
-                        setFilterValue(FILTERS_VALUES.THIS_YEAR)
+                        setFilter({
+                            name : FILTERS.THIS_YEAR,
+                            value : FILTERS_VALUES.THIS_YEAR
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -126,8 +136,10 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.LAST_7_DAYS)
-                        setFilterValue(FILTERS_VALUES.LAST_7_DAYS)
+                        setFilter({
+                            name : FILTERS.LAST_7_DAYS,
+                            value : FILTERS_VALUES.LAST_7_DAYS
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -135,8 +147,10 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.LAST_30_DAYS)
-                        setFilterValue(FILTERS_VALUES.LAST_30_DAYS)
+                        setFilter({
+                            name : FILTERS.LAST_30_DAYS,
+                            value : FILTERS_VALUES.LAST_30_DAYS
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -144,8 +158,10 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        setFilter(FILTERS.LAST_90_DAYS)
-                        setFilterValue(FILTERS_VALUES.LAST_90_DAYS)
+                        setFilter({
+                            name : FILTERS.LAST_90_DAYS,
+                            value : FILTERS_VALUES.LAST_90_DAYS
+                        })
                         setEnableDropDown(false)
                     }}
                 > 
@@ -153,8 +169,6 @@ const ShopReports = () => {
                 </li>
                 <li className='mb-1 bg-blue-100 px-5 dark:bg-slate-600 p-2'
                     onClick={() => {
-                        //setFilter(FILTERS.CUSTOM_DATE)
-                        //setFilterValue(FILTERS_VALUES.CUSTOM_DATE)
                         setEnableDropDown(false)
                         setEnableCustomDate(true)
                     }}
@@ -172,8 +186,10 @@ const ShopReports = () => {
         console.log('End:', endDate)
 
         if(startDate && endDate){
-            setFilter(FILTERS.CUSTOM_DATE)
-            setFilterValue(FILTERS_VALUES.CUSTOM_DATE)
+            setFilter({
+                name : FILTERS.CUSTOM_DATE,
+                value : FILTERS_VALUES.CUSTOM_DATE
+            })
             setEnableCustomDate(false)
         }
 
@@ -243,7 +259,7 @@ const ShopReports = () => {
                             onClick={() => setEnableDropDown(true)}
                         >
                             <div className="flex justify-between ">
-                                <span>{filter}</span>
+                                <span>{filter.name}</span>
                                 <span className="right"> <ArrowDownIcon /></span> 
                             </div>
                             
@@ -251,7 +267,7 @@ const ShopReports = () => {
                     }                  
                 </div>
 
-                {(filterValue ===  FILTERS_VALUES.CUSTOM_DATE  && startDate && endDate) &&
+                {(filter.value ===  FILTERS_VALUES.CUSTOM_DATE  && startDate && endDate) &&
                     <div className='flex justify-center py-3 px-2 w-full 
                     dark:text-slate-200 bg-blue-100 mt-0 -mb-3 dark:bg-slate-600'>
                         {formatDate(startDate)}  <span className="px-4">to</span>  {formatDate(endDate)}
@@ -268,7 +284,7 @@ const ShopReports = () => {
 
                 : orderCount ? (<>
                     <div className={`bg-slate-100 p-4 dark:bg-slate-900 print:hidden 
-                        ${(filterValue ===  FILTERS_VALUES.CUSTOM_DATE  && startDate && endDate) ? 'pt-[170px]' :'pt-[130px]'    }
+                        ${(filter.value ===  FILTERS_VALUES.CUSTOM_DATE  && startDate && endDate) ? 'pt-[170px]' :'pt-[130px]'    }
                     
                     `}>
                         <div className='flex justify-center bold text-center mb-5 font-semibold dark:text-slate-200'>
