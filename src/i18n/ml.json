@@ -23,6 +23,12 @@
             "value": "ഉപഭോക്താക്കൾ"
         }
     ],
+    "global.archivedCustomers": [
+        {
+            "type": 0,
+            "value": "Archived Customers"
+        }
+    ],
     "global.more": [
         {
             "type": 0,
@@ -189,6 +195,12 @@
         {
             "type": 0,
             "value": "ക്ലോസ്"
+        }
+    ],
+    "action.apply": [
+        {
+            "type": 0,
+            "value": "നൽകുക"
         }
     ]
 }

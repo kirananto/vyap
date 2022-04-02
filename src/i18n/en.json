@@ -23,6 +23,12 @@
             "value": "Customers"
         }
     ],
+    "global.archivedCustomers": [
+        {
+            "type": 0,
+            "value": "Archived Customers"
+        }
+    ],
     "global.more": [
         {
             "type": 0,
@@ -195,6 +201,12 @@
         {
             "type": 0,
             "value": "Close"
+        }
+    ],
+    "action.apply": [
+        {
+            "type": 0,
+            "value": "Apply"
         }
     ]
 }

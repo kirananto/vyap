@@ -17,7 +17,8 @@ const ProductCard = ({item} : {item: IProduct}) => {
         >
             <div className="flex py-4 basis-10/12 pl-2 ">
 
-                <div className="basis-3/12 print:basis-1/12  md:basis-1/12 lg:basis-1/12 w-15 h-full text-center border border-slate-200  dark:border-slate-600 relative aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
+                <div className="basis-3/12 print:basis-1/12  md:basis-1/12 lg:basis-1/12 w-15 h-full text-center border border-slate-200  
+                dark:border-slate-600  aspect-square rounded-lg overflow-hidden bg-cover bg-center empty_image_background">
                     {item?.productImage && (
                         <img
                             loading="lazy"

@@ -5,16 +5,22 @@ import Archive from 'src/Components/Style/Icons/Archive'
 interface iProps {
     onClose: () => void,
     inboxId?: string
-    deleteInbox: (arg : string) => void,
+    deleteInbox?: (arg : string) => void,
+    restoreInbox?: (arg : string) => void,
 }
 
-const CustomerOptionsPopup = ({ onClose, inboxId, deleteInbox }
+const CustomerOptionsPopup = ({ onClose, inboxId, deleteInbox, restoreInbox }
     : iProps
 ) => {
 
     const handleDelete = () => {
-        if(inboxId)
+        if(inboxId && deleteInbox)
             deleteInbox(inboxId)
+    }
+
+    const handleRestore = () => {
+        if(inboxId && restoreInbox)
+            restoreInbox(inboxId)
     }
 
     return (
@@ -27,12 +33,12 @@ const CustomerOptionsPopup = ({ onClose, inboxId, deleteInbox }
             <div className="flex flex-col mt-6 ml-2">
 
                 <button onClick={() => {
-                    handleDelete()
+                    deleteInbox ? handleDelete() : handleRestore()
                     hapticFeedback()
                     onClose()
-                }} className="flex items-center py-3 gap-2 text-md font-semibold text-red-500 dark:text-red-300">
+                }} className={`flex items-center py-3 gap-2 text-md font-semibold ${ deleteInbox ? 'text-red-500 dark:text-red-300' : 'text-green-600 dark:text-green-300'} `}>
                     <Archive />
-                    <span>Hide Customer</span>
+                    <span> { deleteInbox ? `Hide Customer` : `Un-hide Customer`}</span>
                 </button>
             </div>
         </div>

@@ -21,6 +21,9 @@ export default function OrderDetails() {
     
     const [urlSlug, setUrlSlug] = useState<string | undefined>(undefined)
 
+    //TODO verify whatsapp contact for  retailer login case
+    const [whatsAppNum, setWhatsAppNum] = useState<number | undefined>(undefined)
+    
     const { user, token } = useSelector(selectCredentials)
     const { id, chatId } = useParams()
     const dispatch = useDispatch()
@@ -45,6 +48,7 @@ export default function OrderDetails() {
     useEffect(() => {
         fetchOrderAPI({ token, id: id }).then((result) => {
             // setOrder(result.data)
+            setWhatsAppNum(result?.data?.buyer?.officeNumber)
             dispatch(setOrderInfo({ inboxId: chatId ?? '', threadId: thread?.id, order: result.data }))
             if(result?.data?.orderShare?.id)
                 setUrlSlug(result?.data?.orderShare?.id)
@@ -63,7 +67,21 @@ export default function OrderDetails() {
     }
     ///...end Bill Actions
 
-    
+
+    const generateShareTxt = () => {
+        let numberText = ''
+        if(whatsAppNum){
+            if(whatsAppNum.toString().length === 10){
+                numberText = whatsAppNum.toString()
+                return `https://api.whatsapp.com/send?phone=91${numberText}&`
+            }else{
+                return `https://api.whatsapp.com/send?phone=${numberText}&`
+            }
+        }else{
+            return `whatsapp://send?`
+        }
+    }
+
     const onShare = () => {
         if (shareAction) {
             share('page')
@@ -76,7 +94,7 @@ export default function OrderDetails() {
         if(urlSlug){
             console.log('https://app.vyap.app/bill/'+urlSlug)           
             const url='https://app.vyap.app/bill/'+urlSlug
-            const shareText = `whatsapp://send?text= *VYAP Order Invoice:* %0a ${url}`
+            const shareText = `${generateShareTxt()}text=*VYAP Order Invoice:* %0a ${url}`
             window.open(shareText)
         }else{
             if (order?.id && token) {
@@ -86,7 +104,7 @@ export default function OrderDetails() {
                         setUrlSlug(response.data.id)
 
                         const url='https://app.vyap.app/bill/'+response.data.id
-                        const shareText = `whatsapp://send?text= *VYAP Order Invoice:* %0a ${url}`
+                        const shareText = `${generateShareTxt()}text= *VYAP Order Invoice:* %0a ${url}`
                         window.open(shareText)
                     })
                     .catch((error) => {
