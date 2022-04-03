@@ -141,7 +141,9 @@ export const PrintAll = ({ apiData }: IProps) => {
                         </p>
                     </div>
                     <div className="item w-1/6 self-center flex justify-end">
-                        <QRCode  size={100} className="mt-2" value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                        <div className="mt-2">
+                            <QRCode  size={100}  value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                        </div>
                     </div>
                 </div>
             </div>
