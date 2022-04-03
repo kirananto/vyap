@@ -16,6 +16,7 @@ import ArrowDownIcon from 'src/Components/Style/Icons/ArrowDownIcon'
 import Button from 'src/Components/Style/Button'
 import { FormattedMessage } from 'react-intl'
 import FilterOptions from '../FilterOptions'
+import { format, subDays } from 'date-fns'
 
 
 const ShopReports = () => {
@@ -101,19 +102,6 @@ const ShopReports = () => {
 
     }
 
-    function maxDate(){
-        return new Date().toISOString().split('T')[0]
-    }
-
-    function formatDate(date : string){
-        const inpDate = new Date(date)
-        const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(inpDate)
-        const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(inpDate)
-        const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(inpDate)
-        console.log(`${day}-${month}-${year}`)
-        return (`${day}-${month}-${year}`)
-    }
-
     return (
         <div className="dark:bg-slate-900 print:bg-white dark:print:bg-white ">
             {/* header */}
@@ -134,12 +122,27 @@ const ShopReports = () => {
                                     <div>
                                         <span className="font-normal">Start Date:</span>
                                         <br/>
-                                        <input className='dark:bg-slate-600 px-2 py-1' type="date" max={maxDate()} id="startDate" name="start" value={startDate} onChange={(e) => setStartDate(e.target.value)}></input>
+                                        <input 
+                                            className='dark:bg-slate-600 px-2 py-1' 
+                                            type="date" 
+                                            max={format(subDays(new Date(), 1), 'yyyy-MM-dd')} 
+                                            id="startDate" 
+                                            name="start" 
+                                            value={startDate} 
+                                            onChange={(e) => setStartDate(e.target.value)} />
+                            
                                     </div>
                                     
                                     <div>
                                         <span className="font-normal">End Date:</span>
-                                        <input className='dark:bg-slate-600 px-2 py-1'  type="date" max={maxDate()} id="endDate" name="end" value={endDate} onChange={(e) => setEndDate(e.target.value)}></input>
+                                        <input 
+                                            className='dark:bg-slate-600 px-2 py-1'  
+                                            type="date" 
+                                            max={format(new Date, 'yyyy-MM-dd')} 
+                                            id="endDate" 
+                                            name="end" 
+                                            value={endDate}
+                                            onChange={(e) => setEndDate(e.target.value)} />
                                     </div>
                                     
                                     <div className="flex gap-2">
@@ -176,7 +179,7 @@ const ShopReports = () => {
                 {(filter.value ===  FILTERS_VALUES.CUSTOM_DATE  && startDate && endDate) &&
                     <div className='flex justify-center py-3 px-2 w-full 
                     dark:text-slate-200 bg-blue-100 mt-0 -mb-3 dark:bg-slate-600'>
-                        {formatDate(startDate)}  <span className="px-4">to</span>  {formatDate(endDate)}
+                        {format(new Date(startDate), 'dd-MMM-yyyy')} <span className="px-4">to</span> {format(new Date(endDate), 'dd-MMM-yyyy')}
                     </div>                           
                 }  
             </div>
