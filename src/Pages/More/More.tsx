@@ -28,6 +28,7 @@ import Bowser from 'bowser'
 import { differenceInDays } from 'date-fns'
 import { clearAll as clearAllProducts } from '../Product/productsSlice'
 import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
+import WhatsApp from 'src/Components/Style/Icons/WhatsApp'
 const browser = Bowser.getParser(window.navigator.userAgent)
 export default function More() {
     const { user, token } = useSelector(selectCredentials)
@@ -120,6 +121,11 @@ export default function More() {
                     </NavLink>
                     {/* ----- */}
                     {/* ----- */}
+                    <a href="https://wa.me/919037555541?text=Hello%20Team%20VYAP%20" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
+                        <span className="text-indigo-500 dark:text-indigo-300 font-bold	"> <WhatsApp size={7} /></span>
+                        <Links linkName={intl.formatMessage({ id: 'global.whatsAppHelp' })} />
+                    </a>
+
                     <a href="mailto:mail@vyap.app" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <HelpIcon className="text-indigo-500 dark:text-indigo-300" />
                         <Links linkName={intl.formatMessage({ id: 'global.help' })} />

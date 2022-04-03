@@ -128,7 +128,13 @@
     "global.help": [
         {
             "type": 0,
-            "value": "Help and Support"
+            "value": "Help and Support (Email)"
+        }
+    ],
+    "global.whatsAppHelp": [
+        {
+            "type": 0,
+            "value": "WhatsApp Support"
         }
     ],
     "global.switch": [
