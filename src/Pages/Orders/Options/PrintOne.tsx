@@ -9,10 +9,10 @@ import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 
 interface IProps {
     orderItems?: IOrderItem[];
-    order?: orderInterface;    
+    order?: orderInterface;
 }
 
-export const PrintOne = ({  orderItems, order}: IProps) => {
+export const PrintOne = ({ orderItems, order }: IProps) => {
     const componentRef = React.useRef(null)
 
     const reactToPrintTrigger = React.useCallback(() => {
@@ -73,7 +73,7 @@ export const PrintOne = ({  orderItems, order}: IProps) => {
 
                     <div className="col-start-2 col-span-2 self-center">
                         <h2 className="text-2xl font-bold text-slate-600">
-                                Order Summary
+                            Order Summary
                         </h2>
                     </div>
                 </div>
@@ -81,14 +81,13 @@ export const PrintOne = ({  orderItems, order}: IProps) => {
                 <div>
                     <div className="m-5 mx-10 p-5 border border-slate-200 rounded-md">
                         <h2 className="dark:text-slate-300 font-bold  mb-7"> Order items </h2>
-                        <div className={`flex w-full justify-between mt-1 pb-2 `}>       
+                        <div className={`flex w-full justify-between mt-1 pb-2 `}>
                         </div>
                         {orderItems?.map((item, index) => (
                             <div
-                                className={`flex justify-between pb-2 ${
-                                    index === orderItems.length - 1
-                                        ? 'border-b-2 border-dashed border-slate-300 dark:border-slate-600 mb-2 pb-4'
-                                        : ''
+                                className={`flex justify-between pb-2 ${index === orderItems.length - 1
+                                    ? 'border-b-2 border-dashed border-slate-300 dark:border-slate-600 mb-2 pb-4'
+                                    : ''
                                 }`}
                                 key={`${index}`}
                             >
@@ -124,29 +123,29 @@ export const PrintOne = ({  orderItems, order}: IProps) => {
                         {orderItems?.length === 0 && (
                             <div className="mt-2 text-center text-slate-600 dark:text-slate-200 mb-4">
                                 {' '}
-                        Order items are not available{' '}
+                                Order items are not available{' '}
                             </div>
                         )}
                         <div className="flex justify-end">
                             <div>
                                 <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
-                                    <span className="text-sm font-normal">Total:</span> 
-                                    {parseFloat(order?.totalAmount ? order?.totalAmount : '0' ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                                    <span className="text-sm font-normal">Total:</span>
+                                    {parseFloat(order?.totalAmount ? order?.totalAmount : '0').toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                 </div>
                                 <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
                                     <span className="text-sm font-normal">Discount:</span>
                                     {parseFloat(order?.flatDiscount ? order?.flatDiscount : '0').toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                 </div>
                                 <div className="text-slate-600 dark:text-slate-200 text-lg font-extrabold text-right">
-                                    <span className="text-sm font-normal">Final Amount:</span> 
+                                    <span className="text-sm font-normal">Final Amount:</span>
                                     {(
-                                        parseFloat(order?.totalAmount ? order?.totalAmount : '0' ) - parseFloat(order?.flatDiscount ? order?.flatDiscount : '0')
+                                        parseFloat(order?.totalAmount ? order?.totalAmount : '0') - parseFloat(order?.flatDiscount ? order?.flatDiscount : '0')
                                     ).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>        
+                </div>
 
                 <div className="flex flex-row flex-wrap justify-end mt-20 pt-2 px-5 border-t border-zinc-200">
                     <div className="item w-1/6 place-self-center">
@@ -158,15 +157,17 @@ export const PrintOne = ({  orderItems, order}: IProps) => {
                     <div className="item w-4/6  place-self-center flex justify-center">
                         <p className="text-slate-800 text-sm font-semibold pb-3 pr-3">
                             {' '}
-                                Report generated by Vyap &nbsp; | &nbsp; https://vyap.app
+                            Report generated by Vyap &nbsp; | &nbsp; https://vyap.app
                         </p>
                     </div>
                     <div className="item w-1/6 self-center flex justify-end">
-                        <QRCode size={100} className="mt-2" value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                        <div className="mt-2">
+                            <QRCode size={100} value="https://play.google.com/store/apps/details?id=app.vyap.app.twa" />
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
         </>
     )
 }
