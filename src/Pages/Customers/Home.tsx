@@ -205,18 +205,19 @@ export const Home = () => {
                 ref={scrollTargetRef}
                 className="card-main-container scrollDes relative divide-y lg:divide-none pb-20 divide-slate-200 dark:divide-slate-800 lg:flex lg:mt-2 lg:flex-wrap lg:gap-0 lg:h-auto lg:px-2"
             >
-                {renderChats()}
-                <div className="flex p-5 my-10 justify-center dark:bg-slate-900 bg-slate-50 text-green-400 dark:text-green-300">
-                    <div className="pr-5  self-center">
+                <div className="flex px-5 py-4 mt-2 justify-left  text-green-400 dark:text-green-300">
+                    <div className="pr-5 self-center">
                         <Archive size={8}/>
                     </div>
-                    <div className="pr-2  self-center">
-                    
-                        <NavLink to="/archived_inboxes" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
-                            <h2 className="font-bold mb-1 pt-1 text-slate-600 dark:text-slate-200 truncate">{intl.formatMessage({ id: 'global.archivedCustomers'})}</h2>
+                    <div className="pr-2 self-center">
+                        <NavLink to="/archived_inboxes" onClick={hapticFeedback} 
+                            className="flex items-center w-full gap-2 dark:text-slate-300 text-slate-500">
+                            <h2 className="font-bold text-slate-600 dark:text-slate-200 truncate">{intl.formatMessage({ id: 'global.archivedCustomers'})}</h2>
                         </NavLink>
                     </div>
                 </div>
+                {renderChats()}
+
             </div>
             {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}
