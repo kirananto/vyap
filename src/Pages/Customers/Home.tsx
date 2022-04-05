@@ -42,6 +42,7 @@ export const Home = () => {
     const navigate = useNavigate()
     const intl = useIntl()
     useEffect(() => {
+        setLoading(true)
         const limit = 30
         if (token) {
             fetchInboxes({
