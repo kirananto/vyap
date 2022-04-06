@@ -1,8 +1,7 @@
 import { Footer } from '../../Components/Footer'
 import React, { useEffect, useCallback, useState } from 'react'
 import { ItemCard } from './ItemCard'
-import { useNavigate } from 'react-router'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { deleteInboxById, fetchInboxes } from 'src/API/inbox.axios'
@@ -19,6 +18,12 @@ import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import CustomerOptionsPopup from './Popups/CustomerOptionsPopup'
 import Archive from 'src/Components/Style/Icons/Archive'
+
+type LocationState ={
+    state : {
+        routeSource : string 
+    }
+}
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -39,10 +44,13 @@ export const Home = () => {
     const [customerOptionModalVisible, setCustomerOptionsModalVisible] = useState<boolean>(false)
     const [selectedInboxId, setSelectedInboxId] = useState<string | undefined>(undefined)
 
-    const navigate = useNavigate()
     const intl = useIntl()
+    const navigate = useNavigate()
+    const { state }  = useLocation() as LocationState
+    const [trackListChange, setTrackListChange] = useState(0)
+
     useEffect(() => {
-        setLoading(true)
+        ((state && trackListChange === 0) && (state?.routeSource === 'archive')) && setLoading(true)
         const limit = 30
         if (token) {
             fetchInboxes({
@@ -58,12 +66,13 @@ export const Home = () => {
         } else {
             navigate('/login')
         }
-    }, [customerOptionModalVisible, paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
+    }, [trackListChange, state, paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
     const deleteInbox = (id: string) => {
         deleteInboxById({ token, id: id })
             .then((result) => {
                 console.log(result)
+                setTrackListChange((prev) => prev + 1)
                 setCustomerOptionsModalVisible(false)
             })
     }
