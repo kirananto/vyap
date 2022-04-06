@@ -137,6 +137,12 @@
             "value": "വാട്സ്ആപ്പ് വഴി സഹായം"
         }
     ],
+    "global.videoTutorial": [
+        {
+            "type": 0,
+            "value": "വീഡിയോ ട്യൂട്ടോറിയൽ"
+        }
+    ],
     "global.offer": [
         {
             "type": 0,
