@@ -1,8 +1,7 @@
 import { Footer } from '../../Components/Footer'
 import React, { useEffect, useCallback, useState } from 'react'
 import { ItemCard } from './ItemCard'
-import { useNavigate } from 'react-router'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { deleteInboxById, fetchInboxes } from 'src/API/inbox.axios'
@@ -19,6 +18,12 @@ import { getDpImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import CustomerOptionsPopup from './Popups/CustomerOptionsPopup'
 import Archive from 'src/Components/Style/Icons/Archive'
+
+type LocationState ={
+    state : {
+        routeSource : string 
+    }
+}
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -39,9 +44,13 @@ export const Home = () => {
     const [customerOptionModalVisible, setCustomerOptionsModalVisible] = useState<boolean>(false)
     const [selectedInboxId, setSelectedInboxId] = useState<string | undefined>(undefined)
 
-    const navigate = useNavigate()
     const intl = useIntl()
+    const navigate = useNavigate()
+    const { state }  = useLocation() as LocationState
+    const [trackListChange, setTrackListChange] = useState(0)
+
     useEffect(() => {
+        ((state && trackListChange === 0) && (state?.routeSource === 'archive')) && setLoading(true)
         const limit = 30
         if (token) {
             fetchInboxes({
@@ -57,12 +66,13 @@ export const Home = () => {
         } else {
             navigate('/login')
         }
-    }, [customerOptionModalVisible, paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
+    }, [trackListChange, state, paginationParams.search, addCustomerVisible, token, paginationParams.page, dispatch, navigate])
 
     const deleteInbox = (id: string) => {
         deleteInboxById({ token, id: id })
             .then((result) => {
                 console.log(result)
+                setTrackListChange((prev) => prev + 1)
                 setCustomerOptionsModalVisible(false)
             })
     }
@@ -205,18 +215,19 @@ export const Home = () => {
                 ref={scrollTargetRef}
                 className="card-main-container scrollDes relative divide-y lg:divide-none pb-20 divide-slate-200 dark:divide-slate-800 lg:flex lg:mt-2 lg:flex-wrap lg:gap-0 lg:h-auto lg:px-2"
             >
-                {renderChats()}
-                <div className="flex p-5 my-10 justify-center dark:bg-slate-900 bg-slate-50 text-green-400 dark:text-green-300">
-                    <div className="pr-5  self-center">
+                <div className="flex px-5 py-4 mt-2 justify-left  text-green-400 dark:text-green-300">
+                    <div className="pr-5 self-center">
                         <Archive size={8}/>
                     </div>
-                    <div className="pr-2  self-center">
-                    
-                        <NavLink to="/archived_inboxes" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
-                            <h2 className="font-bold mb-1 pt-1 text-slate-600 dark:text-slate-200 truncate">{intl.formatMessage({ id: 'global.archivedCustomers'})}</h2>
+                    <div className="pr-2 self-center">
+                        <NavLink to="/archived_inboxes" onClick={hapticFeedback} 
+                            className="flex items-center w-full gap-2 dark:text-slate-300 text-slate-500">
+                            <h2 className="font-bold text-slate-600 dark:text-slate-200 truncate">{intl.formatMessage({ id: 'global.archivedCustomers'})}</h2>
                         </NavLink>
                     </div>
                 </div>
+                {renderChats()}
+
             </div>
             {/* <!-- Customer Card End -->
       <!-- Add Customer Button --> */}

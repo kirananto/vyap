@@ -128,7 +128,19 @@
     "global.help": [
         {
             "type": 0,
-            "value": "സഹായസഹകരണങ്ങൾ"
+            "value": "സഹായസഹകരണങ്ങൾ (Email)"
+        }
+    ],
+    "global.whatsAppHelp": [
+        {
+            "type": 0,
+            "value": "വാട്സ്ആപ്പ് വഴി സഹായം"
+        }
+    ],
+    "global.videoTutorial": [
+        {
+            "type": 0,
+            "value": "വീഡിയോ ട്യൂട്ടോറിയൽ"
         }
     ],
     "global.offer": [

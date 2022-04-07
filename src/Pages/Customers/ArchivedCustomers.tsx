@@ -47,7 +47,10 @@ const ArchivedCustomers = () => {
     return (
         <div className='bg-white dark:bg-slate-800 h-[100vh]'>
             <div className="bg-white dark:bg-slate-900 shadow">
-                <SimpleHeader heading={intl.formatMessage({ id: 'global.archivedCustomers'})}  backFn={() => navigate('/home')}/>
+                <SimpleHeader 
+                    heading={intl.formatMessage({ id: 'global.archivedCustomers'})} 
+                    backFn={() => navigate('/home', { state: { routeSource: 'archive' } })}
+                />
             </div>
 
             <div className="mt-16">
