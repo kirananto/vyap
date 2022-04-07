@@ -7,7 +7,7 @@ import {
     StockManagementIcon,
     MyAccountIcon,
     SettingsIcon,
-    HelpIcon,
+    // HelpIcon,
     OffersManagementIcon,
     LogoutIcon,
     SwitchIcon,
