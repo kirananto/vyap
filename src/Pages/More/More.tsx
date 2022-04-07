@@ -103,13 +103,7 @@ export default function More() {
                     </NavLink>
                     {/* ----- */}
                     {/* ----- */}
-                    {user?.organization?.isSupplier && <NavLink to="#" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
-                        <StockManagementIcon className="text-indigo-500 dark:text-indigo-300" />
-                        <Links linkName={intl.formatMessage({ id: 'global.stockManagement' })} />
-                        <Tag content={intl.formatMessage({ id: 'global.comingSoon' })} />
-                    </NavLink>}
-                    {/* ----- */}
-                    {/* ----- */}
+
                     <NavLink to="/my-account" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <MyAccountIcon className="text-indigo-500 dark:text-indigo-300" />
                         <Links linkName={intl.formatMessage({ id: 'global.myAccount' })} />
@@ -131,16 +125,23 @@ export default function More() {
                         <span className="text-indigo-500 dark:text-indigo-300 font-bold	"> <WhatsApp size={7} /></span>
                         <Links linkName={intl.formatMessage({ id: 'global.whatsAppHelp' })} />
                     </a>
-
+                    {/* 
                     <a href="mailto:mail@vyap.app" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <HelpIcon className="text-indigo-500 dark:text-indigo-300" />
                         <Links linkName={intl.formatMessage({ id: 'global.help' })} />
-                    </a>
+                    </a> */}
 
                     {user?.organization?.isSupplier === false && <a href="mailto:mail@vyap.app" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
                         <SwitchIcon className="text-indigo-500 dark:text-indigo-300" />
                         <Links linkName={intl.formatMessage({ id: 'global.switch' })} />
                     </a>}
+                    {/* ----- */}
+                    {/* ----- */}
+                    {user?.organization?.isSupplier && <NavLink to="#" onClick={hapticFeedback} className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
+                        <StockManagementIcon className="text-indigo-500 dark:text-indigo-300" />
+                        <Links linkName={intl.formatMessage({ id: 'global.stockManagement' })} />
+                        <Tag content={intl.formatMessage({ id: 'global.comingSoon' })} />
+                    </NavLink>}
                     {/* ----- */}
                     {/* ----- */}
                     {user?.organization?.isSupplier && <div className="flex items-center w-full gap-2 py-2 dark:text-slate-300 text-slate-500">
