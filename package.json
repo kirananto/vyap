@@ -20,7 +20,7 @@
     "clean": "echo Hello"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.2",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@formatjs/cli": "^4.8.3",
     "@reduxjs/toolkit": "1.8.1",
