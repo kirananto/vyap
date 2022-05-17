@@ -310,7 +310,7 @@ export default function PlaceOrder() {
                                     </div>
 
                                     <div className="text-right text-lg font-bold text-slate-600  dark:text-slate-200">
-                                        {(item?.quantity * parseFloat(item?.rate)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                                        {item?.quantity > 0 ?(item?.quantity * parseFloat(item?.rate)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' }) : `₹0.00`}
                                     </div>
                                 </div>
                             </div>
@@ -473,19 +473,20 @@ export default function PlaceOrder() {
 
                         <div className="col-span-2  mt-1 text-right mr-4">
                             <div className="text-base  dark:text-slate-400">
-                                {getTotalPrice().toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                                {getTotalPrice() ? getTotalPrice().toLocaleString('en-IN', { style: 'currency', currency: 'INR' }) : `₹0.00`}
                             </div>
                             <div className="text-base dark:text-slate-400">
                                 {placeOrder.discount.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                             </div>
                             <div className="mt-1 text-lg font-extrabold dark:text-slate-400">
                                 {(getTotalPrice() -
-                                    (placeOrder.discount ? placeOrder.discount : 0)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                                    (placeOrder.discount ? placeOrder.discount : 0)) ? (getTotalPrice() -
+                                    (placeOrder.discount ? placeOrder.discount : 0)).toLocaleString('en-IN', { style: 'currency', currency: 'INR' }) :  `₹0.00`}
                             </div>
                         </div>
                     </div>
 
-                    <div className="m-4">
+                    {getTotalPrice() > 0 && <div className="m-4">
                         <Button
                             onClick={() => {
                                 handleSubmit()
@@ -493,7 +494,7 @@ export default function PlaceOrder() {
                         >
                             Place order
                         </Button>
-                    </div>
+                    </div>}
                 </div>
             </div>
 

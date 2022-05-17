@@ -200,7 +200,6 @@ export default function AddItem() {
                     }
                     return mapItem
                 })
-                .filter((filterItem) => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
         } else {
@@ -369,6 +368,9 @@ export default function AddItem() {
                                         onChange={(e) => {
                                             updateItem(item, parseInt(e.target.value.toString()))
                                         }}
+                                        onBlur={() => {
+                                            setSelectedItems(selectedItems?.filter((filterItem) => filterItem.quantity > 0))
+                                        }}
                                         value={
                                             selectedItems?.find(
                                                 (findItem) => findItem.id === item.id
@@ -524,7 +526,7 @@ export default function AddItem() {
 
                 </Swipe>
 
-                {selectedItems?.length > 0 ? <div className="fixed bg-white dark:bg-slate-800 bottom-0 m-auto left-0 right-0 px-4 p-4 pb-10">
+                {selectedItems?.length >= 1 && calculatePriceOfSelected() != "₹NaN" ? <div className="fixed bg-white dark:bg-slate-800 bottom-0 m-auto left-0 right-0 px-4 p-4 pb-10">
                     <Button onClick={onSubmit}>
                         {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
                     </Button>
