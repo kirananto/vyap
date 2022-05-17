@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-export default function Lozenge({ content, color = 'green', square }: { content: string | Element | JSX.Element, color?: 'green' | 'purple' | 'blue' | 'red', square?: boolean }) {
+export default function Lozenge({ content, color = 'green', square }: { content: ReactNode, color?: 'green' | 'purple' | 'blue' | 'red', square?: boolean }) {
     function getColor() {
         switch (color) {
             case 'green':

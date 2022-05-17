@@ -25,7 +25,6 @@ export default function PurchaseOrder() {
                         <div className={'border-b border-slate-300 dark:border-slate-600'} key={`${index}`}>
                             <div className={`flex w-full justify-between mt-2 pb-2`}>
                                 {/* TODO: Remove this console.log */}
-                                {console.log('item', item)}
                                 <div className="flex">
                                     <div className="flex flex-col">
                                         <div className="text-slate-400 dark:text-slate-200">#234234 • 25th March 2021</div>

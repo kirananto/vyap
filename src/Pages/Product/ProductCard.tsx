@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import type { IProduct } from 'src/types/product'
 import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { hapticFeedback } from 'src/utils/vibrate'
-import { useLongPress, LongPressDetectEvents } from 'use-long-press'
+import { useLongPress } from 'use-long-press'
 
 export default function ProductCard({
     item,
@@ -31,15 +31,12 @@ export default function ProductCard({
         setLongPressEnabled(false)
     }, [item, onClicked, setLongPressEnabled, longPresEnabled])
 
+    //@ts-ignore
     const bind = useLongPress(!isScrolling ? callback : null, {
-        // onStart: () => console.log('Press started'),
-        // onFinish: () => console.log('Long press finished'),
-        // onCancel: () => console.log('Press cancelled'),
-        // onMove: () => console.log('Detected mouse or touch movement'),
         threshold: 300,
         captureEvent: true,
         cancelOnMovement: true,
-        detect: LongPressDetectEvents.BOTH
+        detect: "both"
     })
 
     const onItemClick = () => {

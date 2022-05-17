@@ -49,7 +49,7 @@ const ProductReports = () => {
 
     const wrapperRef = useRef<HTMLDivElement>(null)
 
-    const handleFetchOrderItems = useCallback(async (orders) => {
+    const handleFetchOrderItems = useCallback(async (orders: orderInterface[]) => {
         try {
             const result = await Promise.all(orders?.map?.((order: orderInterface) => {
                 return fetchOrderItems({ token, orderId: order.id, limit: 100, offset: 0 })

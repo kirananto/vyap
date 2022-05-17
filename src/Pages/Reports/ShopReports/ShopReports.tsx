@@ -40,7 +40,7 @@ const ShopReports = () => {
 
     const wrapperRef = useRef<HTMLDivElement>(null)
 
-    const getTotalAmount = useCallback((orders) => {
+    const getTotalAmount = useCallback((orders: orderInterface[]) => {
         let _orderTotal = 0
         orders?.forEach?.((item : orderInterface) => {
             const finalAmount = (

@@ -104,7 +104,7 @@ export default function AddItem() {
 
     }
 
-    const handleFetchTagItems = useCallback((productList) => {
+    const handleFetchTagItems = useCallback((productList: any) => {
         const tagSorted : TagListProps  = {}
         productList?.forEach((item : IProduct ) => {
             const tag = item?.organizationCatalogueCategory?.name
@@ -437,9 +437,8 @@ export default function AddItem() {
             </div>
 
             <div>
-
-                <Swipe
-                    onSwipeMove={onSwipeMove}>
+                {/*@ts-ignore */}
+                <Swipe onSwipeMove={onSwipeMove}>
                     <div className="pb-24">
                         {
                             activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED && 

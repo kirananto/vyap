@@ -49,8 +49,6 @@ export default function ItemList({
                 {a.map((item, index) => (
                     <div key={`${index}`}>
                         <div className={`flex justify-between pb-2 ${index === a.length - 1 ? 'border-b-2 border-dashed border-grey-300 mb-2 pb-2 dark:border-slate-500' : ''}`}>
-                            {/* TODO: Remove this console.log */}
-                            {console.log('item', item)}
                             <div className="flex gap-2">
                                 <div
                                     className="bg-gradient-to-br from-blue-500 to-indigo-900 m-1 rounded-full h-4 w-4"
