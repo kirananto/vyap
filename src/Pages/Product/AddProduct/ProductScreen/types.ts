@@ -2,7 +2,7 @@ import { Length, Min } from 'class-validator'
 
 
 export enum TABS {
-    'PRICING' = 'PRICING',
+    'VARIANTS' = 'VARIANTS',
     'OTHERS' = 'OTHERS'
 }
 

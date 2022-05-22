@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCentralProductCategories } from 'src/API/products.axios'
+import { fetchBrands } from 'src/API/brand.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import type { ICategories } from 'src/types/categories'
-import { setCentralCategory } from '../redux/addProductSlice'
-import type { BrandInterface } from './BrandModal'
+import { setBrand } from '../../redux/addProductSlice'
 
-interface IProps {
-    trigger: boolean
-    setModal: (arg: boolean) => void
+export interface BrandInterface {
+  id?: string
+  name: string
+  description?: string
 }
 
-function CentralCategoryModal(props: IProps) {
+interface BrandModalInterface {
+    setModal: (value: boolean) => void
+    trigger: boolean
+
+}
+
+function BrandModal(props: BrandModalInterface) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
-    const [searchValue, setSearchValue] = useState<string>()
-    const [items, setItems] = useState<BrandInterface[]>([])
+    const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
+    const [brands, setBrands] = useState<BrandInterface[]>([])
 
     const dispatch = useDispatch()
 
@@ -25,13 +30,13 @@ function CentralCategoryModal(props: IProps) {
     }
 
     useEffect(() => {
-        fetchCentralProductCategories({ token, limit: 100, offset: 0, search: searchValue }).then(result => {
-            setItems(result.data?.data?.filter((item: ICategories) => item.name))
+        fetchBrands({ token, limit: 100, offset: 0, search: searchValue?.toLowerCase() }).then(result => {
+            setBrands(result.data?.data)
         })
     }, [searchValue, token])
 
-    function selectHSN(value: BrandInterface) {
-        dispatch(setCentralCategory(value))
+    function selectBrand(value: BrandInterface) {
+        dispatch(setBrand(value))
         props.setModal(false)
     }
 
@@ -40,17 +45,16 @@ function CentralCategoryModal(props: IProps) {
         if(!search) {
             return null
         }
-        if(items?.some(category => category.name.toLowerCase() === search)) {
+        if(brands?.some(brand => brand.name.toLowerCase() === search)) {
             return null
         }
-        return <div key='New' onClick={() => selectHSN({
+        return <div key='New' onClick={() => selectBrand({
             name: searchValue ?? ''
         })} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
             <div className="text-slate-700 dark:text-slate-300">{searchValue} </div>
-            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> Create this new category </div>
+            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> Create this new brand. </div>
         </div>
     }
-
 
     return props.trigger ? (
         <div className="border-t border-slate-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-slate-800">
@@ -69,7 +73,7 @@ function CentralCategoryModal(props: IProps) {
                         />
                     </svg>
                 </button>
-                <h3 className="font-bold text-slate-500 dark:text-slate-200">Categories</h3>
+                <h3 className="font-bold text-slate-500 dark:text-slate-200">Brands</h3>
                 <div className="text-slate-400 dark:text-slate-300 mt-2 text-xs font-light">
                 </div>
                 <div className="relative flex w-full mt-8">
@@ -84,8 +88,8 @@ function CentralCategoryModal(props: IProps) {
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
                     {showCreationBox()}
-                    {items.map((mapItem) => (
-                        <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
+                    {brands.map((mapItem) => (
+                        <div key={mapItem.id} onClick={() => selectBrand(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
                             <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>
                             <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
                         </div>
@@ -97,4 +101,4 @@ function CentralCategoryModal(props: IProps) {
     ) : null
 }
 
-export default CentralCategoryModal
+export default BrandModal

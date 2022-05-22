@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrganizationProductCategories } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { IFetchOrganizationProductCategories, IFetchOrganizationProductCategory } from 'src/types/fetchOrganizationProductCategories'
-import { setCategory } from '../redux/addProductSlice'
+import { setCategory } from '../../redux/addProductSlice'
 import type { BrandInterface } from './BrandModal'
 
 
