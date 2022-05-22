@@ -25,7 +25,7 @@ const ArchivedInboxes = lazily(() => import('src/Pages/Customers/ArchivedCustome
 
 const AddItem = lazily(() => import('src/Pages/Customers/ChatView/PlaceOrder/AddItem')).default
 const PlaceOrder = lazily(() => import('src/Pages/Customers/ChatView/PlaceOrder')).default
-const CreateProduct = lazily(() => import('src/Pages/Product/AddProduct/ProductScreen/CreateProduct')).default
+const CreateProduct = lazily(() => import('src/Pages/Product/AddProduct/ProductScreen')).default
 const AddEditPurchase = lazily(() => import('src/Pages/StockManagement/PurchaseOrder/AddEditPurchase')).default
 const PurchaseOrder = lazily(() => import('src/Pages/StockManagement/PurchaseOrder')).default
 const AddProductMain = lazily(() => import('src/Pages/Product/AddProduct/MainScreen/AddProductMain')).default

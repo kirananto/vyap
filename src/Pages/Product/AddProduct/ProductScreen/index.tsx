@@ -17,8 +17,8 @@ import { SimpleFooter } from '../../../../Components/Footer'
 import SimpleHeader from '../../../../Components/Header/SimpleHeader'
 import { clearAll, selectAddProductInfo } from '../redux/addProductSlice'
 import ItemCard from './ItemCard'
-import OthersTab from './OthersTab'
-import PricingTab from './PricingTab'
+import OthersTab from './OthersTab/OthersTab'
+import PricingTab from './VariantsTab'
 import { PAGE_ACTION, TABS } from './types'
 import {
     isValidBrand,
@@ -32,7 +32,7 @@ import {
 } from './validations'
 
 function CreateProduct() {
-    const [toggleState, setToggleState] = useState(TABS.PRICING)
+    const [toggleState, setToggleState] = useState(TABS.VARIANTS)
     const [isLoading, setIsLoading] = useState(false)
     const [saveAttempt, setSaveAttempt] = useState(0)
     const [productImage, setProductImage] = useState<string>()
@@ -166,7 +166,7 @@ function CreateProduct() {
         setSaveAttempt((value) => value + 1)
         if (isValidPricing && !isValidOthers) toggleTabs(TABS.OTHERS)
 
-        if (!isValidPricing && isValidOthers) toggleTabs(TABS.PRICING)
+        if (!isValidPricing && isValidOthers) toggleTabs(TABS.VARIANTS)
 
         if (isValidPricing && isValidOthers) {
             if (isEdit) {
@@ -293,13 +293,13 @@ function CreateProduct() {
                 {/* -------- */}
                 <div className="flex justify-between py-4">
                     <button
-                        onClick={() => toggleTabs(TABS.PRICING)}
-                        className={`w-1/2 rounded px-6 py-2 font-semibold ${toggleState === TABS.PRICING
+                        onClick={() => toggleTabs(TABS.VARIANTS)}
+                        className={`w-1/2 rounded px-6 py-2 font-semibold ${toggleState === TABS.VARIANTS
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 '
                             : 'text-slate-500 dark:text-slate-300'
                         }`}
                     >
-                        Pricing
+                        Variants
                     </button>
                     <button
                         onClick={() => toggleTabs(TABS.OTHERS)}
@@ -314,7 +314,7 @@ function CreateProduct() {
                 {/* -------- */}
 
                 {/* -------------------TAB-1----------------- */}
-                <div className={toggleState === TABS.PRICING ? 'block' : 'hidden'}>
+                <div className={toggleState === TABS.VARIANTS ? 'block' : 'hidden'}>
                     <PricingTab saveAttempt={saveAttempt} action={pageAction} />
                 </div>
 

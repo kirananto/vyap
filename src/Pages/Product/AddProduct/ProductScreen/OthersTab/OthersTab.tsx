@@ -14,17 +14,17 @@ import {
     setDescription,
     setProductImage,
     setSkuCode,
-} from '../redux/addProductSlice'
+} from '../../redux/addProductSlice'
 import BrandModal from './BrandModal'
 import CentralCategoryModal from './CentralCategoryModal'
 import OrganizationCategoryModal from './OrganizationCategoryModal'
-import { PAGE_ACTION } from './types'
+import { PAGE_ACTION } from '../types'
 import {
     isValidBrand,
     isValidCategory,
     // isValidDescription,
     isValidTag,
-} from './validations'
+} from '../validations'
 
 import Compressor from 'compressorjs'
 import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'

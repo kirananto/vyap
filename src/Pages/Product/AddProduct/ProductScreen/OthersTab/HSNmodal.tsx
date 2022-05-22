@@ -1,27 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBrands } from 'src/API/brand.axios'
+import { createIfNotExists, getHSNsClearTax } from 'src/API/hsn.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import { setBrand } from '../redux/addProductSlice'
+import type { HitsEntity } from 'src/types/getHSNsClearTax'
+import { HSNInterface, setHsnNumber } from '../../redux/addProductSlice'
 
-export interface BrandInterface {
-  id?: string
-  name: string
-  description?: string
-}
 
-interface BrandModalInterface {
-    setModal: (value: boolean) => void
+interface IProps {
     trigger: boolean
-
+    setModal: (arg: boolean) => void
 }
 
-function BrandModal(props: BrandModalInterface) {
+function HSNmodal({ setModal, trigger } : IProps) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
-    const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
-    const [brands, setBrands] = useState<BrandInterface[]>([])
+    const [searchValue, setSearchValue] = useState('')
+    const [hsnCodes, setHSNCodes] = useState<HSNInterface[]>([])
 
     const dispatch = useDispatch()
 
@@ -30,36 +25,28 @@ function BrandModal(props: BrandModalInterface) {
     }
 
     useEffect(() => {
-        fetchBrands({ token, limit: 100, offset: 0, search: searchValue?.toLowerCase() }).then(result => {
-            setBrands(result.data?.data)
+        getHSNsClearTax({ search: searchValue }).then(result => {
+            setHSNCodes(result.data?.results?.[0]?.hits.map((mapItem: HitsEntity) => ({
+                chapter: mapItem?.chapter_name,
+                description: mapItem.product_description,
+                gstPercentage: parseFloat(mapItem?.product_rate?.replace('%', '')),
+                hsn: mapItem?.product_hsn_code
+            })))
         })
-    }, [searchValue, token])
+    }, [searchValue])
 
-    function selectBrand(value: BrandInterface) {
-        dispatch(setBrand(value))
-        props.setModal(false)
+    async function selectHSN(value: HSNInterface) {
+        const newVal = await createIfNotExists({ token, data: value })
+        console.log('newVal', newVal)
+        dispatch(setHsnNumber(newVal))
+        setModal(false)
     }
 
-    function showCreationBox() {
-        const search = searchValue?.toLowerCase()?.trim()
-        if(!search) {
-            return null
-        }
-        if(brands?.some(brand => brand.name.toLowerCase() === search)) {
-            return null
-        }
-        return <div key='New' onClick={() => selectBrand({
-            name: searchValue ?? ''
-        })} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
-            <div className="text-slate-700 dark:text-slate-300">{searchValue} </div>
-            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> Create this new brand. </div>
-        </div>
-    }
 
-    return props.trigger ? (
+    return trigger ? (
         <div className="border-t border-slate-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-slate-800">
             <div className="popup-inner">
-                <button className="popup-btn" onClick={() => props.setModal(false)}>
+                <button className="popup-btn" onClick={() => setModal(false)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-8 h-8 text-blue-600 dark:text-blue-400"
@@ -73,8 +60,9 @@ function BrandModal(props: BrandModalInterface) {
                         />
                     </svg>
                 </button>
-                <h3 className="font-bold text-slate-500 dark:text-slate-200">Brands</h3>
+                <h3 className="font-bold text-slate-500 dark:text-slate-200">HSN Number</h3>
                 <div className="text-slate-400 dark:text-slate-300 mt-2 text-xs font-light">
+                    <strong className="font-bold text-slate-600 dark:text-slate-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information.
                 </div>
                 <div className="relative flex w-full mt-8">
                     <input
@@ -87,11 +75,14 @@ function BrandModal(props: BrandModalInterface) {
                     />
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
-                    {showCreationBox()}
-                    {brands.map((mapItem) => (
-                        <div key={mapItem.id} onClick={() => selectBrand(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
-                            <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>
+                    {hsnCodes.map((mapItem) => (
+                        <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
+                            <div className="text-slate-700 dark:text-slate-300">{mapItem.chapter} </div>
                             <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
+                            <div className="mt-2 grid grid-cols-2 text-slate-700 dark:text-slate-300">
+                                <div>HSN: {mapItem.hsn} </div>
+                                <div>Rate: {mapItem.gstPercentage}% </div>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -101,4 +92,4 @@ function BrandModal(props: BrandModalInterface) {
     ) : null
 }
 
-export default BrandModal
+export default HSNmodal

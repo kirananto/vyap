@@ -9,7 +9,7 @@ import {
     setSalesPrice,
     setTaxEnabled
 } from '../redux/addProductSlice'
-import HSNmodal from './HSNmodal'
+import HSNmodal from './OthersTab/HSNmodal'
 import { PAGE_ACTION } from './types'
 import { isValidGST, isValidHSN, isValidMRP, isValidSalePrice } from './validations'
 
@@ -19,7 +19,7 @@ interface Props {
   saveAttempt: number
 }
 
-function PricingTab({ action, saveAttempt }: Props) {
+function VariantsTab({ action, saveAttempt }: Props) {
     const [modal, setModal] = useState(false)
     const addProductInfo = useSelector(selectAddProductInfo)
 
@@ -204,4 +204,4 @@ function PricingTab({ action, saveAttempt }: Props) {
     )
 }
 
-export default PricingTab
+export default VariantsTab

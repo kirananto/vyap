@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { BrandInterface } from 'src/Pages/Product/AddProduct/ProductScreen/BrandModal'
+import type { BrandInterface } from 'src/Pages/Product/AddProduct/ProductScreen/OthersTab/BrandModal';
 import type { RootState } from 'src/redux/store'
 import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
 

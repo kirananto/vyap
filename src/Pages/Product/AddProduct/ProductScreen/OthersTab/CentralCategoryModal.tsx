@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { createIfNotExists, getHSNsClearTax } from 'src/API/hsn.axios'
+import { fetchCentralProductCategories } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
-import type { HitsEntity } from 'src/types/getHSNsClearTax'
-import { HSNInterface, setHsnNumber } from '../redux/addProductSlice'
-
+import type { ICategories } from 'src/types/categories'
+import { setCentralCategory } from '../../redux/addProductSlice'
+import type { BrandInterface } from './BrandModal'
 
 interface IProps {
     trigger: boolean
     setModal: (arg: boolean) => void
 }
 
-function HSNmodal({ setModal, trigger } : IProps) {
+function CentralCategoryModal(props: IProps) {
     const { token } = useSelector(selectCredentials)
     const intl = useIntl()
-    const [searchValue, setSearchValue] = useState('')
-    const [hsnCodes, setHSNCodes] = useState<HSNInterface[]>([])
+    const [searchValue, setSearchValue] = useState<string>()
+    const [items, setItems] = useState<BrandInterface[]>([])
 
     const dispatch = useDispatch()
 
@@ -25,28 +25,37 @@ function HSNmodal({ setModal, trigger } : IProps) {
     }
 
     useEffect(() => {
-        getHSNsClearTax({ search: searchValue }).then(result => {
-            setHSNCodes(result.data?.results?.[0]?.hits.map((mapItem: HitsEntity) => ({
-                chapter: mapItem?.chapter_name,
-                description: mapItem.product_description,
-                gstPercentage: parseFloat(mapItem?.product_rate?.replace('%', '')),
-                hsn: mapItem?.product_hsn_code
-            })))
+        fetchCentralProductCategories({ token, limit: 100, offset: 0, search: searchValue }).then(result => {
+            setItems(result.data?.data?.filter((item: ICategories) => item.name))
         })
-    }, [searchValue])
+    }, [searchValue, token])
 
-    async function selectHSN(value: HSNInterface) {
-        const newVal = await createIfNotExists({ token, data: value })
-        console.log('newVal', newVal)
-        dispatch(setHsnNumber(newVal))
-        setModal(false)
+    function selectHSN(value: BrandInterface) {
+        dispatch(setCentralCategory(value))
+        props.setModal(false)
+    }
+
+    function showCreationBox() {
+        const search = searchValue?.toLowerCase()?.trim()
+        if(!search) {
+            return null
+        }
+        if(items?.some(category => category.name.toLowerCase() === search)) {
+            return null
+        }
+        return <div key='New' onClick={() => selectHSN({
+            name: searchValue ?? ''
+        })} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
+            <div className="text-slate-700 dark:text-slate-300">{searchValue} </div>
+            <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> Create this new category </div>
+        </div>
     }
 
 
-    return trigger ? (
+    return props.trigger ? (
         <div className="border-t border-slate-100 shadow-2xl popup-container dark:bg-slate-700 dark:border-slate-800">
             <div className="popup-inner">
-                <button className="popup-btn" onClick={() => setModal(false)}>
+                <button className="popup-btn" onClick={() => props.setModal(false)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-8 h-8 text-blue-600 dark:text-blue-400"
@@ -60,9 +69,8 @@ function HSNmodal({ setModal, trigger } : IProps) {
                         />
                     </svg>
                 </button>
-                <h3 className="font-bold text-slate-500 dark:text-slate-200">HSN Number</h3>
+                <h3 className="font-bold text-slate-500 dark:text-slate-200">Categories</h3>
                 <div className="text-slate-400 dark:text-slate-300 mt-2 text-xs font-light">
-                    <strong className="font-bold text-slate-600 dark:text-slate-200">Disclaimer:</strong> Rates given below are updated up to the GST (Rate) notification no. 05/2020 dated 16th October 2020 to the best of our information.
                 </div>
                 <div className="relative flex w-full mt-8">
                     <input
@@ -75,14 +83,11 @@ function HSNmodal({ setModal, trigger } : IProps) {
                     />
                 </div>
                 <div className=" mt-4 overflow-scroll  overflow-x-hidden h-64">
-                    {hsnCodes.map((mapItem) => (
+                    {showCreationBox()}
+                    {items.map((mapItem) => (
                         <div key={mapItem.id} onClick={() => selectHSN(mapItem)} className="border border-slate-300 dark:border-slate-600 rounded p-4 my-2">
-                            <div className="text-slate-700 dark:text-slate-300">{mapItem.chapter} </div>
+                            <div className="text-slate-700 dark:text-slate-300">{mapItem.name} </div>
                             <div className="mt-1 text-slate-500 dark:text-slate-400 text-xs"> {mapItem.description} </div>
-                            <div className="mt-2 grid grid-cols-2 text-slate-700 dark:text-slate-300">
-                                <div>HSN: {mapItem.hsn} </div>
-                                <div>Rate: {mapItem.gstPercentage}% </div>
-                            </div>
                         </div>
                     ))}
                 </div>
@@ -92,4 +97,4 @@ function HSNmodal({ setModal, trigger } : IProps) {
     ) : null
 }
 
-export default HSNmodal
+export default CentralCategoryModal

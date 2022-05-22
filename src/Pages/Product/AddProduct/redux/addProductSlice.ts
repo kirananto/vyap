@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
 import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
-import type { BrandInterface } from '../ProductScreen/BrandModal'
+import type { BrandInterface } from '../ProductScreen/OthersTab/BrandModal';
 
 interface CatalogueImageInterface {
     id: string;

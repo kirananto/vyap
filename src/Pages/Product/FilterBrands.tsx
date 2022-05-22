@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBrands } from 'src/API/brand.axios'
 import { selectCredentials } from '../Login/credentialsSlice'
-import type { BrandInterface } from './AddProduct/ProductScreen/BrandModal'
+import type { BrandInterface } from './AddProduct/ProductScreen/OthersTab/BrandModal'
 import { brandsCheckbox, selectProductFilters } from './productFiltersSlice'
 
 interface CategoryName {
