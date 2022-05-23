@@ -46,7 +46,7 @@
     "react-intersection-observer": "^9.1.0",
     "react-intl": "^5.25.1",
     "react-lazily": "^0.9.1",
-    "react-redux": "7.2.8",
+    "react-redux": "8.0.2",
     "react-router-dom": "6.3.0",
     "react-to-print": "^2.14.7",
     "react-use-scroll-direction": "^0.1.0",
