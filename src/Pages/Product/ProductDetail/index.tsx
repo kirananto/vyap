@@ -7,6 +7,7 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { fetchCentralProduct, fetchProductById } from 'src/API/products.axios'
 import { getProductImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectProductsInfo, setSingleCentralData, setSingleProduct } from '../productsSlice'
+import VariantBox from './VariantBox'
 
 const ProductDetail = () => {
 
@@ -152,6 +153,16 @@ const ProductDetail = () => {
                 </div>
             </div>
 
+            {(product?.centralCatalogue?.variants?.length ?? 0) > 0 ? <div className="flex flex-col text-slate-500   mb-5 px-1">
+                <div className="text-sm text-slate-500 font-bold dark:text-slate-400">
+                    Variants
+                </div>
+                <div className="flex flex-row flex-wrap pt-2 text-sm text-slate-400">
+                    {product?.centralCatalogue.variants?.map(item => {
+                        return <VariantBox item={item} key={item.id} product={product} />
+                    })}
+                    </div>
+            </div> : undefined}
         </div>
 
     </div>

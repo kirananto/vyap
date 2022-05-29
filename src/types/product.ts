@@ -1,4 +1,4 @@
-import type { CentralCatalogueInterface } from 'src/Pages/Product/AddProduct/redux/addProductSlice'
+import type { CentralCatalogueInterface, variantInterface } from 'src/Pages/Product/AddProduct/redux/addProductSlice'
 import type { IFetchCentralCatalogueProduct } from './fetchCentralProduct'
 
 export interface IProduct {
@@ -20,5 +20,7 @@ export interface IProduct {
     organizationCatalogueCategory?: {
         name: string
     }
+    variant?: variantInterface
+    variantId?: string
     centralData?: IFetchCentralCatalogueProduct
 }

@@ -1,4 +1,5 @@
 import { validateSync } from 'class-validator'
+import type { variantInterface } from '../redux/addProductSlice'
 import { PostBrand, PostCategory, PostDescription, PostGST, PostHSN, PostMRP, PostSale, PostTag } from './types'
 
 export function isValidMRP(value?: number) {
@@ -7,7 +8,28 @@ export function isValidMRP(value?: number) {
 
     const errors = validateSync(postMrp)
     if (errors.length > 0) {
-        console.log('[VALIDATION]: Error in mrpPrice')
+        console.log('[VALIDATION]: Error in mrpPrice', errors)
+    }
+    return !(errors.length > 0)
+}
+
+export function isValidVariants(value: variantInterface[]) {
+    let errors: any[] = []
+    for (let val of value) {
+        console.log('val', val)
+        const postMrp = new PostMRP()
+        postMrp.mrpPrice = Number(val.mrpPrice)
+        errors = [...errors, ...validateSync(postMrp)]
+        const postSale = new PostSale()
+        postSale.salePrice = Number(val.salesPrice)
+        errors = [...errors, ...validateSync(postSale)]
+        const desc = new PostDescription()
+        desc.description = val.name
+        errors = [...errors, ...validateSync(desc)]
+    }
+
+    if (errors.length > 0) {
+        console.log('[VALIDATION]: Error in variants', errors)
     }
     return !(errors.length > 0)
 }
@@ -25,10 +47,10 @@ export function isValidSalePrice(value?: number) {
 
 export function isValidHSN(taxEnabled: boolean, hasCatalogueId?: boolean, value?: number) {
     if (!taxEnabled) {
-        return true 
+        return true
     }
     if (hasCatalogueId) {
-        return true 
+        return true
     }
 
     const postHSN = new PostHSN()
@@ -42,10 +64,10 @@ export function isValidHSN(taxEnabled: boolean, hasCatalogueId?: boolean, value?
 }
 export function isValidGST(taxEnabled: boolean, hasCatalogueId?: boolean, value?: number) {
     if (!taxEnabled) {
-        return true 
+        return true
     }
     if (hasCatalogueId) {
-        return true 
+        return true
     }
 
 
@@ -73,7 +95,7 @@ export function isValidDescription(value?: string) {
 
 export function isValidCategory(hasCatalogueId: boolean, value?: string) {
     if (hasCatalogueId) {
-        return true 
+        return true
     }
     const postCat = new PostCategory()
     postCat.category = value ?? ''
@@ -99,7 +121,7 @@ export function isValidTag(hasCatalogueId: boolean, value?: string) {
 
 export function isValidBrand(hasCatalogueId: boolean, value?: string) {
     if (hasCatalogueId) {
-        return true 
+        return true
     }
     const postBrand = new PostBrand()
     postBrand.brand = value ?? ''
