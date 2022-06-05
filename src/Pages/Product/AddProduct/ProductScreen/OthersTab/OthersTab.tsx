@@ -36,6 +36,7 @@ import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 import HSNmodal from './HSNmodal'
 import { isNumber } from 'lodash'
 import ToggleButton from 'src/Components/ToggleButton'
+import { isInt } from 'class-validator'
 interface Props {
     action: PAGE_ACTION;
     saveAttempt: number;
@@ -48,9 +49,10 @@ interface IImageProps {
 
 interface IInputProps {
     label: string,
+    type?: React.HTMLInputTypeAttribute | undefined
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>
-    value: string | undefined
+    value: string | number | undefined
     placeholder: string
 }
 
@@ -110,9 +112,11 @@ function handleInputChange(event: React.ChangeEvent<HTMLInputElement>,
             break
 
         case 'Case Quantity':
-            dispatch(setCaseQuantity(tempVal))
+            if(isInt(Number(tempVal))) {
+                dispatch(setCaseQuantity(tempVal))
+            }
             break
-
+    
         default:
             break
     }
@@ -128,7 +132,7 @@ const Input = (props: IInputProps) => {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     handleInputChange(event, props.label, props.dispatch)
                 }}
-                type="text"
+                type={props.type ?? 'text'}
                 value={props.value}
                 placeholder={props.placeholder}
                 className="focus:shadow-outline mt-2 w-full transform rounded border border-transparent border-slate-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
@@ -416,6 +420,15 @@ function OthersTab({ action, saveAttempt }: Props) {
                         placeholder="Enter Description"
                         dispatch={dispatch}
                         value={addProductInfo?.centralCatalogue?.description}
+                    />
+                )}
+                
+                {!addProductInfo?.centralCatalogue?.id && (
+                    <Input
+                        label="Case Quantity"
+                        placeholder="Case Quantity"
+                        dispatch={dispatch}
+                        value={addProductInfo?.centralCatalogue?.caseQuantity}
                     />
                 )}
 

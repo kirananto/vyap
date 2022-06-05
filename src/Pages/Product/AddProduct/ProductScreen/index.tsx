@@ -193,6 +193,7 @@ function CreateProduct() {
                         description: addProductInfo?.others?.centralCategory?.name ?? '',
                         imageName: addProductInfo?.others?.centralCategory?.name ?? '',
                     }],
+                    caseQuantity: parseInt(`${addProductInfo.centralCatalogue?.caseQuantity ?? 0}`, 10),
                     barCode: addProductInfo?.others?.barCode,
                     images: addProductInfo?.others?.productImage?.map((image) => ({
                         title: image.title,

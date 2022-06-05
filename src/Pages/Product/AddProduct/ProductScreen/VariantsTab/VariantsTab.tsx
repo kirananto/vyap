@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     createVariant,
-    selectAddProductInfo,
-    setMrpPrice,
-    setSalesPrice
+    selectAddProductInfo
 } from '../../redux/addProductSlice'
 import { PAGE_ACTION } from '../types'
 import VariantRow from './VariantRow'
@@ -44,10 +42,10 @@ function VariantsTab({ action, saveAttempt }: Props) {
         dispatch(createVariant())
     }
 
-    const variantIndex = addProductInfo?.centralCatalogue?.variants?.findIndex(findItem => findItem.id === addProductInfo.editProduct.variantId)
+    const variantIndex = addProductInfo?.centralCatalogue?.variants?.findIndex(findItem => findItem.id === addProductInfo.editProduct?.variantId)
 
     const variants = action !== PAGE_ACTION.EDIT ? addProductInfo?.centralCatalogue?.variants : addProductInfo?.centralCatalogue?.variants
-            ?.filter(findItem => findItem.id === addProductInfo.editProduct.variantId)
+            ?.filter(findItem => findItem.id === addProductInfo.editProduct?.variantId)
             ?.map(mapItem => ({ ...mapItem, isSelected: true }))
     return (
         <div
@@ -67,8 +65,8 @@ function VariantsTab({ action, saveAttempt }: Props) {
                 />
                 </div>
             ): null}
-            {variants?.map((mapItem) => {
-                return <VariantRow key={variantIndex} saveAttempt={saveAttempt} item={mapItem} index={variantIndex}/>
+            {variants?.map((mapItem, index) => {
+                return <VariantRow key={action !== PAGE_ACTION.EDIT ? index : variantIndex} saveAttempt={saveAttempt} item={mapItem} index={action !== PAGE_ACTION.EDIT ? index : variantIndex}/>
             })}
             {addProductInfo?.centralCatalogue?.id ? <div className="text-center text-sm mt-2 text-slate-500 dark:text-slate-200">
                 For adding new variants please contact support.

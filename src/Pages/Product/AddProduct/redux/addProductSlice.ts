@@ -20,6 +20,7 @@ export interface CentralCatalogueInterface {
     brandId?: string
     description?: string
     hsnId?: string
+    caseQuantity?: number
     id?: string
     name?: string
     variants?: variantInterface[]
@@ -64,7 +65,6 @@ export interface AddProductInterface {
         barCode: string
         brand?: BrandInterface
         brandId: string
-        caseQuantity: number
         aliasName: string
     }
 }
@@ -88,7 +88,6 @@ const initialState: AddProductInterface = {
         barCode: '',
         brand: undefined,
         brandId: '',
-        caseQuantity: 0
     }
 }
 
@@ -185,8 +184,10 @@ export const addProductSlice = createSlice({
         setBrand: (state, action: PayloadAction<AddProductInterface['others']['brand']>) => {
             state.others.brand = action.payload
         },
-        setCaseQuantity: (state, action: PayloadAction<AddProductInterface['others']['caseQuantity']>) => {
-            state.others.caseQuantity = action.payload
+        setCaseQuantity: (state, action: PayloadAction<number>) => {
+            if(state.centralCatalogue) {
+                state.centralCatalogue.caseQuantity = action.payload
+            }
         },
         clearAll: () => {
             return initialState
