@@ -59,7 +59,7 @@ function VariantsTab({ action, saveAttempt }: Props) {
                 <div>
                     <img
                     loading="lazy"
-                    className="m-auto mt-12 h-auto p-12"
+                    className="m-auto mt-12 h-auto p-12 dark:opacity-60"
                     alt="no transactions"
                     src={ChatImg}
                 />
@@ -68,18 +68,18 @@ function VariantsTab({ action, saveAttempt }: Props) {
             {variants?.map((mapItem, index) => {
                 return <VariantRow key={action !== PAGE_ACTION.EDIT ? index : variantIndex} saveAttempt={saveAttempt} item={mapItem} index={action !== PAGE_ACTION.EDIT ? index : variantIndex}/>
             })}
-            {addProductInfo?.centralCatalogue?.id ? <div className="text-center text-sm mt-2 text-slate-500 dark:text-slate-200">
+            {addProductInfo?.centralCatalogue?.id ? <div className="text-center text-sm mt-2 text-slate-500 dark:text-slate-400">
                 For adding new variants please contact support.
                 {/* 
                     temp sol - Add option to edit variants
                     permanent - Add options to edit variants for admins only 
                 */}
             </div> : <div className="mt-6 flex justify-center">
-                <button onClick={addMoreVariantsHandler} className="flex flex-wrap border p-4 px-6 rounded-full active:bg-slate-100 ">
+                <button onClick={addMoreVariantsHandler} className="flex flex-wrap border p-4 px-6 rounded-full active:bg-slate-100 dark:text-slate-400">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
-                    Add more variants
+                    <span>Add more variants</span>
                 </button>
             </div>}
         </div>

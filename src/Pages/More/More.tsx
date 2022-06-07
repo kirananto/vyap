@@ -40,7 +40,7 @@ export default function More() {
     // CHeck if it is not ios
     const isValidBrowser  = browser.getOS()?.name !== 'iOS'
 
-    const expiry = differenceInDays(new Date('2022-06-16T04:30:59.978Z'), new Date())
+    const expiry = differenceInDays(new Date('2022-07-16T04:30:59.978Z'), new Date())
     
 
     const handleLogout = () => {

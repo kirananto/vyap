@@ -52,7 +52,7 @@ function VariantRow({ item, saveAttempt, index }: Props) {
     const editMode = false
 
     return (
-        <div className="border p-4 mt-2">
+        <div className="border dark:border-slate-700  rounded p-4 mt-2">
             <div className="flex" onClick={() => setIsSelected(!item?.isSelected)}>
                 <div
                     className={`inline-flex items-center justify-center w-8 h-8 mx-2 p-1 transition duration-500 ease-in-out rounded-full ${item?.isSelected ? 'bg-indigo-200 dark:bg-indigo-700 dark:border dark:border-indigo-500' : 'bg-slate-200 dark:bg-slate-500'}`}>
@@ -71,7 +71,7 @@ function VariantRow({ item, saveAttempt, index }: Props) {
                 </div>
                 <div className="ml-2">
                     {editMode ? <div> input box </div> : (
-                        <div className="font-semibold mt-1">
+                        <div className="font-semibold mt-1 dark:text-slate-400">
                             {item?.name}
                         </div>
                     )}

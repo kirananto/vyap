@@ -19,7 +19,7 @@ export default function VariantBox({ item, product }: { item: variantInterface, 
         return <></>
     }
 
-    return (<div className="border border-slate-300 rounded m-2 p-2 px-4">
+    return (<div className="border border-slate-300 dark:border-slate-700 rounded m-2 p-2 px-4">
         <div className="text-lg text-slate-600 dark:text-slate-200 font-semibold">
             {item.name}
         </div>
