@@ -129,15 +129,83 @@ export default function AddItemCard({
                     </div>
                 </div>
             </div>
-                <div className="w-full">
-                    {(item.centralCatalogue.variants ?? []).length > 1 ?
-                        <div className="flex w-full flex-row flex-wrap pt-2 text-sm text-slate-400 -ml-2">
-                            {item?.centralCatalogue.variants?.map(mapItem => {
-                                const isSelected = item.variant?.id === mapItem.id
-                                return <VariantBoxAddItem product={item} key={mapItem.id} item={mapItem} handleVariantChange={handleVariantChange} isSelected={isSelected} />
-                            })}
-                        </div> : undefined}
+
+            {item.centralCatalogue.caseQuantity && false ? <div className="w-full">
+               <div className="text-sm text-slate-400 mt-2">1 Case = {item.centralCatalogue.caseQuantity} Units </div>
+               <div className="flex gap-2 col-span-2 sm:col-span-1 mt-2">
+                    <div className="flex text-blue-600 dark:text-blue-400 items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            onClick={() => {
+                                hapticFeedback()
+                                handleRemoveItemItem(item, 1)
+                            }}
+                            className="h-6 w-6 cursor-pointer"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                    </div>
+                    <div className="flex items-center dark:text-slate-200">
+                        <form autoComplete="off">
+                            <input
+                                className="w-16 rounded border-dashed border px-2 border-indigo-300 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
+                                type="number"
+                                name="qty"
+                                id="qty"
+                                onChange={(e) => {
+                                    updateItem(item, parseInt(e.target.value.toString()))
+                                }}
+                                onBlur={() => {
+                                    setSelectedItems(selectedItems?.filter((filterItem) => filterItem.quantity > 0))
+                                }}
+                                value={
+                                    selectedItems?.find(
+                                        (findItem) => findItem.id === item.id
+                                    )?.quantity ?? 0
+                                }
+                            />
+                        </form>
+                    </div>
+
+                    <div className="flex text-blue-600 dark:text-blue-400 items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            onClick={() => {
+                                hapticFeedback()
+                                handleAddItem(item, 1)
+                            }}
+                            className="h-6 w-6 cursor-pointer"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                    </div>
                 </div>
+            </div> : undefined}
+            <div className="w-full">
+                {(item.centralCatalogue.variants ?? []).length > 1 ?
+                    <div className="flex w-full flex-row flex-wrap pt-2 text-sm text-slate-400 -ml-2">
+                        {item?.centralCatalogue.variants?.map(mapItem => {
+                            const isSelected = item.variant?.id === mapItem.id
+                            return <VariantBoxAddItem product={item} key={mapItem.id} item={mapItem} handleVariantChange={handleVariantChange} isSelected={isSelected} />
+                        })}
+                    </div> : undefined}
+            </div>
         </div>
     </div>)
 }

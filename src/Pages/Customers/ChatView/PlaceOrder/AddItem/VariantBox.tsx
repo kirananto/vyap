@@ -16,15 +16,15 @@ export default function VariantBoxAddItem({ item, product, handleVariantChange, 
     }, [item.id])
 
     if(!prod?.id) {
-        return <div className="h-[66px]"></div>
+        return <div className="h-2"></div>
     }
 
-    return (<div onClick={() => handleVariantChange(item.id)} className={`border border-slate-300 rounded m-2 p-2 px-4 ${isSelected ? ' border-indigo-400 ' : ''}`}>
-    <div className={`text-lg ${isSelected ? ' text-indigo-600 dark:text-indigo-200 ' : ' text-slate-600 dark:text-slate-200 '}  font-semibold`}>
+    return (<div onClick={() => handleVariantChange(item.id)} className={`border border-slate-300 rounded-full m-1 p-1 px-4 ${isSelected ? ' border-indigo-400 ' : ''}`}>
+    <div className={`text-md ${isSelected ? ' text-indigo-600 dark:text-indigo-200 ' : ' text-slate-600 dark:text-slate-200 '}  font-semibold`}>
         {item.name}
     </div>
-    <div>
+    {/* <div>
         {prod?.mrpPrice ? `${parseFloat(`${prod?.mrpPrice}`)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : '--'}
-    </div>
+    </div> */}
 </div>)
 }
