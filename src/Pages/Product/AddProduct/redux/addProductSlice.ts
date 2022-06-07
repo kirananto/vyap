@@ -20,11 +20,20 @@ export interface CentralCatalogueInterface {
     brandId?: string
     description?: string
     hsnId?: string
+    caseQuantity?: number
     id?: string
     name?: string
+    variants?: variantInterface[]
     images?: CatalogueImageInterface[]
 }
 
+export interface variantInterface {
+    name: string
+    id?: string
+    mrpPrice?: number
+    salesPrice?: number
+    isSelected?: boolean
+}
 export interface HSNInterface {
     chapter: string
     id: string
@@ -34,6 +43,7 @@ export interface HSNInterface {
 }
 export interface AddProductInterface {
     editProductId?: string,
+    editProduct: any,
     pricing: {
         mrpPrice?: number
         salesPrice?: number
@@ -55,13 +65,13 @@ export interface AddProductInterface {
         barCode: string
         brand?: BrandInterface
         brandId: string
-        caseQuantity: number
         aliasName: string
     }
 }
 
 const initialState: AddProductInterface = {
     editProductId: '',
+    editProduct: undefined,
     centralCatalogue: undefined,
     pricing: {
         mrpPrice: undefined,
@@ -78,7 +88,6 @@ const initialState: AddProductInterface = {
         barCode: '',
         brand: undefined,
         brandId: '',
-        caseQuantity: 0
     }
 }
 
@@ -91,14 +100,49 @@ export const addProductSlice = createSlice({
         setEditProductId: (state: AddProductInterface, action: PayloadAction<string>) => {
             state.editProductId = action.payload
         },
+        setEditProduct: (state: AddProductInterface, action: PayloadAction<any>) => {
+            state.editProduct = action.payload
+        },
         setCentralCatalogue: (state: AddProductInterface, action: PayloadAction<CentralCatalogueInterface>) => {
             state.centralCatalogue = action.payload
         },
-        setMrpPrice: (state: AddProductInterface, action: PayloadAction<number>) => {
-            state.pricing.mrpPrice = action.payload
+        setMrpPrice: (state: AddProductInterface, action: PayloadAction<{ mrp: number, index: number }>) => {
+            const index = action.payload.index
+            if (index !== undefined && state.centralCatalogue!.variants![index]) {
+                state.centralCatalogue!.variants![index].mrpPrice = action.payload.mrp
+            }
         },
-        setSalesPrice: (state: AddProductInterface, action: PayloadAction<number>) => {
-            state.pricing.salesPrice = action.payload
+        setSalesPrice: (state: AddProductInterface, action: PayloadAction<{ salesPrice: number, index: number }>) => {
+            const index = action.payload.index
+            if (index !== undefined && state.centralCatalogue!.variants![index]) {
+                state.centralCatalogue!.variants![index].salesPrice = action.payload.salesPrice
+            }
+        },
+        setIsSelectedVariant: (state: AddProductInterface, action: PayloadAction<{ value: boolean, index: number }>) => {
+            const index = action.payload.index
+            if (index !== undefined && state.centralCatalogue!.variants![index]) {
+                state.centralCatalogue!.variants![index].isSelected = action.payload.value
+            }
+        },
+        createVariant: (state: AddProductInterface) => {
+            state.centralCatalogue!.variants = [
+                ...(state.centralCatalogue!.variants ?? []),
+                {
+                    name: `Variant ${(state.centralCatalogue?.variants?.length ?? 0) + 1}`,
+                    mrpPrice: 0,
+                    salesPrice: 0,
+                    isSelected: true
+                }
+            ]
+        },
+        setVariants: (state: AddProductInterface, action: PayloadAction<variantInterface[]>) => {
+            state.centralCatalogue!.variants = action.payload
+        },
+        setVariantName: (state: AddProductInterface, action: PayloadAction<{ name: string, index: number }>) => {
+            const index = action.payload.index
+            if (index !== undefined && state.centralCatalogue!.variants![index]) {
+                state.centralCatalogue!.variants![index].name = action.payload.name
+            }
         },
         setTaxEnabled: (state, action: PayloadAction<boolean>) => {
             state.pricing.taxEnabled = action.payload
@@ -140,8 +184,10 @@ export const addProductSlice = createSlice({
         setBrand: (state, action: PayloadAction<AddProductInterface['others']['brand']>) => {
             state.others.brand = action.payload
         },
-        setCaseQuantity: (state, action: PayloadAction<AddProductInterface['others']['caseQuantity']>) => {
-            state.others.caseQuantity = action.payload
+        setCaseQuantity: (state, action: PayloadAction<number>) => {
+            if(state.centralCatalogue) {
+                state.centralCatalogue.caseQuantity = action.payload
+            }
         },
         clearAll: () => {
             return initialState
@@ -152,8 +198,11 @@ export const addProductSlice = createSlice({
 
 export const {
     setEditProductId,
+    setEditProduct,
     setCentralCatalogue,
     setMrpPrice,
+    setVariantName,
+    setVariants,
     setBarCode,
     setBrand,
     setCaseQuantity,
@@ -163,6 +212,8 @@ export const {
     setHsnNumber,
     setProductImage,
     setSalesPrice,
+    createVariant,
+    setIsSelectedVariant,
     setSkuCode,
     setTaxEnabled,
     setAliasName,

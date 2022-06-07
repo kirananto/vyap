@@ -219,7 +219,7 @@ export default function PlaceOrder() {
                                             {`${item.centralCatalogue?.name} `}
                                         </div>
                                         <div className=" text-sm font-bold text-slate-600 dark:text-slate-300">
-                                            {item.aliasName ? `( ${item.aliasName})` : ''}
+                                            {item.variant?.name} {item.aliasName ? `( ${item.aliasName})` : ''}
                                         </div>
                                         <div className=" text-xs font-bold text-slate-500 dark:text-slate-400">
                                             MRP: {parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })} Sales Price: {parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}

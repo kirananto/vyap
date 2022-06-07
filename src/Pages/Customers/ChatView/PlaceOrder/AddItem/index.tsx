@@ -25,18 +25,19 @@ import ArrowUpIcon from 'src/Components/Style/Icons/ArrowUpIcon'
 import ArrowDownIcon from 'src/Components/Style/Icons/ArrowDownIcon'
 import Swipe from 'react-easy-swipe'
 import Spinner from 'src/Components/Style/Spinner'
+import AddItemCard from './AddItemCard'
 
 
 export interface AddItemProductInterface extends IProduct {
     quantity: number
 }
 export interface SwipePosition {
-  x: number;
-  y: number;
+    x: number;
+    y: number;
 }
 
 type TagListProps = {
-  [key: string]: IProduct[]
+    [key: string]: IProduct[]
 }
 
 export default function AddItem() {
@@ -96,24 +97,24 @@ export default function AddItem() {
         // console.log(`Moved ${position.x} pixels horizontally`, event)
         // console.log(`Moved ${position.y} pixels vertically----`, event);
 
-        ((activeTab === ADD_ITEM_TABS.ALL_PRODUCTS) && ((position.x  < -100) && (Math.abs(position.y)  < 50) )) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
-        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && ((position.x  < -80) && (Math.abs(position.y)  < 50) )) && setActiveTab(ADD_ITEM_TABS.TAG_LIST );
+        ((activeTab === ADD_ITEM_TABS.ALL_PRODUCTS) && ((position.x < -100) && (Math.abs(position.y) < 50))) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
+        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && ((position.x < -80) && (Math.abs(position.y) < 50))) && setActiveTab(ADD_ITEM_TABS.TAG_LIST);
 
-        ((activeTab === ADD_ITEM_TABS.TAG_LIST) && ((position.x  > 100) && (Math.abs(position.y)  < 70) )) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
-        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && ((position.x  > 100) && (Math.abs(position.y)  < 70) )) && setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS )
+        ((activeTab === ADD_ITEM_TABS.TAG_LIST) && ((position.x > 100) && (Math.abs(position.y) < 70))) && setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED);
+        ((activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED) && ((position.x > 100) && (Math.abs(position.y) < 70))) && setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS)
 
     }
 
     const handleFetchTagItems = useCallback((productList: any) => {
-        const tagSorted : TagListProps  = {}
-        productList?.forEach((item : IProduct ) => {
+        const tagSorted: TagListProps = {}
+        productList?.forEach((item: IProduct) => {
             const tag = item?.organizationCatalogueCategory?.name
-            if(tag){
-                if(tag in tagSorted){
+            if (tag) {
+                if (tag in tagSorted) {
                     const prev = tagSorted[tag]
                     const updated = [...prev, item]
                     tagSorted[tag] = updated
-                }else{
+                } else {
                     _.set(tagSorted, tag, [item])
                 }
             }
@@ -146,7 +147,7 @@ export default function AddItem() {
         }).finally(() => {
             setLoading(false)
         })
-    }, [token, isSupplier, handleFetchTagItems,  user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
+    }, [token, isSupplier, handleFetchTagItems, user?.organizationId, placeOrder?.orgId, searchValue, filters?.categories, filters?.brands, filters?.sorting])
 
     function onSubmit() {
         //TODO Add to dispatch
@@ -199,7 +200,7 @@ export default function AddItem() {
                         }
                     }
                     return mapItem
-                })
+                }).filter(filterItem => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
         } else {
@@ -209,7 +210,7 @@ export default function AddItem() {
                     ...item,
                     quantity: Math.abs(caseQuantity),
                 },
-            ]
+            ].filter(filterItem => filterItem.quantity > 0)
 
             setSelectedItems(_selectedItems)
         }
@@ -245,15 +246,15 @@ export default function AddItem() {
     //         isOpen: undefined,
     //     })
     // }
-    
-    function renderTagItems(){
+
+    function renderTagItems() {
         return <div className='dark:text-slate-300'>
 
             {Object.keys(tagList)?.map((keyName, i) => {
                 return (<div key={i} className="mb-2">
-                    <div 
+                    <div
                         className={`flex p-4 items-center justify-between dark:bg-slate-700 bg-slate-200 mt-2 `}
-                        onClick={() => isExpanded === keyName ?  setIsExpanded(undefined) : setIsExpanded(keyName)}
+                        onClick={() => isExpanded === keyName ? setIsExpanded(undefined) : setIsExpanded(keyName)}
                     >
                         <div className="flex text-xl font-semibold text-slate-800 dark:text-slate-200 ">
                             {keyName} <span className="text-sm self-center"> &nbsp; {` ( ${tagList[keyName].length}  ) `}</span>
@@ -276,15 +277,15 @@ export default function AddItem() {
                         </div>
                     </div>
                     <div className="">
-                        {(isExpanded === keyName ) &&  renderItems(tagList[keyName]) }
-                    </div> 
+                        {(isExpanded === keyName) && renderItems(tagList[keyName])}
+                    </div>
                 </div>
                 )
             })}
         </div>
     }
 
-    function renderItems(items : IProduct[]) {
+    function renderItems(items: IProduct[]) {
         if (items?.length === 0) {
             return (
                 <div>
@@ -296,115 +297,46 @@ export default function AddItem() {
                 </div>
             )
         }
-        return items.map((item, index) => (
-            <div
-                className={`flex flex-wrap  
-                ${selectedItems?.find(
-                (findItem) => findItem.id === item.id
-            ) ? 'bg-blue-100 dark:bg-blue-900'  : 'bg-white-200'
-            } 
-                mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4`}
-                key={`${index}`}
-            >
-                <div className="relative self-center w-1/5 h-20  overflow-hidden">
-                    <img
-                        loading="lazy"
-                        src={item?.thumbnailImage ? getImageURL(
-                            item?.thumbnailImage,
-                            IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE
-                        ) : transparentImg}
-                        alt=""
-                        className="object-cover aspect-square rounded overflow-hidden h-full w-auto bg-cover bg-center empty_image_background"
-                    />
-                    {/* )} */}
-                </div>
-                <div className="w-4/5 pl-4 ">
-                    <div className=" text-lg font-bold mb-1 text-slate-600 dark:text-slate-200">
-                        {item?.aliasName ?? ''}{item?.aliasName ? <i className="ml-1">({item?.centralCatalogue?.name})</i> : item?.centralCatalogue?.name}
-                    </div>
-                    <div className="inline-grid grid-cols-2 w-full gap-3 grid-flow-row-dense">
-                        <div className="flex flex-col">
-                            <div className="flex gap-2 mt-1">
-                                <div className="text-xs font-semibold text-slate-500  dark:text-slate-400">
-                                    <p>MRP:</p>
-                                    <p>{parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
-                                </div>
-                                <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                                    <p>SP:</p>
-                                    <p>{parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className="flex gap-2 col-span-2 sm:col-span-1">
-                            <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    onClick={() => {
-                                        hapticFeedback()
-                                        handleRemoveItemItem(item, 1)
-                                    }}
-                                    className="h-6 w-6 cursor-pointer"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
-                            </div>
-                            <div className="flex items-center dark:text-slate-200">
-                                <form autoComplete="off">
-                                    <input
-                                        className="w-16 rounded border-dashed border px-2 border-indigo-300 dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600 "
-                                        type="number"
-                                        name="qty"
-                                        id="qty"
-                                        onChange={(e) => {
-                                            updateItem(item, parseInt(e.target.value.toString()))
-                                        }}
-                                        onBlur={() => {
-                                            setSelectedItems(selectedItems?.filter((filterItem) => filterItem.quantity > 0))
-                                        }}
-                                        value={
-                                            selectedItems?.find(
-                                                (findItem) => findItem.id === item.id
-                                            )?.quantity ?? 0
-                                        }
-                                    />
-                                </form>
-                            </div>
-
-                            <div className="flex text-blue-600 dark:text-blue-400 items-center">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    onClick={() => {
-                                        hapticFeedback()
-                                        handleAddItem(item, 1)
-                                    }}
-                                    className="h-6 w-6 cursor-pointer"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        return items.filter((elem, index) => {
+            return items.findIndex(obj => obj.centralCatalogue.id === elem.centralCatalogue.id) === index
+        }).map((item) => (
+            <AddItemCard
+                key={item.id}
+                handleAddItem={handleAddItem}
+                item={item}
+                handleVariantChange={(variantId: string) => handleVariantChange(item.id, variantId )}
+                selectedItems={selectedItems}
+                handleRemoveItemItem={handleRemoveItemItem}
+                setSelectedItems={setSelectedItems}
+                updateItem={updateItem}
+            />
         ))
+    }
+
+    const handleVariantChange = (itemId: string, variantId: string, ) => {
+        console.log('handleVariantChange', itemId, variantId)
+        const newItem = itemList.find((findItem ) => findItem.variantId === variantId)
+        const oldItem: any = itemList.find((findItem ) => findItem.id === itemId)
+        // todo swap product
+        // TODO bug --> THe item will get missed.
+        const _itemList = itemList.map(mapItem => {
+            if(mapItem.id === oldItem?.id && newItem) {
+                return {...newItem, quantity: 0 }
+            }
+            if(mapItem.id === newItem?.id && oldItem) {
+                return {...oldItem, quantity: 0 }
+            }
+            return mapItem
+        })
+
+        updateItem(oldItem, 0)
+
+        console.log('_itemList', _itemList)
+
+        setItemList(_itemList)
+
+
+
     }
 
     return (
@@ -423,16 +355,16 @@ export default function AddItem() {
             />
 
             <div className="flex text-lg pt-4 mb-2 px-4 justify-between dark:text-slate-300 shadow-md shadow-slate-200 dark:shadow-slate-800">
-                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.ALL_PRODUCTS  && 'border-b-4 border-indigo-500' } `}
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.ALL_PRODUCTS && 'border-b-4 border-indigo-500'} `}
                     onClick={() => setActiveTab(ADD_ITEM_TABS.ALL_PRODUCTS)}>
                     <p className="px-0"> {ADD_ITEM_TABS.ALL_PRODUCTS} </p>
                 </div>
-                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED  && 'border-b-4 border-indigo-500' }`}
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED && 'border-b-4 border-indigo-500'}`}
                     onClick={() => setActiveTab(ADD_ITEM_TABS.PREVIOUSLY_ORDERED)}>
                     <p className="px-0"> {ADD_ITEM_TABS.PREVIOUSLY_ORDERED} </p>
                 </div>
 
-                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.TAG_LIST  && 'border-b-4 border-indigo-500' }`}
+                <div className={`flex flex-grow pb-2 justify-center ${activeTab === ADD_ITEM_TABS.TAG_LIST && 'border-b-4 border-indigo-500'}`}
                     onClick={() => setActiveTab(ADD_ITEM_TABS.TAG_LIST)}>
                     <p className="px-0"> {ADD_ITEM_TABS.TAG_LIST} </p>
                 </div>
@@ -443,10 +375,10 @@ export default function AddItem() {
                 <Swipe onSwipeMove={onSwipeMove}>
                     <div className="pb-24">
                         {
-                            activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED && 
-                        <div className="h-[70vh] overflow-scroll">
-                            <div className="px-4">
-                                {/* {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
+                            activeTab === ADD_ITEM_TABS.PREVIOUSLY_ORDERED &&
+                            <div className="h-[70vh] overflow-scroll">
+                                <div className="px-4">
+                                    {/* {prevOrdered?.length > 0 ? <div className="p-1 pr-0 mt-4 rounded mb-2">
                             <div className="dark:text-slate-400 mb-1">Choose previously ordered items...</div>
                             <div className="flex gap-2 overflow-x-scroll">
                                 {prevOrdered?.map(item => <ProductSuggestionCard
@@ -460,67 +392,67 @@ export default function AddItem() {
                             </div>
                         </div> : null} */}
 
-                                {loadingRecent
+                                    {loadingRecent
 
-                                    ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
-                                        <Spinner />
-                                    </div>
-                                    :
-                                    <> {renderItems(prevOrdered)} </>
+                                        ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
+                                            <Spinner />
+                                        </div>
+                                        :
+                                        <> {renderItems(prevOrdered)} </>
 
-                                }
+                                    }
+                                </div>
                             </div>
-                        </div>
                         }
 
                         {
-                            activeTab === ADD_ITEM_TABS.ALL_PRODUCTS && 
-                    <div className='py-1'>
+                            activeTab === ADD_ITEM_TABS.ALL_PRODUCTS &&
+                            <div className='py-1'>
 
-                        <div className="border-b border-slate-200 dark:border-slate-800 pb-1">
-                            <AppliedFilters
-                                setSearchValue={setSearchValue}
-                                searchValue={searchValue ?? ''}
-                                onFilterClick={() => setfilterPopupOpen(true)}
-                            />
+                                <div className="border-b border-slate-200 dark:border-slate-800 pb-1">
+                                    <AppliedFilters
+                                        setSearchValue={setSearchValue}
+                                        searchValue={searchValue ?? ''}
+                                        onFilterClick={() => setfilterPopupOpen(true)}
+                                    />
 
-                        </div>
-                        
+                                </div>
 
-                        <div className="h-[70vh] overflow-scroll mt-1">
-                            <div className="px-4">
-                                {loading
 
-                                    ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
-                                        <Spinner />
+                                <div className="h-[70vh] overflow-scroll mt-1">
+                                    <div className="px-4">
+                                        {loading
+
+                                            ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
+                                                <Spinner />
+                                            </div>
+                                            :
+                                            <> {renderItems(itemList)} </>
+
+                                        }
                                     </div>
-                                    :
-                                    <> {renderItems(itemList)} </>
+                                </div>
 
-                                }
                             </div>
-                        </div>
-
-                    </div>
-                        }   
+                        }
 
                         {
-                            activeTab === ADD_ITEM_TABS.TAG_LIST && 
-                        <div className="h-[70vh] overflow-scroll">
-                            <div className="px-4">
-                                {loading
+                            activeTab === ADD_ITEM_TABS.TAG_LIST &&
+                            <div className="h-[70vh] overflow-scroll">
+                                <div className="px-4">
+                                    {loading
 
-                                    ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
-                                        <Spinner />
-                                    </div>
-                                    :
-                                    <> {renderTagItems()}</>
+                                        ? <div className="p-12 pt-60 text-center dark:text-slate-100 grid">
+                                            <Spinner />
+                                        </div>
+                                        :
+                                        <> {renderTagItems()}</>
 
-                                }
+                                    }
 
+                                </div>
                             </div>
-                        </div>
-                        }      
+                        }
 
                     </div>
 
@@ -532,7 +464,7 @@ export default function AddItem() {
                     </Button>
                 </div> : null}
             </div>
-           
+
         </div>
     )
 }

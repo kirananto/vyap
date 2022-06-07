@@ -21,6 +21,7 @@ export interface IAddProduct {
     taxEnabled: boolean,
     mrpPrice: number,
     rate: number
+    variantId?: string
 }
 
 export interface IEditProduct {
@@ -35,6 +36,8 @@ export interface AddCentralCatalogueInterface {
     brandId?: string
     hsnId?: string
     barCode?: string
+    variants?: any
+    caseQuantity?: number
     categoriesId?: string
     categories: IOrganizationProductCategory[]
     images: ICentralImage[]
@@ -45,7 +48,7 @@ export interface AddCentralCatalogueInterface {
     }
 }
 
-export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock }: { token?: string; organizationId?: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
+export const fetchProducts = ({ token, organizationId, limit, offset, categoryIds, brandIds, ordering, search, outOfStock, variantId }: { token?: string; variantId?: string; organizationId?: string; limit: number; offset: number, categoryIds?: string, brandIds?: string, ordering?: string, search?: string, outOfStock?: boolean }) => axiosClient({
     url: `/organization-catalogue`,
     method: 'GET',
     params: {
@@ -55,6 +58,7 @@ export const fetchProducts = ({ token, organizationId, limit, offset, categoryId
         brandIds,
         ordering,
         search: search?.trim(),
+        variantId,
         offset,
         outOfStock
     },

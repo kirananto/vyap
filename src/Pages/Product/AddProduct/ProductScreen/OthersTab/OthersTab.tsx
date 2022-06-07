@@ -12,8 +12,10 @@ import {
     setCategory,
     setCentralCategory,
     setDescription,
+    setGstPercentage,
     setProductImage,
     setSkuCode,
+    setTaxEnabled,
 } from '../../redux/addProductSlice'
 import BrandModal from './BrandModal'
 import CentralCategoryModal from './CentralCategoryModal'
@@ -22,6 +24,8 @@ import { PAGE_ACTION } from '../types'
 import {
     isValidBrand,
     isValidCategory,
+    isValidGST,
+    isValidHSN,
     // isValidDescription,
     isValidTag,
 } from '../validations'
@@ -29,6 +33,10 @@ import {
 import Compressor from 'compressorjs'
 import type { IProductImageUploadResult } from 'src/types/productImageUploadResult'
 import type { ICentralImage } from 'src/types/fetchCentralProductImages'
+import HSNmodal from './HSNmodal'
+import { isNumber } from 'lodash'
+import ToggleButton from 'src/Components/ToggleButton'
+import { isInt } from 'class-validator'
 interface Props {
     action: PAGE_ACTION;
     saveAttempt: number;
@@ -41,9 +49,10 @@ interface IImageProps {
 
 interface IInputProps {
     label: string,
+    type?: React.HTMLInputTypeAttribute | undefined
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>
-    value: string | undefined
+    value: string | number | undefined
     placeholder: string
 }
 
@@ -103,9 +112,11 @@ function handleInputChange(event: React.ChangeEvent<HTMLInputElement>,
             break
 
         case 'Case Quantity':
-            dispatch(setCaseQuantity(tempVal))
+            if(isInt(Number(tempVal))) {
+                dispatch(setCaseQuantity(tempVal))
+            }
             break
-
+    
         default:
             break
     }
@@ -121,7 +132,7 @@ const Input = (props: IInputProps) => {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     handleInputChange(event, props.label, props.dispatch)
                 }}
-                type="text"
+                type={props.type ?? 'text'}
                 value={props.value}
                 placeholder={props.placeholder}
                 className="focus:shadow-outline mt-2 w-full transform rounded border border-transparent border-slate-200 bg-slate-100 px-4 py-2 text-base text-black opacity-75 transition duration-500 ease-in-out focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
@@ -132,6 +143,7 @@ const Input = (props: IInputProps) => {
 function OthersTab({ action, saveAttempt }: Props) {
     console.log('saveAttempt', saveAttempt)
     const [modal, setModal] = useState(false)
+    const [hsnModal, setHSNModal] = useState(false)
     const [categoryModal, setCategoryModal] = useState(false)
     const [tagsModal, setTagsModal] = useState(false)
 
@@ -143,6 +155,17 @@ function OthersTab({ action, saveAttempt }: Props) {
     const addProductInfo = useSelector(selectAddProductInfo)
 
     const fileUploaderRef = useRef<HTMLInputElement>(null)
+
+    const handleHSNModal = () => {
+        setHSNModal(true)
+    }
+
+    const handleGstPercentage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const tempVal = Number(event.target.value)
+        if (tempVal <= 100) {
+            dispatch(setGstPercentage(tempVal))
+        }
+    }
 
     function uploadImage() {
         if (fileUploaderRef.current?.files) {
@@ -399,6 +422,15 @@ function OthersTab({ action, saveAttempt }: Props) {
                         value={addProductInfo?.centralCatalogue?.description}
                     />
                 )}
+                
+                {!addProductInfo?.centralCatalogue?.id && (
+                    <Input
+                        label="Case Quantity"
+                        placeholder="Case Quantity"
+                        dispatch={dispatch}
+                        value={addProductInfo?.centralCatalogue?.caseQuantity}
+                    />
+                )}
 
                 {!addProductInfo?.centralCatalogue?.id && (
                     <div className="barcode-input">
@@ -455,6 +487,102 @@ function OthersTab({ action, saveAttempt }: Props) {
                         value={addProductInfo?.others?.skuCode}
                     />
                 )}
+
+            {/* Tax-info */}
+
+            {action === PAGE_ACTION.ADD &&
+        <div className="mt-2">
+            <div className="text-sm font-bold text-slate-500 dark:text-slate-300">Tax Info</div>
+            <ToggleButton
+                className="mt-4"
+                onChange={() => {
+                    dispatch(setTaxEnabled(!addProductInfo.pricing?.taxEnabled))
+                }}
+                value={addProductInfo.pricing?.taxEnabled}
+            />
+        </div>
+            }
+
+            {/* ---------- */}
+            {!addProductInfo?.centralCatalogue?.id &&
+        addProductInfo.pricing?.taxEnabled && (
+                <div>
+                    {/* HSN section */}
+                    <div>
+                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">HSN Number</p>
+                        <div className="des-modal-btn">
+                            <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-slate-200 rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600">
+                                {addProductInfo.pricing?.hsn?.hsn}
+                            </div>
+
+                            {/* Modal handle btn */}
+                            <button
+                                className="modal-btn dark:text-slate-300 -mt-2"
+                                onClick={handleHSNModal}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-5 h-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                            {/* Modal */}
+
+                            <span
+                                className={
+                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
+                    (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn) ? 'hidden' : '')
+                                }
+                            >
+                  Enter valid HSN !
+                            </span>
+                            <div>
+                                <HSNmodal trigger={hsnModal} setModal={setHSNModal} />
+                            </div>
+                        </div>
+                    </div>
+                    {/* GST section */}
+                    <div>
+                        <p className="mt-4 text-sm font-bold text-slate-500 dark:text-slate-300">GST Percentage</p>
+                        <div className="flex">
+                            <input
+                                onChange={handleGstPercentage}
+                                onBlur={() => isNumber(addProductInfo.pricing?.hsn?.gstPercentage ??
+                    addProductInfo.pricing?.gstPercentage) ? null : dispatch(setGstPercentage(0))}
+
+                                value={
+                                    addProductInfo.pricing?.hsn?.gstPercentage ??
+                    addProductInfo.pricing?.gstPercentage
+                                }
+                                type="number"
+                                max={100}
+                                min={0}
+                                className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-slate-200 rounded rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                            />
+                            <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded rounded-tl-none rounded-bl-none">
+                  %
+                            </div>
+                            <span
+                                className={
+                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
+                    (isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
+                      addProductInfo.pricing?.gstPercentage) ? 'hidden' : '')
+                                }
+                            >
+                  Enter valid GST !
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            )}
 
             </div>
         </div>

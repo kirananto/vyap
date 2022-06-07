@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteProductById, fetchCentralProduct, patchProductById } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useNavigate } from 'react-router'
-import { setAliasName, setCentralCatalogue, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice'
+import { setAliasName, setCentralCatalogue, setEditProduct, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import type { IProduct } from 'src/types/product'
 
@@ -30,8 +30,9 @@ export function MorePopup({ item, onClose }: { item: IProduct | undefined, onClo
                 }
             })
             dispatch(setEditProductId(item?.id))
-            dispatch(setMrpPrice(parseFloat(item?.mrpPrice ?? 0) ?? 0))
-            dispatch(setSalesPrice(parseFloat(item?.rate ?? 0) ?? 0))
+            dispatch(setEditProduct(item))
+            // dispatch(setMrpPrice(parseFloat(item?.mrpPrice ?? 0) ?? 0))
+            // dispatch(setSalesPrice(parseFloat(item?.rate ?? 0) ?? 0))
             dispatch(setAliasName(item?.aliasName ?? ''))
             navigate('/edit-product')
         }

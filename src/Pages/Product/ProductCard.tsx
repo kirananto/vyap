@@ -26,7 +26,7 @@ export default function ProductCard({
     const navigate = useNavigate()
     const callback = useCallback(() => {
         //alert('Long pressed!')
-        if(longPresEnabled)
+        if (longPresEnabled)
             onClicked(item)
         setLongPressEnabled(false)
     }, [item, onClicked, setLongPressEnabled, longPresEnabled])
@@ -70,25 +70,21 @@ export default function ProductCard({
                         )}
                         {item.outOfStock && (
                             <div className="absolute w-full py-1 bottom-0 inset-x-0 bg-rose-100 text-rose-700 font-bold text-xs text-center leading-4">
-                            Out of stock
+                                Out of stock
                             </div>
                         )}
                     </div>
 
                     <div className="max-w-[65vw] w-full  self-center px-5">
                         <div className="font-semibold text-md dark:text-slate-200 md:w-52 truncate">
-                            {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name}
+                            {item?.aliasName ? `${item?.aliasName}` : ''} {item?.aliasName ? `(${item?.centralCatalogue?.name})` : item?.centralCatalogue?.name} {item.variant?.name ? `- ${item.variant?.name}` : ''}
                         </div>
-
                         <div>
-                            {/* <p className="text-sm font-semibold text-slate-400 dark:text-slate-300 ">
-              #{item.id?.split("-")[0]}
-            </p> */}
                         </div>
                         <div className="grid grid-cols-2">
                             <div className="text-sm text-slate-500  dark:text-slate-400">
                                 <p>
-                                MRP
+                                    MRP
                                 </p>
                                 <p className="font-semibold">
                                     {parseFloat(item?.mrpPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
@@ -96,7 +92,7 @@ export default function ProductCard({
                             </div>
                             <div className="text-sm text-slate-500 dark:text-slate-400">
                                 <p >
-                                Sales Price
+                                    Sales Price
                                 </p>
                                 <p className="font-semibold" >
                                     {parseFloat(item?.rate)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
