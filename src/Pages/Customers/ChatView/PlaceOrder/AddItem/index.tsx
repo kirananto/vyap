@@ -315,25 +315,47 @@ export default function AddItem() {
 
     const handleVariantChange = (itemId: string, variantId: string, ) => {
         console.log('handleVariantChange', itemId, variantId)
-        const newItem = itemList.find((findItem ) => findItem.variantId === variantId)
+        const newItem: any = itemList.find((findItem ) => findItem.variantId === variantId)
         const oldItem: any = itemList.find((findItem ) => findItem.id === itemId)
-        // todo swap product
-        // TODO bug --> THe item will get missed.
-        const _itemList = itemList.map(mapItem => {
-            if(mapItem.id === oldItem?.id && newItem) {
-                return {...newItem, quantity: 0 }
+        const item = selectedItems.find(findItem => findItem.id === itemId)
+        if(newItem?.id !== oldItem.id) {
+            // todo swap product
+            // TODO bug --> THe item will get missed.
+            const _itemList = itemList.map(mapItem => {
+                if(mapItem.id === oldItem?.id && newItem) {
+                    return {...newItem, quantity: item?.quantity }
+                }
+                if(mapItem.id === newItem?.id && oldItem) {
+                    return {...oldItem, quantity: 0 }
+                }
+                return mapItem
+            })
+
+            // updateItem(newItem, item?.quantity ?? 0)
+            // updateItem(oldItem, 0)
+
+            console.log(selectedItems)
+
+            setSelectedItems(_selectedItems => {
+                const a = _selectedItems?.filter(filterItem => filterItem.id !== oldItem.id)?.map(mapItem => {
+                console.log('item1', item)
+                if(mapItem.id === newItem.id){
+                    console.log('item', item)
+                    return { ...mapItem, quantity: item?.quantity ?? 0 }
+                } else {
+                    return mapItem
+                }
+            })
+            if(!a.find(findItem => findItem.id === newItem.id)) {
+                a.push({ ...newItem, quantity: item?.quantity ?? 0 })
             }
-            if(mapItem.id === newItem?.id && oldItem) {
-                return {...oldItem, quantity: 0 }
-            }
-            return mapItem
+            return a.filter(filterItem => (filterItem.quantity ?? 0) > 0)
         })
 
-        updateItem(oldItem, 0)
+            console.log('_itemList', _itemList)
 
-        console.log('_itemList', _itemList)
-
-        setItemList(_itemList)
+            setItemList(_itemList)
+        }
 
 
 

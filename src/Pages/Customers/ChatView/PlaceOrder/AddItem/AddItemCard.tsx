@@ -201,7 +201,7 @@ export default function AddItemCard({
                 {(item.centralCatalogue.variants ?? []).length > 1 ?
                     <div className="flex w-full flex-row flex-wrap pt-2 text-sm text-slate-400 -ml-2">
                         {item?.centralCatalogue.variants?.map(mapItem => {
-                            const isSelected = item.variant?.id === mapItem.id
+                            const isSelected = item.variantId === mapItem.id
                             return <VariantBoxAddItem product={item} key={mapItem.id} item={mapItem} handleVariantChange={handleVariantChange} isSelected={isSelected} />
                         })}
                     </div> : undefined}

@@ -19,8 +19,8 @@ export default function VariantBoxAddItem({ item, product, handleVariantChange, 
         return <div className="h-2"></div>
     }
 
-    return (<div onClick={() => handleVariantChange(item.id)} className={`border border-slate-300 dark:border-slate-700 rounded-full m-1 p-1 px-4 ${isSelected ? ' border-indigo-400 ' : ''}`}>
-    <div className={`text-md ${isSelected ? ' text-indigo-600 dark:text-indigo-200 ' : ' text-slate-600 dark:text-slate-200 '}  font-semibold`}>
+    return (<div onClick={() => handleVariantChange(item.id)} className={`border border-slate-300 dark:border-slate-700 rounded-full m-1 p-1 px-4 ${isSelected ? ' border-indigo-600 bg-indigo-600 ' : ''}`}>
+    <div className={`text-md ${isSelected ? ' text-indigo-100 ' : ' text-slate-600 dark:text-slate-200 '}  font-semibold`}>
         {item.name}
     </div>
     {/* <div>
