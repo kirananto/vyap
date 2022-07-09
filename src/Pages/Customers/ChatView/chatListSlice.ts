@@ -49,7 +49,7 @@ export interface ThreadInterface {
 
 const initialState: chatListInterface = {}
 
-export const fetchThreadsByInbox = createAsyncThunk(
+export const fetchThreadsByInbox: any = createAsyncThunk(
     'chatList/fetchThreadsByInbox',
     async ({ token, inboxHash, offset, limit, id }: { token?: string; inboxHash?: string; offset: number; id: string; limit: number }) => {
         const response = await fetchThreadsById({ token: token, inboxId: inboxHash, offset, limit })
@@ -62,7 +62,7 @@ export const fetchThreadsByInbox = createAsyncThunk(
         }
     }
 )
-export const fetchInboxAction = createAsyncThunk(
+export const fetchInboxAction: any = createAsyncThunk(
     'chatList/fetchInboxAction',
     async ({ token, id }: { token?: string; id?: string }) => {
         const response = await fetchInboxById({ token, id: id })
@@ -117,7 +117,7 @@ export const chatListSlice = createSlice({
             if (state[action.payload.id]?.threads) {
                 const existingItems = state[action.payload.id].threads
                 const newItems = action.payload.threads
-                state[action.payload.id].threads = newItems.map(item => {
+                state[action.payload.id].threads = newItems.map((item: any) => {
                     const existingItem = existingItems.find(findItem => findItem.id === item.id) ?? {}
                     return { ...existingItem, ...item }
                 })
