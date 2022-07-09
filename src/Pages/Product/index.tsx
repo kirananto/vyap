@@ -118,7 +118,7 @@ export default function Product() {
         fetchProducts({
             token: token,
             organizationId: user?.organizationId,
-            limit: 5000,
+            limit: 50000,
             offset: 0,
             search: searchValue.trim(),
             ordering: filters?.sorting,
