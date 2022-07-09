@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import './tailwind.css'
 import { Provider } from 'react-redux'
 import { InitialRouter } from './App'
@@ -28,16 +28,17 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 } else {
     document.documentElement.classList.remove('dark')
 }
+const container = document.getElementById('root')!
 
-render(
+const root = createRoot(container); 
+root.render(
     <StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <InitialRouter />
             </PersistGate>
         </Provider>
-    </StrictMode>,
-    document.getElementById('root')
+    </StrictMode>
 )
 
 if (import.meta.hot) {
