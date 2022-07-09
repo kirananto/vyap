@@ -28,9 +28,9 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 } else {
     document.documentElement.classList.remove('dark')
 }
-const container = document.getElementById('root')!
+const container = document.getElementById('root')
 
-const root = createRoot(container); 
+const root = createRoot(container!) 
 root.render(
     <StrictMode>
         <Provider store={store}>

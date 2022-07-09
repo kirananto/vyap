@@ -98,15 +98,15 @@ function CreateProduct() {
         if (addProductInfo?.centralCatalogue?.id) {
             fetchCentralProductImages(
                 { token, limit: 100, offset: 0, catalogueId: addProductInfo?.centralCatalogue?.id }).then((result: ICentralCatalogue) => {
-                    const imageName = result?.data?.data?.filter((filterItem: IDataEntity) =>
-                        filterItem?.imageName?.includes('.')
-                    )?.[0]?.imageName
-                    if (imageName) {
-                        setProductImage(
-                            getImageURL(imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)
-                        )
-                    }
-                })
+                const imageName = result?.data?.data?.filter((filterItem: IDataEntity) =>
+                    filterItem?.imageName?.includes('.')
+                )?.[0]?.imageName
+                if (imageName) {
+                    setProductImage(
+                        getImageURL(imageName, IMAGEKIT_FOLDERS.CENTRAL_CATALOGUE_IMAGE)
+                    )
+                }
+            })
             return () => {
                 setProductImage('')
             }
@@ -269,7 +269,7 @@ function CreateProduct() {
 
     const handleEditProduct = async () => {
         setIsLoading(true)
-        let _variants: variantInterface[] = (addProductInfo?.centralCatalogue?.variants ?? [])?.filter(filterItem => filterItem.id === addProductInfo.editProduct.variantId)
+        const _variants: variantInterface[] = (addProductInfo?.centralCatalogue?.variants ?? [])?.filter(filterItem => filterItem.id === addProductInfo.editProduct.variantId)
         console.log(_variants)
         const organizationCatalogueId: string = addProductInfo?.editProductId ?? ''
 
@@ -297,7 +297,7 @@ function CreateProduct() {
         <div className=" create-product-container dark:bg-slate-900">
             <SimpleHeader
                 heading={`${pageAction === PAGE_ACTION.EDIT ? 'Edit Product ' : 'Create Product'
-                    }`}
+                }`}
             />
 
             <div className="mx-auto w-11/12  px-2 pt-20">
@@ -313,7 +313,7 @@ function CreateProduct() {
                         className={`w-1/2 rounded px-6 py-2 font-semibold ${toggleState === TABS.VARIANTS
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300 '
                             : 'text-slate-500 dark:text-slate-300'
-                            }`}
+                        }`}
                     >
                         Variants
                     </button>
@@ -322,7 +322,7 @@ function CreateProduct() {
                         className={`w-1/2 rounded px-6 py-2 font-semibold ${toggleState === TABS.OTHERS
                             ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
                             : 'text-slate-500 dark:text-slate-300'
-                            }`}
+                        }`}
                     >
                         Others
                     </button>

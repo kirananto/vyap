@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteProductById, fetchCentralProduct, patchProductById } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import { useNavigate } from 'react-router'
-import { setAliasName, setCentralCatalogue, setEditProduct, setEditProductId, setMrpPrice, setSalesPrice } from '../AddProduct/redux/addProductSlice'
+import { setAliasName, setCentralCatalogue, setEditProduct, setEditProductId } from '../AddProduct/redux/addProductSlice'
 import { hapticFeedback } from 'src/utils/vibrate'
 import type { IProduct } from 'src/types/product'
 

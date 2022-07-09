@@ -30,7 +30,7 @@ export default function AddItemCard({
         ${selectedItems?.find(
             (findItem) => findItem.id === item.id
         ) ? 'bg-blue-100 dark:bg-blue-900' : 'bg-white-200'
-            } 
+        } 
         mt-2 border-b-2 border-slate-100 dark:border-slate-800 py-4`}
     >
         <div className="relative self-center w-1/5 h-20  overflow-hidden">
@@ -130,9 +130,9 @@ export default function AddItemCard({
                 </div>
             </div>
 
-            {item.centralCatalogue.caseQuantity && false ? <div className="w-full">
-               <div className="text-sm text-slate-400 mt-2">1 Case = {item.centralCatalogue.caseQuantity} Units </div>
-               <div className="flex gap-2 col-span-2 sm:col-span-1 mt-2">
+            {/* {item.centralCatalogue.caseQuantity && false ? <div className="w-full">
+                <div className="text-sm text-slate-400 mt-2">1 Case = {item.centralCatalogue.caseQuantity} Units </div>
+                <div className="flex gap-2 col-span-2 sm:col-span-1 mt-2">
                     <div className="flex text-blue-600 dark:text-blue-400 items-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +196,7 @@ export default function AddItemCard({
                         </svg>
                     </div>
                 </div>
-            </div> : undefined}
+            </div> : undefined} */}
             <div className="w-full">
                 {(item.centralCatalogue.variants ?? []).length > 1 ?
                     <div className="flex w-full flex-row flex-wrap pt-2 text-sm text-slate-400 -ml-2">

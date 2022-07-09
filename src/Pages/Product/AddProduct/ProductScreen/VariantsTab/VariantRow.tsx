@@ -1,15 +1,13 @@
-import { values } from 'lodash'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import {
-    selectAddProductInfo,
     setIsSelectedVariant,
     setMrpPrice,
     setSalesPrice,
     setVariantName,
     variantInterface,
 } from '../../redux/addProductSlice'
-import { isValidDescription, isValidMRP, isValidSalePrice } from '../validations'
+import { isValidDescription, isValidMRP } from '../validations'
 
 
 interface Props {
@@ -20,7 +18,6 @@ interface Props {
 
 
 function VariantRow({ item, saveAttempt, index }: Props) {
-    const addProductInfo = useSelector(selectAddProductInfo)
 
     console.log('datavariant', item)
 

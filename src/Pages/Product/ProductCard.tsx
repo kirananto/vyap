@@ -36,7 +36,7 @@ export default function ProductCard({
         threshold: 300,
         captureEvent: true,
         cancelOnMovement: true,
-        detect: "both"
+        detect: 'both'
     })
 
     const onItemClick = () => {

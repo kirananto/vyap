@@ -15,7 +15,7 @@ export function isValidMRP(value?: number) {
 
 export function isValidVariants(value: variantInterface[]) {
     let errors: any[] = []
-    for (let val of value) {
+    for (const val of value) {
         console.log('val', val)
         const postMrp = new PostMRP()
         postMrp.mrpPrice = Number(val.mrpPrice)

@@ -488,9 +488,9 @@ function OthersTab({ action, saveAttempt }: Props) {
                     />
                 )}
 
-            {/* Tax-info */}
+                {/* Tax-info */}
 
-            {action === PAGE_ACTION.ADD &&
+                {action === PAGE_ACTION.ADD &&
         <div className="mt-2">
             <div className="text-sm font-bold text-slate-500 dark:text-slate-300">Tax Info</div>
             <ToggleButton
@@ -501,88 +501,88 @@ function OthersTab({ action, saveAttempt }: Props) {
                 value={addProductInfo.pricing?.taxEnabled}
             />
         </div>
-            }
+                }
 
-            {/* ---------- */}
-            {!addProductInfo?.centralCatalogue?.id &&
+                {/* ---------- */}
+                {!addProductInfo?.centralCatalogue?.id &&
         addProductInfo.pricing?.taxEnabled && (
-                <div>
-                    {/* HSN section */}
                     <div>
-                        <p className="text-sm font-bold text-slate-500 dark:text-slate-300">HSN Number</p>
-                        <div className="des-modal-btn">
-                            <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-slate-200 rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600">
-                                {addProductInfo.pricing?.hsn?.hsn}
-                            </div>
+                        {/* HSN section */}
+                        <div>
+                            <p className="text-sm font-bold text-slate-500 dark:text-slate-300">HSN Number</p>
+                            <div className="des-modal-btn">
+                                <div className="w-full h-10 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-slate-200 rounded opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600">
+                                    {addProductInfo.pricing?.hsn?.hsn}
+                                </div>
 
-                            {/* Modal handle btn */}
-                            <button
-                                className="modal-btn dark:text-slate-300 -mt-2"
-                                onClick={handleHSNModal}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-5 h-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
+                                {/* Modal handle btn */}
+                                <button
+                                    className="modal-btn dark:text-slate-300 -mt-2"
+                                    onClick={handleHSNModal}
                                 >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                            </button>
-                            {/* Modal */}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-5 h-5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </button>
+                                {/* Modal */}
 
-                            <span
-                                className={
-                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
+                                <span
+                                    className={
+                                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
                     (isValidHSN(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.hsn) ? 'hidden' : '')
-                                }
-                            >
+                                    }
+                                >
                   Enter valid HSN !
-                            </span>
-                            <div>
-                                <HSNmodal trigger={hsnModal} setModal={setHSNModal} />
+                                </span>
+                                <div>
+                                    <HSNmodal trigger={hsnModal} setModal={setHSNModal} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {/* GST section */}
-                    <div>
-                        <p className="mt-4 text-sm font-bold text-slate-500 dark:text-slate-300">GST Percentage</p>
-                        <div className="flex">
-                            <input
-                                onChange={handleGstPercentage}
-                                onBlur={() => isNumber(addProductInfo.pricing?.hsn?.gstPercentage ??
+                        {/* GST section */}
+                        <div>
+                            <p className="mt-4 text-sm font-bold text-slate-500 dark:text-slate-300">GST Percentage</p>
+                            <div className="flex">
+                                <input
+                                    onChange={handleGstPercentage}
+                                    onBlur={() => isNumber(addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage) ? null : dispatch(setGstPercentage(0))}
 
-                                value={
-                                    addProductInfo.pricing?.hsn?.gstPercentage ??
+                                    value={
+                                        addProductInfo.pricing?.hsn?.gstPercentage ??
                     addProductInfo.pricing?.gstPercentage
-                                }
-                                type="number"
-                                max={100}
-                                min={0}
-                                className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-slate-200 rounded rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
-                            />
-                            <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded rounded-tl-none rounded-bl-none">
+                                    }
+                                    type="number"
+                                    max={100}
+                                    min={0}
+                                    className="w-3/12 px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform bg-slate-100 border border-transparent border-slate-200 rounded rounded-tr-none rounded-br-none opacity-75 focus:border-blue-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2  dark:bg-slate-500 dark:text-slate-200 dark:focus:bg-slate-600"
+                                />
+                                <div className="flex items-center justify-center w-1/12 px-5 mt-2 font-bold text-blue-500 bg-blue-200 rounded rounded-tl-none rounded-bl-none">
                   %
-                            </div>
-                            <span
-                                className={
-                                    'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
+                                </div>
+                                <span
+                                    className={
+                                        'flex items-center font-medium tracking-wide text-rose-500 text-xs mt-1 ml-1 ' +
                     (isValidGST(addProductInfo.pricing?.taxEnabled, !!addProductInfo?.centralCatalogue?.id, addProductInfo.pricing?.hsn?.gstPercentage ??
                       addProductInfo.pricing?.gstPercentage) ? 'hidden' : '')
-                                }
-                            >
+                                    }
+                                >
                   Enter valid GST !
-                            </span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            )}
+                    </div>
+                )}
 
             </div>
         </div>

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
 import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
-import type { BrandInterface } from '../ProductScreen/OthersTab/BrandModal';
+import type { BrandInterface } from '../ProductScreen/OthersTab/BrandModal'
 
 interface CatalogueImageInterface {
     id: string;
@@ -108,40 +108,44 @@ export const addProductSlice = createSlice({
         },
         setMrpPrice: (state: AddProductInterface, action: PayloadAction<{ mrp: number, index: number }>) => {
             const index = action.payload.index
-            if (index !== undefined && state.centralCatalogue!.variants![index]) {
-                state.centralCatalogue!.variants![index].mrpPrice = action.payload.mrp
+            if (index !== undefined && state.centralCatalogue?.variants?.[index]) {
+                state.centralCatalogue.variants[index].mrpPrice = action.payload.mrp
             }
         },
         setSalesPrice: (state: AddProductInterface, action: PayloadAction<{ salesPrice: number, index: number }>) => {
             const index = action.payload.index
-            if (index !== undefined && state.centralCatalogue!.variants![index]) {
-                state.centralCatalogue!.variants![index].salesPrice = action.payload.salesPrice
+            if (index !== undefined && state.centralCatalogue?.variants?.[index]) {
+                state.centralCatalogue.variants[index].salesPrice = action.payload.salesPrice
             }
         },
         setIsSelectedVariant: (state: AddProductInterface, action: PayloadAction<{ value: boolean, index: number }>) => {
             const index = action.payload.index
-            if (index !== undefined && state.centralCatalogue!.variants![index]) {
-                state.centralCatalogue!.variants![index].isSelected = action.payload.value
+            if (index !== undefined && state.centralCatalogue?.variants?.[index]) {
+                state.centralCatalogue.variants[index].isSelected = action.payload.value
             }
         },
         createVariant: (state: AddProductInterface) => {
-            state.centralCatalogue!.variants = [
-                ...(state.centralCatalogue!.variants ?? []),
-                {
-                    name: `Variant ${(state.centralCatalogue?.variants?.length ?? 0) + 1}`,
-                    mrpPrice: 0,
-                    salesPrice: 0,
-                    isSelected: true
-                }
-            ]
+            if(state.centralCatalogue) {
+                state.centralCatalogue.variants = [
+                    ...(state.centralCatalogue?.variants ?? []),
+                    {
+                        name: `Variant ${(state.centralCatalogue?.variants?.length ?? 0) + 1}`,
+                        mrpPrice: 0,
+                        salesPrice: 0,
+                        isSelected: true
+                    }
+                ]
+            }
         },
         setVariants: (state: AddProductInterface, action: PayloadAction<variantInterface[]>) => {
-            state.centralCatalogue!.variants = action.payload
+            if(state.centralCatalogue) {
+                state.centralCatalogue.variants = action.payload
+            }
         },
         setVariantName: (state: AddProductInterface, action: PayloadAction<{ name: string, index: number }>) => {
             const index = action.payload.index
-            if (index !== undefined && state.centralCatalogue!.variants![index]) {
-                state.centralCatalogue!.variants![index].name = action.payload.name
+            if (index !== undefined && state.centralCatalogue?.variants?.[index]) {
+                state.centralCatalogue.variants[index].name = action.payload.name
             }
         },
         setTaxEnabled: (state, action: PayloadAction<boolean>) => {

@@ -161,7 +161,7 @@ const ProductDetail = () => {
                     {product?.centralCatalogue.variants?.map(item => {
                         return <VariantBox item={item} key={item.id} product={product} />
                     })}
-                    </div>
+                </div>
             </div> : undefined}
         </div>
 

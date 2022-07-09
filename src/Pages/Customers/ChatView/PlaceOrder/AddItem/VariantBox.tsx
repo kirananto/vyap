@@ -10,21 +10,23 @@ export default function VariantBoxAddItem({ item, product, handleVariantChange, 
     const [prod, setProd] = useState<IProduct | undefined>(undefined)
 
     useEffect(() => {
-        fetchProducts({ token: token!, variantId: item.id, organizationId: product.organizationId, limit: 12, offset: 0 }).then(result => {
-            setProd(result.data?.data?.[0])
-        })
-    }, [item.id])
+        if(token) {
+            fetchProducts({ token: token, variantId: item.id, organizationId: product.organizationId, limit: 12, offset: 0 }).then(result => {
+                setProd(result.data?.data?.[0])
+            })
+        }
+    }, [item.id, token, product.organizationId])
 
     if(!prod?.id) {
         return <div className="h-2"></div>
     }
 
     return (<div onClick={() => handleVariantChange(item.id)} className={`border border-slate-300 dark:border-slate-700 rounded-full m-1 p-1 px-4 ${isSelected ? ' border-indigo-600 bg-indigo-600 ' : ''}`}>
-    <div className={`text-md ${isSelected ? ' text-indigo-100 ' : ' text-slate-600 dark:text-slate-200 '}  font-semibold`}>
-        {item.name}
-    </div>
-    {/* <div>
+        <div className={`text-md ${isSelected ? ' text-indigo-100 ' : ' text-slate-600 dark:text-slate-200 '}  font-semibold`}>
+            {item.name}
+        </div>
+        {/* <div>
         {prod?.mrpPrice ? `${parseFloat(`${prod?.mrpPrice}`)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}` : '--'}
     </div> */}
-</div>)
+    </div>)
 }
