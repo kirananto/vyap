@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
 import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
+import type { IProduct } from 'src/types/product'
 import type { BrandInterface } from '../ProductScreen/OthersTab/BrandModal'
 
 interface CatalogueImageInterface {
@@ -43,7 +44,7 @@ export interface HSNInterface {
 }
 export interface AddProductInterface {
     editProductId?: string,
-    editProduct: any,
+    editProduct?: IProduct,
     pricing: {
         mrpPrice?: number
         salesPrice?: number
@@ -100,7 +101,7 @@ export const addProductSlice = createSlice({
         setEditProductId: (state: AddProductInterface, action: PayloadAction<string>) => {
             state.editProductId = action.payload
         },
-        setEditProduct: (state: AddProductInterface, action: PayloadAction<any>) => {
+        setEditProduct: (state: AddProductInterface, action: PayloadAction<AddProductInterface['editProduct']>) => {
             state.editProduct = action.payload
         },
         setCentralCatalogue: (state: AddProductInterface, action: PayloadAction<CentralCatalogueInterface>) => {

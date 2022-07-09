@@ -24,18 +24,28 @@ function VariantRow({ item, saveAttempt, index }: Props) {
     const dispatch = useDispatch()
 
 
-    const resetSalesToZero = () => dispatch(setSalesPrice({
-        index: index!,
-        salesPrice: !isNaN(parseFloat(`${item?.salesPrice ?? 0}`)) ? parseFloat(`${item?.salesPrice ?? 0}`) ?? 0 : 0
-    }))
+    const resetSalesToZero = () => {
+        if (index !== undefined) {
+            dispatch(setSalesPrice({
+                index: index,
+                salesPrice: !isNaN(parseFloat(`${item?.salesPrice ?? 0}`)) ? parseFloat(`${item?.salesPrice ?? 0}`) ?? 0 : 0
+            }))
+        }
+    }
 
-    const resetMRPToZero = () => dispatch(setMrpPrice({
-        index: index!,
-        mrp: !isNaN(parseFloat(`${item?.mrpPrice ?? 0}`)) ? parseFloat(`${item?.mrpPrice ?? 0}`) ?? 0 : 0
-    }))
+    const resetMRPToZero = () => {
+        if (index !== undefined) {
+            dispatch(setMrpPrice({
+                index: index,
+                mrp: !isNaN(parseFloat(`${item?.mrpPrice ?? 0}`)) ? parseFloat(`${item?.mrpPrice ?? 0}`) ?? 0 : 0
+            }))
+        }
+    }
 
-    function setIsSelected (value: boolean) {
-        dispatch(setIsSelectedVariant({ value: value, index: index! }))
+    function setIsSelected(value: boolean) {
+        if (index !== undefined) {
+            dispatch(setIsSelectedVariant({ value: value, index: index }))
+        }
     }
 
     useEffect(() => {
@@ -84,10 +94,12 @@ function VariantRow({ item, saveAttempt, index }: Props) {
                         <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Name</p>
                         <input
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                dispatch(setVariantName({
-                                    index: index!,
-                                    name: event.target.value as unknown as string
-                                }))
+                                if(index !== undefined) {
+                                    dispatch(setVariantName({
+                                        index: index,
+                                        name: event.target.value as unknown as string
+                                    }))
+                                }
                             }}
                             onBlur={resetSalesToZero}
                             value={item?.name}
@@ -112,10 +124,12 @@ function VariantRow({ item, saveAttempt, index }: Props) {
                         <p className="text-sm font-bold text-slate-500 dark:text-slate-300">MRP</p>
                         <input
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                dispatch(setMrpPrice({
-                                    index: index!,
-                                    mrp: event.target.value as unknown as number
-                                }))
+                                if(index !== undefined) {
+                                    dispatch(setMrpPrice({
+                                        index: index,
+                                        mrp: event.target.value as unknown as number
+                                    }))
+                                }
                             }}
                             onBlur={resetMRPToZero}
                             value={item?.mrpPrice}
@@ -141,10 +155,12 @@ function VariantRow({ item, saveAttempt, index }: Props) {
                         <p className="text-sm font-bold text-slate-500 dark:text-slate-300">Sale</p>
                         <input
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                dispatch(setSalesPrice({
-                                    index: index!,
-                                    salesPrice: event.target.value as unknown as number
-                                }))
+                                if (index !== undefined) {
+                                    dispatch(setSalesPrice({
+                                        index: index,
+                                        salesPrice: event.target.value as unknown as number
+                                    }))
+                                }
                             }}
                             onBlur={resetMRPToZero}
                             value={item?.salesPrice}

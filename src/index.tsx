@@ -30,7 +30,8 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 }
 const container = document.getElementById('root')
 
-const root = createRoot(container!) 
+// @ts-ignore
+const root = createRoot(container) 
 root.render(
     <StrictMode>
         <Provider store={store}>

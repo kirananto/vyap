@@ -100,7 +100,7 @@ export default function AddItem() {
 
     }
 
-    const handleFetchTagItems = useCallback((productList: any) => {
+    const handleFetchTagItems = useCallback((productList: IProduct[]) => {
         const tagSorted: TagListProps = {}
         productList?.forEach((item: IProduct) => {
             const tag = item?.organizationCatalogueCategory?.name
@@ -299,7 +299,7 @@ export default function AddItem() {
                 key={item.id}
                 handleAddItem={handleAddItem}
                 item={item}
-                handleVariantChange={(variantId: string) => handleVariantChange(item.id, variantId )}
+                handleVariantChange={(variantId?: string) => handleVariantChange(item.id, variantId )}
                 selectedItems={selectedItems}
                 handleRemoveItemItem={handleRemoveItemItem}
                 setSelectedItems={setSelectedItems}
@@ -308,22 +308,22 @@ export default function AddItem() {
         ))
     }
 
-    const handleVariantChange = (itemId: string, variantId: string, ) => {
+    const handleVariantChange = (itemId: string, variantId?: string, ) => {
         console.log('handleVariantChange', itemId, variantId)
-        const newItem: any = itemList.find((findItem ) => findItem.variantId === variantId)
-        const oldItem: any = itemList.find((findItem ) => findItem.id === itemId)
+        const newItem = itemList.find((findItem ) => findItem.variantId === variantId)
+        const oldItem = itemList.find((findItem ) => findItem.id === itemId)
         const item = selectedItems.find(findItem => findItem.id === itemId)
-        if(newItem?.id !== oldItem.id) {
+        if(newItem?.id !== oldItem?.id) {
             // todo swap product
             // TODO bug --> THe item will get missed.
             const _itemList = itemList.map(mapItem => {
                 if(mapItem.id === oldItem?.id && newItem) {
-                    return {...newItem, quantity: item?.quantity }
+                    return {...newItem, quantity: item?.quantity ?? 0 }
                 }
                 if(mapItem.id === newItem?.id && oldItem) {
                     return {...oldItem, quantity: 0 }
                 }
-                return mapItem
+                return { ...mapItem, quantity: mapItem.quantity ?? 0 }
             })
 
             // updateItem(newItem, item?.quantity ?? 0)
@@ -332,16 +332,16 @@ export default function AddItem() {
             console.log(selectedItems)
 
             setSelectedItems(_selectedItems => {
-                const a = _selectedItems?.filter(filterItem => filterItem.id !== oldItem.id)?.map(mapItem => {
+                const a = _selectedItems?.filter(filterItem => filterItem.id !== oldItem?.id)?.map(mapItem => {
                     console.log('item1', item)
-                    if(mapItem.id === newItem.id){
+                    if(mapItem.id === newItem?.id){
                         console.log('item', item)
                         return { ...mapItem, quantity: item?.quantity ?? 0 }
                     } else {
                         return mapItem
                     }
                 })
-                if(!a.find(findItem => findItem.id === newItem.id)) {
+                if(newItem && !a.find(findItem => findItem.id === newItem?.id)) {
                     a.push({ ...newItem, quantity: item?.quantity ?? 0 })
                 }
                 return a.filter(filterItem => (filterItem.quantity ?? 0) > 0)

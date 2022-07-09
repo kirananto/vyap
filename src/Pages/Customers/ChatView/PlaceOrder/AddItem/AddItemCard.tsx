@@ -9,11 +9,11 @@ import VariantBoxAddItem from './VariantBox'
 interface IProps {
     item: IProduct
     selectedItems: AddItemProductInterface[]
-    handleAddItem: any
-    handleRemoveItemItem: any
-    setSelectedItems: any
-    updateItem: any
-    handleVariantChange: any
+    handleAddItem: (item: IProduct, caseQuantity: number) => void
+    handleRemoveItemItem: (item: IProduct, caseQuantity: number) => void
+    setSelectedItems: React.Dispatch<React.SetStateAction<AddItemProductInterface[]>>
+    updateItem: (item: IProduct, caseQuantity: number) => void
+    handleVariantChange: (variantId?: string) => void
 }
 
 export default function AddItemCard({

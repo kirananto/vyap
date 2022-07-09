@@ -60,6 +60,7 @@ export default function ChatList({
 
     useEffect(() => {
         if(inboxHash && token) {
+            // @ts-ignore
             dispatch(fetchThreadsByInbox({ token: token, inboxHash: inboxHash, id: id ?? '', offset: ((currentPage - 1) * limit), limit }))
         }
     }, [toRefresh, token, inboxHash, currentPage, dispatch, id])

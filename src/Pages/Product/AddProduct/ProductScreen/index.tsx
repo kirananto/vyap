@@ -269,7 +269,7 @@ function CreateProduct() {
 
     const handleEditProduct = async () => {
         setIsLoading(true)
-        const _variants: variantInterface[] = (addProductInfo?.centralCatalogue?.variants ?? [])?.filter(filterItem => filterItem.id === addProductInfo.editProduct.variantId)
+        const _variants: variantInterface[] = (addProductInfo?.centralCatalogue?.variants ?? [])?.filter(filterItem => filterItem.id === addProductInfo.editProduct?.variantId)
         console.log(_variants)
         const organizationCatalogueId: string = addProductInfo?.editProductId ?? ''
 

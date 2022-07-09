@@ -5,7 +5,7 @@ import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import type { variantInterface } from 'src/Pages/Product/AddProduct/redux/addProductSlice'
 import type { IProduct } from 'src/types/product'
 
-export default function VariantBoxAddItem({ item, product, handleVariantChange, isSelected }: { item: variantInterface, product: IProduct, handleVariantChange: any , isSelected: boolean}) {
+export default function VariantBoxAddItem({ item, product, handleVariantChange, isSelected }: { item: variantInterface, product: IProduct, handleVariantChange: (variantId?: string) => void , isSelected: boolean}) {
     const { token } = useSelector(selectCredentials)
     const [prod, setProd] = useState<IProduct | undefined>(undefined)
 

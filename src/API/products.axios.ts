@@ -1,3 +1,4 @@
+import type { variantInterface } from 'src/Pages/Product/AddProduct/redux/addProductSlice'
 import type { ICentralImage } from 'src/types/fetchCentralProductImages'
 import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
 import { axiosClient } from './apiClient'
@@ -36,7 +37,7 @@ export interface AddCentralCatalogueInterface {
     brandId?: string
     hsnId?: string
     barCode?: string
-    variants?: any
+    variants?: variantInterface[]
     caseQuantity?: number
     categoriesId?: string
     categories: IOrganizationProductCategory[]
