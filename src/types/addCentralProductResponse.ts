@@ -1,4 +1,4 @@
-import type { variantInterface } from "src/Pages/Product/AddProduct/redux/addProductSlice";
+import type { variantInterface } from 'src/Pages/Product/AddProduct/redux/addProductSlice'
 
 export interface IAddCentralProductResponse {
     data: IAddCentralProductResponseData;

@@ -38,6 +38,7 @@ export const Payment = () => {
         const diffInSec = differenceInMilliseconds(new Date(), new Date(latestThreadUpdatedAt)) / 1000
         // CHeck if difference between two dates is less than 10 seconds
         if (token && (inbox.id ? diffInSec < 15 : true)) {
+            // @ts-ignore
             dispatch(fetchInboxAction({ token: token, id: id }))
         }
     }, [paymentModalVisible, id, token, dispatch, inbox.id, inbox.updatedAt, latestThreadUpdatedAt])

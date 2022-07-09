@@ -10,10 +10,12 @@ export default function VariantBox({ item, product }: { item: variantInterface, 
     const [prod, setProd] = useState<IProduct | undefined>(undefined)
 
     useEffect(() => {
-        fetchProducts({ token: token!, variantId: item.id, organizationId: product.organizationId, limit: 12, offset: 0 }).then(result => {
-            setProd(result.data?.data?.[0])
-        })
-    }, [item.id])
+        if(token) {
+            fetchProducts({ token: token, variantId: item.id, organizationId: product.organizationId, limit: 12, offset: 0 }).then(result => {
+                setProd(result.data?.data?.[0])
+            })
+        }
+    }, [item.id, product.organizationId, token])
 
     if(!prod?.id) {
         return <></>

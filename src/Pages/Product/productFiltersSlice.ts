@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'src/redux/store'
 import type { IOrganizationProductCategory } from 'src/types/organizationProductCategories'
-import type { BrandInterface } from './AddProduct/ProductScreen/OthersTab/BrandModal';
+import type { BrandInterface } from './AddProduct/ProductScreen/OthersTab/BrandModal'
 
 export interface ProductFilterInterface {
     categories: IOrganizationProductCategory[];

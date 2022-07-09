@@ -1,4 +1,4 @@
-import { validateSync } from 'class-validator'
+import { validateSync, ValidationError } from 'class-validator'
 import type { variantInterface } from '../redux/addProductSlice'
 import { PostBrand, PostCategory, PostDescription, PostGST, PostHSN, PostMRP, PostSale, PostTag } from './types'
 
@@ -14,8 +14,8 @@ export function isValidMRP(value?: number) {
 }
 
 export function isValidVariants(value: variantInterface[]) {
-    let errors: any[] = []
-    for (let val of value) {
+    let errors: ValidationError[] = []
+    for (const val of value) {
         console.log('val', val)
         const postMrp = new PostMRP()
         postMrp.mrpPrice = Number(val.mrpPrice)

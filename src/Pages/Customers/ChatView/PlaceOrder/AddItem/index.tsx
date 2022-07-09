@@ -2,22 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Header from 'src/Components/Header/Header'
 import AppliedFilters from './AppliedFilters'
 import Button from 'src/Components/Style/Button'
-// import DropList from 'src/Components/Style/DropList'
 import { useDispatch, useSelector } from 'react-redux'
 import { pushItemsToCart, selectPlaceOrderInfo } from '../placeOrderSlice'
 import { useNavigate } from 'react-router'
 import { fetchProductById, fetchProducts } from 'src/API/products.axios'
 import { selectCredentials } from 'src/Pages/Login/credentialsSlice'
 import ChatImg from '../../../../Product/assets/no_data.svg'
-import transparentImg from 'src/assets/img/transparent.png'
-import { getImageURL, IMAGEKIT_FOLDERS } from 'src/utils/imageKit'
 import { selectAddItemsproductFilters } from './addProductFiltersSlice'
 import ModalViewer from 'src/Components/Style/ModalViewer'
 import { FilterPopup } from './FilterPopup'
 import useQueryParam from 'src/utils/useQueryParams'
-import { hapticFeedback } from 'src/utils/vibrate'
 import { fetchPrevOrderedProducts } from 'src/API/suggestions.axios'
-//import ProductSuggestionCard from './ProductSuggestionCard'
 import type { IProduct } from 'src/types/product'
 import { ADD_ITEM_TABS } from './types'
 import _ from 'lodash'
@@ -105,7 +100,7 @@ export default function AddItem() {
 
     }
 
-    const handleFetchTagItems = useCallback((productList: any) => {
+    const handleFetchTagItems = useCallback((productList: IProduct[]) => {
         const tagSorted: TagListProps = {}
         productList?.forEach((item: IProduct) => {
             const tag = item?.organizationCatalogueCategory?.name
@@ -304,7 +299,7 @@ export default function AddItem() {
                 key={item.id}
                 handleAddItem={handleAddItem}
                 item={item}
-                handleVariantChange={(variantId: string) => handleVariantChange(item.id, variantId )}
+                handleVariantChange={(variantId?: string) => handleVariantChange(item.id, variantId )}
                 selectedItems={selectedItems}
                 handleRemoveItemItem={handleRemoveItemItem}
                 setSelectedItems={setSelectedItems}
@@ -313,22 +308,22 @@ export default function AddItem() {
         ))
     }
 
-    const handleVariantChange = (itemId: string, variantId: string, ) => {
+    const handleVariantChange = (itemId: string, variantId?: string, ) => {
         console.log('handleVariantChange', itemId, variantId)
-        const newItem: any = itemList.find((findItem ) => findItem.variantId === variantId)
-        const oldItem: any = itemList.find((findItem ) => findItem.id === itemId)
+        const newItem = itemList.find((findItem ) => findItem.variantId === variantId)
+        const oldItem = itemList.find((findItem ) => findItem.id === itemId)
         const item = selectedItems.find(findItem => findItem.id === itemId)
-        if(newItem?.id !== oldItem.id) {
+        if(newItem?.id !== oldItem?.id) {
             // todo swap product
             // TODO bug --> THe item will get missed.
             const _itemList = itemList.map(mapItem => {
                 if(mapItem.id === oldItem?.id && newItem) {
-                    return {...newItem, quantity: item?.quantity }
+                    return {...newItem, quantity: item?.quantity ?? 0 }
                 }
                 if(mapItem.id === newItem?.id && oldItem) {
                     return {...oldItem, quantity: 0 }
                 }
-                return mapItem
+                return { ...mapItem, quantity: mapItem.quantity ?? 0 }
             })
 
             // updateItem(newItem, item?.quantity ?? 0)
@@ -337,20 +332,20 @@ export default function AddItem() {
             console.log(selectedItems)
 
             setSelectedItems(_selectedItems => {
-                const a = _selectedItems?.filter(filterItem => filterItem.id !== oldItem.id)?.map(mapItem => {
-                console.log('item1', item)
-                if(mapItem.id === newItem.id){
-                    console.log('item', item)
-                    return { ...mapItem, quantity: item?.quantity ?? 0 }
-                } else {
-                    return mapItem
+                const a = _selectedItems?.filter(filterItem => filterItem.id !== oldItem?.id)?.map(mapItem => {
+                    console.log('item1', item)
+                    if(mapItem.id === newItem?.id){
+                        console.log('item', item)
+                        return { ...mapItem, quantity: item?.quantity ?? 0 }
+                    } else {
+                        return mapItem
+                    }
+                })
+                if(newItem && !a.find(findItem => findItem.id === newItem?.id)) {
+                    a.push({ ...newItem, quantity: item?.quantity ?? 0 })
                 }
+                return a.filter(filterItem => (filterItem.quantity ?? 0) > 0)
             })
-            if(!a.find(findItem => findItem.id === newItem.id)) {
-                a.push({ ...newItem, quantity: item?.quantity ?? 0 })
-            }
-            return a.filter(filterItem => (filterItem.quantity ?? 0) > 0)
-        })
 
             console.log('_itemList', _itemList)
 
@@ -480,7 +475,7 @@ export default function AddItem() {
 
                 </Swipe>
 
-                {selectedItems?.length >= 1 && calculatePriceOfSelected() != "₹NaN" ? <div className="fixed bg-white dark:bg-slate-800 bottom-0 m-auto left-0 right-0 px-4 p-4 pb-10">
+                {selectedItems?.length >= 1 && calculatePriceOfSelected() !== '₹NaN' ? <div className="fixed bg-white dark:bg-slate-800 bottom-0 m-auto left-0 right-0 px-4 p-4 pb-10">
                     <Button onClick={onSubmit}>
                         {`Add ${selectedItems?.length} items (${calculatePriceOfSelected()})`}
                     </Button>

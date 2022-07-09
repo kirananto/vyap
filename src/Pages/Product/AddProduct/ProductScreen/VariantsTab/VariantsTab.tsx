@@ -45,8 +45,8 @@ function VariantsTab({ action, saveAttempt }: Props) {
     const variantIndex = addProductInfo?.centralCatalogue?.variants?.findIndex(findItem => findItem.id === addProductInfo.editProduct?.variantId)
 
     const variants = action !== PAGE_ACTION.EDIT ? addProductInfo?.centralCatalogue?.variants : addProductInfo?.centralCatalogue?.variants
-            ?.filter(findItem => findItem.id === addProductInfo.editProduct?.variantId)
-            ?.map(mapItem => ({ ...mapItem, isSelected: true }))
+        ?.filter(findItem => findItem.id === addProductInfo.editProduct?.variantId)
+        ?.map(mapItem => ({ ...mapItem, isSelected: true }))
     return (
         <div
             className="flex flex-col w-100 mt-2 pb-24 overflow-auto"
@@ -58,11 +58,11 @@ function VariantsTab({ action, saveAttempt }: Props) {
             {(variants?.length ?? 0) < 1 ? (
                 <div>
                     <img
-                    loading="lazy"
-                    className="m-auto mt-12 h-auto p-12 dark:opacity-60"
-                    alt="no transactions"
-                    src={ChatImg}
-                />
+                        loading="lazy"
+                        className="m-auto mt-12 h-auto p-12 dark:opacity-60"
+                        alt="no transactions"
+                        src={ChatImg}
+                    />
                 </div>
             ): null}
             {variants?.map((mapItem, index) => {
