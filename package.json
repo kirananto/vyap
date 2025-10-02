@@ -51,7 +51,7 @@
     "react-to-print": "^2.14.7",
     "react-use-scroll-direction": "^0.1.0",
     "redux-persist": "6.0.0",
-    "tailwindcss": "3.1.5",
+    "tailwindcss": "4.1.14",
     "use-long-press": "^2.0.2",
     "webpack": "^5.73.0",
     "workbox-cacheable-response": "^6.5.3",
